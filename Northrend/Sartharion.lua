@@ -5,7 +5,6 @@
 local mod = BigWigs:NewBoss("Sartharion", 531)
 if not mod then return end
 local shadron, tenebron, vesperon
-mod.otherMenu = 4
 --[[
 	28860 = sartharion
 	30452 = tenebron

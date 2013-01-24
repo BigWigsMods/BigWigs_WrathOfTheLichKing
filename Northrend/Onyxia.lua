@@ -4,7 +4,6 @@
 
 local mod = BigWigs:NewBoss("Onyxia", 718)
 if not mod then return end
-mod.otherMenu = 4
 mod:RegisterEnableMob(10184)
 mod.toggleOptions = {"phase", {17086, "FLASHSHAKE"}, 18431, "bosskill"}
 

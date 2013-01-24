@@ -4,7 +4,6 @@
 
 local mod = BigWigs:NewBoss("Emalon the Storm Watcher", 532)
 if not mod then return end
-mod.otherMenu = 4
 mod:RegisterEnableMob(33993)
 mod.toggleOptions = {64216, {64218, "ICON"}, "proximity", "berserk", "bosskill"}
 

@@ -4,7 +4,6 @@
 
 local mod = BigWigs:NewBoss("Halion", 609)
 if not mod then return end
-mod.otherMenu = 4
 mod:RegisterEnableMob(39863, 40142)
 mod.toggleOptions = {{74562, "SAY", "ICON", "FLASHSHAKE", "WHISPER"}, 74648, {74792, "SAY", "ICON", "FLASHSHAKE", "WHISPER"}, 74769, 74806, 74525, "berserk", "bosskill"}
 
