@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Lady Deathwhisper", 604)
 if not mod then return end
 --Deathwhisper, Cult Adherent, Reanimated Adherent, Cult Fanatic, Reanimated Fanatic, Deformed Fanatic
 mod:RegisterEnableMob(36855, 37949, 38010, 37890, 38009, 38135)
-mod.toggleOptions = {"adds", 70842, 71204, 71426, 71289, {71001, "FLASHSHAKE"}, "berserk", "bosskill"}
+mod.toggleOptions = {"adds", 70842, 71204, 71426, 71289, {71001, "FLASH"}, "berserk", "bosskill"}
 local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	adds = CL.phase:format(1),
@@ -89,14 +89,14 @@ end
 function mod:DnD(player, spellId)
 	if UnitIsUnit(player, "player") then
 		self:LocalMessage(71001, L["dnd_message"], "Personal", spellId, "Alarm")
-		self:FlashShake(71001)
+		self:Flash(71001)
 	end
 end
 
 function mod:Barrier(_, spellId)
 	if not self:Heroic() then
-		self:CancelTimer(handle_Adds, true)
-		self:SendMessage("BigWigs_StopBar", self, L["adds_bar"])
+		self:CancelTimer(handle_Adds)
+		self:StopBar(L["adds_bar"])
 		self:CancelDelayedMessage(L["adds_warning"])
 	end
 	self:Message(70842, L["phase2_message"], "Positive", spellId, "Info")

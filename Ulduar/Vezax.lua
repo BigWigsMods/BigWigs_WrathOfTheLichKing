@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("General Vezax", 529)
 if not mod then return end
 mod:RegisterEnableMob(33271)
-mod.toggleOptions = {"vapor", {"vaporstack", "FLASHSHAKE"}, {62660, "WHISPER", "ICON", "SAY", "FLASHSHAKE"}, {63276, "WHISPER", "ICON", "FLASHSHAKE"}, 62661, 62662, "animus", "berserk", "bosskill"}
+mod.toggleOptions = {"vapor", {"vaporstack", "FLASH"}, {62660, "WHISPER", "ICON", "SAY", "FLASH"}, {63276, "WHISPER", "ICON", "FLASH"}, 62661, 62662, "animus", "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -45,7 +45,7 @@ if L then
 	L.vaporstack_desc = "Warn when you have 5 or more stacks of Saronite Vapors."
 	L.vaporstack_message = "Vapors x%d!"
 
-	L.crash_say = "Crash on me!"
+	L.crash_say = "Crash"
 
 	L.mark_message = "Mark"
 	L.mark_message_other = "Mark on %s!"
@@ -111,7 +111,7 @@ function mod:UNIT_AURA(event, unit)
 	if stack and stack ~= lastVapor then
 		if stack > 5 then
 			self:LocalMessage("vaporstack", L["vaporstack_message"]:format(stack), "Personal", icon)
-			self:FlashShake("vaporstack")
+			self:Flash("vaporstack")
 		end
 		lastVapor = stack
 	end
@@ -125,7 +125,7 @@ do
 		local target = UnitName(bossId .. "target")
 		if target then
 			if UnitIsUnit(target, "player") then
-				mod:FlashShake(62660)
+				mod:Flash(62660)
 				mod:Say(62660, L["crash_say"])
 			end
 			mod:TargetMessage(62660, name, target, "Personal", id, "Alert")
@@ -137,14 +137,14 @@ do
 
 	function mod:Crash(player, spellId, _, _, spellName)
 		id, name = spellId, spellName
-		self:CancelTimer(handle, true)
+		self:CancelTimer(handle)
 		handle = self:ScheduleTimer(scanTarget, 0.1)
 	end
 end
 
 function mod:Mark(player, spellId)
 	self:TargetMessage(63276, L["mark_message"], player, "Personal", spellId, "Alert")
-	if UnitIsUnit(player, "player") then self:FlashShake(63276) end
+	if UnitIsUnit(player, "player") then self:Flash(63276) end
 	self:Whisper(63276, player, L["mark_message"])
 	self:Bar(63276, L["mark_message_other"]:format(player), 10, spellId)
 	self:PrimaryIcon(63276, player)

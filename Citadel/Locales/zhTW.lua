@@ -8,7 +8,6 @@ if L then
 
 	L.empowered_shock_message = "正在施放 強力震擊漩渦！"
 	L.regular_shock_message = "強力震擊漩渦區域！"
-	L.shock_say = ">我< 強力震擊漩渦區域！"
 	L.shock_bar = "<下一強力震擊漩渦>"
 
 	L.iconprince = "強化的血親王標記"
@@ -223,7 +222,6 @@ if L then
 	L.quake_message = "正在施放 地震！"
 	L.quake_bar = "<地震>"
 
-	L.defile_say = ">我< 汙染！"
 	L.defile_message = "汙染：>你<！"
 	L.defile_bar = "<下一汙染>"
 
@@ -233,7 +231,6 @@ if L then
 
 	L.last_phase_bar = "<最終階段>"
 
-	L.trap_say = "暗影陷阱：>你<！"
 	L.trap_message = "暗影陷阱！"
 	L.trap_bar = "<下一暗影陷阱>"
 

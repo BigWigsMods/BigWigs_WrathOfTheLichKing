@@ -66,7 +66,7 @@ end
 
 function mod:Airphase()
 	self:CancelDelayedMessage(L["lifedrain_warn1"])
-	self:SendMessage("BigWigs_StopBar", self, L["lifedrain_bar"])
+	self:StopBar(L["lifedrain_bar"])
 	--43810 Frost Wyrm, looks like a dragon breathing 'deep breath' :)
 	self:Message(28524, L["deepbreath_incoming_message"], "Attention")
 	self:Bar(28524, L["deepbreath_incoming_bar"], 14, 43810)
@@ -93,7 +93,7 @@ end
 
 function mod:Icebolt(player, spellId, _, _, spellName)
 	if UnitIsUnit(player, "player") then
-		self:Say(28522, L["icebolt_say"])
+		self:Say(28522, L["icebolt_say"], true)
 		if bit.band(self.db.profile[(GetSpellInfo(28522))], BigWigs.C.PING) == BigWigs.C.PING then
 			Minimap:PingLocation()
 			BigWigs:Print(L["ping_message"])

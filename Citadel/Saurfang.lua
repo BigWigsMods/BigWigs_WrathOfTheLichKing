@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Deathbringer Saurfang", 604)
 if not mod then return end
 -- Deathbringer Saurfang, Muradin, Marine, Overlord Saurfang, Kor'kron Reaver
 mod:RegisterEnableMob(37813, 37200, 37830, 37187, 37920)
-mod.toggleOptions = {"adds", 72410, 72385, {72293, "WHISPER", "ICON", "FLASHSHAKE"}, 72737, "proximity", "berserk", "bosskill"}
+mod.toggleOptions = {"adds", 72410, 72385, {72293, "WHISPER", "ICON", "FLASH"}, 72737, "proximity", "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -56,7 +56,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:OpenProximity(11)
+	self:OpenProximity("proximity", 11)
 	self:Berserk(self:Heroic() and 360 or 480)
 	self:DelayedMessage("adds", 35, L["adds_warning"], "Urgent")
 	self:Bar("adds", L["adds_bar"], 40, 72173)
@@ -64,7 +64,7 @@ function mod:OnEngage()
 end
 
 function mod:Warmup(msg)
-	self:OpenProximity(11)
+	self:OpenProximity("proximity", 11)
 	if msg == L["warmup_alliance"] then
 		self:Bar("adds", self.displayName, 48, "achievement_boss_saurfang")
 	else
@@ -112,7 +112,7 @@ function mod:Mark(player, spellId, _, _, spellName)
 	count = count + 1
 	self:Whisper(72293, player, spellName)
 	self:PrimaryIcon(72293, player)
-	if UnitIsUnit(player, "player") then self:FlashShake(72293) end
+	if UnitIsUnit(player, "player") then self:Flash(72293) end
 end
 
 function mod:Frenzy(_, spellId, _, _, spellName)

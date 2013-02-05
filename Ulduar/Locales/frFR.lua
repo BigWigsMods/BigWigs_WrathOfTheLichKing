@@ -140,7 +140,6 @@ if L then
 	L.eyebeam_message = "Rayon : %s"
 	L.eyebeam_bar = "~Rayon de l'oeil"
 	L.eyebeam_you = "Rayon de l'oeil sur VOUS !"
-	L.eyebeam_say = "Rayon de l'oeil sur moi !"
 
 	L.armor_message = "%2$dx broyages d'armure sur %1$s"
 end
@@ -276,7 +275,7 @@ if L then
 	L.vaporstack_desc = "Prévient quand vous avez 5 cumuls ou plus de Vapeurs de saronite."
 	L.vaporstack_message = "Vapeurs de saronite x%d !"
 
-	L.crash_say = "Déferlante d'ombre sur moi !"
+	L.crash_say = "Déferlante d'ombre"
 
 	L.mark_message = "Marque"
 	L.mark_message_other = "Marque : %s"

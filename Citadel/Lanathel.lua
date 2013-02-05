@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Blood-Queen Lana'thel", 604)
 if not mod then return end
 mod:RegisterEnableMob(37955)
-mod.toggleOptions = {{71340, "FLASHSHAKE"}, {71265, "FLASHSHAKE"}, {70877, "WHISPER"}, 71772, 71623, "proximity", "berserk", "bosskill"}
+mod.toggleOptions = {{71340, "FLASH"}, {71265, "FLASH"}, {70877, "WHISPER"}, 71772, 71623, "proximity", "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -64,7 +64,7 @@ end
 
 function mod:OnEngage(diff)
 	self:Berserk(320, true)
-	self:OpenProximity(6)
+	self:OpenProximity("proximity", 6)
 	self:Bar(71772, L["phase2_bar"], airPhaseTimers[diff][1], 71772)
 	self:Bar(71340, L["pact_bar"], 16, 71340)
 	self:Bar(71265, L["shadow_bar"], 30, 71265)
@@ -83,7 +83,7 @@ do
 	end
 	function mod:Pact(player)
 		if UnitIsUnit(player, "player") then
-			self:FlashShake(71340)
+			self:Flash(71340)
 		end
 		pactTargets[#pactTargets + 1] = player
 		if not scheduled then
@@ -95,7 +95,7 @@ end
 
 function mod:Shadows(msg, _, _, _, player)
 	if UnitIsUnit(player, "player") then
-		self:FlashShake(71265)
+		self:Flash(71265)
 	end
 	self:TargetMessage(71265, L["shadow_message"], player, "Attention", 71265)
 	self:Bar(71265, L["shadow_bar"], 30, 71265)

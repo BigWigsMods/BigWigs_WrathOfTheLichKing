@@ -55,7 +55,6 @@ if L then
 	L.charge = "Wütender Ansturm"
 	L.charge_desc = "Warnt vor Wütender Ansturm auf Spielern."
 	L.charge_trigger = "zornig an"
-	L.charge_say = "Ansturm auf MIR!"
 
 	L.bosses = "Bosse"
 	L.bosses_desc = "Warnt, wann die nachfolgenden Bosse eintreffen."

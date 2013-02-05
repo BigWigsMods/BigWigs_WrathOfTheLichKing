@@ -20,7 +20,6 @@ if L then
 
 	L.empowered_shock_message = "Могучий вихрь!"
 	L.regular_shock_message = "Вихрь"
-	L.shock_say = "Вихрь на мне!"
 	L.shock_bar = "~Следующий вихрь"
 
 	L.iconprince = "Помечать активного принца"
@@ -246,7 +245,6 @@ if L then
 	L.quake_message = "Встряска"
 	L.quake_bar = "Встряска!"
 
-	L.defile_say = "Осквернение на МНЕ!"
 	L.defile_message = "Осквернение на ТЕБЕ!"
 	L.defile_bar = "Следующее Осквернение"
 
@@ -256,7 +254,6 @@ if L then
 
 	L.last_phase_bar = "Последняя фаза"
 
-	L.trap_say = "На МНЕ - Темная ловушка!"
 	L.trap_message = "Темная ловушка"
 	L.trap_bar = "~Следующая ловушка"
 

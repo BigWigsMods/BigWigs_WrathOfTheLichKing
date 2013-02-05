@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Ignis the Furnace Master", 529)
 if not mod then return end
 mod:RegisterEnableMob(33118)
-mod.toggleOptions = { 62488, 62382, {62680, "FLASHSHAKE"}, {62546, "FLASHSHAKE"}, 62717, "bosskill"}
+mod.toggleOptions = { 62488, 62382, {62680, "FLASH"}, {62546, "FLASH"}, 62717, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -80,7 +80,7 @@ do
 			local t = GetTime()
 			if not last or (t > last + 4) then
 				self:LocalMessage(62546, L["scorch_message"], "Personal", spellId, last and nil or "Alarm")
-				self:FlashShake(62546)
+				self:Flash(62546)
 				last = t
 			end
 		end
@@ -110,7 +110,7 @@ do
 		local caster = isCaster()
 		local color = caster and "Personal" or "Attention"
 		local sound = caster and "Long" or nil
-		if caster then self:FlashShake(62680) end
+		if caster then self:Flash(62680) end
 		self:Message(62680, spellName, color, spellId, sound)
 		self:Bar(62680, L["flame_bar"], 25, spellId)
 		if caster then self:Bar(62680, spellName, 2.7, spellId) end

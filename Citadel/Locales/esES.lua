@@ -8,7 +8,6 @@ if L then
 
 	L.empowered_shock_message = "¡Casteando Choque!"
 	L.regular_shock_message = "Zona de Choque"
-	L.shock_say = "¡Zona de Choque en mí!"
 	L.shock_bar = "~Próximo Choque"
 
 	L.iconprince = "Icono en el príncipe activo"
@@ -120,7 +119,6 @@ if L then
 	L.quake_message = "Casteando Temblor"
 	L.quake_bar = "Temblor"
 
-	L.defile_say = "¡Profanar en MÍ!"
 	L.defile_message = "¡Profanar en TÍ!"
 	L.defile_bar = "Siguiente Profanar"
 
@@ -130,7 +128,6 @@ if L then
 
 	L.last_phase_bar = "Última fase"
 
-	L.trap_say = "¡Trampa en Mí!"
 	L.trap_message = "Trampa de las Sombras"
 	L.trap_bar = "Siguiente Trampa"
 

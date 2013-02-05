@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Deathspeaker High Priest", 604)
 if not mod then return end
 mod:RegisterEnableMob(36805, 36807, 36808, 36811, 36829)
-mod.toggleOptions = {{69483, "WHISPER", "ICON", "FLASHSHAKE"}, "proximity"}
+mod.toggleOptions = {{69483, "WHISPER", "ICON", "FLASH"}, "proximity"}
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -25,8 +25,8 @@ function mod:Reckoning(player, spellId, _, _, spellName)
 	self:TargetMessage(69483, spellName, player, "Personal", spellId, "Alert")
 	self:Bar(69483, spellName, 8, spellId)
 	if UnitIsUnit(player, "player") then
-		self:FlashShake(69483)
-		self:OpenProximity(15)
+		self:Flash(69483)
+		self:OpenProximity("proximity", 15)
 		self:ScheduleTimer(self.CloseProximity, 9, self)
 	end
 	self:Whisper(69483, player, spellName)

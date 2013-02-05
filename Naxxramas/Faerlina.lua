@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Grand Widow Faerlina", 535)
 if not mod then return end
 --Faerlina, Worshipper, Follower
 mod:RegisterEnableMob(15953, 16506, 16505)
-mod.toggleOptions = {28732, {28794, "FLASHSHAKE"}, 28798, "bosskill"}
+mod.toggleOptions = {28732, {28794, "FLASH"}, 28798, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -95,14 +95,14 @@ end
 function mod:Rain(player)
 	if UnitIsUnit(player, "player") then
 		self:LocalMessage(28794, L["rain_message"], "Personal", 54099, "Alarm")
-		self:FlashShake(28794)
+		self:Flash(28794)
 	end
 end
 
 function mod:Frenzy(unit, spellId, _, _, spellName)
 	if unit == self.displayName then
 		self:Message(28798, L["enragewarn"], "Urgent", spellId)
-		self:SendMessage("BigWigs_StopBar", self, spellName)
+		self:StopBar(spellName)
 		self:CancelDelayedMessage(L["enragewarn2"])
 		frenzied = true
 	end

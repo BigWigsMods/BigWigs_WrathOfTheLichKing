@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Sindragosa", 604)
 if not mod then return end
 -- Sindragosa, Rimefang, Spinestalker
 mod:RegisterEnableMob(36853, 37533, 37534)
-mod.toggleOptions = {"airphase", "phase2", 70127, {69762, "FLASHSHAKE"}, 69766, 70106, 70123, {70126, "FLASHSHAKE"}, "proximity", "berserk", "bosskill"}
+mod.toggleOptions = {"airphase", "phase2", 70127, {69762, "FLASH"}, 69766, 70106, 70123, {70126, "FLASH"}, "proximity", "berserk", "bosskill"}
 local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	airphase = CL.phase:format(1),
@@ -111,8 +111,8 @@ do
 	function mod:FrostBeacon(player, spellId, _, _, spellName)
 		beaconTargets[#beaconTargets + 1] = player
 		if UnitIsUnit(player, "player") then
-			self:OpenProximity(10)
-			self:FlashShake(70126)
+			self:OpenProximity("proximity", 10)
+			self:Flash(70126)
 		end
 		if not scheduled then
 			scheduled = true
@@ -138,7 +138,7 @@ end
 
 function mod:Phase2()
 	phase = 2
-	self:SendMessage("BigWigs_StopBar", self, L["airphase_bar"])
+	self:StopBar(L["airphase_bar"])
 	self:Message("phase2", L["phase2_message"], "Positive", nil, "Long")
 	self:Bar(70123, L["grip_bar"], 38, 70117)
 end
@@ -170,9 +170,9 @@ function mod:Unchained(player, spellId)
 	end
 	if UnitIsUnit(player, "player") then
 		self:LocalMessage(69762, L["unchained_message"], "Personal", spellId, "Alert")
-		self:FlashShake(69762)
+		self:Flash(69762)
 		if self:Heroic() then
-			self:OpenProximity(20)
+			self:OpenProximity("proximity", 20)
 			self:ScheduleTimer(self.CloseProximity, 30, self)
 		end
 	end

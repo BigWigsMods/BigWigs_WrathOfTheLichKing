@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Malygos", 527)
 if not mod then return end
 mod:RegisterEnableMob(28859)
-mod.toggleOptions = {"phase", "sparks", "sparkbuff", "vortex", "breath", {"surge", "FLASHSHAKE"}, 57429, "berserk", "bosskill"}
+mod.toggleOptions = {"phase", "sparks", "sparkbuff", "vortex", "breath", {"surge", "FLASH"}, 57429, "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -117,7 +117,7 @@ end
 function mod:RAID_BOSS_WHISPER(event, msg, mob)
 	if phase == 3 and msg == L["surge_trigger"] then
 		self:LocalMessage("surge", L["surge_you"], "Personal", 60936, "Alarm") -- 60936 for phase 3, not 56505
-		self:FlashShake("surge")
+		self:Flash("surge")
 	end
 end
 
@@ -139,8 +139,8 @@ function mod:Phase2()
 	phase = 2
 	self:CancelDelayedMessage(L["vortex_warning"])
 	self:CancelDelayedMessage(L["sparks_warning"])
-	self:SendMessage("BigWigs_StopBar", self, L["sparks"])
-	self:SendMessage("BigWigs_StopBar", self, L["vortex_next"])
+	self:StopBar(L["sparks"])
+	self:StopBar(L["vortex_next"])
 	self:Message("phase", L["phase2_message"], "Attention")
 	self:Bar("breath", L["breath"], 92, 43810)
 	self:DelayedMessage("breath", 87, L["breath_warning"], "Attention")
@@ -148,7 +148,7 @@ end
 
 function mod:P2End()
 	self:CancelDelayedMessage(L["breath_warning"])
-	self:SendMessage("BigWigs_StopBar", self, L["breath"])
+	self:StopBar(L["breath"])
 	self:Message("phase", L["phase3_warning"], "Attention")
 end
 

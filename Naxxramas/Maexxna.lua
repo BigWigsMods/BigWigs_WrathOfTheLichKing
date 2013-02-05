@@ -66,7 +66,7 @@ do
 
 	function mod:Cocoon(player)
 		inCocoon[#inCocoon + 1] = player
-		self:CancelTimer(handle, true)
+		self:CancelTimer(handle)
 		handle = self:ScheduleTimer(cocoonWarn, 0.3)
 	end
 end

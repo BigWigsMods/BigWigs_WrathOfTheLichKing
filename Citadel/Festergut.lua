@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Festergut", 604)
 if not mod then return end
 mod:RegisterEnableMob(36626)
-mod.toggleOptions = {{69279, "FLASHSHAKE"}, 69165, 69195, 72219, 69240, 72295, "proximity", "berserk", "bosskill"}
+mod.toggleOptions = {{69279, "FLASH"}, 69165, 69195, 72219, 69240, 72295, "proximity", "berserk", "bosskill"}
 mod.optionHeaders = {
 	[69279] = "normal",
 	[72295] = "heroic",
@@ -66,7 +66,7 @@ function mod:OnEngage()
 	self:Berserk(300, true)
 	self:Bar(69279, L["spore_bar"], 20, 69279)
 	self:Bar(69165, L["inhale_bar"]:format(count), 33.5, 69165)
-	self:OpenProximity(9)
+	self:OpenProximity("proximity", 9)
 end
 
 --------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ do
 	function mod:Spores(player, spellId, _, _, spellName)
 		sporeTargets[#sporeTargets + 1] = player
 		if UnitIsUnit(player, "player") then
-			self:FlashShake(69279)
+			self:Flash(69279)
 		end
 		if not scheduled then
 			scheduled = true

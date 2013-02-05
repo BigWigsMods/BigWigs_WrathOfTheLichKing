@@ -113,8 +113,8 @@ function mod:TeleportToBalcony()
 		timeroom = 180
 	end
 
-	self:SendMessage("BigWigs_StopBar", self, L["blinkbar"])
-	self:SendMessage("BigWigs_StopBar", self, L["cursebar"])
+	self:StopBar(L["blinkbar"])
+	self:StopBar(L["cursebar"])
 
 	self:Message("teleport", L["teleportwarn"], "Important")
 	self:Bar("teleport", L["backbar"], timebalcony, "Spell_Magic_LesserInvisibilty")

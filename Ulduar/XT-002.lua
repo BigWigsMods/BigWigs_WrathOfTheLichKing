@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("XT-002 Deconstructor", 529)
 if not mod then return end
 mod:RegisterEnableMob(33293)
-mod.toggleOptions = {{63024, "WHISPER", "ICON", "FLASHSHAKE"}, {63018, "WHISPER", "ICON", "FLASHSHAKE"}, 62776, 64193, 63849, "proximity", "berserk", "bosskill"}
+mod.toggleOptions = {{63024, "WHISPER", "ICON", "FLASH"}, {63018, "WHISPER", "ICON", "FLASH"}, 62776, 64193, 63849, "proximity", "berserk", "bosskill"}
 mod.optionHeaders = {
 	[63024] = "normal",
 	[64193] = "hard",
@@ -87,8 +87,8 @@ end
 
 function mod:GravityBomb(player, spellId, _, _, spellName)
 	if UnitIsUnit(player, "player") then
-		self:OpenProximity(10)
-		self:FlashShake(63024)
+		self:OpenProximity("proximity", 10)
+		self:Flash(63024)
 	end
 	self:TargetMessage(63024, spellName, player, "Personal", spellId, "Alert")
 	self:Whisper(63024, player, spellName)
@@ -98,8 +98,8 @@ end
 
 function mod:LightBomb(player, spellId, _, _, spellName)
 	if UnitIsUnit(player, "player") then
-		self:OpenProximity(10)
-		self:FlashShake(63018)
+		self:OpenProximity("proximity", 10)
+		self:Flash(63018)
 	end
 	self:TargetMessage(63018, spellName, player, "Personal", spellId, "Alert")
 	self:Whisper(63018, player, spellName)

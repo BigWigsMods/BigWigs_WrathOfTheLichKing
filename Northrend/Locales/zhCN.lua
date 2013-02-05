@@ -61,10 +61,8 @@ if L then
 	L.fire_damage_message = ">你< 炽焰燃烧！"
 	L.fire_message = "炽焰燃烧！"
 	L.fire_bar = "<下一炽焰燃烧>"
-	L.fire_say = ">我< 炽焰燃烧！"
 	L.shadow_message = "灵魂吞噬！"
 	L.shadow_bar = "<下一灵魂吞噬>"
-	L.shadow_say = ">我< 灵魂吞噬！"
 
 	L.meteorstrike_yell = "天空在燃烧"
 	L.meteorstrike_bar = "<流星打击>"

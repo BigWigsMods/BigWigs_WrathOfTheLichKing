@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Deathbound Ward", 604)
 if not mod then return end
 mod:RegisterEnableMob(37007)
-mod.toggleOptions = {{71022, "FLASHSHAKE"}}
+mod.toggleOptions = {{71022, "FLASH"}}
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -23,7 +23,7 @@ end
 function mod:Shout(_, spellId, _, _, spellName)
 	self:Message(71022, spellName, "Personal", spellId)
 	self:Bar(71022, spellName, 3, spellId)
-	self:FlashShake(71022)
+	self:Flash(71022)
 end
 
 function mod:Deaths()

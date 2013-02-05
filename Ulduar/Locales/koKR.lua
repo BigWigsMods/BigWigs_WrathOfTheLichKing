@@ -141,10 +141,6 @@ if L then
 	L.eyebeam_message = "안광 집중: %s"
 	L.eyebeam_bar = "~안광 집중"
 	L.eyebeam_you = "당신에게 안광 집중!"
-	L.eyebeam_say = "저 안광 집중요!"
-
-	L.eyebeamsay = "안광 일반 대화"
-	L.eyebeamsay_desc = "안광 집중의 대상시 일반 대화로 알립니다."
 
 	L.armor_message = "방어구 씹기 x%2$d: %1$s"
 end
@@ -280,7 +276,7 @@ if L then
 	L.vaporstack_desc = "사로나이트 증기 5중첩이상을 알립니다."
 	L.vaporstack_message = "증기 x%d 중첩!"
 
-	L.crash_say = "저 어둠 붕괴요!"
+	L.crash_say = "어둠 붕괴요"
 
 	L.mark_message = "징표"
 	L.mark_message_other = "얼굴 없는 자의 징표: %s"

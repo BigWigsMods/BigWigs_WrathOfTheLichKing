@@ -55,7 +55,6 @@ if L then
 	L.charge = "Charge furieuse"
 	L.charge_desc = "Prévient quand un joueur subit les effets d'une Charge furieuse."
 	L.charge_trigger = "lâche un rugissement assourdissant !$"
-	L.charge_say = "Charge furieuse sur moi !"
 
 	L.bosses = "Boss"
 	L.bosses_desc = "Prévient quand le boss suivant arrive."

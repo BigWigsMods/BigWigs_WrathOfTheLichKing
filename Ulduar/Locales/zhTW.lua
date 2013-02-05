@@ -141,10 +141,6 @@ if L then
 	L.eyebeam_message = "集束目光：>%s<！"
 	L.eyebeam_bar = "<集束目光>"
 	L.eyebeam_you = ">你< 集束目光！"
-	L.eyebeam_say = ">我< 集束目光！"
-
-	L.eyebeamsay = "集束目光"
-	L.eyebeamsay_desc = "當你中了集束目光時發出自身警報。"
 
 	L.armor_message = "粉碎護甲%2$d層：>%1$s<！"
 end
@@ -284,7 +280,7 @@ if L then
 	L.vaporstack_desc = "當玩家中了5層或更多薩倫煙霧時發出警報。"
 	L.vaporstack_message = "薩倫煙霧：>x%d<！"
 
-	L.crash_say = ">我< 暗影暴擊！"
+	L.crash_say = "暗影暴擊"
 
 	L.mark_message = "無面者印記"
 	L.mark_message_other = "無面者印記：>%s<！"

@@ -12,10 +12,8 @@ if L then
 	L.fire_damage_message = "¡Tus pies están ardiendo!"
 	L.fire_message = "Bomba de Fuego"
 	L.fire_bar = "Siguiente Bomba de Fuego"
-	L.fire_say = "¡Bomba de Fuego en MI!"
 	L.shadow_message = "Bomba de Sombras"
 	L.shadow_bar = "Siguiente Bomba de Sombras"
-	L.shadow_say = "¡Bomba de Sombras en MI!"
 
 	L.meteorstrike_yell = "¡Los cielos arden!"
 	L.meteorstrike_bar = "Golpe de meteorito"

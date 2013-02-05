@@ -134,10 +134,8 @@ if L then
 	L.fire_damage_message = "당신의 발이 불타오르는 중!"
 	L.fire_message = "맹렬한 발화"
 	L.fire_bar = "다음 맹렬한 발화"
-	L.fire_say = "나에게 맹렬한 발화!"
 	L.shadow_message = "영혼 소진"
 	L.shadow_bar = "다음 영혼 소진"
-	L.shadow_say = "나에게 영혼 소진!"
 
 	L.meteorstrike_yell = "하늘이 타오른다!"
 	L.meteorstrike_bar = "유성 충돌"

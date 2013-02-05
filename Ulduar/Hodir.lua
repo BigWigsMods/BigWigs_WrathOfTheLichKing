@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Hodir", 529)
 if not mod then return end
 mod:RegisterEnableMob(32845)
-mod.toggleOptions = {{"cold", "FLASHSHAKE"}, {65123, "WHISPER", "ICON"}, 61968, 62478, "hardmode", "berserk", "bosskill"}
+mod.toggleOptions = {{"cold", "FLASH"}, {65123, "WHISPER", "ICON"}, 61968, 62478, "hardmode", "berserk", "bosskill"}
 
 mod.optionHeaders = {
 	cold = "normal",
@@ -99,7 +99,7 @@ do
 		if UnitInRaid(player) then
 			id, name = spellId, spellName
 			flashFreezed[#flashFreezed + 1] = player
-			self:CancelTimer(handle, true)
+			self:CancelTimer(handle)
 			handle = self:ScheduleTimer(flashWarn, 0.3)
 		end
 	end
@@ -116,7 +116,7 @@ function mod:UNIT_AURA(event, unit)
 	if stack and stack ~= lastCold then
 		if stack > 1 then
 			self:LocalMessage("cold", L["cold_message"]:format(stack), "Personal", icon)
-			self:FlashShake("cold")
+			self:Flash("cold")
 		end
 		lastCold = stack
 	end

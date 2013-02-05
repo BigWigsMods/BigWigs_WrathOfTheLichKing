@@ -3,7 +3,7 @@
 --
 local mod = BigWigs:NewBoss("Faction Champions", 543)
 if not mod then return end
-mod.toggleOptions = {65960, 65801, 65877, 66010, 65947, {65816, "FLASHSHAKE"}, 67514, 67777, 65983, 65980, "bosskill"}
+mod.toggleOptions = {65960, 65801, 65877, 66010, 65947, {65816, "FLASH"}, 67514, 67777, 65983, 65980, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -65,7 +65,7 @@ function mod:Hellfire(player, spellId, _, _, spellName)
 end
 
 function mod:HellfireStopped(player, spellId, _, _, spellName)
-	self:SendMessage("BigWigs_StopBar", self, spellName)
+	self:StopBar(spellName)
 end
 
 do
@@ -75,7 +75,7 @@ do
 			local t = GetTime()
 			if not last or (t > last + 4) then
 				self:TargetMessage(65816, spellName, player, "Personal", spellId, last and nil or "Alarm")
-				self:FlashShake(65816)
+				self:Flash(65816)
 				last = t
 			end
 		end

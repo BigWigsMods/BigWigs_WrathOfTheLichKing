@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("The Twin Val'kyr", 543)
 if not mod then return end
 -- 34496 Darkbane, 34497 Lightbane
 mod:RegisterEnableMob(34496, 34497)
-mod.toggleOptions = {{"vortex", "FLASHSHAKE"}, "shield", "next", {"touch", "WHISPER", "FLASHSHAKE"}, "berserk", "bosskill"}
+mod.toggleOptions = {{"vortex", "FLASH"}, "shield", "next", {"touch", "WHISPER", "FLASH"}, "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -70,7 +70,7 @@ end
 
 function mod:Touch(player, spellId, _, _, spellName)
 	self:TargetMessage("touch", spellName, player, "Personal", spellId, "Info")
-	if UnitIsUnit(player, "player") then self:FlashShake("touch") end
+	if UnitIsUnit(player, "player") then self:Flash("touch") end
 	self:Whisper("touch", player, spellName)
 end
 
@@ -101,7 +101,7 @@ function mod:LightVortex(_, spellId, _, _, spellName)
 		self:Message("vortex", spellName, "Positive", spellId)
 	else
 		self:Message("vortex", spellName, "Personal", spellId, "Alarm")
-		self:FlashShake("vortex")
+		self:Flash("vortex")
 	end
 end
 
@@ -112,7 +112,7 @@ function mod:DarkVortex(_, spellId, _, _, spellName)
 		self:Message("vortex", spellName, "Positive", spellId)
 	else
 		self:Message("vortex", spellName, "Personal", spellId, "Alarm")
-		self:FlashShake("vortex")
+		self:Flash("vortex")
 	end
 end
 

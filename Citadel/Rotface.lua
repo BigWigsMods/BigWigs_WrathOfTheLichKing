@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Rotface", 604)
 if not mod then return end
 mod:RegisterEnableMob(36627)
-mod.toggleOptions = {{69839, "FLASHSHAKE"}, {69674, "FLASHSHAKE", "ICON"}, 69508, "ooze", 72272, "berserk", "bosskill"}
+mod.toggleOptions = {{69839, "FLASH"}, {69674, "FLASH", "ICON"}, 69508, "ooze", 72272, "berserk", "bosskill"}
 mod.optionHeaders = {
 	[69839] = "normal",
 	[72272] = "heroic",
@@ -71,11 +71,11 @@ function mod:Infection(player, spellId)
 	self:TargetMessage(69674, L["infection_message"], player, "Personal", spellId)
 	self:Bar(69674, L["infection_bar"]:format(player), 12, spellId)
 	self:PrimaryIcon(69674, player, "icon")
-	if UnitIsUnit(player, "player") then self:FlashShake(69674) end
+	if UnitIsUnit(player, "player") then self:Flash(69674) end
 end
 
 function mod:InfectionRemoved(player)
-	self:SendMessage("BigWigs_StopBar", self, L["infection_bar"]:format(player))
+	self:StopBar(L["infection_bar"]:format(player))
 end
 
 function mod:SlimeSpray(_, spellId, _, _, spellName)
@@ -88,13 +88,13 @@ do
 	local handle = nil
 	local function explodeWarn(explodeName)
 		handle = nil
-		mod:FlashShake(69839)
+		mod:Flash(69839)
 		mod:Message(69839, explodeName, "Urgent", 69839, "Alert")
 	end
 	function mod:Explode(_, spellId)
 		local explodeName = GetSpellInfo(67729) --"Explode"
 		self:Bar(69839, explodeName, 4, spellId)
-		if handle then self:CancelTimer(handle, true) end
+		if handle then self:CancelTimer(handle) end
 		handle = self:ScheduleTimer(explodeWarn, 4, explodeName)
 	end
 end

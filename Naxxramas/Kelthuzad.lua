@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Kel'Thuzad", 535)
 if not mod then return end
 mod:RegisterEnableMob(15990)
-mod.toggleOptions = {27808, 27810, 28410, {27819, "WHISPER", "ICON", "FLASHSHAKE"}, "guardians", "phase", "proximity", "bosskill"}
+mod.toggleOptions = {27808, 27810, 28410, {27819, "WHISPER", "ICON", "FLASH"}, "guardians", "phase", "proximity", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -109,14 +109,14 @@ do
 		spell = spellId
 		name = spellName
 		fbTargets[#fbTargets + 1] = player
-		self:CancelTimer(handle, true)
+		self:CancelTimer(handle)
 		handle = self:ScheduleTimer(fbWarn, 0.4)
 	end
 end
 
 function mod:Detonate(player, spellId, _, _, spellName)
 	self:TargetMessage(27819, spellName, player, "Personal", spellId, "Alert")
-	if UnitIsUnit(player, "player") then self:FlashShake(27819) end
+	if UnitIsUnit(player, "player") then self:Flash(27819) end
 	self:Whisper(27819, player, spellName)
 	self:PrimaryIcon(27819, player)
 	self:Bar(27819, L["detonate_other"]:format(player), 5, spellId)
@@ -139,7 +139,7 @@ do
 	function mod:MC(player, spellId)
 		spell = spellId
 		mcTargets[#mcTargets + 1] = player
-		self:CancelTimer(handle, true)
+		self:CancelTimer(handle)
 		handle = self:ScheduleTimer(mcWarn, 0.5)
 	end
 end
@@ -165,10 +165,10 @@ function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 		self:CloseProximity()
 		self:Engage()
 	elseif msg == L["phase2_trigger1"] or msg == L["phase2_trigger2"] or msg == L["phase2_trigger3"] then
-		self:SendMessage("BigWigs_StopBar", self, L["start_bar"])
+		self:StopBar(L["start_bar"])
 		self:Message("phase", L["phase2_warning"], "Important")
 		self:Bar("phase", L["phase2_bar"], 15, "Spell_Shadow_Charm")
-		self:OpenProximity(10)
+		self:OpenProximity("proximity", 10)
 	elseif msg == L["phase3_trigger"] then
 		self:Message("phase", L["phase3_warning"], "Attention")
 	elseif msg == L["guardians_trigger"] then

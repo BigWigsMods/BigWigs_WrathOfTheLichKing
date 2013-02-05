@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Flame Leviathan", 529)
 if not mod then return end
 mod:RegisterEnableMob(33113)
-mod.toggleOptions = {"engage", 68605, 62396, {"pursue", "FLASHSHAKE"}, 62475, "bosskill"}
+mod.toggleOptions = {"engage", 68605, 62396, {"pursue", "FLASH"}, 62475, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -66,7 +66,7 @@ function mod:Flame(_, spellId, _, _, spellName)
 end
 
 function mod:FlameFailed(_, _, _, _, spellName)
-	self:SendMessage("BigWigs_StopBar", self, spellName)
+	self:StopBar(spellName)
 end
 
 function mod:Shutdown(unit, spellId, _, _, spellName)
@@ -77,7 +77,7 @@ end
 
 function mod:Pursue(msg, unit, _, _, player)
 	self:TargetMessage("pursue", L["pursue"], player, "Personal", 62374, "Alarm")
-	if UnitIsUnit(player, "player") then self:FlashShake("pursue") end
+	if UnitIsUnit(player, "player") then self:Flash("pursue") end
 	self:Bar("pursue", L["pursue_other"]:format(player), 30, 62374)
 end
 

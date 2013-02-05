@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Koralon the Flame Watcher", 532)
 if not mod then return end
 mod:RegisterEnableMob(35013)
-mod.toggleOptions = {66725, {66684, "FLASHSHAKE"}, 66665, "bosskill"}
+mod.toggleOptions = {66725, {66684, "FLASH"}, 66665, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -61,7 +61,7 @@ end
 function mod:Cinder(player, spellId)
 	if UnitIsUnit(player, "player") then
 		self:LocalMessage(66684, L["cinder_message"], "Personal", spellId, "Alarm")
-		self:FlashShake(66684)
+		self:Flash(66684)
 	end
 end
 

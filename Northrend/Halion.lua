@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Halion", 609)
 if not mod then return end
 mod:RegisterEnableMob(39863, 40142)
-mod.toggleOptions = {{74562, "SAY", "ICON", "FLASHSHAKE", "WHISPER"}, 74648, {74792, "SAY", "ICON", "FLASHSHAKE", "WHISPER"}, 74769, 74806, 74525, "berserk", "bosskill"}
+mod.toggleOptions = {{74562, "SAY", "ICON", "FLASH", "WHISPER"}, 74648, {74792, "SAY", "ICON", "FLASH", "WHISPER"}, 74769, 74806, 74525, "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -30,10 +30,8 @@ if L then
 	L.fire_damage_message = "Your feet are burning!"
 	L.fire_message = "Fire bomb"
 	L.fire_bar = "Next Fire bomb"
-	L.fire_say = "Fire bomb on ME!"
 	L.shadow_message = "Shadow bomb"
 	L.shadow_bar = "Next Shadow bomb"
-	L.shadow_say = "Shadow bomb on ME!"
 
 	L.meteorstrike_yell = "The heavens burn!"
 	L.meteorstrike_bar = "Meteor Strike"
@@ -90,8 +88,8 @@ function mod:Fire(player, spellId)
 		self:Bar(74562, L["fire_bar"], 25, spellId)
 	end
 	if UnitIsUnit(player, "player") then
-		self:Say(74562, L["fire_say"])
-		self:FlashShake(74562)
+		self:Say(74562, L["fire_message"])
+		self:Flash(74562)
 	end
 	self:TargetMessage(74562, L["fire_message"], player, "Personal", spellId, "Info")
 	self:Whisper(74562, player, L["fire_message"])
@@ -105,8 +103,8 @@ function mod:Shadow(player, spellId)
 		self:Bar(74792, L["shadow_bar"], 25, spellId)
 	end
 	if UnitIsUnit(player, "player") then
-		self:Say(74792, L["shadow_say"])
-		self:FlashShake(74792)
+		self:Say(74792, L["shadow_message"])
+		self:Flash(74792)
 	end
 	self:TargetMessage(74792, L["shadow_message"], player, "Personal", spellId, "Info")
 	self:Whisper(74792, player, L["shadow_message"])

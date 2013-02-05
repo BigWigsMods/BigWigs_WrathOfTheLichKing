@@ -139,10 +139,6 @@ if L then
 	L.eyebeam_message = "Взгляд: %s"
 	L.eyebeam_bar = "~Взгляд"
 	L.eyebeam_you = "Взгляд на ВАС!"
-	L.eyebeam_say = "Взгяд на МНЕ!"
-
-	L.eyebeamsay = "Сказать о взгяде"
-	L.eyebeamsay_desc = "Сказать когда вы цель взгляда."
 
 	L.armor_message = "%2$dx Хруста на |3-5(%1$s)"
 end
@@ -278,7 +274,7 @@ if L then
 	L.vaporstack_desc = "Сообщать, когда у вас уже 5 стаков саронитового испарения."
 	L.vaporstack_message = "Испарения x%d!"
 
-	L.crash_say = "Сокрушение на мне!"
+	L.crash_say = "Сокрушение"
 
 	L.mark_message = "Метка"
 	L.mark_message_other = "Метка на: |3-5(%s)!"

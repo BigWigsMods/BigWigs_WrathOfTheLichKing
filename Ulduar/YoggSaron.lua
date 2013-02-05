@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Yogg-Saron", 529)
 if not mod then return end
 --Sara = 33134, Yogg brain = 33890
 mod:RegisterEnableMob(33288, 33134, 33890)
-mod.toggleOptions = {62979, {63138, "WHISPER", "FLASHSHAKE"}, "tentacle", {63830, "ICON"}, {63802, "FLASHSHAKE"}, 64125, "portal", "weakened", 64059, {64465, "ICON"}, 64163, 64189, "phase", {63050, "WHISPER", "FLASHSHAKE"}, 63120, "berserk", "bosskill"}
+mod.toggleOptions = {62979, {63138, "WHISPER", "FLASH"}, "tentacle", {63830, "ICON"}, {63802, "FLASH"}, 64125, "portal", "weakened", 64059, {64465, "ICON"}, 64163, 64189, "phase", {63050, "WHISPER", "FLASH"}, 63120, "berserk", "bosskill"}
 
 local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
@@ -139,7 +139,7 @@ function mod:Fervor(player, spellId, _, _, spellName)
 	self:Bar(63138, L["fervor_message"]:format(player), 15, spellId)
 	self:Whisper(63138, player, spellName)
 	if UnitIsUnit(player, "player") then
-		self:FlashShake(63138)
+		self:Flash(63138)
 	end
 end
 
@@ -154,7 +154,7 @@ do
 		if UnitIsUnit(player, "player") then
 			if stack > 40 then return end
 			self:Message(63050, L["sanity_message"], "Personal", spellId)
-			self:FlashShake(63050)
+			self:Flash(63050)
 			warned[player] = true
 		elseif stack < 31 then
 			self:Whisper(63050, player, L["sanity_message"], true)
@@ -194,7 +194,7 @@ function mod:Malady(player)
 end
 
 function mod:RemoveMalady(player)
-	self:PrimaryIcon(63830, false)
+	self:PrimaryIcon(63830)
 end
 
 function mod:Squeeze(player, spellId, _, _, spellName)
@@ -204,7 +204,7 @@ end
 function mod:Linked(player, spellId)
 	if UnitIsUnit(player, "player") then
 		self:LocalMessage(63802, L["link_warning"], "Personal", spellId, "Alarm")
-		self:FlashShake(63802)
+		self:Flash(63802)
 	end
 end
 
@@ -228,7 +228,7 @@ end
 
 function mod:RemoveEmpower()
 	self:Message(64465, L["empowericon_message"], "Positive", 64465)
-	self:SendMessage("BigWigs_RemoveRaidIcon")
+	--self:SendMessage("BigWigs_RemoveRaidIcon")
 end
 
 do
@@ -266,9 +266,9 @@ function mod:Yells(msg)
 		self:CancelDelayedMessage(L["madness_warning"])
 
 		local madness = GetSpellInfo(64059)
-		self:SendMessage("BigWigs_StopBar", self, madness)
-		self:SendMessage("BigWigs_StopBar", self, L["tentacle_message"]:format(crusherCount))
-		self:SendMessage("BigWigs_StopBar", self, L["portal_bar"])
+		self:StopBar(madness)
+		self:StopBar(L["tentacle_message"]:format(crusherCount))
+		self:StopBar(L["portal_bar"])
 
 		self:Message("phase", L["phase3_warning"], "Important", nil, "Alarm")
 		self:Bar(64465, L["empower_bar"], 46, 64486)

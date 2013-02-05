@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Kologarn", 529)
 if not mod then return end
 mod:RegisterEnableMob(32930)
-mod.toggleOptions = { 64290, "shockwave", {"eyebeam", "WHISPER", "ICON", "FLASHSHAKE", "SAY"}, "arm", 63355, "bosskill"}
+mod.toggleOptions = { 64290, "shockwave", {"eyebeam", "WHISPER", "ICON", "FLASH", "SAY"}, "arm", 63355, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -37,10 +37,7 @@ if L then
 	L.eyebeam_message = "Eyebeam: %s"
 	L.eyebeam_bar = "~Eyebeam"
 	L.eyebeam_you = "Eyebeam on YOU!"
-	L.eyebeam_say = "Eyebeam on ME!"
-
-	L.eyebeamsay = "Eyebeam Say"
-	L.eyebeamsay_desc = "Say when you are the target of Focused Eyebeam."
+	L.eyebeam_say = "Eyebeam"
 
 	L.armor_message = "%2$dx Crunch on %1$s"
 end
@@ -83,7 +80,7 @@ do
 	function mod:Grip(player, spellId, _, _, spellName)
 		id, name = spellId, spellName
 		grip[#grip + 1] = player
-		self:CancelTimer(handle, true)
+		self:CancelTimer(handle)
 		handle = self:ScheduleTimer(gripWarn, 0.2)
 	end
 end
@@ -91,8 +88,8 @@ end
 function mod:RAID_BOSS_WHISPER(event, msg)
 	if msg:find(L["eyebeam_trigger"]) then
 		self:LocalMessage("eyebeam", L["eyebeam_you"], "Personal", 63976, "Long")
-		self:FlashShake("eyebeam")
-		self:Say("eyebeam", L["eyebeam_say"])
+		self:Flash("eyebeam")
+		self:Say("eyebeam", 40620) -- Eyebeam
 	end
 	self:Sync("EyeBeamWarn", pName)
 end

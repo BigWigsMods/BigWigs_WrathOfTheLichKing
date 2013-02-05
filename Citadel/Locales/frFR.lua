@@ -8,7 +8,6 @@ if L then
 
 	L.empowered_shock_message = "Vortex de choc surpuissant en incantation !"
 	L.regular_shock_message = "Vortex de choc"
-	L.shock_say = "Vortex de choc sur moi !"
 	L.shock_bar = "~Prochain Vortex"
 
 	L.iconprince = "Crâne sur le prince surpuissant"
@@ -120,7 +119,6 @@ if L then
 	L.quake_message = "Secousse en incantation"
 	L.quake_bar = "Secousse"
 
-	L.defile_say = "Profanation sur moi !"
 	L.defile_message = "Profanation sur VOUS !"
 	L.defile_bar = "Prochaine Profanation"
 
@@ -130,7 +128,6 @@ if L then
 
 	L.last_phase_bar = "Dernière phase"
 
-	L.trap_say = "Piège d'ombre sur moi !"
 	L.trap_message = "Piège d'ombre"
 	L.trap_bar = "Prochain Piège"
 

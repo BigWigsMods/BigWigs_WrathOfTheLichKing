@@ -55,7 +55,6 @@ if L then
 	L.charge = "Carga furiosa"
 	L.charge_desc = "Avisa sobre la Carga furiosa en jugadores."
 	L.charge_trigger = "mira a"
-	L.charge_say = "¡Carga en MI!"
 
 	L.bosses = "Jefes"
 	L.bosses_desc = "Avisa cuando los Jefes esten entrando."

@@ -141,10 +141,6 @@ if L then
 	L.eyebeam_message = "Haz ocular: %s"
 	L.eyebeam_bar = "~Haz ocular"
 	L.eyebeam_you = "¡Haz ocular en TI!"
-	L.eyebeam_say = "¡Haz ocular en MI!"
-
-	L.eyebeamsay = "Decir Haz ocular"
-	L.eyebeamsay_desc = "Dice cuando eres el objetivo de Haz ocular enfocado."
 
 	L.armor_message = "%2$dx Aplastar en %1$s"
 end
@@ -280,7 +276,7 @@ if L then
 	L.vaporstack_desc = "Avisa cuando tienes 5 o más stacks de Vapores de saronita."
 	L.vaporstack_message = "¡Vapores x%d!"
 
-	L.crash_say = "¡Fragor en mi!"
+	L.crash_say = "Fragor"
 
 	L.mark_message = "Marca"
 	L.mark_message_other = "¡Marca en %s!"

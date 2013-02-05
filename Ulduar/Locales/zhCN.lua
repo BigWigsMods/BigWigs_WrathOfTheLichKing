@@ -141,10 +141,6 @@ if L then
 	L.eyebeam_message = "聚焦视线：>%s<！"
 	L.eyebeam_bar = "<聚焦视线>"
 	L.eyebeam_you = ">你< 聚焦视线！"
-	L.eyebeam_say = ">我< 聚焦视线！"
-
-	L.eyebeamsay = "聚焦视线"
-	L.eyebeamsay_desc = "当你中了聚焦视线时发出自身警报。"
 
 	L.armor_message = "粉碎护甲%2$d层：>%1$s<！"
 end
@@ -284,7 +280,7 @@ if L then
 	L.vaporstack_desc = "当玩家中了5层或更多萨隆邪铁蒸汽时发出警报。"
 	L.vaporstack_message = "萨隆邪铁蒸汽：>x%d<！"
 
-	L.crash_say = ">我< 暗影冲撞！"
+	L.crash_say = "暗影冲撞"
 
 	L.mark_message = "无面者的印记"
 	L.mark_message_other = "无面者的印记：>%s<！"

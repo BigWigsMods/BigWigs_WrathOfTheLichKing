@@ -8,7 +8,6 @@ if L then
 
 	L.empowered_shock_message = "Schockvortex kommt!"
 	L.regular_shock_message = "Schockzone"
-	L.shock_say = "Schockzone auf MIR!"
 	L.shock_bar = "~Nächster Schock"
 
 	L.iconprince = "Symbol auf aktivem Prinz"
@@ -223,7 +222,6 @@ if L then
 	L.quake_message = "Beben kommt!"
 	L.quake_bar = "Beben"
 
-	L.defile_say = "Entweihen auf MIR!"
 	L.defile_message = "Entweihen auf DIR!"
 	L.defile_bar = "Nächstes Entweihen"
 
@@ -233,7 +231,6 @@ if L then
 
 	L.last_phase_bar = "Letzte Phase"
 
-	L.trap_say = "Falle auf MIR!"
 	L.trap_message = "Falle"
 	L.trap_bar = "Nächste Falle"
 

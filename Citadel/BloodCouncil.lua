@@ -5,7 +5,7 @@ local mod = BigWigs:NewBoss("Blood Prince Council", 604)
 if not mod then return end
 --Prince Valanar, Prince Keleseth, Prince Taldaram
 mod:RegisterEnableMob(37970, 37972, 37973)
-mod.toggleOptions = {{72040, "ICON", "FLASHSHAKE"}, 72039, {72037, "SAY", "FLASHSHAKE", "WHISPER"}, 72999, 70981, 72052, {"iconprince", "ICON"}, "berserk", "proximity", "bosskill"}
+mod.toggleOptions = {{72040, "ICON", "FLASH"}, 72039, {72037, "SAY", "FLASH", "WHISPER"}, 72999, 70981, 72052, {"iconprince", "ICON"}, "berserk", "proximity", "bosskill"}
 local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	[72040] = "Taldaram",
@@ -28,7 +28,6 @@ if L then
 
 	L.empowered_shock_message = "Casting Shock!"
 	L.regular_shock_message = "Shock zone"
-	L.shock_say = "Shock zone on me!"
 	L.shock_bar = "~Next Shock"
 
 	L.iconprince = "Icon on active prince"
@@ -79,7 +78,7 @@ end
 function mod:Switch(unit, spellId, _, _, spellName)
 	self:Message(70981, L["switch_message"]:format(unit), "Positive", spellId, "Info")
 	self:Bar(70981, L["switch_bar"], 45, spellId)
-	self:SendMessage("BigWigs_StopBar", self, L["empowered_bar"])
+	self:StopBar(L["empowered_bar"])
 	for i = 1, 3 do
 		local bossId = ("boss%d"):format(i)
 		local name = UnitName(bossId)
@@ -92,7 +91,7 @@ end
 
 function mod:EmpoweredShock(_, spellId)
 	self:Message(72039, L["empowered_shock_message"], "Important", spellId, "Alert")
-	self:OpenProximity(15)
+	self:OpenProximity("proximity", 15)
 	self:ScheduleTimer(self.CloseProximity, 5, self)
 	self:Bar(72039, L["shock_bar"], 16, spellId)
 end
@@ -107,8 +106,8 @@ function mod:RegularShock()
 			local target = UnitName(bossId .. "target")
 			if target then
 				if UnitIsUnit("player", target) then
-					self:FlashShake(72037)
-					self:Say(72037, L["shock_say"])
+					self:Flash(72037)
+					self:Say(72037)
 				end
 				self:TargetMessage(72037, L["regular_shock_message"], target, "Urgent", 72037)
 				self:Whisper(72037, target, L["regular_shock_message"])
@@ -121,7 +120,7 @@ end
 
 function mod:EmpoweredFlame(msg, _, _, _, player)
 	if UnitIsUnit(player, "player") then
-		self:FlashShake(72040)
+		self:Flash(72040)
 	end
 	self:TargetMessage(72040, L["empowered_flames"], player, "Urgent", 72040, "Long")
 	self:SecondaryIcon(72040, player)

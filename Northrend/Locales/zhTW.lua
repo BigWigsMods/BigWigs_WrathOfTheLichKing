@@ -61,10 +61,8 @@ if L then
 	L.fire_damage_message = ">你< 熾熱燃灼！"
 	L.fire_message = "熾熱燃灼！"
 	L.fire_bar = "<下一熾熱燃灼>"
-	L.fire_say = ">我< 熾熱燃灼！"
 	L.shadow_message = "靈魂耗損！"
 	L.shadow_bar = "<下一靈魂耗損>"
-	L.shadow_say = ">我< 靈魂耗損！"
 
 	L.meteorstrike_yell = "天堂也將燃燒!"
 	L.meteorstrike_bar = "<隕石轟擊>"

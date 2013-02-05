@@ -55,7 +55,6 @@ if L then
 	L.charge = "Отчаянный рывок" --Furious Charge - судя по транскриптору нет русского перевода :(
 	L.charge_desc = "Сообщать об отчаянном рывке."
 	L.charge_trigger = "глядит на"	--check
-	L.charge_say = "Бежит на меня!"
 
 	L.bosses = "Боссы"
 	L.bosses_desc = "Сообщать о появлении следующего босса."

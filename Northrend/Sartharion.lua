@@ -12,7 +12,7 @@ local shadron, tenebron, vesperon
 	30449 = vesperon
 --]]
 mod:RegisterEnableMob(28860, 30449, 30451, 30452)
-mod.toggleOptions = {"tsunami", 56908, "drakes", {"twilight", "FLASHSHAKE"}, "berserk", "bosskill"}
+mod.toggleOptions = {"tsunami", 56908, "drakes", {"twilight", "FLASH"}, "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -132,6 +132,6 @@ end
 function mod:Vesperon(msg, mob)
 	if mob ~= vesperon then return end
 	self:Message("twilight", L["twilight_message"]:format(mob), "Personal", 59569, "Alarm")
-	self:FlashShake("twilight")
+	self:Flash("twilight")
 end
 

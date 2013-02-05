@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Thorim", 529)
 if not mod then return end
 -- 32865 = thorim, 32882 = behemoth, 32872 = runic colossus, 32908/32907 = Captured Mercenary Captain, 32885/32883 = Captured Mercenary Soldier
 mod:RegisterEnableMob(32865, 32882, 32872, 32908, 32907, 32885, 32883)
-mod.toggleOptions = {{62042, "ICON"}, 62016, 62331, {62017, "FLASHSHAKE"}, 62338, {62526, "ICON", "SAY"}, 62279, 62130, "proximity", "hardmode", "phase", "bosskill"}
+mod.toggleOptions = {{62042, "ICON"}, 62016, 62331, {62017, "FLASH"}, 62338, {62526, "ICON", "SAY"}, 62279, 62130, "proximity", "hardmode", "phase", "bosskill"}
 
 local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
@@ -135,7 +135,7 @@ function mod:Shock(player, spellId)
 		last = time
 		if UnitIsUnit(player, "player") then
 			self:LocalMessage(62017, L["shock_message"], "Personal", spellId, "Info")
-			self:FlashShake(62017)
+			self:Flash(62017)
 		end
 	end
 end
@@ -146,7 +146,7 @@ end
 
 function mod:Detonation(player, spellId, _, _, spellName)
 	if UnitIsUnit(player, "player") then
-		self:Say(62526, L["detonation_say"])
+		self:Say(62526, L["detonation_say"], true)
 	else
 		self:TargetMessage(62526, spellName, player, "Important", spellId)
 	end
@@ -163,9 +163,9 @@ end
 
 function mod:PhaseThree()
 	self:CancelDelayedMessage(L["hardmode_warning"])
-	self:SendMessage("BigWigs_StopBar", self, L["hardmode"])
-	self:SendMessage("BigWigs_StopBar", self, CL["berserk"])
+	self:StopBar(L["hardmode"])
+	self:StopBar(CL["berserk"])
 	self:Message("phase", L["phase3_message"], "Attention")
-	self:OpenProximity(5)
+	self:OpenProximity("proximity", 5)
 end
 

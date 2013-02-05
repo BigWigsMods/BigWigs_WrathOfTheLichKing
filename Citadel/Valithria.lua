@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Valithria Dreamwalker", 604)
 if not mod then return end
 mod:RegisterEnableMob(36789, 37868, 36791, 37934, 37886, 37950, 37985)
-mod.toggleOptions = {69325, {71086, "FLASHSHAKE"}, "suppresser", {"blazing", "ICON"}, "portal", "berserk", "bosskill"}
+mod.toggleOptions = {69325, {71086, "FLASH"}, "suppresser", {"blazing", "ICON"}, "portal", "berserk", "bosskill"}
 mod.optionHeaders = {
 	[69325] = "normal",
 	berserk = "heroic",
@@ -115,7 +115,7 @@ function mod:LayWaste(_, spellId, _, _, spellName)
 end
 
 function mod:LayWasteRemoved(_, _, _, _, spellName)
-	self:SendMessage("BigWigs_StopBar", self, spellName)
+	self:StopBar(spellName)
 end
 
 function mod:Portal()
@@ -133,7 +133,7 @@ do
 		if (GetTime()-t > 2) and UnitIsUnit(player, "player") and UnitPowerType("player") == 0 then
 			t = GetTime()
 			self:LocalMessage(71086, L["manavoid_message"], "Personal", spellId, "Alarm")
-			self:FlashShake(71086)
+			self:Flash(71086)
 		end
 	end
 end

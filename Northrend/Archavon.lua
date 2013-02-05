@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Archavon the Stone Watcher", 532)
 if not mod then return end
 mod:RegisterEnableMob(31125)
-mod.toggleOptions = {58663, "charge", {58678, "MESSAGE", "ICON"}, {58965, "FLASHSHAKE"}, "berserk", "bosskill"}
+mod.toggleOptions = {58663, "charge", {58678, "MESSAGE", "ICON"}, {58965, "FLASH"}, "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -60,7 +60,7 @@ end
 function mod:Cloud(player, spellId)
 	if UnitIsUnit(player, "player") then
 		self:LocalMessage(58965, L["cloud_message"], "Personal", spellId, "Alarm")
-		self:FlashShake(58965)
+		self:Flash(58965)
 	end
 end
 
@@ -79,7 +79,7 @@ do
 
 	function mod:Shards(_, spellId, _, _, spellName)
 		id, name = spellId, spellName
-		self:CancelTimer(handle, true)
+		self:CancelTimer(handle)
 		handle = self:ScheduleTimer(scanTarget, 0.2)
 	end
 end

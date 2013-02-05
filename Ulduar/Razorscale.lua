@@ -11,7 +11,7 @@ if not mod then return end
 	33186 = Razorscale
 --]]
 mod:RegisterEnableMob(33186, 33210, 33816, 33287)
-mod.toggleOptions = {"phase", 64021, {64704, "FLASHSHAKE"}, "harpoon", "berserk", "bosskill"}
+mod.toggleOptions = {"phase", 64021, {64704, "FLASH"}, "harpoon", "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -86,7 +86,7 @@ end
 function mod:Flame(player)
 	if UnitIsUnit(player, "player") then
 		self:LocalMessage(64704, L["flame_message"], "Personal", 64733, "Alarm")
-		self:FlashShake(64704)
+		self:Flash(64704)
 	end
 end
 
@@ -104,7 +104,7 @@ end
 
 function mod:Phase2()
 	phase = 2
-	self:SendMessage("BigWigs_StopBar", self, L["stun_bar"])
+	self:StopBar(L["stun_bar"])
 	self:Message("phase", L["phase2_message"], "Attention")
 end
 
@@ -139,7 +139,7 @@ function mod:Airphase()
 		started = true
 		phase = 1
 	else
-		self:SendMessage("BigWigs_StopBar", self, L["stun_bar"])
+		self:StopBar(L["stun_bar"])
 		self:Message("phase", L["air_message"], "Attention", nil, "Info")
 	end
 end
@@ -151,7 +151,7 @@ function mod:Airphase10()
 	p2 = nil
 	count = 0
 	self:Bar("harpoon", L["harpoon_nextbar"]:format(1), 22, "INV_Spear_06")
-	self:SendMessage("BigWigs_StopBar", self, L["stun_bar"])
+	self:StopBar(L["stun_bar"])
 	--self:Message(L["air_message"], "Attention", nil, "Info")
 end
 

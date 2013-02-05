@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Lord Marrowgar", 604)
 if not mod then return end
 mod:RegisterEnableMob(36612)
-mod.toggleOptions = {69076, 69057, {69138, "FLASHSHAKE"}, "bosskill"}
+mod.toggleOptions = {69076, 69057, {69138, "FLASH"}, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -77,7 +77,7 @@ end
 function mod:Coldflame(player, spellId)
 	if UnitIsUnit(player, "player") then
 		self:LocalMessage(69138, L["coldflame_message"], "Personal", spellId, "Alarm")
-		self:FlashShake(69138)
+		self:Flash(69138)
 	end
 end
 
@@ -97,7 +97,7 @@ function mod:Bonestorm(_, spellId, _, _, spellName)
 	if self:Heroic() then
 		time = 34
 	else
-		self:SendMessage("BigWigs_StopBar", self, L["impale_cd"])
+		self:StopBar(L["impale_cd"])
 	end
 	self:Bar(69076, spellName, time, spellId)
 	self:ScheduleTimer(afterTheStorm, time)

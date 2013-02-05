@@ -4,7 +4,7 @@
 
 local mod = BigWigs:NewBoss("Anub'arak", 543)
 if not mod then return end
-mod.toggleOptions = {66012, "burrow", {67574, "WHISPER", "ICON", "FLASHSHAKE"}, {66013, "FLASHSHAKE"}, 66118, 66134, "berserk", "bosskill"}
+mod.toggleOptions = {66012, "burrow", {67574, "WHISPER", "ICON", "FLASH"}, {66013, "FLASH"}, 66118, 66134, "berserk", "bosskill"}
 mod:RegisterEnableMob(34564, 34607, 34605)
 mod.optionHeaders = {
 	[66012] = "normal",
@@ -65,8 +65,8 @@ L = mod:GetLocale()
 
 local function unscheduleStrike()
 	mod:CancelDelayedMessage(L["shadow_soon"])
-	mod:CancelTimer(handle_NextStrike, true)
-	mod:SendMessage("BigWigs_StopBar", mod, ssName)
+	mod:CancelTimer(handle_NextStrike)
+	mod:StopBar(ssName)
 end
 
 local function scheduleStrike()
@@ -140,7 +140,7 @@ do
 			scheduled = true
 		end
 		if UnitIsUnit(player, "player") then
-			self:FlashShake(66013)
+			self:Flash(66013)
 		end
 	end
 end
@@ -148,7 +148,7 @@ end
 function mod:ColdDebuff(player, spellId, _, _, spellName)
 	if not UnitIsUnit(player, "player") or not phase2 then return end
 	self:LocalMessage(66013, spellName, "Personal", spellId)
-	self:FlashShake(66013)
+	self:Flash(66013)
 end
 
 function mod:ColdCooldown(_, spellId)
@@ -159,17 +159,17 @@ end
 function mod:Swarm(player, spellId, _, _, spellName)
 	self:Message(66118, spellName, "Important", spellId, "Long")
 	phase2 = true
-	self:SendMessage("BigWigs_StopBar", self, L["burrow_cooldown"])
+	self:StopBar(L["burrow_cooldown"])
 	self:CancelDelayedMessage(L["burrow_soon"])
 	if not self:Heroic() then -- Normal modes
-		self:SendMessage("BigWigs_StopBar", self, L["nerubian_burrower"])
-		self:CancelTimer(handle_NextWave, true)
+		self:StopBar(L["nerubian_burrower"])
+		self:CancelTimer(handle_NextWave)
 	end
 end
 
 function mod:Pursue(player, spellId)
 	self:TargetMessage(67574, L["chase"], player, "Personal", spellId, "Alert")
-	if UnitIsUnit(player, "player") then self:FlashShake(67574) end
+	if UnitIsUnit(player, "player") then self:Flash(67574) end
 	self:Whisper(67574, player, L["chase"])
 	self:PrimaryIcon(67574, player, "icon")
 end
@@ -177,9 +177,9 @@ end
 function mod:Burrow()
 	isBurrowed = true
 	unscheduleStrike()
-	self:SendMessage("BigWigs_StopBar", self, L["freeze_bar"])
-	self:SendMessage("BigWigs_StopBar", self, L["nerubian_burrower"])
-	self:CancelTimer(handle_NextWave, true)
+	self:StopBar(L["freeze_bar"])
+	self:StopBar(L["nerubian_burrower"])
+	self:CancelTimer(handle_NextWave)
 
 	self:Bar("burrow", L["burrow"], 65, 65919)
 end

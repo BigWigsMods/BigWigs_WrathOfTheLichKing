@@ -36,7 +36,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:OpenProximity(5)
+	self:OpenProximity("proximity", 5)
 	self:Bar(64218, L["overcharge_next"], 45, 64218)
 	self:Berserk(360)
 end

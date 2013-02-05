@@ -4,7 +4,7 @@
 
 local mod = BigWigs:NewBoss("The Beasts of Northrend", 543)
 if not mod then return end
-mod.toggleOptions = {"snobold", 66331, 66330, {66317, "FLASHSHAKE"}, "submerge", {66883, "FLASHSHAKE"}, "spew", "sprays", {66823, "FLASHSHAKE"}, 66869, 68335, "proximity", 66770, {"charge", "ICON", "SAY", "FLASHSHAKE"}, 66758, 66759, "bosses", "berserk", "bosskill"}
+mod.toggleOptions = {"snobold", 66331, 66330, {66317, "FLASH"}, "submerge", {66883, "FLASH"}, "spew", "sprays", {66823, "FLASH"}, 66869, 68335, "proximity", 66770, {"charge", "ICON", "SAY", "FLASH"}, 66758, 66759, "bosses", "berserk", "bosskill"}
 mod.optionHeaders = {
 	snobold = "Gormok the Impaler",
 	submerge = "Jormungars",
@@ -62,7 +62,6 @@ if L then
 	L.charge = "Furious Charge"
 	L.charge_desc = "Warn about Furious Charge on players."
 	L.charge_trigger = "glares at"
-	L.charge_say = "Charge on me!"
 
 	L.bosses = "Bosses"
 	L.bosses_desc = "Warn about bosses incoming"
@@ -139,7 +138,7 @@ function mod:Jormungars()
 	if self:Heroic() then
 		self:Bar("bosses", L["boss_incoming"]:format(icehowl), 200, "INV_Misc_MonsterHorn_07")
 	end
-	self:OpenProximity(10)
+	self:OpenProximity("proximity", 10)
 	-- The first worm to spray is Acidmaw, he has a 10 second spray timer after emerge
 	sprayTimer = 10
 	handle_Jormungars = self:ScheduleTimer("Emerge", 15)
@@ -149,10 +148,10 @@ function mod:Icehowl()
 	local m = L["boss_incoming"]:format(icehowl)
 	self:Message("bosses", m, "Positive")
 	self:Bar("bosses", m, 10, "INV_Misc_MonsterHorn_07")
-	self:CancelTimer(handle_Jormungars, true)
+	self:CancelTimer(handle_Jormungars)
 	handle_Jormungars = nil
-	self:SendMessage("BigWigs_StopBar", self, L["spray"])
-	self:SendMessage("BigWigs_StopBar", self, L["submerge"])
+	self:StopBar(L["spray"])
+	self:StopBar(L["submerge"])
 	if self:Heroic() then
 		self:Berserk(220, true, icehowl)
 	end
@@ -193,7 +192,7 @@ do
 			local t = GetTime()
 			if not last or (t > last + 4) then
 				self:LocalMessage(66317, L["firebomb_message"], "Personal", spellId, last and nil or "Alarm")
-				self:FlashShake(66317)
+				self:Flash(66317)
 				last = t
 			end
 		end
@@ -251,7 +250,7 @@ do
 		if UnitIsUnit(player, "player") then
 			dontWarn = true
 			self:TargetMessage(66823, L["toxin_spell"], player, "Personal", spellId, "Info")
-			self:FlashShake(66823)
+			self:Flash(66823)
 		end
 	end
 end
@@ -290,7 +289,7 @@ do
 			local t = GetTime()
 			if not last or (t > last + 4) then
 				self:LocalMessage(66883, L["slime_message"], "Personal", spellId, last and nil or "Alarm")
-				self:FlashShake(66883)
+				self:Flash(66883)
 				last = t
 			end
 		end
@@ -321,8 +320,8 @@ function mod:Charge(msg, unit, _, _, player)
 		local spellName = GetSpellInfo(52311)
 		self:TargetMessage("charge", spellName, player, "Personal", 52311, "Alarm")
 		if UnitIsUnit(player, "player") then
-			self:FlashShake("charge")
-			self:Say("charge", L["charge_say"])
+			self:Flash("charge")
+			self:Say("charge", spellName)
 		end
 		self:Bar("charge", spellName, 7.5, 52311)
 		self:PrimaryIcon("charge", player)

@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("The Lich King", 604)
 if not mod then return end
 mod:RegisterEnableMob(36597)
-mod.toggleOptions = {72143, 70541, {70337, "ICON", "FLASHSHAKE"}, 70372, {72762, "SAY", "ICON", "WHISPER", "FLASHSHAKE"}, 69409, 69037, {68980, "ICON", "WHISPER", "FLASHSHAKE"}, 70498, {68981, "FLASHSHAKE"}, 69200, {72262, "FLASHSHAKE"}, 72350, {73529, "SAY", "WHISPER", "FLASHSHAKE", "ICON"}, "berserk", "bosskill"}
+mod.toggleOptions = {72143, 70541, {70337, "ICON", "FLASH"}, 70372, {72762, "SAY", "ICON", "WHISPER", "FLASH"}, 69409, 69037, {68980, "ICON", "WHISPER", "FLASH"}, 70498, {68981, "FLASH"}, 69200, {72262, "FLASH"}, 72350, {73529, "SAY", "WHISPER", "FLASH", "ICON"}, "berserk", "bosskill"}
 local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	[72143] = CL.phase:format(1),
@@ -53,7 +53,6 @@ if L then
 	L.quake_message = "Quake Casting"
 	L.quake_bar = "Quake"
 
-	L.defile_say = "Defile on ME!"
 	L.defile_message = "Defile on YOU!"
 	L.defile_bar = "Next Defile"
 
@@ -63,7 +62,6 @@ if L then
 
 	L.last_phase_bar = "Last Phase"
 
-	L.trap_say = "Shadow Trap on ME!"
 	L.trap_message = "Shadow Trap"
 	L.trap_bar = "Next Trap"
 
@@ -193,10 +191,10 @@ function mod:Horror(_, spellId)
 end
 
 function mod:FuryofFrostmourne()
-	self:SendMessage("BigWigs_StopBar", self, L["defile_bar"])
-	self:SendMessage("BigWigs_StopBar", self, L["reaper_bar"])
-	self:SendMessage("BigWigs_StopBar", self, L["vilespirits_bar"])
-	self:SendMessage("BigWigs_StopBar", self, L["harvestsoul_bar"])
+	self:StopBar(L["defile_bar"])
+	self:StopBar(L["reaper_bar"])
+	self:StopBar(L["vilespirits_bar"])
+	self:StopBar(L["harvestsoul_bar"])
 	self:Bar(72350, L["last_phase_bar"], 160, 72350)
 end
 
@@ -217,7 +215,7 @@ end
 
 function mod:NecroticPlague(player, spellId, _, _, spellName)
 	self:TargetMessage(70337, spellName, player, "Personal", spellId, "Alert")
-	if UnitIsUnit(player, "player") then self:FlashShake(70337) end
+	if UnitIsUnit(player, "player") then self:Flash(70337) end
 	self:Bar(70337, L["necroticplague_bar"], 30, spellId)
 	self:SecondaryIcon(70337, player)
 end
@@ -231,7 +229,7 @@ do
 				local debuffed, _, _, _, _, _, expire = UnitDebuff(player, plague)
 				if debuffed and (expire - GetTime()) > 13 then
 					mod:TargetMessage(70337, plague, player, "Personal", 70337, "Alert")
-					if UnitIsUnit(player, "player") then mod:FlashShake(70337) end
+					if UnitIsUnit(player, "player") then mod:Flash(70337) end
 					mod:SecondaryIcon(70337, player)
 				end
 			end
@@ -263,7 +261,7 @@ function mod:DefileRun(player, spellId)
 		last = time
 		if UnitIsUnit(player, "player") then
 			self:LocalMessage(72762, L["defile_message"], "Personal", spellId, "Info")
-			self:FlashShake(72762)
+			self:Flash(72762)
 		end
 	end
 end
@@ -293,14 +291,14 @@ end
 
 function mod:HarvestSoul(player, spellId, _, _, spellName)
 	if self:Heroic() then
-		self:SendMessage("BigWigs_StopBar", self, L["defile_bar"])
-		self:SendMessage("BigWigs_StopBar", self, L["reaper_bar"])
-		self:SendMessage("BigWigs_StopBar", self, L["ragingspirit_bar"])
+		self:StopBar(L["defile_bar"])
+		self:StopBar(L["reaper_bar"])
+		self:StopBar(L["ragingspirit_bar"])
 		self:Bar(68980, L["cave_phase"], 50, spellId)
 		self:Bar(68980, L["harvestsoul_bar"], 105, spellId)
 	else
 		self:Bar(68980, L["harvestsoul_bar"], 75, spellId)
-		if UnitIsUnit(player, "player") then self:FlashShake(68980) end
+		if UnitIsUnit(player, "player") then self:Flash(68980) end
 		self:TargetMessage(68980, spellName, player, "Attention", spellId)
 		self:Whisper(68980, player, spellName)
 		self:SecondaryIcon(68980, player)
@@ -313,13 +311,13 @@ end
 
 function mod:RemorselessWinter(_, spellId)
 	phase = phase + 1
-	self:SendMessage("BigWigs_StopBar", self, L["necroticplague_bar"])
-	self:SendMessage("BigWigs_StopBar", self, L["horror_bar"])
-	self:SendMessage("BigWigs_StopBar", self, L["infest_bar"])
-	self:SendMessage("BigWigs_StopBar", self, L["defile_bar"])
-	self:SendMessage("BigWigs_StopBar", self, L["reaper_bar"])
-	self:SendMessage("BigWigs_StopBar", self, L["valkyr_bar"])
-	self:SendMessage("BigWigs_StopBar", self, L["trap_bar"])
+	self:StopBar(L["necroticplague_bar"])
+	self:StopBar(L["horror_bar"])
+	self:StopBar(L["infest_bar"])
+	self:StopBar(L["defile_bar"])
+	self:StopBar(L["reaper_bar"])
+	self:StopBar(L["valkyr_bar"])
+	self:StopBar(L["trap_bar"])
 	self:LocalMessage(68981, L["remorselesswinter_message"], "Urgent", spellId, "Alert")
 	self:Bar(72262, L["quake_bar"], 62, 72262)
 	self:Bar(69200, L["ragingspirit_bar"], 15, spellId)
@@ -327,7 +325,7 @@ end
 
 function mod:Quake(_, spellId)
 	phase = phase + 1
-	self:SendMessage("BigWigs_StopBar", self, L["ragingspirit_bar"])
+	self:StopBar(L["ragingspirit_bar"])
 	self:LocalMessage(72262, L["quake_message"], "Urgent", spellId, "Alert")
 	self:Bar(72762, L["defile_bar"], 37, 72762)
 	self:Bar(70541, L["infest_bar"], 13, 70541)
@@ -348,8 +346,8 @@ do
 		local target = UnitName(bossId .. "target")
 		if target then
 			if UnitIsUnit(target, "player") then
-				mod:FlashShake(72762)
-				mod:Say(72762, L["defile_say"])
+				mod:Flash(72762)
+				mod:Say(72762)
 			end
 			mod:TargetMessage(72762, name, target, "Important", id, "Alert")
 			mod:Whisper(72762, target, name)
@@ -360,7 +358,7 @@ do
 
 	function mod:DefileCast(player, spellId, _, _, spellName)
 		id, name = spellId, spellName
-		self:CancelTimer(handle, true)
+		self:CancelTimer(handle)
 		self:Bar(72762, L["defile_bar"], 32, 72762)
 		handle = self:ScheduleTimer(scanTarget, 0.01)
 	end
@@ -375,8 +373,8 @@ do
 		local target = UnitName(bossId .. "target")
 		if target then
 			if UnitIsUnit(target, "player") then
-				mod:FlashShake(73529)
-				mod:Say(73529, L["trap_say"])
+				mod:Flash(73529)
+				mod:Say(73529)
 			end
 			mod:TargetMessage(73529, L["trap_message"], target, "Attention", 73539)
 			mod:Whisper(73529, target, spellName)

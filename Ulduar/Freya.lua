@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Freya", 529)
 if not mod then return end
 mod:RegisterEnableMob(32906)
-mod.toggleOptions = {"phase", "wave", "tree", {62589, "WHISPER", "ICON", "FLASHSHAKE"}, {62623, "ICON"}, "proximity", 62861, {62437, "FLASHSHAKE"}, {62865, "FLASHSHAKE"}, "berserk", "bosskill"}
+mod.toggleOptions = {"phase", "wave", "tree", {62589, "WHISPER", "ICON", "FLASH"}, {62623, "ICON"}, "proximity", 62861, {62437, "FLASH"}, {62865, "FLASH"}, "berserk", "bosskill"}
 
 mod.optionHeaders = {
 	phase = "normal",
@@ -110,7 +110,7 @@ do
 	function mod:Root(player, spellId, _, _, spellName)
 		root[#root + 1] = player
 		id, name = spellId, spellName
-		self:CancelTimer(handle, true)
+		self:CancelTimer(handle)
 		handle = self:ScheduleTimer(rootWarn, 0.2)
 	end
 end
@@ -134,7 +134,7 @@ do
 		local color = caster and "Personal" or "Attention"
 		local sound = caster and "Long" or nil
 		self:Message(62437, spellName, color, spellId, sound)
-		if caster then self:FlashShake(62437) end
+		if caster then self:Flash(62437) end
 		if phase == 1 then
 			self:Bar(62437, spellName, 2, spellId)
 			self:Bar(62437, L["tremor_bar"], 30, spellId)
@@ -162,15 +162,15 @@ do
 
 	function mod:Sunbeam(_, spellId, _, _, spellName)
 		id, name = spellId, spellName
-		self:CancelTimer(handle, true)
+		self:CancelTimer(handle)
 		handle = self:ScheduleTimer(scanTarget, 0.1)
 	end
 end
 
 function mod:Fury(player, spellId)
 	if UnitIsUnit(player, "player") then
-		self:OpenProximity(10)
-		self:FlashShake(62589)
+		self:OpenProximity("proximity", 10)
+		self:Flash(62589)
 	end
 	self:TargetMessage(62589, L["fury_message"], player, "Personal", spellId, "Alert")
 	self:Whisper(62589, player, L["fury_message"])
@@ -179,7 +179,7 @@ function mod:Fury(player, spellId)
 end
 
 function mod:FuryRemove(player)
-	self:SendMessage("BigWigs_StopBar", self, L["fury_other"]:format(player))
+	self:StopBar(L["fury_other"]:format(player))
 	if UnitIsUnit(player, "player") then
 		self:CloseProximity()
 	end
@@ -187,7 +187,7 @@ end
 
 function mod:AttunedRemove()
 	phase = 2
-	self:SendMessage("BigWigs_StopBar", self, L["wave_bar"])
+	self:StopBar(L["wave_bar"])
 	self:Message("phase", L["phase2_message"], "Important")
 end
 
@@ -198,7 +198,7 @@ do
 			local t = GetTime()
 			if not last or (t > last + 4) then
 				self:LocalMessage(62865, L["energy_message"], "Personal",  62451, "Alarm")
-				self:FlashShake(62865)
+				self:Flash(62865)
 				last = t
 			end
 		end

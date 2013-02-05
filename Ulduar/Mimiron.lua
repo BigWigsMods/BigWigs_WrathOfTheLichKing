@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Mimiron", 529)
 if not mod then return end
 --  Leviathan Mk II(33432), VX-001(33651), Aerial Command Unit(33670),
 mod:RegisterEnableMob(33350, 33432, 33651, 33670)
-mod.toggleOptions = {62997, 63631, {63274, "FLASHSHAKE"}, 64444, 63811, 64623, 64570, "phase", "proximity", "berserk", "bosskill" }
+mod.toggleOptions = {62997, 63631, {63274, "FLASH"}, 64444, 63811, 64623, 64570, "phase", "proximity", "berserk", "bosskill" }
 mod.optionHeaders = {
 	[62997] = "normal",
 	[64623] = "hard",
@@ -120,7 +120,7 @@ end
 
 function mod:Spinning(_, spellId)
 	self:Message(63274, L["laser_soon"], "Personal", spellId, "Long")
-	self:FlashShake(63274)
+	self:Flash(63274)
 end
 
 do
@@ -153,7 +153,7 @@ function mod:Yells(msg)
 		start()
 		ishardmode = true
 		self:Berserk(600, true)
-		self:OpenProximity(5)
+		self:OpenProximity("proximity", 5)
 		self:Engage()
 	elseif msg:find(L["engage_trigger"]) then
 		start()
@@ -161,8 +161,8 @@ function mod:Yells(msg)
 		self:Engage()
 	elseif msg:find(L["phase2_trigger"]) then
 		phase = 2
-		self:SendMessage("BigWigs_StopBar", self, L["plasma_bar"])
-		self:SendMessage("BigWigs_StopBar", self, L["shock_next"])
+		self:StopBar(L["plasma_bar"])
+		self:StopBar(L["shock_next"])
 		self:Message("phase", L["phase2_warning"], "Attention")
 		self:Bar("phase", L["phase_bar"]:format(phase), 40, "INV_Gizmo_01")
 		if ishardmode then

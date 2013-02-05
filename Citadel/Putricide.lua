@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Professor Putricide", 604)
 if not mod then return end
 --Putricide, Gas Cloud (Red Ooze), Volatile Ooze (Green Ooze)
 mod:RegisterEnableMob(36678, 37562, 37697)
-mod.toggleOptions = {{70447, "ICON"}, {70672, "WHISPER", "FLASHSHAKE"}, 70351, 71255, {72295, "SAY", "FLASHSHAKE"}, 72451, {70911, "ICON", "FLASHSHAKE"}, "phase", "berserk", "bosskill"}
+mod.toggleOptions = {{70447, "ICON"}, {70672, "WHISPER", "FLASH"}, 70351, 71255, {72295, "SAY", "FLASH"}, 72451, {70911, "ICON", "FLASH"}, "phase", "berserk", "bosskill"}
 local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	[70447] = CL.phase:format(1),
@@ -95,8 +95,8 @@ end
 
 do
 	local function stopOldStuff()
-		mod:SendMessage("BigWigs_StopBar", mod, L["experiment_bar"])
-		mod:SendMessage("BigWigs_StopBar", mod, barText)
+		mod:StopBar(L["experiment_bar"])
+		mod:StopBar(barText)
 	end
 	local function newPhase()
 		mod:Bar(71255, L["gasbomb_bar"], 14, 71255)
@@ -171,18 +171,18 @@ function mod:UNIT_HEALTH(_, unit)
 end
 
 function mod:ChasedByRedOoze(player, spellId)
-	self:SendMessage("BigWigs_StopBar", self, barText)
+	self:StopBar(barText)
 	self:TargetMessage(70672, L["blight_message"], player, "Personal", spellId)
 	self:Whisper(70672, player, L["blight_message"])
 	if UnitIsUnit(player, "player") then
-		self:FlashShake(70672)
+		self:Flash(70672)
 	end
 	barText = CL.other:format(L["blight_message"], player)
 	self:Bar(70672, barText, 20, spellId)
 end
 
 function mod:RedOozeDeath()
-	self:SendMessage("BigWigs_StopBar", self, barText)
+	self:StopBar(barText)
 end
 
 function mod:StunnedByGreenOoze(player, spellId)
@@ -209,8 +209,8 @@ do
 		local target = UnitName(bossId .. "target")
 		if target then
 			if UnitIsUnit(target, "player") then
-				mod:FlashShake(72295)
-				mod:Say(72295, L["ball_say"])
+				mod:Flash(72295)
+				mod:Say(72295, L["ball_say"], true)
 			end
 			mod:TargetMessage(72295, spellName, target, "Attention", 72295)
 		end
@@ -233,14 +233,14 @@ do
 	function mod:UnboundPlague(player, spellId, _, _, spellName)
 		local expirationTime = select(7, UnitDebuff(player, spellName))
 		if expirationTime then
-			if oldPlagueBar then self:SendMessage("BigWigs_StopBar", self, oldPlagueBar) end
+			if oldPlagueBar then self:StopBar(oldPlagueBar) end
 			oldPlagueBar = L["unbound_bar"]:format(player)
 			self:Bar(70911, oldPlagueBar, expirationTime - GetTime(), spellId)
 		end
 		self:TargetMessage(70911, spellName, player, "Personal", spellId, "Alert")
 		self:SecondaryIcon(70911, player)
 		if UnitIsUnit(player, "player") then
-			self:FlashShake(70911)
+			self:Flash(70911)
 		end
 	end
 end

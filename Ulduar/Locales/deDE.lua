@@ -140,10 +140,6 @@ if L then
 	L.eyebeam_message = "Augenstrahl: %s"
 	L.eyebeam_bar = "~Augenstrahl"
 	L.eyebeam_you = "Augenstrahl auf DIR!"
-	L.eyebeam_say = "Augenstrahl auf MIR!"
-
-	L.eyebeamsay = "Augenstrahl /sagen"
-	L.eyebeamsay_desc = "Verkündet, wenn du das Ziel des Augenstrahls bist."
 
 	L.armor_message = "%2$dx Rüstung zermalmen: %1$s!"
 end
@@ -283,7 +279,7 @@ if L then
 	L.vaporstack_desc = "Warnt, wenn du 5 oder mehr Stapel der Saronitdämpfe hast."
 	L.vaporstack_message = "Saronitdämpfe x%d!"
 
-	L.crash_say = "Schattengeschoss auf MIR!"
+	L.crash_say = "Schattengeschoss"
 
 	L.mark_message = "Mal"
 	L.mark_message_other = "Mal: %s"

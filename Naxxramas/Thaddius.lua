@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Thaddius", 535)
 if not mod then return end
 -- 15928 thaddius, 15929 - stalagg, 15930 - feugen
 mod:RegisterEnableMob(15928, 15929, 15930)
-mod.toggleOptions = {{28089, "FLASHSHAKE"}, 28134, "throw", "phase", "berserk", "bosskill"}
+mod.toggleOptions = {{28089, "FLASH"}, 28134, "throw", "phase", "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -108,13 +108,13 @@ function mod:UNIT_AURA(event, unit)
 			self:LocalMessage(28089, newCharge == "Interface\\Icons\\Spell_ChargePositive" and
 				L["polarity_first_positive"] or L["polarity_first_negative"],
 				"Personal", newCharge, "Alert")
-			self:FlashShake(28089)
+			self:Flash(28089)
 		else
 			if newCharge == lastCharge then
 				self:LocalMessage(28089, L["polarity_nochange"], "Positive", newCharge)
 			else
 				self:LocalMessage(28089, L["polarity_changed"], "Personal", newCharge, "Alert")
-				self:FlashShake(28089)
+				self:Flash(28089)
 			end
 		end
 		lastCharge = newCharge
@@ -148,8 +148,8 @@ function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 		throw()
 		self:Engage()
 	elseif msg:find(L["trigger_phase2_1"]) or msg:find(L["trigger_phase2_2"]) or msg:find(L["trigger_phase2_3"]) then
-		self:CancelTimer(throwHandle, true)
-		self:SendMessage("BigWigs_StopBar", self, L["throw_bar"])
+		self:CancelTimer(throwHandle)
+		self:StopBar(L["throw_bar"])
 		self:Message("phase", L["phase2_message"], "Important")
 		self:Berserk(360, true)
 	end

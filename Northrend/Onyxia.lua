@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Onyxia", 718)
 if not mod then return end
 mod:RegisterEnableMob(10184)
-mod.toggleOptions = {"phase", {17086, "FLASHSHAKE"}, 18431, "bosskill"}
+mod.toggleOptions = {"phase", {17086, "FLASH"}, 18431, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -49,7 +49,7 @@ end
 
 function mod:Breath(_, spellId)
 	self:Message(17086, L["deepbreath_message"], "Important", spellId, "Alarm")
-	self:FlashShake(17086)
+	self:Flash(17086)
 end
 
 function mod:Phase2()
