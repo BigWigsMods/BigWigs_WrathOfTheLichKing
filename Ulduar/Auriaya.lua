@@ -66,32 +66,32 @@ end
 -- Event Handlers
 --
 
-function mod:Sonic(_, spellId, _, _, spellName)
-	self:Message(64422, spellName, "Attention", spellId)
-	self:Bar(64422, L["sonic_bar"], 28, spellId)
+function mod:Sonic(args)
+	self:Message(64422, args.spellName, "Attention", args.spellId)
+	self:Bar(64422, L["sonic_bar"], 28, args.spellId)
 end
 
-function mod:Defender(_, spellId)
-	self:Message("defender", L["defender_message"]:format(count), "Attention", spellId)
+function mod:Defender(args)
+	self:Message("defender", L["defender_message"]:format(count), "Attention", args.spellId)
 end
 
-function mod:DefenderKill(_, spellId)
+function mod:DefenderKill(args)
 	count = count - 1
-	self:Bar("defender", L["defender_message"]:format(count), 34, spellId)
+	self:Bar("defender", L["defender_message"]:format(count), 34, args.spellId)
 end
 
-function mod:Swarm(player, spellId)
-	self:TargetMessage(64396, L["swarm_message"], player, "Attention", spellId)
-	self:Bar(64396, L["swarm_bar"], 37, spellId)
+function mod:Swarm(args)
+	self:TargetMessage(args.spellId, L["swarm_message"], args.destName, "Attention", args.spellId)
+	self:Bar(args.spellId, L["swarm_bar"], 37, args.spellId)
 end
 
-function mod:Fear(_, spellId)
-	self:Message(64386, L["fear_message"], "Urgent", spellId)
-	self:Bar(64386, L["fear_bar"], 35, spellId)
-	self:DelayedMessage(64386, 32, L["fear_warning"], "Attention")
+function mod:Fear(args)
+	self:Message(args.spellId, L["fear_message"], "Urgent", args.spellId)
+	self:Bar(args.spellId, L["fear_bar"], 35, args.spellId)
+	self:DelayedMessage(args.spellId, 32, L["fear_warning"], "Attention")
 end
 
-function mod:Sentinel(_, spellId, _, _, spellName)
-	self:Message(64389, spellName, "Important", spellId)
+function mod:Sentinel(args)
+	self:Message(64389, args.spellName, "Important", args.spellId)
 end
 

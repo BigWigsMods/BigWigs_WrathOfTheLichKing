@@ -1,12 +1,7 @@
 
 local L = BigWigs:NewBossLocale("Algalon the Observer", "koKR")
 if L then
-	L.phase = "단계"
-	L.phase_desc = "단계 변경을 알립니다."
-	L.engage_warning = "1 단계"
-	L.phase2_warning = "곧 2단계"
-	L.phase_bar = "%d 단계"
-	L.engage_trigger = "^너희 행동은 비논리적이다."
+	L.engage_trigger = "너희 행동은 비논리적이다."
 
 	L.punch_message = "위상의 주먹 %2$dx : %1$s"
 	L.smash_message = "곧 우주의 강타!"

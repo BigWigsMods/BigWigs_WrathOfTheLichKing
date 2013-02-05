@@ -3,7 +3,7 @@ local L = BigWigs:NewBossLocale("Anub'Rekhan", "ruRU")
 if L then
 	L.starttrigger1 = "Посмотрим какие вы на вкус!"
 	L.starttrigger2 = "Бегите бегите! Я люблю горячую кровь!"
-	L.starttrigger3 = "Вам отсюда не выбраться."  --check this
+	L.starttrigger3 = "Вам отсюда не выбраться." --check this
 	L.engagewarn = "Ануб'Рекан вступает в бой! Первая волна жуков через ~%d секунд"
 
 	L.gainendwarn = "Жуки-трупоеды исчезают!"
@@ -55,7 +55,7 @@ if L then
 	L.adddeath_desc = "Сообщать о смерти помощников."
 
 	L.starttrigger1 = "Глупо было искать свою смерть."
-	L.starttrigger2 = "Я очень долго ждал. Положите свою душу в мой комбайн и будем вам дерево с золотыми монетами."  --check this
+	L.starttrigger2 = "Я очень долго ждал. Положите свою душу в мой комбайн и будем вам дерево с золотыми монетами." --check this
 	L.startwarn = "Готик вступает в бой! 4:30 до входа в комнату."
 
 	L.rider = "Неодолимый всадник"

@@ -22,7 +22,7 @@ local handle_Adds = nil
 local dmTargets = mod:NewTargetList()
 
 --------------------------------------------------------------------------------
---  Localization
+-- Localization
 --
 
 local L = mod:NewLocale("enUS", true)

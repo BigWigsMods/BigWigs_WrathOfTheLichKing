@@ -15,7 +15,7 @@ mod.optionHeaders = {
 }
 
 --------------------------------------------------------------------------------
---  Localization
+-- Localization
 --
 
 local L = mod:NewLocale("enUS", true)

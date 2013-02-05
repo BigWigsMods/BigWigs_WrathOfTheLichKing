@@ -183,7 +183,7 @@ if L then
 	L.portalcd_bar = "Следующий портал %d"
 	L.portal_trigger = "Я открыла портал в Изумрудный Сон. Там вы найдете спасение, герои..."
 
-    L.manavoid_message = "На ВАС - Магическая воронка!"
+	L.manavoid_message = "На ВАС - Магическая воронка!"
 
 	L.suppresser = "Появление Подавителей"
 	L.suppresser_desc = "Сообщать когда будут появляться Подавители."
@@ -257,9 +257,9 @@ if L then
 	L.trap_message = "Темная ловушка"
 	L.trap_bar = "~Следующая ловушка"
 
-    L.valkyrhug_message = "Валь'кира схватила"
+	L.valkyrhug_message = "Валь'кира схватила"
 	L.cave_phase = "Фаза пещеры"
 
-    L.enrage_bar = "~Исступление"
+	L.enrage_bar = "~Исступление"
 end
 

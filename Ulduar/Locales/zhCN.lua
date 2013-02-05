@@ -1,11 +1,6 @@
 
 local L = BigWigs:NewBossLocale("Algalon the Observer", "zhCN")
 if L then
-	L.phase = "阶段"
-	L.phase_desc = "当进入不同阶段时发出警报。"
-	L.engage_warning = "第一阶段！"
-	L.phase2_warning = "即将 第二阶段！"
-	L.phase_bar = "<阶段%d>"
 	L.engage_trigger = "你们的行动不合逻辑。这场战斗所有可能产生的结果都已被计算在内。无论结果如何，万神殿都会收到观察者发出的信息。"
 
 	L.punch_message = "相位冲压%2$d层：>%1$s<！"

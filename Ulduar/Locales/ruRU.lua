@@ -1,11 +1,6 @@
 
 local L = BigWigs:NewBossLocale("Algalon the Observer", "ruRU")
 if L then
-	L.phase = "Фазы"
-	L.phase_desc = "Сообщать о смене фаз."
-	L.engage_warning = "1-ая фаза"
-	L.phase2_warning = "Наступление 2-ой фазы"
-	L.phase_bar = "%d-ая фаза"
 	L.engage_trigger = "Ваши действия нелогичны. Все возможные исходы этой схватки просчитаны. Пантеон получит сообщение от Наблюдателя в любом случае."
 
 	L.punch_message = "%2$dx фазовых удара на |3-5(%1$s)"

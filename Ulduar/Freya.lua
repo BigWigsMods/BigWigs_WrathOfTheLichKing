@@ -18,7 +18,6 @@ mod.optionHeaders = {
 --
 
 local phase = nil
-local root = mod:NewTargetList()
 -- XXXLOLHAXBOOBS to prevent us from enabling again after she dies.
 -- I never have enough time after she does the yell to do any testing for which Unit* APIs will
 -- allow us to properly disable the VerifyEnable check after she does the yell.
@@ -73,7 +72,6 @@ L = mod:GetLocale()
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Energy", 62865, 62451)              --Elder Brightleaf
 	self:Log("SPELL_CAST_SUCCESS", "EnergySpawns", 62865, 62451)        --Elder Brightleaf
-	self:Log("UNIT_DIED", "Deaths")                                     --Elder Brightleaf
 	self:Log("SPELL_AURA_APPLIED", "Root", 62861, 62930, 62283, 62438)  --Elder Ironbranch
 	self:Log("SPELL_CAST_START", "Tremor", 62437, 62859, 62325, 62932)  --Elder Stonebark
 	self:Log("SPELL_CAST_START", "Sunbeam", 62623, 62872)
@@ -84,6 +82,8 @@ function mod:OnBossEnable()
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Yell("Engage", L["engage_trigger1"], L["engage_trigger2"])
 	self:Yell("Yells", L["end_trigger"], L["conservator_trigger"], L["detonate_trigger"], L["elementals_trigger"])
+
+	self:Death("SunBeamDeath", 33170) -- Sun Beam
 end
 
 function mod:OnEngage()
@@ -102,85 +102,86 @@ end
 --
 
 do
-	local id, name, handle = nil, nil, nil
-	local function rootWarn()
-		mod:TargetMessage(62861, name, root, "Attention", id, "Info")
+	local handle = nil
+	local root = mod:NewTargetList()
+	local function rootWarn(spellName)
+		mod:TargetMessage(62861, spellName, root, "Attention", 62861, "Info")
 		handle = nil
 	end
-	function mod:Root(player, spellId, _, _, spellName)
-		root[#root + 1] = player
-		id, name = spellId, spellName
-		self:CancelTimer(handle)
-		handle = self:ScheduleTimer(rootWarn, 0.2)
+	function mod:Root(args)
+		root[#root + 1] = args.destName
+		if not handle then
+			handle = self:ScheduleTimer(rootWarn, 0.2, args.spellName)
+		end
 	end
 end
 
 do
+	-- XXX Why do we still do this?
 	local _, class = UnitClass("player")
 	local function isCaster()
 		local power = UnitPowerType("player")
 		if power ~= 0 then return end
 		if class == "PALADIN" then
-			local _, _, points = GetTalentTabInfo(1)
-			-- If a paladin has less than 20 points in Holy, he's not a caster.
-			-- And so it shall forever be, said the Lord.
-			if points < 20 then return end
+			local tree = GetSpecialization()
+			local role = GetSpecializationRole(tree)
+			if role ~= "HEALER" then return end
 		end
 		return true
 	end
 
-	function mod:Tremor(_, spellId, _, _, spellName)
+	function mod:Tremor(args)
 		local caster = isCaster()
 		local color = caster and "Personal" or "Attention"
 		local sound = caster and "Long" or nil
-		self:Message(62437, spellName, color, spellId, sound)
+		self:Message(62437, args.spellName, color, args.spellId, sound)
 		if caster then self:Flash(62437) end
 		if phase == 1 then
-			self:Bar(62437, spellName, 2, spellId)
-			self:Bar(62437, L["tremor_bar"], 30, spellId)
+			self:Bar(62437, args.spellName, 2, args.spellId)
+			self:Bar(62437, L["tremor_bar"], 30, args.spellId)
 			self:DelayedMessage(62437, 26, L["tremor_warning"], "Attention")
 		elseif phase == 2 then
-			self:Bar(62437, spellName, 2, spellId)
-			self:Bar(62437, L["tremor_bar"], 23, spellId)
+			self:Bar(62437, args.spellName, 2, args.spellId)
+			self:Bar(62437, L["tremor_bar"], 23, args.spellId)
 			self:DelayedMessage(62437, 20, L["tremor_warning"], "Attention")
 		end
 	end
 end
 
 do
-	local id, name, handle = nil, nil, nil
-	local function scanTarget()
+	local handle = nil
+	local function scanTarget(spellName)
 		local bossId = mod:GetUnitIdByGUID(32906)
 		if not bossId then return end
 		local target = UnitName(bossId .. "target")
 		if target then
-			mod:TargetMessage(62623, name, target, "Attention", id)
+			mod:TargetMessage(62623, spellName, target, "Attention", 62623)
 			mod:SecondaryIcon(62623, target)
 		end
 		handle = nil
 	end
 
-	function mod:Sunbeam(_, spellId, _, _, spellName)
-		id, name = spellId, spellName
-		self:CancelTimer(handle)
-		handle = self:ScheduleTimer(scanTarget, 0.1)
+	function mod:Sunbeam(args)
+		if not handle then
+			handle = self:ScheduleTimer(scanTarget, 0.1, args.spellName)
+		end
 	end
 end
 
-function mod:Fury(player, spellId)
-	if UnitIsUnit(player, "player") then
+function mod:Fury(args)
+	if UnitIsUnit(args.destName, "player") then
 		self:OpenProximity("proximity", 10)
 		self:Flash(62589)
 	end
-	self:TargetMessage(62589, L["fury_message"], player, "Personal", spellId, "Alert")
-	self:Whisper(62589, player, L["fury_message"])
-	self:Bar(62589, L["fury_other"]:format(player), 10, spellId)
-	self:PrimaryIcon(62589, player)
+	self:TargetMessage(62589, L["fury_message"], args.destName, "Personal", args.spellId, "Alert")
+	self:Whisper(62589, args.destName, L["fury_message"])
+	self:Bar(62589, L["fury_other"]:format(args.destName), 10, args.spellId)
+	self:PrimaryIcon(62589, args.destName)
 end
 
-function mod:FuryRemove(player)
-	self:StopBar(L["fury_other"]:format(player))
-	if UnitIsUnit(player, "player") then
+function mod:FuryRemove(args)
+	self:StopBar(L["fury_other"]:format(args.destName))
+	if UnitIsUnit(args.destName, "player") then
 		self:CloseProximity()
 	end
 end
@@ -193,11 +194,11 @@ end
 
 do
 	local last = nil
-	function mod:Energy(player)
-		if UnitIsUnit(player, "player") then
+	function mod:Energy(args)
+		if UnitIsUnit(args.destName, "player") then
 			local t = GetTime()
 			if not last or (t > last + 4) then
-				self:LocalMessage(62865, L["energy_message"], "Personal",  62451, "Alarm")
+				self:LocalMessage(62865, L["energy_message"], "Personal", 62451, "Alarm")
 				self:Flash(62865)
 				last = t
 			end
@@ -206,18 +207,15 @@ do
 end
 
 do
-	local sunBeamName = nil
 	local last = nil
-	function mod:EnergySpawns(unit, spellId, _, _, spellName)
+	function mod:EnergySpawns(args)
 		local t = GetTime()
 		if not last or (t > last + 10) then
-			sunBeamName = unit
-			self:Message(62865, L["sunbeam_message"], "Important", spellId)
+			self:Message(62865, L["sunbeam_message"], "Important", args.spellId)
 			last = t
 		end
 	end
-	function mod:Deaths(event, name)
-		if not sunBeamName or name ~= sunBeamName then return end
+	function mod:SunBeamDeath()
 		self:Bar(62865, L["sunbeam_bar"], 35, 62865)
 	end
 end

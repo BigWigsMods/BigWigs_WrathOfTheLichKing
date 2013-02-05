@@ -25,7 +25,7 @@ local oozeTargets = mod:NewTargetList()
 local gasTargets = mod:NewTargetList()
 
 --------------------------------------------------------------------------------
---  Localization
+-- Localization
 --
 
 local L = mod:NewLocale("enUS", true)
