@@ -14,7 +14,7 @@ if L then
 	L.fear_message = "곧 공포!"
 end
 
-local L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "koKR")
+L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "koKR")
 if L then
 	L.stomp_message = "발 구르기 - 곧 돌진!"
 	L.stomp_warning = "약 5초 후 발구르기 가능!"
@@ -38,9 +38,9 @@ end
 L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "koKR")
 if L then
 	L.fists_bar = "다음 유성 주먹"
-	
+
 	L.cinder_message = "당신은 잿더미!"
-	
+
 	L.breath_bar = "숨결 %d"
 	L.breath_message = "곧 %d 숨결!"
 end
@@ -130,7 +130,7 @@ if L then
 	L.twilight_cutter_trigger = "주위를 회전하는 구슬들이 고동치며 어둠의 기운을 내뿜습니다"
 	L.twilight_cutter_bar = "~황혼 절단기"
 	L.twilight_cutter_warning = "곧 황혼 절단기"
-	
+
 	L.fire_damage_message = "당신의 발이 불타오르는 중!"
 	L.fire_message = "맹렬한 발화"
 	L.fire_bar = "다음 맹렬한 발화"

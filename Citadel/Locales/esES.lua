@@ -1,4 +1,4 @@
-﻿local L = BigWigs:NewBossLocale("Blood Prince Council", "esES")
+local L = BigWigs:NewBossLocale("Blood Prince Council", "esES")
 if L then
 	L.switch_message = "Cambio de objetivo: %s"
 	L.switch_bar = "~Próximo cambio de objetivo"

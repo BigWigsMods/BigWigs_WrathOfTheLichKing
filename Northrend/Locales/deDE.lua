@@ -129,7 +129,7 @@ if L then
 	L.twilight_cutter_trigger = "Die kreisenden Sphären pulsieren vor dunkler Energie!"
 	L.twilight_cutter_bar = "~Zwielichtschnitter"
 	L.twilight_cutter_warning = "Zwielichtschnitter!"
-	
+
 	L.fire_damage_message = "Deine Füße brennen!"
 	L.fire_message = "Einäscherung"
 	L.fire_bar = "~Einäscherung"

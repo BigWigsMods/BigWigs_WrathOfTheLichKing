@@ -1,4 +1,4 @@
-﻿
+
 local L = BigWigs:NewBossLocale("Algalon the Observer", "ruRU")
 if L then
 	L.phase = "Фазы"

@@ -1,4 +1,4 @@
-﻿local L = BigWigs:NewBossLocale("Lord Marrowgar", "ruRU")
+local L = BigWigs:NewBossLocale("Lord Marrowgar", "ruRU")
 if L then
 	L.impale_cd = "~Прокалывание"
 
@@ -148,7 +148,7 @@ if L then
 
 	L.gasbomb_bar = "Следующие желтые газовые бомбы"
 	L.gasbomb_message = "Желтые бомбы!"
-	
+
 	L.unbound_bar = "Безудержная чума: %s"
 end
 
