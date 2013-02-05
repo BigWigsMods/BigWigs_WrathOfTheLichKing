@@ -119,6 +119,10 @@ if L then
 	L.twilight_trigger_shadron = "샤드론의 신도가 황혼에서 나타납니다!"
 	L.twilight_message_tenebron = "알 부화중"
 	L.twilight_message = "%s 신도 추가!"
+
+	L.shadron = "샤드론"
+	L.tenebron = "테네브론"
+	L.vesperon = "베스페론"
 end
 
 L = BigWigs:NewBossLocale("Halion", "koKR")

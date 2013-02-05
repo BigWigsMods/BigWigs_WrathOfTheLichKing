@@ -58,6 +58,10 @@ if L then
 
 	L.bosses = "首领"
 	L.bosses_desc = "当首领即将到来时发出警报。"
+
+	L.icehowl = "冰吼"
+	L.jormungars = "冰虫"
+	L.gormok = "穿刺者戈莫克"
 end
 
 L = BigWigs:NewBossLocale("Faction Champions", "zhCN")

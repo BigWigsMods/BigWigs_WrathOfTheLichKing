@@ -4,13 +4,7 @@
 
 local mod = BigWigs:NewBoss("Sartharion", 531)
 if not mod then return end
-local shadron, tenebron, vesperon
---[[
-	28860 = sartharion
-	30452 = tenebron
-	30451 = shadron
-	30449 = vesperon
---]]
+-- sartharion, tenebron, shadron, vesperon
 mod:RegisterEnableMob(28860, 30449, 30451, 30452)
 mod.toggleOptions = {"tsunami", 56908, "drakes", {"twilight", "FLASH"}, "berserk", "bosskill"}
 
@@ -19,7 +13,6 @@ mod.toggleOptions = {"tsunami", 56908, "drakes", {"twilight", "FLASH"}, "berserk
 --
 
 local shadronStarted, tenebronStarted, vesperonStarted = nil, nil, nil
-local shadron, tenebron, vesperon = nil, nil, nil
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -49,18 +42,16 @@ if L then
 	L.twilight_trigger_shadron = "A Shadron Acolyte appears in the Twilight!"
 	L.twilight_message_tenebron = "Eggs hatching"
 	L.twilight_message = "%s add up!"
+
+	L.shadron = "Shadron"
+	L.tenebron = "Tenebron"
+	L.vesperon = "Vesperon"
 end
 L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
 --
-
-function mod:OnRegister()
-	shadron = BigWigs:Translate("Shadron")
-	tenebron = BigWigs:Translate("Tenebron")
-	vesperon = BigWigs:Translate("Vesperon")
-end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "DrakeCheck", 58105, 61248, 61251)
@@ -94,16 +85,16 @@ function mod:DrakeCheck(_, spellId)
 	-- Vesperon (61251) called in roughly 105s after engage
 	-- Each drake takes around 12 seconds to land
 	if spellId == 58105 and not shadronStarted then
-		self:Bar("drakes", shadron, 80, 58105)
-		self:DelayedMessage("drakes", 75, L["drakes_incomingsoon"]:format(shadron), "Attention")
+		self:Bar("drakes", L.shadron, 80, 58105)
+		self:DelayedMessage("drakes", 75, L["drakes_incomingsoon"]:format(L.shadron), "Attention")
 		shadronStarted = true
 	elseif spellId == 61248 and not tenebronStarted then
-		self:Bar("drakes", tenebron, 30, 61248)
-		self:DelayedMessage("drakes", 25, L["drakes_incomingsoon"]:format(tenebron), "Attention")
+		self:Bar("drakes", L.tenebron, 30, 61248)
+		self:DelayedMessage("drakes", 25, L["drakes_incomingsoon"]:format(L.tenebron), "Attention")
 		tenebronStarted = true
 	elseif spellId == 61251 and not vesperonStarted then
-		self:Bar("drakes", vesperon, 120, 61251)
-		self:DelayedMessage("drakes", 115, L["drakes_incomingsoon"]:format(vesperon), "Attention")
+		self:Bar("drakes", L.vesperon, 120, 61251)
+		self:DelayedMessage("drakes", 115, L["drakes_incomingsoon"]:format(L.vesperon), "Attention")
 		vesperonStarted = true
 	end
 end
@@ -119,18 +110,18 @@ function mod:Tsunami()
 end
 
 function mod:Tenebron(msg, mob)
-	if mob ~= tenebron then return end
+	if mob ~= L.tenebron then return end
 	self:Bar("twilight", L["twilight_message_tenebron"], 20, 23851)
 	self:Message("twilight", L["twilight_message_tenebron"], "Attention", 23851)
 end
 
 function mod:Shadron(msg, mob)
-	if mob ~= shadron then return end
+	if mob ~= L.shadron then return end
 	self:Message("twilight", L["twilight_message"]:format(mob), "Urgent", 59570)
 end
 
 function mod:Vesperon(msg, mob)
-	if mob ~= vesperon then return end
+	if mob ~= L.vesperon then return end
 	self:Message("twilight", L["twilight_message"]:format(mob), "Personal", 59569, "Alarm")
 	self:Flash("twilight")
 end

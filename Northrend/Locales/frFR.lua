@@ -132,6 +132,10 @@ if L then
 	L.twilight_trigger_shadron = "Un disciple d'Obscuron apparaît dans le crépuscule !"
 	L.twilight_message_tenebron = "Éclosion des œufs"
 	L.twilight_message = "Disciple |2 %s actif !"
+
+	L.shadron = "Obscuron"
+	L.tenebron = "Ténébron"
+	L.vesperon = "Vespéron"
 end
 
 L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "frFR")

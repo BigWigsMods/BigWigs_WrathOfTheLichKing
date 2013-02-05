@@ -54,10 +54,14 @@ if L then
 	L.butt_bar = "~Свирепое бодание"
 	L.charge = "Отчаянный рывок" --Furious Charge - судя по транскриптору нет русского перевода :(
 	L.charge_desc = "Сообщать об отчаянном рывке."
-	L.charge_trigger = "глядит на"	--check
+	L.charge_trigger = "глядит на" --check
 
 	L.bosses = "Боссы"
 	L.bosses_desc = "Сообщать о появлении следующего босса."
+
+	L.icehowl = "Ледяной Рев"
+	L.jormungars = "Йормунгары"
+	L.gormok = "Гормок Пронзающий Бивень"
 end
 
 L = LibStub("AceLocale-3.0"):NewLocale("Faction Champions", "ruRU")

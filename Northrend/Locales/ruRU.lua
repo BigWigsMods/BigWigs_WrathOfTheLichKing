@@ -117,6 +117,10 @@ if L then
 	L.twilight_trigger_shadron = "Ученик Шадрона появляется в Зоне сумерек!"
 	L.twilight_message_tenebron = "Вылупление яиц"
 	L.twilight_message = "Появился Ученик |3-1(%s)!"
+
+	L.shadron = "Шадрон"
+	L.tenebron = "Тенеброн"
+	L.vesperon = "Весперон"
 end
 
 L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "ruRU")

@@ -58,6 +58,10 @@ if L then
 
 	L.bosses = "Boss"
 	L.bosses_desc = "Prévient quand le boss suivant arrive."
+
+	L.icehowl = "Glace-hurlante"
+	L.jormungars = "Jormungars"
+	L.gormok = "Gormok l'Empaleur"
 end
 
 L = BigWigs:NewBossLocale("Faction Champions", "frFR")

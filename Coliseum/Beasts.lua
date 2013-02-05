@@ -20,7 +20,6 @@ local burn = mod:NewTargetList()
 local toxin = mod:NewTargetList()
 local snobolledWarned = {}
 local snobolled = GetSpellInfo(66406)
-local icehowl, jormungars, gormok = nil, nil, nil
 local sprayTimer = nil
 local handle_Jormungars = nil
 
@@ -65,6 +64,10 @@ if L then
 
 	L.bosses = "Bosses"
 	L.bosses_desc = "Warn about bosses incoming"
+
+	L.icehowl = "Icehowl"
+	L.jormungars = "Jormungars"
+	L.gormok = "Gormok the Impaler"
 end
 L = mod:GetLocale()
 
@@ -80,10 +83,6 @@ function mod:OnRegister()
 		34797  -- Icehowl
 	)
 	self:RegisterEnableYell(L["enable_trigger"])
-
-	icehowl = BigWigs:Translate("Icehowl")
-	jormungars = BigWigs:Translate("Jormungars")
-	gormok = BigWigs:Translate("Gormok the Impaler")
 end
 
 function mod:OnBossEnable()
@@ -122,9 +121,9 @@ end
 
 function mod:OnEngage()
 	self:CloseProximity()
-	self:Bar("bosses", L["boss_incoming"]:format(gormok), 20, 66331)
+	self:Bar("bosses", L["boss_incoming"]:format(L.gormok), 20, 66331)
 	if self:Heroic() then
-		self:Bar("bosses", L["boss_incoming"]:format(jormungars), 180, "INV_Misc_MonsterScales_18")
+		self:Bar("bosses", L["boss_incoming"]:format(L.jormungars), 180, "INV_Misc_MonsterScales_18")
 	else
 		self:Berserk(900)
 	end
@@ -132,11 +131,11 @@ function mod:OnEngage()
 end
 
 function mod:Jormungars()
-	local m = L["boss_incoming"]:format(jormungars)
+	local m = L["boss_incoming"]:format(L.jormungars)
 	self:Message("bosses", m, "Positive")
 	self:Bar("bosses", m, 15, "INV_Misc_MonsterScales_18")
 	if self:Heroic() then
-		self:Bar("bosses", L["boss_incoming"]:format(icehowl), 200, "INV_Misc_MonsterHorn_07")
+		self:Bar("bosses", L["boss_incoming"]:format(L.icehowl), 200, "INV_Misc_MonsterHorn_07")
 	end
 	self:OpenProximity("proximity", 10)
 	-- The first worm to spray is Acidmaw, he has a 10 second spray timer after emerge
@@ -145,7 +144,7 @@ function mod:Jormungars()
 end
 
 function mod:Icehowl()
-	local m = L["boss_incoming"]:format(icehowl)
+	local m = L["boss_incoming"]:format(L.icehowl)
 	self:Message("bosses", m, "Positive")
 	self:Bar("bosses", m, 10, "INV_Misc_MonsterHorn_07")
 	self:CancelTimer(handle_Jormungars)
@@ -153,7 +152,7 @@ function mod:Icehowl()
 	self:StopBar(L["spray"])
 	self:StopBar(L["submerge"])
 	if self:Heroic() then
-		self:Berserk(220, true, icehowl)
+		self:Berserk(220, true, L.icehowl)
 	end
 	self:CloseProximity()
 end
@@ -316,7 +315,7 @@ function mod:Butt(player, spellId, _, _, spellName)
 end
 
 function mod:Charge(msg, unit, _, _, player)
-	if unit == icehowl then
+	if unit == L.icehowl then
 		local spellName = GetSpellInfo(52311)
 		self:TargetMessage("charge", spellName, player, "Personal", 52311, "Alarm")
 		if UnitIsUnit(player, "player") then

@@ -106,6 +106,10 @@ if L then
 	L.twilight_trigger_shadron = "Ein Shadronjünger erscheint im Zwielicht!"
 	L.twilight_message_tenebron = "Eier schlüpfen"
 	L.twilight_message = "%s kommt dazu!"
+
+	L.shadron = "Shadron"
+	L.tenebron = "Tenebron"
+	L.vesperon = "Vesperon"
 end
 
 L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "deDE")

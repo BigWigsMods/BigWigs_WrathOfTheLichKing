@@ -58,6 +58,10 @@ if L then
 
 	L.bosses = "보스 등장"
 	L.bosses_desc = "보스들 등장을 알립니다."
+
+	L.icehowl = "얼음울음"
+	L.jormungars = "요르문가르"
+	L.gormok = "꿰뚫는 자 고르목"
 end
 
 L = BigWigs:NewBossLocale("Faction Champions", "koKR")

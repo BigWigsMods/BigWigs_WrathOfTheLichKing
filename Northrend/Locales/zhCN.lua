@@ -143,6 +143,10 @@ if L then
 	L.twilight_trigger_shadron = "一只沙德隆的信徒出现了！"
 	L.twilight_message_tenebron = "正在孵卵！"
 	L.twilight_message = "%s到来！"
+
+	L.shadron = "沙德隆"
+	L.tenebron = "塔尼布隆"
+	L.vesperon = "维斯匹隆"
 end
 
 L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "zhCN")
