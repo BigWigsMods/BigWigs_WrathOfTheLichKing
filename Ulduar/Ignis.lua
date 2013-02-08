@@ -28,7 +28,6 @@ if L then
 	L.scorch_message = "Scorch on you!"
 	L.scorch_soon = "Scorch in ~5sec!"
 	L.scorch_bar = "Next Scorch"
-	L.slagpot_message = "Slag Pot: %s"
 end
 L = mod:GetLocale()
 
@@ -58,28 +57,28 @@ end
 -- Event Handlers
 --
 
-function mod:Brittle(_, spellId)
-	self:Message(62382, L["brittle_message"], "Positive", spellId)
+function mod:Brittle(args)
+	self:Message(args.spellId, L["brittle_message"], "Positive", args.spellId)
 end
 
 function mod:Construct()
-	self:Message(62488, L["construct_message"], "Important", "Interface\\Icons\\INV_Misc_Statue_07")
+	self:Message(62488, L["construct_message"], "Important", "INV_Misc_Statue_07")
 	self:Bar(62488, L["construct_bar"], spawnTime, "INV_Misc_Statue_07")
 end
 
-function mod:ScorchCast(_, spellId, _, _, spellName)
-	self:Message(62546, spellName, "Attention", spellId)
-	self:Bar(62546, L["scorch_bar"], 25, spellId)
-	self:DelayedMessage(62546, 20, L["scorch_soon"], "Urgent", spellId)
+function mod:ScorchCast(args)
+	self:Message(62546, args.spellName, "Attention", args.spellId)
+	self:Bar(62546, L["scorch_bar"], 25, args.spellId)
+	self:DelayedMessage(62546, 20, L["scorch_soon"], "Urgent", args.spellId)
 end
 
 do
 	local last = nil
-	function mod:Scorch(player, spellId)
-		if UnitIsUnit(player, "player") then
+	function mod:Scorch(args)
+		if UnitIsUnit(args.destName, "player") then
 			local t = GetTime()
 			if not last or (t > last + 4) then
-				self:LocalMessage(62546, L["scorch_message"], "Personal", spellId, last and nil or "Alarm")
+				self:LocalMessage(62546, L["scorch_message"], "Personal", args.spellId, last and nil or "Alarm")
 				self:Flash(62546)
 				last = t
 			end
@@ -87,33 +86,35 @@ do
 	end
 end
 
-function mod:SlagPot(player, spellId, _, _, spellName)
-	self:TargetMessage(62717, spellName, player, "Important", spellId)
-	self:Bar(62717, L["slagpot_message"]:format(player), 10, spellId)
+function mod:SlagPot(args)
+	self:TargetMessage(62717, args.spellName, args.destName, "Important", args.spellId)
+	self:TargetBar(62717, args.spellName, args.destName, 10, args.spellId)
 end
 
 do
+	-- XXX Why do we still do this?
 	local _, class = UnitClass("player")
 	local function isCaster()
 		local power = UnitPowerType("player")
 		if power ~= 0 then return end
 		if class == "PALADIN" then
-			local _, _, points = GetTalentTabInfo(1)
-			-- If a paladin has less than 20 points in Holy, he's not a caster.
-			-- And so it shall forever be, said the Lord.
-			if points < 20 then return end
+			local tree = GetSpecialization()
+			local role = GetSpecializationRole(tree)
+			if role ~= "HEALER" then return end
 		end
 		return true
 	end
 
-	function mod:Jets(_, spellId, _, _, spellName)
+	function mod:Jets(args)
 		local caster = isCaster()
 		local color = caster and "Personal" or "Attention"
 		local sound = caster and "Long" or nil
-		if caster then self:Flash(62680) end
-		self:Message(62680, spellName, color, spellId, sound)
-		self:Bar(62680, L["flame_bar"], 25, spellId)
-		if caster then self:Bar(62680, spellName, 2.7, spellId) end
+		self:Message(62680, args.spellName, color, args.spellId, sound)
+		self:Bar(62680, L["flame_bar"], 25, args.spellId)
+		if caster then
+			self:Bar(62680, args.spellName, 2.7, args.spellId)
+			self:Flash(62680)
+		end
 	end
 end
 

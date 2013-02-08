@@ -117,7 +117,7 @@ end
 
 function mod:Harpoon()
 	count = count + 1
-	self:Message("harpoon", L["harpoon_message"]:format(count), "Attention", "Interface\\Icons\\INV_Spear_06")
+	self:Message("harpoon", L["harpoon_message"]:format(count), "Attention", "INV_Spear_06")
 	if count < totalHarpoons then
 		self:Bar("harpoon", L["harpoon_nextbar"]:format(count+1), 18, "INV_Spear_06")
 	end

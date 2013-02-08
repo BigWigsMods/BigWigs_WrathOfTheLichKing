@@ -94,7 +94,6 @@ if L then
 	L.scorch_message = ">你< 灼烧！"
 	L.scorch_soon = "约5秒后，灼烧！"
 	L.scorch_bar = "<下一灼烧>"
-	L.slagpot_message = "熔渣炉：>%s<！"
 end
 
 L = BigWigs:NewBossLocale("The Iron Council", "zhCN")
@@ -109,8 +108,6 @@ if L then
 
 	L.chased_other = "闪电之藤：>%s<！"
 	L.chased_you = ">你< 闪电之藤！"
-
-	L.overwhelm_other = "压倒能量：>%s<！"
 
 	L.shield_message = "符文之盾！"
 

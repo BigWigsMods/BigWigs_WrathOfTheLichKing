@@ -94,7 +94,6 @@ if L then
 	L.scorch_message = "¡Agostar en TI!"
 	L.scorch_soon = "¡Agostar en ~5seg!"
 	L.scorch_bar = "Próximo agostar"
-	L.slagpot_message = "Olla de escoria: %s"
 end
 
 L = BigWigs:NewBossLocale("The Iron Council", "esES")
@@ -109,8 +108,6 @@ if L then
 
 	L.chased_other = "¡%s está siendo perseguido!"
 	L.chased_you = "¡TU estás siendo perseguido!"
-
-	L.overwhelm_other = "Poder sobrecogedor: %s"
 
 	L.shield_message = "¡Escudo de runas!"
 

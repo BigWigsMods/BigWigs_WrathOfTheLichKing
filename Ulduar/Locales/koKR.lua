@@ -94,7 +94,6 @@ if L then
 	L.scorch_message = "당신은 불태우기!"
 	L.scorch_soon = "약 5초 후 불태우기!"
 	L.scorch_bar = "다음 불태우기"
-	L.slagpot_message = "용암재 단지: %s"
 end
 
 L = BigWigs:NewBossLocale("The Iron Council", "koKR")
@@ -109,8 +108,6 @@ if L then
 
 	L.chased_other = "%s 추적 중!"
 	L.chased_you = "당신을 추적 중!"
-
-	L.overwhelm_other = "압도적인 힘: %s"
 
 	L.shield_message = "룬의 보호막!"
 

@@ -93,7 +93,6 @@ if L then
 	L.scorch_message = "Versengen auf DIR!"
 	L.scorch_soon = "Versengen in ~5 sek!"
 	L.scorch_bar = "Nächstes Versengen"
-	L.slagpot_message = "Schlackentopf: %s"
 end
 
 L = BigWigs:NewBossLocale("The Iron Council", "deDE")
@@ -108,8 +107,6 @@ if L then
 
 	L.chased_other = "%s wird verfolgt!"
 	L.chased_you = "DU wirst verfolgt!"
-
-	L.overwhelm_other = "Überwältigende Kraft: %s"
 
 	L.shield_message = "Runenschild!"
 

@@ -211,7 +211,7 @@ end
 
 function mod:OnSync(sync, rest, nick)
 	if sync == "MimiLoot" and rest then
-		self:TargetMessage(64444, GetSpellInfo(64444), rest, "Positive", "Interface\\Icons\\INV_Gizmo_KhoriumPowerCore", "Info")
+		self:TargetMessage(64444, GetSpellInfo(64444), rest, "Positive", "INV_Gizmo_KhoriumPowerCore", "Info")
 	elseif sync == "MimiBarrage" then
 		self:Message(63274, L["laser_bar"], "Important", 63274)
 		self:Bar(63274, L["laser_bar"], 60, 63274)

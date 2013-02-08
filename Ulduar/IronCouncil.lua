@@ -41,8 +41,6 @@ if L then
 	L.chased_other = "%s is being chased!"
 	L.chased_you = "YOU are being chased!"
 
-	L.overwhelm_other = "Overwhelming Power: %s"
-
 	L.shield_message = "Rune shield!"
 
 	L.council_dies = "%s dead"
@@ -85,97 +83,91 @@ end
 -- Event Handlers
 --
 
-function mod:Punch(_, spellId, _, _, spellName)
-	self:Message(61903, spellName, "Urgent", spellId)
+function mod:Punch(args)
+	self:Message(61903, args.spellName, "Urgent", args.spellId)
 end
 
-function mod:Overwhelm(player, spellId, _, _, spellName)
-	if UnitIsUnit(player, "player") then
+function mod:Overwhelm(args)
+	if UnitIsUnit(args.destName, "player") then
 		self:OpenProximity("proximity", 15)
 		self:Flash(64637)
 	end
-	self:TargetMessage(64637, spellName, player, "Personal", spellId, "Alert")
-	self:Whisper(64637, player, spellName)
-	self:Bar(64637, L["overwhelm_other"]:format(player), overwhelmTime, spellId)
-	self:PrimaryIcon(64637, player)
+	self:TargetMessage(64637, args.spellName, args.destName, "Personal", args.spellId, "Alert")
+	self:Whisper(64637, args.destName, args.spellName)
+	self:TargetBar(64637, args.spellName, args.destName, overwhelmTime, args.spellId)
+	self:PrimaryIcon(64637, args.destName)
 end
 
-function mod:OverRemove(player)
-	if UnitIsUnit(player, "player") then
+function mod:OverRemove(args)
+	if UnitIsUnit(args.destName, "player") then
 		self:CloseProximity()
 	end
-	self:StopBar(L["overwhelm_other"]:format(player))
+	self:StopBar(args.spellName, args.destName)
 end
 
-function mod:Shield(_, spellId, _, _, _, _, _, _, _, dGUID)
-	if self:GetCID(dGUID) == 32927 then
-		self:Message(62274, L["shield_message"], "Attention", spellId)
+function mod:Shield(args)
+	if self:GetCID(dGUID) == args.destGUID then
+		self:Message(62274, L["shield_message"], "Attention", args.spellId)
 	end
 end
 
-function mod:RunePower(_, spellId, _, _, spellName)
-	self:Message(61974, spellName, "Positive", spellId)
-	self:Bar(61974, spellName, 30, spellId)
+function mod:RunePower(args)
+	self:Message(61974, args.spellName, "Positive", args.spellId)
+	self:Bar(61974, args.spellName, 30, args.spellId)
 end
 
-function mod:RuneDeathCD(_, spellId, _, _, spellName)
-	self:Bar(62269, spellName, 30, spellId)
+function mod:RuneDeathCD(args)
+	self:Bar(62269, args.spellName, 30, args.spellId)
 end
 
-function mod:RuneDeath(player, spellId)
-	if UnitIsUnit(player, "player") then
-		self:LocalMessage(62269, L["death_message"], "Personal", spellId, "Alarm")
+function mod:RuneDeath(args)
+	if UnitIsUnit(args.destName, "player") then
+		self:LocalMessage(62269, L["death_message"], "Personal", args.spellId, "Alarm")
 		self:Flash(62269)
 	end
 end
 
-function mod:RuneSummoning(_, spellId)
-	self:Message(62273, L["summoning_message"], "Attention", spellId)
+function mod:RuneSummoning(args)
+	self:Message(62273, L["summoning_message"], "Attention", args.spellId)
 end
 
-function mod:Overload(_, spellId, _, _, spellName)
-	self:Message(61869, L["overload_message"], "Attention", spellId, "Long")
-	self:Bar(61869, spellName, 6, spellId)
+function mod:Overload(args)
+	self:Message(61869, L["overload_message"], "Attention", args.spellId, "Long")
+	self:Bar(61869, args.spellName, 6, args.spellId)
 end
 
-function mod:Whirl(_, spellId, _, _, spellName)
-	self:Message(63483, spellName, "Attention", spellId)
-end
-
-local function targetCheck()
-	local bossId = mod:GetUnitIdByGUID(32857)
-	if not bossId then return end
-	local target = UnitName(bossId .. "target")
-	if target ~= previous then
-		if target then
-			if UnitIsUnit(target, "player") then
-				mod:LocalMessage(61887, L["chased_you"], "Personal", nil, "Alarm")
-				mod:Flash(61887)
-			else
-				mod:Message(61887, L["chased_other"]:format(target), "Attention")
-				mod:Whisper(61887, target, L["chased_you"])
-			end
-			mod:PrimaryIcon(61887, target)
-			previous = target
-		else
-			previous = nil
-		end
-	end
-end
-
-function mod:TendrilsRemoved()
-	self:CancelTimer(tendrilscanner)
-	tendrilscanner = nil
-	self:PrimaryIcon(61887, false)
+function mod:Whirl(args)
+	self:Message(63483, args.spellName, "Attention", args.spellId)
 end
 
 do
+	local function targetCheck()
+		local bossId = mod:GetUnitIdByGUID(32857)
+		if not bossId then return end
+		local target = UnitName(bossId .. "target")
+		if target ~= previous then
+			if target then
+				if UnitIsUnit(target, "player") then
+					mod:LocalMessage(61887, L["chased_you"], "Personal", nil, "Alarm")
+					mod:Flash(61887)
+				else
+					mod:Message(61887, L["chased_other"]:format(target), "Attention")
+					mod:Whisper(61887, target, L["chased_you"])
+				end
+				mod:PrimaryIcon(61887, target)
+				previous = target
+			else
+				previous = nil
+			end
+		end
+	end
+
 	local last = nil
-	function mod:Tendrils(_, spellId, _, _, spellName)
+	function mod:Tendrils(args)
 		local t = GetTime()
 		if not last or (t > last + 2) then
-			self:Message(61887, spellName, "Attention", spellId)
-			self:Bar(61887, spellName, 25, spellId)
+			self:Message(61887, args.spellName, "Attention", args.spellId)
+			self:Bar(61887, args.spellName, 25, args.spellId)
 			if not tendrilscanner then
 				tendrilscanner = self:ScheduleRepeatingTimer(targetCheck, 0.2)
 			end
@@ -183,10 +175,16 @@ do
 	end
 end
 
-function mod:Deaths(_, _, unitName)
+function mod:TendrilsRemoved()
+	self:CancelTimer(tendrilscanner)
+	tendrilscanner = nil
+	self:PrimaryIcon(61887)
+end
+
+function mod:Deaths(args)
 	deaths = deaths + 1
 	if deaths < 3 then
-		self:Message("bosskill", L["council_dies"]:format(unitName), "Positive")
+		self:Message("bosskill", L["council_dies"]:format(args.destName), "Positive")
 	else
 		self:Win()
 	end

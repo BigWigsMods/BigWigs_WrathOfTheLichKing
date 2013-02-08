@@ -92,7 +92,6 @@ if L then
 	L.scorch_message = "Ожог на ВАС!"
 	L.scorch_soon = "Ожог через ~5сек!"
 	L.scorch_bar = "Следующий Ожог"
-	L.slagpot_message = "Захвачен в ковш: %s"
 end
 
 L = LibStub("AceLocale-3.0"):NewLocale("The Iron Council", "ruRU")
@@ -107,8 +106,6 @@ if L then
 
 	L.chased_other = "Преследует |3-3(%s)!"
 	L.chased_you = "ВАС преследуют!"
-
-	L.overwhelm_other = "Переполняющая энергия на |3-5(%s)"
 
 	L.shield_message = "Применён Рунический щит!"
 

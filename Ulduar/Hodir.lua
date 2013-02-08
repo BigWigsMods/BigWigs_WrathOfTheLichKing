@@ -19,7 +19,6 @@ mod.optionHeaders = {
 
 local flashFreezed = mod:NewTargetList()
 local lastCold = nil
-local cold = GetSpellInfo(62039)
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -52,16 +51,17 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Flash", 61969, 61990)
 	self:Log("SPELL_AURA_APPLIED", "Frozen", 62478, 63512)
 	self:Log("SPELL_AURA_APPLIED", "Cloud", 65123, 65133)
-	self:RegisterEvent("UNIT_AURA")
+
+	self:RegisterUnitEvent("UNIT_AURA", "BitingCold", "player")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
+
 	self:Yell("Engage", L["engage_trigger"])
 	self:Yell("Win", L["end_trigger"])
 end
 
 function mod:OnEngage()
 	lastCold = nil
-	local name = GetSpellInfo(61968)
-	self:Bar(61968, name, 35, 61968)
+	self:Bar(61968, 61968, 35, 61968) -- Flash Freeze
 	self:Bar("hardmode", L["hardmode"], 180, 6673)
 	self:Berserk(480)
 end
@@ -74,51 +74,53 @@ end
 -- Event Handlers
 --
 
-function mod:Cloud(player, spellId, _, _, spellName)
-	self:TargetMessage(65123, spellName, player, "Positive", spellId, "Info")
-	self:Whisper(65123, player, spellName)
-	self:Bar(65123, spellName..": "..player, 30, spellId)
-	self:PrimaryIcon(65123, player)
+function mod:Cloud(args)
+	self:TargetMessage(65123, args.spellName, args.destName, "Positive", args.spellId, "Info")
+	self:Whisper(65123, args.destName, args.spellName)
+	self:TargetBar(65123, args.spellName, args.destName, 30, args.spellId)
+	self:PrimaryIcon(65123, args.destName)
 end
 
-function mod:FlashCast(_, spellId, _, _, spellName)
-	self:Message(61968, L["flash_warning"], "Attention", spellId)
-	self:Bar(61968, spellName, 9, spellId)
-	self:Bar(61968, spellName, 35, spellId)
-	self:DelayedMessage(61968, 30, L["flash_soon"], "Attention")
+function mod:FlashCast(args)
+	self:Message(args.spellId, L["flash_warning"], "Attention", args.spellId)
+	self:Bar(args.spellId, args.spellName, 9, args.spellId)
+	self:Bar(args.spellId, args.spellName, 35, args.spellId)
+	self:DelayedMessage(args.spellId, 30, L["flash_soon"], "Attention")
 end
 
 do
-	local id, name, handle = nil, nil, nil
-	local function flashWarn()
-		mod:TargetMessage(61968, name, flashFreezed, "Urgent", id, "Alert")
+	local handle = nil
+	local function flashWarn(spellId, spellName)
+		mod:TargetMessage(spellId, spellName, flashFreezed, "Urgent", spellId, "Alert")
 		handle = nil
 	end
 
-	function mod:Flash(player, spellId, _, _, spellName)
-		if UnitInRaid(player) then
-			id, name = spellId, spellName
-			flashFreezed[#flashFreezed + 1] = player
-			self:CancelTimer(handle)
-			handle = self:ScheduleTimer(flashWarn, 0.3)
+	function mod:Flash(args)
+		if UnitInRaid(args.destName) then
+			flashFreezed[#flashFreezed + 1] = args.destName
+			if not handle then
+				handle = self:ScheduleTimer(flashWarn, 0.3, 61968, args.spellName)
+			end
 		end
 	end
 end
 
-function mod:Frozen(_, spellId, _, _, spellName)
-	self:Message(62478, spellName, "Important", spellId)
-	self:Bar(62478, spellName, 20, spellId)
+function mod:Frozen(args)
+	self:Message(62478, args.spellName, "Important", args.spellId)
+	self:Bar(62478, args.spellName, 20, args.spellId)
 end
 
-function mod:UNIT_AURA(event, unit)
-	if unit and unit ~= "player" then return end
-	local _, _, icon, stack = UnitDebuff("player", cold)
-	if stack and stack ~= lastCold then
-		if stack > 1 then
-			self:LocalMessage("cold", L["cold_message"]:format(stack), "Personal", icon)
-			self:Flash("cold")
+do
+	local cold = mod:SpellName(62039)
+	function mod:BitingCold(unit)
+		local _, _, icon, stack = UnitDebuff(unit, cold)
+		if stack and stack ~= lastCold then
+			if stack > 1 then
+				self:LocalMessage("cold", L["cold_message"]:format(stack), "Personal", icon)
+				self:Flash("cold")
+			end
+			lastCold = stack
 		end
-		lastCold = stack
 	end
 end
 
