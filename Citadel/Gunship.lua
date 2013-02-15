@@ -61,7 +61,7 @@ do
 			count = 0
 			local guid = UnitGUID("boss1")
 			if guid then
-				guid = self:GetCID(guid)
+				guid = self:MobId(guid)
 				if guid == 37540 or guid == 37215 then
 					self:Engage()
 				else

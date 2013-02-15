@@ -144,7 +144,7 @@ end
 function mod:PlagueTick(horrorName, _, _, tickDamage, _, _, _, _, _, dGUID)
 	if not self:Heroic() then return end -- Doesn't apply on normal diff.
 	-- Not ticking on a Shambling Horror, so bail early
-	if self:GetCID(dGUID) ~= 37698 then return end
+	if self:MobId(dGUID) ~= 37698 then return end
 
 	if not plagueTicks[dGUID] then plagueTicks[dGUID] = 1
 	else plagueTicks[dGUID] = plagueTicks[dGUID] + 1 end

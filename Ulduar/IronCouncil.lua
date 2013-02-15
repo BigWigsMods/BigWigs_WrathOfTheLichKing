@@ -106,7 +106,7 @@ function mod:OverRemove(args)
 end
 
 function mod:Shield(args)
-	if self:GetCID(dGUID) == args.destGUID then
+	if self:MobId(dGUID) == args.destGUID then
 		self:Message(62274, L["shield_message"], "Attention", args.spellId)
 	end
 end

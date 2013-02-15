@@ -101,7 +101,7 @@ function mod:RegularShock()
 		local bossId = ("boss%d"):format(i)
 		local guid = UnitGUID(bossId)
 		if not guid then return end
-		guid = self:GetCID(guid)
+		guid = self:MobId(guid)
 		if guid == 37970 then
 			local target = UnitName(bossId .. "target")
 			if target then

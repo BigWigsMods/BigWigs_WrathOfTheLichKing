@@ -69,7 +69,7 @@ end
 --
 
 function mod:UNIT_HEALTH_FREQUENT(unit)
-	if self:GetCID(UnitGUID(unit)) == 32871 then
+	if self:MobId(UnitGUID(unit)) == 32871 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 21 then
 			self:Message("stages", CL["soon"]:format(CL["phase"]:format(2)), "Positive")
