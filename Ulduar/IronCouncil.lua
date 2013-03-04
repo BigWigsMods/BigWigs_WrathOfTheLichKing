@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("The Iron Council", 529)
 if not mod then return end
 -- steelbreaker = 32867, molgeim = 32927, brundir = 32857
 mod:RegisterEnableMob(32867, 32927, 32857)
-mod.toggleOptions = {61869, 63483, {61887, "WHISPER", "ICON", "FLASH"}, 61903, {64637, "WHISPER", "ICON", "FLASH"}, "proximity", 62274, 61974, {62269, "FLASH"}, 62273, "berserk", "bosskill" }
+mod.toggleOptions = {61869, 63483, {61887, "ICON", "FLASH"}, 61903, {64637, "ICON", "FLASH"}, "proximity", 62274, 61974, {62269, "FLASH"}, 62273, "berserk", "bosskill" }
 
 mod.optionHeaders = {
 	[61869] = "Stormcaller Brundir",
@@ -93,7 +93,6 @@ function mod:Overwhelm(args)
 		self:Flash(64637)
 	end
 	self:TargetMessage(64637, args.spellName, args.destName, "Personal", args.spellId, "Alert")
-	self:Whisper(64637, args.destName, args.spellName)
 	self:TargetBar(64637, args.spellName, args.destName, overwhelmTime, args.spellId)
 	self:PrimaryIcon(64637, args.destName)
 end
@@ -122,7 +121,7 @@ end
 
 function mod:RuneDeath(args)
 	if UnitIsUnit(args.destName, "player") then
-		self:LocalMessage(62269, L["death_message"], "Personal", args.spellId, "Alarm")
+		self:Message(62269, L["death_message"], "Personal", args.spellId, "Alarm")
 		self:Flash(62269)
 	end
 end
@@ -148,11 +147,10 @@ do
 		if target ~= previous then
 			if target then
 				if UnitIsUnit(target, "player") then
-					mod:LocalMessage(61887, L["chased_you"], "Personal", nil, "Alarm")
+					mod:Message(61887, L["chased_you"], "Personal", nil, "Alarm")
 					mod:Flash(61887)
 				else
 					mod:Message(61887, L["chased_other"]:format(target), "Attention")
-					mod:Whisper(61887, target, L["chased_you"])
 				end
 				mod:PrimaryIcon(61887, target)
 				previous = target

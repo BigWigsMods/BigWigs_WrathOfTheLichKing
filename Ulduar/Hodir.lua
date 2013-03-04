@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Hodir", 529)
 if not mod then return end
 mod:RegisterEnableMob(32845)
-mod.toggleOptions = {{"cold", "FLASH"}, {65123, "WHISPER", "ICON"}, 61968, 62478, "hardmode", "berserk", "bosskill"}
+mod.toggleOptions = {{"cold", "FLASH"}, {65123, "ICON"}, 61968, 62478, "hardmode", "berserk", "bosskill"}
 
 mod.optionHeaders = {
 	cold = "normal",
@@ -76,7 +76,6 @@ end
 
 function mod:Cloud(args)
 	self:TargetMessage(65123, args.spellName, args.destName, "Positive", args.spellId, "Info")
-	self:Whisper(65123, args.destName, args.spellName)
 	self:TargetBar(65123, args.spellName, args.destName, 30, args.spellId)
 	self:PrimaryIcon(65123, args.destName)
 end
@@ -116,7 +115,7 @@ do
 		local _, _, icon, stack = UnitDebuff(unit, cold)
 		if stack and stack ~= lastCold then
 			if stack > 1 then
-				self:LocalMessage("cold", L["cold_message"]:format(stack), "Personal", icon)
+				self:Message("cold", L["cold_message"]:format(stack), "Personal", icon)
 				self:Flash("cold")
 			end
 			lastCold = stack

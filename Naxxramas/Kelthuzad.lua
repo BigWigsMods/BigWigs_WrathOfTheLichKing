@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Kel'Thuzad", 535)
 if not mod then return end
 mod:RegisterEnableMob(15990)
-mod.toggleOptions = {27808, 27810, 28410, {27819, "WHISPER", "ICON", "FLASH"}, "guardians", "phase", "proximity", "bosskill"}
+mod.toggleOptions = {27808, 27810, 28410, {27819, "ICON", "FLASH"}, "guardians", "phase", "proximity", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -117,7 +117,6 @@ end
 function mod:Detonate(player, spellId, _, _, spellName)
 	self:TargetMessage(27819, spellName, player, "Personal", spellId, "Alert")
 	if UnitIsUnit(player, "player") then self:Flash(27819) end
-	self:Whisper(27819, player, spellName)
 	self:PrimaryIcon(27819, player)
 	self:Bar(27819, L["detonate_other"]:format(player), 5, spellId)
 	self:Bar(27819, L["detonate_possible_bar"], 20, spellId)

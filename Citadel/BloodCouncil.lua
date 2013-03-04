@@ -5,7 +5,7 @@ local mod = BigWigs:NewBoss("Blood Prince Council", 604)
 if not mod then return end
 --Prince Valanar, Prince Keleseth, Prince Taldaram
 mod:RegisterEnableMob(37970, 37972, 37973)
-mod.toggleOptions = {{72040, "ICON", "FLASH"}, 72039, {72037, "SAY", "FLASH", "WHISPER"}, 72999, 70981, 72052, {"iconprince", "ICON"}, "berserk", "proximity", "bosskill"}
+mod.toggleOptions = {{72040, "ICON", "FLASH"}, 72039, {72037, "SAY", "FLASH"}, 72999, 70981, 72052, {"iconprince", "ICON"}, "berserk", "proximity", "bosskill"}
 local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	[72040] = "Taldaram",
@@ -71,7 +71,7 @@ end
 
 function mod:Prison(player, spellId, _, _, _, stack)
 	if stack > 2 and UnitIsUnit(player, "player") then
-		self:LocalMessage(72999, L["prison_message"]:format(stack), "Personal", spellId)
+		self:Message(72999, L["prison_message"]:format(stack), "Personal", spellId)
 	end
 end
 
@@ -110,7 +110,6 @@ function mod:RegularShock()
 					self:Say(72037)
 				end
 				self:TargetMessage(72037, L["regular_shock_message"], target, "Urgent", 72037)
-				self:Whisper(72037, target, L["regular_shock_message"])
 				self:Bar(72037, L["shock_bar"], 16, 72037)
 			end
 			break

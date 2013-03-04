@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Freya", 529)
 if not mod then return end
 mod:RegisterEnableMob(32906)
-mod.toggleOptions = {"phase", "wave", "tree", {62589, "WHISPER", "ICON", "FLASH"}, {62623, "ICON"}, "proximity", 62861, {62437, "FLASH"}, {62865, "FLASH"}, "berserk", "bosskill"}
+mod.toggleOptions = {"phase", "wave", "tree", {62589, "ICON", "FLASH"}, {62623, "ICON"}, "proximity", 62861, {62437, "FLASH"}, {62865, "FLASH"}, "berserk", "bosskill"}
 
 mod.optionHeaders = {
 	phase = "normal",
@@ -174,7 +174,6 @@ function mod:Fury(args)
 		self:Flash(62589)
 	end
 	self:TargetMessage(62589, L["fury_message"], args.destName, "Personal", args.spellId, "Alert")
-	self:Whisper(62589, args.destName, L["fury_message"])
 	self:Bar(62589, L["fury_other"]:format(args.destName), 10, args.spellId)
 	self:PrimaryIcon(62589, args.destName)
 end
@@ -198,7 +197,7 @@ do
 		if UnitIsUnit(args.destName, "player") then
 			local t = GetTime()
 			if not last or (t > last + 4) then
-				self:LocalMessage(62865, L["energy_message"], "Personal", 62451, "Alarm")
+				self:Message(62865, L["energy_message"], "Personal", 62451, "Alarm")
 				self:Flash(62865)
 				last = t
 			end

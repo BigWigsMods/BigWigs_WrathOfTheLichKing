@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Blood-Queen Lana'thel", 604)
 if not mod then return end
 mod:RegisterEnableMob(37955)
-mod.toggleOptions = {{71340, "FLASH"}, {71265, "FLASH"}, {70877, "WHISPER"}, 71772, 71623, "proximity", "berserk", "bosskill"}
+mod.toggleOptions = {{71340, "FLASH"}, {71265, "FLASH"}, 70877, 71772, 71623, "proximity", "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -103,10 +103,8 @@ end
 
 function mod:Feed(player, spellId)
 	if UnitIsUnit(player, "player") then
-		self:LocalMessage(70877, L["feed_message"], "Urgent", spellId, "Alert")
+		self:Message(70877, L["feed_message"], "Urgent", spellId, "Alert")
 		self:Bar(70877, L["feed_message"], 15, spellId)
-	else
-		self:Whisper(70877, player, L["feed_message"], true)
 	end
 end
 

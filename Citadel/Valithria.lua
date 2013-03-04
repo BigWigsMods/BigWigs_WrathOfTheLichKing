@@ -132,7 +132,7 @@ do
 	function mod:ManaVoid(player, spellId)
 		if (GetTime()-t > 2) and UnitIsUnit(player, "player") and UnitPowerType("player") == 0 then
 			t = GetTime()
-			self:LocalMessage(71086, L["manavoid_message"], "Personal", spellId, "Alarm")
+			self:Message(71086, L["manavoid_message"], "Personal", spellId, "Alarm")
 			self:Flash(71086)
 		end
 	end

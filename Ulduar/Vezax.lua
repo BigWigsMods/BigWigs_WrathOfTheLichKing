@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("General Vezax", 529)
 if not mod then return end
 mod:RegisterEnableMob(33271)
-mod.toggleOptions = {"vapor", {"vaporstack", "FLASH"}, {62660, "WHISPER", "ICON", "SAY", "FLASH"}, {63276, "WHISPER", "ICON", "FLASH"}, 62661, 62662, "animus", "berserk", "bosskill"}
+mod.toggleOptions = {"vapor", {"vaporstack", "FLASH"}, {62660, "ICON", "SAY", "FLASH"}, {63276, "ICON", "FLASH"}, 62661, 62662, "animus", "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -110,7 +110,7 @@ function mod:UNIT_AURA(event, unit)
 	local _, _, icon, stack = UnitDebuff("player", vapor)
 	if stack and stack ~= lastVapor then
 		if stack > 5 then
-			self:LocalMessage("vaporstack", L["vaporstack_message"]:format(stack), "Personal", icon)
+			self:Message("vaporstack", L["vaporstack_message"]:format(stack), "Personal", icon)
 			self:Flash("vaporstack")
 		end
 		lastVapor = stack
@@ -129,7 +129,6 @@ do
 				mod:Say(62660, L["crash_say"])
 			end
 			mod:TargetMessage(62660, name, target, "Personal", id, "Alert")
-			mod:Whisper(62660, target, name)
 			mod:SecondaryIcon(62660, target)
 		end
 		handle = nil
@@ -145,7 +144,6 @@ end
 function mod:Mark(player, spellId)
 	self:TargetMessage(63276, L["mark_message"], player, "Personal", spellId, "Alert")
 	if UnitIsUnit(player, "player") then self:Flash(63276) end
-	self:Whisper(63276, player, L["mark_message"])
 	self:Bar(63276, L["mark_message_other"]:format(player), 10, spellId)
 	self:PrimaryIcon(63276, player)
 end

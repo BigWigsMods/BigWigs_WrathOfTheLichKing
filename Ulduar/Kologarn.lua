@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Kologarn", 529)
 if not mod then return end
 mod:RegisterEnableMob(32930)
-mod.toggleOptions = { 64290, "shockwave", {"eyebeam", "WHISPER", "ICON", "FLASH", "SAY"}, "arm", 63355, "bosskill"}
+mod.toggleOptions = { 64290, "shockwave", {"eyebeam", "ICON", "FLASH", "SAY"}, "arm", 63355, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -87,7 +87,7 @@ end
 
 function mod:RAID_BOSS_WHISPER(event, msg)
 	if msg:find(L["eyebeam_trigger"]) then
-		self:LocalMessage("eyebeam", L["eyebeam_you"], "Personal", 63976, "Long")
+		self:Message("eyebeam", L["eyebeam_you"], "Personal", 63976, "Long")
 		self:Flash("eyebeam")
 		self:Say("eyebeam", 40620) -- Eyebeam
 	end

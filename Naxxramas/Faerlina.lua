@@ -94,7 +94,7 @@ end
 
 function mod:Rain(player)
 	if UnitIsUnit(player, "player") then
-		self:LocalMessage(28794, L["rain_message"], "Personal", 54099, "Alarm")
+		self:Message(28794, L["rain_message"], "Personal", 54099, "Alarm")
 		self:Flash(28794)
 	end
 end

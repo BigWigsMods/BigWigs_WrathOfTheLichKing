@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("The Lich King", 604)
 if not mod then return end
 mod:RegisterEnableMob(36597)
-mod.toggleOptions = {72143, 70541, {70337, "ICON", "FLASH"}, 70372, {72762, "SAY", "ICON", "WHISPER", "FLASH"}, 69409, 69037, {68980, "ICON", "WHISPER", "FLASH"}, 70498, {68981, "FLASH"}, 69200, {72262, "FLASH"}, 72350, {73529, "SAY", "WHISPER", "FLASH", "ICON"}, "berserk", "bosskill"}
+mod.toggleOptions = {72143, 70541, {70337, "ICON", "FLASH"}, 70372, {72762, "SAY", "ICON", "FLASH"}, 69409, 69037, {68980, "ICON", "FLASH"}, 70498, {68981, "FLASH"}, 69200, {72262, "FLASH"}, 72350, {73529, "SAY", "FLASH", "ICON"}, "berserk", "bosskill"}
 local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	[72143] = CL.phase:format(1),
@@ -260,7 +260,7 @@ function mod:DefileRun(player, spellId)
 	if (time - last) > 2 then
 		last = time
 		if UnitIsUnit(player, "player") then
-			self:LocalMessage(72762, L["defile_message"], "Personal", spellId, "Info")
+			self:Message(72762, L["defile_message"], "Personal", spellId, "Info")
 			self:Flash(72762)
 		end
 	end
@@ -300,7 +300,6 @@ function mod:HarvestSoul(player, spellId, _, _, spellName)
 		self:Bar(68980, L["harvestsoul_bar"], 75, spellId)
 		if UnitIsUnit(player, "player") then self:Flash(68980) end
 		self:TargetMessage(68980, spellName, player, "Attention", spellId)
-		self:Whisper(68980, player, spellName)
 		self:SecondaryIcon(68980, player)
 	end
 end
@@ -318,7 +317,7 @@ function mod:RemorselessWinter(_, spellId)
 	self:StopBar(L["reaper_bar"])
 	self:StopBar(L["valkyr_bar"])
 	self:StopBar(L["trap_bar"])
-	self:LocalMessage(68981, L["remorselesswinter_message"], "Urgent", spellId, "Alert")
+	self:Message(68981, L["remorselesswinter_message"], "Urgent", spellId, "Alert")
 	self:Bar(72262, L["quake_bar"], 62, 72262)
 	self:Bar(69200, L["ragingspirit_bar"], 15, spellId)
 end
@@ -326,7 +325,7 @@ end
 function mod:Quake(_, spellId)
 	phase = phase + 1
 	self:StopBar(L["ragingspirit_bar"])
-	self:LocalMessage(72262, L["quake_message"], "Urgent", spellId, "Alert")
+	self:Message(72262, L["quake_message"], "Urgent", spellId, "Alert")
 	self:Bar(72762, L["defile_bar"], 37, 72762)
 	self:Bar(70541, L["infest_bar"], 13, 70541)
 	self:Bar(69409, L["reaper_bar"], 39, 69409)
@@ -350,7 +349,6 @@ do
 				mod:Say(72762)
 			end
 			mod:TargetMessage(72762, name, target, "Important", id, "Alert")
-			mod:Whisper(72762, target, name)
 			mod:PrimaryIcon(72762, target)
 		end
 		handle = nil
@@ -377,7 +375,6 @@ do
 				mod:Say(73529)
 			end
 			mod:TargetMessage(73529, L["trap_message"], target, "Attention", 73539)
-			mod:Whisper(73529, target, spellName)
 			mod:PrimaryIcon(73529, target)
 		end
 	end

@@ -60,7 +60,7 @@ end
 
 function mod:Cinder(player, spellId)
 	if UnitIsUnit(player, "player") then
-		self:LocalMessage(66684, L["cinder_message"], "Personal", spellId, "Alarm")
+		self:Message(66684, L["cinder_message"], "Personal", spellId, "Alarm")
 		self:Flash(66684)
 	end
 end

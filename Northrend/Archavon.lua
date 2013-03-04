@@ -59,7 +59,7 @@ end
 
 function mod:Cloud(player, spellId)
 	if UnitIsUnit(player, "player") then
-		self:LocalMessage(58965, L["cloud_message"], "Personal", spellId, "Alarm")
+		self:Message(58965, L["cloud_message"], "Personal", spellId, "Alarm")
 		self:Flash(58965)
 	end
 end

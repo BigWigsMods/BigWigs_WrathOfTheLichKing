@@ -78,7 +78,7 @@ do
 		if UnitIsUnit(args.destName, "player") then
 			local t = GetTime()
 			if not last or (t > last + 4) then
-				self:LocalMessage(62546, L["scorch_message"], "Personal", args.spellId, last and nil or "Alarm")
+				self:Message(62546, L["scorch_message"], "Personal", args.spellId, last and nil or "Alarm")
 				self:Flash(62546)
 				last = t
 			end

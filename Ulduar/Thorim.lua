@@ -134,7 +134,7 @@ function mod:Shock(player, spellId)
 	if (time - last) > 5 then
 		last = time
 		if UnitIsUnit(player, "player") then
-			self:LocalMessage(62017, L["shock_message"], "Personal", spellId, "Info")
+			self:Message(62017, L["shock_message"], "Personal", spellId, "Info")
 			self:Flash(62017)
 		end
 	end

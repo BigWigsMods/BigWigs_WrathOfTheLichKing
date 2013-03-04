@@ -104,15 +104,15 @@ function mod:UNIT_AURA(event, unit)
 	end
 	if newCharge then
 		if not lastCharge then
-			self:LocalMessage(28089, newCharge == "Interface\\Icons\\Spell_ChargePositive" and
+			self:Message(28089, newCharge == "Interface\\Icons\\Spell_ChargePositive" and
 				L["polarity_first_positive"] or L["polarity_first_negative"],
 				"Personal", newCharge, "Alert")
 			self:Flash(28089)
 		else
 			if newCharge == lastCharge then
-				self:LocalMessage(28089, L["polarity_nochange"], "Positive", newCharge)
+				self:Message(28089, L["polarity_nochange"], "Positive", newCharge)
 			else
-				self:LocalMessage(28089, L["polarity_changed"], "Personal", newCharge, "Alert")
+				self:Message(28089, L["polarity_changed"], "Personal", newCharge, "Alert")
 				self:Flash(28089)
 			end
 		end

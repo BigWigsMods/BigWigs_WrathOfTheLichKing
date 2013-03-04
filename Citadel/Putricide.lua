@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Professor Putricide", 604)
 if not mod then return end
 --Putricide, Gas Cloud (Red Ooze), Volatile Ooze (Green Ooze)
 mod:RegisterEnableMob(36678, 37562, 37697)
-mod.toggleOptions = {{70447, "ICON"}, {70672, "WHISPER", "FLASH"}, 70351, 71255, {72295, "SAY", "FLASH"}, 72451, {70911, "ICON", "FLASH"}, "phase", "berserk", "bosskill"}
+mod.toggleOptions = {{70447, "ICON"}, {70672, "FLASH"}, 70351, 71255, {72295, "SAY", "FLASH"}, 72451, {70911, "ICON", "FLASH"}, "phase", "berserk", "bosskill"}
 local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	[70447] = CL.phase:format(1),
@@ -173,7 +173,6 @@ end
 function mod:ChasedByRedOoze(player, spellId)
 	self:StopBar(barText)
 	self:TargetMessage(70672, L["blight_message"], player, "Personal", spellId)
-	self:Whisper(70672, player, L["blight_message"])
 	if UnitIsUnit(player, "player") then
 		self:Flash(70672)
 	end

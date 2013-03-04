@@ -76,7 +76,7 @@ end
 
 function mod:Coldflame(player, spellId)
 	if UnitIsUnit(player, "player") then
-		self:LocalMessage(69138, L["coldflame_message"], "Personal", spellId, "Alarm")
+		self:Message(69138, L["coldflame_message"], "Personal", spellId, "Alarm")
 		self:Flash(69138)
 	end
 end

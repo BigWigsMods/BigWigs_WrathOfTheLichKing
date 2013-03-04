@@ -85,7 +85,7 @@ end
 
 function mod:Flame(player)
 	if UnitIsUnit(player, "player") then
-		self:LocalMessage(64704, L["flame_message"], "Personal", 64733, "Alarm")
+		self:Message(64704, L["flame_message"], "Personal", 64733, "Alarm")
 		self:Flash(64704)
 	end
 end

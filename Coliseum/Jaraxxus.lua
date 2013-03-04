@@ -4,7 +4,7 @@
 
 local mod = BigWigs:NewBoss("Lord Jaraxxus", 543)
 if not mod then return end
-mod.toggleOptions = {{66237, "WHISPER"}, {66197, "WHISPER", "ICON", "FLASH"}, 66228, "adds", {66334, "FLASH"}, "berserk", "bosskill"}
+mod.toggleOptions = {66237, {66197, "ICON", "FLASH"}, 66228, "adds", {66334, "FLASH"}, "berserk", "bosskill"}
 mod.optionHeaders = {
 	[66237] = "normal",
 	[66334] = "heroic",
@@ -88,7 +88,6 @@ end
 
 function mod:IncinerateFlesh(player, spellId)
 	self:TargetMessage(66237, L["incinerate_message"], player, "Urgent", spellId, "Info")
-	self:Whisper(66237, player, L["incinerate_message"])
 	self:Bar(66237, L["incinerate_other"]:format(player), 12, spellId)
 end
 
@@ -100,7 +99,6 @@ end
 function mod:LegionFlame(player, spellId)
 	self:TargetMessage(66197, L["legionflame_message"], player, "Personal", spellId, "Alert")
 	if UnitIsUnit(player, "player") then self:Flash(66197) end
-	self:Whisper(66197, player, L["legionflame_message"])
 	self:Bar(66197, L["legionflame_other"]:format(player), 8, spellId)
 	self:PrimaryIcon(66197, player)
 end
@@ -124,7 +122,7 @@ end
 
 function mod:MistressKiss(player, spellId)
 	if not UnitIsUnit(player, "player") then return end
-	self:LocalMessage(66334, L["kiss_message"], "Personal", spellId)
+	self:Message(66334, L["kiss_message"], "Personal", spellId)
 	self:Bar(66334, L["kiss_message"], 15, spellId)
 	self:Flash(66334)
 end
@@ -136,6 +134,6 @@ end
 
 function mod:MistressKissInterrupted(player, spellId)
 	if not UnitIsUnit(player, "player") then return end
-	self:LocalMessage(66334, L["kiss_interrupted"], "Personal", spellId)
+	self:Message(66334, L["kiss_interrupted"], "Personal", spellId)
 end
 

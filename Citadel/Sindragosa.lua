@@ -146,19 +146,19 @@ end
 function mod:Buffet(player, spellId, _, _, _, stack)
 	self:Bar(70127, L["buffet_cd"], 6, 70127)
 	if (stack % 2 == 0) and UnitIsUnit(player, "player") then
-		self:LocalMessage(70127, L["buffet_message"]:format(stack), "Attention", spellId, "Info")
+		self:Message(70127, L["buffet_message"]:format(stack), "Attention", spellId, "Info")
 	end
 end
 
 function mod:Instability(player, spellId, _, _, _, stack)
 	if stack > 4 and UnitIsUnit(player, "player") then
-		self:LocalMessage(69766, L["instability_message"]:format(stack), "Personal", spellId)
+		self:Message(69766, L["instability_message"]:format(stack), "Personal", spellId)
 	end
 end
 
 function mod:Chilled(player, spellId, _, _, _, stack)
 	if stack > 4 and UnitIsUnit(player, "player") then
-		self:LocalMessage(70106, L["chilled_message"]:format(stack), "Personal", spellId)
+		self:Message(70106, L["chilled_message"]:format(stack), "Personal", spellId)
 	end
 end
 
@@ -169,7 +169,7 @@ function mod:Unchained(player, spellId)
 		self:Bar(69762, L["unchained_bar"], 80, spellId)
 	end
 	if UnitIsUnit(player, "player") then
-		self:LocalMessage(69762, L["unchained_message"], "Personal", spellId, "Alert")
+		self:Message(69762, L["unchained_message"], "Personal", spellId, "Alert")
 		self:Flash(69762)
 		if self:Heroic() then
 			self:OpenProximity("proximity", 20)

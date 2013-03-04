@@ -190,7 +190,7 @@ do
 		if UnitIsUnit(player, "player") then
 			local t = GetTime()
 			if not last or (t > last + 4) then
-				self:LocalMessage(66317, L["firebomb_message"], "Personal", spellId, last and nil or "Alarm")
+				self:Message(66317, L["firebomb_message"], "Personal", spellId, last and nil or "Alarm")
 				self:Flash(66317)
 				last = t
 			end
@@ -287,7 +287,7 @@ do
 		if UnitIsUnit(player, "player") then
 			local t = GetTime()
 			if not last or (t > last + 4) then
-				self:LocalMessage(66883, L["slime_message"], "Personal", spellId, last and nil or "Alarm")
+				self:Message(66883, L["slime_message"], "Personal", spellId, last and nil or "Alarm")
 				self:Flash(66883)
 				last = t
 			end

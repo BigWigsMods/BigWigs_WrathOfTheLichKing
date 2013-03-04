@@ -88,7 +88,7 @@ end
 
 function mod:DnD(player, spellId)
 	if UnitIsUnit(player, "player") then
-		self:LocalMessage(71001, L["dnd_message"], "Personal", spellId, "Alarm")
+		self:Message(71001, L["dnd_message"], "Personal", spellId, "Alarm")
 		self:Flash(71001)
 	end
 end

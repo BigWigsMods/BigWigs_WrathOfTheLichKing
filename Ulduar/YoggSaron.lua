@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Yogg-Saron", 529)
 if not mod then return end
 --Sara = 33134, Yogg brain = 33890
 mod:RegisterEnableMob(33288, 33134, 33890)
-mod.toggleOptions = {62979, {63138, "WHISPER", "FLASH"}, "tentacle", {63830, "ICON"}, {63802, "FLASH"}, 64125, "portal", "weakened", 64059, {64465, "ICON"}, 64163, 64189, "phase", {63050, "WHISPER", "FLASH"}, 63120, "berserk", "bosskill"}
+mod.toggleOptions = {62979, {63138, "FLASH"}, "tentacle", {63830, "ICON"}, {63802, "FLASH"}, 64125, "portal", "weakened", 64059, {64465, "ICON"}, 64163, 64189, "phase", {63050, "FLASH"}, 63120, "berserk", "bosskill"}
 
 local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
@@ -137,7 +137,6 @@ end
 
 function mod:Fervor(player, spellId, _, _, spellName)
 	self:Bar(63138, L["fervor_message"]:format(player), 15, spellId)
-	self:Whisper(63138, player, spellName)
 	if UnitIsUnit(player, "player") then
 		self:Flash(63138)
 	end
@@ -157,7 +156,6 @@ do
 			self:Flash(63050)
 			warned[player] = true
 		elseif stack < 31 then
-			self:Whisper(63050, player, L["sanity_message"], true)
 			warned[player] = true
 		end
 	end
@@ -203,7 +201,7 @@ end
 
 function mod:Linked(player, spellId)
 	if UnitIsUnit(player, "player") then
-		self:LocalMessage(63802, L["link_warning"], "Personal", spellId, "Alarm")
+		self:Message(63802, L["link_warning"], "Personal", spellId, "Alarm")
 		self:Flash(63802)
 	end
 end

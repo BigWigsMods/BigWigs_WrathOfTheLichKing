@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Halion", 609)
 if not mod then return end
 mod:RegisterEnableMob(39863, 40142)
-mod.toggleOptions = {{74562, "SAY", "ICON", "FLASH", "WHISPER"}, 74648, {74792, "SAY", "ICON", "FLASH", "WHISPER"}, 74769, 74806, 74525, "berserk", "bosskill"}
+mod.toggleOptions = {{74562, "SAY", "ICON", "FLASH"}, 74648, {74792, "SAY", "ICON", "FLASH"}, 74769, 74806, 74525, "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -77,7 +77,7 @@ end
 
 function mod:FireDamage(player, spellId)
 	if UnitIsUnit(player, "player") then
-		self:LocalMessage(74648, L["fire_damage_message"], "Personal", spellId)
+		self:Message(74648, L["fire_damage_message"], "Personal", spellId)
 	end
 end
 
@@ -92,7 +92,6 @@ function mod:Fire(player, spellId)
 		self:Flash(74562)
 	end
 	self:TargetMessage(74562, L["fire_message"], player, "Personal", spellId, "Info")
-	self:Whisper(74562, player, L["fire_message"])
 	self:PrimaryIcon(74562, player)
 end
 
@@ -107,7 +106,6 @@ function mod:Shadow(player, spellId)
 		self:Flash(74792)
 	end
 	self:TargetMessage(74792, L["shadow_message"], player, "Personal", spellId, "Info")
-	self:Whisper(74792, player, L["shadow_message"])
 	self:SecondaryIcon(74792, player)
 end
 

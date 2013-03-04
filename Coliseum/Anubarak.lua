@@ -4,7 +4,7 @@
 
 local mod = BigWigs:NewBoss("Anub'arak", 543)
 if not mod then return end
-mod.toggleOptions = {66012, "burrow", {67574, "WHISPER", "ICON", "FLASH"}, {66013, "FLASH"}, 66118, 66134, "berserk", "bosskill"}
+mod.toggleOptions = {66012, "burrow", {67574, "ICON", "FLASH"}, {66013, "FLASH"}, 66118, 66134, "berserk", "bosskill"}
 mod:RegisterEnableMob(34564, 34607, 34605)
 mod.optionHeaders = {
 	[66012] = "normal",
@@ -147,7 +147,7 @@ end
 
 function mod:ColdDebuff(player, spellId, _, _, spellName)
 	if not UnitIsUnit(player, "player") or not phase2 then return end
-	self:LocalMessage(66013, spellName, "Personal", spellId)
+	self:Message(66013, spellName, "Personal", spellId)
 	self:Flash(66013)
 end
 
@@ -170,7 +170,6 @@ end
 function mod:Pursue(player, spellId)
 	self:TargetMessage(67574, L["chase"], player, "Personal", spellId, "Alert")
 	if UnitIsUnit(player, "player") then self:Flash(67574) end
-	self:Whisper(67574, player, L["chase"])
 	self:PrimaryIcon(67574, player, "icon")
 end
 

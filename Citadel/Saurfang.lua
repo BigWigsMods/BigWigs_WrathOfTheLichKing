@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Deathbringer Saurfang", 604)
 if not mod then return end
 -- Deathbringer Saurfang, Muradin, Marine, Overlord Saurfang, Kor'kron Reaver
 mod:RegisterEnableMob(37813, 37200, 37830, 37187, 37920)
-mod.toggleOptions = {"adds", 72410, 72385, {72293, "WHISPER", "ICON", "FLASH"}, 72737, "proximity", "berserk", "bosskill"}
+mod.toggleOptions = {"adds", 72410, 72385, {72293, "ICON", "FLASH"}, 72737, "proximity", "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -110,7 +110,6 @@ end
 function mod:Mark(player, spellId, _, _, spellName)
 	self:TargetMessage(72293, L["mark"]:format(count), player, "Attention", spellId, "Alert")
 	count = count + 1
-	self:Whisper(72293, player, spellName)
 	self:PrimaryIcon(72293, player)
 	if UnitIsUnit(player, "player") then self:Flash(72293) end
 end
