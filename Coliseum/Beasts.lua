@@ -319,7 +319,7 @@ function mod:Charge(msg, unit, _, _, player)
 		local spellName = GetSpellInfo(52311)
 		self:TargetMessage("charge", spellName, player, "Personal", 52311, "Alarm")
 		if UnitIsUnit(player, "player") then
-			self:Flash("charge")
+			self:Flash("charge", 52311)
 			self:Say("charge", spellName)
 		end
 		self:Bar("charge", spellName, 7.5, 52311)

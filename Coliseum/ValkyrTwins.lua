@@ -70,7 +70,7 @@ end
 
 function mod:Touch(player, spellId, _, _, spellName)
 	self:TargetMessage("touch", spellName, player, "Personal", spellId, "Info")
-	if UnitIsUnit(player, "player") then self:Flash("touch") end
+	if UnitIsUnit(player, "player") then self:Flash("touch", spellId) end
 end
 
 function mod:DarkShield(_, spellId, _, _, spellName)
@@ -100,7 +100,7 @@ function mod:LightVortex(_, spellId, _, _, spellName)
 		self:Message("vortex", spellName, "Positive", spellId)
 	else
 		self:Message("vortex", spellName, "Personal", spellId, "Alarm")
-		self:Flash("vortex")
+		self:Flash("vortex", spellId)
 	end
 end
 
@@ -111,7 +111,7 @@ function mod:DarkVortex(_, spellId, _, _, spellName)
 		self:Message("vortex", spellName, "Positive", spellId)
 	else
 		self:Message("vortex", spellName, "Personal", spellId, "Alarm")
-		self:Flash("vortex")
+		self:Flash("vortex", spellId)
 	end
 end
 

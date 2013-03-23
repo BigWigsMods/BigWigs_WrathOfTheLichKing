@@ -88,7 +88,7 @@ end
 function mod:RAID_BOSS_WHISPER(event, msg)
 	if msg:find(L["eyebeam_trigger"]) then
 		self:Message("eyebeam", L["eyebeam_you"], "Personal", 63976, "Long")
-		self:Flash("eyebeam")
+		self:Flash("eyebeam", 63976)
 		self:Say("eyebeam", 40620) -- Eyebeam
 	end
 	self:Sync("EyeBeamWarn", pName)

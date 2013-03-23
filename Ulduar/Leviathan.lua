@@ -77,7 +77,7 @@ end
 
 function mod:Pursue(msg, unit, _, _, player)
 	self:TargetMessage("pursue", L["pursue"], player, "Personal", 62374, "Alarm")
-	if UnitIsUnit(player, "player") then self:Flash("pursue") end
+	if UnitIsUnit(player, "player") then self:Flash("pursue", 62374) end
 	self:Bar("pursue", L["pursue_other"]:format(player), 30, 62374)
 end
 

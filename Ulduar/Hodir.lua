@@ -112,11 +112,11 @@ end
 do
 	local cold = mod:SpellName(62039)
 	function mod:BitingCold(unit)
-		local _, _, icon, stack = UnitDebuff(unit, cold)
+		local _, _, _, stack = UnitDebuff(unit, cold)
 		if stack and stack ~= lastCold then
 			if stack > 1 then
-				self:Message("cold", L["cold_message"]:format(stack), "Personal", icon)
-				self:Flash("cold")
+				self:Message("cold", L["cold_message"]:format(stack), "Personal", 62039)
+				self:Flash("cold", 62039)
 			end
 			lastCold = stack
 		end

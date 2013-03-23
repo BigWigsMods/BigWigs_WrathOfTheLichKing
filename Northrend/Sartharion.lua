@@ -123,6 +123,6 @@ end
 function mod:Vesperon(msg, mob)
 	if mob ~= L.vesperon then return end
 	self:Message("twilight", L["twilight_message"]:format(mob), "Personal", 59569, "Alarm")
-	self:Flash("twilight")
+	self:Flash("twilight", 59569)
 end
 

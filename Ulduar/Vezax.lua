@@ -107,11 +107,11 @@ end
 
 function mod:UNIT_AURA(event, unit)
 	if unit and unit ~= "player" then return end
-	local _, _, icon, stack = UnitDebuff("player", vapor)
+	local _, _, _, stack = UnitDebuff("player", vapor)
 	if stack and stack ~= lastVapor then
 		if stack > 5 then
-			self:Message("vaporstack", L["vaporstack_message"]:format(stack), "Personal", icon)
-			self:Flash("vaporstack")
+			self:Message("vaporstack", L["vaporstack_message"]:format(stack), "Personal", 63322)
+			self:Flash("vaporstack", 63322)
 		end
 		lastVapor = stack
 	end

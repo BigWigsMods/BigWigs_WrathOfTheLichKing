@@ -117,7 +117,7 @@ end
 function mod:RAID_BOSS_WHISPER(event, msg, mob)
 	if phase == 3 and msg == L["surge_trigger"] then
 		self:Message("surge", L["surge_you"], "Personal", 60936, "Alarm") -- 60936 for phase 3, not 56505
-		self:Flash("surge")
+		self:Flash("surge", 60936)
 	end
 end
 
