@@ -2,7 +2,6 @@ local L = BigWigs:NewBossLocale("Algalon the Observer", "deDE")
 if L then
 	L.engage_trigger = "Euer Handeln ist unlogisch. Alle Möglichkeiten dieser Begegnung wurden berechnet. Das Pantheon wird die Nachricht des Beobachters erhalten, ungeachtet des Ausgangs."
 
-	L.punch_message = "%2$dx Phasenschlag: %1$s!"
 	L.smash_message = "Kosmischer Schlag kommt!"
 	L.blackhole_message = "Schwarzes Loch %dx!"
 	L.bigbang_bar = "Nächster Großer Knall"
@@ -54,7 +53,6 @@ if L then
 	L.tree_message = "Eonars Geschenk!"
 
 	L.fury_message = "Furor"
-	L.fury_other = "Furor: %s"
 
 	L.tremor_warning = "Bebende Erde bald!"
 	L.tremor_bar = "~Bebende Erde"
@@ -85,14 +83,7 @@ end
 L = BigWigs:NewBossLocale("Ignis the Furnace Master", "deDE")
 if L then
 	L.engage_trigger = "Ihr anmaßenden Wichte! Euer Blut wird die Waffen härten, mit denen diese Welt erobert wird!"
-
-	L.construct_message = "Konstrukt aktiviert!"
-	L.construct_bar = "Nächstes Konstrukt"
 	L.brittle_message = "Konstrukt ist spröde!"
-	L.flame_bar = "~Flammenstrahlen"
-	L.scorch_message = "Versengen auf DIR!"
-	L.scorch_soon = "Versengen in ~5 sek!"
-	L.scorch_bar = "Nächstes Versengen"
 end
 
 L = BigWigs:NewBossLocale("The Iron Council", "deDE")
@@ -101,16 +92,10 @@ if L then
 	L.engage_trigger2 = "Nur vollständige Dezimierung wird mich zufriedenstellen."
 	L.engage_trigger3 = "Selbst wenn Ihr die größten Helden der Welt seid, so seid Ihr doch nichts weiter als Sterbliche."
 
-	L.overload_message = "Überladen in 6 sek!"
-	L.death_message = "Todesrune auf DIR!"
 	L.summoning_message = "Elementare!"
 
 	L.chased_other = "%s wird verfolgt!"
 	L.chased_you = "DU wirst verfolgt!"
-
-	L.shield_message = "Runenschild!"
-
-	L.council_dies = "%s getötet!"
 end
 
 L = BigWigs:NewBossLocale("Kologarn", "deDE")
@@ -129,11 +114,6 @@ if L then
 	L.eyebeam = "Fokussierter Augenstrahl"
 	L.eyebeam_desc = "Warnt, wenn du von Fokussierter Augenstrahl betroffen bist."
 	L.eyebeam_trigger = "seinen Blick auf Euch!"
-	L.eyebeam_message = "Augenstrahl: %s"
-	L.eyebeam_bar = "~Augenstrahl"
-	L.eyebeam_you = "Augenstrahl auf DIR!"
-
-	L.armor_message = "%2$dx Rüstung zermalmen: %1$s!"
 end
 
 L = BigWigs:NewBossLocale("Flame Leviathan", "deDE")

@@ -3,7 +3,6 @@ local L = BigWigs:NewBossLocale("Algalon the Observer", "zhTW")
 if L then
 	L.engage_trigger = "你的行為毫無意義。這場沖突的結果早已計算出來了。不論結局為何，萬神殿仍將收到觀察者的訊息。"
 
-	L.punch_message = "相位拳擊%2$d層： >%1$s<！"
 	L.smash_message = "即將 宇宙潰擊！"
 	L.blackhole_message = "黑洞爆炸：>%dx< 出現！"
 	L.bigbang_bar = "<下一大爆炸>"
@@ -55,7 +54,6 @@ if L then
 	L.tree_message = "伊歐娜的贈禮 出現！"
 
 	L.fury_message = "自然烈怒"
-	L.fury_other = "自然烈怒：>%s<！"
 
 	L.tremor_warning = "即將 地面震顫！"
 	L.tremor_bar = "<下一地面震顫>"
@@ -86,14 +84,7 @@ end
 L = BigWigs:NewBossLocale("Ignis the Furnace Master", "zhTW")
 if L then
 	L.engage_trigger = "傲慢的小傢伙!你們的鮮血將會用來淬鍊重奪世界的武器!"
-
-	L.construct_message = "即將 鐵之傀儡！"
-	L.construct_bar = "<下一鐵之傀儡>"
 	L.brittle_message = "鐵之傀儡 - 脆裂！"
-	L.flame_bar = "<烈焰噴洩 冷卻>"
-	L.scorch_message = ">你< 灼燒！"
-	L.scorch_soon = "約5秒後，灼燒！"
-	L.scorch_bar = "<下一灼燒>"
 end
 
 L = BigWigs:NewBossLocale("The Iron Council", "zhTW")
@@ -102,16 +93,10 @@ if L then
 	L.engage_trigger2 = "只有全面屠殺才能滿足我。"
 	L.engage_trigger3 = "不管你是世界第一流的小卒，或是首屈一指的英雄人物，充其量也不過是個凡人罷了。"
 
-	L.overload_message = "6秒後，超載！"
-	L.death_message = ">你< 死亡符文！"
 	L.summoning_message = "閃電元素即將出現！"
 
 	L.chased_other = "閃電觸鬚：>%s<！"
 	L.chased_you = ">你< 閃電觸鬚！"
-
-	L.shield_message = "符文護盾！"
-
-	L.council_dies = "%s被擊敗了！"
 end
 
 L = BigWigs:NewBossLocale("Kologarn", "zhTW")
@@ -130,11 +115,6 @@ if L then
 	L.eyebeam = "集束目光"
 	L.eyebeam_desc = "當玩家中了集束目光時發出警報。"
 	L.eyebeam_trigger = "柯洛剛恩正在注視著你!"
-	L.eyebeam_message = "集束目光：>%s<！"
-	L.eyebeam_bar = "<集束目光>"
-	L.eyebeam_you = ">你< 集束目光！"
-
-	L.armor_message = "粉碎護甲%2$d層：>%1$s<！"
 end
 
 L = BigWigs:NewBossLocale("Flame Leviathan", "zhTW")

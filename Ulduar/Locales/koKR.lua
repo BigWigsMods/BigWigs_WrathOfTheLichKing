@@ -3,7 +3,6 @@ local L = BigWigs:NewBossLocale("Algalon the Observer", "koKR")
 if L then
 	L.engage_trigger = "너희 행동은 비논리적이다."
 
-	L.punch_message = "위상의 주먹 %2$dx : %1$s"
 	L.smash_message = "곧 우주의 강타!"
 	L.blackhole_message = "검은 구멍 폭발 %dx 소환"
 	L.bigbang_bar = "다음 대폭발"
@@ -55,7 +54,6 @@ if L then
 	L.tree_message = "이오나의 선물 소환"
 
 	L.fury_message = "격노"
-	L.fury_other = "자연의 격노: %s!"
 
 	L.tremor_warning = "곧 지진!"
 	L.tremor_bar = "~다음 지진"
@@ -86,14 +84,7 @@ end
 L = BigWigs:NewBossLocale("Ignis the Furnace Master", "koKR")
 if L then
 	L.engage_trigger = "건방진 젖먹이들이! 세상을 되찾는 데 쓸 무기를 네놈들의 피로 담금질하겠다!"	--check
-
-	L.construct_message = "피조물 활성화!"
-	L.construct_bar = "다음 피조물"
 	L.brittle_message = "피조물 부서지는 몸!"
-	L.flame_bar = "~분출 대기시간"
-	L.scorch_message = "당신은 불태우기!"
-	L.scorch_soon = "약 5초 후 불태우기!"
-	L.scorch_bar = "다음 불태우기"
 end
 
 L = BigWigs:NewBossLocale("The Iron Council", "koKR")
@@ -102,16 +93,10 @@ if L then
 	L.engage_trigger2 = "남김없이 쓸어버려야 속이 시원하겠군."
 	L.engage_trigger3 = "세상에서 가장 큰 모기건 세상에서 가장 위대한 영웅이건, 너흰 어차피 필멸의 존재야."
 
-	L.overload_message = "6초 후 과부하!"
-	L.death_message = "당신은 죽음의 룬!"
 	L.summoning_message = "소환의 룬 - 곧 정령 등장!"
 
 	L.chased_other = "%s 추적 중!"
 	L.chased_you = "당신을 추적 중!"
-
-	L.shield_message = "룬의 보호막!"
-
-	L.council_dies = "%s 죽음"
 end
 
 L = BigWigs:NewBossLocale("Kologarn", "koKR")
@@ -130,11 +115,6 @@ if L then
 	L.eyebeam = "안광 집중"
 	L.eyebeam_desc = "안광 집중의 대상이된 플레이어를 알립니다."
 	L.eyebeam_trigger = "콜로간이 당신에게 안광을 집중합니다!"
-	L.eyebeam_message = "안광 집중: %s"
-	L.eyebeam_bar = "~안광 집중"
-	L.eyebeam_you = "당신에게 안광 집중!"
-
-	L.armor_message = "방어구 씹기 x%2$d: %1$s"
 end
 
 L = BigWigs:NewBossLocale("Flame Leviathan", "koKR")

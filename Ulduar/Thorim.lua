@@ -16,9 +16,6 @@ mod.optionHeaders = {
 	phase = "general",
 }
 
-mod.proximityCheck = function(unit) return CheckInteractDistance(unit, 3) end
-mod.proximitySilent = true
-
 --------------------------------------------------------------------------------
 -- Locals
 --
@@ -90,82 +87,81 @@ end
 
 function mod:OnEngage()
 	chargeCount = 1
-	self:Message("phase", L["phase1_message"], "Attention")
+	self:Message("phase", "Attention", nil, L["phase1_message"], false)
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Barrier(_, spellId, _, _, spellName)
-	self:Message(62338, L["barrier_message"], "Urgent", spellId, "Alarm")
-	self:Bar(62338, spellName, 20, spellId)
+function mod:Barrier(args)
+	self:Message(args.spellId, "Urgent", "Alarm", L["barrier_message"])
+	self:Bar(args.spellId, 20)
 end
 
-function mod:Charge(_, spellId)
-	self:Message(62279, L["charge_message"]:format(chargeCount), "Attention", spellId)
+function mod:Charge(args)
+	self:Message(args.spellId, "Attention", nil, L["charge_message"]:format(chargeCount))
 	chargeCount = chargeCount + 1
-	self:Bar(62279, L["charge_bar"]:format(chargeCount), 15, spellId)
+	self:Bar(args.spellId, 15, L["charge_bar"]:format(chargeCount))
 end
 
-function mod:Hammer(player, spellId, _, _, spellName)
-	self:TargetMessage(62042, spellName, player, "Urgent", spellId)
-	self:Bar(62042, spellName, 16, spellId)
-	self:PrimaryIcon(62042, player)
+function mod:Hammer(args)
+	self:TargetMessage(args.spellId, args.destName, "Urgent")
+	self:Bar(args.spellId, 16)
+	self:PrimaryIcon(args.spellId, args.destName)
 end
 
-function mod:Strike(player, spellId, _, _, spellName)
-	self:TargetMessage(62130, spellName, player, "Attention", spellId)
-	self:Bar(62130, spellName..": "..player, 15, spellId)
+function mod:Strike(args)
+	self:TargetMessage(args.spellId, args.destName, "Attention")
+	self:TargetBar(args.spellId, 15, args.destName)
 end
 
-function mod:StrikeCooldown(player, spellId)
-	self:Bar(62130, L["strike_bar"], 25, spellId)
+function mod:StrikeCooldown(args)
+	self:Bar(args.spellId, 25, L["strike_bar"])
 end
 
-function mod:Orb(_, spellId, _, _, spellName)
-	self:Message(62016, spellName, "Urgent", spellId)
-	self:Bar(62016, spellName, 15, spellId)
+function mod:Orb(args)
+	self:Message(args.spellId, "Urgent")
+	self:Bar(args.spellId, 15)
 end
 
 local last = 0
-function mod:Shock(player, spellId)
+function mod:Shock(args)
 	local time = GetTime()
 	if (time - last) > 5 then
 		last = time
-		if UnitIsUnit(player, "player") then
-			self:Message(62017, L["shock_message"], "Personal", spellId, "Info")
-			self:Flash(62017)
+		if self:Me(args.destGUID) then
+			self:Message(args.spellId, "Personal", "Info", L["shock_message"])
+			self:Flash(args.spellId)
 		end
 	end
 end
 
-function mod:Impale(player, spellId, _, _, spellName)
-	self:TargetMessage(62331, spellName, player, "Important", spellId)
+function mod:Impale(args)
+	self:TargetMessage(62331, args.destName, "Important")
 end
 
-function mod:Detonation(player, spellId, _, _, spellName)
-	if UnitIsUnit(player, "player") then
-		self:Say(62526, L["detonation_say"], true)
-	else
-		self:TargetMessage(62526, spellName, player, "Important", spellId)
+function mod:Detonation(args)
+	if self:Me(args.destGUID) then
+		self:Say(args.spellId, L["detonation_say"], true)
 	end
-	self:Bar(62526, spellName..": "..player, 4, spellId)
-	self:PrimaryIcon(62526, player)
+	self:TargetMessage(args.spellId, args.destName, "Important")
+	self:TargetBar(args.spellId, 4, args.destName)
+	self:PrimaryIcon(args.spellId, args.destName)
 end
 
 function mod:PhaseTwo()
-	self:Message("phase", L["phase2_message"], "Attention")
-	self:Bar("phase", CL["berserk"], 375, 20484)
-	self:Bar("hardmode", L["hardmode"], 173, 6673)
-	self:DelayedMessage("hardmode", 173, L["hardmode_warning"], "Attention")
+	self:Message("phase", "Attention", nil, L["phase2_message"], false)
+	self:Bar("phase", 375, CL["berserk"], 20484)
+	self:Bar("hardmode", 173, L["hardmode"], 6673)
+	self:DelayedMessage("hardmode", 173, "Attention", L["hardmode_warning"])
 end
 
 function mod:PhaseThree()
 	self:CancelDelayedMessage(L["hardmode_warning"])
 	self:StopBar(L["hardmode"])
 	self:StopBar(CL["berserk"])
-	self:Message("phase", L["phase3_message"], "Attention")
+	self:Message("phase", "Attention", nil, L["phase3_message"], false)
 	self:OpenProximity("proximity", 5)
 end
 

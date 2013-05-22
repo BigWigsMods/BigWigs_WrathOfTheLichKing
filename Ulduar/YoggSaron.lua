@@ -112,7 +112,7 @@ end
 
 function mod:OnEngage()
 	guardianCount = 1
-	self:Message("phase", L["engage_warning"], "Attention")
+	self:Message("phase", "Attention", nil, L["engage_warning"], false)
 	self:Berserk(900, true)
 end
 
@@ -126,106 +126,106 @@ end
 -- Event Handlers
 --
 
-function mod:FervorCast(player, spellId, _, _, spellName)
+function mod:FervorCast(args)
 	local bossId = self:GetUnitIdByGUID(33134)
 	if bossId then
 		local target = UnitName(bossId .. "target")
 		if not target then return end
-		self:TargetMessage(63138, L["fervor_cast_message"], target, "Personal", spellId)
+		self:Message(args.spellId, "Personal", nil, L["fervor_cast_message"]:format(target))
 	end
 end
 
-function mod:Fervor(player, spellId, _, _, spellName)
-	self:Bar(63138, L["fervor_message"]:format(player), 15, spellId)
-	if UnitIsUnit(player, "player") then
-		self:Flash(63138)
+function mod:Fervor(args)
+	self:Bar(args.spellId, 15, L["fervor_message"]:format(args.destName))
+	if self:Me(args.destGUID) then
+		self:Flash(args.spellId)
 	end
 end
 
 do
 	local warned = {}
-	function mod:SanityIncrease(player, _, _, _, _, stack)
-		if not warned[player] then return end
-		if stack > 70 then warned[player] = nil end
+	function mod:SanityIncrease(args)
+		if not warned[args.destName] then return end
+		if args.amount > 70 then warned[args.destName] = nil end
 	end
-	function mod:SanityDecrease(player, spellId, _, _, _, stack)
-		if warned[player] then return end
-		if UnitIsUnit(player, "player") then
-			if stack > 40 then return end
-			self:Message(63050, L["sanity_message"], "Personal", spellId)
-			self:Flash(63050)
-			warned[player] = true
-		elseif stack < 31 then
-			warned[player] = true
+	function mod:SanityDecrease(args)
+		if warned[args.destName] then return end
+		if self:Me(args.destGUID) then
+			if args.amount > 40 then return end
+			self:Message(args.spellId, "Personal", nil, L["sanity_message"])
+			self:Flash(args.spellId)
+			warned[args.destName] = true
+		elseif args.amount < 31 then
+			warned[args.destName] = true
 		end
 	end
 end
 
-function mod:Guardian(_, spellId)
-	self:Message(62979, L["guardian_message"]:format(guardianCount), "Positive", spellId)
+function mod:Guardian(args)
+	self:Message(args.spellId, "Positive", nil, L["guardian_message"]:format(guardianCount))
 	guardianCount = guardianCount + 1
 end
 
-function mod:Insane(player, spellId, _, _, spellName)
-	self:TargetMessage(63120, spellName, player, "Attention", spellId)
+function mod:Insane(args)
+	self:TargetMessage(args.spellId, args.destName, "Attention")
 end
 
-function mod:Tentacle(_, spellId, source, _, spellName)
+function mod:Tentacle(args)
 	-- Crusher Tentacle (33966) 50 sec
 	-- Corruptor Tentacle (33985) 25 sec
 	-- Constrictor Tentacle (33983) 20 sec
-	if source == L["Crusher Tentacle"] then
-		self:Message("tentacle", L["tentacle_message"]:format(crusherCount), "Important", 64139)
+	if self:MobId(args.sourceGUID) == 33966 then
+		self:Message("tentacle", "Important", nil, L["tentacle_message"]:format(crusherCount), 64139)
 		crusherCount = crusherCount + 1
-		self:Bar("tentacle", L["tentacle_message"]:format(crusherCount), 55, 64139)
+		self:Bar("tentacle", 55, L["tentacle_message"]:format(crusherCount), 64139)
 	end
 end
 
-function mod:Roar(_, spellId, _, _, spellName)
-	self:Message(64189, spellName, "Attention", spellId)
-	self:Bar(64189, L["roar_bar"], 60, spellId)
-	self:DelayedMessage(64189, 55, L["roar_warning"], "Attention")
+function mod:Roar(args)
+	self:Message(args.spellId, "Attention")
+	self:Bar(args.spellId, 60, L["roar_bar"])
+	self:DelayedMessage(args.spellId, 55, "Attention", L["roar_warning"])
 end
 
-function mod:Malady(player)
-	self:PrimaryIcon(63830, player)
+function mod:Malady(args)
+	self:PrimaryIcon(63830, args.destName)
 end
 
-function mod:RemoveMalady(player)
+function mod:RemoveMalady()
 	self:PrimaryIcon(63830)
 end
 
-function mod:Squeeze(player, spellId, _, _, spellName)
-	self:TargetMessage(64125, spellName, player, "Positive", spellId)
+function mod:Squeeze(args)
+	self:TargetMessage(64125, args.destName, "Positive")
 end
 
-function mod:Linked(player, spellId)
-	if UnitIsUnit(player, "player") then
-		self:Message(63802, L["link_warning"], "Personal", spellId, "Alarm")
-		self:Flash(63802)
+function mod:Linked(args)
+	if self:Me(args.destGUID) then
+		self:Message(args.spellId, "Personal", "Alarm", L["link_warning"])
+		self:Flash(args.spellId)
 	end
 end
 
-function mod:Gaze(_, spellId, _, _, spellName)
-	self:Bar(64163, L["gaze_bar"], 9, spellId)
+function mod:Gaze(args)
+	self:Bar(args.spellId, 9, L["gaze_bar"])
 end
 
-function mod:CastGaze(_, spellId, _, _, spellName)
-	self:Bar(64163, spellName, 4, spellId)
+function mod:CastGaze(args)
+	self:Bar(args.spellId, 4)
 end
 
-function mod:Madness(_, spellId, _, _, spellName)
-	self:Bar(64059, spellName, 60, 64059)
-	self:DelayedMessage(64059, 55, L["madness_warning"], "Urgent")
+function mod:Madness(args)
+	self:Bar(args.spellId, 60)
+	self:DelayedMessage(args.spellId, 55, "Urgent", L["madness_warning"])
 end
 
-function mod:Empower(_, spellId, _, _, spellName)
-	self:Message(64465, spellName, "Important", spellId)
-	self:Bar(64465, L["empower_bar"], 46, spellId)
+function mod:Empower(args)
+	self:Message(args.spellId, "Important")
+	self:Bar(args.spellId, 46, L["empower_bar"])
 end
 
-function mod:RemoveEmpower()
-	self:Message(64465, L["empowericon_message"], "Positive", 64465)
+function mod:RemoveEmpower(args)
+	self:Message(args.spellId, "Positive", nil, L["empowericon_message"])
 	--self:SendMessage("BigWigs_RemoveRaidIcon")
 end
 
@@ -238,38 +238,36 @@ do
 		mod:CancelTimer(empowerscanner)
 		empowerscanner = nil
 	end
-	function mod:EmpowerIcon(...)
+	function mod:EmpowerIcon(args)
 		if empowerscanner or (not UnitIsGroupLeader("player") and not UnitIsGroupAssistant("player")) then return end
 		if bit.band(self.db.profile[(GetSpellInfo(64465))], BigWigs.C.ICON) ~= BigWigs.C.ICON then return end
-		local dGuid = select(10, ...)
-		empowerscanner = self:ScheduleRepeatingTimer(scanTarget, 0.3, dGuid)
+		empowerscanner = self:ScheduleRepeatingTimer(scanTarget, 0.3, args.destGUID)
 	end
 end
 
 function mod:Portal()
-	self:Message("portal", L["portal_message"], "Positive", 35717)
-	self:Bar("portal", L["portal_bar"], 90, 35717)
+	self:Message("portal", "Positive", nil, L["portal_message"], 35717)
+	self:Bar("portal", 90, L["portal_bar"], 35717)
 end
 
 function mod:Weakened(_, unit)
-	self:Message("weakened", L["weakened_message"]:format(unit), "Positive", 50661)
+	self:Message("weakened", "Positive", nil, L["weakened_message"]:format(unit), 50661)
 end
 
 function mod:Yells(msg)
 	if msg:find(L["phase2_trigger"]) then
 		crusherCount = 1
-		self:Message("phase", L["phase2_warning"], "Attention")
-		self:Bar("portal", L["portal_bar"], 78, 35717)
+		self:Message("phase", "Attention", nil, L["phase2_warning"], false)
+		self:Bar("portal", 78, L["portal_bar"], 35717)
 	elseif msg:find(L["phase3_trigger"]) then
 		self:CancelDelayedMessage(L["madness_warning"])
 
-		local madness = GetSpellInfo(64059)
-		self:StopBar(madness)
+		self:StopBar(64059) -- Induce Madness
 		self:StopBar(L["tentacle_message"]:format(crusherCount))
 		self:StopBar(L["portal_bar"])
 
-		self:Message("phase", L["phase3_warning"], "Important", nil, "Alarm")
-		self:Bar(64465, L["empower_bar"], 46, 64486)
+		self:Message("phase", "Important", "Alarm", L["phase3_warning"], false)
+		self:Bar(64465, 46, L["empower_bar"])
 	end
 end
 

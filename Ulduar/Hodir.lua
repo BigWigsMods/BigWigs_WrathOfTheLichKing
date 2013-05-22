@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Hodir", 529)
+local mod, CL = BigWigs:NewBoss("Hodir", 529)
 if not mod then return end
 mod:RegisterEnableMob(32845)
 mod.toggleOptions = {{"cold", "FLASH"}, {65123, "ICON"}, 61968, 62478, "hardmode", "berserk", "bosskill"}
@@ -61,8 +61,8 @@ end
 
 function mod:OnEngage()
 	lastCold = nil
-	self:Bar(61968, 61968, 35, 61968) -- Flash Freeze
-	self:Bar("hardmode", L["hardmode"], 180, 6673)
+	self:Bar(61968, 35) -- Flash Freeze
+	self:Bar("hardmode", 180, L["hardmode"], 6673)
 	self:Berserk(480)
 end
 
@@ -75,22 +75,22 @@ end
 --
 
 function mod:Cloud(args)
-	self:TargetMessage(65123, args.spellName, args.destName, "Positive", args.spellId, "Info")
-	self:TargetBar(65123, args.spellName, args.destName, 30, args.spellId)
+	self:TargetMessage(65123, args.destName, "Positive", "Info")
+	self:TargetBar(65123, 30, args.destName)
 	self:PrimaryIcon(65123, args.destName)
 end
 
 function mod:FlashCast(args)
-	self:Message(args.spellId, L["flash_warning"], "Attention", args.spellId)
-	self:Bar(args.spellId, args.spellName, 9, args.spellId)
-	self:Bar(args.spellId, args.spellName, 35, args.spellId)
-	self:DelayedMessage(args.spellId, 30, L["flash_soon"], "Attention")
+	self:Message(args.spellId, "Attention", nil, L["flash_warning"])
+	self:Bar(args.spellId, 9, CL["cast"]:format(args.spellName))
+	self:Bar(args.spellId, 35)
+	self:DelayedMessage(args.spellId, 30, "Attention", L["flash_soon"])
 end
 
 do
 	local handle = nil
 	local function flashWarn(spellId, spellName)
-		mod:TargetMessage(spellId, spellName, flashFreezed, "Urgent", spellId, "Alert")
+		mod:TargetMessage(61968, flashFreezed, "Urgent", "Alert")
 		handle = nil
 	end
 
@@ -98,15 +98,15 @@ do
 		if UnitInRaid(args.destName) then
 			flashFreezed[#flashFreezed + 1] = args.destName
 			if not handle then
-				handle = self:ScheduleTimer(flashWarn, 0.3, 61968, args.spellName)
+				handle = self:ScheduleTimer(flashWarn, 0.3)
 			end
 		end
 	end
 end
 
-function mod:Frozen(args)
-	self:Message(62478, args.spellName, "Important", args.spellId)
-	self:Bar(62478, args.spellName, 20, args.spellId)
+function mod:Frozen()
+	self:Message(62478, "Important")
+	self:Bar(62478, 20)
 end
 
 do
@@ -115,7 +115,7 @@ do
 		local _, _, _, stack = UnitDebuff(unit, cold)
 		if stack and stack ~= lastCold then
 			if stack > 1 then
-				self:Message("cold", L["cold_message"]:format(stack), "Personal", 62039)
+				self:Message("cold", "Personal", nil, L["cold_message"]:format(stack), 62039)
 				self:Flash("cold", 62039)
 			end
 			lastCold = stack

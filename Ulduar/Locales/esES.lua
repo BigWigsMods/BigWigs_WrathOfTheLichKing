@@ -3,7 +3,6 @@ local L = BigWigs:NewBossLocale("Algalon the Observer", "esES")
 if L then
 	L.engage_trigger = "Tus acciones son ilógicas. Todos los resultados posibles de este encuentro han sido calculados. El Panteón recibirá el mensaje del Observador más allá del resultado."
 
-	L.punch_message = "%2$dx Cambiar de fase en %1$s"
 	L.smash_message = "¡Machaque cósmico inminente!"
 	L.blackhole_message = "¡Hoyo negro %d!"
 	L.bigbang_bar = "Próximo Big Bang"
@@ -55,7 +54,6 @@ if L then
 	L.tree_message = "¡Arbol vivo!"
 
 	L.fury_message = "Furia"
-	L.fury_other = "Furia: %s"
 
 	L.tremor_warning = "¡Tremor terrenal inminente!"
 	L.tremor_bar = "~Próximo Tremor terrenal"
@@ -86,14 +84,7 @@ end
 L = BigWigs:NewBossLocale("Ignis the Furnace Master", "esES")
 if L then
 	L.engage_trigger = "¡Gusanos insolentes! ¡Vuestra sangre templará las armas que recuperarán este mundo!"
-
-	L.construct_message = "¡Add inminente!"
-	L.construct_bar = "Próximo add"
 	L.brittle_message = "¡El ensamblaje es frágil!"
-	L.flame_bar = "~Caños de llamas CD"
-	L.scorch_message = "¡Agostar en TI!"
-	L.scorch_soon = "¡Agostar en ~5seg!"
-	L.scorch_bar = "Próximo agostar"
 end
 
 L = BigWigs:NewBossLocale("The Iron Council", "esES")
@@ -102,16 +93,10 @@ if L then
 	L.engage_trigger2 = "Solo una aniquilación total y absoluta bastará."
 	L.engage_trigger3 = "Ya seáis los mayores mequetrefes o los mayores héroes del mundo, seguís siendo mortales."
 
-	L.overload_message = "¡Sobrecarga en 6seg!"
-	L.death_message = "¡Runa de Muerte en TI!"
 	L.summoning_message = "¡Elementales inminentes!"
 
 	L.chased_other = "¡%s está siendo perseguido!"
 	L.chased_you = "¡TU estás siendo perseguido!"
-
-	L.shield_message = "¡Escudo de runas!"
-
-	L.council_dies = "%s muerto"
 end
 
 L = BigWigs:NewBossLocale("Kologarn", "esES")
@@ -130,11 +115,6 @@ if L then
 	L.eyebeam = "Haz ocular enfocado"
 	L.eyebeam_desc = "Avisa quien tiene el Haz ocular enfocado."
 	L.eyebeam_trigger = "sus ojos en ti"
-	L.eyebeam_message = "Haz ocular: %s"
-	L.eyebeam_bar = "~Haz ocular"
-	L.eyebeam_you = "¡Haz ocular en TI!"
-
-	L.armor_message = "%2$dx Aplastar en %1$s"
 end
 
 L = BigWigs:NewBossLocale("Flame Leviathan", "esES")

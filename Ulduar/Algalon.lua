@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Algalon the Observer", 529)
 if not mod then return end
 mod:RegisterEnableMob(32871)
-mod.toggleOptions = {"stages", 64412, 62301, 64122, 64443, "berserk", "bosskill"}
+mod.toggleOptions = {"stages", 64412, 64597, 64122, 64443, "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -22,7 +22,6 @@ local L = mod:NewLocale("enUS", true)
 if L then
 	L.engage_trigger = "Your actions are illogical. All possible results for this encounter have been calculated. The Pantheon will receive the Observer's message regardless of outcome."
 
-	L.punch_message = "%2$dx Phase Punch on %1$s"
 	L.smash_message = "Incoming Cosmic Smash!"
 	L.blackhole_message = "Black Hole %d!"
 	L.bigbang_bar = "Next Big Bang"
@@ -57,10 +56,10 @@ function mod:OnEngage()
 	local _, _, _, text = GetWorldStateUIInfo(1)
 	local num = tonumber((text or ""):match("(%d+)") or nil)
 	if num == 60 then offset = 19 end
-	self:Bar("stages", CL["phase"]:format(1), 8+offset, "INV_Gizmo_01")
-	self:Bar(64443, 64443, 98+offset, 64443) -- Big Bang
-	self:DelayedMessage(64443, 93+offset, L["bigbang_soon"], "Attention")
-	self:Bar(62301, 62301, 33+offset, 64597) -- Cosmic Smash
+	self:Bar("stages", 8+offset, CL["phase"]:format(1), "INV_Gizmo_01")
+	self:Bar(64443, 98+offset) -- Big Bang
+	self:DelayedMessage(64443, 93+offset, "Attention", L["bigbang_soon"])
+	self:Bar(64597, 33+offset) -- Cosmic Smash
 	self:Berserk(360+offset)
 end
 
@@ -72,37 +71,37 @@ function mod:UNIT_HEALTH_FREQUENT(unit)
 	if self:MobId(UnitGUID(unit)) == 32871 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 21 then
-			self:Message("stages", CL["soon"]:format(CL["phase"]:format(2)), "Positive")
+			self:Message("stages", "Positive", nil, CL["soon"]:format(CL["phase"]:format(2)), false)
 			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 		end
 	end
 end
 
 function mod:Punch(args)
-	self:Bar(args.spellId, args.spellName, 15, args.spellId)
+	self:Bar(args.spellId, 15)
 end
 
 function mod:PunchCount(args)
 	if args.amount >= 4 then
-		self:TargetMessage(args.spellId, L["punch_message"], args.destName, "Urgent", args.spellId, "Alert", args.amount)
+		self:StackMessage(args.spellId, args.destName, args.amount, "Urgent", "Alert")
 	end
 end
 
 function mod:Smash(args)
-	self:Message(62301, L["smash_message"], "Attention", 64597, "Info")
-	self:Bar(62301, L["smash_message"], 5, 64597)
-	self:Bar(62301, args.spellName, 25, 64597)
+	self:Message(64597, "Attention", "Info", L["smash_message"], 64597)
+	self:Bar(64597, 5, L["smash_message"], 64597)
+	self:Bar(64597, 25, args.spellName, 64597)
 end
 
-function mod:BlackHole(args)
+function mod:BlackHole()
 	blackholes = blackholes + 1
-	self:Message(64122, L["blackhole_message"]:format(blackholes), "Positive", args.spellId)
+	self:Message(64122, "Positive", nil, L["blackhole_message"]:format(blackholes))
 end
 
-function mod:BigBang(args)
-	self:Message(64443, args.spellName, "Important", 64443, "Alarm")
-	self:Bar(64443, args.spellName, 8, 64443)
-	self:Bar(64443, L["bigbang_bar"], 90, 64443)
-	self:DelayedMessage(64443, 85, L["bigbang_soon"], "Attention")
+function mod:BigBang()
+	self:Message(64443, "Important", "Alarm")
+	self:Bar(64443, 8)
+	self:Bar(64443, 90, L["bigbang_bar"])
+	self:DelayedMessage(64443, 85, "Attention", L["bigbang_soon"])
 end
 

@@ -3,7 +3,6 @@ local L = BigWigs:NewBossLocale("Algalon the Observer", "zhCN")
 if L then
 	L.engage_trigger = "你们的行动不合逻辑。这场战斗所有可能产生的结果都已被计算在内。无论结果如何，万神殿都会收到观察者发出的信息。"
 
-	L.punch_message = "相位冲压%2$d层：>%1$s<！"
 	L.smash_message = "即将 宇宙重击！"
 	L.blackhole_message = "黑洞爆炸：>%dx< 出现！"
 	L.bigbang_bar = "<下一大爆炸>"
@@ -55,7 +54,6 @@ if L then
 	L.tree_message = "艾欧娜尔的礼物 出现！"
 
 	L.fury_message = "自然之怒"
-	L.fury_other = "自然之怒：>%s<！"
 
 	L.tremor_warning = "即将 大地震颤！"
 	L.tremor_bar = "<下一大地震颤>"
@@ -86,14 +84,7 @@ end
 L = BigWigs:NewBossLocale("Ignis the Furnace Master", "zhCN")
 if L then
 	L.engage_trigger = "大胆！今天就要以尔等的鲜血，为曾用来改造这个世界的武器淬火"
-
-	L.construct_message = "即将 铁铸像！"
-	L.construct_bar = "<下一铸像>"
 	L.brittle_message = "铁铸像 - 脆弱！"
-	L.flame_bar = "<烈焰喷射 冷却>"
-	L.scorch_message = ">你< 灼烧！"
-	L.scorch_soon = "约5秒后，灼烧！"
-	L.scorch_bar = "<下一灼烧>"
 end
 
 L = BigWigs:NewBossLocale("The Iron Council", "zhCN")
@@ -102,16 +93,10 @@ if L then
 	L.engage_trigger2 = "只有把你们全部消灭才能解恨。"
 	L.engage_trigger3 = "任你是天下最厉害的恶棍，还是最强大的英雄，都只不过是凡人之躯。"
 
-	L.overload_message = "6秒后，过载！"
-	L.death_message = ">你< 死亡符文！"
 	L.summoning_message = "闪电元素即将出现！"
 
 	L.chased_other = "闪电之藤：>%s<！"
 	L.chased_you = ">你< 闪电之藤！"
-
-	L.shield_message = "符文之盾！"
-
-	L.council_dies = "%s被击败了！"
 end
 
 L = BigWigs:NewBossLocale("Kologarn", "zhCN")
@@ -130,11 +115,6 @@ if L then
 	L.eyebeam = "聚焦视线"
 	L.eyebeam_desc = "当玩家中了聚焦视线时发出警报。"
 	L.eyebeam_trigger = "科隆加恩在注视着你！"
-	L.eyebeam_message = "聚焦视线：>%s<！"
-	L.eyebeam_bar = "<聚焦视线>"
-	L.eyebeam_you = ">你< 聚焦视线！"
-
-	L.armor_message = "粉碎护甲%2$d层：>%1$s<！"
 end
 
 L = BigWigs:NewBossLocale("Flame Leviathan", "zhCN")

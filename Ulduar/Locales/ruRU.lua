@@ -3,7 +3,6 @@ local L = BigWigs:NewBossLocale("Algalon the Observer", "ruRU")
 if L then
 	L.engage_trigger = "Ваши действия нелогичны. Все возможные исходы этой схватки просчитаны. Пантеон получит сообщение от Наблюдателя в любом случае."
 
-	L.punch_message = "%2$dx фазовых удара на |3-5(%1$s)"
 	L.smash_message = "Наступление Кары небесной!"
 	L.blackhole_message = "Появление черной дыры %d"
 	L.bigbang_bar = "~Суровый удар"
@@ -28,7 +27,7 @@ if L then
 	L.sonic_bar = "~Визг"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("Freya", "ruRU")
+L = BigWigs:NewBossLocale("Freya", "ruRU")
 if L then
 	L.engage_trigger1 = "Нужно защитить Оранжерею!"
 	L.engage_trigger2 = "Древни, дайте мне силы!"
@@ -53,7 +52,6 @@ if L then
 	L.tree_message = "Появление Дара Эонара!"
 
 	L.fury_message = "Гнев"
-	L.fury_other = "Гнев на: |3-5(%s)"
 
 	L.tremor_warning = "Скоро Дрожание земли!"
 	L.tremor_bar = "~Дрожание земли"
@@ -64,7 +62,7 @@ if L then
 	L.end_trigger = "Он больше не властен надо мной. Мой взор снова ясен. Благодарю вас, герои."
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("Hodir", "ruRU")
+L = BigWigs:NewBossLocale("Hodir", "ruRU")
 if L then
 	L.engage_trigger = "Вы будете наказаны за это вторжение!"
 
@@ -81,38 +79,25 @@ if L then
 	L.end_trigger = "Наконец-то я... свободен от его оков…"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("Ignis the Furnace Master", "ruRU")
+L = BigWigs:NewBossLocale("Ignis the Furnace Master", "ruRU")
 if L then
 	L.engage_trigger = "Дерзкие глупцы! Ваша кровь закалит оружие, которым был завоеван этот мир!"
-
-	L.construct_message = "Задействовать создание!"
-	L.construct_bar = "Следующее создание"
 	L.brittle_message = "Создание подверглось Ломкости!"
-	L.flame_bar = "~перезарядка струи"
-	L.scorch_message = "Ожог на ВАС!"
-	L.scorch_soon = "Ожог через ~5сек!"
-	L.scorch_bar = "Следующий Ожог"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("The Iron Council", "ruRU")
+L = BigWigs:NewBossLocale("The Iron Council", "ruRU")
 if L then
 	L.engage_trigger1 = "Чужаки! Вам не одолеть Железное Собрание!"
 	L.engage_trigger2 = "Я буду спокоен, лишь когда окончательно истреблю вас."
 	L.engage_trigger3 = "Кто бы вы ни были - жалкие бродяги или великие герои... Вы всего лишь смертные!"
 
-	L.overload_message = "Взрыв через 6сек!"
-	L.death_message = "На ВАС Руна СМЕРТИ!"
 	L.summoning_message = "Руна призыва - приход Элементалей!"
 
 	L.chased_other = "Преследует |3-3(%s)!"
 	L.chased_you = "ВАС преследуют!"
-
-	L.shield_message = "Применён Рунический щит!"
-
-	L.council_dies = "%s умер"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("Kologarn", "ruRU")
+L = BigWigs:NewBossLocale("Kologarn", "ruRU")
 if L then
 	L.arm = "Уничтожение рук"
 	L.arm_desc = "Сообщать о смерти левой и правой руки."
@@ -128,14 +113,9 @@ if L then
 	L.eyebeam = "Сосредоточенный взгляд"
 	L.eyebeam_desc = "Сообщать кто попал под воздействие Сосредоточенный взгляд."
 	L.eyebeam_trigger = "Кологарн устремляет на вас свой взгляд!"
-	L.eyebeam_message = "Взгляд: %s"
-	L.eyebeam_bar = "~Взгляд"
-	L.eyebeam_you = "Взгляд на ВАС!"
-
-	L.armor_message = "%2$dx Хруста на |3-5(%1$s)"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("Flame Leviathan", "ruRU")
+L = BigWigs:NewBossLocale("Flame Leviathan", "ruRU")
 if L then
 	L.engage = "Сообщать о начале боя"
 	L.engage_desc = "Сообщать о начале боя с Огненным Левиафаном."
@@ -150,7 +130,7 @@ if L then
 	L.shutdown_message = "Отключение системы!"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("Mimiron", "ruRU")
+L = BigWigs:NewBossLocale("Mimiron", "ruRU")
 if L then
 	L.phase = "Фазы"
 	L.phase_desc = "Сообщать о смене фаз."
@@ -187,7 +167,7 @@ if L then
 	L.end_trigger = "^Очевидно, я совершил небольшую ошибку в расчетах."
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("Razorscale", "ruRU")
+L = BigWigs:NewBossLocale("Razorscale", "ruRU")
 if L then
 	L.phase = "Фазы"
 	L.phase_desc = "Сообщать когда Острокрылая меняет фазы."
@@ -214,7 +194,7 @@ if L then
 	L.harpoon_nextbar = "Гарпун (%d)"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("Thorim", "ruRU")
+L = BigWigs:NewBossLocale("Thorim", "ruRU")
 if L then
 	L["Runic Colossus"] = "Рунический колосс" -- For the runic barrier emote.
 
@@ -243,7 +223,7 @@ if L then
 	L.end_trigger = "Придержите мечи! Я сдаюсь."
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("General Vezax", "ruRU")
+L = BigWigs:NewBossLocale("General Vezax", "ruRU")
 if L then
 	L.engage_trigger = "Ваша смерть возвестит новую эру страданий!"
 
@@ -272,7 +252,7 @@ if L then
 	L.mark_message_other = "Метка на: |3-5(%s)!"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("XT-002 Deconstructor", "ruRU")
+L = BigWigs:NewBossLocale("XT-002 Deconstructor", "ruRU")
 if L then
 	L.exposed_warning = "Скоро сердце станет уязвимо!"
 	L.exposed_message = "Сердце уязвимо!"
@@ -284,7 +264,7 @@ if L then
 	L.tantrum_bar = "~Раскаты ярости"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("Yogg-Saron", "ruRU")
+L = BigWigs:NewBossLocale("Yogg-Saron", "ruRU")
 if L then
 	L["Crusher Tentacle"] = "Тяжелое щупальце"
 	L["The Observation Ring"] = "Круг Наблюдения"

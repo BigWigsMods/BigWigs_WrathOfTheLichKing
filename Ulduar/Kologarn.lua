@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Kologarn", 529)
+local mod, CL = BigWigs:NewBoss("Kologarn", 529)
 if not mod then return end
 mod:RegisterEnableMob(32930)
 mod.toggleOptions = { 64290, "shockwave", {"eyebeam", "ICON", "FLASH", "SAY"}, "arm", 63355, "bosskill"}
@@ -12,7 +12,7 @@ mod.toggleOptions = { 64290, "shockwave", {"eyebeam", "ICON", "FLASH", "SAY"}, "
 --
 
 local grip = mod:NewTargetList()
-local pName = UnitName("player")
+local eyeBeam = mod:SpellName(40620)
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -34,12 +34,6 @@ if L then
 	L.eyebeam = "Focused Eyebeam"
 	L.eyebeam_desc = "Warn who gets Focused Eyebeam."
 	L.eyebeam_trigger = "his eyes on you"
-	L.eyebeam_message = "Eyebeam: %s"
-	L.eyebeam_bar = "~Eyebeam"
-	L.eyebeam_you = "Eyebeam on YOU!"
-	L.eyebeam_say = "Eyebeam"
-
-	L.armor_message = "%2$dx Crunch on %1$s"
 end
 L = mod:GetLocale()
 
@@ -52,7 +46,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED_DOSE", "Armor", 63355, 64002)
 	self:Log("UNIT_DIED", "Deaths")
 
-	self:Death("Deaths", 32933, 32934, 32930)
+	self:Death("Deaths", 32933, 32934)
+	self:Death("Win", 32930)
 
 	self:RegisterEvent("RAID_BOSS_WHISPER")
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
@@ -66,59 +61,58 @@ end
 
 function mod:Armor(player, spellId, _, _, _, stack)
 	if stack > 1 then
-		self:TargetMessage(63355, L["armor_message"], player, "Urgent", spellId, "Info", stack)
+		self:StackMessage(63355,  player, stack, "Urgent", "Info")
 	end
 end
 
 do
-	local id, name, handle = nil, nil, nil
+	local handle = nil
 	local function gripWarn()
-		mod:TargetMessage(64290, name, grip, "Attention", id, "Alert")
-		mod:Bar(64290, name, 10, id)
+		mod:TargetMessage(64290, grip, "Attention", "Alert")
+		mod:Bar(64290, 10)
+		handle = nil
 	end
 
-	function mod:Grip(player, spellId, _, _, spellName)
-		id, name = spellId, spellName
-		grip[#grip + 1] = player
-		self:CancelTimer(handle)
-		handle = self:ScheduleTimer(gripWarn, 0.2)
+	function mod:Grip(args)
+		grip[#grip + 1] = args.destName
+		if not handle then
+			handle = self:ScheduleTimer(gripWarn, 0.2)
+		end
 	end
 end
 
 function mod:RAID_BOSS_WHISPER(event, msg)
 	if msg:find(L["eyebeam_trigger"]) then
-		self:Message("eyebeam", L["eyebeam_you"], "Personal", 63976, "Long")
+		self:Message("eyebeam", "Personal", "Long", CL["you"]:format(eyeBeam), 63976)
 		self:Flash("eyebeam", 63976)
-		self:Say("eyebeam", 40620) -- Eyebeam
+		self:Say("eyebeam", eyeBeam)
 	end
-	self:Sync("EyeBeamWarn", pName)
+	self:Sync("EyeBeamWarn")
 end
 
-function mod:Deaths(guid)
-	if guid == 32933 then
-		self:Message("arm", L["left_dies"], "Attention")
-		self:Bar("arm", L["left_wipe_bar"], 50, 2062)
-	elseif guid == 32934 then
-		self:Message("arm", L["right_dies"], "Attention")
-		self:Bar("arm", L["right_wipe_bar"], 50, 2062)
-	else
-		self:Win()
+function mod:Deaths(args)
+	if args.mobId == 32933 then
+		self:Message("arm", "Attention", nil, L["left_dies"])
+		self:Bar("arm", 50, L["left_wipe_bar"], 2062)
+	elseif args.mobId == 32934 then
+		self:Message("arm", "Attention", nil, L["right_dies"])
+		self:Bar("arm", 50, L["right_wipe_bar"], 2062)
 	end
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 	if msg == L["shockwave_trigger"] then
-		self:Message("shockwave", L["shockwave"], "Attention", 63982)
-		self:Bar("shockwave", L["shockwave"], 21, 63982)
+		self:Message("shockwave", "Attention", nil, L["shockwave"], 63982)
+		self:Bar("shockwave", 21, L["shockwave"], 63982)
 	end
 end
 
 function mod:OnSync(sync, rest, nick)
-	if sync == "EyeBeamWarn" and rest then
-		self:TargetMessage("eyebeam", GetSpellInfo(40620), rest, "Positive", 63976, "Info") --40620 = "Eyebeam"
-		self:Bar("eyebeam", L["eyebeam_message"]:format(rest), 11, 63976)
-		self:Bar("eyebeam", L["eyebeam_bar"], 20, 63976)
-		self:PrimaryIcon("eyebeam", rest)
+	if sync == "EyeBeamWarn" and nick then
+		self:TargetMessage("eyebeam", nick, "Positive", "Info", eyeBeam, 63976)
+		self:TargetBar("eyebeam", 11, nick, eyeBeam, 63976)
+		self:CDBar("eyebeam", 20, eyeBeam, 63976)
+		self:PrimaryIcon("eyebeam", nick)
 	end
 end
 

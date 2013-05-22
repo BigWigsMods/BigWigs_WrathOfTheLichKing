@@ -64,7 +64,7 @@ if L then
 	L.gormok = "Гормок Пронзающий Бивень"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("Faction Champions", "ruRU")
+L = BigWigs:NewBossLocale("Faction Champions", "ruRU")
 if L then
 	L.enable_trigger = "В следующем бою вы встретитесь с могучими рыцарями Серебряного Авангарда! Лишь победив их, вы заслужите достойную награду."
 	L.defeat_trigger = "Пустая и горькая победа. После сегодняшних потерь мы стали слабее как целое. Кто еще, кроме Короля-лича, выиграет от подобной глупости? Пали великие воины. И ради чего? Истинная опасность еще впереди – нас ждет битва с  Королем-личом."
@@ -77,7 +77,7 @@ if L then
 	L["Bloodlust on champions!"] = "Жажда крови на чемпионах!"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("Lord Jaraxxus", "ruRU")
+L = BigWigs:NewBossLocale("Lord Jaraxxus", "ruRU")
 if L then
 	L.enable_trigger = "Ничтожный гном! Тебя погубит твоя самоуверенность!"
 
@@ -105,7 +105,7 @@ if L then
 	L.kiss_interrupted = "Прерывание!"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("The Twin Val'kyr", "ruRU")
+L = BigWigs:NewBossLocale("The Twin Val'kyr", "ruRU")
 if L then
 	L.engage_trigger1 = "Во имя темного повелителя. Во имя Короля-лича. Вы. Умрете."
 

@@ -14,7 +14,6 @@ mod.toggleOptions = {"vapor", {"vaporstack", "FLASH"}, {62660, "ICON", "SAY", "F
 local vaporCount = 1
 local surgeCount = 1
 local lastVapor = nil
-local vapor = GetSpellInfo(63322)
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -76,7 +75,7 @@ function mod:OnBossEnable()
 	self:Emote("Vapor", L["vapor_trigger"])
 	self:Emote("Animus", L["animus_trigger"])
 
-	self:RegisterEvent("UNIT_AURA")
+	self:RegisterUnitEvent("UNIT_AURA", nil, "player")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Yell("Engage", L["engage_trigger"])
 end
@@ -86,7 +85,7 @@ function mod:OnEngage()
 	vaporCount = 1
 	surgeCount = 1
 	self:Berserk(600)
-	self:Bar(62662, L["surge_bar"]:format(surgeCount), 60, 62662)
+	self:Bar(62662, 60, L["surge_bar"]:format(surgeCount))
 end
 
 --------------------------------------------------------------------------------
@@ -94,23 +93,22 @@ end
 --
 
 function mod:Vapor()
-	self:Message("vapor", L["vapor_message"]:format(vaporCount), "Positive", 63323)
+	self:Message("vapor", "Positive", nil, L["vapor_message"]:format(vaporCount), 63323)
 	vaporCount = vaporCount + 1
 	if vaporCount < 7 then
-		self:Bar("vapor", L["vapor_bar"]:format(vaporCount), 30, 63323)
+		self:Bar("vapor", 30, L["vapor_bar"]:format(vaporCount), 63323)
 	end
 end
 
 function mod:Animus()
-	self:Message("animus", L["animus_message"], "Important", 63319)
+	self:Message("animus", "Important", nil, L["animus_message"], 63319)
 end
 
-function mod:UNIT_AURA(event, unit)
-	if unit and unit ~= "player" then return end
-	local _, _, _, stack = UnitDebuff("player", vapor)
+function mod:UNIT_AURA()
+	local _, _, _, stack = UnitDebuff("player", self:SpellName(63322))
 	if stack and stack ~= lastVapor then
 		if stack > 5 then
-			self:Message("vaporstack", L["vaporstack_message"]:format(stack), "Personal", 63322)
+			self:Message("vaporstack", "Personal", nil, L["vaporstack_message"]:format(stack), 63322)
 			self:Flash("vaporstack", 63322)
 		end
 		lastVapor = stack
@@ -118,7 +116,7 @@ function mod:UNIT_AURA(event, unit)
 end
 
 do
-	local id, name, handle = nil, nil, nil
+	local handle = nil
 	local function scanTarget()
 		local bossId = mod:GetUnitIdByGUID(33271)
 		if not bossId then return end
@@ -128,38 +126,38 @@ do
 				mod:Flash(62660)
 				mod:Say(62660, L["crash_say"])
 			end
-			mod:TargetMessage(62660, name, target, "Personal", id, "Alert")
+			mod:TargetMessage(62660, target, "Personal", "Alert")
 			mod:SecondaryIcon(62660, target)
 		end
 		handle = nil
 	end
 
-	function mod:Crash(player, spellId, _, _, spellName)
-		id, name = spellId, spellName
-		self:CancelTimer(handle)
-		handle = self:ScheduleTimer(scanTarget, 0.1)
+	function mod:Crash()
+		if not handle then
+			handle = self:ScheduleTimer(scanTarget, 0.1)
+		end
 	end
 end
 
-function mod:Mark(player, spellId)
-	self:TargetMessage(63276, L["mark_message"], player, "Personal", spellId, "Alert")
-	if UnitIsUnit(player, "player") then self:Flash(63276) end
-	self:Bar(63276, L["mark_message_other"]:format(player), 10, spellId)
-	self:PrimaryIcon(63276, player)
+function mod:Mark(args)
+	self:TargetMessage(args.spellId, args.destName, "Personal", "Alert", L["mark_message"])
+	if self:Me(args.destGUID) then self:Flash(63276) end
+	self:Bar(args.spellId, 10, L["mark_message_other"]:format(args.destName))
+	self:PrimaryIcon(args.spellId, args.destName)
 end
 
-function mod:Flame(_, spellId, _, _, spellName)
-	self:Message(62661, spellName, "Urgent", spellId)
+function mod:Flame(args)
+	self:Message(args.spellId, "Urgent")
 end
 
-function mod:Surge(_, spellId)
-	self:Message(62662, L["surge_message"]:format(surgeCount), "Important", spellId)
-	self:Bar(62662, L["surge_cast"]:format(surgeCount), 3, spellId)
+function mod:Surge(args)
+	self:Message(args.spellId, "Important", nil, L["surge_message"]:format(surgeCount))
+	self:Bar(args.spellId, 3, L["surge_cast"]:format(surgeCount))
 	surgeCount = surgeCount + 1
-	self:Bar(62662, L["surge_bar"]:format(surgeCount), 60, spellId)
+	self:Bar(args.spellId, 60, L["surge_bar"]:format(surgeCount))
 end
 
-function mod:SurgeGain(_, spellId, _, _, spellName)
-	self:Bar(62662, spellName, 10, spellId)
+function mod:SurgeGain(args)
+	self:Bar(args.spellId, 10)
 end
 

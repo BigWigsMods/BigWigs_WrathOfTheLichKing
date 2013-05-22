@@ -67,31 +67,31 @@ end
 --
 
 function mod:Sonic(args)
-	self:Message(64422, args.spellName, "Attention", args.spellId)
-	self:Bar(64422, L["sonic_bar"], 28, args.spellId)
+	self:Message(64422, "Attention")
+	self:Bar(64422, 28, L["sonic_bar"])
 end
 
 function mod:Defender(args)
-	self:Message("defender", L["defender_message"]:format(count), "Attention", args.spellId)
+	self:Message("defender", "Attention", nil, L["defender_message"]:format(count), args.spellId)
 end
 
 function mod:DefenderKill(args)
 	count = count - 1
-	self:Bar("defender", L["defender_message"]:format(count), 34, args.spellId)
+	self:Bar("defender", 34, L["defender_message"]:format(count), args.spellId)
 end
 
 function mod:Swarm(args)
-	self:TargetMessage(args.spellId, L["swarm_message"], args.destName, "Attention", args.spellId)
-	self:Bar(args.spellId, L["swarm_bar"], 37, args.spellId)
+	self:TargetMessage(args.spellId, args.destName, "Attention", nil, L["swarm_message"])
+	self:Bar(args.spellId, 37, L["swarm_bar"])
 end
 
 function mod:Fear(args)
-	self:Message(args.spellId, L["fear_message"], "Urgent", args.spellId)
-	self:Bar(args.spellId, L["fear_bar"], 35, args.spellId)
-	self:DelayedMessage(args.spellId, 32, L["fear_warning"], "Attention")
+	self:Message(args.spellId, "Urgent", nil, L["fear_message"])
+	self:Bar(args.spellId, 35, L["fear_bar"])
+	self:DelayedMessage(args.spellId, 32, "Attention", L["fear_warning"])
 end
 
-function mod:Sentinel(args)
-	self:Message(64389, args.spellName, "Important", args.spellId)
+function mod:Sentinel()
+	self:Message(64389, "Important")
 end
 

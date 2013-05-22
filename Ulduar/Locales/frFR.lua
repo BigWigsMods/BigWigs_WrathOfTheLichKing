@@ -3,7 +3,6 @@ local L = BigWigs:NewBossLocale("Algalon the Observer", "frFR")
 if L then
 	L.engage_trigger = "Vos actions sont illogiques. Tous les résultats possibles de cette rencontre ont été calculés. Le Panthéon recevra le message de l'Observateur quelle que soit l'issue."
 
-	L.punch_message = "%2$dx Coups de poing phasiques sur %1$s"
 	L.smash_message = "Arrivée d'un Choc cosmique !"
 	L.blackhole_message = "Trou noir %d !"
 	L.bigbang_soon = "Big Bang imminent !"
@@ -54,7 +53,6 @@ if L then
 	L.tree_message = "Un arbre pousse !"
 
 	L.fury_message = "Fureur de la nature"
-	L.fury_other = "Fureur : %s"
 
 	L.tremor_warning = "Tremblement de terre imminent !"
 	L.tremor_bar = "~Prochain Tremblement"
@@ -85,14 +83,7 @@ end
 L = BigWigs:NewBossLocale("Ignis the Furnace Master", "frFR")
 if L then
 	L.engage_trigger = "Chiots insolents ! Les lames qui serviront à reconquérir ce monde seront trempées dans votre sang !"
-
-	L.construct_message = "Assemblage activé !"
-	L.construct_bar = "Prochain Assemblage"
 	L.brittle_message = "Un Assemblage est devenu Fragile !"
-	L.flame_bar = "~Recharge Flots"
-	L.scorch_message = "Brûlure sur VOUS !"
-	L.scorch_soon = "Brûlure dans ~5 sec. !"
-	L.scorch_bar = "Prochaine Brûlure"
 end
 
 L = BigWigs:NewBossLocale("The Iron Council", "frFR")
@@ -101,16 +92,10 @@ if L then
 	L.engage_trigger2 = "Seule votre extermination complète me conviendra."
 	L.engage_trigger3 = "Que vous soyez les plus grandes punaises ou les plus grands héros de ce monde, vous n'êtes jamais que des mortels."
 
-	L.overload_message = "Surcharge dans 6 sec. !"
-	L.death_message = "Rune de mort sur VOUS !"
 	L.summoning_message = "Arrivée des élémentaires !"
 
 	L.chased_other = "%s est poursuivi(e) !"
 	L.chased_you = "VOUS êtes poursuivi(e) !"
-
-	L.shield_message = "Bouclier des runes !"
-
-	L.council_dies = "%s éliminé"
 end
 
 L = BigWigs:NewBossLocale("Kologarn", "frFR")
@@ -129,11 +114,6 @@ if L then
 	L.eyebeam = "Rayon de l'oeil"
 	L.eyebeam_desc = "Prévient quand un Rayon de l'oeil focalisé est incanté."
 	L.eyebeam_trigger = "%s concentre son regard sur vous !"
-	L.eyebeam_message = "Rayon : %s"
-	L.eyebeam_bar = "~Rayon de l'oeil"
-	L.eyebeam_you = "Rayon de l'oeil sur VOUS !"
-
-	L.armor_message = "%2$dx broyages d'armure sur %1$s"
 end
 
 L = BigWigs:NewBossLocale("Flame Leviathan", "frFR")

@@ -74,7 +74,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Spinning", 63414)
 	self:Log("SPELL_SUMMON", "Magnetic", 64444)
 	self:Log("SPELL_SUMMON", "Bomb", 63811)
-	self:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START")
+	self:RegisterUnitEvent("UNIT_SPELLCAST_CHANNEL_START", nil, "target", "focus")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:RegisterEvent("CHAT_MSG_LOOT")
 	self:Yell("Yells", L["engage_trigger"], L["hardmode_trigger"], L["phase2_trigger"], L["phase3_trigger"], L["phase4_trigger"])
@@ -91,35 +91,35 @@ end
 -- Event Handlers
 --
 
-function mod:Bomb(_, spellId, _, _, spellName)
-	self:Message(63811, L["bomb_message"], "Important", 63811, "Alert")
+function mod:Bomb(args)
+	self:Message(args.spellId, "Important", "Alert", L["bomb_message"])
 end
 
-function mod:Suppressant(_, spellId, _, _, spellName)
-	self:Message(64570, L["suppressant_warning"], "Important", spellId)
-	self:Bar(64570, spellName, 3, spellId)
+function mod:Suppressant(args)
+	self:Message(args.spellId, "Important", nil, L["suppressant_warning"])
+	self:Bar(args.spellId, 3)
 end
 
-function mod:FBomb(_, spellId, _, _, spellName)
-	self:Message(64623, spellName, "Important", spellId)
-	self:Bar(64623, spellName, 2, spellId)
-	self:Bar(64623, L["fbomb_bar"], 30, spellId)
+function mod:FBomb(args)
+	self:Message(args.spellId, "Important")
+	self:Bar(args.spellId, 2)
+	self:Bar(args.spellId, 30, L["fbomb_bar"])
 end
 
-function mod:Plasma(_, spellId, _, _, spellName)
-	self:Message(62997, L["plasma_warning"], "Important", spellId)
-	self:Bar(62997, L["plasma_warning"], 3, spellId)
-	self:Bar(62997, L["plasma_bar"], 30, spellId)
+function mod:Plasma()
+	self:Message(62997, "Important", nil, L["plasma_warning"])
+	self:Bar(62997, 3, L["plasma_warning"])
+	self:Bar(62997, 30, L["plasma_bar"])
 end
 
-function mod:Shock(_, spellId, _, _, spellName)
-	self:Message(63631, spellName, "Important", spellId)
-	self:Bar(63631, spellName, 3.5, spellId)
-	self:Bar(63631, L["shock_next"], 34, spellId)
+function mod:Shock(args)
+	self:Message(args.spellId, "Important")
+	self:Bar(args.spellId, 3.5)
+	self:Bar(args.spellId, 34, L["shock_next"])
 end
 
-function mod:Spinning(_, spellId)
-	self:Message(63274, L["laser_soon"], "Personal", spellId, "Long")
+function mod:Spinning(args)
+	self:Message(63274, "Personal", "Long", L["laser_soon"], args.spellId)
 	self:Flash(63274)
 end
 
@@ -132,20 +132,20 @@ do
 	end
 end
 
-function mod:Magnetic(_, spellId, _, _, spellName)
-	self:Message(64444, L["magnetic_message"], "Important", spellId)
-	self:Bar(64444, spellName, 15, spellId)
+function mod:Magnetic(args)
+	self:Message(args.spellId, "Important", nil, L["magnetic_message"])
+	self:Bar(args.spellId, 15)
 end
 
 local function start()
 	ishardmode = nil
 	phase = 1
-	mod:Message("phase", L["engage_warning"], "Attention")
-	mod:Bar("phase", L["phase_bar"]:format(phase), 7, "INV_Gizmo_01")
+	mod:Message("phase", "Attention", nil, L["engage_warning"])
+	mod:Bar("phase", 7, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 
-	mod:Bar(63631, L["shock_next"], 30, 63631)
-	mod:Bar(62997, L["plasma_bar"], 20, 62997)
-	mod:DelayedMessage(62997, 17, L["plasma_soon"], "Attention")
+	mod:Bar(63631, 30, L["shock_next"])
+	mod:Bar(62997, 20, L["plasma_bar"])
+	mod:DelayedMessage(62997, 17, "Attention", L["plasma_soon"])
 end
 
 function mod:Yells(msg)
@@ -163,24 +163,24 @@ function mod:Yells(msg)
 		phase = 2
 		self:StopBar(L["plasma_bar"])
 		self:StopBar(L["shock_next"])
-		self:Message("phase", L["phase2_warning"], "Attention")
-		self:Bar("phase", L["phase_bar"]:format(phase), 40, "INV_Gizmo_01")
+		self:Message("phase", "Attention", nil, L["phase2_warning"])
+		self:Bar("phase", 40, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 		if ishardmode then
-			self:Bar(64623, L["fbomb_bar"], 45, 64623)
+			self:Bar(64623, 45, L["fbomb_bar"])
 		end
 		self:CloseProximity()
 	elseif msg:find(L["phase3_trigger"]) then
 		phase = 3
-		self:Message("phase", L["phase3_warning"], "Attention")
-		self:Bar("phase", L["phase_bar"]:format(phase), 25, "INV_Gizmo_01")
+		self:Message("phase", "Attention", nil, L["phase3_warning"])
+		self:Bar("phase", 25, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 	elseif msg:find(L["phase4_trigger"]) then
 		phase = 4
-		self:Message("phase", L["phase4_warning"], "Attention")
-		self:Bar("phase", L["phase_bar"]:format(phase), 25, "INV_Gizmo_01")
+		self:Message("phase", "Attention", nil, L["phase4_warning"])
+		self:Bar("phase", 25, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 		if ishardmode then
-			self:Bar(64623, L["fbomb_bar"], 30, 64623)
+			self:Bar(64623, 30, L["fbomb_bar"])
 		end
-		self:Bar(63631, L["shock_next"], 48, 63631)
+		self:Bar(63631, 48, L["shock_next"])
 	end
 end
 
@@ -188,18 +188,18 @@ do
 	local lootItem = '^' .. LOOT_ITEM:gsub("%%s", "(.-)") .. '$'
 	local lootItemSelf = '^' .. LOOT_ITEM_SELF:gsub("%%s", "(.*)") .. '$'
 	function mod:CHAT_MSG_LOOT(event, msg)
-		local player, item = select(3, msg:find(lootItem))
+		local _, _, player, item = msg:find(lootItem)
 		if not player then
-			item = select(3, msg:find(lootItemSelf))
+			_, _, item = msg:find(lootItemSelf)
 			if item then
-				player = UnitName("player")
+				player = self:UnitName("player")
 			end
 		end
 
 		if type(item) == "string" and type(player) == "string" then
-			local itemLink, itemRarity = select(2, GetItemInfo(item))
+			local _, itemLink, itemRarity = GetItemInfo(item)
 			if itemRarity and itemRarity == 1 and itemLink then
-				local itemId = select(3, itemLink:find("item:(%d+):"))
+				local _, _, itemId = itemLink:find("item:(%d+):")
 				if not itemId then return end
 				itemId = tonumber(itemId:trim())
 				if type(itemId) ~= "number" or itemId ~= 46029 then return end
@@ -211,10 +211,10 @@ end
 
 function mod:OnSync(sync, rest, nick)
 	if sync == "MimiLoot" and rest then
-		self:TargetMessage(64444, GetSpellInfo(64444), rest, "Positive", "INV_Gizmo_KhoriumPowerCore", "Info")
+		self:TargetMessage(64444, rest, "Positive", "Info")
 	elseif sync == "MimiBarrage" then
-		self:Message(63274, L["laser_bar"], "Important", 63274)
-		self:Bar(63274, L["laser_bar"], 60, 63274)
+		self:Message(63274, "Important", nil, L["laser_bar"])
+		self:Bar(63274, 60, L["laser_bar"])
 	end
 end
 

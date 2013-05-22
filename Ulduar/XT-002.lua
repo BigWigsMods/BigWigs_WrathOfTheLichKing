@@ -51,7 +51,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "LightRemoved", 63018, 65121)
 	self:Log("SPELL_CAST_START", "Tantrum", 62776)
 	self:Death("Win", 33293)
-	self:RegisterEvent("UNIT_HEALTH")
+	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
 end
@@ -68,69 +68,69 @@ end
 -- Event Handlers
 --
 
-function mod:Exposed(_, spellId, _, _, spellName)
-	self:Message(63849, L["exposed_message"], "Attention", spellId)
-	self:Bar(63849, spellName, 30, spellId)
+function mod:Exposed(args)
+	self:Message(args.spellId, "Attention", nil, L["exposed_message"])
+	self:Bar(args.spellId, 30)
 end
 
-function mod:Heartbreak(_, spellId, _, _, spellName)
+function mod:Heartbreak()
 	phase = 2
-	self:Message(64193, spellName, "Important", spellId)
+	self:Message(64193, "Important")
 end
 
-function mod:Tantrum(_, spellId, _, _, spellName)
+function mod:Tantrum(args)
 	if phase == 2 then
-		self:Message(62776, spellName, "Attention", spellId)
-		self:Bar(62776, L["tantrum_bar"], 65, spellId)
+		self:Message(args.spellId, "Attention")
+		self:Bar(args.spellId, 65, L["tantrum_bar"])
 	end
 end
 
-function mod:GravityBomb(player, spellId, _, _, spellName)
-	if UnitIsUnit(player, "player") then
+function mod:GravityBomb(args)
+	if self:Me(args.destGUID) then
 		self:OpenProximity("proximity", 10)
 		self:Flash(63024)
 	end
-	self:TargetMessage(63024, spellName, player, "Personal", spellId, "Alert")
-	self:Bar(63024, L["gravitybomb_other"]:format(player), 9, spellId)
-	self:SecondaryIcon(63024, player)
+	self:TargetMessage(63024, args.destName, "Personal", "Alert")
+	self:Bar(63024, 9, L["gravitybomb_other"]:format(args.destName))
+	self:SecondaryIcon(63024, args.destName)
 end
 
-function mod:LightBomb(player, spellId, _, _, spellName)
-	if UnitIsUnit(player, "player") then
+function mod:LightBomb(args)
+	if self:Me(args.destGUID) then
 		self:OpenProximity("proximity", 10)
 		self:Flash(63018)
 	end
-	self:TargetMessage(63018, spellName, player, "Personal", spellId, "Alert")
-	self:Bar(63018, L["lightbomb_other"]:format(player), 9, spellId)
-	self:PrimaryIcon(63018, player)
+	self:TargetMessage(63018, args.destName, "Personal", "Alert")
+	self:Bar(63018, 9, L["lightbomb_other"]:format(args.destName))
+	self:PrimaryIcon(63018, args.destName)
 end
 
-function mod:GravityRemoved(player)
-	if UnitIsUnit(player, "player") then
+function mod:GravityRemoved(args)
+	if self:Me(args.destGUID) then
 		self:CloseProximity()
 	end
-	self:SecondaryIcon(63024, false)
+	self:SecondaryIcon(63024)
 end
 
-function mod:LightRemoved(player)
-	if UnitIsUnit(player, "player") then
+function mod:LightRemoved(args)
+	if self:Me(args.destGUID) then
 		self:CloseProximity()
 	end
-	self:PrimaryIcon(63018, false)
+	self:PrimaryIcon(63018)
 end
 
-function mod:UNIT_HEALTH(event, msg)
-	if phase == 1 and UnitName(msg) == mod.displayName then
-		local health = UnitHealth(msg) / UnitHealthMax(msg) * 100
-		if not exposed1 and health > 86 and health <= 88 then
+function mod:UNIT_HEALTH_FREQUENT(unit)
+	if self:MobId(UnitGUID(unit)) == 33293 then
+		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+		if not exposed1 and hp > 86 and hp <= 88 then
 			exposed1 = true
-			self:Message(63849, L["exposed_warning"], "Attention")
-		elseif not exposed2 and health > 56 and health <= 58 then
+			self:Message(63849, "Attention", nil, L["exposed_warning"])
+		elseif not exposed2 and hp > 56 and hp <= 58 then
 			exposed2 = true
-			self:Message(63849, L["exposed_warning"], "Attention")
-		elseif not exposed3 and health > 26 and health <= 28 then
+			self:Message(63849, "Attention", nil, L["exposed_warning"])
+		elseif not exposed3 and hp > 26 and hp <= 28 then
 			exposed3 = true
-			self:Message(63849, L["exposed_warning"], "Attention")
+			self:Message(63849, "Attention", nil, L["exposed_warning"])
 		end
 	end
 end

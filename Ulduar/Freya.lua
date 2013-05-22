@@ -53,7 +53,6 @@ if L then
 	L.tree_message = "Tree is up!"
 
 	L.fury_message = "Fury"
-	L.fury_other = "Fury: %s"
 
 	L.tremor_warning = "Ground Tremor soon!"
 	L.tremor_bar = "~Next Ground Tremor"
@@ -89,7 +88,7 @@ end
 function mod:OnEngage()
 	phase = 1
 	self:Berserk(600)
-	self:Bar("wave", L["wave_bar"], 11, 35594)
+	self:Bar("wave", 11, L["wave_bar"], 35594)
 end
 
 function mod:VerifyEnable(unit)
@@ -104,29 +103,24 @@ end
 do
 	local handle = nil
 	local root = mod:NewTargetList()
-	local function rootWarn(spellName)
-		mod:TargetMessage(62861, spellName, root, "Attention", 62861, "Info")
+	local function rootWarn()
+		mod:TargetMessage(62861, root, "Attention", "Info")
 		handle = nil
 	end
 	function mod:Root(args)
 		root[#root + 1] = args.destName
 		if not handle then
-			handle = self:ScheduleTimer(rootWarn, 0.2, args.spellName)
+			handle = self:ScheduleTimer(rootWarn, 0.2)
 		end
 	end
 end
 
 do
 	-- XXX Why do we still do this?
-	local _, class = UnitClass("player")
 	local function isCaster()
 		local power = UnitPowerType("player")
-		if power ~= 0 then return end
-		if class == "PALADIN" then
-			local tree = GetSpecialization()
-			local role = GetSpecializationRole(tree)
-			if role ~= "HEALER" then return end
-		end
+		local _, class = UnitClass("player")
+		if power ~= 0 or (class == "PALADIN" and not mod:Healer()) then return end
 		return true
 	end
 
@@ -134,28 +128,27 @@ do
 		local caster = isCaster()
 		local color = caster and "Personal" or "Attention"
 		local sound = caster and "Long" or nil
-		self:Message(62437, args.spellName, color, args.spellId, sound)
+		self:Message(62437, color, sound)
 		if caster then self:Flash(62437) end
+		self:Bar(62437, 2)
 		if phase == 1 then
-			self:Bar(62437, args.spellName, 2, args.spellId)
-			self:Bar(62437, L["tremor_bar"], 30, args.spellId)
-			self:DelayedMessage(62437, 26, L["tremor_warning"], "Attention")
+			self:Bar(62437, 30, L["tremor_bar"])
+			self:DelayedMessage(62437, 26, "Attention", L["tremor_warning"])
 		elseif phase == 2 then
-			self:Bar(62437, args.spellName, 2, args.spellId)
-			self:Bar(62437, L["tremor_bar"], 23, args.spellId)
-			self:DelayedMessage(62437, 20, L["tremor_warning"], "Attention")
+			self:Bar(62437, 23, L["tremor_bar"])
+			self:DelayedMessage(62437, 20, "Attention", L["tremor_warning"])
 		end
 	end
 end
 
 do
 	local handle = nil
-	local function scanTarget(spellName)
+	local function scanTarget()
 		local bossId = mod:GetUnitIdByGUID(32906)
 		if not bossId then return end
 		local target = UnitName(bossId .. "target")
 		if target then
-			mod:TargetMessage(62623, spellName, target, "Attention", 62623)
+			mod:TargetMessage(62623, target, "Attention")
 			mod:SecondaryIcon(62623, target)
 		end
 		handle = nil
@@ -163,24 +156,24 @@ do
 
 	function mod:Sunbeam(args)
 		if not handle then
-			handle = self:ScheduleTimer(scanTarget, 0.1, args.spellName)
+			handle = self:ScheduleTimer(scanTarget, 0.1)
 		end
 	end
 end
 
 function mod:Fury(args)
-	if UnitIsUnit(args.destName, "player") then
+	if self:Me(args.destGUID) then
 		self:OpenProximity("proximity", 10)
 		self:Flash(62589)
 	end
-	self:TargetMessage(62589, L["fury_message"], args.destName, "Personal", args.spellId, "Alert")
-	self:Bar(62589, L["fury_other"]:format(args.destName), 10, args.spellId)
+	self:TargetMessage(62589, args.destName, "Personal", "Alert", L["fury_message"])
+	self:TargetBar(62589, 10, args.destName, L["fury_message"])
 	self:PrimaryIcon(62589, args.destName)
 end
 
 function mod:FuryRemove(args)
-	self:StopBar(L["fury_other"]:format(args.destName))
-	if UnitIsUnit(args.destName, "player") then
+	self:StopBar(L["fury_message"], args.destName)
+	if self:Me(args.destGUID) then
 		self:CloseProximity()
 	end
 end
@@ -188,16 +181,16 @@ end
 function mod:AttunedRemove()
 	phase = 2
 	self:StopBar(L["wave_bar"])
-	self:Message("phase", L["phase2_message"], "Important")
+	self:Message("phase", "Important", nil, L["phase2_message"], false)
 end
 
 do
 	local last = nil
 	function mod:Energy(args)
-		if UnitIsUnit(args.destName, "player") then
+		if self:Me(args.destGUID) then
 			local t = GetTime()
 			if not last or (t > last + 4) then
-				self:Message(62865, L["energy_message"], "Personal", 62451, "Alarm")
+				self:Message(62865, "Personal", "Alarm", L["energy_message"], 62451)
 				self:Flash(62865)
 				last = t
 			end
@@ -207,20 +200,20 @@ end
 
 do
 	local last = nil
-	function mod:EnergySpawns(args)
+	function mod:EnergySpawns()
 		local t = GetTime()
 		if not last or (t > last + 10) then
-			self:Message(62865, L["sunbeam_message"], "Important", args.spellId)
+			self:Message(62865, "Important", nil, L["sunbeam_message"])
 			last = t
 		end
 	end
 	function mod:SunBeamDeath()
-		self:Bar(62865, L["sunbeam_bar"], 35, 62865)
+		self:Bar(62865, 35, L["sunbeam_bar"])
 	end
 end
 
 function mod:Tree()
-	self:Message("tree", L["tree_message"], "Urgent", 5420, "Alarm")
+	self:Message("tree", "Urgent", "Alarm", L["tree_message"], 5420)
 end
 
 function mod:Yells(msg)
@@ -229,14 +222,14 @@ function mod:Yells(msg)
 		sheIsDead = true
 		self:Win()
 	elseif msg == L["conservator_trigger"] then
-		self:Message("wave", L["conservator_message"], "Positive", 35594)
-		self:Bar("wave", L["wave_bar"], 60, 35594)
+		self:Message("wave", "Positive", nil, L["conservator_message"], 35594)
+		self:Bar("wave", 60, L["wave_bar"], 35594)
 	elseif msg == L["detonate_trigger"] then
-		self:Message("wave", L["detonate_message"], "Positive", 35594)
-		self:Bar("wave", L["wave_bar"], 60, 35594)
+		self:Message("wave", "Positive", nil, L["detonate_message"], 35594)
+		self:Bar("wave", 60, L["wave_bar"], 35594)
 	elseif msg == L["elementals_trigger"] then
-		self:Message("wave", L["elementals_message"], "Positive", 35594)
-		self:Bar("wave", L["wave_bar"], 60, 35594)
+		self:Message("wave", "Positive", nil, L["elementals_message"], 35594)
+		self:Bar("wave", 60, L["wave_bar"], 35594)
 	end
 end
 

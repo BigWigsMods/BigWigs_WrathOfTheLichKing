@@ -17,7 +17,6 @@ mod.toggleOptions = {"phase", 64021, {64704, "FLASH"}, "harpoon", "berserk", "bo
 -- Locals
 --
 
-local p2 = nil
 local started = nil
 local count = 0
 local totalHarpoons = 4
@@ -72,7 +71,7 @@ function mod:OnBossEnable()
 	self:Yell("Airphase", L["air_trigger"])
 	self:Yell("Airphase10", L["air_trigger2"])
 
-	self:RegisterEvent("UNIT_HEALTH")
+	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 
 	totalHarpoons = self:Difficulty() == 3 and 2 or 4
@@ -83,21 +82,19 @@ end
 -- Event Handlers
 --
 
-function mod:Flame(player)
-	if UnitIsUnit(player, "player") then
-		self:Message(64704, L["flame_message"], "Personal", 64733, "Alarm")
+function mod:Flame(args)
+	if self:Me(args.destGUID) then
+		self:Message(64704, "Personal", "Alarm", L["flame_message"], 64733)
 		self:Flash(64704)
 	end
 end
 
-function mod:UNIT_HEALTH(event, msg)
-	if UnitName(msg) == self.displayName then
-		local hp = UnitHealth(msg) / UnitHealthMax(msg) * 100
-		if hp > 51 and hp <= 55 and not p2 then
-			self:Message("phase", L["phase2_warning"], "Positive")
-			p2 = true
-		elseif hp > 70 and p2 then
-			p2 = nil
+function mod:UNIT_HEALTH_FREQUENT(unit)
+	if self:MobId(UnitGUID(unit)) == 33186 then
+		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+		if hp > 51 and hp < 55 then
+			self:Message("phase", "Positive", nil, L["phase2_warning"])
+			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 		end
 	end
 end
@@ -105,34 +102,33 @@ end
 function mod:Phase2()
 	phase = 2
 	self:StopBar(L["stun_bar"])
-	self:Message("phase", L["phase2_message"], "Attention")
+	self:Message("phase", "Attention", nil, L["phase2_message"])
 end
 
 function mod:Breath()
-	self:Message(64021, L["breath_message"], "Attention", 64021)
+	self:Message(64021, "Attention", nil, L["breath_message"])
 	if phase == 2 then
-		self:Bar(64021, L["breath_bar"], 21, 64021)
+		self:Bar(64021, 21, L["breath_bar"], 64021)
 	end
 end
 
 function mod:Harpoon()
 	count = count + 1
-	self:Message("harpoon", L["harpoon_message"]:format(count), "Attention", "INV_Spear_06")
+	self:Message("harpoon", "Attention", nil, L["harpoon_message"]:format(count), "INV_Spear_06")
 	if count < totalHarpoons then
-		self:Bar("harpoon", L["harpoon_nextbar"]:format(count+1), 18, "INV_Spear_06")
+		self:Bar("harpoon", 18, L["harpoon_nextbar"]:format(count+1), "INV_Spear_06")
 	end
 end
 
 function mod:Grounded()
-	self:Message("phase", L["ground_message"], "Attention", nil, "Long")
-	self:Bar("phase", L["stun_bar"], 38, 20170) --20170, looks like a stun :p
+	self:Message("phase", "Attention", "Long", L["ground_message"])
+	self:Bar("phase", 38, L["stun_bar"], 20170) --20170, looks like a stun :p
 	count = 0
 end
 
 function mod:Airphase()
-	p2 = nil
 	count = 0
-	self:Bar("harpoon", L["harpoon_nextbar"]:format(1), 55, "INV_Spear_06")
+	self:Bar("harpoon", 55, L["harpoon_nextbar"]:format(1), "INV_Spear_06")
 	if not started then
 		self:Engage()
 		self:Berserk(900)
@@ -140,7 +136,7 @@ function mod:Airphase()
 		phase = 1
 	else
 		self:StopBar(L["stun_bar"])
-		self:Message("phase", L["air_message"], "Attention", nil, "Info")
+		self:Message("phase", "Attention", "Info", L["air_message"])
 	end
 end
 
@@ -148,9 +144,8 @@ end
 -- it happens alot later then the 25m yell, so a "Takeoff" warning isn't really appropriate anymore.
 -- just a bar for the next harpoon
 function mod:Airphase10()
-	p2 = nil
 	count = 0
-	self:Bar("harpoon", L["harpoon_nextbar"]:format(1), 22, "INV_Spear_06")
+	self:Bar("harpoon", 22, L["harpoon_nextbar"]:format(1), "INV_Spear_06")
 	self:StopBar(L["stun_bar"])
 	--self:Message(L["air_message"], "Attention", nil, "Info")
 end

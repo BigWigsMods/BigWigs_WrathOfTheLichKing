@@ -47,37 +47,38 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Message("engage", L["engage_message"]:format(self.displayName), "Attention")
+	self:Message("engage", "Attention", nil, L["engage_message"]:format(self.displayName))
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Pyrite(_, spellId, _, _, spellName, _, _, sFlags)
-	if bit.band(sFlags, COMBATLOG_OBJECT_AFFILIATION_MINE or 0x1) ~= 0 then
-		self:Bar(68605, spellName, 10, spellId)
+function mod:Pyrite(args)
+	if bit.band(args.sourceFlags, COMBATLOG_OBJECT_AFFILIATION_MINE or 0x1) ~= 0 then
+		self:Bar(args.spellId, 10)
 	end
 end
 
-function mod:Flame(_, spellId, _, _, spellName)
-	self:Message(62396, spellName, "Urgent", spellId)
-	self:Bar(62396, spellName, 10, spellId)
+function mod:Flame(args)
+	self:Message(args.spellId, "Urgent")
+	self:Bar(args.spellId, 10)
 end
 
-function mod:FlameFailed(_, _, _, _, spellName)
-	self:StopBar(spellName)
+function mod:FlameFailed(args)
+	self:StopBar(args.spellName)
 end
 
-function mod:Shutdown(unit, spellId, _, _, spellName)
-	if unit ~= self.displayName then return end
-	self:Message(62475, L["shutdown_message"], "Positive", spellId, "Long")
-	self:Bar(62475, spellName, 20, spellId)
+function mod:Shutdown(args)
+	if self:MobId(args.destGUID) == 33113 then
+		self:Message(args.spellId, "Positive", "Long", L["shutdown_message"])
+		self:Bar(args.spellId, 20)
+	end
 end
 
 function mod:Pursue(msg, unit, _, _, player)
-	self:TargetMessage("pursue", L["pursue"], player, "Personal", 62374, "Alarm")
+	self:TargetMessage("pursue", player, "Personal", "Alarm", L["pursue"], 62374)
 	if UnitIsUnit(player, "player") then self:Flash("pursue", 62374) end
-	self:Bar("pursue", L["pursue_other"]:format(player), 30, 62374)
+	self:Bar("pursue", 30, L["pursue_other"]:format(player), 62374)
 end
 

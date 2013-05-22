@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Ignis the Furnace Master", 529)
+local mod, CL = BigWigs:NewBoss("Ignis the Furnace Master", 529)
 if not mod then return end
 mod:RegisterEnableMob(33118)
 mod.toggleOptions = { 62488, 62382, {62680, "FLASH"}, {62546, "FLASH"}, 62717, "bosskill"}
@@ -20,14 +20,7 @@ local spawnTime = 30
 local L = mod:NewLocale("enUS", true)
 if L then
 	L.engage_trigger = "Insolent whelps! Your blood will temper the weapons used to reclaim this world!"
-
-	L.construct_message = "Add incoming!"
-	L.construct_bar = "Next add"
 	L.brittle_message = "Construct is Brittle!"
-	L.flame_bar = "~Jets cooldown"
-	L.scorch_message = "Scorch on you!"
-	L.scorch_soon = "Scorch in ~5sec!"
-	L.scorch_bar = "Next Scorch"
 end
 L = mod:GetLocale()
 
@@ -49,8 +42,8 @@ end
 
 function mod:OnEngage(diff)
 	spawnTime = diff == 3 and 40 or 30
-	self:Bar(62680, L["flame_bar"], 21, 62680)
-	self:Bar(62488, L["construct_bar"], 10, "INV_Misc_Statue_07")
+	self:CDBar(62680, 21)
+	self:Bar(62488, 10, CL["next_add"], "INV_Misc_Statue_07")
 end
 
 --------------------------------------------------------------------------------
@@ -58,27 +51,27 @@ end
 --
 
 function mod:Brittle(args)
-	self:Message(args.spellId, L["brittle_message"], "Positive", args.spellId)
+	self:Message(args.spellId, "Positive", nil, L["brittle_message"])
 end
 
 function mod:Construct()
-	self:Message(62488, L["construct_message"], "Important", "INV_Misc_Statue_07")
-	self:Bar(62488, L["construct_bar"], spawnTime, "INV_Misc_Statue_07")
+	self:Message(62488, "Important", nil, CL["add_spawned"], "INV_Misc_Statue_07")
+	self:Bar(62488, spawnTime, CL["next_add"], "INV_Misc_Statue_07")
 end
 
 function mod:ScorchCast(args)
-	self:Message(62546, args.spellName, "Attention", args.spellId)
-	self:Bar(62546, L["scorch_bar"], 25, args.spellId)
-	self:DelayedMessage(62546, 20, L["scorch_soon"], "Urgent", args.spellId)
+	self:Message(62546, "Attention")
+	self:Bar(62546, 25)
+	self:DelayedMessage(62546, 20, "Urgent", CL["custom_sec"]:format(args.spellName, 5))
 end
 
 do
 	local last = nil
 	function mod:Scorch(args)
-		if UnitIsUnit(args.destName, "player") then
+		if self:Me(args.destGUID) then
 			local t = GetTime()
 			if not last or (t > last + 4) then
-				self:Message(62546, L["scorch_message"], "Personal", args.spellId, last and nil or "Alarm")
+				self:Message(62546, "Personal", last and nil or "Alarm", CL["underyou"]:format(args.spellName))
 				self:Flash(62546)
 				last = t
 			end
@@ -87,21 +80,16 @@ do
 end
 
 function mod:SlagPot(args)
-	self:TargetMessage(62717, args.spellName, args.destName, "Important", args.spellId)
-	self:TargetBar(62717, args.spellName, args.destName, 10, args.spellId)
+	self:TargetMessage(62717, args.destName, "Important")
+	self:TargetBar(62717, 10, args.destName)
 end
 
 do
 	-- XXX Why do we still do this?
-	local _, class = UnitClass("player")
 	local function isCaster()
 		local power = UnitPowerType("player")
-		if power ~= 0 then return end
-		if class == "PALADIN" then
-			local tree = GetSpecialization()
-			local role = GetSpecializationRole(tree)
-			if role ~= "HEALER" then return end
-		end
+		local _, class = UnitClass("player")
+		if power ~= 0 or (class == "PALADIN" and not mod:Healer()) then return end
 		return true
 	end
 
@@ -109,10 +97,10 @@ do
 		local caster = isCaster()
 		local color = caster and "Personal" or "Attention"
 		local sound = caster and "Long" or nil
-		self:Message(62680, args.spellName, color, args.spellId, sound)
-		self:Bar(62680, L["flame_bar"], 25, args.spellId)
+		self:Message(62680, color, sound)
+		self:CDBar(62680, 25)
 		if caster then
-			self:Bar(62680, args.spellName, 2.7, args.spellId)
+			self:Bar(62680, 2.7, CL["cast"]:format(args.spellName))
 			self:Flash(62680)
 		end
 	end
