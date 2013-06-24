@@ -65,9 +65,9 @@ end
 function mod:OnEngage(diff)
 	self:Berserk(320, true)
 	self:OpenProximity("proximity", 6)
-	self:Bar(71772, L["phase2_bar"], airPhaseTimers[diff][1], 71772)
-	self:Bar(71340, L["pact_bar"], 16, 71340)
-	self:Bar(71265, L["shadow_bar"], 30, 71265)
+	self:Bar(71772, airPhaseTimers[diff][1], L["phase2_bar"])
+	self:Bar(71340, 16, L["pact_bar"])
+	self:Bar(71265, 30, L["shadow_bar"])
 end
 
 --------------------------------------------------------------------------------
@@ -77,18 +77,17 @@ end
 do
 	local scheduled = nil
 	local function pact()
-		mod:TargetMessage(71340, L["pact_message"], pactTargets, "Important", 71340)
-		mod:Bar(71340, L["pact_bar"], 30, 71340)
+		mod:TargetMessage(71340, pactTargets, "Important", nil, L["pact_message"])
 		scheduled = nil
 	end
-	function mod:Pact(player)
-		if UnitIsUnit(player, "player") then
+	function mod:Pact(args)
+		if self:Me(args.destGUID) then
 			self:Flash(71340)
 		end
-		pactTargets[#pactTargets + 1] = player
+		pactTargets[#pactTargets + 1] = args.destName
 		if not scheduled then
-			scheduled = true
-			self:ScheduleTimer(pact, 0.3)
+			self:Bar(71340, 30, L["pact_bar"])
+			scheduled = self:ScheduleTimer(pact, 0.3)
 		end
 	end
 end
@@ -97,24 +96,24 @@ function mod:Shadows(msg, _, _, _, player)
 	if UnitIsUnit(player, "player") then
 		self:Flash(71265)
 	end
-	self:TargetMessage(71265, L["shadow_message"], player, "Attention", 71265)
-	self:Bar(71265, L["shadow_bar"], 30, 71265)
+	self:TargetMessage(71265, player, "Attention", nil, L["shadow_message"])
+	self:Bar(71265, 30, L["shadow_bar"])
 end
 
-function mod:Feed(player, spellId)
-	if UnitIsUnit(player, "player") then
-		self:Message(70877, L["feed_message"], "Urgent", spellId, "Alert")
-		self:Bar(70877, L["feed_message"], 15, spellId)
+function mod:Feed(args)
+	if self:Me(args.destGUID) then
+		self:Message(70877, "Urgent", "Alert", L["feed_message"])
+		self:Bar(70877, 15, L["feed_message"])
 	end
 end
 
-function mod:AirPhase(player, spellId)
-	self:Message(71772, L["phase_message"], "Important", spellId, "Alarm")
-	self:Bar(71772, L["phase1_bar"], 12, spellId)
-	self:Bar(71772, L["phase2_bar"], airPhaseTimers[self:Difficulty()][2], 71772)
+function mod:AirPhase(args)
+	self:Message(71772, "Important", "Alarm", L["phase_message"])
+	self:Bar(71772, 12, L["phase1_bar"])
+	self:Bar(71772, airPhaseTimers[self:Difficulty()][2], L["phase2_bar"])
 end
 
-function mod:Slash(player, spellId, _, _, spellName)
-	self:TargetMessage(71623, spellName, player, "Attention", spellId)
+function mod:Slash(args)
+	self:TargetMessage(71623, args.destName, "Attention")
 end
 

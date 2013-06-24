@@ -4,15 +4,13 @@
 
 local mod = BigWigs:NewBoss("Deathbringer Saurfang", 604)
 if not mod then return end
--- Deathbringer Saurfang, Muradin, Marine, Overlord Saurfang, Kor'kron Reaver
-mod:RegisterEnableMob(37813, 37200, 37830, 37187, 37920)
+mod:RegisterEnableMob(37813, 37200, 37830, 37187, 37920) -- Deathbringer Saurfang, Muradin, Marine, Overlord Saurfang, Kor'kron Reaver
 mod.toggleOptions = {"adds", 72410, 72385, {72293, "ICON", "FLASH"}, 72737, "proximity", "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
 --
 
-local bbTargets = mod:NewTargetList()
 local killed = nil
 local count = 1
 
@@ -26,11 +24,6 @@ if L then
 	L.adds_desc = "Shows a timer and messages for when Blood Beasts spawn."
 	L.adds_warning = "Blood Beasts in 5 sec!"
 	L.adds_message = "Blood Beasts!"
-	L.adds_bar = "Next Blood Beasts"
-
-	L.rune_bar = "~Next Rune"
-
-	L.mark = "Mark %d"
 
 	L.engage_trigger = "BY THE MIGHT OF THE LICH KING!"
 	L.warmup_alliance = "Let's get a move on then! Move ou..."
@@ -48,33 +41,30 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "BoilingBlood", 72385, 72442, 72441, 72443) --10/25
 	self:Log("SPELL_AURA_APPLIED", "Mark", 72293)
 	self:Log("SPELL_AURA_APPLIED", "Frenzy", 72737)
-	self:Death("Deaths", 37813)
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Yell("Engage", L["engage_trigger"])
 	self:Yell("Warmup", L["warmup_alliance"], L["warmup_horde"])
+
+	self:Death("Deaths", 37813)
 end
 
 function mod:OnEngage()
 	self:OpenProximity("proximity", 11)
 	self:Berserk(self:Heroic() and 360 or 480)
-	self:DelayedMessage("adds", 35, L["adds_warning"], "Urgent")
-	self:Bar("adds", L["adds_bar"], 40, 72173)
+	self:DelayedMessage("adds", 35, "Urgent", L["adds_warning"])
+	self:Bar("adds", 40, L["adds"], 72173)
 	count = 1
 end
 
 function mod:Warmup(msg)
 	self:OpenProximity("proximity", 11)
-	if msg == L["warmup_alliance"] then
-		self:Bar("adds", self.displayName, 48, "achievement_boss_saurfang")
-	else
-		self:Bar("adds", self.displayName, 99, "achievement_boss_saurfang")
-	end
+	self:Bar("adds", L["warmup_alliance"] and 48 or 99, self.displayName, "achievement_boss_saurfang")
 end
 
 function mod:VerifyEnable()
-	SetMapToCurrentZone()
-	if not killed and GetCurrentMapDungeonLevel() == 3 then return true end
+	BigWigs.SetMapToCurrentZone()
+	return not killed and GetCurrentMapDungeonLevel() == 3
 end
 
 --------------------------------------------------------------------------------
@@ -82,40 +72,41 @@ end
 --
 
 do
-	local scheduled = nil
-	local function boilingWarn(spellName)
-		mod:TargetMessage(72385, spellName, bbTargets, "Urgent", 72385)
+	local bbTargets, scheduled = mod:NewTargetList(), nil
+	local function boilingWarn()
+		mod:TargetMessage(72385, bbTargets, "Urgent")
 		scheduled = nil
 	end
-	function mod:BoilingBlood(player, spellId, _, _, spellName)
-		bbTargets[#bbTargets + 1] = player
+	function mod:BoilingBlood(args)
+		bbTargets[#bbTargets + 1] = args.destName
 		if not scheduled then
-			scheduled = true
-			self:ScheduleTimer(boilingWarn, 0.3, spellName)
+			scheduled = self:ScheduleTimer(boilingWarn, 0.3)
 		end
 	end
 end
 
-function mod:Adds(_, spellId)
-	self:Message("adds", L["adds_message"], "Positive", spellId, "Alarm")
-	self:DelayedMessage("adds", 35, L["adds_warning"], "Urgent")
-	self:Bar("adds", L["adds_bar"], 40, spellId)
+function mod:Adds(args)
+	self:Message("adds", "Positive", "Alarm", L["adds_message"], args.spellId)
+	self:DelayedMessage("adds", 35, "Urgent", L["adds_warning"])
+	self:Bar("adds", 40, L["adds"], args.spellId)
 end
 
-function mod:RuneofBlood(player, spellId, _, _, spellName)
-	self:TargetMessage(72410, spellName, player, "Attention", spellId)
-	self:Bar(72410, L["rune_bar"], 20, spellId)
+function mod:RuneofBlood(args)
+	self:TargetMessage(72410, args.destName, "Attention")
+	self:CDBar(72410, 20)
 end
 
-function mod:Mark(player, spellId, _, _, spellName)
-	self:TargetMessage(72293, L["mark"]:format(count), player, "Attention", spellId, "Alert")
+function mod:Mark(args)
+	self:StackMessage(72293, args.destName, count, "Attention", "Alert")
 	count = count + 1
-	self:PrimaryIcon(72293, player)
-	if UnitIsUnit(player, "player") then self:Flash(72293) end
+	self:PrimaryIcon(72293, args.destName)
+	if self:Me(args.destGUID) then
+		self:Flash(72293)
+	end
 end
 
-function mod:Frenzy(_, spellId, _, _, spellName)
-	self:Message(72737, spellName, "Important", spellId, "Long")
+function mod:Frenzy(args)
+	self:Message(72737, "Important", "Long")
 end
 
 function mod:Deaths()

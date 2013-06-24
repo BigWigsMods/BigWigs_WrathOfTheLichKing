@@ -8,16 +8,6 @@ mod:RegisterEnableMob(37217, 37025)
 mod.toggleOptions = {71127}
 
 --------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale("enUS", true)
-if L then
-	L.wound_message = "%2$dx Mortal Wound on %1$s"
-end
-L = mod:GetLocale()
-
---------------------------------------------------------------------------------
 -- Initialization
 --
 
@@ -30,9 +20,9 @@ end
 -- Event Handlers
 --
 
-function mod:Wound(player, spellId, _, _, _, stack)
-	if stack > 5 then
-		self:TargetMessage(71127, L["wound_message"], player, "Important", spellId, nil, stack)
+function mod:Wound(args)
+	if args.amount > 5 then
+		self:StackMessage(71127, args.destName, args.amount, "Important")
 	end
 end
 

@@ -21,15 +21,15 @@ end
 -- Event Handlers
 --
 
-function mod:Reckoning(player, spellId, _, _, spellName)
-	self:TargetMessage(69483, spellName, player, "Personal", spellId, "Alert")
-	self:Bar(69483, spellName, 8, spellId)
-	if UnitIsUnit(player, "player") then
+function mod:Reckoning(args)
+	self:TargetMessage(69483, args.destName, "Personal", "Alert")
+	self:Bar(69483, 8)
+	if self:Me(args.destGUID) then
 		self:Flash(69483)
 		self:OpenProximity("proximity", 15)
 		self:ScheduleTimer(self.CloseProximity, 9, self)
 	end
-	self:PrimaryIcon(69483, player, "icon")
+	self:PrimaryIcon(69483, args.destName, "icon")
 end
 
 do

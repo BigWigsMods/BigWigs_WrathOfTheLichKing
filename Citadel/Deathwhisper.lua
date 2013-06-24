@@ -2,12 +2,10 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Lady Deathwhisper", 604)
+local mod, CL = BigWigs:NewBoss("Lady Deathwhisper", 604)
 if not mod then return end
---Deathwhisper, Cult Adherent, Reanimated Adherent, Cult Fanatic, Reanimated Fanatic, Deformed Fanatic
-mod:RegisterEnableMob(36855, 37949, 38010, 37890, 38009, 38135)
+mod:RegisterEnableMob(36855, 37949, 38010, 37890, 38009, 38135) --Deathwhisper, Cult Adherent, Reanimated Adherent, Cult Fanatic, Reanimated Fanatic, Deformed Fanatic
 mod.toggleOptions = {"adds", 70842, 71204, 71426, 71289, {71001, "FLASH"}, "berserk", "bosskill"}
-local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	adds = CL.phase:format(1),
 	[71204] = CL.phase:format(2),
@@ -19,7 +17,6 @@ mod.optionHeaders = {
 --
 
 local handle_Adds = nil
-local dmTargets = mod:NewTargetList()
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -44,8 +41,6 @@ if L then
 
 	L.spirit_message = "Summon Spirit!"
 	L.spirit_bar = "Next Spirit"
-
-	L.dominate_bar = "~Next Dominate Mind"
 end
 L = mod:GetLocale()
 
@@ -68,16 +63,16 @@ function mod:OnBossEnable()
 end
 
 local function adds(time)
-	mod:DelayedMessage("adds", time-5, L["adds_warning"], "Attention")
-	mod:Bar("adds", L["adds_bar"], time, 70768)
+	mod:DelayedMessage("adds", time-5, "Attention", L["adds_warning"])
+	mod:Bar("adds", time, L["adds_bar"], 70768)
 	handle_Adds = mod:ScheduleTimer(adds, time, time)
 end
 
 function mod:OnEngage(diff)
 	self:Berserk(600, true)
-	self:Bar("adds", L["adds_bar"], 7, 70768)
+	self:Bar("adds", 7, L["adds_bar"], 70768)
 	if diff > 3 then
-		self:Bar(71289, L["dominate_bar"], 30, 71289)
+		self:CDBar(71289, 30) -- Dominate Mind
 	end
 	handle_Adds = self:ScheduleTimer(adds, 7, self:Heroic() and 45 or 60)
 end
@@ -86,58 +81,57 @@ end
 -- Event Handlers
 --
 
-function mod:DnD(player, spellId)
-	if UnitIsUnit(player, "player") then
-		self:Message(71001, L["dnd_message"], "Personal", spellId, "Alarm")
+function mod:DnD(args)
+	if self:Me(args.destGUID) then
+		self:Message(71001, "Personal", "Alarm", L["dnd_message"], 71001)
 		self:Flash(71001)
 	end
 end
 
-function mod:Barrier(_, spellId)
+function mod:Barrier(args)
 	if not self:Heroic() then
 		self:CancelTimer(handle_Adds)
 		self:StopBar(L["adds_bar"])
 		self:CancelDelayedMessage(L["adds_warning"])
 	end
-	self:Message(70842, L["phase2_message"], "Positive", spellId, "Info")
-	self:Bar(71426, L["spirit_bar"], 30, 71426)
+	self:Message(70842, "Positive", "Info", L["phase2_message"], args.spellId)
+	self:Bar(71426, 30, L["spirit_bar"])
 end
 
 do
-	local scheduled = nil
-	local function dmWarn(spellName)
-		mod:TargetMessage(71289, spellName, dmTargets, "Important", 71289, "Alert")
+	local dmTargets, scheduled = mod:NewTargetList(), nil
+	local function dmWarn()
+		mod:TargetMessage(71289, dmTargets, "Important", "Alert")
 		scheduled = nil
 	end
-	function mod:DominateMind(player, spellId, _, _, spellName)
-		dmTargets[#dmTargets + 1] = player
+	function mod:DominateMind(args)
+		dmTargets[#dmTargets + 1] = args.destName
 		if not scheduled then
-			scheduled = true
-			self:Bar(71289, L["dominate_bar"], 40, 71289)
-			self:ScheduleTimer(dmWarn, 0.3, spellName)
+			self:CDBar(71289, 40) -- Dominate Mind
+			scheduled = self:ScheduleTimer(dmWarn, 0.3)
 		end
 	end
 end
 
-function mod:Touch(player, spellId, _, _, _, stack)
-	if stack and stack > 1 then
-		self:TargetMessage(71204, L["touch_message"], player, "Urgent", spellId, nil, stack)
+function mod:Touch(args)
+	if (args.amount or 1) > 1 then
+		self:StackMessage(71204, args.destName, args.amount, "Urgent")
 	end
-	self:Bar(71204, L["touch_bar"], 7, spellId)
+	self:Bar(71204, 7, L["touch_bar"], 71204)
 end
 
 function mod:Deformed()
-	self:Message("adds", L["deformed_fanatic"], "Urgent", 70900)
+	self:Message("adds", "Urgent", nil, L["deformed_fanatic"], 70900)
 end
 
 do
 	local t = 0
-	function mod:Spirit(_, spellId)
+	function mod:Spirit(args)
 		local time = GetTime()
 		if (time - t) > 5 then
 			t = time
-			self:Message(71426, L["spirit_message"], "Attention", spellId)
-			self:Bar(71426, L["spirit_bar"], 13, spellId)
+			self:Message(71426, "Attention", nil, L["spirit_message"])
+			self:Bar(71426, 13, L["spirit_bar"])
 		end
 	end
 end

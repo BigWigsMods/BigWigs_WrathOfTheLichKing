@@ -4,7 +4,7 @@
 
 local mod = BigWigs:NewBoss("Icecrown Gunship Battle", 604)
 if not mod then return end
-mod:RegisterEnableMob(37184) --Zafod Boombox
+mod:RegisterEnableMob(37184) -- Zafod Boombox
 mod.toggleOptions = {"adds", "mage", "bosskill"}
 
 --------------------------------------------------------------------------------
@@ -73,10 +73,10 @@ do
 end
 
 function mod:Warmup()
-	self:Bar("adds", COMBAT, 45, "achievement_dungeon_hordeairship")
+	self:Bar("adds", 45, COMBAT, "achievement_dungeon_hordeairship")
 	--XXX Fix me, move to engage, need more logs for testing
-	self:Bar("adds", L["adds_bar"], 60, 53142)
-	self:Bar("mage", L["mage_bar"], 82, 69705)
+	self:Bar("adds", 60, L["adds_bar"], 53142)
+	self:Bar("mage", 82, L["mage_bar"], 69705)
 end
 
 function mod:VerifyEnable()
@@ -88,16 +88,16 @@ end
 --
 
 function mod:AddsPortal()
-	self:Message("adds", L["adds_message"], "Attention", 53142)
-	self:Bar("adds", L["adds_bar"], 60, 53142) --Portal: Dalaran icon
+	self:Message("adds", "Attention", nil, L["adds_message"], 53142)
+	self:Bar("adds", 60, L["adds_bar"], 53142) --Portal: Dalaran icon
 end
 
-function mod:Frozen(_, spellId)
-	self:Message("mage", L["mage_message"], "Positive", spellId, "Info")
+function mod:Frozen(args)
+	self:Message("mage", "Positive", "Info", L["mage_message"], args.spellId)
 end
 
-function mod:FrozenCD(_, spellId)
-	self:Bar("mage", L["mage_bar"], 35, spellId)
+function mod:FrozenCD(args)
+	self:Bar("mage", 35, L["mage_bar"], args.spellId)
 end
 
 function mod:Defeated()

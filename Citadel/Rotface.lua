@@ -13,12 +13,6 @@ mod.optionHeaders = {
 }
 
 --------------------------------------------------------------------------------
--- Locals
---
-
-local gasTargets = mod:NewTargetList()
-
---------------------------------------------------------------------------------
 -- Localization
 --
 
@@ -26,7 +20,6 @@ local L = mod:NewLocale("enUS", true)
 if L then
 	L.engage_trigger = "WEEEEEE!"
 
-	L.infection_bar = "Infection on %s!"
 	L.infection_message = "Infection"
 
 	L.ooze = "Ooze Merge"
@@ -56,10 +49,10 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Berserk(600,true)
-	self:Bar(69508, L["spray_bar"], 19, 69508)
+	self:Berserk(600, true)
+	self:Bar(69508, 19, L["spray_bar"])
 	if self:Heroic() then
-		self:Bar(72272, GetSpellInfo(72272), 20, 72272)
+		self:Bar(72272, 20)
 	end
 end
 
@@ -67,44 +60,46 @@ end
 -- Event Handlers
 --
 
-function mod:Infection(player, spellId)
-	self:TargetMessage(69674, L["infection_message"], player, "Personal", spellId)
-	self:Bar(69674, L["infection_bar"]:format(player), 12, spellId)
-	self:PrimaryIcon(69674, player, "icon")
-	if UnitIsUnit(player, "player") then self:Flash(69674) end
+function mod:Infection(args)
+	self:TargetMessage(69674, args.destName, "Personal", nil, L["infection_message"])
+	self:TargetBar(69674, 12, args.destName, L["infection_message"])
+	self:PrimaryIcon(69674, args.destName, "icon")
+	if self:Me(args.destGUID) then
+		self:Flash(69674)
+	end
 end
 
-function mod:InfectionRemoved(player)
-	self:StopBar(L["infection_bar"]:format(player))
+function mod:InfectionRemoved(args)
+	self:StopBar(L["infection_message"], args.destName)
 end
 
-function mod:SlimeSpray(_, spellId, _, _, spellName)
-	self:Message(69508, spellName, "Important", spellId, "Alarm")
-	self:Bar(69508, L["spray_bar"], 21, 69508)
+function mod:SlimeSpray(args)
+	self:Message(69508, "Important", "Alarm")
+	self:Bar(69508, 21, L["spray_bar"])
 end
 
 do
 	--The cast is sometimes pushed back
 	local handle = nil
-	local function explodeWarn(explodeName)
+	local function explodeWarn()
 		handle = nil
 		mod:Flash(69839)
-		mod:Message(69839, explodeName, "Urgent", 69839, "Alert")
+		mod:Message(69839, "Urgent", "Alert", 67729) -- Explode
 	end
-	function mod:Explode(_, spellId)
-		local explodeName = GetSpellInfo(67729) --"Explode"
-		self:Bar(69839, explodeName, 4, spellId)
-		if handle then self:CancelTimer(handle) end
-		handle = self:ScheduleTimer(explodeWarn, 4, explodeName)
+	function mod:Explode(args)
+		self:Bar(69839, 4, 67729) -- "Explode"
+		self:CancelTimer(handle)
+		handle = self:ScheduleTimer(explodeWarn, 4)
 	end
 end
 
-function mod:Ooze(_, spellId, _, _, _, stack)
-	if stack > 4 then return end
-	self:Message("ooze", L["ooze_message"]:format(stack), "Attention", spellId)
+function mod:Ooze(args)
+	if args.amount < 5 then
+		self:Message("ooze", "Attention", nil, L["ooze_message"]:format(args.amount), args.spellId)
+	end
 end
 
-function mod:VileGas(player, spellId, _, _, spellName)
-	self:Bar(72272, spellName, 30, 72272)
+function mod:VileGas(args)
+	self:Bar(72272, 30)
 end
 

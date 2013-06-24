@@ -1,12 +1,11 @@
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
-local mod = BigWigs:NewBoss("Blood Prince Council", 604)
+
+local mod, CL = BigWigs:NewBoss("Blood Prince Council", 604)
 if not mod then return end
---Prince Valanar, Prince Keleseth, Prince Taldaram
-mod:RegisterEnableMob(37970, 37972, 37973)
+mod:RegisterEnableMob(37970, 37972, 37973) -- Prince Valanar, Prince Keleseth, Prince Taldaram
 mod.toggleOptions = {{72040, "ICON", "FLASH"}, 72039, {72037, "SAY", "FLASH"}, 72999, 70981, 72052, {"iconprince", "ICON"}, "berserk", "proximity", "bosskill"}
-local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	[72040] = "Taldaram",
 	[72039] = "Valanar",
@@ -21,14 +20,13 @@ mod.optionHeaders = {
 local L = mod:NewLocale("enUS", true)
 if L then
 	L.switch_message = "Health swap: %s"
-	L.switch_bar = "~Next health swap"
+	L.switch_bar = "Next health swap"
 
 	L.empowered_flames = "Empowered Flames"
-	L.empowered_bar = "~Next Flames"
 
 	L.empowered_shock_message = "Casting Shock!"
 	L.regular_shock_message = "Shock zone"
-	L.shock_bar = "~Next Shock"
+	L.shock_bar = "Next Shock"
 
 	L.iconprince = "Icon on active prince"
 	L.iconprince_desc = "Place the primary raid icon on the active prince (requires promoted or leader)."
@@ -56,8 +54,8 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Bar(70981, L["switch_bar"], 45, 70981)
-	self:Bar(72037, L["shock_bar"], 20, 72037)
+	self:CDBar(70981, 45, L["switch_bar"])
+	self:CDBar(72037, 20, L["shock_bar"])
 	self:Berserk(600)
 end
 
@@ -65,24 +63,23 @@ end
 -- Event Handlers
 --
 
-function mod:Bomb(_, spellId, _, _, spellName)
-	self:Message(72052, spellName, "Attention", spellId, "Alert")
+function mod:Bomb(args)
+	self:Message(72052, "Attention", "Alert")
 end
 
-function mod:Prison(player, spellId, _, _, _, stack)
-	if stack > 2 and UnitIsUnit(player, "player") then
-		self:Message(72999, L["prison_message"]:format(stack), "Personal", spellId)
+function mod:Prison(args)
+	if args.amount > 2 and self:Me(args.destGUID) then
+		self:Message(72999, "Personal", nil, L["prison_message"]:format(args.amount))
 	end
 end
 
-function mod:Switch(unit, spellId, _, _, spellName)
-	self:Message(70981, L["switch_message"]:format(unit), "Positive", spellId, "Info")
-	self:Bar(70981, L["switch_bar"], 45, spellId)
-	self:StopBar(L["empowered_bar"])
+function mod:Switch(args)
+	self:Message(70981, "Positive", "Info", L["switch_message"]:format(args.destName))
+	self:CDBar(70981, 45, L["switch_bar"])
+	self:StopBar(L["empowered_flames"])
 	for i = 1, 3 do
 		local bossId = ("boss%d"):format(i)
-		local name = UnitName(bossId)
-		if name and name == unit then
+		if UnitGUID(bossId) == args.destGUID then
 			self:PrimaryIcon("iconprince", bossId)
 			break
 		end
@@ -90,27 +87,24 @@ function mod:Switch(unit, spellId, _, _, spellName)
 end
 
 function mod:EmpoweredShock(_, spellId)
-	self:Message(72039, L["empowered_shock_message"], "Important", spellId, "Alert")
+	self:Message(72039, "Important", "Long", L["empowered_shock_message"])
 	self:OpenProximity("proximity", 15)
-	self:ScheduleTimer(self.CloseProximity, 5, self)
-	self:Bar(72039, L["shock_bar"], 16, spellId)
+	self:ScheduleTimer("CloseProximity", 5)
+	self:CDBar(72039, 16, L["shock_bar"])
 end
 
 function mod:RegularShock()
 	for i = 1, 3 do
-		local bossId = ("boss%d"):format(i)
-		local guid = UnitGUID(bossId)
-		if not guid then return end
-		guid = self:MobId(guid)
-		if guid == 37970 then
-			local target = UnitName(bossId .. "target")
-			if target then
-				if UnitIsUnit("player", target) then
+		local boss = ("boss%d"):format(i)
+		if self:MobId(UnitGUID(boss)) == 37970 then
+			local bossTarget = boss.."target"
+			if UnitExists(bossTarget) then
+				if UnitIsUnit("player", bossTarget) then
 					self:Flash(72037)
 					self:Say(72037)
 				end
-				self:TargetMessage(72037, L["regular_shock_message"], target, "Urgent", 72037)
-				self:Bar(72037, L["shock_bar"], 16, 72037)
+				self:TargetMessage(72037, self:UnitName(bossTarget), "Urgent", nil, L["regular_shock_message"])
+				self:CDBar(72037, 16, L["shock_bar"])
 			end
 			break
 		end
@@ -121,9 +115,9 @@ function mod:EmpoweredFlame(msg, _, _, _, player)
 	if UnitIsUnit(player, "player") then
 		self:Flash(72040)
 	end
-	self:TargetMessage(72040, L["empowered_flames"], player, "Urgent", 72040, "Long")
+	self:TargetMessage(72040, player, "Urgent", "Long", L["empowered_flames"])
 	self:SecondaryIcon(72040, player)
-	self:Bar(72040, L["empowered_bar"], 20, 72040)
+	self:CDBar(72040, 20, L["empowered_flames"])
 end
 
 do

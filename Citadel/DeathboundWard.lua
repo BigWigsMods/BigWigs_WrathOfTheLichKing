@@ -20,9 +20,9 @@ end
 -- Event Handlers
 --
 
-function mod:Shout(_, spellId, _, _, spellName)
-	self:Message(71022, spellName, "Personal", spellId)
-	self:Bar(71022, spellName, 3, spellId)
+function mod:Shout(args)
+	self:Message(71022, "Personal")
+	self:Bar(71022, 3)
 	self:Flash(71022)
 end
 

@@ -2,11 +2,10 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("The Lich King", 604)
+local mod, CL = BigWigs:NewBoss("The Lich King", 604)
 if not mod then return end
 mod:RegisterEnableMob(36597)
 mod.toggleOptions = {72143, 70541, {70337, "ICON", "FLASH"}, 70372, {72762, "SAY", "ICON", "FLASH"}, 69409, 69037, {68980, "ICON", "FLASH"}, 70498, {68981, "FLASH"}, 69200, {72262, "FLASH"}, 72350, {73529, "SAY", "FLASH", "ICON"}, "berserk", "bosskill"}
-local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	[72143] = CL.phase:format(1),
 	[72762] = CL.phase:format(2),
@@ -21,8 +20,6 @@ mod.optionHeaders = {
 --
 
 local phase = 0
-local hugged = mod:NewTargetList()
-local class = select(2,UnitClass("player"))
 local frenzied = {}
 local plagueTicks = {}
 
@@ -35,42 +32,18 @@ if L then
 	L.warmup_trigger = "So the Light's vaunted justice has finally arrived"
 	L.engage_trigger = "I'll keep you alive to witness the end, Fordring."
 
-	L.horror_bar = "~Next Horror"
 	L.horror_message = "Shambling Horror"
+	L.horror_bar = "Next Horror"
 
-	L.necroticplague_bar = "Necrotic Plague"
-
-	L.ragingspirit_bar = "Raging Spirit"
-
-	L.valkyr_bar = "Next Val'kyr"
 	L.valkyr_message = "Val'kyr"
-
-	L.vilespirits_bar = "~Vile Spirits"
-
-	L.harvestsoul_bar = "Harvest Soul"
-
-	L.remorselesswinter_message = "Remorseless Winter Casting"
-	L.quake_message = "Quake Casting"
-	L.quake_bar = "Quake"
-
-	L.defile_message = "Defile on YOU!"
-	L.defile_bar = "Next Defile"
-
-	L.infest_bar = "~Next Infest"
-
-	L.reaper_bar = "~Next Reaper"
-
-	L.last_phase_bar = "Last Phase"
-
-	L.trap_message = "Shadow Trap"
-	L.trap_bar = "Next Trap"
-
+	L.valkyr_bar = "Next Val'kyr"
 	L.valkyrhug_message = "Val'kyrs Hugged"
+
 	L.cave_phase = "Cave Phase"
+	L.last_phase_bar = "Last Phase"
 
 	L.frenzy_bar = "%s frenzies!"
 	L.frenzy_survive_message = "%s will survive after plague"
-	L.enrage_bar = "~Enrage"
 	L.frenzy_message = "Add frenzied!"
 	L.frenzy_soon_message = "5sec to frenzy!"
 end
@@ -121,7 +94,7 @@ function mod:OnBossEnable()
 end
 
 function mod:Warmup()
-	self:Bar("berserk", self.displayName, 53, "achievement_boss_lichking")
+	self:Bar("berserk", 53, self.displayName, "achievement_boss_lichking")
 end
 
 function mod:OnEngage()
@@ -129,11 +102,11 @@ function mod:OnEngage()
 	wipe(plagueTicks)
 
 	self:Berserk(900)
-	self:Bar(70337, L["necroticplague_bar"], 31, 70337)
-	self:Bar(70372, L["horror_bar"], 22, 70372)
+	self:Bar(70337, 31) -- Necrotic Plague
+	self:CDBar(70372, 22, L["horror_bar"])
 	phase = 1
 	if self:Heroic() then
-		self:Bar(73529, L["trap_bar"], 16, 73539)
+		self:Bar(73529, 16)
 	end
 end
 
@@ -141,83 +114,84 @@ end
 -- Event Handlers
 --
 
-function mod:PlagueTick(horrorName, _, _, tickDamage, _, _, _, _, _, dGUID)
+function mod:PlagueTick(args)
 	if not self:Heroic() then return end -- Doesn't apply on normal diff.
 	-- Not ticking on a Shambling Horror, so bail early
-	if self:MobId(dGUID) ~= 37698 then return end
+	if self:MobId(args.destGUID) ~= 37698 then return end
 
-	if not plagueTicks[dGUID] then plagueTicks[dGUID] = 1
-	else plagueTicks[dGUID] = plagueTicks[dGUID] + 1 end
-	if plagueTicks[dGUID] == 3 then
-		plagueTicks[dGUID] = nil
+	plagueTicks[args.destGUID] = (plagueTicks[args.destGUID] or 0) + 1
+	if plagueTicks[args.destGUID] == 3 then
+		plagueTicks[args.destGUID] = nil
 		return
 	end
 
 	-- Search by full GUID, so we don't mistake one shambler for another
-	local unitId = self:GetUnitIdByGUID(dGUID)
+	local unitId = self:GetUnitIdByGUID(args.destGUID)
 	if not unitId then return end
 
 	-- Shambler is already frenzied, will it die from the plague or endure
 	-- for a longer period?
-	if frenzied[dGUID] then
-		local damageLeft = (3 - plagueTicks[dGUID]) * tickDamage
+	if frenzied[args.destGUID] then
+		local damageLeft = (3 - plagueTicks[args.destGUID]) * args.extraSpellId
 		local hp = UnitHealth(unitId)
 		if hp > damageLeft then
-			self:Message(70372, L["frenzy_survive_message"]:format(horrorName), "Attention", 72143)
+			self:Message(70372, L["frenzy_survive_message"]:format(args.destName), "Attention", 72143)
 		end
 	else
 		local hp, max = UnitHealth(unitId), UnitHealthMax(unitId)
 		if not max or max == 0 then return end
-		local nextTickHP = hp - tickDamage
+		local nextTickHP = hp - args.extraSpellId
 		-- Will the shambler die from the next tick?
 		if nextTickHP <= 0 then return end
 		local percentHp = (nextTickHP / max) * 100
 		-- This sucker will frenzy in 5 seconds
 		if percentHp < 21 then
-			self:Message(70372, L["frenzy_soon_message"], "Important", 72143, "Info")
-			self:Bar(70372, L["frenzy_bar"]:format(horrorName), 5, 72143)
+			self:Message(70372, "Important", "Info", L["frenzy_soon_message"], 72143)
+			self:Bar(70372, 5, L["frenzy_bar"]:format(args.destName), 72143)
 		end
 	end
 end
 
-function mod:Frenzy(_, _, _, _, _, _, _, _, _, dGUID)
-	frenzied[dGUID] = true
-	self:Message(70372, L["frenzy_message"], "Important", 72143, "Long")
+function mod:Frenzy(args)
+	frenzied[args.destGUID] = true
+	self:Message(70372, "Important", "Long", L["frenzy_message"], 72143)
 end
 
-function mod:Horror(_, spellId)
-	self:Message(70372, L["horror_message"], "Attention", spellId)
-	self:Bar(70372, L["horror_bar"], 60, spellId)
+function mod:Horror(args)
+	self:Message(70372, "Attention", nil, L["horror_message"])
+	self:CDBar(70372, 60, L["horror_bar"])
 end
 
 function mod:FuryofFrostmourne()
-	self:StopBar(L["defile_bar"])
-	self:StopBar(L["reaper_bar"])
-	self:StopBar(L["vilespirits_bar"])
-	self:StopBar(L["harvestsoul_bar"])
-	self:Bar(72350, L["last_phase_bar"], 160, 72350)
+	self:StopBar(72762) -- Defile
+	self:StopBar(69409) -- Soul Reaper
+	self:StopBar(70498) -- Vile Spirits
+	self:StopBar(68980) -- Harvest Soul
+	self:Bar(72350, 160, L["last_phase_bar"])
 end
 
-function mod:Infest(_, spellId, _, _, spellName)
-	self:Message(70541, spellName, "Urgent", spellId)
-	self:Bar(70541, L["infest_bar"], 22, spellId)
+function mod:Infest(args)
+	self:Message(70541, "Urgent")
+	self:CDBar(70541, 22)
 end
 
-function mod:VileSpirits(_, spellId, _, _, spellName)
-	self:Message(70498, spellName, "Urgent", spellId)
-	self:Bar(70498, L["vilespirits_bar"], 30.5, spellId)
+function mod:VileSpirits(args)
+	self:Message(70498, "Urgent")
+	self:CDBar(70498, 30.5)
 end
 
-function mod:SoulReaper(player, spellId, _, _, spellName)
-	self:TargetMessage(69409, spellName, player, "Personal", spellId, "Alert")
-	self:Bar(69409, L["reaper_bar"], 30, spellId)
+function mod:SoulReaper(args)
+	self:TargetMessage(69409, args.destName, "Personal", "Alert")
+	self:CDBar(69409, 30)
 end
 
-function mod:NecroticPlague(player, spellId, _, _, spellName)
-	self:TargetMessage(70337, spellName, player, "Personal", spellId, "Alert")
-	if UnitIsUnit(player, "player") then self:Flash(70337) end
-	self:Bar(70337, L["necroticplague_bar"], 30, spellId)
-	self:SecondaryIcon(70337, player)
+function mod:NecroticPlague(args)
+	if self:Me(args.destGUID) then
+		self:Flash(70337)
+	end
+	self:TargetMessage(70337, args.destName, "Personal", "Alert")
+	self:Bar(70337, 30)
+	self:SecondaryIcon(70337, args.destName)
 end
 
 do
@@ -225,13 +199,13 @@ do
 	local function scanRaid()
 		for i = 1, GetNumGroupMembers() do
 			local player = GetRaidRosterInfo(i)
-			if player then
-				local debuffed, _, _, _, _, _, expire = UnitDebuff(player, plague)
-				if debuffed and (expire - GetTime()) > 13 then
-					mod:TargetMessage(70337, plague, player, "Personal", 70337, "Alert")
-					if UnitIsUnit(player, "player") then mod:Flash(70337) end
-					mod:SecondaryIcon(70337, player)
+			local debuffed, _, _, _, _, _, expire = UnitDebuff(player, plague)
+			if debuffed and (expire - GetTime()) > 13 then
+				if UnitIsUnit(player, "player") then
+					mod:Flash(70337)
 				end
+				mod:TargetMessage(70337, player, "Personal", "Alert")
+				mod:SecondaryIcon(70337, player)
 			end
 		end
 	end
@@ -240,149 +214,152 @@ do
 	end
 end
 
-function mod:Enrage(_, spellId, _, _, spellName)
-	if class == "HUNTER" or class == "ROGUE" then
-		self:Message(72143, spellName, "Attention", spellId, "Info")
-		self:Bar(72143, L["enrage_bar"], 21, spellId)
+function mod:Enrage(args)
+	if self:Dispeller("enrage", true) then
+		self:Message(72143, "Attention", "Alert")
+		self:CDBar(72143, 21)
 	else
-		self:Message(72143, spellName, "Attention", spellId)
+		self:Message(72143, "Attention")
 	end
 end
 
-function mod:RagingSpirit(player, spellId, _, _, spellName)
-	self:TargetMessage(69200, spellName, player, "Personal", spellId, "Alert")
-	self:Bar(69200, L["ragingspirit_bar"], 23, spellId)
+function mod:RagingSpirit(args)
+	self:TargetMessage(69200, args.destName, "Personal", "Alert")
+	self:Bar(69200, 23) -- Raging Spirit
 end
 
-local last = 0
-function mod:DefileRun(player, spellId)
-	local time = GetTime()
-	if (time - last) > 2 then
-		last = time
-		if UnitIsUnit(player, "player") then
-			self:Message(72762, L["defile_message"], "Personal", spellId, "Info")
-			self:Flash(72762)
+do
+	local prev = 0
+	function mod:DefileRun(args)
+		local t = GetTime()
+		if t-prev > 2 then
+			prev = t
+			if self:Me(args.destGUID) then
+				self:Message(72762, "Personal", "Info", CL["you"]:format(args.spellName))
+				self:Flash(72762)
+			end
 		end
 	end
 end
 
 do
+	local hugged, prev = mod:NewTargetList(), 0
 	local function ValkyrHugCheck()
 		for i=1, GetNumGroupMembers() do
-			local n = GetRaidRosterInfo(i)
-			if UnitInVehicle(n) then
-				hugged[#hugged + 1] = n
+			local player = GetRaidRosterInfo(i)
+			if UnitInVehicle(player) then
+				hugged[#hugged + 1] = player
 			end
 		end
-		mod:TargetMessage(69037, L["valkyrhug_message"], hugged, "Urgent", 71844)
+		mod:TargetMessage(69037, hugged, "Urgent", nil, L["valkyrhug_message"], 71844)
 	end
-
-	local t = 0
-	function mod:Valkyr(_, spellId)
-		local time = GetTime()
-		if (time - t) > 4 then
-			t = time
-			self:Message(69037, L["valkyr_message"], "Attention", 71844)
-			self:Bar(69037, L["valkyr_bar"], 46, 71844)
+	function mod:Valkyr(args)
+		local t = GetTime()
+		if t-prev > 4 then
+			prev = t
+			self:Message(69037, "Attention", nil, L["valkyr_message"], 71844)
+			self:Bar(69037, 46, L["valkyr_bar"], 71844)
 			self:ScheduleTimer(ValkyrHugCheck, 6.1)
 		end
 	end
 end
 
-function mod:HarvestSoul(player, spellId, _, _, spellName)
+function mod:HarvestSoul(args)
 	if self:Heroic() then
-		self:StopBar(L["defile_bar"])
-		self:StopBar(L["reaper_bar"])
-		self:StopBar(L["ragingspirit_bar"])
-		self:Bar(68980, L["cave_phase"], 50, spellId)
-		self:Bar(68980, L["harvestsoul_bar"], 105, spellId)
+		self:StopBar(72762) -- Defile
+		self:StopBar(69409) -- Soul Reaper
+		self:StopBar(69200) -- Raging Spirit
+		self:Bar(68980, 50, L["cave_phase"])
+		self:Bar(68980, 105)
 	else
-		self:Bar(68980, L["harvestsoul_bar"], 75, spellId)
-		if UnitIsUnit(player, "player") then self:Flash(68980) end
-		self:TargetMessage(68980, spellName, player, "Attention", spellId)
-		self:SecondaryIcon(68980, player)
+		if self:Me(args.destGUID) then
+			self:Flash(68980)
+		end
+		self:TargetMessage(68980, args.destName, "Attention")
+		self:Bar(68980, 75)
+		self:SecondaryIcon(68980, args.destName)
 	end
 end
 
-function mod:HSRemove(player, spellId)
-	self:SecondaryIcon(68980, false)
+function mod:HSRemove(args)
+	self:SecondaryIcon(68980)
 end
 
-function mod:RemorselessWinter(_, spellId)
+function mod:RemorselessWinter(args)
 	phase = phase + 1
-	self:StopBar(L["necroticplague_bar"])
-	self:StopBar(L["horror_bar"])
-	self:StopBar(L["infest_bar"])
-	self:StopBar(L["defile_bar"])
-	self:StopBar(L["reaper_bar"])
 	self:StopBar(L["valkyr_bar"])
-	self:StopBar(L["trap_bar"])
-	self:Message(68981, L["remorselesswinter_message"], "Urgent", spellId, "Alert")
-	self:Bar(72262, L["quake_bar"], 62, 72262)
-	self:Bar(69200, L["ragingspirit_bar"], 15, spellId)
+	self:StopBar(L["horror_bar"])
+	self:StopBar(70337) -- Necrotic Plague
+	self:StopBar(70541) -- Infest
+	self:StopBar(72762) -- Defile
+	self:StopBar(69409) -- Soul Reaper
+	self:StopBar(73529) -- Shadow Trap
+
+	self:Message(68981, "Urgent", "Long", CL["cast"]:format(args.spellName))
+	self:Bar(72262, 62) -- Quake
+	self:Bar(69200, 15) -- Raging Spirit
 end
 
-function mod:Quake(_, spellId)
+function mod:Quake(args)
 	phase = phase + 1
-	self:StopBar(L["ragingspirit_bar"])
-	self:Message(72262, L["quake_message"], "Urgent", spellId, "Alert")
-	self:Bar(72762, L["defile_bar"], 37, 72762)
-	self:Bar(70541, L["infest_bar"], 13, 70541)
-	self:Bar(69409, L["reaper_bar"], 39, 69409)
+	self:StopBar(69200) -- Raging Spirit
+	self:Message(72262, "Urgent", "Long", CL["cast"]:format(args.spellName))
+	self:Bar(72762, 37) -- Defile
+	self:CDBar(70541, 13) -- Infest
+	self:CDBar(69409, 39) -- Soul Reaper
 	if phase == 3 then
-		self:Bar(69037, L["valkyr_bar"], 24, 71844)
+		self:Bar(69037, 24, L["valkyr_bar"], 71844)
 	elseif phase == 5 then
-		self:Bar(70498, L["vilespirits_bar"], 21, 70498)
-		self:Bar(68980, L["harvestsoul_bar"], 12, 68980)
+		self:CDBar(70498, 21) -- Vile Spirits
+		self:Bar(68980, 12) -- Harvest Soul
 	end
 end
 
 do
-	local id, name, handle = nil, nil, nil
+	local handle = nil
 	local function scanTarget()
 		local bossId = mod:GetUnitIdByGUID(36597)
 		if not bossId then return end
-		local target = UnitName(bossId .. "target")
-		if target then
-			if UnitIsUnit(target, "player") then
+		local bossTarget = bossId.."target"
+		if UnitExists(bossTarget) then
+			if UnitIsUnit(bossTarget, "player") then
 				mod:Flash(72762)
 				mod:Say(72762)
 			end
-			mod:TargetMessage(72762, name, target, "Important", id, "Alert")
+			local target = mod:UnitName(bossTarget)
+			mod:TargetMessage(72762, target, "Important", "Alert")
 			mod:PrimaryIcon(72762, target)
 		end
 		handle = nil
 	end
-
-	function mod:DefileCast(player, spellId, _, _, spellName)
-		id, name = spellId, spellName
+	function mod:DefileCast(args)
 		self:CancelTimer(handle)
-		self:Bar(72762, L["defile_bar"], 32, 72762)
-		handle = self:ScheduleTimer(scanTarget, 0.01)
+		self:Bar(72762, 32)
+		handle = self:ScheduleTimer(scanTarget, 0.01, args.spellName)
 	end
 end
 
 do
 	local scheduled = nil
-	local function trapTarget(spellName)
+	local function trapTarget()
 		scheduled = nil
 		local bossId = mod:GetUnitIdByGUID(36597)
 		if not bossId then return end
-		local target = UnitName(bossId .. "target")
-		if target then
-			if UnitIsUnit(target, "player") then
+		local bossTarget = bossId.."target"
+		if UnitExists(bossTarget) then
+			if UnitIsUnit(bossTarget, "player") then
 				mod:Flash(73529)
 				mod:Say(73529)
 			end
-			mod:TargetMessage(73529, L["trap_message"], target, "Attention", 73539)
+			local target = mod:UnitName(bossTarget)
+			mod:TargetMessage(73529, target, "Attention")
 			mod:PrimaryIcon(73529, target)
 		end
 	end
-	function mod:ShadowTrap(_, spellId, _, _, spellName)
+	function mod:ShadowTrap(args)
 		if not scheduled then
-			scheduled = true
-			self:ScheduleTimer(trapTarget, 0.01, spellName)
-			self:Bar(73529, L["trap_bar"], 16, spellId)
+			scheduled = self:ScheduleTimer(trapTarget, 0.01)
+			self:Bar(73529, 16)
 		end
 	end
 end

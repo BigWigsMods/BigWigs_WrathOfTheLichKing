@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Festergut", 604)
+local mod, CL = BigWigs:NewBoss("Festergut", 604)
 if not mod then return end
 mod:RegisterEnableMob(36626)
 mod.toggleOptions = {{69279, "FLASH"}, 69165, 69195, 72219, 69240, 72295, "proximity", "berserk", "bosskill"}
@@ -16,7 +16,6 @@ mod.optionHeaders = {
 -- Locals
 --
 
-local sporeTargets = mod:NewTargetList()
 local count = 1
 
 --------------------------------------------------------------------------------
@@ -27,17 +26,8 @@ local L = mod:NewLocale("enUS", true)
 if L then
 	L.engage_trigger = "Fun time?"
 
-	L.inhale_message = "Inhale Blight %d"
-	L.inhale_bar = "Inhale %d"
-
+	L.inhale_bar = "Inhale (%d)"
 	L.blight_warning = "Pungent Blight in ~5sec!"
-	L.blight_bar = "Next Blight"
-
-	L.bloat_message = "%2$dx Gastric Bloat on %1$s"
-	L.bloat_bar = "~Gastric Bloat"
-
-	L.spore_bar = "~Gas Spores"
-
 	L.ball_message = "Goo ball incoming!"
 end
 L = mod:GetLocale()
@@ -64,8 +54,8 @@ end
 function mod:OnEngage()
 	count = 1
 	self:Berserk(300, true)
-	self:Bar(69279, L["spore_bar"], 20, 69279)
-	self:Bar(69165, L["inhale_bar"]:format(count), 33.5, 69165)
+	self:CDBar(69279, 20) -- Gas Spore
+	self:Bar(69165, 33.5, L["inhale_bar"]:format(count))
 	self:OpenProximity("proximity", 9)
 end
 
@@ -74,60 +64,55 @@ end
 --
 
 do
-	local scheduled = nil
-	local function sporeWarn(spellName)
-		mod:TargetMessage(69279, spellName, sporeTargets, "Urgent", 69279, "Alert")
+	local sporeTargets, scheduled = mod:NewTargetList(), nil
+	local function sporeWarn()
+		mod:TargetMessage(69279, sporeTargets, "Urgent", "Alert")
 		scheduled = nil
 	end
-	local function sporeNext()
-		mod:Bar(69279, L["spore_bar"], 28, 69279)
-	end
-	function mod:Spores(player, spellId, _, _, spellName)
-		sporeTargets[#sporeTargets + 1] = player
-		if UnitIsUnit(player, "player") then
+	function mod:Spores(args)
+		sporeTargets[#sporeTargets + 1] = args.destName
+		if self:Me(args.destGUID) then
 			self:Flash(69279)
 		end
 		if not scheduled then
-			scheduled = true
-			self:ScheduleTimer(sporeWarn, 0.2, spellName)
-			self:ScheduleTimer(sporeNext, 12)
-			local explodeName = GetSpellInfo(67729) --"Explode"
-			self:Bar(69279, explodeName, 12, spellId)
+			scheduled = self:ScheduleTimer(sporeWarn, 0.2, args.spellName)
+			self:ScheduleTimer("CDBar", 12, 69279, 28) -- Gas Spore
+			self:Bar(69279, 12, 67729) -- Explode
 		end
 	end
 end
 
-function mod:InhaleCD(_, spellId, _, _, spellName)
-	self:Message(69165, L["inhale_message"]:format(count), "Attention", spellId)
+function mod:InhaleCD(args)
+	self:Message(69165, "Attention", nil, CL["count"]:format(args.spellName, count))
 	count = count + 1
 	if count == 4 then
-		self:DelayedMessage(69195, 28.5, L["blight_warning"], "Attention")
-		self:Bar(69195, L["blight_bar"], 33.5, 69195)
+		self:DelayedMessage(69195, 28.5, "Attention", L["blight_warning"])
+		self:Bar(69195, 33.5)
 	else
-		self:Bar(69165, L["inhale_bar"]:format(count), 33.5, spellId)
+		self:Bar(69165, 33.5, L["inhale_bar"]:format(count))
 	end
 end
 
-function mod:Blight(_, spellId, _, _, spellName)
+function mod:Blight(args)
 	count = 1
-	self:Message(69195, spellName, "Attention", spellId)
-	self:Bar(69165, L["inhale_bar"]:format(count), 33.5, 69165)
+	self:Message(69195, "Attention")
+	self:Bar(69165, 33.5, L["inhale_bar"]:format(count))
 end
 
-function mod:Bloat(player, spellId, _, _, _, stack)
-	if stack > 5 then
-		self:TargetMessage(72219, L["bloat_message"], player, "Positive", spellId, nil, stack)
-		self:Bar(72219, L["bloat_bar"], 10, spellId)
+function mod:Bloat(args)
+	if args.amount > 5 then
+		self:StackMessage(72219, args.destName, args.amount, "Positive")
+		self:CDBar(72219, 10)
 	end
 end
 
 do
 	local t = 0
-	function mod:VileGas(_, spellId, _, _, spellName)
+	function mod:VileGas(args)
 		local time = GetTime()
 		if (time - t) > 2 then
 			t = time
-			self:Message(69240, spellName, "Important", spellId)
+			self:Message(69240, "Important")
 		end
 	end
 end
@@ -143,7 +128,7 @@ end
 
 function mod:OnSync(sync, rest, nick)
 	if sync == "GooBall" then
-		self:Message(72295, L["ball_message"], "Important", 72295)
+		self:Message(72295, "Important", nil, L["ball_message"])
 	end
 end
 

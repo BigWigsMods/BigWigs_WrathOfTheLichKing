@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Valithria Dreamwalker", 604)
+local mod, CL = BigWigs:NewBoss("Valithria Dreamwalker", 604)
 if not mod then return end
 mod:RegisterEnableMob(36789, 37868, 36791, 37934, 37886, 37950, 37985)
 mod.toggleOptions = {69325, {71086, "FLASH"}, "suppresser", {"blazing", "ICON"}, "portal", "berserk", "bosskill"}
@@ -35,11 +35,9 @@ if L then
 	L.portalcd_bar = "Next Portals %d"
 	L.portal_trigger = "I have opened a portal into the Dream. Your salvation lies within, heroes..."
 
-	L.manavoid_message = "Mana Void on YOU!"
-
 	L.suppresser = "Suppressers spawn"
 	L.suppresser_desc = "Warns when a pack of Suppressers spawn."
-	L.suppresser_message = "~Suppressers"
+	L.suppresser_message = "Suppressers"
 
 	L.blazing = "Blazing Skeleton"
 	L.blazing_desc = "Blazing Skeleton |cffff0000estimated|r respawn timer. This timer may be inaccurate, use only as a rough guide."
@@ -73,14 +71,14 @@ do
 		blazingRepeater = nil
 	end
 	local function suppresserSpawn(time)
-		mod:Bar("suppresser", L["suppresser_message"], time, 70588)
+		mod:CDBar("suppresser", time, L["suppresser_message"], 70588)
 		mod:ScheduleTimer(suppresserSpawn, time, time)
 	end
 	local function blazingSpawn()
 		if not blazingTimers[blazingCount] then return end
-		mod:Bar("blazing", L["blazing"], blazingTimers[blazingCount], 69325)
+		mod:Bar("blazing", blazingTimers[blazingCount], L["blazing"], 69325)
 		mod:ScheduleTimer(blazingSpawn, blazingTimers[blazingCount])
-		mod:DelayedMessage("blazing", blazingTimers[blazingCount] - 5, L["blazing_warning"], "Positive")
+		mod:DelayedMessage("blazing", blazingTimers[blazingCount] - 5, "Positive", L["blazing_warning"])
 		blazingCount = blazingCount + 1
 		if not blazingRepeater and (UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) and bit.band(mod.db.profile.blazing, BigWigs.C.ICON) == BigWigs.C.ICON then
 			blazingRepeater = mod:ScheduleRepeatingTimer(scanTarget, 0.5)
@@ -89,18 +87,18 @@ do
 	function mod:OnEngage()
 		portalCount = 1
 		if self:Heroic() then
-			self:Bar("suppresser", L["suppresser_message"], 14, 70588)
-			self:Bar("portal", L["portalcd_bar"]:format(portalCount), 46, 72482)
+			self:CDBar("suppresser", 14, L["suppresser_message"], 70588)
+			self:Bar("portal", 46, L["portalcd_bar"]:format(portalCount), 72482)
 			self:ScheduleTimer(suppresserSpawn, 14, 31)
 			self:Berserk(420)
 		else
-			self:Bar("suppresser", L["suppresser_message"], 29, 70588)
-			self:Bar("portal", L["portalcd_bar"]:format(portalCount), 46, 72482)
+			self:CDBar("suppresser", 29, L["suppresser_message"], 70588)
+			self:Bar("portal", 46, L["portalcd_bar"]:format(portalCount), 72482)
 			self:ScheduleTimer(suppresserSpawn, 29, 58)
 		end
 		self:ScheduleTimer(blazingSpawn, 50)
-		self:Bar("blazing", L["blazing"], 50, 69325)
-		self:DelayedMessage("blazing", 45, L["blazing_warning"], "Positive")
+		self:Bar("blazing", 50, L["blazing"], 69325)
+		self:DelayedMessage("blazing", 45, "Positive", L["blazing_warning"])
 		blazingCount = 1
 	end
 end
@@ -109,30 +107,31 @@ end
 -- Event Handlers
 --
 
-function mod:LayWaste(_, spellId, _, _, spellName)
-	self:Message(69325, spellName, "Attention", spellId)
-	self:Bar(69325, spellName, 12, spellId)
+function mod:LayWaste(args)
+	self:Message(69325, "Attention")
+	self:Bar(69325, 12)
 end
 
-function mod:LayWasteRemoved(_, _, _, _, spellName)
-	self:StopBar(spellName)
+function mod:LayWasteRemoved(args)
+	self:StopBar(args.spellName)
 end
 
 function mod:Portal()
 	-- 46 sec cd until initial positioning, +14 sec until 'real' spawn.
-	self:Message("portal", L["portalcd_message"]:format(portalCount), "Important")
-	self:Bar("portal", L["portal_bar"], 14, 72482)
-	self:DelayedMessage("portal", 14, L["portal_message"], "Important")
+	self:Message("portal", "Important", nil, L["portalcd_message"]:format(portalCount), false)
+	self:Bar("portal", 14, L["portal_bar"], 72482)
+	self:DelayedMessage("portal", 14, "Important", L["portal_message"])
 	portalCount = portalCount + 1
-	self:Bar("portal", L["portalcd_bar"]:format(portalCount), 46, 72482)
+	self:Bar("portal", 46, L["portalcd_bar"]:format(portalCount), 72482)
 end
 
 do
-	local t = 0
-	function mod:ManaVoid(player, spellId)
-		if (GetTime()-t > 2) and UnitIsUnit(player, "player") and UnitPowerType("player") == 0 then
-			t = GetTime()
-			self:Message(71086, L["manavoid_message"], "Personal", spellId, "Alarm")
+	local prev = 0
+	function mod:ManaVoid(args)
+		local t = GetTime()
+		if t-prev > 2 and self:Me(args.destGUID) and UnitPowerType("player") == 0 then
+			prev = t()
+			self:Message(71086, "Personal", "Alarm", CL["you"]:format(args.spellName))
 			self:Flash(71086)
 		end
 	end
