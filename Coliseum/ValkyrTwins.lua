@@ -2,10 +2,9 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("The Twin Val'kyr", 543)
+local mod, CL = BigWigs:NewBoss("The Twin Val'kyr", 543)
 if not mod then return end
--- 34496 Darkbane, 34497 Lightbane
-mod:RegisterEnableMob(34496, 34497)
+mod:RegisterEnableMob(34496, 34497) -- Darkbane, Lightbane
 mod.toggleOptions = {{"vortex", "FLASH"}, "shield", "next", {"touch", "FLASH"}, "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
@@ -60,7 +59,7 @@ end
 function mod:OnEngage()
 	if started then return end
 	started = true
-	self:Bar("next", L["vortex_or_shield_cd"], 45, 39089)
+	self:Bar("next", 45, L["vortex_or_shield_cd"], 39089)
 	self:Berserk(self:Heroic() and 360 or 480)
 end
 
@@ -68,50 +67,48 @@ end
 -- Event Handlers
 --
 
-function mod:Touch(player, spellId, _, _, spellName)
-	self:TargetMessage("touch", spellName, player, "Personal", spellId, "Info")
-	if UnitIsUnit(player, "player") then self:Flash("touch", spellId) end
-end
-
-function mod:DarkShield(_, spellId, _, _, spellName)
-	self:Bar("shield", L["vortex_or_shield_cd"], 45, 39089)
-	local d = UnitDebuff("player", essenceDark)
-	if d then
-		self:Message("shield", spellName, "Important", spellId, "Alert")
-	else
-		self:Message("shield", spellName, "Urgent", spellId)
+function mod:Touch(args)
+	self:TargetMessage("touch", args.destName, "Personal", "Info", args.spellId)
+	if self:Me(args.destGUID) then
+		self:Flash("touch", args.spellId)
 	end
 end
 
-function mod:LightShield(_, spellId, _, _, spellName)
-	self:Bar("shield", L["vortex_or_shield_cd"], 45, 39089)
-	local d = UnitDebuff("player", essenceLight)
-	if d then
-		self:Message("shield", spellName, "Important", spellId, "Alert")
+function mod:DarkShield(args)
+	self:Bar("shield", 45, L["vortex_or_shield_cd"], 39089)
+	if UnitDebuff("player", essenceDark) then
+		self:Message("shield", "Important", "Alert", args.spellId)
 	else
-		self:Message("shield", spellName, "Urgent", spellId)
+		self:Message("shield", "Urgent", nil, args.spellId)
 	end
 end
 
-function mod:LightVortex(_, spellId, _, _, spellName)
-	self:Bar("vortex", L["vortex_or_shield_cd"], 45, 39089)
-	local d = UnitDebuff("player", essenceLight)
-	if d then
-		self:Message("vortex", spellName, "Positive", spellId)
+function mod:LightShield(args)
+	self:Bar("shield", 45, L["vortex_or_shield_cd"], 39089)
+	if UnitDebuff("player", essenceLight) then
+		self:Message("shield", "Important", "Alert", args.spellId)
 	else
-		self:Message("vortex", spellName, "Personal", spellId, "Alarm")
-		self:Flash("vortex", spellId)
+		self:Message("shield", "Urgent", nil, args.spellId)
 	end
 end
 
-function mod:DarkVortex(_, spellId, _, _, spellName)
-	self:Bar("vortex", L["vortex_or_shield_cd"], 45, 39089)
-	local d = UnitDebuff("player", essenceDark)
-	if d then
-		self:Message("vortex", spellName, "Positive", spellId)
+function mod:LightVortex(args)
+	self:Bar("vortex", 45, L["vortex_or_shield_cd"], 39089)
+	if UnitDebuff("player", essenceLight) then
+		self:Message("vortex", "Positive", nil, args.spellId)
 	else
-		self:Message("vortex", spellName, "Personal", spellId, "Alarm")
-		self:Flash("vortex", spellId)
+		self:Message("vortex", "Personal", "Alarm", args.spellId)
+		self:Flash("vortex", args.spellId)
+	end
+end
+
+function mod:DarkVortex(args)
+	self:Bar("vortex", 45, L["vortex_or_shield_cd"], 39089)
+	if UnitDebuff("player", essenceDark) then
+		self:Message("vortex", "Positive", nil, args.spellId)
+	else
+		self:Message("vortex", "Personal", "Alarm", args.spellId)
+		self:Flash("vortex", args.spellId)
 	end
 end
 

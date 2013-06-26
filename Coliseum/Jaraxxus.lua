@@ -37,7 +37,6 @@ if L then
 
 	L.infernal_bar = "Volcano spawns"
 	L.netherportal_bar = "Portal spawns"
-	L.netherpower_bar = "~Next Nether Power"
 
 	L.kiss_message = "Kiss on YOU!"
 	L.kiss_interrupted = "Interrupted!"
@@ -72,11 +71,11 @@ function mod:OnBossEnable()
 end
 
 function mod:FirstEngage()
-	self:Bar("adds", L["engage"], 12, "INV_Gizmo_01")
+	self:Bar("adds", 12, L["engage"], "INV_Gizmo_01")
 end
 
 function mod:OnEngage()
-	self:Bar("adds", L["netherportal_bar"], 20, 66269)
+	self:Bar("adds", 20, L["netherportal_bar"], 66269)
 	if self:Heroic() then
 		self:Berserk(600)
 	end
@@ -86,54 +85,59 @@ end
 -- Event Handlers
 --
 
-function mod:IncinerateFlesh(player, spellId)
-	self:TargetMessage(66237, L["incinerate_message"], player, "Urgent", spellId, "Info")
-	self:Bar(66237, L["incinerate_other"]:format(player), 12, spellId)
+function mod:IncinerateFlesh(args)
+	self:TargetMessage(args.spellId, args.destName, "Urgent", "Info", L["incinerate_message"])
+	self:Bar(args.spellId, 12, L["incinerate_other"]:format(args.destName))
 end
 
-function mod:IncinerateFleshRemoved(player, spellId)
-	self:Message(66237, L["incinerate_safe"]:format(player), "Positive", 17) -- Power Word: Shield icon.
-	self:StopBar(L["incinerate_other"]:format(player))
+function mod:IncinerateFleshRemoved(args)
+	self:Message(args.spellId, "Positive", nil, L["incinerate_safe"]:format(args.destName), 17) -- Power Word: Shield icon.
+	self:StopBar(L["incinerate_other"]:format(args.destName))
 end
 
-function mod:LegionFlame(player, spellId)
-	self:TargetMessage(66197, L["legionflame_message"], player, "Personal", spellId, "Alert")
-	if UnitIsUnit(player, "player") then self:Flash(66197) end
-	self:Bar(66197, L["legionflame_other"]:format(player), 8, spellId)
-	self:PrimaryIcon(66197, player)
+function mod:LegionFlame(args)
+	self:TargetMessage(args.spellId, args.destName, "Personal", "Alert", L["legionflame_message"])
+	if self:Me(args.destGUID) then
+		self:Flash(args.spellId)
+	end
+	self:Bar(args.spellId, 8, L["legionflame_other"]:format(args.destName))
+	self:PrimaryIcon(args.spellId, args.destName)
 end
 
-function mod:NetherPower(unit, spellId, _, _, spellName)
-	if unit == self.displayName then
-		self:Message(66228, spellName, "Attention", spellId)
-		self:Bar(66228, L["netherpower_bar"], 44, spellId)
+function mod:NetherPower(args)
+	if args.destName == self.displayName then
+		self:Message(args.spellId, "Attention")
+		self:CDBar(args.spellId, 44)
 	end
 end
 
-function mod:NetherPortal(_, spellId, _, _, spellName)
-	self:Message("adds", spellName, "Urgent", spellId, "Alarm")
-	self:Bar("adds", L["infernal_bar"], 60, 66258)
+function mod:NetherPortal(args)
+	self:Message("adds", "Urgent", "Alarm", args.spellId)
+	self:Bar("adds", 60, L["infernal_bar"], 66258)
 end
 
-function mod:InfernalEruption(_, spellId, _, _, spellName)
-	self:Message("adds", spellName, "Urgent", spellId, "Alarm")
-	self:Bar("adds", L["netherportal_bar"], 60, 66269)
+function mod:InfernalEruption(args)
+	self:Message("adds", "Urgent", "Alarm", args.spellId)
+	self:Bar("adds", 60, L["netherportal_bar"], 66269)
 end
 
-function mod:MistressKiss(player, spellId)
-	if not UnitIsUnit(player, "player") then return end
-	self:Message(66334, L["kiss_message"], "Personal", spellId)
-	self:Bar(66334, L["kiss_message"], 15, spellId)
-	self:Flash(66334)
+function mod:MistressKiss(args)
+	if self:Me(args.destGUID) then
+		self:Message(args.spellId, "Personal", nil, L["kiss_message"])
+		self:Bar(args.spellId, 15, L["kiss_message"])
+		self:Flash(args.spellId)
+	end
 end
 
-function mod:MistressKissRemoved(player, spellId)
-	if not UnitIsUnit(player, "player") then return end
-	self:StopBar(L["kiss_message"])
+function mod:MistressKissRemoved(args)
+	if self:Me(args.destGUID) then
+		self:StopBar(L["kiss_message"])
+	end
 end
 
-function mod:MistressKissInterrupted(player, spellId)
-	if not UnitIsUnit(player, "player") then return end
-	self:Message(66334, L["kiss_interrupted"], "Personal", spellId)
+function mod:MistressKissInterrupted(args)
+	if self:Me(args.destGUID) then
+		self:Message(args.spellId, "Personal", nil, L["kiss_interrupted"])
+	end
 end
 

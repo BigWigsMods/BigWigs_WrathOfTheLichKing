@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("The Beasts of Northrend", 543)
+local mod, CL = BigWigs:NewBoss("The Beasts of Northrend", 543)
 if not mod then return end
 mod.toggleOptions = {"snobold", 66331, 66330, {66317, "FLASH"}, "submerge", {66883, "FLASH"}, "spew", "sprays", {66823, "FLASH"}, 66869, 68335, "proximity", 66770, {"charge", "ICON", "SAY", "FLASH"}, 66758, 66759, "bosses", "berserk", "bosskill"}
 mod.optionHeaders = {
@@ -16,10 +16,7 @@ mod.optionHeaders = {
 -- Locals
 --
 
-local burn = mod:NewTargetList()
-local toxin = mod:NewTargetList()
 local snobolledWarned = {}
-local snobolled = GetSpellInfo(66406)
 local sprayTimer = nil
 local handle_Jormungars = nil
 
@@ -41,8 +38,6 @@ if L then
 	L.snobold = "Snobold"
 	L.snobold_desc = "Warn who gets a Snobold on their heads."
 	L.snobold_message = "Add"
-	L.impale_message = "%2$dx Impale on %1$s"
-	L.firebomb_message = "Fire on YOU!"
 
 	-- Jormungars
 	L.submerge = "Submerge"
@@ -54,10 +49,9 @@ if L then
 	L.slime_message = "Slime on YOU!"
 	L.burn_spell = "Burn"
 	L.toxin_spell = "Toxin"
-	L.spray = "~Next Spray"
+	L.spray = "Next Spray"
 
 	-- Icehowl
-	L.butt_bar = "~Butt Cooldown"
 	L.charge = "Furious Charge"
 	L.charge_desc = "Warn about Furious Charge on players."
 	L.charge_trigger = "glares at"
@@ -92,7 +86,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Impale", 66331)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "Impale", 66331)
 	self:Log("SPELL_CAST_START", "StaggeringStomp", 66330)
-	self:RegisterEvent("UNIT_AURA")
 
 	-- Jormungars
 	self:Log("SPELL_CAST_SUCCESS", "SlimeCast", 66883)
@@ -121,21 +114,22 @@ end
 
 function mod:OnEngage()
 	self:CloseProximity()
-	self:Bar("bosses", L["boss_incoming"]:format(L.gormok), 20, 66331)
+	self:Bar("bosses", 20, L["boss_incoming"]:format(L.gormok), 66331)
 	if self:Heroic() then
-		self:Bar("bosses", L["boss_incoming"]:format(L.jormungars), 180, "INV_Misc_MonsterScales_18")
+		self:Bar("bosses", 180, L["boss_incoming"]:format(L.jormungars), "INV_Misc_MonsterScales_18")
 	else
 		self:Berserk(900)
 	end
 	wipe(snobolledWarned)
+	self:RegisterEvent("UNIT_AURA")
 end
 
 function mod:Jormungars()
 	local m = L["boss_incoming"]:format(L.jormungars)
-	self:Message("bosses", m, "Positive")
-	self:Bar("bosses", m, 15, "INV_Misc_MonsterScales_18")
+	self:Message("bosses", "Positive", nil, m)
+	self:Bar("bosses", 15, m, "INV_Misc_MonsterScales_18")
 	if self:Heroic() then
-		self:Bar("bosses", L["boss_incoming"]:format(L.icehowl), 200, "INV_Misc_MonsterHorn_07")
+		self:Bar("bosses", 200, L["boss_incoming"]:format(L.icehowl), "INV_Misc_MonsterHorn_07")
 	end
 	self:OpenProximity("proximity", 10)
 	-- The first worm to spray is Acidmaw, he has a 10 second spray timer after emerge
@@ -145,8 +139,8 @@ end
 
 function mod:Icehowl()
 	local m = L["boss_incoming"]:format(L.icehowl)
-	self:Message("bosses", m, "Positive")
-	self:Bar("bosses", m, 10, "INV_Misc_MonsterHorn_07")
+	self:Message("bosses", "Positive", nil, m)
+	self:Bar("bosses", 10, m, "INV_Misc_MonsterHorn_07")
 	self:CancelTimer(handle_Jormungars)
 	handle_Jormungars = nil
 	self:StopBar(L["spray"])
@@ -161,37 +155,41 @@ end
 -- Gormok the Impaler
 --
 
-function mod:UNIT_AURA(event, unit)
-	local name, _, icon = UnitDebuff(unit, snobolled)
-	local n = UnitName(unit)
-	if snobolledWarned[n] and not name then
-		snobolledWarned[n] = nil
-	elseif name and not snobolledWarned[n] then
-		self:TargetMessage("snobold", L["snobold_message"], n, "Attention", icon)
-		snobolledWarned[n] = true
+do
+	local UnitDebuff = UnitDebuff
+	local snobolled = GetSpellInfo(66406)
+	function mod:UNIT_AURA(_, unit)
+		local debuffed = UnitDebuff(unit, snobolled)
+		local player = self:UnitName(unit)
+		if snobolledWarned[player] and not debuffed then
+			snobolledWarned[player] = nil
+		elseif debuffed and not snobolledWarned[player] then
+			self:TargetMessage("snobold", player, "Attention", nil, L["snobold_message"], 66406)
+			snobolledWarned[player] = true
+		end
 	end
 end
 
-function mod:Impale(player, spellId, _, _, spellName, stack)
-	if stack and stack > 1 then
-		self:TargetMessage(66331, L["impale_message"], player, "Urgent", spellId, "Info", stack)
+function mod:Impale(args)
+	if args.amount then
+		self:StackMessage(args.spellId, args.destName, args.amount, "Urgent", "Info")
 	end
-	self:Bar(66331, spellName, 10, spellId)
+	self:Bar(args.spellId, 10)
 end
 
-function mod:StaggeringStomp(_, spellId, _, _, spellName)
-	self:Message(66330, spellName, "Important", spellId)
-	self:Bar(66330, spellName, 21, spellId)
+function mod:StaggeringStomp(args)
+	self:Message(args.spellId, "Important")
+	self:Bar(args.spellId, 21)
 end
 
 do
-	local last = nil
-	function mod:FireBomb(player, spellId)
-		if UnitIsUnit(player, "player") then
+	local last = 0
+	function mod:FireBomb(args)
+		if self:Me(args.destGUID) then
 			local t = GetTime()
-			if not last or (t > last + 4) then
-				self:Message(66317, L["firebomb_message"], "Personal", spellId, last and nil or "Alarm")
-				self:Flash(66317)
+			if t-4 > last then
+				self:Message(args.spellId, "Personal", "Alarm", CL["you"]:format(args.spellName))
+				self:Flash(args.spellId)
 				last = t
 			end
 		end
@@ -208,87 +206,71 @@ do
 	end
 
 	function mod:Emerge()
-		self:Bar("submerge", L["submerge"], 45, "INV_Misc_MonsterScales_18")
+		self:Bar("submerge", 45, L["submerge"], "INV_Misc_MonsterScales_18")
 		handle_Jormungars = self:ScheduleTimer(submerge, 45)
 		-- Rain of Fire icon as a generic AoE spray icon .. good enough?
-		self:Bar("sprays", L["spray"], sprayTimer, 5740)
+		self:CDBar("sprays", sprayTimer, L["spray"], 5740)
 		sprayTimer = sprayTimer == 10 and 20 or 10
 	end
 
-	function mod:Spray(_, spellId, _, _, spellName)
-		self:Message("sprays", spellName, "Important", spellId)
-		self:Bar("sprays", L["spray"], 20, 5740)
+	function mod:Spray(args)
+		self:Message("sprays", "Important", nil, args.spellName, args.spellId)
+		self:CDBar("sprays", 20, L["spray"], 5740)
 	end
 end
 
 
-function mod:SlimeCast(_, spellId, _, _, spellName)
-	self:Message(66883, spellName, "Attention", spellId)
+function mod:SlimeCast(args)
+	self:Message(args.spellId, "Attention")
 end
 
-function mod:Spew(_, spellId, _, _, spellName)
-	self:Message("spew", spellName, "Attention", spellId)
+function mod:Spew(args)
+	self:Message("spew", "Attention", nil, args.spellName, args.spellId)
 end
 
 do
-	local handle = nil
-	local dontWarn = nil
+	local toxinTargets, scheduled = mod:NewTargetList(), nil
 	local function toxinWarn(spellId)
-		if not dontWarn then
-			mod:TargetMessage(66823, L["toxin_spell"], toxin, "Urgent", spellId)
-		else
-			dontWarn = nil
-			wipe(toxin)
-		end
-		handle = nil
+		mod:TargetMessage(spellId, toxinTargets, "Urgent", "Info", L["toxin_spell"])
+		scheduled = nil
 	end
-	function mod:Toxin(player, spellId)
-		toxin[#toxin + 1] = player
-		if handle then self:CancelTimer(handle) end
-		handle = self:ScheduleTimer(toxinWarn, 0.2, spellId)
-		if UnitIsUnit(player, "player") then
-			dontWarn = true
-			self:TargetMessage(66823, L["toxin_spell"], player, "Personal", spellId, "Info")
-			self:Flash(66823)
+	function mod:Toxin(args)
+		toxinTargets[#toxinTargets + 1] = args.destName
+		if self:Me(args.destGUID) then
+			self:Flash(args.spellId)
+		end
+		if not scheduled then 
+			scheduled = self:ScheduleTimer(toxinWarn, 0.5, args.spellId)
 		end
 	end
 end
 
 do
-	local handle = nil
-	local dontWarn = nil
+	local burnTargets, scheduled = mod:NewTargetList()
 	local function burnWarn(spellId)
-		if not dontWarn then
-			mod:TargetMessage(66869, L["burn_spell"], burn, "Urgent", spellId)
-		else
-			dontWarn = nil
-			wipe(burn)
-		end
-		handle = nil
+		mod:TargetMessage(spellId, L["burn_spell"], burnTargets, "Urgent", "Info")
+		scheduled = nil
 	end
-	function mod:Burn(player, spellId)
-		burn[#burn + 1] = player
-		if handle then self:CancelTimer(handle) end
-		handle = self:ScheduleTimer(burnWarn, 0.2, spellId)
-		if UnitIsUnit(player, "player") then
-			dontWarn = true
-			self:TargetMessage(66869, L["burn_spell"], player, "Important", spellId, "Info")
+	function mod:Burn(args)
+		burnTargets[#burnTargets + 1] = args.destName
+		if not scheduled then 
+			scheduled = self:ScheduleTimer(burnWarn, 0.5, args.spellId)
 		end
 	end
 end
 
-function mod:Enraged(_, spellId, _, _, spellName)
-	self:Message(68335, spellName, "Important", spellId, "Long")
+function mod:Enraged(args)
+	self:Message(args.spellId, "Important", "Long")
 end
 
 do
-	local last = nil
-	function mod:Slime(player, spellId)
-		if UnitIsUnit(player, "player") then
+	local last = 0
+	function mod:Slime(args)
+		if self:Me(args.destGUID) then
 			local t = GetTime()
-			if not last or (t > last + 4) then
-				self:Message(66883, L["slime_message"], "Personal", spellId, last and nil or "Alarm")
-				self:Flash(66883)
+			if t-4 > last then
+				self:Message(args.spellId, "Personal", "Alarm", L["slime_message"])
+				self:Flash(args.spellId)
 				last = t
 			end
 		end
@@ -299,31 +281,33 @@ end
 -- Icehowl
 --
 
-function mod:Rage(_, spellId, _, _, spellName)
-	self:Message(66759, spellName, "Important", spellId)
-	self:Bar(66759, spellName, 15, spellId)
+function mod:Rage(args)
+	self:Message(args.spellId, "Important")
+	self:Bar(args.spellId, 15)
 end
 
-function mod:Daze(_, spellId, _, _, spellName)
-	self:Message(66758, spellName, "Positive", spellId)
-	self:Bar(66758, spellName, 15, spellId)
+function mod:Daze(args)
+	self:Message(args.spellId, "Positive")
+	self:Bar(args.spellId, 15)
 end
 
-function mod:Butt(player, spellId, _, _, spellName)
-	self:TargetMessage(66770, spellName, player, "Attention", spellId)
-	self:Bar(66770, L["butt_bar"], 12, spellId)
+function mod:Butt(args)
+	self:TargetMessage(args.spellId, args.destName, "Attention")
+	self:CDBar(args.spellId, 12)
 end
 
-function mod:Charge(msg, unit, _, _, player)
-	if unit == L.icehowl then
-		local spellName = GetSpellInfo(52311)
-		self:TargetMessage("charge", spellName, player, "Personal", 52311, "Alarm")
-		if UnitIsUnit(player, "player") then
-			self:Flash("charge", 52311)
-			self:Say("charge", spellName)
+do
+	local spellName = GetSpellInfo(52311)
+	function mod:Charge(msg, unit, _, _, player)
+		if unit == L.icehowl then
+			self:TargetMessage("charge", player, "Personal", "Alarm", spellName, 52311)
+			if UnitIsUnit(player, "player") then
+				self:Flash("charge", 52311)
+				self:Say("charge", spellName)
+			end
+			self:Bar("charge", 7.5, spellName, 52311)
+			self:PrimaryIcon("charge", player)
 		end
-		self:Bar("charge", spellName, 7.5, 52311)
-		self:PrimaryIcon("charge", player)
 	end
 end
 
