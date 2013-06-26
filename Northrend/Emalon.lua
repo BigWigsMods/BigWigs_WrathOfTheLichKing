@@ -64,7 +64,7 @@ do
 		timer = nil
 	end
 
-	function mod:OverchargeIcon(ags)
+	function mod:OverchargeIcon(args)
 		if (not UnitIsGroupLeader("player") and not UnitIsGroupAssistant("player")) or bit.band(self.db.profile[overcharge], BigWigs.C.ICON) ~= BigWigs.C.ICON then return end
 		if not timer then
 			timer = self:ScheduleRepeatingTimer(scanTarget, 0.2, args.destGUID)
