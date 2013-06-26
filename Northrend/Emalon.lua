@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Emalon the Storm Watcher", 532)
+local mod, CL = BigWigs:NewBoss("Emalon the Storm Watcher", 532)
 if not mod then return end
 mod:RegisterEnableMob(33993)
 mod.toggleOptions = {64216, {64218, "ICON"}, "proximity", "berserk", "bosskill"}
@@ -13,11 +13,8 @@ mod.toggleOptions = {64216, {64218, "ICON"}, "proximity", "berserk", "bosskill"}
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.nova_next = "~Nova Cooldown"
-
 	L.overcharge_message = "A minion is overcharged!"
 	L.overcharge_bar = "Explosion"
-	L.overcharge_next = "~Overcharge Cooldown"
 end
 L = mod:GetLocale()
 
@@ -37,7 +34,7 @@ end
 
 function mod:OnEngage()
 	self:OpenProximity("proximity", 5)
-	self:Bar(64218, L["overcharge_next"], 45, 64218)
+	self:CDBar(64218, 45) -- Overcharge
 	self:Berserk(360)
 end
 
@@ -45,33 +42,33 @@ end
 -- Event Handlers
 --
 
-function mod:Nova(_, spellId, _, _, spellName)
-	self:Message(64216, spellName, "Attention", spellId)
-	self:Bar(64216, spellName, 5, spellId)
-	self:Bar(64216, L["nova_next"], 25, spellId)
+function mod:Nova(args)
+	self:Message(64216, "Attention")
+	self:Bar(64216, 5, CL["cast"]:format(args.spellName))
+	self:CDBar(64216, 25)
 end
 
-function mod:Overcharge(_, spellId, _, _, spellName)
-	self:Message(64218, L["overcharge_message"], "Positive", spellId)
-	self:Bar(64218, L["overcharge_bar"], 20, spellId)
-	self:Bar(64218, L["overcharge_next"], 45, spellId)
+function mod:Overcharge(args)
+	self:Message(args.spellId, "Positive", nil, L["overcharge_message"])
+	self:Bar(args.spellId, 20, L["overcharge_bar"])
+	self:CDBar(args.spellId, 45)
 end
 
 do
-	local overchargerepeater = nil
-	local function scanTarget(dGuid)
-		local unitId = mod:GetUnitIdByGUID(dGuid)
+	local overcharge, timer = GetSpellInfo(64218), nil
+	local function scanTarget(destGUID)
+		local unitId = mod:GetUnitIdByGUID(destGUID)
 		if not unitId then return end
 		SetRaidTarget(unitId, 8)
-		mod:CancelTimer(overchargerepeater)
-		overchargerepeater = nil
+		mod:CancelTimer(timer)
+		timer = nil
 	end
 
-	function mod:OverchargeIcon(...)
-		if overchargerepeater or (not IsRaidLeader() and not IsRaidOfficer()) then return end
-		if bit.band(self.db.profile[(GetSpellInfo(64218))], BigWigs.C.ICON) ~= BigWigs.C.ICON then return end
-		local dGuid = select(10, ...)
-		overchargerepeater = self:ScheduleRepeatingTimer(scanTarget, 0.2, dGuid)
+	function mod:OverchargeIcon(ags)
+		if (not UnitIsGroupLeader("player") and not UnitIsGroupAssistant("player")) or bit.band(self.db.profile[overcharge], BigWigs.C.ICON) ~= BigWigs.C.ICON then return end
+		if not timer then
+			timer = self:ScheduleRepeatingTimer(scanTarget, 0.2, args.destGUID)
+		end
 	end
 end
 

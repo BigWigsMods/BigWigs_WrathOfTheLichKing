@@ -73,7 +73,6 @@ function mod:OnBossEnable()
 	self:RegisterEvent("RAID_BOSS_WHISPER")
 	-- Since we don't have the actual emotes here we can't use :Emote
 	self:RegisterEvent("RAID_BOSS_EMOTE")
-	self:RegisterEvent("UNIT_HEALTH")
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
@@ -81,88 +80,89 @@ end
 
 function mod:OnEngage()
 	phase = 1
-	self:Bar("vortex", L["vortex_next"], 29, 56105)
-	self:DelayedMessage("vortex", 24, L["vortex_warning"], "Attention")
-	self:Bar("sparks", L["sparks"], 25, 56152)
-	self:DelayedMessage("sparks", 20, L["sparks_warning"], "Attention")
+	self:Bar("vortex", 29, L["vortex_next"], 56105)
+	self:DelayedMessage("vortex", 24, "Attention", L["vortex_warning"])
+	self:Bar("sparks", 25, L["sparks"], 56152)
+	self:DelayedMessage("sparks", 20, "Attention", L["sparks_warning"])
 	self:Berserk(600)
+	self:RegisterEvent("UNIT_HEALTH")
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Spark(unit, spellId)
-	if unit == self.displayName then
-		self:Message("sparkbuff", L["sparkbuff_message"], "Important", spellId)
+function mod:Spark(args)
+	if args.destName == self.displayName then
+		self:Message("sparkbuff", "Important", nil, L["sparkbuff_message"], args.spellId)
 	end
 end
 
-function mod:Static(target, spellId, _, _, spellName)
-	if UnitIsUnit(target, "player") then
-		self:Message(57429, spellName, "Urgent", spellId)
+function mod:Static(args)
+	if self:Me(args.destGUID) then
+		self:Message(args.spellId, "Urgent")
 	end
 end
 
-function mod:Vortex(_, spellId)
-	self:Bar("vortex", L["vortex"], 10, 56105)
-	self:Message("vortex", L["vortex_message"], "Attention", spellId)
-	self:Bar("vortex", L["vortex_next"], 59, 56105)
-	self:DelayedMessage("vortex", 54, L["vortex_warning"], "Attention")
+function mod:Vortex(args)
+	self:Bar("vortex", 10, L["vortex"], args.spellId)
+	self:Message("vortex", "Attention", nil, L["vortex_message"], args.spellId)
+	self:Bar("vortex", 59, L["vortex_next"], args.spellId)
+	self:DelayedMessage("vortex", 54, "Attention", L["vortex_warning"])
 
-	self:Bar("sparks", L["sparks"], 17, 56152)
-	self:DelayedMessage("sparks", 12, L["sparks_warning"], "Attention")
+	self:Bar("sparks", 17, L["sparks"], 56152)
+	self:DelayedMessage("sparks", 12, "Attention", L["sparks_warning"])
 end
 
 function mod:RAID_BOSS_WHISPER(event, msg, mob)
 	if phase == 3 and msg == L["surge_trigger"] then
-		self:Message("surge", L["surge_you"], "Personal", 60936, "Alarm") -- 60936 for phase 3, not 56505
+		self:Message("surge", "Personal", "Alarm", L["surge_you"], 60936) -- 60936 for phase 3, not 56505
 		self:Flash("surge", 60936)
 	end
 end
 
 function mod:RAID_BOSS_EMOTE(event, msg)
 	if phase == 1 then
-		self:Message("sparks", L["sparks_message"], "Important", 56152, "Alert")
-		self:Bar("sparks", L["sparks"], 30, 56152)
-		self:DelayedMessage("sparks", 25, L["sparks_warning"], "Attention")
+		self:Message("sparks", "Important", "Alert", L["sparks_message"], 56152)
+		self:Bar("sparks", 30, L["sparks"], 56152)
+		self:DelayedMessage("sparks", 25, "Attention", L["sparks_warning"])
 	elseif phase == 2 then
 		-- 43810 Frost Wyrm, looks like a dragon breathing 'deep breath' :)
 		-- Correct spellId for 'breath" in phase 2 is 56505
-		self:Message("breath", L["breath_message"], "Important", 43810, "Alert")
-		self:Bar("breath", L["breath"], 59, 43810)
-		self:DelayedMessage("breath", 54, L["breath_warning"], "Attention")
+		self:Message("breath", "Important", "Alert", L["breath_message"], 43810)
+		self:Bar("breath", 59, L["breath"], 43810)
+		self:DelayedMessage("breath", 54, "Attention", L["breath_warning"])
 	end
 end
 
 function mod:Phase2()
 	phase = 2
+	self:UnregisterEvent("UNIT_HEALTH")
 	self:CancelDelayedMessage(L["vortex_warning"])
 	self:CancelDelayedMessage(L["sparks_warning"])
 	self:StopBar(L["sparks"])
 	self:StopBar(L["vortex_next"])
-	self:Message("phase", L["phase2_message"], "Attention")
-	self:Bar("breath", L["breath"], 92, 43810)
-	self:DelayedMessage("breath", 87, L["breath_warning"], "Attention")
+	self:Message("phase", "Attention", nil, L["phase2_message"], false)
+	self:Bar("breath", 92, L["breath"], 43810)
+	self:DelayedMessage("breath", 87, "Attention", L["breath_warning"])
 end
 
 function mod:P2End()
 	self:CancelDelayedMessage(L["breath_warning"])
 	self:StopBar(L["breath"])
-	self:Message("phase", L["phase3_warning"], "Attention")
+	self:Message("phase", "Attention", nil, L["phase3_warning"], false)
 end
 
 function mod:Phase3()
 	phase = 3
-	self:Message("phase", L["phase3_message"], "Attention")
+	self:Message("phase", "Attention", nil, L["phase3_message"], false)
 end
 
-function mod:UNIT_HEALTH(event, msg)
-	if phase ~= 1 then return end
-	if UnitName(msg) == self.displayName then
-		local hp = UnitHealth(msg) / UnitHealthMax(msg) * 100
-		if hp > 51 and hp <= 54 then
-			self:Message("phase", L["phase2_warning"], "Attention")
+function mod:UNIT_HEALTH(_, unit)
+	if phase == 1 and UnitIsUnit(unit, self.displayName) then
+		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+		if hp < 54 then
+			self:Message("phase", "Attention", nil, L["phase2_warning"], false)
 			self:UnregisterEvent("UNIT_HEALTH")
 		end
 	end

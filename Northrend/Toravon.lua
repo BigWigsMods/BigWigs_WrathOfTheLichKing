@@ -12,7 +12,6 @@ mod.toggleOptions = {72034, 72091, 72004, 72090, "bosskill"}
 --
 
 local count = 1
-local freezeTargets = mod:NewTargetList()
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -23,11 +22,7 @@ if L then
 	L.whiteout_bar = "Whiteout %d"
 	L.whiteout_message = "Whiteout %d soon!"
 
-	L.frostbite_message = "%2$dx Frostbite on %1$s"
-
 	L.freeze_message = "Freeze"
-
-	L.orb_bar = "Next Orb"
 end
 L = mod:GetLocale()
 
@@ -48,43 +43,40 @@ end
 
 function mod:OnEngage()
 	count = 1
-	self:Bar(72091, L["orb_bar"], 15, 72091)
-	self:Bar(72034, L["whiteout_bar"]:format(count), 30, 72034)
+	self:Bar(72091, 15) -- Frozen Orb
+	self:Bar(72034, 30, L["whiteout_bar"]:format(count))
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Whiteout(_, spellId, _, _, spellName)
-	self:Message(72034, spellName, "Positive", spellId)
+function mod:Whiteout(args)
+	self:Message(72034, "Positive")
 	count = count + 1
-	self:Bar(72034, L["whiteout_bar"]:format(count), 35, spellId)
-	self:DelayedMessage(72034, 30, L["whiteout_message"]:format(count), "Attention")
+	self:Bar(72034, 35, L["whiteout_bar"]:format(count))
+	self:DelayedMessage(72034, 30, "Attention", L["whiteout_message"]:format(count))
 end
 
-function mod:Orbs(_, spellId, _, _, spellName)
-	self:Message(72091, spellName, "Important", spellId)
-	self:Bar(72091, L["orb_bar"], 30, spellId)
+function mod:Orbs(args)
+	self:Message(72091, "Important")
+	self:Bar(72091, 30)
 end
 
-function mod:Frostbite(player, spellId, _, _, _, stack)
-	if stack and stack > 4 then
-		self:TargetMessage(72004, L["frostbite_message"], player, "Urgent", spellId, nil, stack)
-	end
+function mod:Frostbite(args)
+	self:StackMessage(72004, args.destName, args.amount, "Urgent")
 end
 
 do
-	local scheduled = nil
+	local freezeTargets, scheduled = nil, mod:NewTargetList()
 	local function freezeWarn()
-		mod:TargetMessage(72090, L["freeze_message"], freezeTargets, "Personal", 72090)
+		mod:TargetMessage(72090, freezeTargets, "Personal", nil, L["freeze_message"])
 		scheduled = nil
 	end
-	function mod:Freeze(player)
-		freezeTargets[#freezeTargets + 1] = player
+	function mod:Freeze(args)
+		freezeTargets[#freezeTargets + 1] = args.destName
 		if not scheduled then
-			scheduled = true
-			self:ScheduleTimer(freezeWarn, 0.2)
+			scheduled = self:ScheduleTimer(freezeWarn, 0.2)
 		end
 	end
 end

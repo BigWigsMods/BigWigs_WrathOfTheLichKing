@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Koralon the Flame Watcher", 532)
+local mod, CL = BigWigs:NewBoss("Koralon the Flame Watcher", 532)
 if not mod then return end
 mod:RegisterEnableMob(35013)
 mod.toggleOptions = {66725, {66684, "FLASH"}, 66665, "bosskill"}
@@ -19,10 +19,6 @@ local count = 1
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.fists_bar = "Next Fists"
-
-	L.cinder_message = "Flame on YOU!"
-
 	L.breath_bar = "Breath %d"
 	L.breath_message = "Breath %d soon!"
 end
@@ -44,31 +40,31 @@ end
 
 function mod:OnEngage()
 	count = 1
-	self:Bar(66725, L["fists_bar"], 47, 66725)
-	self:Bar(66665, L["breath_bar"]:format(count), 10, 66665)
+	self:Bar(66725, 47) -- Meteor Fists
+	self:Bar(66665, 10, L["breath_bar"]:format(count))
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Fists(_, spellId, _, _, spellName)
-	self:Message(66725, spellName, "Attention", spellId)
-	self:Bar(66725, spellName, 15, spellId)
-	self:Bar(66725, L["fists_bar"], 47, spellId)
+function mod:Fists(args)
+	self:Message(args.spellId, "Attention")
+	self:Bar(args.spellId, 15)
+	self:Bar(args.spellId, 47)
 end
 
-function mod:Cinder(player, spellId)
-	if UnitIsUnit(player, "player") then
-		self:Message(66684, L["cinder_message"], "Personal", spellId, "Alarm")
-		self:Flash(66684)
+function mod:Cinder(args)
+	if self:Me(args.destGUID) then
+		self:Message(args.spellId, "Personal", "Alarm", CL["you"]:format(args.spellName))
+		self:Flash(args.spellId)
 	end
 end
 
-function mod:Breath(_, spellId, _, _, spellName)
-	self:Message(66665, spellName, "Positive", spellId)
+function mod:Breath(args)
+	self:Message(args.spellId, "Positive")
 	count = count + 1
-	self:Bar(66665, L["breath_bar"]:format(count), 45, spellId)
-	self:DelayedMessage(66665, 40, L["breath_message"]:format(count), "Attention")
+	self:Bar(args.spellId, 45, L["breath_bar"]:format(count))
+	self:DelayedMessage(args.spellId, 40, "Attention", L["breath_message"]:format(count))
 end
 

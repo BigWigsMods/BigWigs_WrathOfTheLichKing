@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Archavon the Stone Watcher", 532)
+local mod, CL = BigWigs:NewBoss("Archavon the Stone Watcher", 532)
 if not mod then return end
 mod:RegisterEnableMob(31125)
 mod.toggleOptions = {58663, "charge", {58678, "MESSAGE", "ICON"}, {58965, "FLASH"}, "berserk", "bosskill"}
@@ -15,9 +15,6 @@ local L = mod:NewLocale("enUS", true)
 if L then
 	L.stomp_message = "Stomp - Charge Inc!"
 	L.stomp_warning = "Possible Stomp in ~5sec!"
-	L.stomp_bar = "~Stomp Cooldown"
-
-	L.cloud_message = "Choking Cloud on YOU!"
 
 	L.charge = "Charge"
 	L.charge_desc = "Warn about Charge on players."
@@ -42,8 +39,8 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Bar(58663, L["stomp_bar"], 47, 60880)
-	self:DelayedMessage(58663, 42, L["stomp_warning"], "Attention")
+	self:CDBar(58663, 47) -- Stomp
+	self:DelayedMessage(58663, 42, "Attention", L["stomp_warning"])
 	self:Berserk(300)
 end
 
@@ -51,42 +48,40 @@ end
 -- Event Handlers
 --
 
-function mod:Stomp(_, spellId)
-	self:Message(58663, L["stomp_message"], "Positive", spellId)
-	self:Bar(58663, L["stomp_bar"], 47, spellId)
-	self:DelayedMessage(58663, 42, L["stomp_warning"], "Attention")
+function mod:Stomp(args)
+	self:Message(58663, "Positive", nil, L["stomp_message"])
+	self:CDBar(58663, 47)
+	self:DelayedMessage(58663, 42, "Attention", L["stomp_warning"])
 end
 
-function mod:Cloud(player, spellId)
-	if UnitIsUnit(player, "player") then
-		self:Message(58965, L["cloud_message"], "Personal", spellId, "Alarm")
+function mod:Cloud(args)
+	if self:Me(args.destGUID) then
+		self:Message(58965, "Personal", "Alarm", CL["you"]:format(args.spellName))
 		self:Flash(58965)
 	end
 end
 
 do
-	local id, name, handle = nil, nil, nil
-	local function scanTarget(spellId, spellName)
+	local handle = nil
+	local function scanTarget(spellId)
 		local bossId = mod:GetUnitIdByGUID(31125)
 		if not bossId then return end
-		local target = UnitName(bossId .. "target")
+		local target = mod:UnitName(bossId .. "target")
 		if target then
-			mod:TargetMessage(58965, name, target, "Important", id)
+			mod:TargetMessage(58965, target, "Important", nil, spellId)
 			mod:PrimaryIcon(58965, target)
 		end
 		handle = nil
 	end
-
-	function mod:Shards(_, spellId, _, _, spellName)
-		id, name = spellId, spellName
+	function mod:Shards(args)
 		self:CancelTimer(handle)
-		handle = self:ScheduleTimer(scanTarget, 0.2)
+		handle = self:ScheduleTimer(scanTarget, 0.2, args.spellId)
 	end
 end
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, _, unit, _, _, player)
 	if unit == self.displayName then
-		self:TargetMessage("charge", L["charge"], player, "Attention", 11578)
+		self:TargetMessage("charge", player, "Attention", nil, L["charge"], 11578)
 	end
 end
 

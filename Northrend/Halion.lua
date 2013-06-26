@@ -24,21 +24,16 @@ if L then
 	L.phase_two_trigger = "You will find only suffering within the realm of twilight! Enter if you dare!"
 
 	L.twilight_cutter_trigger = "The orbiting spheres pulse with dark energy!"
-	L.twilight_cutter_bar = "~Laser beams"
+	L.twilight_cutter_bar = "Laser beams"
 	L.twilight_cutter_warning = "Laser beams incoming!"
 
 	L.fire_damage_message = "Your feet are burning!"
 	L.fire_message = "Fire bomb"
-	L.fire_bar = "Next Fire bomb"
 	L.shadow_message = "Shadow bomb"
-	L.shadow_bar = "Next Shadow bomb"
 
 	L.meteorstrike_yell = "The heavens burn!"
 	L.meteorstrike_bar = "Meteor Strike"
 	L.meteor_warning_message = "Meteor incoming!"
-
-	L.sbreath_cooldown = "Next Shadow Breath"
-	L.fbreath_cooldown = "Next Fire Breath"
 end
 L = mod:GetLocale()
 
@@ -68,71 +63,63 @@ end
 function mod:OnEngage()
 	phase = 1
 	self:Berserk(480)
-	self:Bar(74648, L["meteorstrike_bar"], 30, 74648)
+	self:Bar(74648, 30, L["meteorstrike_bar"])
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:FireDamage(player, spellId)
-	if UnitIsUnit(player, "player") then
-		self:Message(74648, L["fire_damage_message"], "Personal", spellId)
+function mod:FireDamage(args)
+	if self:Me(args.destGUID) then
+		self:Message(74648, "Personal", nil, L["fire_damage_message"])
 	end
 end
 
-function mod:Fire(player, spellId)
-	if self:Heroic() then
-		self:Bar(74562, L["fire_bar"], 20, spellId)
-	else
-		self:Bar(74562, L["fire_bar"], 25, spellId)
-	end
-	if UnitIsUnit(player, "player") then
+function mod:Fire(args)
+	self:Bar(74562, self:Heroic() and 20 or 25, L["fire_message"])
+	if self:Me(args.destGUID) then
 		self:Say(74562, L["fire_message"])
 		self:Flash(74562)
 	end
-	self:TargetMessage(74562, L["fire_message"], player, "Personal", spellId, "Info")
-	self:PrimaryIcon(74562, player)
+	self:TargetMessage(74562, args.destName, "Personal", "Info", L["fire_message"])
+	self:PrimaryIcon(74562, args.destName)
 end
 
-function mod:Shadow(player, spellId)
-	if self:Heroic() then
-		self:Bar(74792, L["shadow_bar"], 20, spellId)
-	else
-		self:Bar(74792, L["shadow_bar"], 25, spellId)
-	end
-	if UnitIsUnit(player, "player") then
+function mod:Shadow(args)
+	self:Bar(74792, self:Heroic() and 20 or 25, L["shadow_message"])
+	if self:Me(args.destGUID) then
 		self:Say(74792, L["shadow_message"])
 		self:Flash(74792)
 	end
-	self:TargetMessage(74792, L["shadow_message"], player, "Personal", spellId, "Info")
-	self:SecondaryIcon(74792, player)
+	self:TargetMessage(74792, args.destName, "Personal", "Info", L["shadow_message"])
+	self:SecondaryIcon(74792, args.destName)
 end
 
-function mod:ShadowBreath(_, spellId)
-	self:Bar(74806, L["sbreath_cooldown"], 12, spellId)
+function mod:ShadowBreath(args)
+	self:Bar(74806, 12)
 end
 
-function mod:FireBreath(_, spellId)
-	self:Bar(74525, L["fbreath_cooldown"], 12, spellId)
+function mod:FireBreath(args)
+	self:Bar(74525, 12)
 end
 
 function mod:TwilightCutter()
-	self:Bar(74769, L["twilight_cutter_bar"], 33, 74769)
-	self:Message(74769, L["twilight_cutter_warning"], "Important", 74769, "Alert")
+	self:CDBar(74769, 33, L["twilight_cutter_bar"])
+	self:Message(74769, "Important", "Alert", L["twilight_cutter_warning"])
 end
 
-function mod:MeteorInc()
-	self:Message(74648, L["meteor_warning_message"], "Urgent", 74648, "Long")
+function mod:MeteorInc(args)
+	self:Message(74648, "Urgent", "Long", L["meteor_warning_message"])
 end
 
-function mod:MeteorStrike(_, spellId, _, _, spellName)
-	self:Bar(74648, L["meteorstrike_bar"], 40, spellId)
-	self:Message(74648, spellName, "Important", spellId)
+function mod:MeteorStrike(args)
+	self:Bar(74648, 40, L["meteorstrike_bar"])
+	self:Message(74648, "Important")
 end
 
-function mod:PhaseTwo()
+function mod:PhaseTwo(args)
 	phase = 2
-	self:Bar(74769, L["twilight_cutter_bar"], 40, 74769)
+	self:CDBar(74769, 40, L["twilight_cutter_bar"])
 end
 
