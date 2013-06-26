@@ -105,7 +105,7 @@ function mod:LegionFlame(args)
 end
 
 function mod:NetherPower(args)
-	if args.destName == self.displayName then
+	if self:MobId(args.destGUID) == 34780 then
 		self:Message(args.spellId, "Attention")
 		self:CDBar(args.spellId, 44)
 	end

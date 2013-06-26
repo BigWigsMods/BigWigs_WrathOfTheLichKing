@@ -93,7 +93,7 @@ end
 --
 
 function mod:Spark(args)
-	if args.destName == self.displayName then
+	if self:MobId(args.destGUID) == 28859 then
 		self:Message("sparkbuff", "Important", nil, L["sparkbuff_message"], args.spellId)
 	end
 end
@@ -159,7 +159,7 @@ function mod:Phase3()
 end
 
 function mod:UNIT_HEALTH(_, unit)
-	if phase == 1 and UnitIsUnit(unit, self.displayName) then
+	if phase == 1 and self:MobId(UnitGUID(unit)) == 28859 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 54 then
 			self:Message("phase", "Attention", nil, L["phase2_warning"], false)

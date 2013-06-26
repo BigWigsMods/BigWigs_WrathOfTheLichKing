@@ -141,15 +141,15 @@ function mod:Plague(args)
 end
 
 function mod:UNIT_HEALTH_FREQUENT(_, unit)
-	if not UnitIsUnit(unit, self.displayName) then return end
-
-	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
-	if hp <= 83 and not p2 then
-		self:Message("phase", "Positive", nil, L["phase_warning"]:format(2), false)
-		p2 = true
-	elseif hp <= 37 then
-		self:Message("phase", "Positive", nil, L["phase_warning"]:format(3), false)
-		self:UnregisterEvent("UNIT_HEALTH")
+	if self:MobId(UnitGUID(unit)) == 36678 then
+		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+		if hp <= 83 and not p2 then
+			self:Message("phase", "Positive", nil, L["phase_warning"]:format(2), false)
+			p2 = true
+		elseif hp <= 37 then
+			self:Message("phase", "Positive", nil, L["phase_warning"]:format(3), false)
+			self:UnregisterEvent("UNIT_HEALTH")
+		end
 	end
 end
 
