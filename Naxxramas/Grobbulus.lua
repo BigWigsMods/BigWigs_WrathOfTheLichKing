@@ -39,15 +39,17 @@ end
 -- Event Handlers
 --
 
-function mod:Inject(player, spellId)
-	self:TargetMessage(28169, L["bomb_message"], player, "Personal", spellId, "Alert")
-	if UnitIsUnit(player, "player") then self:Flash(28169) end
-	self:Bar(28169, L["bomb_message_other"]:format(player), 10, spellId)
-	self:PrimaryIcon(28169, player)
+function mod:Inject(args)
+	self:TargetMessage(args.spellId, args.destName, "Personal", "Alert", L["bomb_message"])
+	if self:Me(args.destGUID) then
+		self:Flash(args.spellId)
+	end
+	self:Bar(args.spellId, 10, L["bomb_message_other"]:format(args.destName))
+	self:PrimaryIcon(args.spellId, args.destName)
 end
 
-function mod:Cloud(_, spellId, _, _, spellName)
-	self:Message(28240, spellName, "Attention", spellId)
-	self:Bar(28240, spellName, 15, spellId)
+function mod:Cloud(args)
+	self:Message(args.spellId, "Attention")
+	self:Bar(args.spellId, 15)
 end
 

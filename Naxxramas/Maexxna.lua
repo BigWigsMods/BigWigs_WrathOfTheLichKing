@@ -8,13 +8,6 @@ mod:RegisterEnableMob(15952)
 mod.toggleOptions = {29484, 28622, 54123, "bosskill"}
 
 --------------------------------------------------------------------------------
--- Locals
---
-
-local inCocoon = mod:NewTargetList()
-local enrageannounced = nil
-
---------------------------------------------------------------------------------
 -- Localization
 --
 
@@ -46,11 +39,11 @@ function mod:OnBossEnable()
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-	self:RegisterEvent("UNIT_HEALTH")
 end
 
 function mod:OnEngage()
 	self:Spray()
+	self:RegisterEvent("UNIT_HEALTH")
 end
 
 --------------------------------------------------------------------------------
@@ -58,44 +51,40 @@ end
 --
 
 do
-	local handle = nil
+	local cocoonTargets, scheduled = mod:NewTargetList(), nil
 	local function cocoonWarn()
-		mod:TargetMessage(28622, L["cocoonbar"], inCocoon, "Important", 745, "Alert")
-		handle = nil
+		mod:TargetMessage(28622, cocoonTargets, "Important", "Alert", L["cocoonbar"], 745)
+		scheduled = nil
 	end
-
-	function mod:Cocoon(player)
-		inCocoon[#inCocoon + 1] = player
-		self:CancelTimer(handle)
-		handle = self:ScheduleTimer(cocoonWarn, 0.3)
+	function mod:Cocoon(args)
+		cocoonTargets[#cocoonTargets + 1] = args.destName
+		self:CancelTimer(scheduled)
+		scheduled = self:ScheduleTimer(cocoonWarn, 0.3)
 	end
 end
 
 function mod:Spray()
-	self:Message(29484, L["webspraywarn"], "Important", 54125)
-	self:DelayedMessage(29484, 10, L["webspraywarn30sec"], "Attention")
-	self:DelayedMessage(29484, 20, L["webspraywarn20sec"], "Attention")
-	self:DelayedMessage(29484, 30, L["webspraywarn10sec"], "Attention")
-	self:DelayedMessage(29484, 35, L["webspraywarn5sec"], "Attention")
-	self:Bar(29484, L["webspraybar"], 40, 54125)
-
-	self:Bar(28622, L["cocoonbar"], 20, 745)
-
-	self:Bar(29484, L["spiderbar"], 30, 17332)
+	self:Message(29484, "Important", nil, L["webspraywarn"], 54125)
+	self:DelayedMessage(29484, 10, "Attention", L["webspraywarn30sec"])
+	self:DelayedMessage(29484, 20, "Attention", L["webspraywarn20sec"])
+	self:DelayedMessage(29484, 30, "Attention", L["webspraywarn10sec"])
+	self:DelayedMessage(29484, 35, "Attention", L["webspraywarn5sec"])
+	self:Bar(29484, 40, L["webspraybar"], 54125)
+	self:Bar(28622, 20, L["cocoonbar"], 745)
+	self:Bar(29484, 30, L["spiderbar"], 17332)
 end
 
-function mod:Frenzy(_, spellId)
-	self:Message(54123, L["enragewarn"], "Attention", spellId, "Alarm")
+function mod:Frenzy(args)
+	self:UnregisterEvent("UNIT_HEALTH")
+	self:Message(54123, "Attention", "Alarm", L["enragewarn"], args.spellId)
 end
 
-function mod:UNIT_HEALTH(event, msg)
-	if UnitName(msg) == mod.displayName then
-		local health = UnitHealth(msg) / UnitHealthMax(msg) * 100
-		if health > 30 and health <= 33 and not enrageannounced then
-			self:Message(54123, L["enragesoonwarn"], "Important")
-			enrageannounced = true
-		elseif health > 40 and enrageannounced then
-			enrageannounced = nil
+function mod:UNIT_HEALTH(_, unit)
+	if self:MobId(UnitGUID(unit)) == 15952 then
+		local health = UnitHealth(unit) / UnitHealthMax(unit) * 100
+		if health > 30 and health <= 33 then
+			self:Message(54123, L["enragesoonwarn"], "Important", nil, false)
+			self:UnregisterEvent("UNIT_HEALTH")
 		end
 	end
 end

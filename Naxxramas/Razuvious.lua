@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Instructor Razuvious", 535)
 if not mod then return end
 mod:RegisterEnableMob(16061)
-mod.toggleOptions = {29107, 55550, 29061, 29060, "bosskill"}
+mod.toggleOptions = {55543, 55550, 29061, 29060, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -14,7 +14,6 @@ mod.toggleOptions = {29107, 55550, 29061, 29060, "bosskill"}
 local L = mod:NewLocale("enUS", true)
 if L then
 	L.shout_warning = "Disrupting Shout in 5sec!"
-	L.shout_next = "Shout Cooldown"
 
 	L.taunt_warning = "Taunt ready in 5sec!"
 	L.shieldwall_warning = "Barrier gone in 5sec!"
@@ -37,34 +36,33 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Shout()
+	self:Bar(55543, 15) -- Disrupting Shout
+	self:DelayedMessage(55543, 12, "Attention", L["shout_warning"])
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Shout(_, spellId, _, _, spellName)
-	if spellName then
-		self:Message(29107, spellName, "Important", 55543)
-	end
-	self:Bar(29107, L["shout_next"], 15, 55543)
-	self:DelayedMessage(29107, 12, L["shout_warning"], "Attention")
+function mod:Shout(args)
+	self:Message(55543, "Important")
+	self:Bar(55543, 15)
+	self:DelayedMessage(55543, 12, "Attention", L["shout_warning"])
 end
 
-function mod:ShieldWall(_, spellId, _, _, spellName)
-	self:Message(29061, spellName, "Positive", spellId)
-	self:Bar(29061, spellName, 20, spellId)
-	self:DelayedMessage(29061, 15, L["taunt_warning"], "Attention")
+function mod:ShieldWall(args)
+	self:Message(args.spellId, "Positive")
+	self:Bar(args.spellId, 20)
+	self:DelayedMessage(args.spellId, 15, "Attention", L["taunt_warning"])
 end
 
-function mod:Taunt(_, spellId, _, _, spellName)
-	self:Message(29060, spellName, "Positive", spellId)
-	self:Bar(29060, spellName, 20, spellId)
-	self:DelayedMessage(29060, 15, L["shieldwall_warning"], "Attention")
+function mod:Taunt(args)
+	self:Message(args.spellId, "Positive")
+	self:Bar(args.spellId, 20)
+	self:DelayedMessage(args.spellId, 15, "Attention", L["shieldwall_warning"])
 end
 
-function mod:Knife(player, spellId, _, _, spellName)
-	self:TargetMessage(55550, spellName, player, "Important", spellId)
+function mod:Knife(args)
+	self:TargetMessage(args.spellId, args.destName, "Important")
 end
 

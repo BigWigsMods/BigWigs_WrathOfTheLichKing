@@ -79,12 +79,12 @@ function mod:OnEngage(diff)
 	wave1time = 10
 	wave2time = 41
 
-	self:Message("teleport", L["startwarn"], "Important")
-	self:DelayedMessage("teleport", timeroom - 10, L["teleportwarn2"], "Urgent")
-	self:Bar("teleport", L["teleportbar"], timeroom, "Spell_Magic_LesserInvisibilty")
+	self:Message("teleport", "Attention", nil, L["startwarn"], false)
+	self:DelayedMessage("teleport", timeroom - 10, "Urgent", L["teleportwarn2"])
+	self:Bar("teleport", timeroom, L["teleportbar"], "Spell_Magic_LesserInvisibilty")
 	if diff == 4 then
-		self:DelayedMessage("blink", 25, L["blinkwarn2"], "Attention")
-		self:Bar("blink", L["blinkbar"], 30, 29208)
+		self:DelayedMessage("blink", 25, "Attention", L["blinkwarn2"])
+		self:Bar("blink", 30, L["blinkbar"], 29208)
 	end
 	self:ScheduleTimer("TeleportToBalcony", timeroom)
 end
@@ -93,17 +93,17 @@ end
 -- Event Handlers
 --
 
-function mod:Curse(_, spellId)
-	self:Message(29213, L["cursewarn"], "Important", spellId, "Alarm")
-	self:DelayedMessage(29213, cursetime - 10, L["curse10secwarn"], "Urgent")
-	self:Bar(29213, L["cursebar"], cursetime, spellId)
-	self:Bar(29213, L["curseexplosion"], 10, spellId)
+function mod:Curse(args)
+	self:Message(29213, "Important", "Alarm", L["cursewarn"])
+	self:DelayedMessage(29213, cursetime - 10, "Urgent", L["curse10secwarn"])
+	self:Bar(29213, cursetime, L["cursebar"])
+	self:Bar(29213, 10, L["curseexplosion"])
 end
 
 function mod:Blink()
-	self:Message("blink", L["blinkwarn"], "Important", 29208)
-	self:DelayedMessage("blink", 34, L["blinkwarn2"], "Attention")
-	self:Bar("blink", L["blinkbar"], 39, 29208)
+	self:Message("blink", "Important", nil, L["blinkwarn"], 29208)
+	self:DelayedMessage("blink", 34, "Attention", L["blinkwarn2"])
+	self:Bar("blink", 39, L["blinkbar"], 29208)
 end
 
 function mod:TeleportToBalcony()
@@ -116,13 +116,13 @@ function mod:TeleportToBalcony()
 	self:StopBar(L["blinkbar"])
 	self:StopBar(L["cursebar"])
 
-	self:Message("teleport", L["teleportwarn"], "Important")
-	self:Bar("teleport", L["backbar"], timebalcony, "Spell_Magic_LesserInvisibilty")
-	self:DelayedMessage("teleport", timebalcony - 10, L["backwarn2"], "Urgent")
+	self:Message("teleport", "Important", nil, L["teleportwarn"], false)
+	self:Bar("teleport", timebalcony, L["backbar"], "Spell_Magic_LesserInvisibilty")
+	self:DelayedMessage("teleport", timebalcony - 10, "Urgent", L["backwarn2"])
 
-	self:Bar("wave", L["wave1bar"], wave1time, "Spell_ChargePositive")
-	self:Bar("wave", L["wave2bar"], wave2time, "Spell_ChargePositive")
-	self:DelayedMessage("wave", wave2time - 10, L["wave2_message"], "Urgent")
+	self:Bar("wave", wave1time, L["wave1bar"], "Spell_ChargePositive")
+	self:Bar("wave", wave2time, L["wave2bar"], "Spell_ChargePositive")
+	self:DelayedMessage("wave", wave2time - 10, "Urgent", L["wave2_message"])
 
 	self:ScheduleTimer("TeleportToRoom", timebalcony)
 	wave2time = wave2time + 15
@@ -135,9 +135,9 @@ function mod:TeleportToRoom()
 		timebalcony = 120
 	end
 
-	self:Message("teleport", L["backwarn"]:format(timeroom), "Important")
-	self:Bar("teleport", L["teleportbar"], timeroom, "Spell_Magic_LesserInvisibilty")
-	self:DelayedMessage("teleport", timeroom - 10, L["teleportwarn2"], "Urgent")
+	self:Message("teleport", "Important", nil, L["backwarn"]:format(timeroom), false)
+	self:Bar("teleport", timeroom, L["teleportbar"], "Spell_Magic_LesserInvisibilty")
+	self:DelayedMessage("teleport", timeroom - 10, "Urgent", L["teleportwarn2"])
 	self:ScheduleTimer("TeleportToBalcony", timeroom)
 end
 

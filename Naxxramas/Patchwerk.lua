@@ -39,7 +39,7 @@ end
 -- Event Handlers
 --
 
-function mod:Frenzy(_, spellId)
-	self:Message(28131, L["enragewarn"], "Attention", spellId, "Alarm")
+function mod:Frenzy(args)
+	self:Message(args.spellId, "Attention", "Alarm", L["enragewarn"])
 end
 

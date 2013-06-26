@@ -22,7 +22,7 @@ if L then
 	L.startwarn = "Gluth engaged, ~105 sec to decimate!"
 
 	L.decimatesoonwarn = "Decimate Soon!"
-	L.decimatebartext = "~Decimate Zombies"
+	L.decimatebartext = "Decimate Zombies"
 end
 L = mod:GetLocale()
 
@@ -41,29 +41,30 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage(diff)
-	enrageTime = diff == 3 and 480 or 420
-	self:Message(54426, L["startwarn"], "Attention")
-	self:Bar(54426, L["decimatebartext"], 105, 54426)
-	self:DelayedMessage(54426, 100, L["decimatesoonwarn"], "Urgent")
-	self:Berserk(enrageTime)
+	self:Berserk(diff == 3 and 480 or 420, true)
+	self:Message(54426, "Attention", nil, L["startwarn"], false)
+	self:CDBar(54426, 105, L["decimatebartext"])
+	self:DelayedMessage(54426, 100, "Urgent", L["decimatesoonwarn"])
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Frenzy(_, spellId, _, _, spellName)
-	self:Message(28371, spellName, "Important", spellId)
+function mod:Frenzy(args)
+	self:Message(28371, "Important")
 end
 
-local last = 0
-function mod:Decimate(_, spellId, _, _, spellName)
-	local time = GetTime()
-	if (time - last) > 5 then
-		last = time
-		self:Message(54426, spellName, "Attention", spellId, "Alert")
-		self:Bar(54426, L["decimatebartext"], 105, spellId)
-		self:DelayedMessage(54426, 100, L["decimatesoonwarn"], "Urgent")
+do
+	local last = 0
+	function mod:Decimate(args)
+		local t = GetTime()
+		if t-5 > last then
+			self:Message(54426, "Attention", "Alert")
+			self:CDBar(54426, 105, L["decimatebartext"])
+			self:DelayedMessage(54426, 100, "Urgent", L["decimatesoonwarn"])
+			last = t
+		end
 	end
 end
 

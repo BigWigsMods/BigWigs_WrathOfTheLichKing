@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Anub'Rekhan", 535)
+local mod, CL = BigWigs:NewBoss("Anub'Rekhan", 535)
 if not mod then return end
 mod:RegisterEnableMob(15956)
 mod.toggleOptions = {28785, "bosskill"}
@@ -25,12 +25,8 @@ if L then
 	L.starttrigger3 = "There is no way out."
 	L.engagewarn = "Anub'Rekhan engaged! Locust Swarm in ~%d sec"
 
-	L.gainendwarn = "Locust Swarm ended!"
 	L.gainnextwarn = "Next Locust Swarm in ~85 sec"
 	L.gainwarn10sec = "~10 sec until Locust Swarm"
-	L.gainincbar = "~Next Locust Swarm"
-
-	L.castwarn = "Incoming Locust Swarm!"
 end
 L = mod:GetLocale()
 
@@ -51,26 +47,26 @@ function mod:OnEngage(diff)
 	if started then return end
 	started = true
 	locustTime = diff == 3 and 102 or 90
-	self:Message(28785, L["engagewarn"]:format(locustTime), "Urgent")
-	self:DelayedMessage(28785, locustTime - 10, L["gainwarn10sec"], "Important")
-	self:Bar(28785, L["gainincbar"], locustTime, 28785)
+	self:Message(28785, "Attention", nil, L["engagewarn"]:format(locustTime), false)
+	self:DelayedMessage(28785, locustTime - 10, "Important", L["gainwarn10sec"])
+	self:CDBar(28785, locustTime) -- Locus Swarm
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:GainSwarm(unit, spellId, _, _, spellName)
-	if unit == self.displayName then
-		self:DelayedMessage(28785, 20, L["gainendwarn"], "Important")
-		self:Bar(28785, spellName, 20, spellId)
+function mod:GainSwarm(args)
+	if self:MobId(args.destGUID) == 15956 then
+		self:DelayedMessage(28785, 20, "Important", CL["over"]:format(args.spellName))
+		self:Bar(28785, 20, 131394) -- "Swarming Insects"
 		self:DelayedMessage(28785, 75, L["gainwarn10sec"], "Important")
-		self:Bar(28785, L["gainincbar"], 85, spellId)
+		self:CDBar(28785, 85)
 	end
 end
 
-function mod:Swarm(_, spellId)
-	self:Message(28785, L["castwarn"], "Attention", spellId)
-	self:Bar(28785, L["castwarn"], 3, spellId)
+function mod:Swarm(args)
+	self:Message(28785, "Attention", nil, CL["incoming"]:format(args.spellName))
+	self:Bar(28785, 3, CL["incoming"]:format(args.spellName))
 end
 

@@ -29,7 +29,7 @@ if L then
 
 	L.lifedrain_message = "Life Drain! Next in ~24sec!"
 	L.lifedrain_warn1 = "Life Drain in ~5sec!"
-	L.lifedrain_bar = "~Possible Life Drain"
+	L.lifedrain_bar = "Possible Life Drain"
 
 	L.icebolt_say = "I'm a Block!"
 
@@ -68,39 +68,39 @@ function mod:Airphase()
 	self:CancelDelayedMessage(L["lifedrain_warn1"])
 	self:StopBar(L["lifedrain_bar"])
 	--43810 Frost Wyrm, looks like a dragon breathing 'deep breath' :)
-	self:Message(28524, L["deepbreath_incoming_message"], "Attention")
-	self:Bar(28524, L["deepbreath_incoming_bar"], 14, 43810)
-	self:DelayedMessage(28524, 9, L["deepbreath_incoming_soon_message"], "Attention")
+	self:Message(28524, "Attention", nil, L["deepbreath_incoming_message"])
+	self:Bar(28524, 14, L["deepbreath_incoming_bar"], 43810)
+	self:DelayedMessage(28524, 9, "Attention", L["deepbreath_incoming_soon_message"])
 end
 
 function mod:Deepbreath()
-	self:Message(28524, L["deepbreath_warning"], "Attention")
-	self:Bar(28524, L["deepbreath_bar"], 10, 29318)
+	self:Message(28524, "Attention", nil, L["deepbreath_warning"])
+	self:Bar(28524, 10, L["deepbreath_bar"])
 end
 
-function mod:Breath(_, spellId, _, _, spellName)
+function mod:Breath(args)
 	breath = breath + 1
 	if breath == 2 then
-		self:Message(28524, spellName, "Important", spellId)
+		self:Message(28524, "Important")
 	end
 end
 
-function mod:Drain(_, spellId)
-	self:Message(28542, L["lifedrain_message"], "Urgent", spellId)
-	self:Bar(28542, L["lifedrain_bar"], 23, spellId)
-	self:DelayedMessage(28542, 18, L["lifedrain_warn1"], "Important")
+function mod:Drain(args)
+	self:Message(28542, "Urgent", nil, L["lifedrain_message"])
+	self:CDBar(28542, 23, L["lifedrain_bar"])
+	self:DelayedMessage(28542, 18, "Important", L["lifedrain_warn1"])
 end
 
-function mod:Icebolt(player, spellId, _, _, spellName)
-	if UnitIsUnit(player, "player") then
-		self:Say(28522, L["icebolt_say"], true)
-		if bit.band(self.db.profile[(GetSpellInfo(28522))], BigWigs.C.PING) == BigWigs.C.PING then
+function mod:Icebolt(args)
+	if self:Me(args.destGUID) then
+		self:Say(args.spellId, L["icebolt_say"], true)
+		if bit.band(self.db.profile[args.spellName], BigWigs.C.PING) == BigWigs.C.PING then
 			Minimap:PingLocation()
 			BigWigs:Print(L["ping_message"])
 		end
 	else
-		self:TargetMessage(28522, spellName, player, "Attention", spellId)
+		self:TargetMessage(args.spellId, args.destName, "Attention")
 	end
-	self:PrimaryIcon(28522, player)
+	self:PrimaryIcon(args.spellId, args.destName)
 end
 
