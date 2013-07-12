@@ -63,7 +63,7 @@ function mod:Warmup(msg)
 end
 
 function mod:VerifyEnable()
-	BigWigs.SetMapToCurrentZone()
+	BigWigsLoader.SetMapToCurrentZone()
 	return not killed and GetCurrentMapDungeonLevel() == 3
 end
 
