@@ -130,7 +130,7 @@ do
 	function mod:ManaVoid(args)
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) and UnitPowerType("player") == 0 then
-			prev = t()
+			prev = t
 			self:Message(71086, "Personal", "Alarm", CL["you"]:format(args.spellName))
 			self:Flash(71086)
 		end
