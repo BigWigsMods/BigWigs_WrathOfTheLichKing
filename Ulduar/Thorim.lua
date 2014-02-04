@@ -2,13 +2,12 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Thorim", 529)
+local mod, CL = BigWigs:NewBoss("Thorim", 529)
 if not mod then return end
 -- 32865 = thorim, 32882 = behemoth, 32872 = runic colossus, 32908/32907 = Captured Mercenary Captain, 32885/32883 = Captured Mercenary Soldier
 mod:RegisterEnableMob(32865, 32882, 32872, 32908, 32907, 32885, 32883)
 mod.toggleOptions = {{62042, "ICON"}, 62016, 62331, {62017, "FLASH"}, 62338, {62526, "ICON", "SAY"}, 62279, 62130, "proximity", "hardmode", "phase", "bosskill"}
 
-local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	[62042] = CL.phase:format(2),
 	[62279] = CL.phase:format(3),
@@ -152,7 +151,7 @@ end
 
 function mod:PhaseTwo()
 	self:Message("phase", "Attention", nil, L["phase2_message"], false)
-	self:Bar("phase", 375, CL["berserk"], 20484)
+	self:Bar("phase", 375, 26662) -- Berserk
 	self:Bar("hardmode", 173, L["hardmode"], 6673)
 	self:DelayedMessage("hardmode", 173, "Attention", L["hardmode_warning"])
 end
@@ -160,7 +159,7 @@ end
 function mod:PhaseThree()
 	self:CancelDelayedMessage(L["hardmode_warning"])
 	self:StopBar(L["hardmode"])
-	self:StopBar(CL["berserk"])
+	self:StopBar(26662) -- Berserk
 	self:Message("phase", "Attention", nil, L["phase3_message"], false)
 	self:OpenProximity("proximity", 5)
 end
