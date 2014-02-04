@@ -56,8 +56,8 @@ end
 
 function mod:OnEngage()
 	count = 9
-	self:Bar("defender", L["defender_message"]:format(count), 60, 64455)
-	self:Bar(64386, L["fear_bar"], 32, 64386)
+	self:Bar("defender", 60, L["defender_message"]:format(count), 64455)
+	self:Bar(64386, 32, L["fear_bar"])
 	self:DelayedMessage(64386, 32, L["fear_warning"], "Attention")
 	self:Berserk(600)
 end
