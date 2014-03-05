@@ -27,7 +27,7 @@ local p2, first = nil, nil
 local L = mod:NewLocale("enUS", true)
 if L then
 	L.engage_trigger = "I think I've perfected a plague"
-	
+
 	L.phase = "Phases"
 	L.phase_desc = "Warn for phase changes."
 	L.phase_warning = "Phase %d soon!"
@@ -143,12 +143,12 @@ end
 function mod:UNIT_HEALTH_FREQUENT(_, unit)
 	if self:MobId(UnitGUID(unit)) == 36678 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
-		if hp <= 83 and not p2 then
+		if hp < 84 and not p2 then
 			self:Message("phase", "Positive", nil, L["phase_warning"]:format(2), false)
 			p2 = true
-		elseif hp <= 37 then
+		elseif hp < 38 then
 			self:Message("phase", "Positive", nil, L["phase_warning"]:format(3), false)
-			self:UnregisterEvent("UNIT_HEALTH")
+			self:UnregisterEvent("UNIT_HEALTH_FREQUENT")
 		end
 	end
 end
