@@ -45,8 +45,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Fire", 74562)
 	self:Log("SPELL_AURA_APPLIED", "Shadow", 74792)
 	self:Log("SPELL_CAST_SUCCESS", "MeteorStrike", 74648)
-	self:Log("SPELL_DAMAGE", "FireDamage", 75947, 75948, 75949, 75950, 75951, 75952)
-	self:Log("SPELL_MISSED", "FireDamage", 75947, 75948, 75949, 75950, 75951, 75952)
+	--self:Log("SPELL_DAMAGE", "FireDamage", 75947, 75948, 75949, 75950, 75951, 75952) -- XXX These IDs no longer exist, we need to find the correct one(s).
+	--self:Log("SPELL_MISSED", "FireDamage", 75947, 75948, 75949, 75950, 75951, 75952)
 	-- Dark breath 25m, flame breath 25m, dark breath 10m, flame breath 10m
 	self:Log("SPELL_CAST_START", "ShadowBreath", 74806)
 	self:Log("SPELL_CAST_START", "FireBreath", 74525)
