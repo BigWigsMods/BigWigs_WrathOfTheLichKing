@@ -14,7 +14,7 @@ mod.toggleOptions = {69076, 69057, {69138, "FLASH"}, "bosskill"}
 local L = mod:NewLocale("enUS", true)
 if L then
 	L.engage_trigger = "The Scourge will wash over this world as a swarm of death and destruction!"
-	
+
 	L.bonestorm_warning = "Bone Storm in 5 sec!"
 end
 L = mod:GetLocale()

@@ -4,7 +4,6 @@ if L then
 	L.switch_bar = "<下一生命转换>"
 
 	L.empowered_flames = "塑造强能烈焰"
-	L.empowered_bar = "<下一塑造强能烈焰>"
 
 	L.empowered_shock_message = "正在施放强能震荡涡流！"
 	L.regular_shock_message = "强能震荡涡流区域！"
@@ -40,11 +39,6 @@ if L then
 	L.adds_desc = "当召唤血兽时发出警报和显示计时条。"
 	L.adds_warning = "5秒后，血兽！"
 	L.adds_message = "血兽！"
-	L.adds_bar = "<下一血兽>"
-
-	L.rune_bar = "<下一符文之血>"
-
-	L.mark = "阵亡勇士的印记：>%d<！"
 
 	L.engage_trigger = "以巫妖王的力量为名！"
 	L.warmup_alliance = "那我们要行动了，我们要……"
@@ -55,17 +49,8 @@ L = BigWigs:NewBossLocale("Festergut", "zhCN")
 if L then
 	L.engage_trigger = "玩吗？玩吗？"
 
-	L.inhale_message = "凋零呼吸：>%d<！"
 	L.inhale_bar = "<下一凋零呼吸：%d>"
-
 	L.blight_warning = "约5秒后，刺鼻毒气！"
-	L.blight_bar = "<下一刺鼻毒气>"
-
-	L.bloat_message = "毒肿%2$dx：>%1$s<！"
-	L.bloat_bar = "<下一毒肿>"
-
-	L.spore_bar = "<下一毒气孢子>"
-
 	L.ball_message = "即将 绿色软泥黏液球！"
 end
 
@@ -109,30 +94,23 @@ if L then
 
 	L.spirit_message = "召唤灵魂！"
 	L.spirit_bar = "<下一召唤灵魂>"
-
-	L.dominate_bar = "<下一统御心灵>"
 end
 
 L = BigWigs:NewBossLocale("Lord Marrowgar", "zhCN")
 if L then
-	L.impale_cd = "<下一穿刺>"
-
-	L.bonestorm_cd = "<下一白骨风暴>"
-	L.bonestorm_warning = "5秒后，白骨风暴！"
-
-	L.coldflame_message = ">你< 冷焰！"
-
 	L.engage_trigger = "强大的天灾军团将让死亡和毁灭席卷整个世界！"
+
+	L.bonestorm_warning = "5秒后，白骨风暴！"
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "zhCN")
 if L then
+	L.engage_trigger = "喜讯，各位！我想我已经研制出一种能够毁灭艾泽拉斯的药剂了！"
+
 	L.phase = "阶段"
 	L.phase_desc = "当进入不同阶段时发出警报。"
 	L.phase_warning = "即将 第%d阶段！"
 	L.phase_bar = "<下一阶段>"
-
-	L.engage_trigger = "喜讯，各位！我想我已经研制出一种能够毁灭艾泽拉斯的药剂了！"
 
 	L.ball_bar = "<下一可延展黏液>"
 	L.ball_say = "即将 可延展黏液！"
@@ -143,25 +121,18 @@ if L then
 	L.blight_message = "毒肿！"
 	L.violation_message = "不稳定的软泥怪！"
 
-	L.plague_message = "畸变瘟疫%2$dx：>%1$s<！"
-	L.plague_bar = "<下一畸变瘟疫>"
-
 	L.gasbomb_bar = "<多个窒息毒气弹>"
 	L.gasbomb_message = "窒息毒气弹！"
-
-	L.unbound_bar = "<肆虐毒疫：%s>"
 end
 
 L = BigWigs:NewBossLocale("Putricide Dogs", "zhCN")
 if L then
-	L.wound_message = "致命之伤%2$dx：>%1$s<！"
 end
 
 L = BigWigs:NewBossLocale("Rotface", "zhCN")
 if L then
 	L.engage_trigger = "WEEEEEE"
 
-	L.infection_bar = "<畸变感染：%s>"
 	L.infection_message = "畸变感染！"
 
 	L.ooze = "软泥融合"
@@ -189,10 +160,6 @@ if L then
 	L.boom_message = "严寒！"
 	L.boom_bar = "<严寒>"
 
-	L.grip_bar = "<下一冰冷之握>"
-
-	L.unchained_message = ">你< 狂咒！"
-	L.unchained_bar = "狂咒！"
 	L.instability_message = "动荡 x%d！"
 	L.chilled_message = "寒霜刺骨 x%d！"
 	L.buffet_message = "秘法打击 x%d！"
@@ -204,42 +171,18 @@ if L then
 	L.warmup_trigger = "怎么，自诩正义的圣光终于来了"
 	L.engage_trigger = "我会让你活着目睹这个末日，弗丁。"
 
-	L.horror_bar = "<下一血僵尸>"
 	L.horror_message = "蹒跚的血僵尸！"
+	L.horror_bar = "<下一血僵尸>"
 
-	L.necroticplague_bar = "<死疽>"
-
-	L.ragingspirit_bar = "<狂怒之魂>"
-
-	L.valkyr_bar = "<下一瓦格里暗影戒卫者>"
 	L.valkyr_message = "瓦格里暗影戒卫者！"
+	L.valkyr_bar = "<下一瓦格里暗影戒卫者>"
+	L.valkyrhug_message = "瓦格里抓人！"
 
-	L.vilespirits_bar = "<卑劣的灵魂>"
-
-	L.harvestsoul_bar = "<收割灵魂>"
-
-	L.remorselesswinter_message = "正在施放 冷酷严冬！"
-	L.quake_message = "正在施放 地震！"
-	L.quake_bar = "<地震>"
-
-	L.defile_message = "污染：>你<！"
-	L.defile_bar = "<下一污染>"
-
-	L.infest_bar = "<下一寄生>"
-
-	L.reaper_bar = "<下一灵魂收割>"
-
-	L.last_phase_bar = "<最终阶段>"
-
-	L.trap_message = "暗影陷阱！"
-	L.trap_bar = "<下一暗影陷阱>"
-
-	L.valkyrhug_message = "召唤瓦格里！"
 	L.cave_phase = "剑内阶段！"
+	L.last_phase_bar = "<最终阶段>"
 
 	L.frenzy_bar = "%s狂乱！"
 	L.frenzy_survive_message = "%s将在瘟疫后存活！"
-	L.enrage_bar = "<激怒>"
 	L.frenzy_message = "小怪狂乱！"
 	L.frenzy_soon_message = "5秒后，狂乱！"
 end
@@ -255,8 +198,6 @@ if L then
 	L.portalcd_message = "14秒后，梦魇之门：>%d<！"
 	L.portalcd_bar = "<下一梦魇之门：%d>"
 	L.portal_trigger = "我打开了进入梦境的传送门。英雄们，救赎就在其中……"
-
-	L.manavoid_message = ">你< 法力黑洞！"
 
 	L.suppresser = "抑制者出现"
 	L.suppresser_desc = "当一群抑制者出现时发出警报。"
