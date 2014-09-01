@@ -4,15 +4,15 @@
 
 local mod, CL = BigWigs:NewBoss("The Lich King", 604)
 if not mod then return end
-mod:RegisterEnableMob(36597)
-mod.toggleOptions = {72143, 70541, {70337, "ICON", "FLASH"}, 70372, {72762, "SAY", "ICON", "FLASH"}, 69409, 69037, {68980, "ICON", "FLASH"}, 70498, {68981, "FLASH"}, 69200, {72262, "FLASH"}, 72350, {73529, "SAY", "FLASH", "ICON"}, "berserk", "bosskill"}
+mod:RegisterEnableMob(36597, 38995) -- The Lich King, Highlord Tirion Fordring
+mod.toggleOptions = {72143, 70541, {70337, "ICON", "FLASH"}, 70372, {72762, "SAY", "ICON", "FLASH"}, 69409, 69037, {68980, "ICON", "FLASH"}, 70498, {68981, "FLASH"}, 69200, {72262, "FLASH"}, 72350, {73529, "SAY", "FLASH", "ICON"}, "warmup", "berserk", "bosskill"}
 mod.optionHeaders = {
 	[72143] = CL.phase:format(1),
 	[72762] = CL.phase:format(2),
 	[68980] = CL.phase:format(3),
 	[68981] = "Transition",
 	[73529] = "heroic",
-	berserk = "general",
+	warmup = "general",
 }
 
 --------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ function mod:OnBossEnable()
 end
 
 function mod:Warmup()
-	self:Bar("berserk", 53, self.displayName, "achievement_boss_lichking")
+	self:Bar("warmup", 53, self.displayName, "achievement_boss_lichking")
 end
 
 function mod:OnEngage()
