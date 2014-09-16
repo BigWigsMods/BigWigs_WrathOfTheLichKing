@@ -1,7 +1,9 @@
 ## Interface: 50400
 
 ## Title: Big Wigs [|cffeda55fWrath of the Lich King|r]
+## Title-zhCN: Big Wigs [|cffeda55f巫妖王之怒|r]
 ## Notes: A collection of Big Wigs modules from the Wrath of the Lich King era.
+## Notes-zhCN: Big Wigs 巫妖王之怒模块。
 
 ## LoadOnDemand: 1
 ## Dependencies: BigWigs
