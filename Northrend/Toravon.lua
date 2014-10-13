@@ -52,15 +52,15 @@ end
 --
 
 function mod:Whiteout(args)
-	self:Message(72034, "Positive")
+	self:Message(args.spellId, "Positive")
 	count = count + 1
-	self:Bar(72034, 35, L["whiteout_bar"]:format(count))
-	self:DelayedMessage(72034, 30, "Attention", L["whiteout_message"]:format(count))
+	self:Bar(args.spellId, 35, L["whiteout_bar"]:format(count))
+	self:DelayedMessage(args.spellId, 30, "Attention", L["whiteout_message"]:format(count))
 end
 
 function mod:Orbs(args)
-	self:Message(72091, "Important")
-	self:Bar(72091, 30)
+	self:Message(args.spellId, "Important")
+	self:Bar(args.spellId, 30)
 end
 
 function mod:Frostbite(args)
@@ -68,7 +68,7 @@ function mod:Frostbite(args)
 end
 
 do
-	local freezeTargets, scheduled = nil, mod:NewTargetList()
+	local freezeTargets, scheduled = mod:NewTargetList(), nil
 	local function freezeWarn()
 		mod:TargetMessage(72090, freezeTargets, "Personal", nil, L["freeze_message"])
 		scheduled = nil
