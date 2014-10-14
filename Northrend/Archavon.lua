@@ -64,6 +64,7 @@ end
 do
 	local handle = nil
 	local function scanTarget(spellId)
+		handle = nil
 		local bossId = mod:GetUnitIdByGUID(31125)
 		if not bossId then return end
 		local target = mod:UnitName(bossId .. "target")
@@ -71,11 +72,11 @@ do
 			mod:TargetMessage(58965, target, "Important", nil, spellId)
 			mod:PrimaryIcon(58965, target)
 		end
-		handle = nil
 	end
 	function mod:Shards(args)
-		self:CancelTimer(handle)
-		handle = self:ScheduleTimer(scanTarget, 0.2, args.spellId)
+		if not handle then
+			handle = self:ScheduleTimer(scanTarget, 0.2, args.spellId)
+		end
 	end
 end
 
