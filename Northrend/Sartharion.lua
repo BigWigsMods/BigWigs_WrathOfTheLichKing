@@ -72,8 +72,8 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Bar("tsunami", L["tsunami_cooldown"], 30, 57491)
-	self:DelayedMessage("tsunami", 25, L["tsunami_warning"], "Attention")
+	self:Bar("tsunami", 30, L["tsunami_cooldown"], 57491)
+	self:DelayedMessage("tsunami", 25, "Attention", L["tsunami_warning"])
 	self:Berserk(900)
 end
 

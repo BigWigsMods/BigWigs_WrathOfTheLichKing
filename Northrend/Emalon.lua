@@ -55,7 +55,7 @@ function mod:Overcharge(args)
 end
 
 do
-	local overcharge, timer = GetSpellInfo(64218), nil
+	local overcharge, timer = mod:SpellName(64218), nil
 	local function scanTarget(destGUID)
 		local unitId = mod:GetUnitIdByGUID(destGUID)
 		if not unitId then return end
