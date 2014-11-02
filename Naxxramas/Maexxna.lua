@@ -43,7 +43,7 @@ end
 
 function mod:OnEngage()
 	self:Spray()
-	self:RegisterEvent("UNIT_HEALTH")
+	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
 end
 
 --------------------------------------------------------------------------------
@@ -75,16 +75,16 @@ function mod:Spray()
 end
 
 function mod:Frenzy(args)
-	self:UnregisterEvent("UNIT_HEALTH")
+	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 	self:Message(54123, "Attention", "Alarm", L["enragewarn"], args.spellId)
 end
 
-function mod:UNIT_HEALTH(_, unit)
+function mod:UNIT_HEALTH_FREQUENT(_, unit)
 	if self:MobId(UnitGUID(unit)) == 15952 then
 		local health = UnitHealth(unit) / UnitHealthMax(unit) * 100
-		if health > 30 and health <= 33 then
+		if health < 36 then
 			self:Message(54123, L["enragesoonwarn"], "Important", nil, false)
-			self:UnregisterEvent("UNIT_HEALTH")
+			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 		end
 	end
 end

@@ -75,7 +75,7 @@ function mod:OnEngage()
 	p2, first = nil, nil
 	self:Bar(70351, 25, L["experiment_bar"])
 
-	self:RegisterEvent("UNIT_HEALTH_FREQUENT")
+	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 end
 
@@ -98,7 +98,7 @@ do
 		else
 			mod:Message("phase", "Positive", nil, CL.phase:format(3), false)
 			first = nil
-			mod:UnregisterEvent("UNIT_HEALTH_FREQUENT")
+			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 		end
 	end
 
@@ -148,7 +148,7 @@ function mod:UNIT_HEALTH_FREQUENT(_, unit)
 			p2 = true
 		elseif hp < 38 then
 			self:Message("phase", "Positive", nil, L["phase_warning"]:format(3), false)
-			self:UnregisterEvent("UNIT_HEALTH_FREQUENT")
+			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 		end
 	end
 end
