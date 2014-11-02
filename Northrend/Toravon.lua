@@ -33,7 +33,7 @@ L = mod:GetLocale()
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Whiteout", 72034)
 	self:Log("SPELL_CAST_START", "Orbs", 72091)
-	self:Log("SPELL_AURA_APPLIED_DOSE", "Frostbite", 72004, 72121)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "Frostbite", 72004)
 	self:Log("SPELL_AURA_APPLIED", "Freeze", 72090)
 	self:Death("Win", 38433)
 
@@ -64,7 +64,7 @@ function mod:Orbs(args)
 end
 
 function mod:Frostbite(args)
-	self:StackMessage(72004, args.destName, args.amount, "Urgent")
+	self:StackMessage(args.spellId, args.destName, args.amount, "Urgent")
 end
 
 do
