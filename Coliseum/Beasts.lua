@@ -296,18 +296,16 @@ function mod:Butt(args)
 	self:CDBar(args.spellId, 12)
 end
 
-do
-	local spellName = GetSpellInfo(52311)
-	function mod:Charge(msg, unit, _, _, player)
-		if unit == L.icehowl then
-			self:TargetMessage("charge", player, "Personal", "Alarm", spellName, 52311)
-			if UnitIsUnit(player, "player") then
-				self:Flash("charge", 52311)
-				self:Say("charge", spellName)
-			end
-			self:Bar("charge", 7.5, spellName, 52311)
-			self:PrimaryIcon("charge", player)
+function mod:Charge(msg, unit, _, _, player)
+	if unit == L.icehowl then
+		local furiousChargeId = 52311
+		self:TargetMessage("charge", player, "Personal", "Alarm", furiousChargeId)
+		if UnitIsUnit(player, "player") then
+			self:Flash("charge", furiousChargeId)
+			self:Say("charge", furiousChargeId)
 		end
+		self:Bar("charge", 7.5, furiousChargeId)
+		self:PrimaryIcon("charge", player)
 	end
 end
 

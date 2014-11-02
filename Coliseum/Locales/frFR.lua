@@ -7,16 +7,12 @@ if L then
 	L.burrow_trigger = "s'enfonce dans le sol"
 	L.burrow = "Fouir"
 	L.burrow_desc = "Affiche un délai de la technique Fouir d'Anub'Arak."
-	L.burrow_cooldown = "Prochain Fouir"
 	L.burrow_soon = "Fouir imminent"
 
 	L.nerubian_message = "Arrivée de fouisseurs !"
 	L.nerubian_burrower = "Plus de fouisseurs"
 
 	L.shadow_soon = "Attaque d'ombre dans ~5 sec. !"
-
-	L.freeze_bar = "~Prochaine Entaille givrante"
-	L.pcold_bar = "~Prochain Froid pénétrant"
 
 	L.chase = "Poursuivi"
 end
@@ -35,8 +31,6 @@ if L then
 	L.snobold = "Frigbold"
 	L.snobold_desc = "Prévient quand un joueur a un frigbold sur sa tête."
 	L.snobold_message = "Frigbold"
-	L.impale_message = "%2$dx Empaler sur %1$s"
-	L.firebomb_message = "Bombe incendiaire en dessous de VOUS !"
 
 	-- Jormungars
 	L.submerge = "Dans le sol"
@@ -48,10 +42,9 @@ if L then
 	L.slime_message = "Bave sur VOUS !"
 	L.burn_spell = "Bile"
 	L.toxin_spell = "Toxine"
-	L.spray = "~Prochain Jet"
+	L.spray = "Prochain Jet"
 
 	-- Icehowl
-	L.butt_bar = "~Recharge Coup de tête"
 	L.charge = "Charge furieuse"
 	L.charge_desc = "Prévient quand un joueur subit les effets d'une Charge furieuse."
 	L.charge_trigger = "lâche un rugissement assourdissant !$"
@@ -99,7 +92,6 @@ if L then
 
 	L.infernal_bar = "Apparition d'un volcan"
 	L.netherportal_bar = "Apparition d'un portail"
-	L.netherpower_bar = "~Prochaine Puissance"
 
 	L.kiss_message = "Baiser de la Maîtresse sur VOUS !"
 	L.kiss_interrupted = "Interrompu !"

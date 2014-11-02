@@ -7,16 +7,12 @@ if L then
 	L.burrow_trigger = "땅속으로 숨어버립니다!"
 	L.burrow = "소멸"
 	L.burrow_desc = "아눕아락의 등장과 소멸, 소환 되어 추가되는 벌레들을 알립니다."
-	L.burrow_cooldown = "다음 소멸"
 	L.burrow_soon = "곧 소멸"
 
 	L.nerubian_message = "곧 땅무지 추가!"
 	L.nerubian_burrower = "땅무지 추가"
 
 	L.shadow_soon = "약 5초 후 어둠의 일격!"
-
-	L.freeze_bar = "~다음 얼음 베기"
-	L.pcold_bar = "~다음 냉기 관통"
 
 	L.chase = "추격"
 end
@@ -35,8 +31,6 @@ if L then
 	L.snobold = "스노볼트"
 	L.snobold_desc = "스노볼트가 누구의 머리위에 있는지를 알립니다."
 	L.snobold_message = "스노볼트 추가"
-	L.impale_message = "꿰뚫기 %2$dx : %1$s"
-	L.firebomb_message = "당신은 불 폭탄!"
 
 	-- Jormungars
 	L.submerge = "잠수"
@@ -48,10 +42,9 @@ if L then
 	L.slime_message = "당신은 진흙 웅덩이!"
 	L.burn_spell = "불타는 담즙"
 	L.toxin_spell = "마비 독"
-	L.spray = "~다음 분사"
+	L.spray = "다음 분사"
 
 	-- Icehowl
-	L.butt_bar = "~박치기 대기시간"
 	L.charge = "사나운 돌진"
 	L.charge_desc = "사나운 돌진의 대상 플레이어를 알립니다."
 	L.charge_trigger = "([^%s]+)|1을;를; 노려보며 큰 소리로 울부짖습니다.$"
@@ -99,7 +92,6 @@ if L then
 
 	L.infernal_bar = "화산 소환"
 	L.netherportal_bar = "~황천 차원문 대기시간"
-	L.netherpower_bar = "~황천의 힘 대기시간"
 
 	L.kiss_message = "당신에게 키스!"
 	L.kiss_interrupted = "차단함!"

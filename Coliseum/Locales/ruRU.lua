@@ -7,16 +7,12 @@ if L then
 	L.burrow_trigger = "зарывается в землю!"
 	L.burrow = "Зарывание в землю"
 	L.burrow_desc = "Отображать таймер до закапывания Ануб'арака"
-	L.burrow_cooldown = "Следующее зарывание"
 	L.burrow_soon = "Скоро зарывание"
 
 	L.nerubian_message = "Жуки наступают!"
 	L.nerubian_burrower = "Ещё жуки"
 
 	L.shadow_soon = "Теневой удар через ~5сек!"
-
-	L.freeze_bar = "~Замораживающий выпад"
-	L.pcold_bar = "~Пронизывающий холод"
 
 	L.chase = "Преследование"
 end
@@ -35,8 +31,6 @@ if L then
 	L.snobold = "Снобольд"
 	L.snobold_desc = "Сообщать о том, на кого прыгнул снобольд."
 	L.snobold_message = "Снобольд на:"
-	L.impale_message = "%2$dx Прокалывания на %1$s"
-	L.firebomb_message = "Огненная бомба на ВАС!"
 
 	-- Jormungars
 	L.submerge = "Погружение"
@@ -48,10 +42,9 @@ if L then
 	L.slime_message = "Вы в луже жижи!"
 	L.burn_spell = "Горящая желчь"
 	L.toxin_spell = "Паралитический токсин"
-	L.spray = "~Брызги"
+	L.spray = "Брызги"
 
 	-- Icehowl
-	L.butt_bar = "~Свирепое бодание"
 	L.charge = "Отчаянный рывок" --Furious Charge - судя по транскриптору нет русского перевода :(
 	L.charge_desc = "Сообщать об отчаянном рывке."
 	L.charge_trigger = "глядит на" --check
@@ -99,7 +92,6 @@ if L then
 
 	L.infernal_bar = "~появление вулкана"
 	L.netherportal_bar = "~появление врат"
-	L.netherpower_bar = "~сила пустоты"
 
 	L.kiss_message = "Поцелуй на ВАС!"
 	L.kiss_interrupted = "Прерывание!"

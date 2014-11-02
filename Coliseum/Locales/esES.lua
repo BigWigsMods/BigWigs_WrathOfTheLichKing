@@ -7,16 +7,12 @@ if L then
 	L.burrow_trigger = "se entierra en el suelo!"
 	L.burrow = "Se entierra"
 	L.burrow_desc = "Mostrar contadores para emerger y enterrar, y también para aparición de adds."
-	L.burrow_cooldown = "Siguiente enterrar"
 	L.burrow_soon = "Se entierra pronto"
 
 	L.nerubian_message = "¡Aparecen Adds!"
 	L.nerubian_burrower = "Más adds"
 
 	L.shadow_soon = "¡Golpe de las Sombras en ~5sec!"
-
-	L.freeze_bar = "~Siguiente Tajo congelante"
-	L.pcold_bar = "~Siguiente Frío penetrante"
 
 	L.chase = "Perseguido"
 end
@@ -35,8 +31,6 @@ if L then
 	L.snobold = "Snobold"
 	L.snobold_desc = "Avisa quien tiene un Snobold en su cabeza."
 	L.snobold_message = "Add"
-	L.impale_message = "%2$dx Empalar en %1$s"
-	L.firebomb_message = "¡Fuego en TI!"
 
 	-- Jormungars
 	L.submerge = "Sumerge"
@@ -48,10 +42,9 @@ if L then
 	L.slime_message = "¡Baba paralizante en TI!"
 	L.burn_spell = "Fuego"
 	L.toxin_spell = "Toxina"
-	L.spray = "~Siguiente Spray"
+	L.spray = "Siguiente Spray"
 
 	-- Icehowl
-	L.butt_bar = "~Topetazo Cooldown"
 	L.charge = "Carga furiosa"
 	L.charge_desc = "Avisa sobre la Carga furiosa en jugadores."
 	L.charge_trigger = "mira a"
@@ -99,7 +92,6 @@ if L then
 
 	L.infernal_bar = "Volcán aparece"
 	L.netherportal_bar = "Portal aparece"
-	L.netherpower_bar = "~Siguiente Poder abisal"
 
 	L.kiss_message = "¡Beso en TI!"
 	L.kiss_interrupted = "¡Cortado!"

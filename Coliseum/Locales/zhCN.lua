@@ -7,16 +7,12 @@ if L then
 	L.burrow_trigger = "钻入了地下"
 	L.burrow = "钻地"
 	L.burrow_desc = "当阿努巴拉克钻地时显示计时条。"
-	L.burrow_cooldown = "<下一钻地>"
 	L.burrow_soon = "即将 钻地！"
 
 	L.nerubian_message = "即将 增援！"
 	L.nerubian_burrower = "更多增援！"
 
 	L.shadow_soon = "约5秒后，暗影突击！"
-
-	L.freeze_bar = "<下一寒冰打击>"
-	L.pcold_bar = "<下一刺骨之寒>"
 
 	L.chase = "追击"
 end
@@ -35,8 +31,6 @@ if L then
 	L.snobold = "狗头人奴隶"
 	L.snobold_desc = "当出现狗头人奴隶时发出警报。"
 	L.snobold_message = "狗头人奴隶！"
-	L.impale_message = "%2$dx 穿刺：>%1$s<！"
-	L.firebomb_message = ">你< 燃烧弹！"
 
 	-- Jormungars
 	L.submerge = "潜地"
@@ -51,7 +45,6 @@ if L then
 	L.spray = "<下一喷溅>"
 
 	-- Icehowl
-	L.butt_bar = "<野蛮头冲 冷却>"
 	L.charge = "野性冲锋"
 	L.charge_desc = "当玩家中了野性冲锋时发出警报。"
 	L.charge_trigger = "%s等着"
@@ -99,7 +92,6 @@ if L then
 
 	L.infernal_bar = "<地狱火山出现>"
 	L.netherportal_bar = "<下一虚空传送门>"
-	L.netherpower_bar = "<下一虚空之能>"
 
 	L.kiss_message = ">你< 仕女之吻！"
 	L.kiss_interrupted = "打断！"

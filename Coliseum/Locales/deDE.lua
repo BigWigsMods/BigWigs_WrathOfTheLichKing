@@ -7,16 +7,12 @@ if L then
 	L.burrow_trigger = "gräbt sich in den Boden"
 	L.burrow = "Eingraben"
 	L.burrow_desc = "Zeigt Timer für Anub'araks Ein- und Ausgraben sowie für das Erscheinen der Nerubischen Gräber."
-	L.burrow_cooldown = "~Eingraben"
 	L.burrow_soon = "Eingraben bald!"
 
 	L.nerubian_message = "Adds kommen!"
 	L.nerubian_burrower = "Weitere Adds"
 
 	L.shadow_soon = "Schattenhieb in ~5 sek!"
-
-	L.freeze_bar = "~Gefrierender Streich"
-	L.pcold_bar = "~Durchdringende Kälte"
 
 	L.chase = "Verfolgen"
 end
@@ -35,8 +31,6 @@ if L then
 	L.snobold = "Schneebold"
 	L.snobold_desc = "Warnt davor, wer einen Schneebold auf seinem Kopf hat."
 	L.snobold_message = "Schneebold"
-	L.impale_message = "%2$dx Pfählen: %1$s"
-	L.firebomb_message = "Feuer auf DIR!"
 
 	-- Jormungars
 	L.submerge = "Eingraben"
@@ -48,10 +42,9 @@ if L then
 	L.slime_message = "Schleimpfütze auf DIR!"
 	L.burn_spell = "Brennende Galle"
 	L.toxin_spell = "Paralysierendes Toxin"
-	L.spray = "~Sprühen"
+	L.spray = "Sprühen"
 
 	-- Icehowl
-	L.butt_bar = "~Kopfstoß"
 	L.charge = "Wütender Ansturm"
 	L.charge_desc = "Warnt vor Wütender Ansturm auf Spielern."
 	L.charge_trigger = "zornig an"
@@ -99,7 +92,6 @@ if L then
 
 	L.infernal_bar = "Vulkan kommt"
 	L.netherportal_bar = "Netherportal kommt"
-	L.netherpower_bar = "~Macht des Nether"
 
 	L.kiss_message = "Kuss auf DIR!"
 	L.kiss_interrupted = "Unterbrochen!"
