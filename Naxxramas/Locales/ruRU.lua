@@ -261,10 +261,6 @@ if L then
 	L.lifedrain_bar = "~Возможное похищение жизни"
 
 	L.icebolt_say = "Я в глыбе!"
-
-	L.ping = "Мояк по мини-карте"
-	L.ping_desc = "Отмечать ваше текущеее положение маяком по мини-карте если вы находитесь в глыбе после морозной стрелы."
-	L.ping_message = "Глыба - отмечаю положение!"
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ruRU")

@@ -261,10 +261,6 @@ if L then
 	L.lifedrain_bar = "~생명력 흡수 가능"
 
 	L.icebolt_say = "저 방패에요!"
-
-	L.ping = "미니맵 표시"
-	L.ping_desc = "자신이 얼음 화살에 걸렸을 때 현재 위치를 미니맵에 표시합니다."
-	L.ping_message = "방패 - 현재 위치 미니맵에 표시 중!"
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "koKR")

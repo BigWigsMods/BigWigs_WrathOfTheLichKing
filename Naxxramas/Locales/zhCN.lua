@@ -260,11 +260,7 @@ if L then
 	L.lifedrain_warn1 = "5秒后，生命吸取！"
 	L.lifedrain_bar = "<生命吸取>"
 
-	L.icebolt_say = "我是寒冰屏障！快躲到我后面！"
-
-	L.ping = "点击"
-	L.ping_desc = "当你中了寒冰屏障时点击当前所在位置。"
-	L.ping_message = "寒冰屏障 - 点击你的位置！"
+	L.icebolt_say = "我是寒冰屏障！"
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "zhCN")

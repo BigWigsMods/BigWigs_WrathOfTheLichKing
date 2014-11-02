@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Sapphiron", 535)
 if not mod then return end
 mod:RegisterEnableMob(15989)
-mod.toggleOptions = {28542, 28524, {28522, "ICON", "SAY", "PING"}, "berserk", "bosskill"}
+mod.toggleOptions = {28542, 28524, {28522, "ICON", "SAY"}, "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -32,8 +32,6 @@ if L then
 	L.lifedrain_bar = "Possible Life Drain"
 
 	L.icebolt_say = "I'm a Block!"
-
-	L.ping_message = "Block - Pinging your location!"
 end
 L = mod:GetLocale()
 
@@ -94,10 +92,6 @@ end
 function mod:Icebolt(args)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId, L["icebolt_say"], true)
-		if bit.band(self.db.profile[args.spellName], BigWigs.C.PING) == BigWigs.C.PING then
-			Minimap:PingLocation()
-			BigWigs:Print(L["ping_message"])
-		end
 	else
 		self:TargetMessage(args.spellId, args.destName, "Attention")
 	end

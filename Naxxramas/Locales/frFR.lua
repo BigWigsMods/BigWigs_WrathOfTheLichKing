@@ -260,10 +260,6 @@ if L then
 	L.lifedrain_bar = "Prochains Drains de vie"
 
 	L.icebolt_say = "Je suis un bloc !"
-
-	L.ping = "Ping"
-	L.ping_desc = "Pinge votre position actuelle si vous subissez les effets de l'Eclair de glace."
-	L.ping_message = "Bloc - Indication de votre position aux autres !"
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "frFR")

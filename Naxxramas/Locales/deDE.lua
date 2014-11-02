@@ -261,10 +261,6 @@ if L then
 	L.lifedrain_bar = "~Lebensentzug"
 
 	L.icebolt_say = "Ich bin ein Eisblock!"
-
-	L.ping = "Ping"
-	L.ping_desc = "Die derzeitige Position pingen, wenn du von Eisblitz betroffen bist."
-	L.ping_message = "Eisblock - Pinge deine Position!"
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "deDE")

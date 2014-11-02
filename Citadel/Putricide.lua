@@ -98,7 +98,7 @@ do
 		else
 			mod:Message("phase", "Positive", nil, CL.phase:format(3), false)
 			first = nil
-			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
+			mod:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 		end
 	end
 
