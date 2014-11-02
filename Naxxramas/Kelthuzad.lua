@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Kel'Thuzad", 535)
+local mod, CL = BigWigs:NewBoss("Kel'Thuzad", 535)
 if not mod then return end
 mod:RegisterEnableMob(15990)
 mod.toggleOptions = {27808, 27810, 28410, {27819, "ICON", "FLASH"}, "guardians", "phase", "proximity", "bosskill"}
@@ -36,10 +36,6 @@ if L then
 	L.phase3_soon_warning = "Phase 3 soon!"
 	L.phase3_trigger = "Master, I require aid!"
 	L.phase3_warning = "Phase 3, Guardians in ~15 sec!"
-
-	L.mc_message = "Mind Control: %s"
-	L.mc_warning = "Mind controls soon!"
-	L.mc_nextbar = "~Mind Controls"
 
 	L.frostblast_bar = "Possible Frost Blast"
 	L.frostblast_soon_message = "Possible Frost Blast in ~5 sec!"
@@ -77,102 +73,94 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Fizzure", 27810)
 	self:Log("SPELL_AURA_APPLIED", "FrostBlast", 27808)
 	self:Log("SPELL_AURA_APPLIED", "Detonate", 27819)
-	self:Log("SPELL_AURA_APPLIED", "MC", 28410)
+	self:Log("SPELL_AURA_APPLIED", "ChainsOfKelThuzad", 28410)
 	self:Death("Win", 15990)
 
-	self.warnedAboutPhase3Soon = nil
-
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
-	self:RegisterEvent("UNIT_HEALTH")
+	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Fizzure(_, spellId, _, _, spellName)
-	self:Message(27810, spellName, "Important", spellId)
+function mod:Fizzure(args)
+	self:Message(args.spellId, "Important")
 end
 
 do
-	local spell = nil
-	local name = nil
 	local handle = nil
-	local function fbWarn()
-		mod:TargetMessage(27808, name, fbTargets, "Important", spell, "Alert")
-		mod:DelayedMessage(27808, 32, L["frostblast_soon_message"], "Attention")
-		mod:Bar(27808, L["frostblast_bar"], 37, spell)
+	local function fbWarn(spellId)
+		mod:TargetMessage(spellId, fbTargets, "Important", "Alert")
+		mod:DelayedMessage(spellId, 32, "Attention", L["frostblast_soon_message"])
+		mod:Bar(spellId, 37, L["frostblast_bar"])
 		handle = nil
 	end
 
-	function mod:FrostBlast(player, spellId, _, _, spellName)
-		spell = spellId
-		name = spellName
-		fbTargets[#fbTargets + 1] = player
+	function mod:FrostBlast(args)
+		fbTargets[#fbTargets + 1] = args.destName
 		self:CancelTimer(handle)
-		handle = self:ScheduleTimer(fbWarn, 0.4)
+		handle = self:ScheduleTimer(fbWarn, 0.4, args.spellId)
 	end
 end
 
-function mod:Detonate(player, spellId, _, _, spellName)
-	self:TargetMessage(27819, spellName, player, "Personal", spellId, "Alert")
-	if UnitIsUnit(player, "player") then self:Flash(27819) end
-	self:PrimaryIcon(27819, player)
-	self:Bar(27819, L["detonate_other"]:format(player), 5, spellId)
-	self:Bar(27819, L["detonate_possible_bar"], 20, spellId)
-	self:DelayedMessage(27819, 15, L["detonate_warning"], "Attention")
+function mod:Detonate(args)
+	self:TargetMessage(args.spellId, args.destName, "Personal", "Alert")
+	if self:Me(args.destGUID) then
+		self:Flash(args.spellId)
+	end
+	self:PrimaryIcon(args.spellId, args.destName)
+	self:Bar(args.spellId, 5, L["detonate_other"]:format(args.destName))
+	self:Bar(args.spellId, 20, L["detonate_possible_bar"])
+	self:DelayedMessage(args.spellId, 15, L["detonate_warning"], "Attention")
 end
 
 do
-	local spell = nil
 	local handle = nil
-	local function mcWarn()
-		local spellName = GetSpellInfo(605) -- Mind Control
-		mod:TargetMessage(28410, spellName, mcTargets, "Important", spell, "Alert")
-		mod:Bar(28410, spellName, 20, 28410)
-		mod:DelayedMessage(28410, 68, L["mc_warning"], "Urgent")
-		mod:Bar(28410, L["mc_nextbar"], 68, spell)
+	local function mcWarn(spellId)
+		local mindControl = mod:SpellName(605)
+		mod:TargetMessage(spellId, mcTargets, "Important", "Alert", mindControl)
+		mod:Bar(spellId, 20, mindControl)
+		mod:DelayedMessage(spellId, 68, CL["soon"]:format(mindControl), "Urgent")
+		mod:CDBar(spellId, 68, mindControl)
 		handle = nil
 	end
 
-	function mod:MC(player, spellId)
-		spell = spellId
-		mcTargets[#mcTargets + 1] = player
+	function mod:ChainsOfKelThuzad(args)
+		mcTargets[#mcTargets + 1] = args.destName
 		self:CancelTimer(handle)
-		handle = self:ScheduleTimer(mcWarn, 0.5)
+		handle = self:ScheduleTimer(mcWarn, 0.5, args.spellId)
 	end
 end
 
-function mod:UNIT_HEALTH(event, msg)
+function mod:UNIT_HEALTH_FREQUENT(event, msg)
 	if UnitName(msg) == mod.displayName then
 		local health = UnitHealth(msg) / UnitHealthMax(msg) * 100
-		if health > 40 and health <= 43 and not self.warnedAboutPhase3Soon then
-			self:Message("phase", L["phase3_soon_warning"], "Attention")
-			self.warnedAboutPhase3Soon = true
-		elseif health > 60 and self.warnedAboutPhase3Soon then
-			self.warnedAboutPhase3Soon = nil
+		if health < 46 then
+			self:Message("phase", "Attention", nil, L["phase3_soon_warning"], false)
+			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 		end
 	end
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 	if msg == L["start_trigger"] then
-		self:Message("phase", L["start_warning"], "Attention")
-		self:Bar("phase", L["start_bar"], 215, "Spell_Fire_FelImmolation")
+		self:Message("phase", "Attention", nil, L["start_warning"], false)
+		self:Bar("phase", 215, L["start_bar"], "Spell_Fire_FelImmolation")
 		wipe(mcTargets)
 		wipe(fbTargets)
 		self:CloseProximity()
-		self:Engage()
+		--self:Engage() -- No wipe check?
 	elseif msg == L["phase2_trigger1"] or msg == L["phase2_trigger2"] or msg == L["phase2_trigger3"] then
 		self:StopBar(L["start_bar"])
-		self:Message("phase", L["phase2_warning"], "Important")
-		self:Bar("phase", L["phase2_bar"], 15, "Spell_Shadow_Charm")
+		self:Message("phase", "Important", nil, L["phase2_warning"], false)
+		self:Bar("phase", 15, L["phase2_bar"], "Spell_Shadow_Charm")
 		self:OpenProximity("proximity", 10)
 	elseif msg == L["phase3_trigger"] then
-		self:Message("phase", L["phase3_warning"], "Attention")
+		self:Message("phase", "Attention", nil, L["phase3_warning"], false)
 	elseif msg == L["guardians_trigger"] then
-		self:Message("guardians", L["guardians_warning"], "Important")
-		self:Bar("guardians", L["guardians_bar"], 10, 28866)
+		self:Message("guardians", "Important", nil, L["guardians_warning"], false)
+		self:Bar("guardians", 10, L["guardians_bar"], "inv_trinket_naxxramas04")
 	end
 end
 

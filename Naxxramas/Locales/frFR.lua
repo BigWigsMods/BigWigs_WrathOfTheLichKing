@@ -153,10 +153,6 @@ if L then
 	L.phase3_trigger = "Maître, j'ai besoin d'aide !"
 	L.phase3_warning = "Phase 3, gardiens dans ~15 sec. !"
 
-	L.mc_message = "Contrôle mental : %s"
-	L.mc_warning = "Contrôles mentaux imminents !"
-	L.mc_nextbar = "~Contrôles mentaux"
-
 	L.frostblast_bar = "Trait de givre probable"
 	L.frostblast_soon_message = "Trait de givre probable dans ~5 sec. !"
 

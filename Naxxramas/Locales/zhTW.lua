@@ -154,10 +154,6 @@ if L then
 	L.phase3_trigger = "主人，我需要幫助!"
 	L.phase3_warning = "第三階段開始， 約15秒後，寒冰皇冠守衛者出現！"
 
-	L.mc_message = "科爾蘇加德之鍊：>%s<！"
-	L.mc_warning = "即將 科爾蘇加德之鍊！"
-	L.mc_nextbar = "<下一科爾蘇加德之鍊>"
-
 	L.frostblast_bar = "<可能 冰霜衝擊>"
 	L.frostblast_soon_message = "約5秒後，可能冰霜衝擊！"
 

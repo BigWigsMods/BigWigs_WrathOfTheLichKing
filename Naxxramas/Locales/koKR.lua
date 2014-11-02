@@ -154,10 +154,6 @@ if L then
 	L.phase3_trigger = "주인님, 도와주소서!"
 	L.phase3_warning = "3 단계, 약 15초 이내 수호자 등장!"
 
-	L.mc_message = "정신 지배: %s"
-	L.mc_warning = "정신 지배 대기시간 종료 - 곧 사용!"
-	L.mc_nextbar = "~정배 대기 시간"
-
 	L.frostblast_bar = "냉기 작렬 가능"
 	L.frostblast_soon_message = "약 5초 이내 냉기 작렬 가능!"
 

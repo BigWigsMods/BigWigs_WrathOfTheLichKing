@@ -154,10 +154,6 @@ if L then
 	L.phase3_trigger = "Господин мне нужна помощь!"
 	L.phase3_warning = "Фаза 3 защитники через ~15 секунд!"
 
-	L.mc_message = "Контроль над |3-4(%s)"
-	L.mc_warning = "Скоро контроль разума!"
-	L.mc_nextbar = "~Контроль Разума"
-
 	L.frostblast_bar = "Возможен ледяной взрыв"
 	L.frostblast_soon_message = "Возможный ледяной взрыв через 15 секунд!"
 

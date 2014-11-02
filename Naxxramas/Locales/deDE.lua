@@ -154,10 +154,6 @@ if L then
 	L.phase3_trigger = "Meister, ich benötige Beistand."
 	L.phase3_warning = "Phase 3, Wächter in ~15 sek!"
 
-	L.mc_message = "Gedankenkontrolle: %s"
-	L.mc_warning = "Gedankenkontrolle bald!"
-	L.mc_nextbar = "~Gedankenkontrolle"
-
 	L.frostblast_bar = "~Frostschlag"
 	L.frostblast_soon_message = "Frostschlag in ~5 sek!"
 
