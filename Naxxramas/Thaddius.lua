@@ -87,7 +87,7 @@ function mod:UNIT_AURA(_, unit)
 	if not shiftTime or (GetTime() - shiftTime) < 3 then return end
 
 	local newCharge = nil
-	for i = 1, GetNumGroupMembers() do
+	for i = 1, 10 do
 		local name, _, icon, stack = UnitDebuff("player", i)
 		-- If stack > 1 we need to wait for another UNIT_AURA event.
 		-- UnitDebuff returns 0 for debuffs that don't stack.

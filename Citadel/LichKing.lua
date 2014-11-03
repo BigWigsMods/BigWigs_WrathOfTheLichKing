@@ -197,13 +197,13 @@ end
 do
 	local plague = GetSpellInfo(70337)
 	local function scanRaid()
-		for i = 1, GetNumGroupMembers() do
-			local player = GetRaidRosterInfo(i)
-			local debuffed, _, _, _, _, _, expire = UnitDebuff(player, plague)
+		for unit in mod:IterateGroup() do
+			local debuffed, _, _, _, _, _, expire = UnitDebuff(unit, plague)
 			if debuffed and (expire - GetTime()) > 13 then
-				if UnitIsUnit(player, "player") then
+				if UnitIsUnit(unit, "player") then
 					mod:Flash(70337)
 				end
+				local player = mod:UnitName(unit)
 				mod:TargetMessage(70337, player, "Personal", "Alert")
 				mod:SecondaryIcon(70337, player)
 			end
@@ -245,10 +245,9 @@ end
 do
 	local hugged, prev = mod:NewTargetList(), 0
 	local function ValkyrHugCheck()
-		for i=1, GetNumGroupMembers() do
-			local player = GetRaidRosterInfo(i)
-			if UnitInVehicle(player) then
-				hugged[#hugged + 1] = player
+		for unit in mod:IterateGroup() do
+			if UnitInVehicle(unit) then
+				hugged[#hugged + 1] = mod:UnitName(unit)
 			end
 		end
 		mod:TargetMessage(69037, hugged, "Urgent", nil, L["valkyrhug_message"], 71844)
