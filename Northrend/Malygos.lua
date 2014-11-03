@@ -158,7 +158,7 @@ function mod:Phase3()
 	self:Message("phase", "Attention", nil, L["phase3_message"], false)
 end
 
-function mod:UNIT_HEALTH_FREQUENT(_, unit)
+function mod:UNIT_HEALTH_FREQUENT(unit)
 	if phase == 1 and self:MobId(UnitGUID(unit)) == 28859 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 54 then
