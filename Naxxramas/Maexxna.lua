@@ -79,7 +79,7 @@ function mod:Frenzy(args)
 	self:Message(54123, "Attention", "Alarm", L["enragewarn"], args.spellId)
 end
 
-function mod:UNIT_HEALTH_FREQUENT(_, unit)
+function mod:UNIT_HEALTH_FREQUENT(unit)
 	if self:MobId(UnitGUID(unit)) == 15952 then
 		local health = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if health < 36 then

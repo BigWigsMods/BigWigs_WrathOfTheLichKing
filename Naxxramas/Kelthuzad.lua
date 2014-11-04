@@ -133,7 +133,7 @@ do
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, msg)
+function mod:UNIT_HEALTH_FREQUENT(msg)
 	if UnitName(msg) == mod.displayName then
 		local health = UnitHealth(msg) / UnitHealthMax(msg) * 100
 		if health < 46 then
