@@ -140,7 +140,7 @@ function mod:Plague(args)
 	self:Bar(72451, 10)
 end
 
-function mod:UNIT_HEALTH_FREQUENT(_, unit)
+function mod:UNIT_HEALTH_FREQUENT(unit)
 	if self:MobId(UnitGUID(unit)) == 36678 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 84 and not p2 then
