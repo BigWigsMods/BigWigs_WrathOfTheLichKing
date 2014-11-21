@@ -140,7 +140,7 @@ end
 local function start()
 	ishardmode = nil
 	phase = 1
-	mod:Message("phase", "Attention", nil, L["engage_warning"])
+	mod:Message("phase", "Attention", nil, L["engage_warning"], false)
 	mod:Bar("phase", 7, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 
 	mod:Bar(63631, 30, L["shock_next"])
