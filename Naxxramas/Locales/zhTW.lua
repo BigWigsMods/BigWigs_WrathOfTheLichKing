@@ -130,8 +130,6 @@ if L then
 	L.markwarn1 = "印記%d！"
 	L.markwarn2 = "5秒後，印記%d！"
 
-	L.dies = "#%d死亡！"
-
 	L.startwarn = "四騎士已進入戰鬥 - 約17秒後，印記！"
 end
 

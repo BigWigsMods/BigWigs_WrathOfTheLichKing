@@ -130,8 +130,6 @@ if L then
 	L.markwarn1 = "Mal (%d)!"
 	L.markwarn2 = "Mal (%d) in 5 sek!"
 
-	L.dies = "#%d getötet"
-
 	L.startwarn = "Die Vier Reiter angegriffen! Male in ~17 sek."
 end
 

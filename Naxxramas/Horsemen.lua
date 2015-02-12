@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("The Four Horsemen", 535)
+local mod, CL = BigWigs:NewBoss("The Four Horsemen", 535)
 if not mod then return end
 mod:RegisterEnableMob(16063, 16064, 16065, 30549) -- Zeliek, Thane, Blaumeux, Baron
 mod.toggleOptions = {"mark", 28884, 28863, 28883, "bosskill"}
@@ -50,9 +50,9 @@ end
 function mod:OnEngage()
 	marks = 1
 	deaths = 0
-	self:Message("mark", L["startwarn"], "Attention")
-	self:Bar("mark", L["markbar"]:format(marks), 17, 28835)
-	self:DelayedMessage("mark", 12, L["markwarn2"]:format(marks), "Urgent")
+	self:Message("mark", "Attention", L["startwarn"])
+	self:Bar("mark", 17, L["markbar"]:format(marks), 28835)
+	self:DelayedMessage("mark", 12, "Urgent", L["markwarn2"]:format(marks))
 end
 
 --------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ end
 function mod:Deaths()
 	deaths = deaths + 1
 	if deaths < 4 then
-		self:Message("bosskill", "Positive", nil, L["dies"]:format(deaths), false)
+		self:Message("bosskill", "Positive", nil, CL.mob_killed:format(deaths, 4), false)
 	else
 		self:Win()
 	end

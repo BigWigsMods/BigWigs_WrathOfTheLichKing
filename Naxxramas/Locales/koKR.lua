@@ -130,8 +130,6 @@ if L then
 	L.markwarn1 = "징표(%d)!"
 	L.markwarn2 = "5초 후 징표(%d)"
 
-	L.dies = "기사 #%d 처치"
-
 	L.startwarn = "4인의 기병대 전투 시작! 약 17초 이내 징표"
 end
 
