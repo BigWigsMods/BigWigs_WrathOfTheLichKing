@@ -134,7 +134,7 @@ end
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L["polarity_trigger"], nil, true) then
 		self:DelayedMessage(28089, 25, "Important", L["polarity_warning"])
-		self:Bar(28089, L["polarity_bar"], 28, "Spell_Nature_Lightning")
+		self:Bar(28089, 28, L["polarity_bar"], "Spell_Nature_Lightning")
 	elseif msg == L["trigger_phase1_1"] or msg == L["trigger_phase1_2"] then
 		if not stage1warn then
 			self:Message("phase", "Important", nil, L["phase1_message"], false)

@@ -50,7 +50,7 @@ end
 function mod:OnEngage()
 	marks = 1
 	deaths = 0
-	self:Message("mark", "Attention", L["startwarn"])
+	self:Message("mark", "Attention", nil, L["startwarn"], false)
 	self:Bar("mark", 17, L["markbar"]:format(marks), 28835)
 	self:DelayedMessage("mark", 12, "Urgent", L["markwarn2"]:format(marks))
 end
