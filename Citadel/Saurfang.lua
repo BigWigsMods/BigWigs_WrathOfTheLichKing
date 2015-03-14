@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Deathbringer Saurfang", 604)
 if not mod then return end
 mod:RegisterEnableMob(37813, 37200, 37830, 37187, 37920) -- Deathbringer Saurfang, Muradin, Marine, Overlord Saurfang, Kor'kron Reaver
-mod.toggleOptions = {"adds", 72410, 72385, {72293, "ICON", "FLASH"}, 72737, "proximity", "berserk", "bosskill"}
+mod.toggleOptions = {"warmup", "adds", 72410, 72385, {72293, "ICON", "FLASH"}, 72737, "proximity", "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -44,9 +44,10 @@ function mod:OnBossEnable()
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Yell("Engage", L["engage_trigger"])
-	self:Yell("Warmup", L["warmup_alliance"], L["warmup_horde"])
+	self:Yell("WarmupHorde", L["warmup_horde"])
+	self:Yell("WarmupAlliance", L["warmup_alliance"])
 
-	self:Death("Deaths", 37813)
+	self:Death("Win", 37813)
 end
 
 function mod:OnEngage()
@@ -57,14 +58,19 @@ function mod:OnEngage()
 	count = 1
 end
 
-function mod:Warmup(msg)
+function mod:WarmupHorde()
 	self:OpenProximity("proximity", 11)
-	self:Bar("adds", L["warmup_alliance"] and 48 or 99, self.displayName, "achievement_boss_saurfang")
+	self:Bar("warmup", 96, self.displayName, "achievement_boss_saurfang")
+end
+
+function mod:WarmupAlliance()
+	self:OpenProximity("proximity", 11)
+	self:Bar("warmup", 48, self.displayName, "achievement_boss_saurfang")
 end
 
 function mod:VerifyEnable()
 	BigWigsLoader.SetMapToCurrentZone()
-	return not killed and GetCurrentMapDungeonLevel() == 2
+	return not self.lastKill and GetCurrentMapDungeonLevel() == 2
 end
 
 --------------------------------------------------------------------------------
@@ -107,10 +113,5 @@ end
 
 function mod:Frenzy(args)
 	self:Message(72737, "Important", "Long")
-end
-
-function mod:Deaths()
-	killed = true
-	self:Win()
 end
 
