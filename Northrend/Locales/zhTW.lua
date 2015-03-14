@@ -46,6 +46,9 @@ if L then
 	L.overcharge_message = "暴雨爪牙 - 超載！"
 	L.overcharge_bar = "<爆炸>"
 	L.overcharge_next = "<下一超載>"
+
+	L.custom_on_overcharge_mark = "Overcharge marker"
+	L.custom_on_overcharge_mark_desc = "Place the {rt8} marker on the overcharged minion, requires promoted or leader."
 end
 
 L = BigWigs:NewBossLocale("Halion", "zhTW")

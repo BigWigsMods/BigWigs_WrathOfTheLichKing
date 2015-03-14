@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Emalon the Storm Watcher", 532)
 if not mod then return end
 mod:RegisterEnableMob(33993)
-mod.toggleOptions = {64216, {64218, "ICON"}, "proximity", "berserk", "bosskill"}
+mod.toggleOptions = {64216, 64218, "custom_on_overcharge_mark", "proximity", "berserk", "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -15,6 +15,10 @@ local L = mod:NewLocale("enUS", true)
 if L then
 	L.overcharge_message = "A minion is overcharged!"
 	L.overcharge_bar = "Explosion"
+
+	L.custom_on_overcharge_mark = "Overcharge marker"
+	L.custom_on_overcharge_mark_desc = "Place the {rt8} marker on the overcharged minion, requires promoted or leader."
+	L.custom_on_overcharge_mark_icon = 8
 end
 L = mod:GetLocale()
 
@@ -55,19 +59,18 @@ function mod:Overcharge(args)
 end
 
 do
-	local overcharge, timer = mod:SpellName(64218), nil
-	local function scanTarget(destGUID)
-		local unitId = mod:GetUnitIdByGUID(destGUID)
+	local timer = nil
+	local function scanTarget(self, destGUID)
+		local unitId = self:GetUnitIdByGUID(destGUID)
 		if not unitId then return end
 		SetRaidTarget(unitId, 8)
-		mod:CancelTimer(timer)
+		self:CancelTimer(timer)
 		timer = nil
 	end
 
 	function mod:OverchargeIcon(args)
-		if (not UnitIsGroupLeader("player") and not UnitIsGroupAssistant("player")) or bit.band(self.db.profile[overcharge], BigWigs.C.ICON) ~= BigWigs.C.ICON then return end
-		if not timer then
-			timer = self:ScheduleRepeatingTimer(scanTarget, 0.2, args.destGUID)
+		if not timer and self:GetOption("custom_on_overcharge_mark") and (UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) then
+			timer = self:ScheduleRepeatingTimer(scanTarget, 0.2, self, args.destGUID)
 		end
 	end
 end

@@ -33,6 +33,9 @@ if L then
 	L.overcharge_message = "하수인 과충전!"
 	L.overcharge_bar = "폭발"
 	L.overcharge_next = "~과충전 대기시간"
+
+	L.custom_on_overcharge_mark = "Overcharge marker"
+	L.custom_on_overcharge_mark_desc = "Place the {rt8} marker on the overcharged minion, requires promoted or leader."
 end
 
 L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "koKR")
