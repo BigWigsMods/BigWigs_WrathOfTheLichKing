@@ -176,7 +176,7 @@ end
 function mod:Deaths(args)
 	deaths = deaths + 1
 	if deaths < 3 then
-		self:Message("bosskill", "Positive", nil, CL["mob_killed"]:format(args.destName, deaths, 3))
+		self:Message("bosskill", "Positive", nil, CL["mob_killed"]:format(args.destName, deaths, 3), false)
 	else
 		self:Win()
 	end

@@ -185,8 +185,6 @@ if L then
 	L.breath_message = "Огненное дыхание!"
 	L.breath_bar = "~перезарядка дыхания"
 
-	L.flame_message = "ВЫ в Лавовой БОМБЕ!"
-
 	L.harpoon = "Гарпунная Пушка"
 	L.harpoon_desc = "Объявлять Гарпунные Пушки."
 	L.harpoon_message = "Пушка (%d) готова!"

@@ -186,8 +186,6 @@ if L then
 	L.breath_message = "Souffle de flammes !"
 	L.breath_bar = "~Recharge Souffle"
 
-	L.flame_message = "Flamme dévorante sur VOUS !"
-
 	L.harpoon = "Tourelle à harpon"
 	L.harpoon_desc = "Prévient quand une tourelle à harpon est prête."
 	L.harpoon_message = "Tourelle à harpon %d prête !"

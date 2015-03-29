@@ -187,8 +187,6 @@ if L then
 	L.breath_message = "¡Aliento de llamas!"
 	L.breath_bar = "~Aliento CD"
 
-	L.flame_message = "¡Llamas en TI!"
-
 	L.harpoon = "Arpones"
 	L.harpoon_desc = "Anuncia cuando los arpones están listos para su uso."
 	L.harpoon_message = "¡Arpón %d listo!"

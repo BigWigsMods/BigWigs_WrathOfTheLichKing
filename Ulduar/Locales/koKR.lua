@@ -189,8 +189,6 @@ if L then
 	L.breath_message = "화염 숨결!"
 	L.breath_bar = "~숨결 대기시간"
 
-	L.flame_message = "당신은 파멸의 불길!"
-
 	L.harpoon = "작살 포탑"
 	L.harpoon_desc = "작살 포탑의 준비를 알립니다."
 	L.harpoon_message = "작살 포탑 (%d)"

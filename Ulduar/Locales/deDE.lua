@@ -192,8 +192,6 @@ if L then
 	L.breath_message = "Flammenatem!"
 	L.breath_bar = "~Flammenatem"
 
-	L.flame_message = "Verschlingende Flamme auf DIR!"
-
 	L.harpoon = "Harpunengeschütze"
 	L.harpoon_desc = "Warnungen und Timer für die Harpunengeschütze."
 	L.harpoon_message = "Harpunengeschütz %d bereit!"

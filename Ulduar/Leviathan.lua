@@ -47,7 +47,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Message("engage", "Attention", nil, L["engage_message"]:format(self.displayName))
+	self:Message("engage", "Attention", nil, L["engage_message"]:format(self.displayName), false)
 end
 
 --------------------------------------------------------------------------------

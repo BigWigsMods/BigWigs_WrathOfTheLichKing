@@ -191,8 +191,6 @@ if L then
 	L.breath_message = "烈焰喷射！"
 	L.breath_bar = "<烈焰喷射 冷却>"
 
-	L.flame_message = ">你< 吞噬烈焰！"
-
 	L.harpoon = "鱼叉炮台"
 	L.harpoon_desc = "当鱼叉炮台可用时发出警报。"
 	L.harpoon_message = "鱼叉炮台：>%d<可用！"

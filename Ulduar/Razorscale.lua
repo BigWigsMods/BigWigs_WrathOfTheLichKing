@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Razorscale", 529)
+local mod, CL = BigWigs:NewBoss("Razorscale", 529)
 if not mod then return end
 --[[
 	33287 = Expedition Engineer
@@ -44,8 +44,6 @@ if L then
 	L.breath_message = "Flame Breath!"
 	L.breath_bar = "~Breath Cooldown"
 
-	L.flame_message = "Flame on YOU!"
-
 	L.harpoon = "Harpoons"
 	L.harpoon_desc = "Announce when the harpoons are ready for use."
 	L.harpoon_message = "Harpoon %d ready!"
@@ -84,7 +82,7 @@ end
 
 function mod:Flame(args)
 	if self:Me(args.destGUID) then
-		self:Message(64704, "Personal", "Alarm", L["flame_message"], 64733)
+		self:Message(64704, "Personal", "Alarm", CL.underyou:format(args.spellName))
 		self:Flash(64704)
 	end
 end
@@ -102,7 +100,7 @@ end
 function mod:Phase2()
 	phase = 2
 	self:StopBar(L["stun_bar"])
-	self:Message("phase", "Attention", nil, L["phase2_message"])
+	self:Message("phase", "Attention", nil, L["phase2_message"], false)
 end
 
 function mod:Breath()
@@ -121,7 +119,7 @@ function mod:Harpoon()
 end
 
 function mod:Grounded()
-	self:Message("phase", "Attention", "Long", L["ground_message"])
+	self:Message("phase", "Attention", "Long", L["ground_message"], false)
 	self:Bar("phase", 38, L["stun_bar"], 20170) --20170, looks like a stun :p
 	count = 0
 end
