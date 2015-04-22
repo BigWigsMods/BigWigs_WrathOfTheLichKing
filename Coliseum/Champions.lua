@@ -14,12 +14,12 @@ if L then
 	L.enable_trigger = "The next battle will be against the Argent Crusade's most powerful knights! Only by defeating them will you be deemed worthy..."
 	L.defeat_trigger = "A shallow and tragic victory."
 
-	L["Shield on %s!"] = true
-	L["Bladestorming!"] = true
-	L["Hunter pet up!"] = true
-	L["Felhunter up!"] = true
-	L["Heroism on champions!"] = true
-	L["Bloodlust on champions!"] = true
+	L["Shield on %s!"] = "Shield on %s!";
+	L["Bladestorming!"] = "Bladestorming!";
+	L["Hunter pet up!"] = "Hunter pet up!";
+	L["Felhunter up!"] = "Felhunter up!";
+	L["Heroism on champions!"] = "Heroism on champions!";
+	L["Bloodlust on champions!"] = "Bloodlust on champions!";
 end
 L = mod:GetLocale()
 
