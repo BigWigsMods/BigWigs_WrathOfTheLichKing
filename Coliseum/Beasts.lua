@@ -126,7 +126,7 @@ end
 
 function mod:Jormungars()
 	local m = L["boss_incoming"]:format(L.jormungars)
-	self:Message("bosses", "Positive", nil, m)
+	self:Message("bosses", "Positive", nil, m, "Ability_Hunter_Pet_Worm")
 	self:Bar("bosses", 15, m, "INV_Misc_MonsterScales_18")
 	if self:Heroic() then
 		self:Bar("bosses", 200, L["boss_incoming"]:format(L.icehowl), "INV_Misc_MonsterHorn_07")
@@ -139,7 +139,7 @@ end
 
 function mod:Icehowl()
 	local m = L["boss_incoming"]:format(L.icehowl)
-	self:Message("bosses", "Positive", nil, m)
+	self:Message("bosses", "Positive", nil, m, "INV_Misc_Pet_Pandaren_Yeti")
 	self:Bar("bosses", 10, m, "INV_Misc_MonsterHorn_07")
 	self:CancelTimer(handle_Jormungars)
 	handle_Jormungars = nil
