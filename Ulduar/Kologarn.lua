@@ -22,6 +22,7 @@ local L = mod:NewLocale("enUS", true)
 if L then
 	L.arm = "Arm dies"
 	L.arm_desc = "Warn for Left & Right Arm dies."
+	L.arm_icon = 2062 -- spell_nature_earthelemental_totem / Earth Elemental Totem
 	L.left_dies = "Left Arm dies"
 	L.right_dies = "Right Arm dies"
 	L.left_wipe_bar = "Respawn Left Arm"
@@ -92,11 +93,11 @@ end
 
 function mod:Deaths(args)
 	if args.mobId == 32933 then
-		self:Message("arm", "Attention", nil, L["left_dies"], 2062)
-		self:Bar("arm", 50, L["left_wipe_bar"], 2062)
+		self:Message("arm", "Attention", nil, L["left_dies"], L.arm_icon)
+		self:Bar("arm", 50, L["left_wipe_bar"], L.arm_icon)
 	elseif args.mobId == 32934 then
-		self:Message("arm", "Attention", nil, L["right_dies"], 2062)
-		self:Bar("arm", 50, L["right_wipe_bar"], 2062)
+		self:Message("arm", "Attention", nil, L["right_dies"], L.arm_icon)
+		self:Bar("arm", 50, L["right_wipe_bar"], L.arm_icon)
 	end
 end
 
