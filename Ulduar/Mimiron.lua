@@ -163,7 +163,7 @@ function mod:Yells(msg)
 		phase = 2
 		self:StopBar(L["plasma_bar"])
 		self:StopBar(L["shock_next"])
-		self:Message("phase", "Attention", nil, L["phase2_warning"])
+		self:Message("phase", "Attention", nil, L["phase2_warning"], false)
 		self:Bar("phase", 40, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 		if ishardmode then
 			self:Bar(64623, 45, L["fbomb_bar"])
@@ -171,11 +171,11 @@ function mod:Yells(msg)
 		self:CloseProximity()
 	elseif msg:find(L["phase3_trigger"]) then
 		phase = 3
-		self:Message("phase", "Attention", nil, L["phase3_warning"])
+		self:Message("phase", "Attention", nil, L["phase3_warning"], false)
 		self:Bar("phase", 25, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 	elseif msg:find(L["phase4_trigger"]) then
 		phase = 4
-		self:Message("phase", "Attention", nil, L["phase4_warning"])
+		self:Message("phase", "Attention", nil, L["phase4_warning"], false)
 		self:Bar("phase", 25, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 		if ishardmode then
 			self:Bar(64623, 30, L["fbomb_bar"])
