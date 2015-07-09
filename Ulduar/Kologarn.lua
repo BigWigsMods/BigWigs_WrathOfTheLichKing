@@ -92,10 +92,10 @@ end
 
 function mod:Deaths(args)
 	if args.mobId == 32933 then
-		self:Message("arm", "Attention", nil, L["left_dies"])
+		self:Message("arm", "Attention", nil, L["left_dies"], 2062)
 		self:Bar("arm", 50, L["left_wipe_bar"], 2062)
 	elseif args.mobId == 32934 then
-		self:Message("arm", "Attention", nil, L["right_dies"])
+		self:Message("arm", "Attention", nil, L["right_dies"], 2062)
 		self:Bar("arm", 50, L["right_wipe_bar"], 2062)
 	end
 end
