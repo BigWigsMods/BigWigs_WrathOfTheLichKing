@@ -70,7 +70,7 @@ end
 
 function mod:VerifyEnable()
 	BigWigsLoader.SetMapToCurrentZone()
-	return not self.lastKill and GetCurrentMapDungeonLevel() == 2
+	return not self.lastKill and BigWigsLoader.GetCurrentMapDungeonLevel() == 2
 end
 
 --------------------------------------------------------------------------------
