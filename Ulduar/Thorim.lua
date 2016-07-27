@@ -152,7 +152,7 @@ end
 function mod:PhaseTwo()
 	self:Message("phase", "Attention", nil, L["phase2_message"], false)
 	self:Bar("phase", 375, 26662) -- Berserk
-	self:Bar("hardmode", 173, L["hardmode"], 27578) --ability_warrior_battleshout
+	self:Bar("hardmode", 173, L["hardmode"], 27578) -- ability_warrior_battleshout / Battle Shout / icon 132333
 	self:DelayedMessage("hardmode", 173, "Attention", L["hardmode_warning"])
 end
 

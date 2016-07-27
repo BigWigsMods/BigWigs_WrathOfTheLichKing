@@ -22,7 +22,7 @@ local L = mod:NewLocale("enUS", true)
 if L then
 	L.arm = "Arm dies"
 	L.arm_desc = "Warn for Left & Right Arm dies."
-	L.arm_icon = 2062 -- spell_nature_earthelemental_totem / Earth Elemental Totem
+	L.arm_icon = 73903 -- spell_nature_earthelemental_totem / Earth Elemental Totem / icon 136024
 	L.left_dies = "Left Arm dies"
 	L.right_dies = "Right Arm dies"
 	L.left_wipe_bar = "Respawn Left Arm"
