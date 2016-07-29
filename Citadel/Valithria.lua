@@ -5,11 +5,10 @@
 local mod, CL = BigWigs:NewBoss("Valithria Dreamwalker", 604)
 if not mod then return end
 mod:RegisterEnableMob(36789, 37868, 36791, 37934, 37886, 37950, 37985)
-mod.toggleOptions = {69325, {71086, "FLASH"}, "suppresser", {"blazing", "ICON"}, "portal", "berserk", "bosskill"}
+mod.toggleOptions = {69325, {71086, "FLASH"}, "suppresser", {"blazing", "ICON"}, "portal", "berserk"}
 mod.optionHeaders = {
 	[69325] = "normal",
 	berserk = "heroic",
-	bosskill = "general",
 }
 
 --------------------------------------------------------------------------------

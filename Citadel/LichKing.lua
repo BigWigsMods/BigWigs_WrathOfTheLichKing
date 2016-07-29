@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("The Lich King", 604)
 if not mod then return end
 mod:RegisterEnableMob(36597, 38995) -- The Lich King, Highlord Tirion Fordring
-mod.toggleOptions = {72143, 70541, {70337, "ICON", "FLASH"}, 70372, {72762, "SAY", "ICON", "FLASH"}, 69409, 69037, {68980, "ICON", "FLASH"}, 70498, {68981, "FLASH"}, 69200, {72262, "FLASH"}, 72350, {73529, "SAY", "FLASH", "ICON"}, "warmup", "berserk", "bosskill"}
+mod.toggleOptions = {72143, 70541, {70337, "ICON", "FLASH"}, 70372, {72762, "SAY", "ICON", "FLASH"}, 69409, 69037, {68980, "ICON", "FLASH"}, 70498, {68981, "FLASH"}, 69200, {72262, "FLASH"}, 72350, {73529, "SAY", "FLASH", "ICON"}, "warmup", "berserk"}
 mod.optionHeaders = {
 	[72143] = CL.phase:format(1),
 	[72762] = CL.phase:format(2),

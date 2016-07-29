@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Anub'Rekhan", 535)
 if not mod then return end
 mod:RegisterEnableMob(15956)
-mod.toggleOptions = {28785, "bosskill"}
+mod.toggleOptions = {28785}
 
 --------------------------------------------------------------------------------
 -- Locals

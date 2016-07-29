@@ -3,7 +3,7 @@
 --
 local mod, CL = BigWigs:NewBoss("Faction Champions", 543)
 if not mod then return end
-mod.toggleOptions = {65960, 65801, 65877, 66010, 65947, {65816, "FLASH"}, 67514, 67777, 65983, 65980, "bosskill"}
+mod.toggleOptions = {65960, 65801, 65877, 66010, 65947, {65816, "FLASH"}, 67514, 67777, 65983, 65980}
 
 --------------------------------------------------------------------------------
 -- Localization

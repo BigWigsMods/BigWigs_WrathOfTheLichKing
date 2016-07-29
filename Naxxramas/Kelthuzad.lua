@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Kel'Thuzad", 535)
 if not mod then return end
 mod:RegisterEnableMob(15990)
-mod.toggleOptions = {27808, 27810, 28410, {27819, "ICON", "FLASH"}, "guardians", "phase", "proximity", "bosskill"}
+mod.toggleOptions = {27808, 27810, 28410, {27819, "ICON", "FLASH"}, "guardians", "phase", "proximity"}
 
 --------------------------------------------------------------------------------
 -- Locals

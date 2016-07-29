@@ -6,7 +6,7 @@ local mod, CL = BigWigs:NewBoss("The Iron Council", 529)
 if not mod then return end
 -- steelbreaker = 32867, molgeim = 32927, brundir = 32857
 mod:RegisterEnableMob(32867, 32927, 32857)
-mod.toggleOptions = {61869, 63483, {61887, "ICON", "FLASH"}, 61903, {64637, "ICON", "FLASH"}, "proximity", 62274, 61974, {62269, "FLASH"}, 62273, "berserk", "bosskill" }
+mod.toggleOptions = {61869, 63483, {61887, "ICON", "FLASH"}, 61903, {64637, "ICON", "FLASH"}, "proximity", 62274, 61974, {62269, "FLASH"}, 62273, "berserk", "stages" }
 
 mod.optionHeaders = {
 	[61869] = "Stormcaller Brundir",
@@ -176,7 +176,7 @@ end
 function mod:Deaths(args)
 	deaths = deaths + 1
 	if deaths < 3 then
-		self:Message("bosskill", "Positive", nil, CL["mob_killed"]:format(args.destName, deaths, 3), false)
+		self:Message("stages", "Positive", nil, CL["mob_killed"]:format(args.destName, deaths, 3), false)
 	else
 		self:Win()
 	end

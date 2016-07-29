@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Sindragosa", 604)
 if not mod then return end
 mod:RegisterEnableMob(36853, 37533, 37534) -- Sindragosa, Rimefang, Spinestalker
-mod.toggleOptions = {"airphase", "phase2", 70127, {69762, "FLASH"}, 69766, 70106, 70123, {70126, "FLASH"}, "proximity", "berserk", "bosskill"}
+mod.toggleOptions = {"airphase", "phase2", 70127, {69762, "FLASH"}, 69766, 70106, 70123, {70126, "FLASH"}, "proximity", "berserk"}
 mod.optionHeaders = {
 	airphase = CL.phase:format(1),
 	phase2 = CL.phase:format(2),

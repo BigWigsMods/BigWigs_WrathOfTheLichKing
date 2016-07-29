@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Kologarn", 529)
 if not mod then return end
 mod:RegisterEnableMob(32930)
-mod.toggleOptions = { 64290, "shockwave", {"eyebeam", "ICON", "FLASH", "SAY"}, "arm", 63355, "bosskill"}
+mod.toggleOptions = { 64290, "shockwave", {"eyebeam", "ICON", "FLASH", "SAY"}, "arm", 63355}
 
 --------------------------------------------------------------------------------
 -- Locals

@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Lady Deathwhisper", 604)
 if not mod then return end
 mod:RegisterEnableMob(36855, 37949, 38010, 37890, 38009, 38135) --Deathwhisper, Cult Adherent, Reanimated Adherent, Cult Fanatic, Reanimated Fanatic, Deformed Fanatic
-mod.toggleOptions = {"adds", 70842, 71204, 71426, 71289, {71001, "FLASH"}, "berserk", "bosskill"}
+mod.toggleOptions = {"adds", 70842, 71204, 71426, 71289, {71001, "FLASH"}, "berserk"}
 mod.optionHeaders = {
 	adds = CL.phase:format(1),
 	[71204] = CL.phase:format(2),

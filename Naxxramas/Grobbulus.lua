@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Grobbulus", 535)
 if not mod then return end
 mod:RegisterEnableMob(15931)
-mod.toggleOptions = {{28169, "ICON", "FLASH"}, 28240, "berserk", "bosskill"}
+mod.toggleOptions = {{28169, "ICON", "FLASH"}, 28240, "berserk"}
 
 --------------------------------------------------------------------------------
 -- Localization

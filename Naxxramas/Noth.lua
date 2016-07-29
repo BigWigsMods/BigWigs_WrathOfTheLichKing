@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Noth the Plaguebringer", 535)
 if not mod then return end
 mod:RegisterEnableMob(15954)
-mod.toggleOptions = {"blink", "teleport", 29213, "wave", "bosskill"}
+mod.toggleOptions = {"blink", "teleport", 29213, "wave"}
 
 --------------------------------------------------------------------------------
 -- Locals

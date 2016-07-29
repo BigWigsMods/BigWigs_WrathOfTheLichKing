@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Maexxna", 535)
 if not mod then return end
 mod:RegisterEnableMob(15952)
-mod.toggleOptions = {29484, 28622, 54123, "bosskill"}
+mod.toggleOptions = {29484, 28622, 54123}
 
 --------------------------------------------------------------------------------
 -- Localization

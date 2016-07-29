@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Toravon the Ice Watcher", 532)
 if not mod then return end
 mod:RegisterEnableMob(38433)
-mod.toggleOptions = {72034, 72091, 72004, 72090, "bosskill"}
+mod.toggleOptions = {72034, 72091, 72004, 72090}
 
 --------------------------------------------------------------------------------
 -- Locals

@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Loatheb", 535)
 if not mod then return end
 mod:RegisterEnableMob(16011)
-mod.toggleOptions = {55593, 29865, 29204, 29234, "berserk", "bosskill"}
+mod.toggleOptions = {55593, 29865, 29204, 29234, "berserk"}
 
 --------------------------------------------------------------------------------
 -- Locals

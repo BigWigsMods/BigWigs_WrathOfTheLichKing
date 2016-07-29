@@ -4,11 +4,10 @@
 
 local mod = BigWigs:NewBoss("Lord Jaraxxus", 543)
 if not mod then return end
-mod.toggleOptions = {66237, {66197, "ICON", "FLASH"}, 66228, "adds", {66334, "FLASH"}, "berserk", "bosskill"}
+mod.toggleOptions = {66237, {66197, "ICON", "FLASH"}, 66228, "adds", {66334, "FLASH"}, "berserk"}
 mod.optionHeaders = {
 	[66237] = "normal",
 	[66334] = "heroic",
-	bosskill = "general",
 }
 
 --------------------------------------------------------------------------------

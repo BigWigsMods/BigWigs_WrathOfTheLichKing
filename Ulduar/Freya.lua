@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Freya", 529)
 if not mod then return end
 mod:RegisterEnableMob(32906)
-mod.toggleOptions = {"phase", "wave", "tree", {62589, "ICON", "FLASH"}, {62623, "ICON"}, "proximity", 62861, {62437, "FLASH"}, {62865, "FLASH"}, "berserk", "bosskill"}
+mod.toggleOptions = {"phase", "wave", "tree", {62589, "ICON", "FLASH"}, {62623, "ICON"}, "proximity", 62861, {62437, "FLASH"}, {62865, "FLASH"}, "berserk"}
 
 mod.optionHeaders = {
 	phase = "normal",

@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Icecrown Gunship Battle", 604)
 if not mod then return end
 mod:RegisterEnableMob(37184) -- Zafod Boombox
-mod.toggleOptions = {"adds", "mage", "bosskill"}
+mod.toggleOptions = {"adds", "mage"}
 
 --------------------------------------------------------------------------------
 -- Locals

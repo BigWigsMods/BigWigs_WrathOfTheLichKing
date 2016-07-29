@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Thaddius", 535)
 if not mod then return end
 -- 15928 thaddius, 15929 - stalagg, 15930 - feugen
 mod:RegisterEnableMob(15928, 15929, 15930)
-mod.toggleOptions = {{28089, "FLASH"}, 28134, "throw", "phase", "berserk", "bosskill"}
+mod.toggleOptions = {{28089, "FLASH"}, 28134, "throw", "phase", "berserk"}
 
 --------------------------------------------------------------------------------
 -- Locals

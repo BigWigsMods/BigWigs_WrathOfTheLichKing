@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Algalon the Observer", 529)
 if not mod then return end
 mod:RegisterEnableMob(32871)
-mod.toggleOptions = {"stages", 64412, 64597, 64122, 64443, "berserk", "bosskill"}
+mod.toggleOptions = {"stages", 64412, 64597, 64122, 64443, "berserk"}
 
 --------------------------------------------------------------------------------
 -- Locals

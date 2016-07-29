@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Festergut", 604)
 if not mod then return end
 mod:RegisterEnableMob(36626)
-mod.toggleOptions = {{69279, "FLASH"}, 69165, 69195, 72219, 69240, 72295, "proximity", "berserk", "bosskill"}
+mod.toggleOptions = {{69279, "FLASH"}, 69165, 69195, 72219, 69240, 72295, "proximity", "berserk"}
 mod.optionHeaders = {
 	[69279] = "normal",
 	[72295] = "heroic",

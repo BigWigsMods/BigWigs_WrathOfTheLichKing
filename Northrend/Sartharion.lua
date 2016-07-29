@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Sartharion", 531)
 if not mod then return end
 -- sartharion, tenebron, shadron, vesperon
 mod:RegisterEnableMob(28860, 30449, 30451, 30452)
-mod.toggleOptions = {"tsunami", 56908, "drakes", {"twilight", "FLASH"}, "berserk", "bosskill"}
+mod.toggleOptions = {"tsunami", 56908, "drakes", {"twilight", "FLASH"}, "berserk"}
 
 --------------------------------------------------------------------------------
 -- Locals

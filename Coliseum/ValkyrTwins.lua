@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("The Twin Val'kyr", 543)
 if not mod then return end
 mod:RegisterEnableMob(34496, 34497) -- Darkbane, Lightbane
-mod.toggleOptions = {{"vortex", "FLASH"}, "shield", "next", {"touch", "FLASH"}, "berserk", "bosskill"}
+mod.toggleOptions = {{"vortex", "FLASH"}, "shield", "next", {"touch", "FLASH"}, "berserk"}
 
 --------------------------------------------------------------------------------
 -- Locals

@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Emalon the Storm Watcher", 532)
 if not mod then return end
 mod:RegisterEnableMob(33993)
-mod.toggleOptions = {64216, 64218, "custom_on_overcharge_mark", "proximity", "berserk", "bosskill"}
+mod.toggleOptions = {64216, 64218, "custom_on_overcharge_mark", "proximity", "berserk"}
 
 --------------------------------------------------------------------------------
 -- Localization

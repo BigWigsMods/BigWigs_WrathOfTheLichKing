@@ -6,7 +6,7 @@ local mod, CL = BigWigs:NewBoss("Thorim", 529)
 if not mod then return end
 -- 32865 = thorim, 32882 = behemoth, 32872 = runic colossus, 32908/32907 = Captured Mercenary Captain, 32885/32883 = Captured Mercenary Soldier
 mod:RegisterEnableMob(32865, 32882, 32872, 32908, 32907, 32885, 32883)
-mod.toggleOptions = {{62042, "ICON"}, 62016, 62331, {62017, "FLASH"}, 62338, {62526, "ICON", "SAY"}, 62279, 62130, "proximity", "hardmode", "phase", "bosskill"}
+mod.toggleOptions = {{62042, "ICON"}, 62016, 62331, {62017, "FLASH"}, 62338, {62526, "ICON", "SAY"}, 62279, 62130, "proximity", "hardmode", "phase"}
 
 mod.optionHeaders = {
 	[62042] = CL.phase:format(2),

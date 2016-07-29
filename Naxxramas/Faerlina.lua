@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("Grand Widow Faerlina", 535)
 if not mod then return end
 --Faerlina, Worshipper, Follower
 mod:RegisterEnableMob(15953, 16506, 16505)
-mod.toggleOptions = {28732, {28794, "FLASH"}, 28798, "bosskill"}
+mod.toggleOptions = {28732, {28794, "FLASH"}, 28798}
 
 --------------------------------------------------------------------------------
 -- Locals

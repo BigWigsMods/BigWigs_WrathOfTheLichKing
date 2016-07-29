@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Instructor Razuvious", 535)
 if not mod then return end
 mod:RegisterEnableMob(16061)
-mod.toggleOptions = {55543, 55550, 29061, 29060, "bosskill"}
+mod.toggleOptions = {55543, 55550, 29061, 29060}
 
 --------------------------------------------------------------------------------
 -- Locals

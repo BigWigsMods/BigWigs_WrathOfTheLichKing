@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("The Four Horsemen", 535)
 if not mod then return end
 mod:RegisterEnableMob(16063, 16064, 16065, 30549) -- Zeliek, Thane, Blaumeux, Baron
-mod.toggleOptions = {"mark", 28884, 28863, 28883, "bosskill"}
+mod.toggleOptions = {"mark", 28884, 28863, 28883, "stages"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -62,7 +62,7 @@ end
 function mod:Deaths()
 	deaths = deaths + 1
 	if deaths < 4 then
-		self:Message("bosskill", "Positive", nil, CL.mob_killed:format(deaths, 4), false)
+		self:Message("stages", "Positive", nil, CL.mob_killed:format(deaths, 4), false)
 	else
 		self:Win()
 	end

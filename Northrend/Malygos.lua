@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Malygos", 527)
 if not mod then return end
 mod:RegisterEnableMob(28859)
-mod.toggleOptions = {"phase", "sparks", "sparkbuff", "vortex", "breath", {"surge", "FLASH"}, 57429, "berserk", "bosskill"}
+mod.toggleOptions = {"phase", "sparks", "sparkbuff", "vortex", "breath", {"surge", "FLASH"}, 57429, "berserk"}
 
 --------------------------------------------------------------------------------
 -- Locals
