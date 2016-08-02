@@ -2,13 +2,12 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Yogg-Saron", 529)
+local mod, CL = BigWigs:NewBoss("Yogg-Saron", 529)
 if not mod then return end
 --Sara = 33134, Yogg brain = 33890
 mod:RegisterEnableMob(33288, 33134, 33890)
 mod.toggleOptions = {62979, {63138, "FLASH"}, "tentacle", {63830, "ICON"}, {63802, "FLASH"}, 64125, "portal", "weakened", 64059, {64465, "ICON"}, 64163, 64189, "phase", {63050, "FLASH"}, 63120, "berserk"}
 
-local CL = LibStub("AceLocale-3.0"):GetLocale("Big Wigs: Common")
 mod.optionHeaders = {
 	[62979] = CL.phase:format(1),
 	tentacle = CL.phase:format(2),
