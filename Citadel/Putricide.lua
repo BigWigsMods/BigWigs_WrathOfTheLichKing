@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Professor Putricide", 604)
+local mod, CL = BigWigs:NewBoss("Professor Putricide", 604, 1631)
 if not mod then return end
 mod:RegisterEnableMob(36678, 37562, 37697) -- Putricide, Gas Cloud (Red Ooze), Volatile Ooze (Green Ooze)
 mod.toggleOptions = {{70447, "ICON"}, {70672, "FLASH"}, 70351, 71255, {72295, "SAY", "FLASH"}, 72451, {70911, "ICON", "FLASH"}, "phase", "berserk"}

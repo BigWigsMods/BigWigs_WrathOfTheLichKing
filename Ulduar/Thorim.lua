@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Thorim", 529)
+local mod, CL = BigWigs:NewBoss("Thorim", 529, 1645)
 if not mod then return end
 -- 32865 = thorim, 32882 = behemoth, 32872 = runic colossus, 32908/32907 = Captured Mercenary Captain, 32885/32883 = Captured Mercenary Soldier
 mod:RegisterEnableMob(32865, 32882, 32872, 32908, 32907, 32885, 32883)

@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Mimiron", 529)
+local mod = BigWigs:NewBoss("Mimiron", 529, 1647)
 if not mod then return end
 -- Leviathan Mk II(33432), VX-001(33651), Aerial Command Unit(33670),
 mod:RegisterEnableMob(33350, 33432, 33651, 33670)

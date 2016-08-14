@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Heigan the Unclean", 535)
+local mod = BigWigs:NewBoss("Heigan the Unclean", 535, 1605)
 if not mod then return end
 mod:RegisterEnableMob(15936)
 mod.toggleOptions = {"engage", "teleport"}

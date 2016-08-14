@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Gluth", 535)
+local mod = BigWigs:NewBoss("Gluth", 535, 1612)
 if not mod then return end
 mod:RegisterEnableMob(15932)
 mod.toggleOptions = {28371, 54426, "berserk"}

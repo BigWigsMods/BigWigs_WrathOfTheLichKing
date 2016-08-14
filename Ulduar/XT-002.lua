@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("XT-002 Deconstructor", 529)
+local mod = BigWigs:NewBoss("XT-002 Deconstructor", 529, 1640)
 if not mod then return end
 mod:RegisterEnableMob(33293)
 mod.toggleOptions = {{63024, "ICON", "FLASH"}, {63018, "ICON", "FLASH"}, 62776, 64193, 63849, "proximity", "berserk"}

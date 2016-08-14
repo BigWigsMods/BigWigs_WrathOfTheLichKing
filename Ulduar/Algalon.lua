@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Algalon the Observer", 529)
+local mod, CL = BigWigs:NewBoss("Algalon the Observer", 529, 1650)
 if not mod then return end
 mod:RegisterEnableMob(32871)
 mod.toggleOptions = {"stages", 64412, 64597, 64122, 64443, "berserk"}

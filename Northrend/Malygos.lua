@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Malygos", 527)
+local mod = BigWigs:NewBoss("Malygos", 527, 1617)
 if not mod then return end
 mod:RegisterEnableMob(28859)
 mod.toggleOptions = {"phase", "sparks", "sparkbuff", "vortex", "breath", {"surge", "FLASH"}, 57429, "berserk"}

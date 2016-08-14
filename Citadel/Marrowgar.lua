@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Lord Marrowgar", 604)
+local mod, CL = BigWigs:NewBoss("Lord Marrowgar", 604, 1624)
 if not mod then return end
 mod:RegisterEnableMob(36612)
 mod.toggleOptions = {69076, 69057, {69138, "FLASH"}}

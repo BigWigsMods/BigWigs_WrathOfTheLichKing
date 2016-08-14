@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Kologarn", 529)
+local mod, CL = BigWigs:NewBoss("Kologarn", 529, 1642)
 if not mod then return end
 mod:RegisterEnableMob(32930)
 mod.toggleOptions = { 64290, "shockwave", {"eyebeam", "ICON", "FLASH", "SAY"}, "arm", 63355}

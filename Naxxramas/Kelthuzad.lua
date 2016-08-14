@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Kel'Thuzad", 535)
+local mod, CL = BigWigs:NewBoss("Kel'Thuzad", 535, 1615)
 if not mod then return end
 mod:RegisterEnableMob(15990)
 mod.toggleOptions = {27808, 27810, 28410, {27819, "ICON", "FLASH"}, "guardians", "phase", "proximity"}

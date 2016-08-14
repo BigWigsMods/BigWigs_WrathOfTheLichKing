@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Hodir", 529)
+local mod, CL = BigWigs:NewBoss("Hodir", 529, 1644)
 if not mod then return end
 mod:RegisterEnableMob(32845)
 mod.toggleOptions = {{"cold", "FLASH"}, {65123, "ICON"}, 61968, 62478, "hardmode", "berserk"}

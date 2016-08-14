@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Sartharion", 531)
+local mod = BigWigs:NewBoss("Sartharion", 531, 1616)
 if not mod then return end
 -- sartharion, tenebron, shadron, vesperon
 mod:RegisterEnableMob(28860, 30449, 30451, 30452)

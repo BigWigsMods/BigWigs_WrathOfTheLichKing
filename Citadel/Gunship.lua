@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Icecrown Gunship Battle", 604)
+local mod = BigWigs:NewBoss("Icecrown Gunship Battle", 604, 1626)
 if not mod then return end
 mod:RegisterEnableMob(37184) -- Zafod Boombox
 mod.toggleOptions = {"adds", "mage"}

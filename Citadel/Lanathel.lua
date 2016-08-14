@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Blood-Queen Lana'thel", 604)
+local mod = BigWigs:NewBoss("Blood-Queen Lana'thel", 604, 1633)
 if not mod then return end
 mod:RegisterEnableMob(37955)
 mod.toggleOptions = {{71340, "FLASH"}, {71265, "FLASH"}, 70877, 71772, 71623, "proximity", "berserk"}

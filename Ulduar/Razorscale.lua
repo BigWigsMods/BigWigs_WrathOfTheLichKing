@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Razorscale", 529)
+local mod, CL = BigWigs:NewBoss("Razorscale", 529, 1639)
 if not mod then return end
 --[[
 	33287 = Expedition Engineer

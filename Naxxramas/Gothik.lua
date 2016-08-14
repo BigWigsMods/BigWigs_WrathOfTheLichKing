@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Gothik the Harvester", 535)
+local mod = BigWigs:NewBoss("Gothik the Harvester", 535, 1608)
 if not mod then return end
 mod:RegisterEnableMob(16060)
 mod.toggleOptions = {"room", "add", "adddeath"}

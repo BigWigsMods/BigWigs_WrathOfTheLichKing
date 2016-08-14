@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Flame Leviathan", 529)
+local mod = BigWigs:NewBoss("Flame Leviathan", 529, 1637)
 if not mod then return end
 mod:RegisterEnableMob(33113)
 mod.toggleOptions = {"engage", 68605, 62396, {"pursue", "FLASH"}, 62475}

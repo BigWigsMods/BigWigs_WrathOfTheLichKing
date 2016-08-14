@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Festergut", 604)
+local mod, CL = BigWigs:NewBoss("Festergut", 604, 1629)
 if not mod then return end
 mod:RegisterEnableMob(36626)
 mod.toggleOptions = {{69279, "FLASH"}, 69165, 69195, 72219, 69240, 72295, "proximity", "berserk"}

@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Auriaya", 529)
+local mod = BigWigs:NewBoss("Auriaya", 529, 1643)
 if not mod then return end
 mod:RegisterEnableMob(33515)
 --Feral Defender = 34035

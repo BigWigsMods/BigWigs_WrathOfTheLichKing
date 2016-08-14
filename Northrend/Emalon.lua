@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Emalon the Storm Watcher", 532)
+local mod, CL = BigWigs:NewBoss("Emalon the Storm Watcher", 532, 1598)
 if not mod then return end
 mod:RegisterEnableMob(33993)
 mod.toggleOptions = {64216, 64218, "custom_on_overcharge_mark", "proximity", "berserk"}

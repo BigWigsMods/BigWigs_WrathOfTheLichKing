@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("The Four Horsemen", 535)
+local mod, CL = BigWigs:NewBoss("The Four Horsemen", 535, 1609)
 if not mod then return end
 mod:RegisterEnableMob(16063, 16064, 16065, 30549) -- Zeliek, Thane, Blaumeux, Baron
 mod.toggleOptions = {"mark", 28884, 28863, 28883, "stages"}

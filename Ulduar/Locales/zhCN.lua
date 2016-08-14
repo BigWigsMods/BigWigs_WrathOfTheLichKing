@@ -119,6 +119,8 @@ end
 
 L = BigWigs:NewBossLocale("Flame Leviathan", "zhCN")
 if L then
+	L.engage = "进入战斗警报"
+	L.engage_desc = "当烈焰巨兽进入战斗时发出警报。"
 	L.engage_trigger = "检测到敌对实体。威胁评定协议启动。向主要目标发动攻击。30秒后重新评估。"
 	L.engage_message = "%s已激怒！"
 

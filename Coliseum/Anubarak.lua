@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Anub'arak", 543)
+local mod, CL = BigWigs:NewBoss("Anub'arak", 543, 1623)
 if not mod then return end
 mod.toggleOptions = {66012, "burrow", {67574, "ICON", "FLASH"}, {66013, "FLASH"}, 66118, 66134, "berserk"}
 mod:RegisterEnableMob(34564, 34607, 34605)

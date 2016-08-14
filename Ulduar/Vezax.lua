@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("General Vezax", 529)
+local mod = BigWigs:NewBoss("General Vezax", 529, 1648)
 if not mod then return end
 mod:RegisterEnableMob(33271)
 mod.toggleOptions = {"vapor", {"vaporstack", "FLASH"}, {62660, "ICON", "SAY", "FLASH"}, {63276, "ICON", "FLASH"}, 62661, 62662, "animus", "berserk"}

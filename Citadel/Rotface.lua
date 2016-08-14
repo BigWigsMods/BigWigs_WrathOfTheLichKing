@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Rotface", 604)
+local mod = BigWigs:NewBoss("Rotface", 604, 1630)
 if not mod then return end
 mod:RegisterEnableMob(36627)
 mod.toggleOptions = {{69839, "FLASH"}, {69674, "FLASH", "ICON"}, 69508, "ooze", 72272, "berserk"}

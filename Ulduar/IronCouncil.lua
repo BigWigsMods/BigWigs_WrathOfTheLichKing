@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("The Iron Council", 529)
+local mod, CL = BigWigs:NewBoss("The Iron Council", 529, 1641)
 if not mod then return end
 -- steelbreaker = 32867, molgeim = 32927, brundir = 32857
 mod:RegisterEnableMob(32867, 32927, 32857)

@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Sindragosa", 604)
+local mod, CL = BigWigs:NewBoss("Sindragosa", 604, 1635)
 if not mod then return end
 mod:RegisterEnableMob(36853, 37533, 37534) -- Sindragosa, Rimefang, Spinestalker
 mod.toggleOptions = {"airphase", "phase2", 70127, {69762, "FLASH"}, 69766, 70106, 70123, {70126, "FLASH"}, "proximity", "berserk"}

@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Grand Widow Faerlina", 535)
+local mod = BigWigs:NewBoss("Grand Widow Faerlina", 535, 1602)
 if not mod then return end
 --Faerlina, Worshipper, Follower
 mod:RegisterEnableMob(15953, 16506, 16505)
