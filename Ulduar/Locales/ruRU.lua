@@ -1,8 +1,6 @@
 
 local L = BigWigs:NewBossLocale("Algalon the Observer", "ruRU")
 if L then
-	L.engage_trigger = "Ваши действия нелогичны. Все возможные исходы этой схватки просчитаны. Пантеон получит сообщение от Наблюдателя в любом случае."
-
 	L.smash_message = "Наступление Кары небесной!"
 	L.blackhole_message = "Появление черной дыры %d"
 	L.bigbang_bar = "~Суровый удар"
