@@ -6,6 +6,7 @@ local mod, CL = BigWigs:NewBoss("Algalon the Observer", 529, 1650)
 if not mod then return end
 mod:RegisterEnableMob(32871)
 mod.toggleOptions = {"stages", 64412, 64597, 64122, 64443, "berserk"}
+mod.engageId = 1130
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -13,6 +14,7 @@ mod.toggleOptions = {"stages", 64412, 64597, 64122, 64443, "berserk"}
 
 local phase = nil
 local blackholes = 0
+local offset = 8
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -20,14 +22,10 @@ local blackholes = 0
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.engage_trigger = "Your actions are illogical. All possible results for this encounter have been calculated. The Pantheon will receive the Observer's message regardless of outcome."
-
 	L.smash_message = "Incoming Cosmic Smash!"
 	L.blackhole_message = "Black Hole %d!"
 	L.bigbang_bar = "Next Big Bang"
 	L.bigbang_soon = "Big Bang soon!"
-
-	L.end_trigger = "I have seen worlds bathed in the Makers' flames."
 end
 L = mod:GetLocale()
 
@@ -41,26 +39,20 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Smash", 62301, 64598)
 	self:Log("SPELL_CAST_SUCCESS", "BlackHole", 64122, 65108)
 	self:Log("SPELL_CAST_START","BigBang", 64443, 64584)
-
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-
-	self:Yell("Engage", L["engage_trigger"])
-	self:Yell("Win", L["end_trigger"])
 end
 
 function mod:OnEngage()
+	blackholes = 0
+
 	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
 
-	blackholes = 0
-	local offset = 0
-	local _, _, _, text = GetWorldStateUIInfo(1)
-	local num = tonumber((text or ""):match("(%d+)") or nil)
-	if num == 60 then offset = 19 end
 	self:Bar("stages", 8+offset, CL["phase"]:format(1), "INV_Gizmo_01")
 	self:Bar(64443, 98+offset) -- Big Bang
 	self:DelayedMessage(64443, 93+offset, "Attention", L["bigbang_soon"])
 	self:Bar(64597, 33+offset) -- Cosmic Smash
 	self:Berserk(360+offset)
+
+	offset = 0
 end
 
 --------------------------------------------------------------------------------

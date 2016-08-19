@@ -1,14 +1,10 @@
 
 local L = BigWigs:NewBossLocale("Algalon the Observer", "esES")
 if L then
-	L.engage_trigger = "Tus acciones son ilógicas. Todos los resultados posibles de este encuentro han sido calculados. El Panteón recibirá el mensaje del Observador más allá del resultado."
-
 	L.smash_message = "¡Machaque cósmico inminente!"
 	L.blackhole_message = "¡Hoyo negro %d!"
 	L.bigbang_bar = "Próximo Big Bang"
 	L.bigbang_soon = "¡Big Bang inminente!"
-
-	L.end_trigger = "He visto mundos enteros bañados en las llamas del Creador, a sus habitantes esfumarse dejando menos que un quejido."
 end
 
 L = BigWigs:NewBossLocale("Auriaya", "esES")

@@ -1,14 +1,10 @@
 
 local L = BigWigs:NewBossLocale("Algalon the Observer", "zhTW")
 if L then
-	L.engage_trigger = "你的行為毫無意義。這場沖突的結果早已計算出來了。不論結局為何，萬神殿仍將收到觀察者的訊息。"
-
 	L.smash_message = "即將 宇宙潰擊！"
 	L.blackhole_message = "黑洞爆炸：>%dx< 出現！"
 	L.bigbang_bar = "<下一大爆炸>"
 	L.bigbang_soon = "即將 大爆炸！"
-
-	L.end_trigger = "我曾經看過塵世沉浸在造物者的烈焰之中"
 end
 
 L = BigWigs:NewBossLocale("Auriaya", "zhTW")
