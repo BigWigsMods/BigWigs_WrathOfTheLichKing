@@ -239,7 +239,7 @@ do
 	end
 	function mod:EmpowerIcon(args)
 		if empowerscanner or (not UnitIsGroupLeader("player") and not UnitIsGroupAssistant("player")) then return end
-		if bit.band(self.db.profile[(GetSpellInfo(64465))], BigWigs.C.ICON) ~= BigWigs.C.ICON then return end
+		if bit.band(self.db.profile[64465], BigWigs.C.ICON) ~= BigWigs.C.ICON then return end
 		empowerscanner = self:ScheduleRepeatingTimer(scanTarget, 0.3, args.destGUID)
 	end
 end
