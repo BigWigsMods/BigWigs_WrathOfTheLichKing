@@ -179,7 +179,6 @@ if L then
 	L.phase2_trigger = "%s|1이;가; 완전히 땅에 내려앉았습니다!"
 	L.phase2_message = "2 단계!"
 	L.phase2_warning = "곧 2 단계!"
-	L.stun_bar = "기절"
 
 	L.breath_trigger = "%s|1이;가; 숨을 깊게 들이쉽니다."
 	L.breath_message = "화염 숨결!"

@@ -177,7 +177,6 @@ if L then
 	L.phase2_trigger = "%s обессилела и больше не может летать!"
 	L.phase2_message = "Вторая фаза!"
 	L.phase2_warning = "Скоро вторая фаза!"
-	L.stun_bar = "Оглушение"
 
 	L.breath_trigger = "%s делает глубокий вдох…"
 	L.breath_message = "Огненное дыхание!"

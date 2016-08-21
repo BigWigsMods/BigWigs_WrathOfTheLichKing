@@ -177,7 +177,6 @@ if L then
 	L.phase2_trigger = "¡%s ha aterrizado permanentemente!"
 	L.phase2_message = "¡Fase 2!"
 	L.phase2_warning = "¡Fase 2 inminente!"
-	L.stun_bar = "Stun"
 
 	L.breath_trigger = "%s toma aire con fuerza..."
 	L.breath_message = "¡Aliento de llamas!"

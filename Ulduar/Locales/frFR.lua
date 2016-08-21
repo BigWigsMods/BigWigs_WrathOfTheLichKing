@@ -176,7 +176,6 @@ if L then
 	L.phase2_trigger = "Tranchécaille bloquée au sol !"
 	L.phase2_message = "Phases 2 !"
 	L.phase2_warning = "Phase 2 imminente !"
-	L.stun_bar = "Étourdie"
 
 	L.breath_trigger = "%s inspire profondément…"
 	L.breath_message = "Souffle de flammes !"

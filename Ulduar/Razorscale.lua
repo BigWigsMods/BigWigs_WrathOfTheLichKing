@@ -38,7 +38,6 @@ if L then
 	L.phase2_trigger = "%s grounded permanently!"
 	L.phase2_message = "Phase 2!"
 	L.phase2_warning = "Phase 2 Soon!"
-	L.stun_bar = "Stun"
 
 	L.breath_trigger = "%s takes a deep breath..."
 	L.breath_message = "Flame Breath!"
@@ -99,7 +98,7 @@ end
 
 function mod:Phase2()
 	phase = 2
-	self:StopBar(L["stun_bar"])
+	self:StopBar(171163) -- Stun
 	self:Message("phase", "Attention", nil, L["phase2_message"], false)
 end
 
@@ -120,7 +119,7 @@ end
 
 function mod:Grounded()
 	self:Message("phase", "Attention", "Long", L["ground_message"], false)
-	self:Bar("phase", 38, L["stun_bar"], 25) --20170 not in game.
+	self:Bar("phase", 38, 171163) -- spell_frost_stun / Stun / icon id 135860
 	count = 0
 end
 
@@ -133,7 +132,7 @@ function mod:Airphase()
 		started = true
 		phase = 1
 	else
-		self:StopBar(L["stun_bar"])
+		self:StopBar(171163) -- Stun
 		self:Message("phase", "Attention", "Info", L["air_message"])
 	end
 end
@@ -144,7 +143,7 @@ end
 function mod:Airphase10()
 	count = 0
 	self:Bar("harpoon", 22, L["harpoon_nextbar"]:format(1), "INV_Spear_06")
-	self:StopBar(L["stun_bar"])
+	self:StopBar(171163) -- Stun
 	--self:Message(L["air_message"], "Attention", nil, "Info")
 end
 

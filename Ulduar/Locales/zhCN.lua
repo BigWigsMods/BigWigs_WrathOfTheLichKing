@@ -171,8 +171,6 @@ end
 
 L = BigWigs:NewBossLocale("Razorscale", "zhCN")
 if L then
---	L["Razorscale Controller"] = true,
-
 	L.phase = "阶段"
 	L.phase_desc = "当锋鳞转换不同阶段时发出警报。"
 	L.ground_trigger = "快一点！她马上就要挣脱了！"
@@ -183,7 +181,6 @@ if L then
 	L.phase2_trigger = "%s被永久地禁锢在地面上！"
 	L.phase2_message = "第二阶段！"
 	L.phase2_warning = "即将 第二阶段！"
-	L.stun_bar = "<昏迷>"
 
 	L.breath_trigger = "%s深深地吸了一口气……"
 	L.breath_message = "烈焰喷射！"

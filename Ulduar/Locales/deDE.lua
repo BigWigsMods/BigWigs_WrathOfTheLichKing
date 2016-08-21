@@ -170,8 +170,6 @@ end
 
 L = BigWigs:NewBossLocale("Razorscale", "deDE")
 if L then
-	L["Razorscale Controller"] = "Klingenschuppe Controller"
-
 	L.phase = "Phasen"
 	L.phase_desc = "Warnt bei Phasenwechsel."
 	L.ground_trigger = "Beeilt Euch! Sie wird nicht lange am Boden bleiben!"
@@ -182,7 +180,6 @@ if L then
 	L.phase2_trigger = "%s dauerhaft an den Boden gebunden!"
 	L.phase2_message = "Phase 2"
 	L.phase2_warning = "Phase 2 bald!"
-	L.stun_bar = "Betäubt"
 
 	L.breath_trigger = "%s holt tief Luft..."
 	L.breath_message = "Flammenatem!"
