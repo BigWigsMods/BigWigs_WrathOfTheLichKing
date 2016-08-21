@@ -10,8 +10,8 @@ if L then
 	L.phase2_trigger = "這毫無意義的行動讓我很厭煩。我會從上空把你們都燒成灰!"
 	L.phase3_trigger = "看起來需要再給你一次教訓，凡人!"
 
-	L.deepbreath = "深呼吸警報"
-	L.deepbreath_desc = "當奧妮克希亞開始施放深呼吸時發出警報。"
+	L.deepbreath_message = "即將 深呼吸！"
+	L.fear_message = "即將 恐懼！"
 end
 
 local L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "zhTW")
