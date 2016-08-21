@@ -120,7 +120,7 @@ end
 
 function mod:Grounded()
 	self:Message("phase", "Attention", "Long", L["ground_message"], false)
-	self:Bar("phase", 38, L["stun_bar"], 20170) --20170, looks like a stun :p
+	self:Bar("phase", 38, L["stun_bar"], 25) --20170 not in game.
 	count = 0
 end
 
