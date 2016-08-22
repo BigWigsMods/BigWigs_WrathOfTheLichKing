@@ -1,7 +1,7 @@
 ## Interface: 70000
 
-## Title: Big Wigs [|cffeda55fWrath of the Lich King|r]
-## Title-zhCN: Big Wigs [|cffeda55f巫妖王之怒|r]
+## Title: BigWigs [|cffeda55fWrath of the Lich King|r]
+## Title-zhCN: BigWigs [|cffeda55f巫妖王之怒|r]
 ## Title-zhTW: BigWigs [|cffeda55fWrath of the Lich King|r]
 ## Title-deDE: BigWigs [|cffeda55fWrath of the Lich King|r]
 ## Title-frFR: BigWigs [|cffeda55fWrath of the Lich King|r]
@@ -11,17 +11,17 @@
 ## Title-ptBR: BigWigs [|cffeda55fWrath of the Lich King|r]
 ## Title-esES: BigWigs [|cffeda55fWrath of the Lich King|r]
 ## Title-esMX: BigWigs [|cffeda55fWrath of the Lich King|r]
-## Notes: A collection of Big Wigs modules from the Wrath of the Lich King era.
-## Notes-zhCN: Big Wigs 巫妖王之怒模块。
-## Notes-zhTW: A collection of Big Wigs modules from the Wrath of the Lich King era.
-## Notes-deDE: A collection of Big Wigs modules from the Wrath of the Lich King era.
-## Notes-frFR: A collection of Big Wigs modules from the Wrath of the Lich King era.
-## Notes-itIT: A collection of Big Wigs modules from the Wrath of the Lich King era.
-## Notes-koKR: A collection of Big Wigs modules from the Wrath of the Lich King era.
-## Notes-ruRU: A collection of Big Wigs modules from the Wrath of the Lich King era.
-## Notes-ptBR: A collection of Big Wigs modules from the Wrath of the Lich King era.
-## Notes-esES: A collection of Big Wigs modules from the Wrath of the Lich King era.
-## Notes-esMX: A collection of Big Wigs modules from the Wrath of the Lich King era.
+## Notes: A collection of BigWigs modules from the Wrath of the Lich King era.
+## Notes-zhCN: BigWigs 巫妖王之怒模块。
+## Notes-zhTW: A collection of BigWigs modules from the Wrath of the Lich King era.
+## Notes-deDE: A collection of BigWigs modules from the Wrath of the Lich King era.
+## Notes-frFR: A collection of BigWigs modules from the Wrath of the Lich King era.
+## Notes-itIT: A collection of BigWigs modules from the Wrath of the Lich King era.
+## Notes-koKR: A collection of BigWigs modules from the Wrath of the Lich King era.
+## Notes-ruRU: A collection of BigWigs modules from the Wrath of the Lich King era.
+## Notes-ptBR: A collection of BigWigs modules from the Wrath of the Lich King era.
+## Notes-esES: A collection of BigWigs modules from the Wrath of the Lich King era.
+## Notes-esMX: A collection of BigWigs modules from the Wrath of the Lich King era.
 
 ## LoadOnDemand: 1
 ## Dependencies: BigWigs
