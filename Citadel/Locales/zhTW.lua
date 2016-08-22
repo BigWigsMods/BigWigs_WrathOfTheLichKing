@@ -186,8 +186,8 @@ if L then
 	L.frenzy_message = "小怪狂亂！"
 	L.frenzy_soon_message = "5秒後，狂亂！"
 
-	--L.custom_on_valkyr_marker = "Val'kyr marker"
-	--L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
+	L.custom_on_valkyr_marker = "華爾琪標記"
+	L.custom_on_valkyr_marker_desc = "使用 {rt8}{rt7}{rt6} 標記華爾琪，需要權限。\n|cFFFF0000團隊中只有1名應該啟用此選項以防止標記衝突。|r\n|cFFADFF2F提示：如果團隊選擇你打開此選項，滑鼠快速指向華爾琪是標記他們的最快方式。|r"
 end
 
 L = BigWigs:NewBossLocale("Valithria Dreamwalker", "zhTW")
