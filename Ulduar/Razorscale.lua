@@ -90,7 +90,7 @@ function mod:UNIT_HEALTH_FREQUENT(unit)
 	if self:MobId(UnitGUID(unit)) == 33186 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp > 51 and hp < 55 then
-			self:Message("phase", "Positive", nil, L["phase2_warning"])
+			self:Message("phase", "Positive", nil, L["phase2_warning"], false)
 			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 		end
 	end
@@ -133,7 +133,7 @@ function mod:Airphase()
 		phase = 1
 	else
 		self:StopBar(171163) -- Stun
-		self:Message("phase", "Attention", "Info", L["air_message"])
+		self:Message("phase", "Attention", "Info", L["air_message"], false)
 	end
 end
 
