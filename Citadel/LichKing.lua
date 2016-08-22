@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("The Lich King", 604, 1636)
 if not mod then return end
 mod:RegisterEnableMob(36597, 38995) -- The Lich King, Highlord Tirion Fordring
-mod.toggleOptions = {72143, 70541, {70337, "ICON", "FLASH"}, 70372, {72762, "SAY", "ICON", "FLASH"}, 69409, 69037, {68980, "ICON", "FLASH"}, 70498, {68981, "FLASH"}, 69200, {72262, "FLASH"}, 72350, {73529, "SAY", "FLASH", "ICON"}, "warmup", "berserk"}
+mod.toggleOptions = {72143, 70541, {70337, "ICON", "FLASH"}, 70372, {72762, "SAY", "ICON", "FLASH"}, 69409, 69037, "custom_on_valkyr_marker", {68980, "ICON", "FLASH"}, 70498, {68981, "FLASH"}, 69200, {72262, "FLASH"}, 72350, {73529, "SAY", "FLASH", "ICON"}, "warmup", "berserk"}
 mod.optionHeaders = {
 	[72143] = CL.phase:format(1),
 	[72762] = CL.phase:format(2),
@@ -22,6 +22,7 @@ mod.optionHeaders = {
 local phase = 0
 local frenzied = {}
 local plagueTicks = {}
+local valkyrs = {}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -46,6 +47,10 @@ if L then
 	L.frenzy_survive_message = "%s will survive after plague"
 	L.frenzy_message = "Add frenzied!"
 	L.frenzy_soon_message = "5sec to frenzy!"
+
+	L.custom_on_valkyr_marker = "Val'kyr marker"
+	L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the spears is the fastest way to mark them.|r"
+	L.custom_on_valkyr_marker_icon = 8
 end
 L = mod:GetLocale()
 
@@ -100,6 +105,7 @@ end
 function mod:OnEngage()
 	wipe(frenzied)
 	wipe(plagueTicks)
+	wipe(valkyrs)
 
 	self:Berserk(900)
 	self:Bar(70337, 31) -- Necrotic Plague
@@ -243,8 +249,24 @@ do
 end
 
 do
+	-- valkyr marking
+	local count = 8
+	function mod:UNIT_TARGET(_, firedUnit)
+		local unit = firedUnit and firedUnit.."target" or "mouseover"
+		local guid = UnitGUID(unit)
+		if valkyrs[guid] then
+			SetRaidTarget(unit, valkyrs[guid])
+			valkyrs[guid] = nil
+		end
+		if not next(valkyrs) then
+			self:UnregisterEvent("UPDATE_MOUSEOVER_UNIT")
+			self:UnregisterEvent("UNIT_TARGET")
+		end
+	end
+
 	local hugged, prev = mod:NewTargetList(), 0
 	local function ValkyrHugCheck()
+		count = 8
 		for unit in mod:IterateGroup() do
 			if UnitInVehicle(unit) then
 				hugged[#hugged + 1] = mod:UnitName(unit)
@@ -252,13 +274,21 @@ do
 		end
 		mod:TargetMessage(69037, hugged, "Urgent", nil, L["valkyrhug_message"], 71844)
 	end
+
 	function mod:Valkyr(args)
+		valkyrs[args.destGUID] = count
+		count = count - 1
+
 		local t = GetTime()
 		if t-prev > 4 then
 			prev = t
 			self:Message(69037, "Attention", nil, L["valkyr_message"], 71844)
 			self:Bar(69037, 46, L["valkyr_bar"], 71844)
 			self:ScheduleTimer(ValkyrHugCheck, 6.1)
+			if self.db.profile.custom_on_valkyr_marker then
+				self:RegisterEvent("UPDATE_MOUSEOVER_UNIT", "UNIT_TARGET")
+				self:RegisterEvent("UNIT_TARGET")
+			end
 		end
 	end
 end
