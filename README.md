@@ -1,4 +1,4 @@
-# BigWigs_Cataclysm
+# BigWigs_WrathOfTheLichKing
 A collection of BigWigs modules from the **Wrath of the Lich King** era, including:
 
 * The Eye of Eternity
