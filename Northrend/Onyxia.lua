@@ -5,7 +5,8 @@
 local mod = BigWigs:NewBoss("Onyxia", 718, 1651)
 if not mod then return end
 mod:RegisterEnableMob(10184)
-mod.toggleOptions = {"phase", {17086, "FLASH"}, 18431}
+mod.toggleOptions = {"phase", {17086, "FLASH"}, 18431, 18435}
+mod.engageId = 1084
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -33,10 +34,10 @@ L = mod:GetLocale()
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Fear", 18431)
-	self:Log("SPELL_CAST_START", "Breath", 17086, 18351, 18564, 18576, 18584, 18596, 18609, 18617)
+	self:Log("SPELL_CAST_START", "DeepBreath", 17086, 18351, 18564, 18576, 18584, 18596, 18609, 18617)
+	self:Log("SPELL_CAST_START", "FlameBreath", 18435)
 	self:Yell("Phase2", L["phase2_trigger"])
 	self:Yell("Phase3", L["phase3_trigger"])
-	self:Death("Win", 10184)
 end
 
 --------------------------------------------------------------------------------
@@ -47,9 +48,14 @@ function mod:Fear(args)
 	self:Message(args.spellId, "Attention", nil, L["fear_message"])
 end
 
-function mod:Breath(args)
-	self:Message(17086, "Important", "Alarm", L["deepbreath_message"], args.spellId)
+function mod:DeepBreath()
+	self:Message(17086, "Urgent", "Alarm", L["deepbreath_message"])
+	self:Bar(17086, 8)
 	self:Flash(17086)
+end
+
+function mod:FlameBreath(args)
+	self:Message(args.spellId, "Important", "Alert")
 end
 
 function mod:Phase2()
