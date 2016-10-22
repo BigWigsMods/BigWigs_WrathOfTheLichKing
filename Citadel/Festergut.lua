@@ -43,8 +43,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED_DOSE", "Bloat", 72219)
 	self:Death("Win", 36626)
 
-	self:AddSyncListener("GooBall")
-	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Yell("Engage", L["engage_trigger"])
 
@@ -117,18 +116,8 @@ do
 	end
 end
 
-do
-	local goo = GetSpellInfo(72310)
-	function mod:UNIT_SPELLCAST_SUCCEEDED(unit, spell)
-		if spell == goo then
-			self:Sync("GooBall")
-		end
-	end
-end
-
-function mod:OnSync(sync, rest, nick)
-	if sync == "GooBall" then
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, _, spellId)
+	if spellId == 72299 then
 		self:Message(72295, "Important", nil, L["ball_message"])
 	end
 end
-
