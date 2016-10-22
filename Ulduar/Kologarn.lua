@@ -5,6 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Kologarn", 529, 1642)
 if not mod then return end
 mod:RegisterEnableMob(32930)
+--mod.engageId = 1137
 mod.toggleOptions = { 64290, "shockwave", {"eyebeam", "ICON", "FLASH", "SAY"}, "arm", 63355}
 
 --------------------------------------------------------------------------------
@@ -45,25 +46,22 @@ L = mod:GetLocale()
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Grip", 64290, 64292)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "Armor", 63355, 64002)
-	self:Log("UNIT_DIED", "Deaths")
 
-	self:Death("Deaths", 32933, 32934)
+	self:Death("ArmsDie", 32933, 32934)
 	self:Death("Win", 32930)
 
-	self:RegisterEvent("RAID_BOSS_WHISPER")
+	self:RegisterEvent("CHAT_MSG_RAID_BOSS_WHISPER")
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:AddSyncListener("EyeBeamWarn")
+	self:RegisterMessage("BigWigs_BossComm")
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Armor(player, spellId, _, _, _, stack)
-	if stack > 1 then
-		self:StackMessage(63355,  player, stack, "Urgent", "Info")
-	end
+function mod:Armor(args)
+	self:StackMessage(63355, args.destName, args.amount, "Urgent", "Info")
 end
 
 do
@@ -82,16 +80,16 @@ do
 	end
 end
 
-function mod:RAID_BOSS_WHISPER(event, msg)
-	if msg:find(L["eyebeam_trigger"]) then
-		self:Message("eyebeam", "Personal", "Long", CL["you"]:format(eyeBeam), 63976)
+function mod:CHAT_MSG_RAID_BOSS_WHISPER(event, msg, unitName)
+	-- Kologarn focuses his eyes on you!#Kologarn
+	if unitName == self.displayName then
 		self:Flash("eyebeam", 63976)
 		self:Say("eyebeam", eyeBeam)
+		self:Sync("EyeBeamWarn")
 	end
-	self:Sync("EyeBeamWarn")
 end
 
-function mod:Deaths(args)
+function mod:ArmsDie(args)
 	if args.mobId == 32933 then
 		self:Message("arm", "Attention", nil, L["left_dies"], L.arm_icon)
 		self:Bar("arm", 50, L["left_wipe_bar"], L.arm_icon)
@@ -108,12 +106,13 @@ function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 	end
 end
 
-function mod:OnSync(sync, rest, nick)
-	if sync == "EyeBeamWarn" and nick then
-		self:TargetMessage("eyebeam", nick, "Positive", "Info", eyeBeam, 63976)
-		self:TargetBar("eyebeam", 11, nick, eyeBeam, 63976)
+function mod:BigWigs_BossComm(_, msg, _, sender)
+	if sync == "EyeBeamWarn" then
+		self:TargetMessage("eyebeam", sender, "Positive", "Info", eyeBeam, 63976)
+		self:TargetBar("eyebeam", 11, sender, eyeBeam, 63976)
 		self:CDBar("eyebeam", 20, eyeBeam, 63976)
-		self:PrimaryIcon("eyebeam", nick)
+		self:PrimaryIcon("eyebeam", sender)
+		self:ScheduleTimer("PrimaryIcon", 12, "eyebeam")
 	end
 end
 
