@@ -3,6 +3,13 @@
 --
 local mod, CL = BigWigs:NewBoss("Faction Champions", 543, 1621)
 if not mod then return end
+mod:RegisterEnableMob(
+	-- Alliance NPCs
+	34460, 34461, 34463, 34465, 34466, 34467, 34468, 34469, 34470, 34471, 34472, 34473, 34474, 34475,
+	-- Horde NPCs
+	34441, 34444, 34445, 34447, 34448, 34449, 34450, 34451, 34453, 34454, 34455, 34456, 34458, 34459
+)
+--mod.engageId = 1086 -- Fires too early
 mod.toggleOptions = {65960, 65801, 65877, 66010, 65947, {65816, "FLASH"}, 67514, 67777, 65983, 65980}
 
 --------------------------------------------------------------------------------
@@ -11,7 +18,6 @@ mod.toggleOptions = {65960, 65801, 65877, 66010, 65947, {65816, "FLASH"}, 67514,
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.enable_trigger = "The next battle will be against the Argent Crusade's most powerful knights! Only by defeating them will you be deemed worthy..."
 	L.defeat_trigger = "A shallow and tragic victory."
 
 	L["Shield on %s!"] = "Shield on %s!"
@@ -26,16 +32,6 @@ L = mod:GetLocale()
 --------------------------------------------------------------------------------
 -- Initialization
 --
-
-function mod:OnRegister()
-	self:RegisterEnableMob(
-		-- Alliance NPCs
-		34460, 34461, 34463, 34465, 34466, 34467, 34468, 34469, 34470, 34471, 34472, 34473, 34474, 34475,
-		-- Horde NPCs
-		34441, 34444, 34445, 34447, 34448, 34449, 34450, 34451, 34453, 34454, 34455, 34456, 34458, 34459
-	)
-	self:RegisterEnableYell(L["enable_trigger"])
-end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Blind", 65960)
@@ -52,12 +48,18 @@ function mod:OnBossEnable()
 	self:Log("SPELL_DAMAGE", "HellfireOnYou", 65817)
 	self:Log("SPELL_MISSED", "HellfireOnYou", 65817)
 
-	self:Yell("Win", L["defeat_trigger"])
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if msg == L.defeat_trigger or msg:find(L.defeat_trigger, nil, true) then
+		self:Win()
+	end
+end
 
 function mod:Hellfire(args)
 	self:Message(args.spellId, "Urgent")

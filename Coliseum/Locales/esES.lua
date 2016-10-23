@@ -19,7 +19,6 @@ end
 
 L = BigWigs:NewBossLocale("The Beasts of Northrend", "esES")
 if L then
-	L.enable_trigger = "¡Bienvenidos, campeones! ¡Habéis escuchado la Llamada de la Cruzada Argenta y os habéis atrevido a responder!"
 	L.wipe_trigger = "Trágico..."
 
 	L.engage_trigger = "Desde las cavernas más oscuras y profundas de Las Cumbres Tormentosas: ¡Gormok el Empalador! ¡A luchar, héroes!"
@@ -51,15 +50,10 @@ if L then
 
 	L.bosses = "Jefes"
 	L.bosses_desc = "Avisa cuando los Jefes esten entrando."
-
-	L.icehowl = "Aullahielo"
-	L.jormungars = "Jormungars"
-	L.gormok = "Gormok el Empalador"
 end
 
 L = BigWigs:NewBossLocale("Faction Champions", "esES")
 if L then
-	L.enable_trigger = "¡La siguiente batalla os enfrentará a los caballeros más poderosos de la Cruzada Argenta! Solo seréis dignos si los derrotáis..."
 	L.defeat_trigger = "Una victoria trágica y fútil."
 
 	L["Shield on %s!"] = "¡Escudo en %s!"

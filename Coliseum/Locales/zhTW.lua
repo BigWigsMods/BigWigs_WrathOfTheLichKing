@@ -19,7 +19,6 @@ end
 
 L = BigWigs:NewBossLocale("The Beasts of Northrend", "zhTW")
 if L then
-	L.enable_trigger = "歡迎，勇士們!你們聽從銀白十字軍的號召前來，英勇的挺身而出。"
 	L.wipe_trigger = "真可惜…"
 
 	L.engage_trigger = "來自風暴群山最深邃，最黑暗的洞穴。歡迎『穿刺者』戈莫克!戰鬥吧，英雄們!"
@@ -51,15 +50,10 @@ if L then
 
 	L.bosses = "首領"
 	L.bosses_desc = "當首領即將到來時發出警報。"
-
-	L.icehowl = "冰嚎"
-	L.jormungars = "巨蟲"
-	L.gormok = "「穿刺者」戈莫克"
 end
 
 L = BigWigs:NewBossLocale("Faction Champions", "zhTW")
 if L then
-	L.enable_trigger = "接著進入競技場的是，不論在戰場或聯賽場地都身經百戰的聖騎士，身為銀白十字軍的大勇士"
 	L.defeat_trigger = "膚淺而悲痛的勝利。今天痛失的生命反而令我們更加的頹弱。除了巫妖王之外，誰還能從中獲利?偉大的戰士失去了寶貴生命。為了什麼?真正的威脅就在前方 - 巫妖王在死亡的領域中等著我們。"
 
 	L["Shield on %s!"] = "聖盾術：>%s<！"

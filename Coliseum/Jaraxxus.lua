@@ -4,6 +4,8 @@
 
 local mod = BigWigs:NewBoss("Lord Jaraxxus", 543, 1619)
 if not mod then return end
+mod:RegisterEnableMob(34780)
+--mod.engageId = 1087 -- Can fire repeatedly during a wipe
 mod.toggleOptions = {66237, {66197, "ICON", "FLASH"}, 66228, "adds", {66334, "FLASH"}, "berserk"}
 mod.optionHeaders = {
 	[66237] = "normal",
@@ -47,9 +49,9 @@ L = mod:GetLocale()
 --
 
 function mod:OnRegister()
-	self:RegisterEnableMob(34780)
-	self:RegisterEnableYell(L["enable_trigger"])
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 end
+mod.OnBossDisable = mod.OnRegister
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "IncinerateFlesh", 66237)
@@ -62,15 +64,9 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "MistressKissRemoved", 66334)
 	self:Log("SPELL_INTERRUPT", "MistressKissInterrupted", 66335, 66359) -- debuff after getting interrupted
 
-	-- Only happens the first time we engage Jaraxxus, still 11 seconds left until he really engages.
-	self:Yell("FirstEngage", L["engage_trigger1"])
-	self:Yell("Engage", L["engage_trigger"])
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 34780)
-end
-
-function mod:FirstEngage()
-	self:Bar("adds", 12, L["engage"], "INV_Gizmo_01")
 end
 
 function mod:OnEngage()
@@ -83,6 +79,17 @@ end
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if msg == L.enable_trigger or msg:find(L.enable_trigger, nil, true) then
+		self:Enable()
+	elseif msg == L.engage_trigger1 or msg:find(L.engage_trigger1, nil, true) then
+		-- Only happens the first time we engage Jaraxxus, still 11 seconds left until he really engages.
+		self:Bar("adds", 12, L["engage"], "INV_Gizmo_01")
+	elseif msg == L.engage_trigger or msg:find(L.engage_trigger, nil, true) then
+		self:Engage()
+	end
+end
 
 function mod:IncinerateFlesh(args)
 	self:TargetMessage(args.spellId, args.destName, "Urgent", "Info", L["incinerate_message"])

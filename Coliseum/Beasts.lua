@@ -4,13 +4,13 @@
 
 local mod, CL = BigWigs:NewBoss("The Beasts of Northrend", 543, 1618)
 if not mod then return end
-mod.toggleOptions = {"snobold", 66331, 66330, {66317, "FLASH"}, "submerge", {66883, "FLASH"}, "spew", "sprays", {66823, "FLASH"}, 66869, 68335, "proximity", 66770, {"charge", "ICON", "SAY", "FLASH"}, 66758, 66759, "bosses", "berserk"}
-mod.optionHeaders = {
-	snobold = "Gormok the Impaler",
-	submerge = "Jormungars",
-	[66770] = "Icehowl",
-	bosses = "general",
-}
+mod:RegisterEnableMob(
+	34796, -- Gormok
+	34799, -- Dreadscale
+	35144, -- Acidmaw
+	34797  -- Icehowl
+)
+--mod.engageId = 0 -- Inconsistent between tries, ends between bosses
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -19,6 +19,13 @@ mod.optionHeaders = {
 local snobolledWarned = {}
 local sprayTimer = nil
 local handle_Jormungars = nil
+local icehowl, jormungars, gormok
+do
+	local _
+	_, icehowl = EJ_GetCreatureInfo(1, 1618) -- Gormok the Impaler
+	_, jormungars = EJ_GetCreatureInfo(2, 1618) -- Acidmaw and Dreadscale
+	_, gormok = EJ_GetCreatureInfo(3, 1618) -- Icehowl
+end
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -26,7 +33,6 @@ local handle_Jormungars = nil
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.enable_trigger = "You have heard the call of the Argent Crusade and you have boldly answered"
 	L.wipe_trigger = "Tragic..."
 
 	L.engage_trigger = "Hailing from the deepest, darkest caverns of the Storm Peaks, Gormok the Impaler! Battle on, heroes!"
@@ -58,10 +64,6 @@ if L then
 
 	L.bosses = "Bosses"
 	L.bosses_desc = "Warn about bosses incoming"
-
-	L.icehowl = "Icehowl"
-	L.jormungars = "Jormungars"
-	L.gormok = "Gormok the Impaler"
 end
 L = mod:GetLocale()
 
@@ -70,13 +72,43 @@ L = mod:GetLocale()
 --
 
 function mod:OnRegister()
-	self:RegisterEnableMob(
-		34796, -- Gormok
-		34799, -- Dreadscale
-		35144, -- Acidmaw
-		34797  -- Icehowl
-	)
-	self:RegisterEnableYell(L["enable_trigger"])
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+end
+mod.OnBossDisable = mod.OnRegister
+
+function mod:GetOptions()
+	return {
+		--[[ Gormok the Impaler ]]--
+		"snobold",
+		66331,
+		66330,
+		{66317, "FLASH"},
+
+		--[[ Jormungars ]]--
+		"submerge",
+		{66883, "FLASH"},
+		"spew",
+		"sprays",
+		{66823, "FLASH"},
+		66869,
+		68335,
+		"proximity",
+
+		--[[ Icehowl ]]--
+		66770,
+		{"charge", "ICON", "SAY", "FLASH"},
+		66758,
+		66759,
+
+		--[[ General ]]--
+		"bosses",
+		"berserk",
+	}, {
+		snobold = gormok,
+		submerge = jormungars,
+		[66770] = icehowl,
+		bosses = "general",
+	}
 end
 
 function mod:OnBossEnable()
@@ -96,27 +128,24 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Toxin", 66823)
 	self:Log("SPELL_AURA_APPLIED", "Burn", 66869, 66870)
 	self:Log("SPELL_AURA_APPLIED", "Enraged", 68335)
-	self:Yell("Jormungars", L["jormungars_trigger"])
 
 	-- Icehowl
 	self:Log("SPELL_AURA_APPLIED", "Rage", 66759)
 	self:Log("SPELL_AURA_APPLIED", "Daze", 66758)
 	self:Log("SPELL_AURA_APPLIED", "Butt", 66770)
-	self:Yell("Icehowl", L["icehowl_trigger"])
-	self:Emote("Charge", L["charge_trigger"])
 
 	-- Common
-	self:Yell("Engage", L["engage_trigger"])
-	self:Yell("Reboot", L["wipe_trigger"])
 	self:RegisterEvent("ZONE_CHANGED_NEW_AREA", "Reboot")
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE", "Charge")
 	self:Death("Win", 34797)
 end
 
 function mod:OnEngage()
 	self:CloseProximity()
-	self:Bar("bosses", 20, L["boss_incoming"]:format(L.gormok), 66331)
+	self:Bar("bosses", 20, L["boss_incoming"]:format(gormok), 66331)
 	if self:Heroic() then
-		self:Bar("bosses", 180, L["boss_incoming"]:format(L.jormungars), "INV_Misc_MonsterScales_18")
+		self:Bar("bosses", 180, L["boss_incoming"]:format(jormungars), "INV_Misc_MonsterScales_18")
 	else
 		self:Berserk(900)
 	end
@@ -124,31 +153,23 @@ function mod:OnEngage()
 	self:RegisterEvent("UNIT_AURA")
 end
 
-function mod:Jormungars()
-	local m = L["boss_incoming"]:format(L.jormungars)
-	self:Message("bosses", "Positive", nil, m, "Ability_Hunter_Pet_Worm")
-	self:Bar("bosses", 15, m, "INV_Misc_MonsterScales_18")
-	if self:Heroic() then
-		self:Bar("bosses", 200, L["boss_incoming"]:format(L.icehowl), "INV_Misc_MonsterHorn_07")
-	end
-	self:OpenProximity("proximity", 10)
-	-- The first worm to spray is Acidmaw, he has a 10 second spray timer after emerge
-	sprayTimer = 10
-	handle_Jormungars = self:ScheduleTimer("Emerge", 15)
-end
+--------------------------------------------------------------------------------
+-- Event Handlers
+--
 
-function mod:Icehowl()
-	local m = L["boss_incoming"]:format(L.icehowl)
-	self:Message("bosses", "Positive", nil, m, "INV_Misc_Pet_Pandaren_Yeti")
-	self:Bar("bosses", 10, m, "INV_Misc_MonsterHorn_07")
-	self:CancelTimer(handle_Jormungars)
-	handle_Jormungars = nil
-	self:StopBar(L["spray"])
-	self:StopBar(L["submerge"])
-	if self:Heroic() then
-		self:Berserk(220, true, L.icehowl)
+function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if msg == L.engage_trigger or msg:find(L.engage_trigger, nil, true) then
+		if not self:IsEnabled() then
+			self:Enable()
+		end
+		self:Engage()
+	elseif msg == L.wipe_trigger or msg:find(L.wipe_trigger, nil, true) then
+		self:Reboot()
+	elseif msg == L.icehowl_trigger or msg:find(L.icehowl_trigger, nil, true) then
+		self:Icehowl()
+	elseif msg == L.jormungars_trigger or msg:find(L.jormungars_trigger, nil, true) then
+		self:Jormungars()
 	end
-	self:CloseProximity()
 end
 
 --------------------------------------------------------------------------------
@@ -200,6 +221,19 @@ end
 -- Jormungars
 --
 
+function mod:Jormungars()
+	local m = L["boss_incoming"]:format(jormungars)
+	self:Message("bosses", "Positive", nil, m, "Ability_Hunter_Pet_Worm")
+	self:Bar("bosses", 15, m, "INV_Misc_MonsterScales_18")
+	if self:Heroic() then
+		self:Bar("bosses", 200, L["boss_incoming"]:format(icehowl), "INV_Misc_MonsterHorn_07")
+	end
+	self:OpenProximity("proximity", 10)
+	-- The first worm to spray is Acidmaw, he has a 10 second spray timer after emerge
+	sprayTimer = 10
+	handle_Jormungars = self:ScheduleTimer("Emerge", 15)
+end
+
 do
 	local function submerge()
 		handle_Jormungars = mod:ScheduleTimer("Emerge", 10)
@@ -247,14 +281,14 @@ end
 
 do
 	local burnTargets, scheduled = mod:NewTargetList()
-	local function burnWarn(spellId)
-		mod:TargetMessage(spellId, L["burn_spell"], burnTargets, "Urgent", "Info")
+	local function burnWarn()
+		mod:TargetMessage(66869, burnTargets, "Urgent", "Info", L["burn_spell"])
 		scheduled = nil
 	end
 	function mod:Burn(args)
 		burnTargets[#burnTargets + 1] = args.destName
 		if not scheduled then 
-			scheduled = self:ScheduleTimer(burnWarn, 0.5, args.spellId)
+			scheduled = self:ScheduleTimer(burnWarn, 0.5)
 		end
 	end
 end
@@ -281,6 +315,20 @@ end
 -- Icehowl
 --
 
+function mod:Icehowl()
+	local m = L["boss_incoming"]:format(icehowl)
+	self:Message("bosses", "Positive", nil, m, "INV_Misc_Pet_Pandaren_Yeti")
+	self:Bar("bosses", 10, m, "INV_Misc_MonsterHorn_07")
+	self:CancelTimer(handle_Jormungars)
+	handle_Jormungars = nil
+	self:StopBar(L["spray"])
+	self:StopBar(L["submerge"])
+	if self:Heroic() then
+		self:Berserk(220, true, icehowl)
+	end
+	self:CloseProximity()
+end
+
 function mod:Rage(args)
 	self:Message(args.spellId, "Important")
 	self:Bar(args.spellId, 15)
@@ -296,8 +344,8 @@ function mod:Butt(args)
 	self:CDBar(args.spellId, 12)
 end
 
-function mod:Charge(msg, unit, _, _, player)
-	if unit == L.icehowl then
+function mod:Charge(_, msg, unit, _, _, player)
+	if unit == icehowl then
 		local furiousChargeId = 52311
 		self:TargetMessage("charge", player, "Personal", "Alarm", furiousChargeId)
 		if UnitIsUnit(player, "player") then

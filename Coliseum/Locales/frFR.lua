@@ -19,7 +19,6 @@ end
 
 L = BigWigs:NewBossLocale("The Beasts of Northrend", "frFR")
 if L then
-	L.enable_trigger = "Vous avez entendu l'appel de la Croisade d'argent, et vaillamment répondu !"
 	L.wipe_trigger = "Tragique…"
 
 	L.engage_trigger = "Arrivant tout droit des plus noires et profondes cavernes des pics Foudroyés, Gormok l'Empaleur !"
@@ -51,15 +50,10 @@ if L then
 
 	L.bosses = "Boss"
 	L.bosses_desc = "Prévient quand le boss suivant arrive."
-
-	L.icehowl = "Glace-hurlante"
-	L.jormungars = "Jormungars"
-	L.gormok = "Gormok l'Empaleur"
 end
 
 L = BigWigs:NewBossLocale("Faction Champions", "frFR")
 if L then
-	L.enable_trigger = "La prochaine bataille sera contre les chevaliers les plus puissants de la Croisade d'argent ! Ce n'est qu'après les avoir vaincus que vous serez déclarés dignes…"
 	L.defeat_trigger = "Une victoire tragique et dépourvue de sens."
 
 	L["Shield on %s!"] = "Bouclier sur %s !"

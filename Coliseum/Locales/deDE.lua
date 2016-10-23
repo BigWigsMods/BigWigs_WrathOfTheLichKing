@@ -19,7 +19,6 @@ end
 
 L = BigWigs:NewBossLocale("The Beasts of Northrend", "deDE")
 if L then
-	L.enable_trigger = "Ihr habt den Ruf des Argentumkreuzzugs vernommen und seid ihm mutig gefolgt"
 	L.wipe_trigger = "Tragisch..."
 
 	L.engage_trigger = "Er kommt aus den tiefsten, dunkelsten Höhlen der Sturmgipfel - Gormok der Pfähler! Voran, Helden!"
@@ -51,15 +50,10 @@ if L then
 
 	L.bosses = "Bosse"
 	L.bosses_desc = "Warnt, wann die nachfolgenden Bosse eintreffen."
-
-	L.icehowl = "Eisheuler"
-	L.jormungars = "Jormungars"
-	L.gormok = "Gormok der Pfähler"
 end
 
 L = BigWigs:NewBossLocale("Faction Champions", "deDE")
 if L then
-	L.enable_trigger = "Der nächste Kampf wird gegen die stärksten Ritter des Argentumkreuzzugs ausgefochten! Nur der Sieg wird Euren..."
 	L.defeat_trigger = "Ein tragischer Sieg. Wir wurden schwächer durch die heutigen Verluste. Wer außer dem Lichkönig profitiert von solchen Torheiten? Große Krieger gaben ihr Leben. Und wofür? Die wahre Bedrohung erwartet uns noch - der Lichkönig erwartet uns alle im Tod."
 
 	L["Shield on %s!"] = "Schild: %s!"
