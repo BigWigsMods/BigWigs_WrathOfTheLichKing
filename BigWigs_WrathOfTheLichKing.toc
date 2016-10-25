@@ -1,4 +1,4 @@
-## Interface: 70000
+## Interface: 70100
 
 ## Title: BigWigs [|cffeda55fWrath of the Lich King|r]
 ## Title-zhCN: BigWigs [|cffeda55f巫妖王之怒|r]
