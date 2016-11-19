@@ -29,7 +29,7 @@
 
 ## X-Category: Raid
 ## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask us about anything else.
-## X-Curse-Project-ID: bigwigs_wrathofthelichking
+## X-Curse-Project-ID: 50417
 ## X-WoWI-ID: 22086
 ## X-BigWigs-LoadOn-ZoneId: 604, 543, 535, 529, 527, 532, 531, 609, 718
 
