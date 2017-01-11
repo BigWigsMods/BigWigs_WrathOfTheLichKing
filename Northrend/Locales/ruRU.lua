@@ -16,7 +16,7 @@ if L then
 	L.fear_message = "Страх через 1.5 сек!"
 end
 
-local L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "ruRU")
+L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "ruRU")
 if L then
 	L.stomp_message = "Топот - близится Рывок!"
 	L.stomp_warning = "Топот через ~5сек!"
@@ -96,7 +96,7 @@ if L then
 	L.phase3_message = "3 Фаза!"
 end
 
-L = LibStub("AceLocale-3.0"):NewLocale("Sartharion", "ruRU")
+L = BigWigs:NewBossLocale("Sartharion", "ruRU")
 if L then
 	--L.engage_trigger = "It is my charge to watch over these eggs. I will see you burn before any harm comes to them!"
 
