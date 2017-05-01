@@ -22,9 +22,9 @@ local handle_Jormungars = nil
 local icehowl, jormungars, gormok
 do
 	local _
-	_, icehowl = EJ_GetCreatureInfo(1, 1618) -- Gormok the Impaler
+	_, gormok = EJ_GetCreatureInfo(1, 1618) -- Gormok the Impaler
 	_, jormungars = EJ_GetCreatureInfo(2, 1618) -- Acidmaw and Dreadscale
-	_, gormok = EJ_GetCreatureInfo(3, 1618) -- Icehowl
+	_, icehowl = EJ_GetCreatureInfo(3, 1618) -- Icehowl
 end
 
 --------------------------------------------------------------------------------
