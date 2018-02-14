@@ -109,13 +109,9 @@ end
 
 L = BigWigs:NewBossLocale("Razorscale", "deDE")
 if L then
-	L.phase = "Phasen"
-	L.phase_desc = "Warnt bei Phasenwechsel."
 	L.ground_trigger = "Beeilt Euch! Sie wird nicht lange am Boden bleiben!"
 	L.ground_message = "Angekettet!"
 	L.air_message = "Hebt ab!"
-	L.phase2_message = "Phase 2"
-	L.phase2_warning = "Phase 2 bald!"
 
 	L.harpoon = "Harpunengeschütze"
 	L.harpoon_desc = "Warnungen und Timer für die Harpunengeschütze."

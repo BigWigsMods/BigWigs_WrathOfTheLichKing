@@ -13,7 +13,7 @@ mod:RegisterEnableMob(33816, 33210, 33287, 33259, 33186) -- Expedition Defender,
 --
 
 local count = 0
-local phase = 1
+local stage = 1
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -21,14 +21,9 @@ local phase = 1
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.phase = "Phases"
-	L.phase_desc = "Warn when Razorscale switches between phases."
 	L.ground_trigger = "Move quickly! She won't remain grounded for long!"
 	L.ground_message = "Razorscale Chained up!"
-
 	L.air_message = "Takeoff!"
-	L.phase2_message = "Phase 2!"
-	L.phase2_warning = "Phase 2 Soon!"
 
 	L.harpoon = "Harpoons"
 	L.harpoon_desc = "Announce when the harpoons are ready for use."
@@ -44,7 +39,7 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		"phase",
+		"stages",
 		64021, -- Flame Breath
 		64733, -- Devouring Flame
 		"harpoon",
@@ -78,7 +73,7 @@ end
 
 function mod:OnEngage()
 	count = 0
-	phase = 1
+	stage = 1
 	self:Berserk(900)
 	self:Bar("harpoon", 50, L["harpoon_nextbar"]:format(1), "INV_Spear_06")
 end
@@ -89,7 +84,7 @@ end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg == L.ground_trigger then -- Grounded stage begins
-		self:Message("phase", "Neutral", "Long", L["ground_message"], false)
+		self:Message("stages", "Neutral", "Long", L["ground_message"], false)
 	end
 end
 
@@ -117,16 +112,16 @@ end
 function mod:UNIT_HEALTH_FREQUENT(unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if hp > 51 and hp < 55 then
-		self:Message("phase", "Positive", nil, L["phase2_warning"], false)
+		self:Message("stages", "Positive", nil, CL.soon:format(CL.stage:format(2)), false)
 		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unit)
 	end
 end
 
 function mod:WingBuffetCastEnd() -- Air stage begins again
 	count = 0
-	if phase == 1 then
+	if stage == 1 then
 		self:Bar("harpoon", 55, L["harpoon_nextbar"]:format(1), "INV_Spear_06")
-		self:Message("phase", "Neutral", "Long", L["air_message"], false)
+		self:Message("stages", "Neutral", "Long", L["air_message"], false)
 	end
 end
 
@@ -139,14 +134,14 @@ function mod:HarpoonedOver(args)
 	self:StopBar(args.spellName)
 	local hp = UnitHealth("boss1") / UnitHealthMax("boss1") * 100
 	if hp < 50 then -- Stage 2 (Permanently grounded) begins
-		phase = 2
-		self:Message("phase", "Attention", nil, L["phase2_message"], false)
+		stage = 2
+		self:Message("stages", "Attention", nil, CL.stage:format(2), false)
 	end
 end
 
 --function mod:FlameBreath(args)
 --	self:Message(args.spellId, "Attention", "Warning", L["breath_message"])
---	if phase == 2 then
+--	if stage == 2 then
 --		self:CDBar(args.spellId, 21)
 --	end
 --end
@@ -154,7 +149,7 @@ end
 function mod:UNIT_SPELLCAST_START(_, _, _, _, spellId)
 	if spellId == 64021 then -- Flame Breath
 		self:Message(spellId, "Attention", "Warning", L["breath_message"])
-		if phase == 2 then
+		if stage == 2 then
 			self:CDBar(spellId, 21)
 		end
 	end

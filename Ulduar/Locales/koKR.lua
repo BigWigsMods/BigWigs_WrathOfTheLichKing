@@ -109,13 +109,9 @@ end
 
 L = BigWigs:NewBossLocale("Razorscale", "koKR")
 if L then
-	L.phase = "단계"
-	L.phase_desc = "칼날비늘의 단계 변경을 알립니다."
 	L.ground_trigger = "움직이세요! 오래 붙잡아둘 순 없을 겁니다!"
 	L.ground_message = "칼날비늘 묶임!"
 	L.air_message = "이륙!"
-	L.phase2_message = "2 단계!"
-	L.phase2_warning = "곧 2 단계!"
 
 	L.harpoon = "작살 포탑"
 	L.harpoon_desc = "작살 포탑의 준비를 알립니다."

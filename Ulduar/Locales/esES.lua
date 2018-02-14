@@ -105,13 +105,9 @@ end
 
 L = BigWigs:NewBossLocale("Razorscale", "esES") or BigWigs:NewBossLocale("Razorscale", "esMX")
 if L then
-	L.phase = "Fases"
-	L.phase_desc = "Avisa cuando Tajoescama cambia de fases."
 	L.ground_trigger = "¡Moveos! ¡No seguirá mucho más en el suelo!"
 	L.ground_message = "¡Tajoescama está encandenado!"
-	L.air_message = "¡Despega!" -- verificar
-	L.phase2_message = "¡Fase 2!"
-	L.phase2_warning = "¡Fase 2 inminente!"
+	L.air_message = "¡Despega!"
 
 	L.harpoon = "Arpones"
 	L.harpoon_desc = "Anuncia cuando los arpones están listos para su uso."

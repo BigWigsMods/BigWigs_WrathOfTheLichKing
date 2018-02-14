@@ -109,13 +109,9 @@ end
 
 L = BigWigs:NewBossLocale("Razorscale", "zhTW")
 if L then
-	L.phase = "階段"
-	L.phase_desc = "當銳鱗轉換不同階段發出警報。"
 	L.ground_trigger = "快!她可不會在地面上待太久!"
 	L.ground_message = "銳鱗被鎖住了！"
 	L.air_message = "起飛！"
-	L.phase2_message = "第二階段！"
-	L.phase2_warning = "即將 第二階段！"
 
 	L.harpoon = "魚叉炮塔"
 	L.harpoon_desc = "當魚叉炮塔可用時發出警報。"

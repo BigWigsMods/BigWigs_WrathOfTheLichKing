@@ -105,13 +105,9 @@ end
 
 L = BigWigs:NewBossLocale("Razorscale", "ruRU")
 if L then
-	L.phase = "Фазы"
-	L.phase_desc = "Сообщать когда Острокрылая меняет фазы."
 	L.ground_trigger = "Быстрее! Сейчас она снова взлетит!"
 	L.ground_message = "Острокрылая на привязи!"
 	L.air_message = "Взлет!"
-	L.phase2_message = "Вторая фаза!"
-	L.phase2_warning = "Скоро вторая фаза!"
 
 	L.harpoon = "Гарпунная Пушка"
 	L.harpoon_desc = "Объявлять Гарпунные Пушки."
