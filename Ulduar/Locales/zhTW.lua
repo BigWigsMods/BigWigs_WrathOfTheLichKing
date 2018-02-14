@@ -65,7 +65,6 @@ if L then
 
 	L.eyebeam = "集束目光"
 	L.eyebeam_desc = "當玩家中了集束目光時發出警報。"
-	L.eyebeam_trigger = "柯洛剛恩正在注視著你!"
 end
 
 L = BigWigs:NewBossLocale("Mimiron", "zhTW")
@@ -101,7 +100,6 @@ if L then
 
 	L.suppressant_warning = "即將 熾焰抑制劑！"
 
-	L.fbomb_soon = "可能即將 冰霜炸彈！"
 	L.fbomb_bar = "<下一冰霜炸彈>"
 
 	L.bomb_message = "炸彈機器人 出現！"
@@ -180,7 +178,6 @@ if L then
 	L.portal_message = "開啟傳送門！"
 	L.portal_bar = "<下一傳送門>"
 
-	L.fervor_cast_message = "正在施放 薩拉的熱誠：>%s<！"
 	L.fervor_message = "薩拉的熱誠：>%s<！"
 
 	L.sanity_message = ">你< 即將瘋狂！！"
@@ -190,7 +187,7 @@ if L then
 	L.weakened_message = "昏迷：>%s<！"
 
 	L.madness_warning = "10秒後，瘋狂誘陷！"
-	L.malady_message = "心靈缺陷：>%s<！"
+	L.malady_message = "心靈缺陷" -- short for Malady of the Mind (63830)
 
 	L.tentacle = "粉碎觸手"
 	L.tentacle_desc = "當粉碎觸手出現時發出警報。"

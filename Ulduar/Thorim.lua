@@ -14,8 +14,6 @@ mod.respawnTime = 32
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L["Runic Colossus"] = true -- For the runic barrier emote.
-
 	L.phase2_trigger = "Interlopers! You mortals who dare to interfere with my sport will pay.... Wait--you..."
 	L.phase3_trigger = "Impertinent whelps, you dare challenge me atop my pedestal? I will crush you myself!"
 

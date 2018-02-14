@@ -65,7 +65,6 @@ if L then
 
 	L.eyebeam = "Haz ocular enfocado"
 	L.eyebeam_desc = "Avisa quien tiene el Haz ocular enfocado."
-	L.eyebeam_trigger = "sus ojos en ti"
 end
 
 L = BigWigs:NewBossLocale("Mimiron", "esES") or BigWigs:NewBossLocale("Mimiron", "esMX")
@@ -97,7 +96,6 @@ if L then
 
 	L.suppressant_warning = "¡Supresor inminente!"
 
-	L.fbomb_soon = "¡Posible Bomba de Escarcha inminente!"
 	L.fbomb_bar = "Próxima Bomba de Escarcha"
 
 	L.bomb_message = "¡Bombabot aparece!"
@@ -176,7 +174,6 @@ if L then
 	L.portal_message = "¡Portales abiertos!"
 	L.portal_bar = "Próximos portales"
 
-	L.fervor_cast_message = "Lanzando Fervor en %s!"
 	L.fervor_message = "Fervor en %s!"
 
 	L.sanity_message = "¡Te estás volviendo loco!"
@@ -186,7 +183,7 @@ if L then
 	L.weakened_message = "¡%s está aturdido!"
 
 	L.madness_warning = "¡Locura en 10 seg!"
-	L.malady_message = "Mal de la mente: %s"
+	L.malady_message = "Mal de la mente" -- short for Malady of the Mind (63830)
 
 	L.tentacle = "Tentáculo triturador"
 	L.tentacle_desc = "Aviso cuando Tentáculo triturador aparece."

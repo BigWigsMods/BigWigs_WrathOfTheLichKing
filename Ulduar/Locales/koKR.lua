@@ -65,7 +65,6 @@ if L then
 
 	L.eyebeam = "안광 집중"
 	L.eyebeam_desc = "안광 집중의 대상이된 플레이어를 알립니다."
-	L.eyebeam_trigger = "콜로간이 당신에게 안광을 집중합니다!"
 end
 
 L = BigWigs:NewBossLocale("Mimiron", "koKR")
@@ -101,7 +100,6 @@ if L then
 
 	L.suppressant_warning = "곧 화염 억제!"
 
-	L.fbomb_soon = "잠시후 서리 폭탄 가능!"
 	L.fbomb_bar = "다음 서리 폭탄"
 
 	L.bomb_message = "폭발로봇 소환!"
@@ -180,7 +178,6 @@ if L then
 	L.portal_message = "차원문 열림!"
 	L.portal_bar = "다음 차원문"
 
-	L.fervor_cast_message = "%s 에게 사라의 열정 시전!"
 	L.fervor_message = "사라의 열정: %s!"
 
 	L.sanity_message = "당신의 이성 위험!"
@@ -190,7 +187,7 @@ if L then
 	L.weakened_message = "%s 기절!"
 
 	L.madness_warning = "10초 후 광기 유발!"
-	L.malady_message = "병든 정신: %s"
+	L.malady_message = "병든 정신" -- short for Malady of the Mind (63830)
 
 	L.tentacle = "촉수 소환"
 	L.tentacle_desc = "촉수 소환을 알립니다."

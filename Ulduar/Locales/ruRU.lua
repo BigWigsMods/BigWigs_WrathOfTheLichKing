@@ -65,7 +65,6 @@ if L then
 
 	L.eyebeam = "Сосредоточенный взгляд"
 	L.eyebeam_desc = "Сообщать кто попал под воздействие Сосредоточенный взгляд."
-	L.eyebeam_trigger = "Кологарн устремляет на вас свой взгляд!"
 end
 
 L = BigWigs:NewBossLocale("Mimiron", "ruRU")
@@ -97,7 +96,6 @@ if L then
 
 	L.suppressant_warning = "Подавитель пламени!"
 
-	L.fbomb_soon = "Скоро Ледяная бомба!"
 	L.fbomb_bar = "~Ледяная бомба"
 
 	L.bomb_message = "Появился Бомбот!"
@@ -176,7 +174,6 @@ if L then
 	L.portal_message = "Порталы открыты!"
 	L.portal_bar = "Следующий портал"
 
-	L.fervor_cast_message = "Применяется Рвение на |3-5(%s)!"
 	L.fervor_message = "Рвение на |3-5(%s)!"
 
 	L.sanity_message = "Вы теряете рассудок!"
@@ -186,7 +183,7 @@ if L then
 	L.weakened_message = "%s оглушен!"
 
 	L.madness_warning = "Помешательство через 10 сек!"
-	L.malady_message = "Болезнь у: |3-1(%s)"
+	L.malady_message = "Болезнь" -- short for Malady of the Mind (63830)
 
 	L.tentacle = "Тяжелое щупальце"
 	L.tentacle_desc = "Сообщать о появлении тяжелого щупальца."

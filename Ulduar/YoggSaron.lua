@@ -45,6 +45,8 @@ if L then
 
 	L.madness_warning = "Madness in 10 sec!"
 
+	L.malady_message = "Malady"
+
 	L.tentacle = "Crusher Tentacle"
 	L.tentacle_desc = "Warn for Crusher Tentacle spawn."
 	L.tentacle_message = "Crusher %d!"
@@ -204,7 +206,7 @@ function mod:DeafeningRoar(args)
 end
 
 function mod:MaladyOfTheMind(args)
-	self:TargetMessage(args.spellId, args.destName, "Attention", "Alert")
+	self:TargetMessage(args.spellId, args.destName, "Attention", "Alert", L.malady_message)
 	self:PrimaryIcon(args.spellId, args.destName)
 end
 

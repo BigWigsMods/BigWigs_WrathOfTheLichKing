@@ -65,7 +65,6 @@ if L then
 
 	L.eyebeam = "Fokussierter Augenstrahl"
 	L.eyebeam_desc = "Warnt, wenn du von Fokussierter Augenstrahl betroffen bist."
-	L.eyebeam_trigger = "seinen Blick auf Euch!"
 end
 
 L = BigWigs:NewBossLocale("Mimiron", "deDE")
@@ -101,7 +100,6 @@ if L then
 
 	L.suppressant_warning = "Löschschaum kommt!"
 
-	L.fbomb_soon = "Frostbombe bald!"
 	L.fbomb_bar = "~Frostbombe"
 
 	L.bomb_message = "Bombenbot!"
@@ -180,7 +178,6 @@ if L then
 	L.portal_message = "Portale offen!"
 	L.portal_bar = "Nächsten Portale"
 
-	L.fervor_cast_message = "Wirkt Eifer auf %s!"
 	L.fervor_message = "Eifer auf %s!"
 
 	L.sanity_message = "DU wirst verrückt!"
@@ -190,7 +187,7 @@ if L then
 	L.weakened_message = "%s ist geschwächt!"
 
 	L.madness_warning = "Wahnsinn in 10 sek!"
-	L.malady_message = "Geisteskrank: %s!"
+	L.malady_message = "Geisteskrank" -- short for Malady of the Mind (63830)
 
 	L.tentacle = "Schmettertentakel"
 	L.tentacle_desc = "Warnung und Timer für das Auftauchen der Schmettertentakel."

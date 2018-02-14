@@ -65,7 +65,6 @@ if L then
 
 	L.eyebeam = "Rayon de l'oeil"
 	L.eyebeam_desc = "Prévient quand un Rayon de l'oeil focalisé est incanté."
-	L.eyebeam_trigger = "%s concentre son regard sur vous !"
 end
 
 L = BigWigs:NewBossLocale("Mimiron", "frFR")
@@ -97,7 +96,6 @@ if L then
 
 	L.suppressant_warning = "Arrivée d'un Coupe-flamme !"
 
-	L.fbomb_soon = "Bombe de givre imminente !"
 	L.fbomb_bar = "Prochaine Bombe de givre"
 
 	L.bomb_message = "Robo-bombe apparu !"
@@ -176,7 +174,6 @@ if L then
 	L.portal_message = "Portails ouverts !"
 	L.portal_bar = "Prochains portails"
 
-	L.fervor_cast_message = "Ferveur en incantation sur %s !"
 	L.fervor_message = "Ferveur sur %s !"
 
 	L.sanity_message = "Vous allez devenir fou !"
@@ -186,7 +183,7 @@ if L then
 	L.weakened_message = "%s est étourdi !"
 
 	L.madness_warning = "Susciter la folie dans 10 sec. !"
-	L.malady_message = "Mal : %s"
+	L.malady_message = "Mal" -- short for Malady of the Mind (63830)
 
 	L.tentacle = "Tentacule écraseur"
 	L.tentacle_desc = "Prévient quand un Tentacule écraseur apparaît."

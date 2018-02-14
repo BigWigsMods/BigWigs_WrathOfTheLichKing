@@ -65,7 +65,6 @@ if L then
 
 	L.eyebeam = "聚焦视线"
 	L.eyebeam_desc = "当玩家中了聚焦视线时发出警报。"
-	L.eyebeam_trigger = "科隆加恩在注视着你！"
 end
 
 L = BigWigs:NewBossLocale("Mimiron", "zhCN")
@@ -101,7 +100,6 @@ if L then
 
 	L.suppressant_warning = "即将 烈焰遏制！"
 
-	L.fbomb_soon = "可能即将 冰霜炸弹！"
 	L.fbomb_bar = "<下一冰霜炸弹>"
 
 	L.bomb_message = "炸弹机器人 出现！"
@@ -180,7 +178,6 @@ if L then
 	L.portal_message = "开启传送门！"
 	L.portal_bar = "<下一传送门>"
 
-	L.fervor_cast_message = "正在施放 萨拉的热情：>%s<！"
 	L.fervor_message = "萨拉的热情：>%s<！"
 
 	L.sanity_message = ">你< 即将疯狂！"
@@ -190,7 +187,7 @@ if L then
 	L.weakened_message = "昏迷：>%s<！"
 
 	L.madness_warning = "10秒后，疯狂诱导！"
-	L.malady_message = "心灵疾病：>%s<！"
+	L.malady_message = "心灵疾病" -- short for Malady of the Mind (63830)
 
 	L.tentacle = "粉碎触须"
 	L.tentacle_desc = "当粉碎触须出现时发出警报。"
