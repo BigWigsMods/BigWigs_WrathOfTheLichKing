@@ -79,7 +79,7 @@ function mod:OnBossEnable()
 end
 
 function mod:VerifyEnable(unit)
-	return (UnitIsEnemy(unit, "player") and UnitHealth(unit) == UnitHealthMax(unit)) and true or false
+	return (UnitIsEnemy(unit, "player") and UnitHealth(unit) > 100) and true or false
 end
 
 function mod:OnEngage()
