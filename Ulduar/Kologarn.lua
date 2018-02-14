@@ -29,7 +29,6 @@ if L then
 
 	L.eyebeam = "Focused Eyebeam"
 	L.eyebeam_desc = "Warn who gets Focused Eyebeam."
-	L.eyebeam_trigger = "his eyes on you"
 end
 L = mod:GetLocale()
 
@@ -117,4 +116,3 @@ function mod:BigWigs_BossComm(_, msg, _, sender)
 		self:ScheduleTimer("PrimaryIcon", 12, "eyebeam")
 	end
 end
-

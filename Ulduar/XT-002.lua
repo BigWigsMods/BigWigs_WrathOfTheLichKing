@@ -12,7 +12,6 @@ mod.engageId = 1142
 -- Locals
 --
 
-local phase = 1
 local exposed1 = false
 local exposed2 = false
 local exposed3 = false
@@ -65,7 +64,6 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	phase = 1
 	exposed1 = false
 	exposed2 = false
 	exposed3 = false
@@ -83,7 +81,6 @@ function mod:Exposed(args)
 end
 
 function mod:Heartbreak()
-	phase = 2
 	self:Message(64193, "Important")
 end
 
@@ -139,4 +136,3 @@ function mod:UNIT_HEALTH_FREQUENT(unit)
 		self:Message(63849, "Attention", nil, L["exposed_warning"])
 	end
 end
-

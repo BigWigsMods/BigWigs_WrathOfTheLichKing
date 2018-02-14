@@ -11,7 +11,6 @@ mod.engageId = 1130
 -- Locals
 --
 
-local phase = nil
 local blackholes = 0
 
 --------------------------------------------------------------------------------
@@ -93,4 +92,3 @@ function mod:BigBang(args)
 	self:Bar(64443, 90)
 	self:DelayedMessage(64443, 85, "Attention", CL.soon:format(args.spellName))
 end
-

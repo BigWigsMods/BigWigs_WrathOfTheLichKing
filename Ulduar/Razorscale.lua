@@ -140,7 +140,7 @@ function mod:HarpoonedOver(args)
 end
 
 --function mod:FlameBreath(args)
---	self:Message(args.spellId, "Attention", "Warning", L["breath_message"])
+--	self:Message(args.spellId, "Attention", "Warning")
 --	if stage == 2 then
 --		self:CDBar(args.spellId, 21)
 --	end
@@ -148,7 +148,7 @@ end
 
 function mod:UNIT_SPELLCAST_START(_, _, _, _, spellId)
 	if spellId == 64021 then -- Flame Breath
-		self:Message(spellId, "Attention", "Warning", L["breath_message"])
+		self:Message(spellId, "Attention", "Warning")
 		if stage == 2 then
 			self:CDBar(spellId, 21)
 		end

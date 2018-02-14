@@ -103,7 +103,7 @@ do
 	function mod:Root(args)
 		root[#root + 1] = args.destName
 		if #root == 1 then
-			handle = self:ScheduleTimer("TargetMessage", 0.2, 62861, root, "Attention", "Info")
+			self:ScheduleTimer("TargetMessage", 0.2, 62861, root, "Attention", "Info")
 		end
 	end
 end

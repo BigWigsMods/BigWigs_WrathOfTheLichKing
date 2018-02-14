@@ -35,7 +35,6 @@ if L then
 	L.portal_message = "Portals open!"
 	L.portal_bar = "Next portals"
 
-	L.fervor_cast_message = "Casting Fervor on %s!"
 	L.fervor_message = "Fervor on %s!"
 
 	L.sanity_message = "You're going insane!"
@@ -45,7 +44,6 @@ if L then
 	L.weakened_message = "%s is stunned!"
 
 	L.madness_warning = "Madness in 10 sec!"
-	L.malady_message = "Malady: %s"
 
 	L.tentacle = "Crusher Tentacle"
 	L.tentacle_desc = "Warn for Crusher Tentacle spawn."
@@ -68,7 +66,7 @@ L = mod:GetLocale()
 --
 
 local shadowBeaconMarker = mod:AddMarkerOption(true, "npc", 8, 64465, 8, 7) -- Shadow Beacon
-function mod:GetOptions(CL)
+function mod:GetOptions()
 	return {
 		62979, -- Summon Guardian
 		{63138, "FLASH"}, -- Sara's Fervor

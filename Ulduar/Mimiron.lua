@@ -49,7 +49,6 @@ if L then
 
 	L.suppressant_warning = "Suppressant incoming!"
 
-	L.fbomb_soon = "Possible Frost Bomb soon!"
 	L.fbomb_bar = "Next Frost Bomb"
 
 	L.bomb_message = "Bomb Bot spawned!"
