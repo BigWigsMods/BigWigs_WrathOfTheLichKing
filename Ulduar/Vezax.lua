@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("General Vezax", 529, 1648)
+local mod, CL = BigWigs:NewBoss("General Vezax", 529, 1648)
 if not mod then return end
 mod:RegisterEnableMob(33271)
-mod.toggleOptions = {"vapor", {"vaporstack", "FLASH"}, {62660, "ICON", "SAY", "FLASH"}, {63276, "ICON", "FLASH"}, 62661, 62662, "animus", "berserk"}
+mod.engageId = 1134
+--mod.respawnTime = Doesn't despawn
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -13,7 +14,6 @@ mod.toggleOptions = {"vapor", {"vaporstack", "FLASH"}, {62660, "ICON", "SAY", "F
 
 local vaporCount = 1
 local surgeCount = 1
-local lastVapor = nil
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -21,12 +21,6 @@ local lastVapor = nil
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L["Vezax Bunny"] = true -- For emote catching.
-
-	L.engage_trigger = "^Your destruction will herald a new age of suffering!"
-
-	L.surge_message = "Surge %d!"
-	L.surge_cast = "Surge %d casting!"
 	L.surge_bar = "Surge %d"
 
 	L.animus = "Saronite Animus"
@@ -47,41 +41,46 @@ if L then
 	L.crash_say = "Crash"
 
 	L.mark_message = "Mark"
-	L.mark_message_other = "Mark on %s!"
 end
 L = mod:GetLocale()
-
-mod.optionHeaders = {
-	vapor = L.vapor,
-	[62660] = 62660,
-	[63276] = 63276,
-	[62661] = "normal",
-	animus = "hard",
-	berserk = "general",
-}
 
 --------------------------------------------------------------------------------
 -- Initialization
 --
 
+function mod:GetOptions()
+	return {
+		"vapor",
+		{"vaporstack", "FLASH"},
+		{62660, "ICON", "SAY"}, -- Shadow Crash
+		{63276, "ICON", "SAY", "FLASH"}, -- Mark of the Faceless
+		62661, -- Searing Flames
+		62662, -- Surge of Darkness
+		"animus",
+		"berserk",
+	}, {
+		vapor = L.vapor,
+		[62660] = 62660,
+		[63276] = 63276,
+		[62661] = "normal",
+		animus = -17610, -- Hard Mode
+		berserk = "general",
+	}
+end
+
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_START", "Flame", 62661)
-	self:Log("SPELL_CAST_START", "Surge", 62662)
-	self:Log("SPELL_AURA_APPLIED", "SurgeGain", 62662)
-	self:Log("SPELL_CAST_SUCCESS", "Crash", 60835, 62660)
-	self:Log("SPELL_CAST_SUCCESS", "Mark", 63276)
-	self:Death("Win", 33271)
+	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE")
 
-	self:Emote("Vapor", L["vapor_trigger"])
-	self:Emote("Animus", L["animus_trigger"])
-
-	self:RegisterUnitEvent("UNIT_AURA", nil, "player")
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Yell("Engage", L["engage_trigger"])
+	self:Log("SPELL_CAST_START", "SearingFlames", 62661)
+	self:Log("SPELL_CAST_START", "SurgeOfDarkness", 62662)
+	self:Log("SPELL_AURA_APPLIED", "SurgeOfDarknessApplied", 62662)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "SaroniteVaporsApplied", 63322)
+	self:Log("SPELL_CAST_SUCCESS", "ShadowCrash", 62660)
+	self:Log("SPELL_CAST_SUCCESS", "MarkOfTheFaceless", 63276)
+	self:Log("SPELL_AURA_REMOVED", "MarkOfTheFacelessRemoved", 63276)
 end
 
 function mod:OnEngage()
-	lastVapor = nil
 	vaporCount = 1
 	surgeCount = 1
 	self:Berserk(600)
@@ -92,72 +91,67 @@ end
 -- Event Handlers
 --
 
-function mod:Vapor()
-	self:Message("vapor", "Positive", nil, L["vapor_message"]:format(vaporCount), 63323)
-	vaporCount = vaporCount + 1
-	if vaporCount < 7 then
-		self:Bar("vapor", 30, L["vapor_bar"]:format(vaporCount), 63323)
+function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
+	if msg == L.vapor_trigger then
+		self:Message("vapor", "Positive", nil, L.vapor_message:format(vaporCount), 63322)
+		vaporCount = vaporCount + 1
+		if vaporCount < 7 then
+			self:Bar("vapor", 30, L.vapor_bar:format(vaporCount), 63322)
+		end
+	elseif msg == L.animus_trigger then
+		self:Message("animus", "Important", nil, L.animus_message, 87179) -- 87179 / Summon Water Elemental / spell_frost_summonwaterelemental_2 / icon 135862
 	end
 end
 
-function mod:Animus()
-	self:Message("animus", "Important", nil, L["animus_message"], 63319)
-end
-
-function mod:UNIT_AURA()
-	local _, _, _, stack = UnitDebuff("player", self:SpellName(63322))
-	if stack and stack ~= lastVapor then
-		if stack > 5 then
-			self:Message("vaporstack", "Personal", nil, L["vaporstack_message"]:format(stack), 63322)
-			self:Flash("vaporstack", 63322)
-		end
-		lastVapor = stack
+function mod:SaroniteVaporsApplied(args)
+	if self:Me(args.destGUID) and args.amount > 5 then
+		self:Message("vaporstack", "Personal", nil, L["vaporstack_message"]:format(args.amount), 63322)
+		self:Flash("vaporstack", 63322)
 	end
 end
 
 do
-	local handle = nil
-	local function scanTarget()
-		local bossId = mod:GetUnitIdByGUID(33271)
-		if not bossId then return end
-		local target = UnitName(bossId .. "target")
-		if target then
-			if UnitIsUnit(target, "player") then
-				mod:Flash(62660)
-				mod:Say(62660, L["crash_say"])
-			end
-			mod:TargetMessage(62660, target, "Personal", "Alert")
-			mod:SecondaryIcon(62660, target)
+	local function printTarget(self, name, guid)
+		self:TargetMessage(62660, name, "Urgent", "Alert")
+		self:SecondaryIcon(62660, name)
+		self:ScheduleTimer("SecondaryIcon", 3, 62660)
+		if self:Me(guid) then
+			self:Say(62660, L["crash_say"])
 		end
-		handle = nil
 	end
 
-	function mod:Crash()
-		if not handle then
-			handle = self:ScheduleTimer(scanTarget, 0.1)
-		end
+	function mod:ShadowCrash(args)
+		self:GetBossTarget(printTarget, 0.5, args.sourceGUID)
 	end
 end
 
-function mod:Mark(args)
-	self:TargetMessage(args.spellId, args.destName, "Personal", "Alert", L["mark_message"])
-	if self:Me(args.destGUID) then self:Flash(63276) end
-	self:Bar(args.spellId, 10, L["mark_message_other"]:format(args.destName))
+function mod:MarkOfTheFaceless(args)
+	self:TargetMessage(args.spellId, args.destName, "Urgent", "Alert")
+	if self:Me(args.destGUID) then
+		self:Say(63276, L.mark_message)
+		self:Flash(63276)
+	end
+	self:TargetBar(args.spellId, 10, args.destName, L.mark_message)
 	self:PrimaryIcon(args.spellId, args.destName)
 end
 
-function mod:Flame(args)
-	self:Message(args.spellId, "Urgent")
+function mod:MarkOfTheFacelessRemoved(args)
+	self:StopBar(L.mark_message, args.destName)
+	self:PrimaryIcon(args.spellId)
 end
 
-function mod:Surge(args)
-	self:Message(args.spellId, "Important", nil, L["surge_message"]:format(surgeCount))
-	self:Bar(args.spellId, 3, L["surge_cast"]:format(surgeCount))
+function mod:SearingFlames(args)
+	self:Message(args.spellId, "Attention", self:Interrupter() and "Warning")
+end
+
+function mod:SurgeOfDarkness(args)
+	self:Message(args.spellId, "Important", "Long", CL.count:format(args.spellName, surgeCount))
+	self:CastBar(args.spellId, 3, L["surge_bar"]:format(surgeCount))
 	surgeCount = surgeCount + 1
 	self:Bar(args.spellId, 60, L["surge_bar"]:format(surgeCount))
 end
 
-function mod:SurgeGain(args)
+function mod:SurgeOfDarknessApplied(args)
 	self:Bar(args.spellId, 10)
 end
 

@@ -2,27 +2,17 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Freya", 529, 1646)
+local mod, CL = BigWigs:NewBoss("Freya", 529, 1646)
 if not mod then return end
 mod:RegisterEnableMob(32906)
-mod.toggleOptions = {"phase", "wave", "tree", {62589, "ICON", "FLASH"}, {62623, "ICON"}, "proximity", 62861, {62437, "FLASH"}, {62865, "FLASH"}, "berserk"}
-
-mod.optionHeaders = {
-	phase = "normal",
-	[62861] = "hard",
-	berserk = "general",
-}
+mod.engageId = 1133
+mod.respawnTime = 34
 
 --------------------------------------------------------------------------------
 -- Locals
 --
 
-local phase = nil
--- XXXLOLHAXBOOBS to prevent us from enabling again after she dies.
--- I never have enough time after she does the yell to do any testing for which Unit* APIs will
--- allow us to properly disable the VerifyEnable check after she does the yell.
--- Perhaps I'll make a script for it next time we go to Ulduar (which might never happen again).
-local sheIsDead = nil
+local stage = nil
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -30,13 +20,6 @@ local sheIsDead = nil
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.engage_trigger1 = "The Conservatory must be protected!"
-	L.engage_trigger2 = "Elders grant me your strength!"
-
-	L.phase = "Phases"
-	L.phase_desc = "Warn for phase changes."
-	L.phase2_message = "Phase 2!"
-
 	L.wave = "Waves"
 	L.wave_desc = "Warn for Waves."
 	L.wave_bar = "Next Wave"
@@ -59,14 +42,31 @@ if L then
 	L.energy_message = "Unstable Energy on YOU!"
 	L.sunbeam_message = "Sun beams up!"
 	L.sunbeam_bar = "~Next Sun Beams"
-
-	L.end_trigger = "His hold on me dissipates. I can see clearly once more. Thank you, heroes."
 end
 L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
 --
+
+function mod:GetOptions()
+	return {
+		"wave",
+		"tree",
+		{62589, "ICON", "FLASH"}, -- Nature's Fury
+		{62623, "ICON"}, -- Sunbeam
+		"proximity",
+		62861, -- Iron Roots
+		{62437, "FLASH"}, -- Ground Tremor
+		{62865, "FLASH"}, -- Unstable Energy
+		"stages",
+		"berserk",
+	}, {
+		wave = "normal",
+		[62861] = -17610, -- Hard Mode
+		stages = "general",
+	}
+end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Energy", 62865, 62451)              --Elder Brightleaf
@@ -77,23 +77,21 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Fury", 62589, 63571)
 	self:Log("SPELL_AURA_REMOVED", "FuryRemove", 62589, 63571)
 	self:Log("SPELL_AURA_REMOVED", "AttunedRemove", 62519)
-	self:Emote("Tree", L["tree_trigger"])
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Yell("Engage", L["engage_trigger1"], L["engage_trigger2"])
-	self:Yell("Yells", L["end_trigger"], L["conservator_trigger"], L["detonate_trigger"], L["elementals_trigger"])
+
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE")
 
 	self:Death("SunBeamDeath", 33170) -- Sun Beam
 end
 
 function mod:OnEngage()
-	phase = 1
+	stage = 1
 	self:Berserk(600)
-	self:Bar("wave", 11, L["wave_bar"], 35594)
+	self:Bar("wave", 11, L.wave_bar, 35594)
 end
 
 function mod:VerifyEnable(unit)
-	if sheIsDead then return false end
-	return (UnitIsEnemy(unit, "player") and UnitCanAttack(unit, "player")) and true or false
+	return (UnitIsEnemy(unit, "player") and UnitHealth(unit) > 100) and true or false
 end
 
 --------------------------------------------------------------------------------
@@ -101,16 +99,11 @@ end
 --
 
 do
-	local handle = nil
 	local root = mod:NewTargetList()
-	local function rootWarn()
-		mod:TargetMessage(62861, root, "Attention", "Info")
-		handle = nil
-	end
 	function mod:Root(args)
 		root[#root + 1] = args.destName
-		if not handle then
-			handle = self:ScheduleTimer(rootWarn, 0.2)
+		if #root == 1 then
+			handle = self:ScheduleTimer("TargetMessage", 0.2, 62861, root, "Attention", "Info")
 		end
 	end
 end
@@ -131,12 +124,12 @@ do
 		self:Message(62437, color, sound)
 		if caster then self:Flash(62437) end
 		self:Bar(62437, 2)
-		if phase == 1 then
-			self:Bar(62437, 30, L["tremor_bar"])
-			self:DelayedMessage(62437, 26, "Attention", L["tremor_warning"])
-		elseif phase == 2 then
-			self:Bar(62437, 23, L["tremor_bar"])
-			self:DelayedMessage(62437, 20, "Attention", L["tremor_warning"])
+		if stage == 1 then
+			self:CDBar(62437, 30, L.tremor_bar)
+			self:DelayedMessage(62437, 26, "Attention", L.tremor_warning)
+		elseif stage == 2 then
+			self:CDBar(62437, 23, L.tremor_bar)
+			self:DelayedMessage(62437, 20, "Attention", L.tremor_warning)
 		end
 	end
 end
@@ -166,70 +159,67 @@ function mod:Fury(args)
 		self:OpenProximity("proximity", 10)
 		self:Flash(62589)
 	end
-	self:TargetMessage(62589, args.destName, "Personal", "Alert", L["fury_message"])
-	self:TargetBar(62589, 10, args.destName, L["fury_message"])
+	self:TargetMessage(62589, args.destName, "Personal", "Alert", L.fury_message)
+	self:TargetBar(62589, 10, args.destName, L.fury_message)
 	self:PrimaryIcon(62589, args.destName)
 end
 
 function mod:FuryRemove(args)
-	self:StopBar(L["fury_message"], args.destName)
+	self:StopBar(L.fury_message, args.destName)
 	if self:Me(args.destGUID) then
 		self:CloseProximity()
 	end
 end
 
 function mod:AttunedRemove()
-	phase = 2
-	self:StopBar(L["wave_bar"])
-	self:Message("phase", "Important", nil, L["phase2_message"], false)
+	stage = 2
+	self:StopBar(L.wave_bar)
+	self:Message("stages", "Important", nil, CL.stage:format(2), false)
 end
 
 do
-	local last = nil
+	local prev = 0
 	function mod:Energy(args)
 		if self:Me(args.destGUID) then
 			local t = GetTime()
-			if not last or (t > last + 4) then
-				self:Message(62865, "Personal", "Alarm", L["energy_message"], 62451)
+			if t-prev > 4 then
+				prev = t
+				self:Message(62865, "Personal", "Alarm", L.energy_message, 62451)
 				self:Flash(62865)
-				last = t
 			end
 		end
 	end
 end
 
 do
-	local last = nil
+	local prev = 0
 	function mod:EnergySpawns()
 		local t = GetTime()
-		if not last or (t > last + 10) then
-			self:Message(62865, "Important", nil, L["sunbeam_message"])
-			last = t
+		if t-prev > 10 then
+			prev = t
+			self:Message(62865, "Important", nil, L.sunbeam_message)
 		end
 	end
 	function mod:SunBeamDeath()
-		self:Bar(62865, 35, L["sunbeam_bar"])
+		self:CDBar(62865, 35, L.sunbeam_bar)
 	end
 end
 
-function mod:Tree()
-	self:Message("tree", "Urgent", "Alarm", L["tree_message"], 5420)
-end
-
-function mod:Yells(msg)
-	if msg == L["end_trigger"] then
-		-- Never enable again this session!
-		sheIsDead = true
-		self:Win()
-	elseif msg == L["conservator_trigger"] then
-		self:Message("wave", "Positive", nil, L["conservator_message"], 35594)
-		self:Bar("wave", 60, L["wave_bar"], 35594)
-	elseif msg == L["detonate_trigger"] then
-		self:Message("wave", "Positive", nil, L["detonate_message"], 35594)
-		self:Bar("wave", 60, L["wave_bar"], 35594)
-	elseif msg == L["elementals_trigger"] then
-		self:Message("wave", "Positive", nil, L["elementals_message"], 35594)
-		self:Bar("wave", 60, L["wave_bar"], 35594)
+function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if msg == L.conservator_trigger then
+		self:Message("wave", "Positive", nil, L.conservator_message, 35594)
+		self:Bar("wave", 60, L.wave_bar, 35594)
+	elseif msg == L.detonate_trigger then
+		self:Message("wave", "Positive", nil, L.detonate_message, 35594)
+		self:Bar("wave", 60, L.wave_bar, 35594)
+	elseif msg == L.elementals_trigger then
+		self:Message("wave", "Positive", nil, L.elementals_message, 35594)
+		self:Bar("wave", 60, L.wave_bar, 35594)
 	end
 end
 
+function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
+	if msg == L.tree_trigger then
+		self:Message("tree", "Urgent", "Alarm", L.tree_message, 5420) -- 5420 / Incarnation: Tree of Life / ability_druid_treeoflife / icon 132145
+	end
+end

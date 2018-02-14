@@ -4,22 +4,9 @@
 
 local mod, CL = BigWigs:NewBoss("Thorim", 529, 1645)
 if not mod then return end
--- 32865 = thorim, 32882 = behemoth, 32872 = runic colossus, 32908/32907 = Captured Mercenary Captain, 32885/32883 = Captured Mercenary Soldier
-mod:RegisterEnableMob(32865, 32882, 32872, 32908, 32907, 32885, 32883)
-mod.toggleOptions = {{62042, "ICON"}, 62016, 62331, {62017, "FLASH"}, 62338, {62526, "ICON", "SAY"}, 62279, 62130, "proximity", "hardmode", "phase"}
-
-mod.optionHeaders = {
-	[62042] = CL.phase:format(2),
-	[62279] = CL.phase:format(3),
-	hardmode = "hard",
-	phase = "general",
-}
-
---------------------------------------------------------------------------------
--- Locals
---
-
-local chargeCount = 1
+mod:RegisterEnableMob(32865)
+mod.engageId = 1141
+mod.respawnTime = 32
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -29,29 +16,17 @@ local L = mod:NewLocale("enUS", true)
 if L then
 	L["Runic Colossus"] = true -- For the runic barrier emote.
 
-	L.phase = "Phases"
-	L.phase_desc = "Warn for phase changes."
-	L.phase1_message = "Phase 1"
 	L.phase2_trigger = "Interlopers! You mortals who dare to interfere with my sport will pay.... Wait--you..."
-	L.phase2_message = "Phase 2, berserk in 6:15!"
 	L.phase3_trigger = "Impertinent whelps, you dare challenge me atop my pedestal? I will crush you myself!"
-	L.phase3_message = "Phase 3 - Thorim engaged!"
 
 	L.hardmode = "Hard mode timer"
 	L.hardmode_desc = "Show timer for when you have to reach Thorim in order to enter hard mode in phase 3."
 	L.hardmode_warning = "Hard mode expires"
 
-	L.shock_message = "You're getting shocked!"
 	L.barrier_message = "Barrier up!"
-
-	L.detonation_say = "I'm a bomb!"
 
 	L.charge_message = "Charged x%d!"
 	L.charge_bar = "Charge %d"
-
-	L.strike_bar = "Unbalancing Strike CD"
-
-	L.end_trigger = "Stay your arms! I yield!"
 end
 L = mod:GetLocale()
 
@@ -59,79 +34,107 @@ L = mod:GetLocale()
 -- Initialization
 --
 
+function mod:GetOptions()
+	return {
+		62042, -- Stormhammer
+		62016, -- Charge Orb
+		62331, -- Impale
+		{62017, "FLASH"}, -- Lightning Shock
+		62338, -- Runic Barrier
+		{62526, "ICON", "SAY"}, -- Rune Detonation
+		62942, -- Runic Fortification
+		62279, -- Lightning Charge
+		62130, -- Unbalancing Strike
+		"proximity",
+		"hardmode",
+		"stages",
+		"berserk",
+	}, {
+		[62042] = CL.stage:format(1),
+		[62279] = CL.stage:format(2),
+		hardmode = "general",
+	}
+end
+
 function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED", "Hammer", 62042)
-	self:Log("SPELL_CAST_SUCCESS", "Charge", 62279)
-	self:Log("SPELL_CAST_SUCCESS", "StrikeCooldown", 62130)
-	self:Log("SPELL_MISSED", "StrikeCooldown", 62130)
-	self:Log("SPELL_AURA_APPLIED", "Strike", 62130)
-	self:Log("SPELL_AURA_APPLIED", "Detonation", 62526)
-	self:Log("SPELL_AURA_APPLIED", "Orb", 62016)
+	self:Log("SPELL_AURA_APPLIED", "Stormhammer", 62042)
+	self:Log("SPELL_AURA_APPLIED", "LightningChargeApplied", 62279)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "LightningChargeApplied", 62279)
+	self:Log("SPELL_CAST_SUCCESS", "UnbalancingStrikeCast", 62130)
+	self:Log("SPELL_AURA_APPLIED", "UnbalancingStrike", 62130)
+	self:Log("SPELL_CAST_SUCCESS", "RunicFortification", 62942)
+
+	self:Log("SPELL_AURA_APPLIED", "RuneDetonation", 62526)
+	self:Log("SPELL_AURA_REMOVED", "RuneDetonationRemoved", 62526)
+
+	self:Log("SPELL_AURA_APPLIED", "ChargeOrb", 62016)
 	self:Log("SPELL_AURA_APPLIED", "Impale", 62331, 62418)
-	self:Log("SPELL_AURA_APPLIED", "Barrier", 62338)
-	self:Log("SPELL_DAMAGE", "Shock", 62017)
-	self:Log("SPELL_MISSED", "Shock", 62017)
+	self:Log("SPELL_AURA_APPLIED", "RunicBarrier", 62338)
+	self:Log("SPELL_DAMAGE", "LightningShockDamage", 62017)
+	self:Log("SPELL_MISSED", "LightningShockDamage", 62017)
 
-	self:Yell("PhaseTwo", L["phase2_trigger"])
-	self:Yell("PhaseThree", L["phase3_trigger"])
-	self:Yell("Win", L["end_trigger"])
-
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
+	self:Log("SPELL_AURA_APPLIED", "HardModeTimerBegins", 62507) -- Touch of Dominion, Sif spawns and begins the cast
+	self:Log("SPELL_AURA_REMOVED", "HardModeTimerExpires", 62507) -- Touch of Dominion, Sif despawns
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 end
 
 function mod:VerifyEnable(unit)
-	return (UnitIsEnemy(unit, "player") and UnitCanAttack(unit, "player")) and true or false
+	return (UnitIsEnemy(unit, "player") and UnitHealth(unit) == UnitHealthMax(unit)) and true or false
 end
 
 function mod:OnEngage()
-	chargeCount = 1
-	self:Message("phase", "Attention", nil, L["phase1_message"], false)
+	self:Berserk(375)
+	self:Bar("hardmode", 128, L.hardmode, 27578) -- ability_warrior_battleshout / Battle Shout / icon 132333
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Barrier(args)
-	self:Message(args.spellId, "Urgent", "Alarm", L["barrier_message"])
+function mod:RunicBarrier(args)
+	self:Message(args.spellId, "Urgent", "Alarm", L.barrier_message)
 	self:Bar(args.spellId, 20)
 end
 
-function mod:Charge(args)
-	self:Message(args.spellId, "Attention", nil, L["charge_message"]:format(chargeCount))
-	chargeCount = chargeCount + 1
-	self:Bar(args.spellId, 15, L["charge_bar"]:format(chargeCount))
+function mod:LightningChargeApplied(args) -- Lightning Charge on Thorim
+	local amount = args.amount or 1
+	self:Message(args.spellId, "Attention", nil, L.charge_message:format(amount))
+	self:Bar(args.spellId, 15, L.charge_bar:format(amount+1))
 end
 
-function mod:Hammer(args)
+function mod:Stormhammer(args)
 	self:TargetMessage(args.spellId, args.destName, "Urgent")
 	self:Bar(args.spellId, 16)
-	self:PrimaryIcon(args.spellId, args.destName)
 end
 
-function mod:Strike(args)
+function mod:UnbalancingStrike(args)
 	self:TargetMessage(args.spellId, args.destName, "Attention")
 	self:TargetBar(args.spellId, 15, args.destName)
 end
 
-function mod:StrikeCooldown(args)
-	self:Bar(args.spellId, 25, L["strike_bar"])
+function mod:UnbalancingStrikeCast(args)
+	self:CDBar(args.spellId, 25)
 end
 
-function mod:Orb(args)
+function mod:RunicFortification(args)
+	self:Message(args.spellId, "Attention")
+end
+
+function mod:ChargeOrb(args)
 	self:Message(args.spellId, "Urgent")
 	self:Bar(args.spellId, 15)
 end
 
-local last = 0
-function mod:Shock(args)
-	local time = GetTime()
-	if (time - last) > 5 then
-		last = time
+do
+	local prev = 0
+	function mod:LightningShockDamage(args)
 		if self:Me(args.destGUID) then
-			self:Message(args.spellId, "Personal", "Info", L["shock_message"])
-			self:Flash(args.spellId)
+			local t = GetTime()
+			if t-prev > 5 then
+				prev = t
+				self:Message(args.spellId, "Personal", "Info", CL.you:format(args.spellName))
+				self:Flash(args.spellId)
+			end
 		end
 	end
 end
@@ -140,27 +143,52 @@ function mod:Impale(args)
 	self:TargetMessage(62331, args.destName, "Important")
 end
 
-function mod:Detonation(args)
+function mod:RuneDetonation(args)
 	if self:Me(args.destGUID) then
-		self:Say(args.spellId, L["detonation_say"], true)
+		self:Say(args.spellId, 40332) -- 40332 = "Bomb"
 	end
 	self:TargetMessage(args.spellId, args.destName, "Important")
 	self:TargetBar(args.spellId, 4, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
 end
 
-function mod:PhaseTwo()
-	self:Message("phase", "Attention", nil, L["phase2_message"], false)
-	self:Bar("phase", 375, 26662) -- Berserk
-	self:Bar("hardmode", 173, L["hardmode"], 27578) -- ability_warrior_battleshout / Battle Shout / icon 132333
-	self:DelayedMessage("hardmode", 173, "Attention", L["hardmode_warning"])
+function mod:RuneDetonationRemoved(args)
+	self:StopBar(args.spellName, args.destName)
+	self:PrimaryIcon(args.spellId)
 end
 
-function mod:PhaseThree()
-	self:CancelDelayedMessage(L["hardmode_warning"])
+function mod:HardModeTimerBegins()
+	-- Restart the bar for accuracy
+	self:Bar("hardmode", 105, L.hardmode, 27578) -- ability_warrior_battleshout / Battle Shout / icon 132333
+end
+
+function mod:HardModeTimerExpires()
+	if self:BarTimeLeft(L.hardmode) == 0 then
+		self:Message("hardmode", "Positive", nil, L.hardmode_warning, false)
+	else
+		self:Message("hardmode", "Positive", nil, -17610, false) -- -17610 = "Hard Mode"
+	end
+end
+
+function mod:StageTwo()
+	-- Cancel scheduled berserk
+	for k,v in next, self.scheduledMessages do
+		self:CancelTimer(v)
+		self.scheduledMessages[k] = nil
+	end
+
 	self:StopBar(L["hardmode"])
-	self:StopBar(26662) -- Berserk
-	self:Message("phase", "Attention", nil, L["phase3_message"], false)
+	self:Message("stages", "Attention", nil, CL.stage:format(2), false)
 	self:OpenProximity("proximity", 5)
+	self:Berserk(312, true) -- Berserk again with new timer and no engage message
 end
 
+function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if msg == L.phase2_trigger then -- Stage 1
+		if not self.isEngaged then
+			self:Engage() -- Until boss frame shows for stage 1
+		end
+	elseif msg == L.phase3_trigger then -- Stage 2
+		self:StageTwo()
+	end
+end

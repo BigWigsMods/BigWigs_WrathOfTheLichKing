@@ -1,38 +1,16 @@
-local L = BigWigs:NewBossLocale("Algalon the Observer", "deDE")
+
+local L = BigWigs:NewBossLocale("Auriaya", "deDE")
+if not L then return end
 if L then
-	L.smash_message = "Kosmischer Schlag kommt!"
-	L.blackhole_message = "Schwarzes Loch %dx!"
-	L.bigbang_bar = "Nächster Großer Knall"
-	L.bigbang_soon = "Großer Knall bald!"
-end
-
-L = BigWigs:NewBossLocale("Auriaya", "deDE")
-if L then
-	L.engage_trigger = "In manche Dinge mischt man sich besser nicht ein!"
-
-	L.fear_warning = "Furcht bald!"
-	L.fear_message = "Furcht!"
-	L.fear_bar = "~Furcht"
-
 	L.swarm_message = "Wächterschwarm"
-	L.swarm_bar = "~Wächterschwarm"
 
 	L.defender = "Wilder Verteidiger"
 	L.defender_desc = "Warnt, wieviele Leben der Wilder Verteidiger noch hat."
 	L.defender_message = "Verteidiger da %d/9!"
-
-	L.sonic_bar = "~Überschallkreischen"
 end
 
 L = BigWigs:NewBossLocale("Freya", "deDE")
 if L then
-	L.engage_trigger1 = "Das Konservatorium muss verteidigt werden!"
-	L.engage_trigger2 = "Ihr Ältesten, gewährt mir Eure Macht!"
-
-	L.phase = "Phasen"
-	L.phase_desc = "Warnt bei Phasenwechsel."
-	L.phase2_message = "Phase 2"
-
 	L.wave = "Wellen"
 	L.wave_desc = "Warnt vor den Wellen."
 	L.wave_bar = "Nächste Welle"
@@ -55,39 +33,21 @@ if L then
 	L.energy_message = "Instabile Energie auf DIR!"
 	L.sunbeam_message = "Sonnenstrahl!"
 	L.sunbeam_bar = "~Sonnenstrahl"
-
-	L.end_trigger = "Seine Macht über mich beginnt zu schwinden. Endlich kann ich wieder klar sehen. Ich danke Euch, Helden."
 end
 
 L = BigWigs:NewBossLocale("Hodir", "deDE")
 if L then
-	L.engage_trigger = "Für Euer Eindringen werdet Ihr bezahlen!"
-
-	L.cold = "Beißende Kälte"
-	L.cold_desc = "Warnt, wenn du zwei Stapel von Beißende Kälte hast."
-	L.cold_message = "Beißende Kälte x%d!"
-
-	L.flash_warning = "Blitzeis!"
-	L.flash_soon = "Blitzeis in 5 sek!"
-
 	L.hardmode = "Hard Mode"
 	L.hardmode_desc = "Timer für den Hard Mode."
-
-	L.end_trigger = "Ich... bin von ihm befreit... endlich."
 end
 
 L = BigWigs:NewBossLocale("Ignis the Furnace Master", "deDE")
 if L then
-	L.engage_trigger = "Ihr anmaßenden Wichte! Euer Blut wird die Waffen härten, mit denen diese Welt erobert wird!"
 	L.brittle_message = "Konstrukt ist spröde!"
 end
 
 L = BigWigs:NewBossLocale("The Iron Council", "deDE")
 if L then
-	L.engage_trigger1 = "So leicht werdet Ihr die Versammlung des Eisens nicht bezwingen, Eindringlinge!"
-	L.engage_trigger2 = "Nur vollständige Dezimierung wird mich zufriedenstellen."
-	L.engage_trigger3 = "Selbst wenn Ihr die größten Helden der Welt seid, so seid Ihr doch nichts weiter als Sterbliche."
-
 	L.summoning_message = "Elementare!"
 
 	L.chased_other = "%s wird verfolgt!"
@@ -103,28 +63,9 @@ if L then
 	L.left_wipe_bar = "Neuer linker Arm"
 	L.right_wipe_bar = "Neuer rechter Arm"
 
-	L.shockwave = "Schockwelle"
-	L.shockwave_desc = "Timer für die Schockwelle."
-	L.shockwave_trigger = "AUSLÖSCHUNG!"
-
 	L.eyebeam = "Fokussierter Augenstrahl"
 	L.eyebeam_desc = "Warnt, wenn du von Fokussierter Augenstrahl betroffen bist."
 	L.eyebeam_trigger = "seinen Blick auf Euch!"
-end
-
-L = BigWigs:NewBossLocale("Flame Leviathan", "deDE")
-if L then
-	L.engage = "Angegriffen"
-	L.engage_desc = "Warnt, wenn der Flammenleviathan angegriffen wurde."
-	L.engage_trigger = "^Feindeinheiten erkannt"
-	L.engage_message = "%s angegriffen!"
-
-	L.pursue = "Verfolgen"
-	L.pursue_desc = "Warnt, wenn der Flammenleviathan einen Spieler verfolgt."
-	L.pursue_trigger = "^%%s verfolgt"
-	L.pursue_other = "Verfolgen: %s"
-
-	L.shutdown_message = "Systemabschaltung!"
 end
 
 L = BigWigs:NewBossLocale("Mimiron", "deDE")
@@ -164,8 +105,6 @@ if L then
 	L.fbomb_bar = "~Frostbombe"
 
 	L.bomb_message = "Bombenbot!"
-
-	L.end_trigger = "^Es scheint, als wäre mir"
 end
 
 L = BigWigs:NewBossLocale("Razorscale", "deDE")
@@ -174,16 +113,9 @@ if L then
 	L.phase_desc = "Warnt bei Phasenwechsel."
 	L.ground_trigger = "Beeilt Euch! Sie wird nicht lange am Boden bleiben!"
 	L.ground_message = "Angekettet!"
-	L.air_trigger = "Gebt uns einen Moment, damit wir uns auf den Bau der Geschütze vorbereiten können."
-	L.air_trigger2 = "Feuer einstellen! Lasst uns diese Geschütze reparieren!"
 	L.air_message = "Hebt ab!"
-	L.phase2_trigger = "%s dauerhaft an den Boden gebunden!"
 	L.phase2_message = "Phase 2"
 	L.phase2_warning = "Phase 2 bald!"
-
-	L.breath_trigger = "%s holt tief Luft..."
-	L.breath_message = "Flammenatem!"
-	L.breath_bar = "~Flammenatem"
 
 	L.harpoon = "Harpunengeschütze"
 	L.harpoon_desc = "Warnungen und Timer für die Harpunengeschütze."
@@ -194,37 +126,21 @@ end
 
 L = BigWigs:NewBossLocale("Thorim", "deDE")
 if L then
-	L.phase = "Phasen"
-	L.phase_desc = "Warnt bei Phasenwechsel."
-	L.phase1_message = "Phase 1"
 	L.phase2_trigger = " Eindringlinge! Ihr Sterblichen, die Ihr es wagt, Euch in mein Vergnügen einzumischen, werdet... Wartet... Ihr..." -- space in the beginning!
-	L.phase2_message = "Phase 2 - Berserker in 6:15 min!"
 	L.phase3_trigger = "Ihr unverschämtes Geschmeiß! Ihr wagt es, mich in meinem Refugium herauszufordern? Ich werde Euch eigenhändig zerschmettern!"
-	L.phase3_message = "Phase 3 - Thorim angegriffen!"
 
 	L.hardmode = "Hard Mode"
 	L.hardmode_desc = "Timer für den Hard Mode."
 	L.hardmode_warning = "Hard Mode beendet!"
 
-	L.shock_message = "DU wirst geschockt!"
 	L.barrier_message = "Runenbarriere oben!"
-
-	L.detonation_say = "Ich bin die Bombe!"
 
 	L.charge_message = "Blitzladung x%d!"
 	L.charge_bar = "Blitzladung %d"
-
-	L.strike_bar = "~Schlag"
-
-	L.end_trigger = "Senkt Eure Waffen! Ich ergebe mich!"
 end
 
 L = BigWigs:NewBossLocale("General Vezax", "deDE")
 if L then
-	L.engage_trigger = "Eure Vernichtung wird ein neues Zeitalter des Leids einläuten!"
-
-	L.surge_message = "Sog %d!"
-	L.surge_cast = "Wirkt Sog %d"
 	L.surge_bar = "Sog %d"
 
 	L.animus = "Saronitanimus"
@@ -245,7 +161,6 @@ if L then
 	L.crash_say = "Schattengeschoss"
 
 	L.mark_message = "Mal"
-	L.mark_message_other = "Mal: %s"
 end
 
 L = BigWigs:NewBossLocale("XT-002 Deconstructor", "deDE")
@@ -256,27 +171,16 @@ if L then
 	L.gravitybomb_other = "Gravitationsbombe: %s"
 
 	L.lightbomb_other = "Lichtbombe: %s"
-
-	L.tantrum_bar = "~Betäubender Koller"
 end
 
 L = BigWigs:NewBossLocale("Yogg-Saron", "deDE")
 if L then
-	L["Crusher Tentacle"] = "Schmettertentakel"
-	L["The Observation Ring"] = "Der Beobachtungsring"
-
-	L.phase = "Phasen"
-	L.phase_desc = "Warnt bei Phasenwechsel."
-	L.engage_warning = "Phase 1"
 	L.engage_trigger = "^Bald ist die Zeit"
-	L.phase2_warning = "Phase 2"
 	L.phase2_trigger = "^Ich bin der strahlende Traum"
-	L.phase3_warning = "Phase 3"
 	L.phase3_trigger = "^Erblickt das wahre Antlitz des Todes"
 
 	L.portal = "Portale"
 	L.portal_desc = "Warnt, wenn Portale erscheinen."
-	L.portal_trigger = "Portale öffnen sich im Geist von %s!"
 	L.portal_message = "Portale offen!"
 	L.portal_bar = "Nächsten Portale"
 
@@ -288,23 +192,20 @@ if L then
 	L.weakened = "Geschwächt"
 	L.weakened_desc = "Warnt, wenn Yogg-Saron geschwächt ist."
 	L.weakened_message = "%s ist geschwächt!"
-	L.weakened_trigger = "Die Illusion fällt in sich zusammen und der Weg in den zentralen Raum wird frei!"
 
-	L.madness_warning = "Wahnsinn in 5 sek!"
+	L.madness_warning = "Wahnsinn in 10 sek!"
 	L.malady_message = "Geisteskrank: %s!"
 
 	L.tentacle = "Schmettertentakel"
 	L.tentacle_desc = "Warnung und Timer für das Auftauchen der Schmettertentakel."
 	L.tentacle_message = "Schmettertentakel %d!"
 
+	--L.small_tentacles = "Small Tentacles"
+	--L.small_tentacles_desc = "Warn for Corruptor Tentacle and Constrictor Tentacle spawns."
+
 	L.link_warning = "DU bist verbunden!"
 
-	L.gaze_bar = "~Blick"
-	L.empower_bar = "~Machtvolle Schatten"
-
 	L.guardian_message = "Wächter %d!"
-
-	L.empowericon_message = "Schatten verblasst!"
 
 	L.roar_warning = "Gebrüll in 5 sek!"
 	L.roar_bar = "Nächstes Gebrüll"

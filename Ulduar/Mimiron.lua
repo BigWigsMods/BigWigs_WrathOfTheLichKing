@@ -7,12 +7,7 @@ if not mod then return end
 -- Leviathan Mk II(33432), VX-001(33651), Aerial Command Unit(33670),
 mod:RegisterEnableMob(33350, 33432, 33651, 33670)
 mod.engageId = 1138
-mod.toggleOptions = {62997, 63631, {63274, "FLASH"}, 64444, 63811, 64623, 64570, "phase", "proximity", "berserk" }
-mod.optionHeaders = {
-	[62997] = "normal",
-	[64623] = "hard",
-	phase = "general",
-}
+mod.respawnTime = 31
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -58,8 +53,6 @@ if L then
 	L.fbomb_bar = "Next Frost Bomb"
 
 	L.bomb_message = "Bomb Bot spawned!"
-
-	L.end_trigger = "^It would appear that I've made a slight miscalculation."
 end
 L = mod:GetLocale()
 
@@ -67,21 +60,39 @@ L = mod:GetLocale()
 -- Initialization
 --
 
+function mod:GetOptions()
+	return {
+		64529, -- Plasma Blast
+		63631, -- Shock Blast
+		{63274, "FLASH"}, -- P3Wx2 Laser Barrage
+		64444, -- Magnetic Core
+		63811, -- Bomb Bot
+		64623, -- Frost Bomb
+		64570, -- Flame Suppressant
+		"phase",
+		"proximity",
+		"berserk" ,
+	}, {
+		[64529] = "normal",
+		[64623] = -17610, -- Hard Mode
+		phase = "general",
+	}
+end
+
 function mod:VerifyEnable(unit)
 	return (UnitIsEnemy(unit, "player") and UnitCanAttack(unit, "player")) and true or false
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_START", "Plasma", 62997, 64529)
-	self:Log("SPELL_CAST_START", "Suppressant", 64570)
-	self:Log("SPELL_CAST_START", "FBomb", 64623)
-	self:Log("SPELL_CAST_START", "Shock", 63631)
-	self:Log("SPELL_CAST_SUCCESS", "Spinning", 63414)
-	self:Log("SPELL_SUMMON", "Magnetic", 64444)
-	self:Log("SPELL_SUMMON", "Bomb", 63811)
+	self:Log("SPELL_CAST_START", "PlasmaBlast", 64529)
+	self:Log("SPELL_CAST_START", "FlameSuppressant", 64570)
+	self:Log("SPELL_CAST_START", "FrostBomb", 64623)
+	self:Log("SPELL_CAST_START", "ShockBlast", 63631)
+	self:Log("SPELL_CAST_SUCCESS", "SpinningUp", 63414)
+	self:Log("SPELL_SUMMON", "MagneticCore", 64444)
+	self:Log("SPELL_SUMMON", "BombBot", 63811)
 	self:RegisterEvent("CHAT_MSG_LOOT")
-	self:Yell("Yells", L["engage_trigger"], L["hardmode_trigger"], L["phase2_trigger"], L["phase3_trigger"], L["phase4_trigger"])
-	--self:Yell("Win", L["end_trigger"])
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 end
 
 function mod:OnEngage()
@@ -91,54 +102,54 @@ function mod:OnEngage()
 	self:Bar("phase", 7, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 
 	self:Bar(63631, 30, L["shock_next"])
-	self:Bar(62997, 20, L["plasma_bar"])
-	self:DelayedMessage(62997, 17, "Attention", L["plasma_soon"])
+	self:Bar(64529, 20, L["plasma_bar"])
+	self:DelayedMessage(64529, 17, "Attention", L["plasma_soon"])
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Bomb(args)
+function mod:BombBot(args)
 	self:Message(args.spellId, "Important", "Alert", L["bomb_message"])
 end
 
-function mod:Suppressant(args)
+function mod:FlameSuppressant(args)
 	self:Message(args.spellId, "Important", nil, L["suppressant_warning"])
 	self:Bar(args.spellId, 3)
 end
 
-function mod:FBomb(args)
+function mod:FrostBomb(args)
 	self:Message(args.spellId, "Important")
 	self:Bar(args.spellId, 2)
 	self:Bar(args.spellId, 30, L["fbomb_bar"])
 end
 
-function mod:Plasma()
-	self:Message(62997, "Important", nil, L["plasma_warning"])
-	self:Bar(62997, 3, L["plasma_warning"])
-	self:Bar(62997, 30, L["plasma_bar"])
+function mod:PlasmaBlast(args)
+	self:Message(args.spellId, "Important", nil, L["plasma_warning"])
+	self:Bar(args.spellId, 3, L["plasma_warning"])
+	self:Bar(args.spellId, 30, L["plasma_bar"])
 end
 
-function mod:Shock(args)
+function mod:ShockBlast(args)
 	self:Message(args.spellId, "Important")
 	self:Bar(args.spellId, 3.5)
 	self:Bar(args.spellId, 34, L["shock_next"])
 end
 
-function mod:Spinning(args)
+function mod:SpinningUp(args)
 	self:Message(63274, "Personal", "Long", L["laser_soon"], args.spellId)
 	self:Flash(63274)
 	self:ScheduleTimer("Message", 4, 63274, "Important", nil, L["laser_bar"])
 	self:ScheduleTimer("Bar", 4, 63274, 60, L["laser_bar"])
 end
 
-function mod:Magnetic(args)
+function mod:MagneticCore(args)
 	self:Message(args.spellId, "Important", nil, L["magnetic_message"])
 	self:Bar(args.spellId, 15)
 end
 
-function mod:Yells(msg)
+function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L["hardmode_trigger"]) then
 		ishardmode = true
 		self:Berserk(600, true)

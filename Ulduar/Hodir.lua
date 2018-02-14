@@ -5,20 +5,15 @@
 local mod, CL = BigWigs:NewBoss("Hodir", 529, 1644)
 if not mod then return end
 mod:RegisterEnableMob(32845)
-mod.toggleOptions = {{"cold", "FLASH"}, {65123, "ICON"}, 61968, 62478, "hardmode", "berserk"}
-
-mod.optionHeaders = {
-	cold = "normal",
-	hardmode = "hard",
-	berserk = "general",
-}
+mod.engageId = 1135
+mod.respawnTime = 30
 
 --------------------------------------------------------------------------------
 -- Locals
 --
 
 local flashFreezed = mod:NewTargetList()
-local lastCold = nil
+local lastCold = 0
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -26,19 +21,8 @@ local lastCold = nil
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.engage_trigger = "You will suffer for this trespass!"
-
-	L.cold = "Biting Cold"
-	L.cold_desc = "Warn when you have 2 or more stacks of Biting Cold."
-	L.cold_message = "Biting Cold x%d!"
-
-	L.flash_warning = "Freeze!"
-	L.flash_soon = "Freeze in 5sec!"
-
 	L.hardmode = "Hard mode"
 	L.hardmode_desc = "Show timer for hard mode."
-
-	L.end_trigger = "I... I am released from his grasp... at last."
 end
 L = mod:GetLocale()
 
@@ -46,67 +30,72 @@ L = mod:GetLocale()
 -- Initialization
 --
 
+function mod:GetOptions()
+	return {
+		62039, -- Biting Cold
+		{65133, "ICON"}, -- Storm Cloud
+		61968, -- Flash Freeze
+		63512, -- Frozen Blows
+		"hardmode",
+		"berserk",
+	}
+end
+
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_START", "FlashCast", 61968)
-	self:Log("SPELL_AURA_APPLIED", "Flash", 61969, 61990)
-	self:Log("SPELL_AURA_APPLIED", "Frozen", 62478, 63512)
-	self:Log("SPELL_AURA_APPLIED", "Cloud", 65123, 65133)
+	self:Log("SPELL_CAST_START", "FlashFreezeCast", 61968)
+	self:Log("SPELL_AURA_APPLIED", "FlashFreeze", 61969)
+	self:Log("SPELL_AURA_APPLIED", "FrozenBlows", 63512)
+	self:Log("SPELL_AURA_APPLIED", "StormCloud", 65133)
+	self:Log("SPELL_AURA_REMOVED", "StormCloudRemoved", 65133)
 
 	self:RegisterUnitEvent("UNIT_AURA", "BitingCold", "player")
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-
-	self:Yell("Engage", L["engage_trigger"])
-	self:Yell("Win", L["end_trigger"])
 end
 
 function mod:OnEngage()
-	lastCold = nil
+	lastCold = 0
 	self:Bar(61968, 35) -- Flash Freeze
-	self:Bar("hardmode", 180, L["hardmode"], 27578) -- ability_warrior_battleshout / Battle Shout / icon 132333
+	self:Bar("hardmode", 180, L.hardmode, 27578) -- ability_warrior_battleshout / Battle Shout / icon 132333
 	self:Berserk(480)
 end
 
 function mod:VerifyEnable(unit)
-	return (UnitIsEnemy(unit, "player") and UnitCanAttack(unit, "player")) and true or false
+	return (UnitIsEnemy(unit, "player") and UnitHealth(unit) == UnitHealthMax(unit)) and true or false
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Cloud(args)
-	self:TargetMessage(65123, args.destName, "Positive", "Info")
-	self:TargetBar(65123, 30, args.destName)
-	self:PrimaryIcon(65123, args.destName)
+function mod:StormCloud(args)
+	self:TargetMessage(args.spellId, args.destName, "Positive", "Info")
+	self:TargetBar(args.spellId, 30, args.destName)
+	self:PrimaryIcon(args.spellId, args.destName)
 end
 
-function mod:FlashCast(args)
-	self:Message(args.spellId, "Attention", nil, L["flash_warning"])
-	self:Bar(args.spellId, 9, CL["cast"]:format(args.spellName))
+function mod:StormCloudRemoved(args)
+	self:StopBar(args.spellName, args.destName)
+	self:PrimaryIcon(args.spellId)
+end
+
+function mod:FlashFreezeCast(args)
+	self:Message(args.spellId, "Attention", "Long", CL.casting:format(args.spellName))
+	self:CastBar(args.spellId, 9)
 	self:Bar(args.spellId, 35)
-	self:DelayedMessage(args.spellId, 30, "Attention", L["flash_soon"])
+	self:DelayedMessage(args.spellId, 30, "Attention", CL.custom_sec:format(args.spellName, 5))
 end
 
-do
-	local handle = nil
-	local function flashWarn(spellId, spellName)
-		mod:TargetMessage(61968, flashFreezed, "Urgent", "Alert")
-		handle = nil
-	end
-
-	function mod:Flash(args)
-		if UnitInRaid(args.destName) then
-			flashFreezed[#flashFreezed + 1] = args.destName
-			if not handle then
-				handle = self:ScheduleTimer(flashWarn, 0.3)
-			end
+function mod:FlashFreeze(args)
+	if args.destGUID:find("Player", nil, true) then -- Applies to NPCs
+		flashFreezed[#flashFreezed + 1] = args.destName
+		if #flashFreezed == 1 then
+			self:ScheduleTimer("TargetMessage", 0.3, 61968, flashFreezed, "Urgent", "Alert")
 		end
 	end
 end
 
-function mod:Frozen()
-	self:Message(62478, "Important")
-	self:Bar(62478, 20)
+function mod:FrozenBlows(args)
+	self:Message(args.spellId, "Important")
+	self:Bar(args.spellId, 20)
 end
 
 do
@@ -115,8 +104,7 @@ do
 		local _, _, _, stack = UnitDebuff(unit, cold)
 		if stack and stack ~= lastCold then
 			if stack > 1 then
-				self:Message("cold", "Personal", nil, L["cold_message"]:format(stack), 62039)
-				self:Flash("cold", 62039)
+				self:Message(62039, "Personal", "Alert", CL.you:format(CL.count:format(cold, stack)))
 			end
 			lastCold = stack
 		end

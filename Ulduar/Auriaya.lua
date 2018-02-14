@@ -2,17 +2,11 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Auriaya", 529, 1643)
+local mod, CL = BigWigs:NewBoss("Auriaya", 529, 1643)
 if not mod then return end
 mod:RegisterEnableMob(33515)
---Feral Defender = 34035
-mod.toggleOptions = { 64386, 64389, 64396, 64422, "defender", "berserk" }
-
---------------------------------------------------------------------------------
--- Locals
---
-
-local count = 9
+mod.engageId = 1131
+mod.respawnTime = 30
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -20,20 +14,11 @@ local count = 9
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.engage_trigger = "Some things are better left alone!"
-
-	L.fear_warning = "Fear soon!"
-	L.fear_message = "Casting Fear!"
-	L.fear_bar = "~Fear"
-
 	L.swarm_message = "Swarm"
-	L.swarm_bar = "~Swarm"
 
 	L.defender = "Feral Defender"
 	L.defender_desc = "Warn for Feral Defender lives."
 	L.defender_message = "Defender up %d/9!"
-
-	L.sonic_bar = "~Sonic"
 end
 L = mod:GetLocale()
 
@@ -41,24 +26,31 @@ L = mod:GetLocale()
 -- Initialization
 --
 
-function mod:OnBossEnable()
-	self:Log("SPELL_CAST_START", "Sonic", 64422, 64688)
-	self:Log("SPELL_CAST_START", "Fear", 64386)
-	self:Log("SPELL_CAST_START", "Sentinel", 64389, 64678)
-	self:Log("SPELL_AURA_APPLIED", "Swarm", 64396)
-	self:Log("SPELL_AURA_APPLIED", "Defender", 64455)
-	self:Log("SPELL_AURA_REMOVED_DOSE", "DefenderKill", 64455)
-	self:Death("Win", 33515)
+function mod:GetOptions()
+	return {
+		64386, -- Terrifying Screech
+		64678, -- Sentinel Blast
+		64396, -- Guardian Swarm
+		64688, -- Sonic Screech
+		"defender",
+		"berserk",
+	}
+end
 
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Yell("Engage", L["engage_trigger"])
+function mod:OnBossEnable()
+	self:Log("SPELL_CAST_START", "SonicScreech", 64688)
+	self:Log("SPELL_CAST_START", "TerrifyingScreech", 64386)
+	self:Log("SPELL_CAST_START", "SentinelBlast", 64678)
+	self:Log("SPELL_AURA_APPLIED", "GuardianSwarm", 64396)
+	self:Log("SPELL_CAST_SUCCESS", "DefenderSpawn", 64455) -- Feral Essence
+	self:Log("SPELL_AURA_REMOVED_DOSE", "DefenderKill", 64455) -- Feral Essence
 end
 
 function mod:OnEngage()
-	count = 9
-	self:Bar("defender", 60, L["defender_message"]:format(count), 64455)
-	self:Bar(64386, 32, L["fear_bar"])
-	self:DelayedMessage(64386, 32, L["fear_warning"], "Attention")
+	self:Bar("defender", 60, L["defender_message"]:format(9), 64455)
+	local fear = self:SpellName(5782) -- 5782 = "Fear"
+	self:Bar(64386, 32, fear)
+	self:DelayedMessage(64386, 32, "Attention", CL.soon:format(fear))
 	self:Berserk(600)
 end
 
@@ -66,32 +58,35 @@ end
 -- Event Handlers
 --
 
-function mod:Sonic(args)
-	self:Message(64422, "Attention")
-	self:Bar(64422, 28, L["sonic_bar"])
+function mod:SonicScreech(args)
+	self:Message(args.spellId, "Attention", "Warning")
+	self:Bar(args.spellId, 28)
 end
 
-function mod:Defender(args)
-	self:Message("defender", "Attention", nil, L["defender_message"]:format(count), args.spellId)
+function mod:DefenderSpawn(args)
+	-- Spawns with 9 lives
+	self:Message("defender", "Attention", nil, L.defender_message:format(9), args.spellId)
 end
 
 function mod:DefenderKill(args)
-	count = count - 1
-	self:Bar("defender", 34, L["defender_message"]:format(count), args.spellId)
+	-- Looses 1 life every time it dies, then respawns
+	local amount = args.amount or 1
+	self:Bar("defender", 34, L.defender_message:format(amount), args.spellId)
 end
 
-function mod:Swarm(args)
-	self:TargetMessage(args.spellId, args.destName, "Attention", nil, L["swarm_message"])
-	self:Bar(args.spellId, 37, L["swarm_bar"])
+function mod:GuardianSwarm(args)
+	self:TargetMessage(args.spellId, args.destName, "Attention", "Alert", L.swarm_message, nil, self:Healer())
+	self:CDBar(args.spellId, 37, L.swarm_message)
 end
 
-function mod:Fear(args)
-	self:Message(args.spellId, "Urgent", nil, L["fear_message"])
-	self:Bar(args.spellId, 35, L["fear_bar"])
-	self:DelayedMessage(args.spellId, 32, "Attention", L["fear_warning"])
+function mod:TerrifyingScreech(args)
+	local fear = self:SpellName(5782) -- 5782 = "Fear"
+	self:Message(args.spellId, "Urgent", "Info", fear)
+	self:CDBar(args.spellId, 35, fear)
+	self:DelayedMessage(args.spellId, 32, "Urgent", CL.soon:format(fear))
 end
 
-function mod:Sentinel()
-	self:Message(64389, "Important")
+function mod:SentinelBlast(args)
+	self:Message(args.spellId, "Important", "Long")
 end
 

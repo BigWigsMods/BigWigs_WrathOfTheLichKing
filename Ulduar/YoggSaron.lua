@@ -4,17 +4,9 @@
 
 local mod, CL = BigWigs:NewBoss("Yogg-Saron", 529, 1649)
 if not mod then return end
---Sara = 33134, Yogg brain = 33890
-mod:RegisterEnableMob(33288, 33134, 33890)
-mod.toggleOptions = {62979, {63138, "FLASH"}, "tentacle", {63830, "ICON"}, {63802, "FLASH"}, 64125, "portal", "weakened", 64059, {64465, "ICON"}, 64163, 64189, "phase", {63050, "FLASH"}, 63120, "berserk"}
-
-mod.optionHeaders = {
-	[62979] = CL.phase:format(1),
-	tentacle = CL.phase:format(2),
-	[64465] = CL.phase:format(3),
-	[64189] = "hard",
-	phase = "general",
-}
+mod:RegisterEnableMob(33288, 33134, 33890) -- Yogg-Saron, Sara, Brain of Yogg-Saron
+mod.engageId = 1143
+mod.respawnTime = 46
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -22,6 +14,11 @@ mod.optionHeaders = {
 
 local guardianCount = 1
 local crusherCount = 1
+local smallTentacleCount = 1
+local portalCount = 1
+local madnessTime = 0
+local warnedForSanity = false
+local shadowBeacon1GUID, shadowBeacon2GUID = nil, nil
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -29,21 +26,12 @@ local crusherCount = 1
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L["Crusher Tentacle"] = true
-	L["The Observation Ring"] = true
-
-	L.phase = "Phase"
-	L.phase_desc = "Warn for phase changes."
-	L.engage_warning = "Phase 1"
 	L.engage_trigger = "^The time to"
-	L.phase2_warning = "Phase 2"
 	L.phase2_trigger = "^I am the lucid dream"
-	L.phase3_warning = "Phase 3"
 	L.phase3_trigger = "^Look upon the true face"
 
 	L.portal = "Portal"
 	L.portal_desc = "Warn for Portals."
-	L.portal_trigger = "Portals open into %s's mind!"
 	L.portal_message = "Portals open!"
 	L.portal_bar = "Next portals"
 
@@ -55,23 +43,20 @@ if L then
 	L.weakened = "Stunned"
 	L.weakened_desc = "Warn when Yogg-saron becomes stunned."
 	L.weakened_message = "%s is stunned!"
-	L.weakened_trigger = "The illusion shatters and a path to the central chamber opens!"
 
-	L.madness_warning = "Madness in 5sec!"
+	L.madness_warning = "Madness in 10 sec!"
 	L.malady_message = "Malady: %s"
 
 	L.tentacle = "Crusher Tentacle"
 	L.tentacle_desc = "Warn for Crusher Tentacle spawn."
 	L.tentacle_message = "Crusher %d!"
 
+	L.small_tentacles = "Small Tentacles"
+	L.small_tentacles_desc = "Warn for Corruptor Tentacle and Constrictor Tentacle spawns."
+
 	L.link_warning = "You are linked!"
 
-	L.gaze_bar = "~Gaze Cooldown"
-	L.empower_bar = "~Empower Cooldown"
-
 	L.guardian_message = "Guardian %d!"
-
-	L.empowericon_message = "Empower Faded!"
 
 	L.roar_warning = "Roar in 5sec!"
 	L.roar_bar = "Next Roar"
@@ -82,86 +67,116 @@ L = mod:GetLocale()
 -- Initialization
 --
 
+local shadowBeaconMarker = mod:AddMarkerOption(true, "npc", 8, 64465, 8, 7) -- Shadow Beacon
+function mod:GetOptions(CL)
+	return {
+		62979, -- Summon Guardian
+		{63138, "FLASH"}, -- Sara's Fervor
+		"tentacle",
+		"small_tentacles",
+		{63830, "ICON", "ME_ONLY"}, -- Malady of the Mind
+		{63802, "FLASH"}, -- Brain Link
+		64126, -- Squeeze
+		"portal",
+		"weakened",
+		{64059, "COUNTDOWN"}, -- Induce Madness
+		64465, -- Shadow Beacon
+		shadowBeaconMarker,
+		64163, -- Lunatic Gaze
+		64189, -- Deafening Roar
+		"stages",
+		{63050, "FLASH"}, -- Sanity
+		63120, -- Insane
+		"berserk",
+	}, {
+		[62979] = CL.stage:format(1),
+		tentacle = CL.stage:format(2),
+		[64465] = CL.stage:format(3),
+		[64189] = -17610, -- Hard Mode
+		stages = "general",
+	}
+end
+
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_START", "FervorCast", 63138)
-	self:Log("SPELL_AURA_APPLIED", "Fervor", 63138)
-	self:Log("SPELL_CAST_START", "Roar", 64189)
-	self:Log("SPELL_CAST_START", "Madness", 64059)
-	self:Log("SPELL_CAST_SUCCESS", "Empower", 64465)
-	self:Log("SPELL_AURA_APPLIED", "EmpowerIcon", 64465)
-	self:Log("SPELL_AURA_REMOVED", "RemoveEmpower", 64465)
-	self:Log("SPELL_CAST_SUCCESS", "Tentacle", 64144)
-	self:Log("SPELL_AURA_APPLIED", "Squeeze", 64125, 64126)
-	self:Log("SPELL_AURA_APPLIED", "Linked", 63802)
-	self:Log("SPELL_AURA_REMOVED", "Gaze", 64163)
-	self:Log("SPELL_AURA_APPLIED", "CastGaze", 64163)
-	self:Log("SPELL_AURA_APPLIED", "Malady", 63830, 63881)
-	self:Log("SPELL_AURA_REMOVED", "RemoveMalady", 63830, 63881)
+	self:Log("SPELL_CAST_START", "SarasFervorCast", 63138)
+	self:Log("SPELL_AURA_APPLIED", "SarasFervor", 63138)
+	self:Log("SPELL_CAST_START", "DeafeningRoar", 64189)
+	self:Log("SPELL_CAST_START", "InduceMadness", 64059)
+	self:Log("SPELL_AURA_APPLIED", "IllusionRoom", 63988)
+	self:Log("SPELL_AURA_REMOVED", "IllusionRoomExit", 63988)
+	self:Log("SPELL_CAST_SUCCESS", "ShadowBeacon", 64465)
+	self:Log("SPELL_AURA_APPLIED", "ShadowBeaconApplied", 64465)
+	self:Log("SPELL_AURA_REMOVED", "ShadowBeaconRemoved", 64465)
+	self:Log("SPELL_CAST_SUCCESS", "TentacleSpawn", 64144) -- Erupt
+	self:Log("SPELL_AURA_APPLIED", "Squeeze", 64126)
+	self:Log("SPELL_AURA_APPLIED", "BrainLink", 63802)
+	self:Log("SPELL_AURA_REMOVED", "LunaticGazeOver", 64163)
+	self:Log("SPELL_AURA_APPLIED", "LunaticGaze", 64163)
+	self:Log("SPELL_AURA_APPLIED", "MaladyOfTheMind", 63830)
+	self:Log("SPELL_AURA_REMOVED", "MaladyOfTheMindRemoved", 63830)
 	self:Log("SPELL_AURA_APPLIED", "Insane", 63120)
 	self:Log("SPELL_AURA_REMOVED_DOSE", "SanityDecrease", 63050)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "SanityIncrease", 63050)
-	self:Log("SPELL_SUMMON", "Guardian", 62979)
-	self:Death("Win", 33288)
-	self:Emote("Portal", L["portal_trigger"])
-	self:Emote("Weakened", L["weakened_trigger"])
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Yell("Engage", L["engage_trigger"])
-	self:Yell("Yells", L["phase2_trigger"], L["phase3_trigger"])
+	self:Log("SPELL_SUMMON", "SummonGuardian", 62979)
+	self:Log("SPELL_CAST_SUCCESS", "PortalsOpen", 64167) -- Lunatic Gaze
+	self:Log("SPELL_CAST_SUCCESS", "BrainStunned", 64173) -- Shattered Illusion
+
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 end
 
 function mod:OnEngage()
 	guardianCount = 1
-	self:Message("phase", "Attention", nil, L["engage_warning"], false)
-	self:Berserk(900, true)
+	crusherCount = 1
+	smallTentacleCount = 1
+	portalCount = 1
+	madnessTime = 0
+	warnedForSanity = false
+	shadowBeacon1GUID, shadowBeacon2GUID = nil, nil
+	self:Berserk(900)
 end
 
 function mod:VerifyEnable()
-	local z = GetSubZoneText()
-	if z and z == L["The Observation Ring"] then return false end
-	return true
+	BigWigsLoader.SetMapToCurrentZone()
+	return BigWigsLoader.GetCurrentMapDungeonLevel() == 4 -- Floor 4, The Prison of Yogg-Saron
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:FervorCast(args)
-	local bossId = self:GetUnitIdByGUID(33134)
-	if bossId then
-		local target = UnitName(bossId .. "target")
-		if not target then return end
-		self:Message(args.spellId, "Personal", nil, L["fervor_cast_message"]:format(target))
+do
+	local function printTarget(self, name, guid)
+		self:TargetMessage(63138, name, "Urgent", "Alert")
+	end
+
+	function mod:SarasFervorCast(args)
+		self:GetUnitTarget(printTarget, 0.5, args.sourceGUID)
 	end
 end
 
-function mod:Fervor(args)
-	self:Bar(args.spellId, 15, L["fervor_message"]:format(args.destName))
+function mod:SarasFervor(args)
+	self:Bar(args.spellId, 15, L.fervor_message:format(args.destName))
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
 end
 
-do
-	local warned = {}
-	function mod:SanityIncrease(args)
-		if not warned[args.destName] then return end
-		if args.amount > 70 then warned[args.destName] = nil end
-	end
-	function mod:SanityDecrease(args)
-		if warned[args.destName] then return end
-		if self:Me(args.destGUID) then
-			if args.amount > 40 then return end
-			self:Message(args.spellId, "Personal", nil, L["sanity_message"])
-			self:Flash(args.spellId)
-			warned[args.destName] = true
-		elseif args.amount < 31 then
-			warned[args.destName] = true
-		end
+function mod:SanityIncrease(args)
+	if self:Me(args.destGUID) and warnedForSanity and args.amount > 40 then
+		warnedForSanity = false
 	end
 end
 
-function mod:Guardian(args)
-	self:Message(args.spellId, "Positive", nil, L["guardian_message"]:format(guardianCount))
+function mod:SanityDecrease(args)
+	if self:Me(args.destGUID) and not warnedForSanity and args.amount < 41 then
+		warnedForSanity = true
+		self:Message(args.spellId, "Personal", nil, L.sanity_message)
+		self:Flash(args.spellId)
+	end
+end
+
+function mod:SummonGuardian(args)
+	self:Message(args.spellId, "Positive", nil, L.guardian_message:format(guardianCount))
 	guardianCount = guardianCount + 1
 end
 
@@ -169,104 +184,185 @@ function mod:Insane(args)
 	self:TargetMessage(args.spellId, args.destName, "Attention")
 end
 
-function mod:Tentacle(args)
-	-- Crusher Tentacle (33966) 50 sec
+function mod:TentacleSpawn(args)
+	-- Crusher Tentacle (33966) 55 sec
 	-- Corruptor Tentacle (33985) 25 sec
-	-- Constrictor Tentacle (33983) 20 sec
+	-- Constrictor Tentacle (33983) 25 sec
 	if self:MobId(args.sourceGUID) == 33966 then
-		self:Message("tentacle", "Important", nil, L["tentacle_message"]:format(crusherCount), 64139)
+		self:Message("tentacle", "Important", nil, L.tentacle_message:format(crusherCount), 64139)
 		crusherCount = crusherCount + 1
-		self:Bar("tentacle", 55, L["tentacle_message"]:format(crusherCount), 64139)
+		self:Bar("tentacle", 55, L.tentacle_message:format(crusherCount), 64139)
+	elseif self:MobId(args.sourceGUID) == 33985 then -- Corruptor & Constrictor at the same time
+		self:Message("small_tentacles", "Important", nil, CL.count:format(L.small_tentacles, smallTentacleCount), 64139)
+		smallTentacleCount = smallTentacleCount + 1
+		self:Bar("small_tentacles", 25, CL.count:format(L.small_tentacles, smallTentacleCount), 64139)
 	end
 end
 
-function mod:Roar(args)
+function mod:DeafeningRoar(args)
 	self:Message(args.spellId, "Attention")
-	self:Bar(args.spellId, 60, L["roar_bar"])
-	self:DelayedMessage(args.spellId, 55, "Attention", L["roar_warning"])
+	self:Bar(args.spellId, 60, L.roar_bar)
+	self:DelayedMessage(args.spellId, 55, "Attention", L.roar_warning)
 end
 
-function mod:Malady(args)
-	self:PrimaryIcon(63830, args.destName)
+function mod:MaladyOfTheMind(args)
+	self:TargetMessage(args.spellId, args.destName, "Attention", "Alert")
+	self:PrimaryIcon(args.spellId, args.destName)
 end
 
-function mod:RemoveMalady()
-	self:PrimaryIcon(63830)
+function mod:MaladyOfTheMindRemoved(args)
+	self:PrimaryIcon(args.spellId)
 end
 
 function mod:Squeeze(args)
-	self:TargetMessage(64125, args.destName, "Positive")
+	self:TargetMessage(args.spellId, args.destName, "Positive")
 end
 
-function mod:Linked(args)
+function mod:BrainLink(args)
 	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "Personal", "Alarm", L["link_warning"])
+		self:Message(args.spellId, "Personal", "Alarm", L.link_warning)
 		self:Flash(args.spellId)
 	end
 end
 
-function mod:Gaze(args)
-	self:Bar(args.spellId, 9, L["gaze_bar"])
+function mod:LunaticGazeOver(args)
+	self:CDBar(args.spellId, 9)
 end
 
-function mod:CastGaze(args)
-	self:Bar(args.spellId, 4)
+function mod:LunaticGaze(args)
+	self:Message(args.spellId, "Important", "Warning")
+	self:CastBar(args.spellId, 4)
 end
 
-function mod:Madness(args)
-	self:Bar(args.spellId, 60)
-	self:DelayedMessage(args.spellId, 55, "Urgent", L["madness_warning"])
+function mod:InduceMadness()
+	madnessTime = GetTime()
 end
 
-function mod:Empower(args)
-	self:Message(args.spellId, "Important")
-	self:Bar(args.spellId, 46, L["empower_bar"])
+function mod:IllusionRoom(args)
+	-- Induce Madness
+	if self:Me(args.destGUID) then
+		local passed = GetTime() - madnessTime
+		local remaining = 55 - passed
+		self:Bar(64059, remaining)
+		self:DelayedMessage(64059, remaining - 10, "Urgent", L.madness_warning, false, "Warning")
+	end
 end
 
-function mod:RemoveEmpower(args)
-	self:Message(args.spellId, "Positive", nil, L["empowericon_message"])
-	--self:SendMessage("BigWigs_RemoveRaidIcon")
+function mod:IllusionRoomExit(args)
+	-- Induce Madness
+	if self:Me(args.destGUID) then
+		self:StopBar(64059)
+		self:CancelDelayedMessage(L.madness_warning)
+	end
+end
+
+function mod:ShadowBeacon(args)
+	self:CDBar(args.spellId, 46)
 end
 
 do
-	local empowerscanner = nil
-	local function scanTarget(dGuid)
-		local unitId = mod:GetUnitIdByGUID(dGuid)
-		if not unitId then return end
-		SetRaidTarget(unitId, 8)
-		mod:CancelTimer(empowerscanner)
-		empowerscanner = nil
+	local function Cleanup(self)
+		shadowBeacon1GUID, shadowBeacon2GUID = nil, nil
+		self:UnregisterTargetEvents()
 	end
-	function mod:EmpowerIcon(args)
-		if empowerscanner or (not UnitIsGroupLeader("player") and not UnitIsGroupAssistant("player")) then return end
-		if bit.band(self.db.profile[64465], BigWigs.C.ICON) ~= BigWigs.C.ICON then return end
-		empowerscanner = self:ScheduleRepeatingTimer(scanTarget, 0.3, args.destGUID)
+
+	function mod:UnmarkShadowBeacon(event, unit, guid)
+		if guid == shadowBeacon1GUID or guid == shadowBeacon2GUID then
+			SetRaidTarget(unit, 0)
+		end
+	end
+
+	local prev = 0
+	function mod:ShadowBeaconRemoved(args)
+		local t = GetTime()
+		if t-prev > 5 then
+			prev = t
+			self:Message(args.spellId, "Positive", nil, CL.removed:format(args.spellName))
+			if self:GetOption(shadowBeaconMarker) then
+				self:ScheduleTimer(Cleanup, 5, self)
+			end
+		end
+
+		if self:GetOption(shadowBeaconMarker) then
+			local destGUID = args.destGUID
+			if destGUID == shadowBeacon1GUID or destGUID == shadowBeacon2GUID then
+				local unitId = mod:GetUnitIdByGUID(destGUID)
+				if unitId then
+					SetRaidTarget(unitId, 0)
+				else
+					self:RegisterTargetEvents("UnmarkShadowBeacon")
+				end
+			end
+		end
 	end
 end
 
-function mod:Portal()
-	self:Message("portal", "Positive", nil, L["portal_message"], 35717)
-	self:Bar("portal", 90, L["portal_bar"], 35717)
+do
+	function mod:MarkShadowBeacon(event, unit, guid)
+		if guid == shadowBeacon1GUID then
+			SetRaidTarget(unit, 8)
+		elseif guid == shadowBeacon2GUID then
+			SetRaidTarget(unit, 7)
+		end
+	end
+
+	local prev = 0
+	function mod:ShadowBeaconApplied(args)
+		local t = GetTime()
+		if t-prev > 5 then
+			prev = t
+			self:TargetMessage(args.spellId, args.destName, "Important")
+		end
+
+		if self:GetOption(shadowBeaconMarker) then
+			if not shadowBeacon1GUID then
+				shadowBeacon1GUID = args.destGUID
+			else
+				shadowBeacon2GUID = args.destGUID
+			end
+
+			local unitId = mod:GetUnitIdByGUID(shadowBeacon2GUID or shadowBeacon1GUID)
+			if unitId then
+				SetRaidTarget(unitId, shadowBeacon2GUID and 7 or 8)
+			else
+				self:RegisterTargetEvents("MarkShadowBeacon")
+			end
+		end
+	end
 end
 
-function mod:Weakened(_, unit)
-	self:Message("weakened", "Positive", nil, L["weakened_message"]:format(unit), 50661)
+do
+	local prev = 0
+	function mod:PortalsOpen(args) -- Laughing Skulls above portals all gain Lunatic Gaze
+		local t = GetTime()
+		if t-prev > 10 then
+			prev = t
+			self:Message("portal", "Positive", nil, CL.count:format(L.portal_message, portalCount), 35717)
+			portalCount = portalCount + 1
+			self:Bar("portal", 61, CL.count:format(L.portal_bar, portalCount), 35717)
+		end
+	end
 end
 
-function mod:Yells(msg)
-	if msg:find(L["phase2_trigger"]) then
+function mod:BrainStunned(args) -- Shattered Illusion
+	self:Message("weakened", "Positive", "Long", L.weakened_message:format(self.displayName), 50661) -- 50661 / Weakened Resolve / spell_shadow_brainwash / icon 136125
+end
+
+function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if msg:find(L.phase2_trigger) then
 		crusherCount = 1
-		self:Message("phase", "Attention", nil, L["phase2_warning"], false)
-		self:Bar("portal", 78, L["portal_bar"], 35717)
-	elseif msg:find(L["phase3_trigger"]) then
-		self:CancelDelayedMessage(L["madness_warning"])
+		self:Message("stages", "Attention", nil, CL.stage:format(2), false)
+		self:Bar("portal", 25, CL.count:format(L.portal_bar, portalCount), 35717)
+	elseif msg:find(L.phase3_trigger) then
+		self:CancelDelayedMessage(L.madness_warning)
 
 		self:StopBar(64059) -- Induce Madness
-		self:StopBar(L["tentacle_message"]:format(crusherCount))
-		self:StopBar(L["portal_bar"])
+		self:StopBar(L.tentacle_message:format(crusherCount))
+		self:StopBar(CL.count:format(L.portal_bar, portalCount))
 
-		self:Message("phase", "Important", "Alarm", L["phase3_warning"], false)
-		self:Bar(64465, 46, L["empower_bar"])
+		self:Message("stages", "Important", "Alarm", CL.stage:format(3), false)
+		self:Bar(64465, 46)
+	elseif msg:find(L.engage_trigger) and not self.isEngaged then
+		self:Engage() -- Remove if Sara is added to boss frames on engage
 	end
 end
-
