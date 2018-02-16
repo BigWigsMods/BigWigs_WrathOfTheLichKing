@@ -95,7 +95,7 @@ function mod:GravityBomb(args)
 		self:Flash(63024)
 	end
 	self:TargetMessage(63024, args.destName, "Personal", "Alert")
-	self:Bar(63024, 9, L["gravitybomb_other"]:format(args.destName))
+	self:Bar(63024, 9, L["gravitybomb_other"]:format(self:ColorName(args.destName)))
 	self:SecondaryIcon(63024, args.destName)
 end
 
@@ -105,7 +105,7 @@ function mod:LightBomb(args)
 		self:Flash(63018)
 	end
 	self:TargetMessage(63018, args.destName, "Personal", "Alert")
-	self:Bar(63018, 9, L["lightbomb_other"]:format(args.destName))
+	self:Bar(63018, 9, L["lightbomb_other"]:format(self:ColorName(args.destName)))
 	self:PrimaryIcon(63018, args.destName)
 end
 

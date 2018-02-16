@@ -54,7 +54,7 @@ end
 function mod:OnEngage()
 	lastCold = 0
 	self:Bar(61968, 35) -- Flash Freeze
-	self:Bar("hardmode", 180, L.hardmode, 27578) -- ability_warrior_battleshout / Battle Shout / icon 132333
+	self:Bar("hardmode", 150, L.hardmode, 27578) -- ability_warrior_battleshout / Battle Shout / icon 132333
 	self:Berserk(480)
 end
 

@@ -16,7 +16,6 @@ local guardianCount = 1
 local crusherCount = 1
 local smallTentacleCount = 1
 local portalCount = 1
-local madnessTime = 0
 local warnedForSanity = false
 local shadowBeacon1GUID, shadowBeacon2GUID = nil, nil
 
@@ -129,7 +128,6 @@ function mod:OnEngage()
 	crusherCount = 1
 	smallTentacleCount = 1
 	portalCount = 1
-	madnessTime = 0
 	warnedForSanity = false
 	shadowBeacon1GUID, shadowBeacon2GUID = nil, nil
 	self:Berserk(900)
@@ -155,7 +153,7 @@ do
 end
 
 function mod:SarasFervor(args)
-	self:Bar(args.spellId, 15, L.fervor_message:format(args.destName))
+	self:Bar(args.spellId, 15, L.fervor_message:format(self:ColorName(args.destName)))
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
@@ -234,25 +232,28 @@ function mod:LunaticGaze(args)
 	self:CastBar(args.spellId, 4)
 end
 
-function mod:InduceMadness()
-	madnessTime = GetTime()
-end
-
-function mod:IllusionRoom(args)
-	-- Induce Madness
-	if self:Me(args.destGUID) then
-		local passed = GetTime() - madnessTime
-		local remaining = 55 - passed
-		self:Bar(64059, remaining)
-		self:DelayedMessage(64059, remaining - 10, "Urgent", L.madness_warning, false, "Warning")
+do
+	local madnessTime = 0
+	function mod:InduceMadness()
+		madnessTime = GetTime()
 	end
-end
 
-function mod:IllusionRoomExit(args)
-	-- Induce Madness
-	if self:Me(args.destGUID) then
-		self:StopBar(64059)
-		self:CancelDelayedMessage(L.madness_warning)
+	function mod:IllusionRoom(args)
+		-- Induce Madness
+		if self:Me(args.destGUID) then
+			local passed = GetTime() - madnessTime
+			local remaining = 55 - passed
+			self:Bar(64059, remaining)
+			self:DelayedMessage(64059, remaining - 10, "Urgent", L.madness_warning, false, "Warning")
+		end
+	end
+
+	function mod:IllusionRoomExit(args)
+		-- Induce Madness
+		if self:Me(args.destGUID) then
+			self:StopBar(64059)
+			self:CancelDelayedMessage(L.madness_warning)
+		end
 	end
 end
 
