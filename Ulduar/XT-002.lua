@@ -6,7 +6,7 @@ local mod = BigWigs:NewBoss("XT-002 Deconstructor", 529, 1640)
 if not mod then return end
 mod:RegisterEnableMob(33293)
 mod.engageId = 1142
---mod.respawnTime = 25
+--mod.respawnTime = resets, doesn't respawn
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -22,12 +22,8 @@ local exposed3 = false
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.exposed_warning = "Exposed soon"
-	L.exposed_message = "Heart exposed!"
-
-	L.gravitybomb_other = "Gravity on %s!"
-
-	L.lightbomb_other = "Light on %s!"
+	L.gravitybomb_other = "Gravity"
+	L.lightbomb_other = "Light"
 end
 L = mod:GetLocale()
 
@@ -37,28 +33,23 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		{63024, "ICON", "FLASH"}, -- Gravity Bomb
-		{63018, "ICON", "FLASH"}, -- Searing Light
+		{64234, "ICON", "FLASH", "SAY", "PROXIMITY"}, -- Gravity Bomb
+		{65121, "ICON", "FLASH", "SAY", "PROXIMITY"}, -- Searing Light
 		62776, -- Tympanic Tantrum
 		64193, -- Heartbreak
 		63849, -- Exposed Heart
-		"proximity",
 		"berserk",
-	}, {
-		[63024] = "normal",
-		[64193] = -17610, -- Hard Mode
-		proximity = "general",
 	}
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED", "Exposed", 63849)
-	self:Log("SPELL_AURA_APPLIED", "Heartbreak", 64193, 65737)
-	self:Log("SPELL_AURA_APPLIED", "GravityBomb", 63024, 64234)
-	self:Log("SPELL_AURA_APPLIED", "LightBomb", 63018, 65121)
-	self:Log("SPELL_AURA_REMOVED", "GravityRemoved", 63024, 64234)
-	self:Log("SPELL_AURA_REMOVED", "LightRemoved", 63018, 65121)
-	self:Log("SPELL_CAST_START", "Tantrum", 62776)
+	self:Log("SPELL_AURA_APPLIED", "ExposedHeart", 63849)
+	self:Log("SPELL_AURA_APPLIED", "Heartbreak", 64193, 65737) -- XXX verify id
+	self:Log("SPELL_AURA_APPLIED", "GravityBomb", 64234)
+	self:Log("SPELL_AURA_APPLIED", "SearingLight", 65121)
+	self:Log("SPELL_AURA_REMOVED", "GravityBombRemoved", 64234)
+	self:Log("SPELL_AURA_REMOVED", "SearingLightRemoved", 65121)
+	self:Log("SPELL_CAST_START", "TympanicTantrum", 62776)
 
 	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1")
 end
@@ -75,64 +66,71 @@ end
 -- Event Handlers
 --
 
-function mod:Exposed(args)
-	self:Message(args.spellId, "Attention", nil, L["exposed_message"])
+function mod:ExposedHeart(args)
+	self:Message(args.spellId, "Attention", "Long")
 	self:Bar(args.spellId, 30)
 end
 
 function mod:Heartbreak()
-	self:Message(64193, "Important")
+	self:Message(64193, "Important", "Info")
 end
 
-function mod:Tantrum(args)
-	self:Message(args.spellId, "Attention")
+function mod:TympanicTantrum(args)
+	self:Message(args.spellId, "Attention", "Warning")
 	self:CDBar(args.spellId, 62)
 end
 
 function mod:GravityBomb(args)
 	if self:Me(args.destGUID) then
-		self:OpenProximity("proximity", 10)
-		self:Flash(63024)
+		self:OpenProximity(args.spellId, 10)
+		self:Flash(args.spellId)
+		self:Say(args.spellId)
+		self:SayCountdown(args.spellId, 9)
 	end
-	self:TargetMessage(63024, args.destName, "Personal", "Alert")
-	self:Bar(63024, 9, L["gravitybomb_other"]:format(self:ColorName(args.destName)))
-	self:SecondaryIcon(63024, args.destName)
+	self:TargetMessage(args.spellId, args.destName, "Personal", "Alert")
+	self:TargetBar(args.spellId, 9, args.destName, L.gravitybomb_other)
+	self:SecondaryIcon(args.spellId, args.destName)
 end
 
-function mod:LightBomb(args)
+function mod:GravityBombRemoved(args)
 	if self:Me(args.destGUID) then
-		self:OpenProximity("proximity", 10)
-		self:Flash(63018)
+		self:CloseProximity(args.spellId)
+		self:CancelSayCountdown(args.spellId)
 	end
-	self:TargetMessage(63018, args.destName, "Personal", "Alert")
-	self:Bar(63018, 9, L["lightbomb_other"]:format(self:ColorName(args.destName)))
-	self:PrimaryIcon(63018, args.destName)
+	self:StopBar(L.gravitybomb_other, args.destName)
+	self:SecondaryIcon(args.spellId)
 end
 
-function mod:GravityRemoved(args)
+function mod:SearingLight(args)
 	if self:Me(args.destGUID) then
-		self:CloseProximity()
+		self:OpenProximity(args.spellId, 10)
+		self:Flash(args.spellId)
+		self:Say(args.spellId)
 	end
-	self:SecondaryIcon(63024)
+	self:TargetMessage(args.spellId, args.destName, "Personal", "Alert")
+	self:TargetBar(args.spellId, 9, args.destName, L.lightbomb_other)
+	self:PrimaryIcon(args.spellId, args.destName)
 end
 
-function mod:LightRemoved(args)
+function mod:SearingLightRemoved(args)
 	if self:Me(args.destGUID) then
-		self:CloseProximity()
+		self:CloseProximity(args.spellId)
 	end
-	self:PrimaryIcon(63018)
+	self:StopBar(L.lightbomb_other, args.destName)
+	self:PrimaryIcon(args.spellId)
 end
 
 function mod:UNIT_HEALTH_FREQUENT(unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if not exposed1 and hp > 86 and hp < 90 then
 		exposed1 = true
-		self:Message(63849, "Attention", nil, L["exposed_warning"])
+		self:Message(63849, "Attention", nil, CL.soon:format(self:SpellName(63849))) -- Exposed Heart soon
 	elseif not exposed2 and hp > 56 and hp < 58 then
 		exposed2 = true
-		self:Message(63849, "Attention", nil, L["exposed_warning"])
+		self:Message(63849, "Attention", nil, CL.soon:format(self:SpellName(63849)))
 	elseif not exposed3 and hp > 26 and hp < 28 then
 		exposed3 = true
-		self:Message(63849, "Attention", nil, L["exposed_warning"])
+		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unit)
+		self:Message(63849, "Attention", nil, CL.soon:format(self:SpellName(63849)))
 	end
 end

@@ -159,12 +159,8 @@ end
 
 L = BigWigs:NewBossLocale("XT-002 Deconstructor", "zhCN")
 if L then
-	L.exposed_warning = "即将 暴露心脏！"
-	L.exposed_message = "暴露心脏！"
-
-	L.gravitybomb_other = "重力炸弹：>%s<！"
-
-	L.lightbomb_other = "灼热之光：>%s<！"
+	L.gravitybomb_other = "重力炸弹"
+	L.lightbomb_other = "灼热之光"
 end
 
 L = BigWigs:NewBossLocale("Yogg-Saron", "zhCN")

@@ -155,12 +155,8 @@ end
 
 L = BigWigs:NewBossLocale("XT-002 Deconstructor", "frFR")
 if L then
-	L.exposed_warning = "Cœur exposé imminent"
-	L.exposed_message = "Cœur exposé !"
-
-	L.gravitybomb_other = "Gravité : %s"
-
-	L.lightbomb_other = "Lumière : %s"
+	L.gravitybomb_other = "Gravité"
+	L.lightbomb_other = "Lumière"
 end
 
 L = BigWigs:NewBossLocale("Yogg-Saron", "frFR")

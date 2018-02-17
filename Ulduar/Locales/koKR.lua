@@ -159,12 +159,8 @@ end
 
 L = BigWigs:NewBossLocale("XT-002 Deconstructor", "koKR")
 if L then
-	L.exposed_warning = "잠시 후 심장 노출!"
-	L.exposed_message = "심장 노출 - 로봇들 추가!"
-
-	L.gravitybomb_other = "중력 폭탄: %s!"
-
-	L.lightbomb_other = "빛의 폭탄: %s!"
+	L.gravitybomb_other = "중력 폭탄"
+	L.lightbomb_other = "타오르는 빛"
 end
 
 L = BigWigs:NewBossLocale("Yogg-Saron", "koKR")

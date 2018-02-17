@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Razorscale", 529, 1639)
 if not mod then return end
 mod:RegisterEnableMob(33816, 33210, 33287, 33259, 33186) -- Expedition Defender, Expidition Commander, Expedition Engineer, Expedition Trapper, Razorscale
---mod.engageId = 1139 -- ENCOUNTER_END wasn't firing
+--mod.engageId = 1139 -- ENCOUNTER_END wasn't firing (for wipes)
 --mod.respawnTime = 30
 
 --------------------------------------------------------------------------------
@@ -64,8 +64,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Harpooned", 62794)
 	self:Log("SPELL_AURA_REMOVED", "HarpoonedOver", 62794)
 
-	--self:Log("SPELL_CAST_START", "FlameBreath", 64021) -- Delayed for some reason despite being the same ID
-	self:RegisterUnitEvent("UNIT_SPELLCAST_START", nil, "boss1")
+	self:Log("SPELL_CAST_START", "FlameBreath", 64021)
 
 	self:Log("SPELL_AURA_APPLIED", "FuseArmor", 64771)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "FuseArmor", 64771)
@@ -101,17 +100,19 @@ end
 do
 	local prev = 0
 	function mod:DevouringFlameDamage(args)
-		local t = GetTime()
-		if self:Me(args.destGUID) and t-prev > 1.5 then
-			prev = t
-			self:Message(args.spellId, "Personal", "Alarm", CL.underyou:format(args.spellName))
+		if self:Me(args.destGUID) then
+			local t = GetTime()
+			if t-prev > 2 then
+				prev = t
+				self:Message(args.spellId, "Personal", "Alarm", CL.underyou:format(args.spellName))
+			end
 		end
 	end
 end
 
 function mod:UNIT_HEALTH_FREQUENT(unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
-	if hp > 51 and hp < 55 then
+	if hp > 51 and hp < 56 then
 		self:Message("stages", "Positive", nil, CL.soon:format(CL.stage:format(2)), false)
 		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unit)
 	end
@@ -139,25 +140,16 @@ function mod:HarpoonedOver(args)
 	end
 end
 
---function mod:FlameBreath(args)
---	self:Message(args.spellId, "Attention", "Warning")
---	if stage == 2 then
---		self:CDBar(args.spellId, 21)
---	end
---end
-
-function mod:UNIT_SPELLCAST_START(_, _, _, _, spellId)
-	if spellId == 64021 then -- Flame Breath
-		self:Message(spellId, "Attention", "Warning")
-		if stage == 2 then
-			self:CDBar(spellId, 21)
-		end
+function mod:FlameBreath(args)
+	self:Message(args.spellId, "Attention", "Warning")
+	if stage == 2 then
+		self:CDBar(args.spellId, 21)
 	end
 end
 
 function mod:FuseArmor(args)
 	if self:Me(args.destGUID) or (self:Tank() and self:Tank(args.destName)) then
 		local amount = args.amount or 1
-		self:StackMessage(args.spellId, args.destName, amount, "Urgent", "Alert") -- Warning sound for non-tanks, 3+ stacks warning for tanks
+		self:StackMessage(args.spellId, args.destName, amount, "Urgent", arms.amount > 1 and "Info")
 	end
 end

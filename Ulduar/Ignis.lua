@@ -29,7 +29,6 @@ function mod:GetOptions()
 		63472, -- Flame Jets
 		63474, -- Scorch
 		62717, -- Slag Pot
-		"infobox",
 		"berserk"
 	}
 end
@@ -37,7 +36,7 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "ActivateConstruct", 62488)
 	self:Log("SPELL_CAST_SUCCESS", "ScorchCast", 63474)
-	self:Log("SPELL_AURA_APPLIED", "SlagPot", 62717, 63477) -- XXX check which is correct
+	self:Log("SPELL_AURA_APPLIED", "SlagPot", 62717)
 	self:Log("SPELL_CAST_START", "FlameJets", 63472)
 	self:Log("SPELL_AURA_APPLIED", "Brittle", 62382)
 
@@ -57,8 +56,8 @@ end
 --
 
 function mod:ActivateConstruct(args)
-	self:Message(args.spellId, "Important", nil, CL.add_spawned, "INV_Misc_Statue_07")
-	self:Bar(args.spellId, 30.3, CL.next_add, "INV_Misc_Statue_07") -- Usually 30.3, sometimes 35/37
+	self:Message(args.spellId, "Important", self:Tank() and "Warning", CL.add_spawned, "INV_Misc_Statue_07")
+	self:CDBar(args.spellId, 30.3, CL.next_add, "INV_Misc_Statue_07") -- Usually 30.3, sometimes 35/37
 end
 
 function mod:ScorchCast(args)
@@ -67,8 +66,8 @@ function mod:ScorchCast(args)
 end
 
 function mod:SlagPot(args)
-	self:TargetMessage(62717, args.destName, "Important")
-	self:TargetBar(62717, 10, args.destName)
+	self:TargetMessage(args.spellId, args.destName, "Important", "Alert", nil, nil, self:Healer())
+	self:TargetBar(args.spellId, 10, args.destName)
 end
 
 function mod:FlameJets(args)
@@ -77,16 +76,18 @@ function mod:FlameJets(args)
 end
 
 function mod:Brittle(args)
-	self:Message(args.spellId, "Positive", nil, L.brittle_message)
+	self:Message(args.spellId, "Positive", "Info", L.brittle_message)
 end
 
 do
 	local prev = 0
 	function mod:ScorchDamage(args)
-		local t = GetTime()
-		if self:Me(args.destGUID) and t-prev > 1.5 then
-			prev = t
-			self:Message(63474, "Personal", "Alarm", CL.underyou:format(args.spellName))
+		if self:Me(args.destGUID) then
+			local t = GetTime()
+			if t-prev > 2 then
+				prev = t
+				self:Message(63474, "Personal", "Alarm", CL.underyou:format(args.spellName))
+			end
 		end
 	end
 end
