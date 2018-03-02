@@ -71,7 +71,6 @@ function mod:OnBossEnable()
 	self:Yell("Phase3", L["phase3_trigger"])
 
 	self:RegisterEvent("RAID_BOSS_WHISPER")
-	-- Since we don't have the actual emotes here we can't use :Emote
 	self:RegisterEvent("RAID_BOSS_EMOTE")
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")

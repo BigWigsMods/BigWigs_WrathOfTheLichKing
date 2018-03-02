@@ -74,7 +74,7 @@ function mod:OnEngage()
 	count = 0
 	stage = 1
 	self:Berserk(900)
-	self:Bar("harpoon", 50, L["harpoon_nextbar"]:format(1), "INV_Spear_06")
+	self:Bar("harpoon", 50, L.harpoon_nextbar:format(1), "INV_Spear_06")
 end
 
 --------------------------------------------------------------------------------
@@ -83,16 +83,16 @@ end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg == L.ground_trigger then -- Grounded stage begins
-		self:Message("stages", "Neutral", "Long", L["ground_message"], false)
+		self:Message("stages", "Neutral", "Long", L.ground_message, false)
 	end
 end
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
 	if msg == L.harpoon_trigger then -- Next harpoon ready
 		count = count + 1
-		self:Message("harpoon", "Attention", "Info", L["harpoon_message"]:format(count), "INV_Spear_06")
+		self:Message("harpoon", "Attention", "Info", L.harpoon_message:format(count), "INV_Spear_06")
 		if count < 4 then
-			self:Bar("harpoon", 18, L["harpoon_nextbar"]:format(count+1), "INV_Spear_06")
+			self:Bar("harpoon", 18, L.harpoon_nextbar:format(count+1), "INV_Spear_06")
 		end
 	end
 end
@@ -121,8 +121,8 @@ end
 function mod:WingBuffetCastEnd() -- Air stage begins again
 	count = 0
 	if stage == 1 then
-		self:Bar("harpoon", 55, L["harpoon_nextbar"]:format(1), "INV_Spear_06")
-		self:Message("stages", "Neutral", "Long", L["air_message"], false)
+		self:Bar("harpoon", 55, L.harpoon_nextbar:format(1), "INV_Spear_06")
+		self:Message("stages", "Neutral", "Long", L.air_message, false)
 	end
 end
 
