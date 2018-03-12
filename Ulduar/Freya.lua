@@ -119,9 +119,7 @@ do
 
 	function mod:Tremor(args)
 		local caster = isCaster()
-		local color = caster and "Personal" or "Attention"
-		local sound = caster and "Long" or nil
-		self:Message(62437, color, sound)
+		self:Message(62437, caster and "Personal" or "Attention", caster and "Long")
 		if caster then self:Flash(62437) end
 		self:Bar(62437, 2)
 		if stage == 1 then

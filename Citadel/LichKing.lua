@@ -141,7 +141,7 @@ function mod:PlagueTick(args)
 		local damageLeft = (3 - plagueTicks[args.destGUID]) * args.extraSpellId
 		local hp = UnitHealth(unitId)
 		if hp > damageLeft then
-			self:Message(70372, L["frenzy_survive_message"]:format(args.destName), "Attention", 72143)
+			self:Message(70372, "Attention", nil, L["frenzy_survive_message"]:format(args.destName), 72143)
 		end
 	else
 		local hp, max = UnitHealth(unitId), UnitHealthMax(unitId)

@@ -70,7 +70,7 @@ function mod:OnEngage(diff)
 	self:DelayedMessage(29204, 300, "Important", L["doomtimerwarnnow"])
 
 	self:ScheduleTimer(swapTime, 300)
-	self:Message(29204, L["startwarn"], "Attention", nil, false)
+	self:Message(29204, "Attention", nil, L["startwarn"], false)
 	self:Bar(29204, 120, L["doombar"]:format(doomCount))
 	self:DelayedMessage(29204, 115, "Urgent", L["doomwarn5sec"]:format(doomCount))
 
