@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("The Iron Council", 529, 1641)
+local mod, CL = BigWigs:NewBoss("The Iron Council", 603, 1641)
 if not mod then return end
 mod:RegisterEnableMob(32867, 32927, 32857) -- Steelbreaker, Runemaster Molgeim, Stormcaller Brundir
 mod.engageId = 1140

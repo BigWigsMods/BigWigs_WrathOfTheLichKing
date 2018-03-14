@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Deathbound Ward", 604)
+local mod = BigWigs:NewBoss("Deathbound Ward", 631)
 if not mod then return end
 mod:RegisterEnableMob(37007)
 mod.toggleOptions = {{71022, "FLASH"}}

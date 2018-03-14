@@ -2,7 +2,7 @@
 -- Locals
 --
 
-local mod = BigWigs:NewBoss("Onyxia", 718, 1651)
+local mod = BigWigs:NewBoss("Onyxia", 249, 1651)
 if not mod then return end
 mod:RegisterEnableMob(10184)
 mod.toggleOptions = {"phase", {17086, "FLASH"}, 18431, 18435}

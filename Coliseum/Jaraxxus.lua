@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Lord Jaraxxus", 543, 1619)
+local mod = BigWigs:NewBoss("Lord Jaraxxus", 649, 1619)
 if not mod then return end
 mod:RegisterEnableMob(34780)
 --mod.engageId = 1087 -- Can fire repeatedly during a wipe

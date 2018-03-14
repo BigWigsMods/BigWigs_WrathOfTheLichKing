@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("XT-002 Deconstructor", 529, 1640)
+local mod, CL = BigWigs:NewBoss("XT-002 Deconstructor", 603, 1640)
 if not mod then return end
 mod:RegisterEnableMob(33293)
 mod.engageId = 1142

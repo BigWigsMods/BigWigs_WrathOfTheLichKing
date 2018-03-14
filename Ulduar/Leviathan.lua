@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Flame Leviathan", 529, 1637)
+local mod = BigWigs:NewBoss("Flame Leviathan", 603, 1637)
 if not mod then return end
 mod:RegisterEnableMob(33113)
 mod.engageId = 1132

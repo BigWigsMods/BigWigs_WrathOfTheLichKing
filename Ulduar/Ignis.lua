@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Ignis the Furnace Master", 529, 1638)
+local mod, CL = BigWigs:NewBoss("Ignis the Furnace Master", 603, 1638)
 if not mod then return end
 mod:RegisterEnableMob(33118)
 mod.engageId = 1136

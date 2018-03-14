@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("The Beasts of Northrend", 543, 1618)
+local mod, CL = BigWigs:NewBoss("The Beasts of Northrend", 649, 1618)
 if not mod then return end
 mod:RegisterEnableMob(
 	34796, -- Gormok

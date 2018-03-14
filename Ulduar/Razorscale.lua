@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Razorscale", 529, 1639)
+local mod, CL = BigWigs:NewBoss("Razorscale", 603, 1639)
 if not mod then return end
 mod:RegisterEnableMob(33816, 33210, 33287, 33259, 33186) -- Expedition Defender, Expidition Commander, Expedition Engineer, Expedition Trapper, Razorscale
 --mod.engageId = 1139 -- ENCOUNTER_END wasn't firing (for wipes)

@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
-local mod, CL = BigWigs:NewBoss("Faction Champions", 543, 1621)
+local mod, CL = BigWigs:NewBoss("Faction Champions", 649, 1621)
 if not mod then return end
 mod:RegisterEnableMob(
 	-- Alliance NPCs
