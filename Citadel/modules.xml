@@ -17,5 +17,6 @@
 <Script file="Sindragosa.lua"/>
 <Script file="Valithria.lua"/>
 
-</Ui>
+<Include file="Options\options.xml"/>
 
+</Ui>

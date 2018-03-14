@@ -16,5 +16,6 @@
 <Script file="Vezax.lua"/>
 <Script file="YoggSaron.lua"/>
 
-</Ui>
+<Include file="Options\options.xml"/>
 
+</Ui>

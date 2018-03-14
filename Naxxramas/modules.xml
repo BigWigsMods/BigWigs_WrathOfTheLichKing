@@ -17,5 +17,6 @@
 <Script file="Sapphiron.lua"/>
 <Script file="Thaddius.lua"/>
 
-</Ui>
+<Include file="Options\options.xml"/>
 
+</Ui>
