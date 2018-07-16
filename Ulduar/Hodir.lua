@@ -101,7 +101,7 @@ end
 do
 	local cold = mod:SpellName(62039)
 	function mod:BitingCold(unit)
-		local _, _, _, stack = UnitDebuff(unit, cold)
+		local _, stack = self:UnitDebuff(unit, cold)
 		if stack and stack ~= lastCold then
 			if stack > 1 then
 				self:Message(62039, "Personal", "Alert", CL.you:format(CL.count:format(cold, stack)))

@@ -76,7 +76,7 @@ end
 
 function mod:DarkShield(args)
 	self:Bar("shield", 45, L["vortex_or_shield_cd"], 39089)
-	if UnitDebuff("player", essenceDark) then
+	if self:UnitDebuff("player", essenceDark) then
 		self:Message("shield", "Important", "Alert", args.spellId)
 	else
 		self:Message("shield", "Urgent", nil, args.spellId)
@@ -85,7 +85,7 @@ end
 
 function mod:LightShield(args)
 	self:Bar("shield", 45, L["vortex_or_shield_cd"], 39089)
-	if UnitDebuff("player", essenceLight) then
+	if self:UnitDebuff("player", essenceLight) then
 		self:Message("shield", "Important", "Alert", args.spellId)
 	else
 		self:Message("shield", "Urgent", nil, args.spellId)
@@ -94,7 +94,7 @@ end
 
 function mod:LightVortex(args)
 	self:Bar("vortex", 45, L["vortex_or_shield_cd"], 39089)
-	if UnitDebuff("player", essenceLight) then
+	if self:UnitDebuff("player", essenceLight) then
 		self:Message("vortex", "Positive", nil, args.spellId)
 	else
 		self:Message("vortex", "Personal", "Alarm", args.spellId)
@@ -104,7 +104,7 @@ end
 
 function mod:DarkVortex(args)
 	self:Bar("vortex", 45, L["vortex_or_shield_cd"], 39089)
-	if UnitDebuff("player", essenceDark) then
+	if self:UnitDebuff("player", essenceDark) then
 		self:Message("vortex", "Positive", nil, args.spellId)
 	else
 		self:Message("vortex", "Personal", "Alarm", args.spellId)

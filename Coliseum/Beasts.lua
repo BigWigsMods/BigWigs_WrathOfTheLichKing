@@ -177,10 +177,9 @@ end
 --
 
 do
-	local UnitDebuff = UnitDebuff
 	local snobolled = GetSpellInfo(66406)
 	function mod:UNIT_AURA(_, unit)
-		local debuffed = UnitDebuff(unit, snobolled)
+		local debuffed = self:UnitDebuff(unit, snobolled)
 		local player = self:UnitName(unit)
 		if snobolledWarned[player] and not debuffed then
 			snobolledWarned[player] = nil

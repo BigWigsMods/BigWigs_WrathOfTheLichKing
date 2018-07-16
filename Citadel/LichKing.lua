@@ -204,7 +204,7 @@ do
 	local plague = GetSpellInfo(70337)
 	local function scanRaid()
 		for unit in mod:IterateGroup() do
-			local debuffed, _, _, _, _, _, expire = UnitDebuff(unit, plague)
+			local debuffed, _, _, expire = mod:UnitDebuff(unit, plague)
 			if debuffed and (expire - GetTime()) > 13 then
 				if UnitIsUnit(unit, "player") then
 					mod:Flash(70337)

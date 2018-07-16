@@ -86,12 +86,14 @@ end
 function mod:UNIT_AURA(_, unit)
 	if not shiftTime or (GetTime() - shiftTime) < 3 then return end
 
-	local newCharge = nil
+	local newCharge = 0
 	for i = 1, 10 do
-		local name, _, icon, stack = UnitDebuff("player", i)
+		local name, icon, stack = UnitDebuff("player", i)
 		-- If stack > 1 we need to wait for another UNIT_AURA event.
 		-- UnitDebuff returns 0 for debuffs that don't stack.
-		if icon == "Interface\\Icons\\Spell_ChargeNegative" or icon == "Interface\\Icons\\Spell_ChargePositive" then
+		-- 135768 = Interface\\Icons\\Spell_ChargeNegative
+		-- 135769 = Interface\\Icons\\Spell_ChargePositive
+		if icon == 135768 or icon == 135769 then
 			if stack > 1 then return end
 			newCharge = icon
 			-- We keep scanning even though we found one, because
@@ -102,7 +104,7 @@ function mod:UNIT_AURA(_, unit)
 	end
 	if newCharge then
 		if not lastCharge then
-			local text = newCharge == "Interface\\Icons\\Spell_ChargePositive" and L["polarity_first_positive"] or L["polarity_first_negative"]
+			local text = newCharge == 135769 and L["polarity_first_positive"] or L["polarity_first_negative"]
 			self:Message(28089, "Personal", "Alert", text, newCharge)
 			self:Flash(28089)
 		else
