@@ -1,17 +1,17 @@
 
 BigWigs:AddSounds("The Beasts of Northrend", {
-	["charge"] = "Alarm",
-	[66883] = "Alarm",
-	[66823] = "Info",
-	[66869] = "Info",
-	[68335] = "Long",
 	[66317] = "Alarm",
 	[66331] = "Info",
+	[66823] = "Info",
+	[66869] = "Info",
+	[66883] = "Alarm",
+	[68335] = "Long",
+	["charge"] = "Alarm",
 })
 
 BigWigs:AddSounds("Lord Jaraxxus", {
-	[66237] = "Info",
 	[66197] = "Alert",
+	[66237] = "Info",
 	["adds"] = "Alarm",
 })
 

@@ -12,8 +12,8 @@ BigWigs:AddSounds("Grobbulus", {
 })
 
 BigWigs:AddSounds("Kel'Thuzad", {
-	[27819] = "Alert",
 	[27808] = "Alert",
+	[27819] = "Alert",
 	[28410] = "Alert",
 })
 

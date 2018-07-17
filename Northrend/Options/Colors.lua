@@ -1,30 +1,30 @@
 
 BigWigs:AddColors("Archavon the Stone Watcher", {
 	[58663] = {"Attention","Positive"},
-	[58965] = {"Personal","Important"},
+	[58965] = {"Important","Personal"},
 	["charge"] = {"Attention","Personal"},
 })
 
 BigWigs:AddColors("Malygos", {
 	[57429] = "Urgent",
-	["vortex"] = "Attention",
+	["breath"] = {"Attention","Important"},
 	["phase"] = "Attention",
 	["sparkbuff"] = "Important",
-	["breath"] = {"Important","Attention"},
-	["surge"] = "Personal",
 	["sparks"] = {"Attention","Important"},
+	["surge"] = "Personal",
+	["vortex"] = "Attention",
 })
 
 BigWigs:AddColors("Sartharion", {
-	["twilight"] = {"Attention","Urgent","Personal"},
 	["drakes"] = "Attention",
 	["tsunami"] = {"Attention","Important"},
+	["twilight"] = {"Attention","Personal","Urgent"},
 })
 
 BigWigs:AddColors("Halion", {
 	[74562] = "Personal",
+	[74648] = {"Important","Personal","Urgent"},
 	[74769] = "Important",
-	[74648] = {"Personal","Urgent","Important"},
 	[74792] = "Personal",
 })
 
@@ -34,21 +34,21 @@ BigWigs:AddColors("Emalon the Storm Watcher", {
 })
 
 BigWigs:AddColors("Koralon the Flame Watcher", {
+	[66665] = {"Attention","Positive"},
 	[66684] = "Personal",
 	[66725] = "Attention",
-	[66665] = {"Positive","Attention"},
 })
 
 BigWigs:AddColors("Toravon the Ice Watcher", {
+	[72004] = {"Personal","Urgent"},
+	[72034] = {"Attention","Positive"},
 	[72090] = "Personal",
 	[72091] = "Important",
-	[72004] = {"Urgent","Personal"},
-	[72034] = {"Positive","Attention"},
 })
 
 BigWigs:AddColors("Onyxia", {
+	[17086] = "Urgent",
 	[18431] = "Attention",
 	[18435] = "Important",
-	[17086] = "Urgent",
 	["phase"] = "Positive",
 })
