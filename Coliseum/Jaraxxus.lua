@@ -143,7 +143,7 @@ end
 
 function mod:MistressKissInterrupted(args)
 	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "Personal", nil, L["kiss_interrupted"])
+		self:Message(66334, "Personal", nil, L["kiss_interrupted"])
 	end
 end
 
