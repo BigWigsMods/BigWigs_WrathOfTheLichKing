@@ -37,8 +37,7 @@ L = mod:GetLocale()
 --
 
 function mod:VerifyEnable()
-	BigWigsLoader.SetMapToCurrentZone()
-	return (GetTime() - prevWin) > 300 and BigWigsLoader.GetCurrentMapDungeonLevel() == 2
+	return (GetTime() - prevWin) > 300 and BigWigsLoader.GetBestMapForUnit("player") == 188 -- Floor 3, Deathbringer's Rise
 end
 
 function mod:OnBossEnable()

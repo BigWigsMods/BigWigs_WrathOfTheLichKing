@@ -134,8 +134,7 @@ function mod:OnEngage()
 end
 
 function mod:VerifyEnable()
-	BigWigsLoader.SetMapToCurrentZone()
-	return BigWigsLoader.GetCurrentMapDungeonLevel() == 4 -- Floor 4, The Prison of Yogg-Saron
+	return BigWigsLoader.GetBestMapForUnit("player") == 150 -- Floor 4, The Prison of Yogg-Saron
 end
 
 --------------------------------------------------------------------------------
