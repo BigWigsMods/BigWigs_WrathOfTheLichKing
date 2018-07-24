@@ -47,7 +47,7 @@ end
 -- Event Handlers
 --
 
-function mod:UNIT_TARGETABLE_CHANGED(unit)
+function mod:UNIT_TARGETABLE_CHANGED(_, unit)
 	if UnitCanAttack("player", unit) then -- Engage
 		self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, unit)
 		self:Bar(64443, 98) -- Big Bang
@@ -57,11 +57,11 @@ function mod:UNIT_TARGETABLE_CHANGED(unit)
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unit)
+function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if hp < 21 then
 		self:Message("stages", "Positive", nil, CL["soon"]:format(CL["phase"]:format(2)), false)
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unit)
+		self:UnregisterUnitEvent(event, unit)
 	end
 end
 

@@ -116,7 +116,7 @@ do
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 	if spellId == 72299 then
 		self:Message(72295, "Important", nil, L["ball_message"])
 	end

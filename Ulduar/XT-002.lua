@@ -120,7 +120,7 @@ function mod:SearingLightRemoved(args)
 	self:PrimaryIcon(args.spellId)
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unit)
+function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if not exposed1 and hp > 86 and hp < 90 then
 		exposed1 = true
@@ -130,7 +130,7 @@ function mod:UNIT_HEALTH_FREQUENT(unit)
 		self:Message(63849, "Attention", nil, CL.soon:format(self:SpellName(63849)))
 	elseif not exposed3 and hp > 26 and hp < 28 then
 		exposed3 = true
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unit)
+		self:UnregisterUnitEvent(event, unit)
 		self:Message(63849, "Attention", nil, CL.soon:format(self:SpellName(63849)))
 	end
 end

@@ -100,7 +100,7 @@ end
 
 do
 	local cold = mod:SpellName(62039)
-	function mod:BitingCold(unit)
+	function mod:BitingCold(_, unit)
 		local _, stack = self:UnitDebuff(unit, cold)
 		if stack and stack ~= lastCold then
 			if stack > 1 then

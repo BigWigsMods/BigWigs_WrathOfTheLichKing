@@ -133,12 +133,12 @@ do
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(msg)
-	if UnitName(msg) == mod.displayName then
-		local health = UnitHealth(msg) / UnitHealthMax(msg) * 100
+function mod:UNIT_HEALTH_FREQUENT(event, unit)
+	if UnitName(unit) == mod.displayName then
+		local health = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if health < 46 then
 			self:Message("phase", "Attention", nil, L["phase3_soon_warning"], false)
-			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
+			self:UnregisterUnitEvent(event, "target", "focus")
 		end
 	end
 end

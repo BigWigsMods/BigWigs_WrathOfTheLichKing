@@ -96,7 +96,7 @@ function mod:ArmsDie(args)
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 	if spellId == 63983 then -- Arm Sweep
 		self:Message(63983, "Attention")
 		self:Bar(63983, 21)

@@ -58,7 +58,6 @@ L = mod:GetLocale()
 -- Initialization
 --
 
-
 function mod:OnBossEnable()
 	-- Phase 1
 	self:Log("SPELL_CAST_START", "Infest", 70541)

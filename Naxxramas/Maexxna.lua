@@ -79,12 +79,12 @@ function mod:Frenzy(args)
 	self:Message(54123, "Attention", "Alarm", L["enragewarn"], args.spellId)
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unit)
+function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	if self:MobId(UnitGUID(unit)) == 15952 then
 		local health = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if health < 36 then
 			self:Message(54123, "Important", nil, L["enragesoonwarn"], false)
-			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
+			self:UnregisterUnitEvent(event, "target", "focus")
 		end
 	end
 end

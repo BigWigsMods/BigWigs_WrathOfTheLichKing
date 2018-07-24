@@ -140,7 +140,7 @@ function mod:Plague(args)
 	self:Bar(72451, 10)
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unit)
+function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	if self:MobId(UnitGUID(unit)) == 36678 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 84 and not p2 then
@@ -148,7 +148,7 @@ function mod:UNIT_HEALTH_FREQUENT(unit)
 			p2 = true
 		elseif hp < 38 then
 			self:Message("phase", "Positive", nil, L["phase_warning"]:format(3), false)
-			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
+			self:UnregisterUnitEvent(event, "target", "focus")
 		end
 	end
 end
