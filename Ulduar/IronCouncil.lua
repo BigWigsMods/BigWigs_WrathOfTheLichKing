@@ -84,7 +84,7 @@ end
 --
 
 function mod:FusionPunch(args)
-	self:Message(61903, "Urgent")
+	self:Message(61903, "orange")
 end
 
 function mod:OverwhelmingPower(args)
@@ -92,7 +92,7 @@ function mod:OverwhelmingPower(args)
 		self:OpenProximity(64637, 15)
 		self:Flash(64637)
 	end
-	self:TargetMessage(64637, args.destName, "Personal", "Alert")
+	self:TargetMessage(64637, args.destName, "blue", "Alert")
 	self:TargetBar(64637, 35, args.destName)
 	self:PrimaryIcon(64637, args.destName)
 end
@@ -106,13 +106,13 @@ end
 
 function mod:ShieldOfRunes(args)
 	if self:MobId(args.destGUID) == 32927 then
-		self:Message(62274, "Attention")
+		self:Message(62274, "yellow")
 		self:Bar(62274, 30)
 	end
 end
 
 function mod:RuneOfPower(args)
-	self:Message(61974, "Positive")
+	self:Message(61974, "green")
 	self:Bar(61974, 30)
 end
 
@@ -122,22 +122,22 @@ end
 
 function mod:RuneOfDeath(args)
 	if self:Me(args.destGUID) then
-		self:Message(62269, "Personal", "Alarm", CL.you:format(self:SpellName(62269)))
+		self:Message(62269, "blue", "Alarm", CL.you:format(self:SpellName(62269)))
 		self:Flash(62269)
 	end
 end
 
 function mod:RuneOfSummoning(args)
-	self:Message(args.spellId, "Attention", nil, L.summoning_message)
+	self:Message(args.spellId, "yellow", nil, L.summoning_message)
 end
 
 function mod:Overload(args)
-	self:Message(61869, "Attention", "Long", CL.custom_sec:format(args.spellName, 6))
+	self:Message(61869, "yellow", "Long", CL.custom_sec:format(args.spellName, 6))
 	self:Bar(61869, 6)
 end
 
 function mod:LightningWhirl(args)
-	self:Message(63483, "Attention")
+	self:Message(63483, "yellow")
 end
 
 do
@@ -148,10 +148,10 @@ do
 		if target ~= previous then
 			if target then
 				if UnitIsUnit(target, "player") then
-					mod:Message(61887, "Personal", "Alarm", L.chased_you)
+					mod:Message(61887, "blue", "Alarm", L.chased_you)
 					mod:Flash(61887)
 				else
-					mod:Message(61887, "Attention", nil, L.chased_other:format(target))
+					mod:Message(61887, "yellow", nil, L.chased_other:format(target))
 				end
 				mod:PrimaryIcon(61887, target)
 				previous = target
@@ -165,7 +165,7 @@ do
 	function mod:LightningTendrils(args)
 		local t = GetTime()
 		if not last or (t > last + 2) then
-			self:Message(61887, "Attention")
+			self:Message(61887, "yellow")
 			self:Bar(61887, 25)
 			if not tendrilscanner then
 				tendrilscanner = self:ScheduleRepeatingTimer(targetCheck, 0.2)
@@ -183,7 +183,7 @@ end
 function mod:Deaths(args)
 	deaths = deaths + 1
 	if deaths < 3 then
-		self:Message("stages", "Positive", nil, CL.mob_killed:format(args.destName, deaths, 3), false)
+		self:Message("stages", "green", nil, CL.mob_killed:format(args.destName, deaths, 3), false)
 	end
 end
 

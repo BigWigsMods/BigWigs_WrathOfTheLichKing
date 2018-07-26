@@ -42,9 +42,9 @@ end
 
 function mod:OnEngage(diff)
 	self:Berserk(diff == 3 and 480 or 420, true)
-	self:Message(54426, "Attention", nil, L["startwarn"], false)
+	self:Message(54426, "yellow", nil, L["startwarn"], false)
 	self:CDBar(54426, 105, L["decimatebartext"])
-	self:DelayedMessage(54426, 100, "Urgent", L["decimatesoonwarn"])
+	self:DelayedMessage(54426, 100, "orange", L["decimatesoonwarn"])
 end
 
 --------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ end
 --
 
 function mod:Frenzy(args)
-	self:Message(28371, "Important")
+	self:Message(28371, "red")
 end
 
 do
@@ -60,9 +60,9 @@ do
 	function mod:Decimate(args)
 		local t = GetTime()
 		if t-5 > last then
-			self:Message(54426, "Attention", "Alert")
+			self:Message(54426, "yellow", "Alert")
 			self:CDBar(54426, 105, L["decimatebartext"])
-			self:DelayedMessage(54426, 100, "Urgent", L["decimatesoonwarn"])
+			self:DelayedMessage(54426, 100, "orange", L["decimatesoonwarn"])
 			last = t
 		end
 	end

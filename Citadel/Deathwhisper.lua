@@ -63,7 +63,7 @@ function mod:OnBossEnable()
 end
 
 local function adds(time)
-	mod:DelayedMessage("adds", time-5, "Attention", L["adds_warning"])
+	mod:DelayedMessage("adds", time-5, "yellow", L["adds_warning"])
 	mod:Bar("adds", time, L["adds_bar"], 70768)
 	handle_Adds = mod:ScheduleTimer(adds, time, time)
 end
@@ -83,7 +83,7 @@ end
 
 function mod:DnD(args)
 	if self:Me(args.destGUID) then
-		self:Message(71001, "Personal", "Alarm", L["dnd_message"], 71001)
+		self:Message(71001, "blue", "Alarm", L["dnd_message"], 71001)
 		self:Flash(71001)
 	end
 end
@@ -94,14 +94,14 @@ function mod:Barrier(args)
 		self:StopBar(L["adds_bar"])
 		self:CancelDelayedMessage(L["adds_warning"])
 	end
-	self:Message(70842, "Positive", "Info", L["phase2_message"], args.spellId)
+	self:Message(70842, "green", "Info", L["phase2_message"], args.spellId)
 	self:Bar(71426, 30, L["spirit_bar"])
 end
 
 do
 	local dmTargets, scheduled = mod:NewTargetList(), nil
 	local function dmWarn()
-		mod:TargetMessage(71289, dmTargets, "Important", "Alert")
+		mod:TargetMessage(71289, dmTargets, "red", "Alert")
 		scheduled = nil
 	end
 	function mod:DominateMind(args)
@@ -115,13 +115,13 @@ end
 
 function mod:Touch(args)
 	if (args.amount or 1) > 1 then
-		self:StackMessage(71204, args.destName, args.amount, "Urgent")
+		self:StackMessage(71204, args.destName, args.amount, "orange")
 	end
 	self:Bar(71204, 7, L["touch_bar"], 71204)
 end
 
 function mod:Deformed()
-	self:Message("adds", "Urgent", nil, L["deformed_fanatic"], 70900)
+	self:Message("adds", "orange", nil, L["deformed_fanatic"], 70900)
 end
 
 do
@@ -130,7 +130,7 @@ do
 		local time = GetTime()
 		if (time - t) > 5 then
 			t = time
-			self:Message(71426, "Attention", nil, L["spirit_message"])
+			self:Message(71426, "yellow", nil, L["spirit_message"])
 			self:Bar(71426, 13, L["spirit_bar"])
 		end
 	end

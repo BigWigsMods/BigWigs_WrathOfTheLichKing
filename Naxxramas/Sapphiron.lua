@@ -66,34 +66,34 @@ function mod:Airphase()
 	self:CancelDelayedMessage(L["lifedrain_warn1"])
 	self:StopBar(L["lifedrain_bar"])
 	--43810 Frost Wyrm, looks like a dragon breathing 'deep breath' :)
-	self:Message(28524, "Attention", nil, L["deepbreath_incoming_message"])
+	self:Message(28524, "yellow", nil, L["deepbreath_incoming_message"])
 	self:Bar(28524, 14, L["deepbreath_incoming_bar"], 43810)
-	self:DelayedMessage(28524, 9, "Attention", L["deepbreath_incoming_soon_message"])
+	self:DelayedMessage(28524, 9, "yellow", L["deepbreath_incoming_soon_message"])
 end
 
 function mod:Deepbreath()
-	self:Message(28524, "Attention", nil, L["deepbreath_warning"])
+	self:Message(28524, "yellow", nil, L["deepbreath_warning"])
 	self:Bar(28524, 10, L["deepbreath_bar"])
 end
 
 function mod:Breath(args)
 	breath = breath + 1
 	if breath == 2 then
-		self:Message(28524, "Important")
+		self:Message(28524, "red")
 	end
 end
 
 function mod:Drain(args)
-	self:Message(28542, "Urgent", nil, L["lifedrain_message"])
+	self:Message(28542, "orange", nil, L["lifedrain_message"])
 	self:CDBar(28542, 23, L["lifedrain_bar"])
-	self:DelayedMessage(28542, 18, "Important", L["lifedrain_warn1"])
+	self:DelayedMessage(28542, 18, "red", L["lifedrain_warn1"])
 end
 
 function mod:Icebolt(args)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId, L["icebolt_say"], true)
 	else
-		self:TargetMessage(args.spellId, args.destName, "Attention")
+		self:TargetMessage(args.spellId, args.destName, "yellow")
 	end
 	self:PrimaryIcon(args.spellId, args.destName)
 end

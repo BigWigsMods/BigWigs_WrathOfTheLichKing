@@ -37,7 +37,7 @@ end
 
 function mod:OnEngage()
 	self:Bar(55543, 15) -- Disrupting Shout
-	self:DelayedMessage(55543, 12, "Attention", L["shout_warning"])
+	self:DelayedMessage(55543, 12, "yellow", L["shout_warning"])
 end
 
 --------------------------------------------------------------------------------
@@ -45,24 +45,24 @@ end
 --
 
 function mod:Shout(args)
-	self:Message(55543, "Important")
+	self:Message(55543, "red")
 	self:Bar(55543, 15)
-	self:DelayedMessage(55543, 12, "Attention", L["shout_warning"])
+	self:DelayedMessage(55543, 12, "yellow", L["shout_warning"])
 end
 
 function mod:ShieldWall(args)
-	self:Message(args.spellId, "Positive")
+	self:Message(args.spellId, "green")
 	self:Bar(args.spellId, 20)
-	self:DelayedMessage(args.spellId, 15, "Attention", L["taunt_warning"])
+	self:DelayedMessage(args.spellId, 15, "yellow", L["taunt_warning"])
 end
 
 function mod:Taunt(args)
-	self:Message(args.spellId, "Positive")
+	self:Message(args.spellId, "green")
 	self:Bar(args.spellId, 20)
-	self:DelayedMessage(args.spellId, 15, "Attention", L["shieldwall_warning"])
+	self:DelayedMessage(args.spellId, 15, "yellow", L["shieldwall_warning"])
 end
 
 function mod:Knife(args)
-	self:TargetMessage(args.spellId, args.destName, "Important")
+	self:TargetMessage(args.spellId, args.destName, "red")
 end
 

@@ -59,8 +59,8 @@ end
 
 function mod:OnEngage()
 	if not started then
-		self:Message(28798, "Attention", nil, L["startwarn"], false)
-		self:DelayedMessage(28798, 45, "Important", L["enragewarn2"])
+		self:Message(28798, "yellow", nil, L["startwarn"], false)
+		self:DelayedMessage(28798, 45, "red", L["enragewarn2"])
 		self:Bar(28798, 60)
 		started = true --If I remember right, we need this as she sometimes uses an engage trigger mid-fight
 		frenzied = nil
@@ -76,31 +76,31 @@ function mod:Silence(args)
 
 	if not frenzied then
 		-- preemptive, 30s silence
-		self:Message(28732, "Positive", nil, L["silencewarn"])
+		self:Message(28732, "green", nil, L["silencewarn"])
 		self:Bar(28732, 30, L["silencebar"])
-		self:DelayedMessage(28732, 25, "Urgent", L["silencewarn5sec"])
+		self:DelayedMessage(28732, 25, "orange", L["silencewarn5sec"])
 	else
 		-- Reactive enrage removed
-		self:Message(28798, "Positive", nil, L["enrageremovewarn"])
-		self:DelayedMessage(28798, 45, "Important", L["enragewarn2"])
+		self:Message(28798, "green", nil, L["enrageremovewarn"])
+		self:DelayedMessage(28798, 45, "red", L["enragewarn2"])
 		self:Bar(28798, 60)
 
 		self:Bar(28732, 30, L["silencebar"])
-		self:DelayedMessage(28732, 25, "Urgent", L["silencewarn5sec"])
+		self:DelayedMessage(28732, 25, "orange", L["silencewarn5sec"])
 		frenzied = nil
 	end
 end
 
 function mod:Rain(args)
 	if self:Me(args.destGUID) then
-		self:Message(28794, "Personal", "Alarm", L["rain_message"], 54099)
+		self:Message(28794, "blue", "Alarm", L["rain_message"], 54099)
 		self:Flash(28794)
 	end
 end
 
 function mod:Frenzy(args)
 	if self:MobId(args.destGUID) == 15953 then
-		self:Message(28798, "Urgent", nil, L["enragewarn"])
+		self:Message(28798, "orange", nil, L["enragewarn"])
 		self:StopBar(args.spellName)
 		self:CancelDelayedMessage(L["enragewarn2"])
 		frenzied = true

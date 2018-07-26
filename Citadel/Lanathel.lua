@@ -77,7 +77,7 @@ end
 do
 	local scheduled = nil
 	local function pact()
-		mod:TargetMessage(71340, pactTargets, "Important", nil, L["pact_message"])
+		mod:TargetMessage(71340, pactTargets, "red", nil, L["pact_message"])
 		scheduled = nil
 	end
 	function mod:Pact(args)
@@ -96,24 +96,24 @@ function mod:Shadows(msg, _, _, _, player)
 	if UnitIsUnit(player, "player") then
 		self:Flash(71265)
 	end
-	self:TargetMessage(71265, player, "Attention", nil, L["shadow_message"])
+	self:TargetMessage(71265, player, "yellow", nil, L["shadow_message"])
 	self:Bar(71265, 30, L["shadow_bar"])
 end
 
 function mod:Feed(args)
 	if self:Me(args.destGUID) then
-		self:Message(70877, "Urgent", "Alert", L["feed_message"])
+		self:Message(70877, "orange", "Alert", L["feed_message"])
 		self:Bar(70877, 15, L["feed_message"])
 	end
 end
 
 function mod:AirPhase(args)
-	self:Message(71772, "Important", "Alarm", L["phase_message"])
+	self:Message(71772, "red", "Alarm", L["phase_message"])
 	self:Bar(71772, 12, L["phase1_bar"])
 	self:Bar(71772, airPhaseTimers[self:Difficulty()][2], L["phase2_bar"])
 end
 
 function mod:Slash(args)
-	self:TargetMessage(71623, args.destName, "Attention")
+	self:TargetMessage(71623, args.destName, "yellow")
 end
 

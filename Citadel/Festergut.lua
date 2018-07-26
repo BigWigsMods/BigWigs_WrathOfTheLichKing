@@ -65,7 +65,7 @@ end
 do
 	local sporeTargets, scheduled = mod:NewTargetList(), nil
 	local function sporeWarn()
-		mod:TargetMessage(69279, sporeTargets, "Urgent", "Alert")
+		mod:TargetMessage(69279, sporeTargets, "orange", "Alert")
 		scheduled = nil
 	end
 	function mod:Spores(args)
@@ -82,10 +82,10 @@ do
 end
 
 function mod:InhaleCD(args)
-	self:Message(69165, "Attention", nil, CL["count"]:format(args.spellName, count))
+	self:Message(69165, "yellow", nil, CL["count"]:format(args.spellName, count))
 	count = count + 1
 	if count == 4 then
-		self:DelayedMessage(69195, 28.5, "Attention", L["blight_warning"])
+		self:DelayedMessage(69195, 28.5, "yellow", L["blight_warning"])
 		self:Bar(69195, 33.5)
 	else
 		self:Bar(69165, 33.5, L["inhale_bar"]:format(count))
@@ -94,13 +94,13 @@ end
 
 function mod:Blight(args)
 	count = 1
-	self:Message(69195, "Attention")
+	self:Message(69195, "yellow")
 	self:Bar(69165, 33.5, L["inhale_bar"]:format(count))
 end
 
 function mod:Bloat(args)
 	if args.amount > 5 then
-		self:StackMessage(72219, args.destName, args.amount, "Positive")
+		self:StackMessage(72219, args.destName, args.amount, "green")
 		self:CDBar(72219, 10)
 	end
 end
@@ -111,13 +111,13 @@ do
 		local time = GetTime()
 		if (time - t) > 2 then
 			t = time
-			self:Message(69240, "Important")
+			self:Message(69240, "red")
 		end
 	end
 end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 	if spellId == 72299 then
-		self:Message(72295, "Important", nil, L["ball_message"])
+		self:Message(72295, "red", nil, L["ball_message"])
 	end
 end

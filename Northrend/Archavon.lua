@@ -39,7 +39,7 @@ end
 
 function mod:OnEngage()
 	self:CDBar(58663, 47) -- Stomp
-	self:DelayedMessage(58663, 42, "Attention", L["stomp_warning"])
+	self:DelayedMessage(58663, 42, "yellow", L["stomp_warning"])
 	self:Berserk(300)
 end
 
@@ -48,14 +48,14 @@ end
 --
 
 function mod:Stomp(args)
-	self:Message(58663, "Positive", nil, L["stomp_message"])
+	self:Message(58663, "green", nil, L["stomp_message"])
 	self:CDBar(58663, 47)
-	self:DelayedMessage(58663, 42, "Attention", L["stomp_warning"])
+	self:DelayedMessage(58663, 42, "yellow", L["stomp_warning"])
 end
 
 function mod:Cloud(args)
 	if self:Me(args.destGUID) then
-		self:Message(58965, "Personal", "Alarm", CL["you"]:format(args.spellName))
+		self:Message(58965, "blue", "Alarm", CL["you"]:format(args.spellName))
 		self:Flash(58965)
 	end
 end
@@ -68,7 +68,7 @@ do
 		if not bossId then return end
 		local target = mod:UnitName(bossId .. "target")
 		if target then
-			mod:TargetMessage(58965, target, "Important", nil, spellId)
+			mod:TargetMessage(58965, target, "red", nil, spellId)
 			mod:PrimaryIcon(58965, target)
 		end
 	end
@@ -81,7 +81,7 @@ end
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, _, unit, _, _, player)
 	if unit == self.displayName then
-		self:TargetMessage("charge", player, "Attention", nil, L["charge"], 11578)
+		self:TargetMessage("charge", player, "yellow", nil, L["charge"], 11578)
 	end
 end
 

@@ -56,27 +56,27 @@ end
 --
 
 function mod:ActivateConstruct(args)
-	self:Message(args.spellId, "Important", self:Tank() and "Warning", CL.add_spawned, "INV_Misc_Statue_07")
+	self:Message(args.spellId, "red", self:Tank() and "Warning", CL.add_spawned, "INV_Misc_Statue_07")
 	self:CDBar(args.spellId, 30.3, CL.next_add, "INV_Misc_Statue_07") -- Usually 30.3, sometimes 35/37
 end
 
 function mod:ScorchCast(args)
-	self:Message(args.spellId, "Attention")
+	self:Message(args.spellId, "yellow")
 	self:CDBar(args.spellId, 22)
 end
 
 function mod:SlagPot(args)
-	self:TargetMessage(args.spellId, args.destName, "Important", "Alert", nil, nil, self:Healer())
+	self:TargetMessage(args.spellId, args.destName, "red", "Alert", nil, nil, self:Healer())
 	self:TargetBar(args.spellId, 10, args.destName)
 end
 
 function mod:FlameJets(args)
-	self:Message(args.spellId, "Attention", "Long")
+	self:Message(args.spellId, "yellow", "Long")
 	self:CDBar(args.spellId, 24.3)
 end
 
 function mod:Brittle(args)
-	self:Message(args.spellId, "Positive", "Info", L.brittle_message)
+	self:Message(args.spellId, "green", "Info", L.brittle_message)
 end
 
 do
@@ -86,7 +86,7 @@ do
 			local t = GetTime()
 			if t-prev > 2 then
 				prev = t
-				self:Message(63474, "Personal", "Alarm", CL.underyou:format(args.spellName))
+				self:Message(63474, "blue", "Alarm", CL.underyou:format(args.spellName))
 			end
 		end
 	end

@@ -66,7 +66,7 @@ end
 local function scheduleStrike()
 	unscheduleStrike()
 	mod:Bar(66134, 30.5)
-	mod:DelayedMessage(66134, 25.5, "Attention", L["shadow_soon"])
+	mod:DelayedMessage(66134, 25.5, "yellow", L["shadow_soon"])
 	handle_NextStrike = mod:ScheduleTimer(scheduleStrike, 30.5)
 end
 
@@ -90,16 +90,16 @@ end
 
 local function scheduleWave()
 	if isBurrowed then return end
-	mod:Message("burrow", "Urgent", nil, L["nerubian_message"], 66333)
+	mod:Message("burrow", "orange", nil, L["nerubian_message"], 66333)
 	mod:Bar("burrow", 45, L["nerubian_burrower"], 66333)
 	handle_NextWave = mod:ScheduleTimer(scheduleWave, 45)
 end
 
 function mod:OnEngage()
 	isBurrowed = nil
-	self:Message("burrow", "Attention", nil, L["engage_message"], 65919)
+	self:Message("burrow", "yellow", nil, L["engage_message"], 65919)
 	self:Bar("burrow", 80, L["burrow"], 65919)
-	self:DelayedMessage("burrow", 65, "Attention", L["burrow_soon"])
+	self:DelayedMessage("burrow", 65, "yellow", L["burrow_soon"])
 
 	self:Bar("burrow", 10, L["nerubian_burrower"], 66333)
 	handle_NextWave = self:ScheduleTimer(scheduleWave, 10)
@@ -123,7 +123,7 @@ end
 do
 	local coldTargets, scheduled = mod:NewTargetList(), nil
 	local function coldWarn(spellId)
-		mod:TargetMessage(spellId, coldTargets, "Urgent")
+		mod:TargetMessage(spellId, coldTargets, "orange")
 		scheduled = nil
 	end
 	function mod:ColdDebuff(args)
@@ -140,7 +140,7 @@ end
 
 function mod:ColdDebuff(args)
 	if self:Me(args.destGUID) and phase2 then
-		self:Message(args.spellId, "Personal")
+		self:Message(args.spellId, "blue")
 		self:Flash(args.spellId)
 	end
 end
@@ -152,7 +152,7 @@ function mod:ColdCooldown(args)
 end
 
 function mod:Swarm(args)
-	self:Message(args.spellId, "Important", "Long")
+	self:Message(args.spellId, "red", "Long")
 	phase2 = true
 	self:StopBar(L["burrow"])
 	self:CancelDelayedMessage(L["burrow_soon"])
@@ -163,7 +163,7 @@ function mod:Swarm(args)
 end
 
 function mod:Pursue(args)
-	self:TargetMessage(args.spellId, args.destName, "Personal", "Alert", L["chase"])
+	self:TargetMessage(args.spellId, args.destName, "blue", "Alert", L["chase"])
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
@@ -183,7 +183,7 @@ end
 function mod:Surface()
 	isBurrowed = nil
 	self:Bar("burrow", 76, L["burrow"], 65919)
-	self:DelayedMessage("burrow", 61, "Attention", L["burrow_soon"])
+	self:DelayedMessage("burrow", 61, "yellow", L["burrow_soon"])
 
 	self:Bar("burrow", 5, L["nerubian_burrower"], 66333)
 	handle_NextWave = self:ScheduleTimer(scheduleWave, 5)

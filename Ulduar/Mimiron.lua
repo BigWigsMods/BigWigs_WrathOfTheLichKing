@@ -97,12 +97,12 @@ end
 function mod:OnEngage()
 	ishardmode = nil
 	phase = 1
-	self:Message("phase", "Attention", nil, L["engage_warning"], false)
+	self:Message("phase", "yellow", nil, L["engage_warning"], false)
 	self:Bar("phase", 7, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 
 	self:Bar(63631, 30, L["shock_next"])
 	self:Bar(64529, 20, L["plasma_bar"])
-	self:DelayedMessage(64529, 17, "Attention", L["plasma_soon"])
+	self:DelayedMessage(64529, 17, "yellow", L["plasma_soon"])
 end
 
 --------------------------------------------------------------------------------
@@ -110,41 +110,41 @@ end
 --
 
 function mod:BombBot(args)
-	self:Message(args.spellId, "Important", "Alert", L["bomb_message"])
+	self:Message(args.spellId, "red", "Alert", L["bomb_message"])
 end
 
 function mod:FlameSuppressant(args)
-	self:Message(args.spellId, "Important", nil, L["suppressant_warning"])
+	self:Message(args.spellId, "red", nil, L["suppressant_warning"])
 	self:Bar(args.spellId, 3)
 end
 
 function mod:FrostBomb(args)
-	self:Message(args.spellId, "Important")
+	self:Message(args.spellId, "red")
 	self:Bar(args.spellId, 2)
 	self:Bar(args.spellId, 30, L["fbomb_bar"])
 end
 
 function mod:PlasmaBlast(args)
-	self:Message(args.spellId, "Important", nil, L["plasma_warning"])
+	self:Message(args.spellId, "red", nil, L["plasma_warning"])
 	self:Bar(args.spellId, 3, L["plasma_warning"])
 	self:Bar(args.spellId, 30, L["plasma_bar"])
 end
 
 function mod:ShockBlast(args)
-	self:Message(args.spellId, "Important")
+	self:Message(args.spellId, "red")
 	self:Bar(args.spellId, 3.5)
 	self:Bar(args.spellId, 34, L["shock_next"])
 end
 
 function mod:SpinningUp(args)
-	self:Message(63274, "Personal", "Long", L["laser_soon"], args.spellId)
+	self:Message(63274, "blue", "Long", L["laser_soon"], args.spellId)
 	self:Flash(63274)
-	self:ScheduleTimer("Message", 4, 63274, "Important", nil, L["laser_bar"])
+	self:ScheduleTimer("Message", 4, 63274, "red", nil, L["laser_bar"])
 	self:ScheduleTimer("Bar", 4, 63274, 60, L["laser_bar"])
 end
 
 function mod:MagneticCore(args)
-	self:Message(args.spellId, "Important", nil, L["magnetic_message"])
+	self:Message(args.spellId, "red", nil, L["magnetic_message"])
 	self:Bar(args.spellId, 15)
 end
 
@@ -159,7 +159,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		phase = 2
 		self:StopBar(L["plasma_bar"])
 		self:StopBar(L["shock_next"])
-		self:Message("phase", "Attention", nil, L["phase2_warning"], false)
+		self:Message("phase", "yellow", nil, L["phase2_warning"], false)
 		self:Bar("phase", 40, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 		if ishardmode then
 			self:Bar(64623, 45, L["fbomb_bar"])
@@ -167,11 +167,11 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		self:CloseProximity()
 	elseif msg:find(L["phase3_trigger"]) then
 		phase = 3
-		self:Message("phase", "Attention", nil, L["phase3_warning"], false)
+		self:Message("phase", "yellow", nil, L["phase3_warning"], false)
 		self:Bar("phase", 25, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 	elseif msg:find(L["phase4_trigger"]) then
 		phase = 4
-		self:Message("phase", "Attention", nil, L["phase4_warning"], false)
+		self:Message("phase", "yellow", nil, L["phase4_warning"], false)
 		self:Bar("phase", 25, L["phase_bar"]:format(phase), "INV_Gizmo_01")
 		if ishardmode then
 			self:Bar(64623, 30, L["fbomb_bar"])
@@ -185,7 +185,7 @@ do
 	--CHAT_MSG_LOOT:Varian receives loot: |cffffffff|Hitem:46029::::::::110:253::::::|h[Magnetic Core]|h|r.::::Varian::0:0::0:247:nil:0:false:false:false:false:
 	function mod:CHAT_MSG_LOOT(event, msg, _, _, _, playerName)
 		if msg:find("Hitem:46029", nil, true) then
-			self:TargetMessage(64444, playerName, "Positive", "Info")
+			self:TargetMessage(64444, playerName, "green", "Info")
 		end
 	end
 end

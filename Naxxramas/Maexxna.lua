@@ -53,7 +53,7 @@ end
 do
 	local cocoonTargets, scheduled = mod:NewTargetList(), nil
 	local function cocoonWarn()
-		mod:TargetMessage(28622, cocoonTargets, "Important", "Alert", L["cocoonbar"], 745)
+		mod:TargetMessage(28622, cocoonTargets, "red", "Alert", L["cocoonbar"], 745)
 		scheduled = nil
 	end
 	function mod:Cocoon(args)
@@ -64,11 +64,11 @@ do
 end
 
 function mod:Spray()
-	self:Message(29484, "Important", nil, L["webspraywarn"], 54125)
-	self:DelayedMessage(29484, 10, "Attention", L["webspraywarn30sec"])
-	self:DelayedMessage(29484, 20, "Attention", L["webspraywarn20sec"])
-	self:DelayedMessage(29484, 30, "Attention", L["webspraywarn10sec"])
-	self:DelayedMessage(29484, 35, "Attention", L["webspraywarn5sec"])
+	self:Message(29484, "red", nil, L["webspraywarn"], 54125)
+	self:DelayedMessage(29484, 10, "yellow", L["webspraywarn30sec"])
+	self:DelayedMessage(29484, 20, "yellow", L["webspraywarn20sec"])
+	self:DelayedMessage(29484, 30, "yellow", L["webspraywarn10sec"])
+	self:DelayedMessage(29484, 35, "yellow", L["webspraywarn5sec"])
 	self:Bar(29484, 40, L["webspraybar"], 54125)
 	self:Bar(28622, 20, L["cocoonbar"], 745)
 	self:Bar(29484, 30, L["spiderbar"], 17332)
@@ -76,14 +76,14 @@ end
 
 function mod:Frenzy(args)
 	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
-	self:Message(54123, "Attention", "Alarm", L["enragewarn"], args.spellId)
+	self:Message(54123, "yellow", "Alarm", L["enragewarn"], args.spellId)
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	if self:MobId(UnitGUID(unit)) == 15952 then
 		local health = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if health < 36 then
-			self:Message(54123, "Important", nil, L["enragesoonwarn"], false)
+			self:Message(54123, "red", nil, L["enragesoonwarn"], false)
 			self:UnregisterUnitEvent(event, "target", "focus")
 		end
 	end

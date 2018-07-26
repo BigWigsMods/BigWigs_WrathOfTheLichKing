@@ -40,7 +40,7 @@ end
 --
 
 function mod:Inject(args)
-	self:TargetMessage(args.spellId, args.destName, "Personal", "Alert", L["bomb_message"])
+	self:TargetMessage(args.spellId, args.destName, "blue", "Alert", L["bomb_message"])
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
@@ -49,7 +49,7 @@ function mod:Inject(args)
 end
 
 function mod:Cloud(args)
-	self:Message(args.spellId, "Attention")
+	self:Message(args.spellId, "yellow")
 	self:Bar(args.spellId, 15)
 end
 

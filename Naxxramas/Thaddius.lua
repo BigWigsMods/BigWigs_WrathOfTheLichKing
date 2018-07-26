@@ -79,7 +79,7 @@ end
 --
 
 function mod:StalaggPower(args)
-	self:Message(28134, "Important", nil, L["surge_message"])
+	self:Message(28134, "red", nil, L["surge_message"])
 	self:Bar(28134, 10)
 end
 
@@ -105,13 +105,13 @@ function mod:UNIT_AURA(_, unit)
 	if newCharge then
 		if not lastCharge then
 			local text = newCharge == 135769 and L["polarity_first_positive"] or L["polarity_first_negative"]
-			self:Message(28089, "Personal", "Alert", text, newCharge)
+			self:Message(28089, "blue", "Alert", text, newCharge)
 			self:Flash(28089)
 		else
 			if newCharge == lastCharge then
-				self:Message(28089, "Positive", nil, L["polarity_nochange"], newCharge)
+				self:Message(28089, "green", nil, L["polarity_nochange"], newCharge)
 			else
-				self:Message(28089, "Personal", "Alert", L["polarity_changed"], newCharge)
+				self:Message(28089, "blue", "Alert", L["polarity_changed"], newCharge)
 				self:Flash(28089)
 			end
 		end
@@ -124,22 +124,22 @@ end
 function mod:Shift()
 	shiftTime = GetTime()
 	self:RegisterUnitEvent("UNIT_AURA", nil, "player")
-	self:Message(28089, "Important", nil, L["polarity_message"])
+	self:Message(28089, "red", nil, L["polarity_message"])
 end
 
 local function throw()
 	mod:Bar("throw", 20, L["throw_bar"], "Ability_Druid_Maul")
-	mod:DelayedMessage("throw", 15, "Urgent", L["throw_warning"])
+	mod:DelayedMessage("throw", 15, "orange", L["throw_warning"])
 	throwHandle = mod:ScheduleTimer(throw, 21)
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L["polarity_trigger"], nil, true) then
-		self:DelayedMessage(28089, 25, "Important", L["polarity_warning"])
+		self:DelayedMessage(28089, 25, "red", L["polarity_warning"])
 		self:Bar(28089, 28, L["polarity_bar"], "Spell_Nature_Lightning")
 	elseif msg == L["trigger_phase1_1"] or msg == L["trigger_phase1_2"] then
 		if not stage1warn then
-			self:Message("phase", "Important", nil, L["phase1_message"], false)
+			self:Message("phase", "red", nil, L["phase1_message"], false)
 		end
 		deaths = 0
 		stage1warn = true
@@ -148,7 +148,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	elseif msg:find(L["trigger_phase2_1"], nil, true) or msg:find(L["trigger_phase2_2"], nil, true) or msg:find(L["trigger_phase2_3"], nil, true) then
 		self:CancelTimer(throwHandle)
 		self:StopBar(L["throw_bar"])
-		self:Message("phase", "Important", nil, L["phase2_message"], false)
+		self:Message("phase", "red", nil, L["phase2_message"], false)
 		self:Berserk(360, true)
 	end
 end

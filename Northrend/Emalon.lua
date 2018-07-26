@@ -47,13 +47,13 @@ end
 --
 
 function mod:Nova(args)
-	self:Message(64216, "Attention")
+	self:Message(64216, "yellow")
 	self:Bar(64216, 5, CL["cast"]:format(args.spellName))
 	self:CDBar(64216, 25)
 end
 
 function mod:Overcharge(args)
-	self:Message(args.spellId, "Positive", nil, L["overcharge_message"])
+	self:Message(args.spellId, "green", nil, L["overcharge_message"])
 	self:Bar(args.spellId, 20, L["overcharge_bar"])
 	self:CDBar(args.spellId, 45)
 end

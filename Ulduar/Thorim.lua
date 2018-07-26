@@ -90,23 +90,23 @@ end
 --
 
 function mod:RunicBarrier(args)
-	self:Message(args.spellId, "Urgent", "Alarm", L.barrier_message)
+	self:Message(args.spellId, "orange", "Alarm", L.barrier_message)
 	self:Bar(args.spellId, 20)
 end
 
 function mod:LightningChargeApplied(args) -- Lightning Charge on Thorim
 	local amount = args.amount or 1
-	self:Message(args.spellId, "Attention", nil, L.charge_message:format(amount))
+	self:Message(args.spellId, "yellow", nil, L.charge_message:format(amount))
 	self:Bar(args.spellId, 15, L.charge_bar:format(amount+1))
 end
 
 function mod:Stormhammer(args)
-	self:TargetMessage(args.spellId, args.destName, "Urgent")
+	self:TargetMessage(args.spellId, args.destName, "orange")
 	self:Bar(args.spellId, 16)
 end
 
 function mod:UnbalancingStrike(args)
-	self:TargetMessage(args.spellId, args.destName, "Attention")
+	self:TargetMessage(args.spellId, args.destName, "yellow")
 	self:TargetBar(args.spellId, 15, args.destName)
 end
 
@@ -115,11 +115,11 @@ function mod:UnbalancingStrikeCast(args)
 end
 
 function mod:RunicFortification(args)
-	self:Message(args.spellId, "Attention")
+	self:Message(args.spellId, "yellow")
 end
 
 function mod:ChargeOrb(args)
-	self:Message(args.spellId, "Urgent")
+	self:Message(args.spellId, "orange")
 	self:Bar(args.spellId, 15)
 end
 
@@ -130,7 +130,7 @@ do
 			local t = GetTime()
 			if t-prev > 5 then
 				prev = t
-				self:Message(args.spellId, "Personal", "Info", CL.you:format(args.spellName))
+				self:Message(args.spellId, "blue", "Info", CL.you:format(args.spellName))
 				self:Flash(args.spellId)
 			end
 		end
@@ -138,14 +138,14 @@ do
 end
 
 function mod:Impale(args)
-	self:TargetMessage(62331, args.destName, "Important")
+	self:TargetMessage(62331, args.destName, "red")
 end
 
 function mod:RuneDetonation(args)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId, 40332) -- 40332 = "Bomb"
 	end
-	self:TargetMessage(args.spellId, args.destName, "Important")
+	self:TargetMessage(args.spellId, args.destName, "red")
 	self:TargetBar(args.spellId, 4, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
 end
@@ -162,9 +162,9 @@ end
 
 function mod:HardModeTimerExpires()
 	if self:BarTimeLeft(L.hardmode) == 0 then
-		self:Message("hardmode", "Neutral", nil, L.hardmode_warning, false)
+		self:Message("hardmode", "cyan", nil, L.hardmode_warning, false)
 	else
-		self:Message("hardmode", "Neutral", nil, -17610, false) -- -17610 = "Hard Mode"
+		self:Message("hardmode", "cyan", nil, -17610, false) -- -17610 = "Hard Mode"
 	end
 end
 
@@ -176,7 +176,7 @@ function mod:StageTwo()
 	end
 
 	self:StopBar(L["hardmode"])
-	self:Message("stages", "Attention", nil, CL.stage:format(2), false)
+	self:Message("stages", "yellow", nil, CL.stage:format(2), false)
 	self:OpenProximity("proximity", 5)
 	self:Berserk(312, true) -- Berserk again with new timer and no engage message
 end

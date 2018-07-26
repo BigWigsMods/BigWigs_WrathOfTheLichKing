@@ -68,7 +68,7 @@ end
 --
 
 function mod:Touch(args)
-	self:TargetMessage("touch", args.destName, "Personal", "Info", args.spellId)
+	self:TargetMessage("touch", args.destName, "blue", "Info", args.spellId)
 	if self:Me(args.destGUID) then
 		self:Flash("touch", args.spellId)
 	end
@@ -77,27 +77,27 @@ end
 function mod:DarkShield(args)
 	self:Bar("shield", 45, L["vortex_or_shield_cd"], 39089)
 	if self:UnitDebuff("player", essenceDark) then
-		self:Message("shield", "Important", "Alert", args.spellId)
+		self:Message("shield", "red", "Alert", args.spellId)
 	else
-		self:Message("shield", "Urgent", nil, args.spellId)
+		self:Message("shield", "orange", nil, args.spellId)
 	end
 end
 
 function mod:LightShield(args)
 	self:Bar("shield", 45, L["vortex_or_shield_cd"], 39089)
 	if self:UnitDebuff("player", essenceLight) then
-		self:Message("shield", "Important", "Alert", args.spellId)
+		self:Message("shield", "red", "Alert", args.spellId)
 	else
-		self:Message("shield", "Urgent", nil, args.spellId)
+		self:Message("shield", "orange", nil, args.spellId)
 	end
 end
 
 function mod:LightVortex(args)
 	self:Bar("vortex", 45, L["vortex_or_shield_cd"], 39089)
 	if self:UnitDebuff("player", essenceLight) then
-		self:Message("vortex", "Positive", nil, args.spellId)
+		self:Message("vortex", "green", nil, args.spellId)
 	else
-		self:Message("vortex", "Personal", "Alarm", args.spellId)
+		self:Message("vortex", "blue", "Alarm", args.spellId)
 		self:Flash("vortex", args.spellId)
 	end
 end
@@ -105,9 +105,9 @@ end
 function mod:DarkVortex(args)
 	self:Bar("vortex", 45, L["vortex_or_shield_cd"], 39089)
 	if self:UnitDebuff("player", essenceDark) then
-		self:Message("vortex", "Positive", nil, args.spellId)
+		self:Message("vortex", "green", nil, args.spellId)
 	else
-		self:Message("vortex", "Personal", "Alarm", args.spellId)
+		self:Message("vortex", "blue", "Alarm", args.spellId)
 		self:Flash("vortex", args.spellId)
 	end
 end

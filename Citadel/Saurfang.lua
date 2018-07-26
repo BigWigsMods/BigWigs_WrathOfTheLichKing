@@ -58,7 +58,7 @@ end
 function mod:OnEngage()
 	self:OpenProximity("proximity", 11)
 	self:Berserk(self:Heroic() and 360 or 480)
-	self:DelayedMessage("adds", 35, "Urgent", L["adds_warning"])
+	self:DelayedMessage("adds", 35, "orange", L["adds_warning"])
 	self:Bar("adds", 40, L["adds"], 72173)
 	count = 1
 end
@@ -84,7 +84,7 @@ end
 do
 	local bbTargets, scheduled = mod:NewTargetList(), nil
 	local function boilingWarn()
-		mod:TargetMessage(72385, bbTargets, "Urgent")
+		mod:TargetMessage(72385, bbTargets, "orange")
 		scheduled = nil
 	end
 	function mod:BoilingBlood(args)
@@ -96,18 +96,18 @@ do
 end
 
 function mod:Adds(args)
-	self:Message("adds", "Positive", "Alarm", L["adds_message"], args.spellId)
-	self:DelayedMessage("adds", 35, "Urgent", L["adds_warning"])
+	self:Message("adds", "green", "Alarm", L["adds_message"], args.spellId)
+	self:DelayedMessage("adds", 35, "orange", L["adds_warning"])
 	self:Bar("adds", 40, L["adds"], args.spellId)
 end
 
 function mod:RuneofBlood(args)
-	self:TargetMessage(72410, args.destName, "Attention")
+	self:TargetMessage(72410, args.destName, "yellow")
 	self:CDBar(72410, 20)
 end
 
 function mod:Mark(args)
-	self:StackMessage(72293, args.destName, count, "Attention", "Alert")
+	self:StackMessage(72293, args.destName, count, "yellow", "Alert")
 	count = count + 1
 	self:PrimaryIcon(72293, args.destName)
 	if self:Me(args.destGUID) then
@@ -116,6 +116,6 @@ function mod:Mark(args)
 end
 
 function mod:Frenzy(args)
-	self:Message(72737, "Important", "Long")
+	self:Message(72737, "red", "Long")
 end
 

@@ -86,11 +86,11 @@ end
 --
 
 function mod:DKDead()
-	self:Message("adddeath", "Important", nil, L["dkdiewarn"], false)
+	self:Message("adddeath", "red", nil, L["dkdiewarn"], false)
 end
 
 function mod:RiderDead()
-	self:Message("adddeath", "Important", nil, L["riderdiewarn"], false)
+	self:Message("adddeath", "red", nil, L["riderdiewarn"], false)
 end
 
 local function waveWarn(message, color)
@@ -108,33 +108,33 @@ end
 
 local function newTrainee()
 	mod:Bar("add", timeTrainer, L["trabar"]:format(numTrainer), "Ability_Seal")
-	mod:ScheduleTimer(waveWarn, timeTrainer - 3, L["trawarn"], "Attention")
+	mod:ScheduleTimer(waveWarn, timeTrainer - 3, L["trawarn"], "yellow")
 	mod:ScheduleTimer(newTrainee, timeTrainer)
 	numTrainer = numTrainer + 1
 end
 
 local function newDeathknight()
 	mod:Bar("add", timeDK, L["dkbar"]:format(numDK), "INV_Boots_Plate_08")
-	mod:ScheduleTimer(waveWarn, timeDK - 3, L["dkwarn"], "Urgent")
+	mod:ScheduleTimer(waveWarn, timeDK - 3, L["dkwarn"], "orange")
 	mod:ScheduleTimer(newDeathknight, timeDK)
 	numDK = numDK + 1
 end
 
 local function newRider()
 	mod:Bar("add", timeRider, L["riderbar"]:format(numRider), "Spell_Shadow_DeathPact")
-	mod:ScheduleTimer(waveWarn, timeRider - 3, L["riderwarn"], "Important")
+	mod:ScheduleTimer(waveWarn, timeRider - 3, L["riderwarn"], "red")
 	mod:ScheduleTimer(newRider, timeRider)
 	numRider = numRider + 1
 end
 
 function mod:OnEngage()
-	self:Message("room", "Attention", nil, L["startwarn"], false)
+	self:Message("room", "yellow", nil, L["startwarn"], false)
 	self:Bar("room", 270, L["inroombartext"], "Spell_Magic_LesserInvisibilty")
-	self:DelayedMessage("room", 90, "Attention", L["warn1"])
-	self:DelayedMessage("room", 180, "Attention", L["warn2"])
-	self:DelayedMessage("room", 210, "Urgent", L["warn3"])
-	self:DelayedMessage("room", 240, "Important", L["warn4"])
-	self:DelayedMessage("room", 260, "Important", L["warn5"])
+	self:DelayedMessage("room", 90, "yellow", L["warn1"])
+	self:DelayedMessage("room", 180, "yellow", L["warn2"])
+	self:DelayedMessage("room", 210, "orange", L["warn3"])
+	self:DelayedMessage("room", 240, "red", L["warn4"])
+	self:DelayedMessage("room", 260, "red", L["warn5"])
 	numTrainer = 1
 	numDK = 1
 	numRider = 1
@@ -150,6 +150,6 @@ function mod:OnEngage()
 end
 
 function mod:InRoom()
-	self:Message("room", "Important", nil, L["inroomwarn"], false)
+	self:Message("room", "red", nil, L["inroomwarn"], false)
 end
 

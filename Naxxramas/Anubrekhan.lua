@@ -47,8 +47,8 @@ function mod:OnEngage(diff)
 	if started then return end
 	started = true
 	locustTime = diff == 3 and 102 or 90
-	self:Message(28785, "Attention", nil, L["engagewarn"]:format(locustTime), false)
-	self:DelayedMessage(28785, locustTime - 10, "Important", L["gainwarn10sec"])
+	self:Message(28785, "yellow", nil, L["engagewarn"]:format(locustTime), false)
+	self:DelayedMessage(28785, locustTime - 10, "red", L["gainwarn10sec"])
 	self:CDBar(28785, locustTime) -- Locus Swarm
 end
 
@@ -58,15 +58,15 @@ end
 
 function mod:GainSwarm(args)
 	if self:MobId(args.destGUID) == 15956 then
-		self:DelayedMessage(28785, 20, "Important", CL["over"]:format(args.spellName))
+		self:DelayedMessage(28785, 20, "red", CL["over"]:format(args.spellName))
 		self:Bar(28785, 20, 131394) -- "Swarming Insects"
-		self:DelayedMessage(28785, 75, "Important", L["gainwarn10sec"])
+		self:DelayedMessage(28785, 75, "red", L["gainwarn10sec"])
 		self:CDBar(28785, 85)
 	end
 end
 
 function mod:Swarm(args)
-	self:Message(28785, "Attention", nil, CL["incoming"]:format(args.spellName))
+	self:Message(28785, "yellow", nil, CL["incoming"]:format(args.spellName))
 	self:Bar(28785, 3, CL["incoming"]:format(args.spellName))
 end
 

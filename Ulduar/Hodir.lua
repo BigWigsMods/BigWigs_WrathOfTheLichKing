@@ -67,7 +67,7 @@ end
 --
 
 function mod:StormCloud(args)
-	self:TargetMessage(args.spellId, args.destName, "Positive", "Info")
+	self:TargetMessage(args.spellId, args.destName, "green", "Info")
 	self:TargetBar(args.spellId, 30, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
 end
@@ -78,23 +78,23 @@ function mod:StormCloudRemoved(args)
 end
 
 function mod:FlashFreezeCast(args)
-	self:Message(args.spellId, "Attention", "Long", CL.casting:format(args.spellName))
+	self:Message(args.spellId, "yellow", "Long", CL.casting:format(args.spellName))
 	self:CastBar(args.spellId, 9)
 	self:Bar(args.spellId, 35)
-	self:DelayedMessage(args.spellId, 30, "Attention", CL.custom_sec:format(args.spellName, 5))
+	self:DelayedMessage(args.spellId, 30, "yellow", CL.custom_sec:format(args.spellName, 5))
 end
 
 function mod:FlashFreeze(args)
 	if args.destGUID:find("Player", nil, true) then -- Applies to NPCs
 		flashFreezed[#flashFreezed + 1] = args.destName
 		if #flashFreezed == 1 then
-			self:ScheduleTimer("TargetMessage", 0.3, 61968, flashFreezed, "Urgent", "Alert")
+			self:ScheduleTimer("TargetMessage", 0.3, 61968, flashFreezed, "orange", "Alert")
 		end
 	end
 end
 
 function mod:FrozenBlows(args)
-	self:Message(args.spellId, "Important")
+	self:Message(args.spellId, "red")
 	self:Bar(args.spellId, 20)
 end
 
@@ -104,7 +104,7 @@ do
 		local _, stack = self:UnitDebuff(unit, cold)
 		if stack and stack ~= lastCold then
 			if stack > 1 then
-				self:Message(62039, "Personal", "Alert", CL.you:format(CL.count:format(cold, stack)))
+				self:Message(62039, "blue", "Alert", CL.you:format(CL.count:format(cold, stack)))
 			end
 			lastCold = stack
 		end

@@ -49,22 +49,22 @@ end
 --
 
 function mod:Fists(args)
-	self:Message(args.spellId, "Attention")
+	self:Message(args.spellId, "yellow")
 	self:Bar(args.spellId, 15)
 	self:Bar(args.spellId, 47)
 end
 
 function mod:Cinder(args)
 	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "Personal", "Alarm", CL["you"]:format(args.spellName))
+		self:Message(args.spellId, "blue", "Alarm", CL["you"]:format(args.spellName))
 		self:Flash(args.spellId)
 	end
 end
 
 function mod:Breath(args)
-	self:Message(args.spellId, "Positive")
+	self:Message(args.spellId, "green")
 	count = count + 1
 	self:Bar(args.spellId, 45, L["breath_bar"]:format(count))
-	self:DelayedMessage(args.spellId, 40, "Attention", L["breath_message"]:format(count))
+	self:DelayedMessage(args.spellId, 40, "yellow", L["breath_message"]:format(count))
 end
 

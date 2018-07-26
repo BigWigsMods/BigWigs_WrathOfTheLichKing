@@ -45,7 +45,7 @@ function mod:BluePyrite(args)
 end
 
 function mod:FlameVents(args)
-	self:Message(args.spellId, "Urgent")
+	self:Message(args.spellId, "orange")
 	self:Bar(args.spellId, 10) -- Buff duration
 end
 
@@ -55,7 +55,7 @@ end
 
 function mod:SystemsShutdown(args)
 	if self:MobId(args.destGUID) == 33113 then -- Flame Leviathan
-		self:Message(args.spellId, "Positive", "Long")
+		self:Message(args.spellId, "green", "Long")
 		self:Bar(args.spellId, 20)
 	end
 end
@@ -63,7 +63,7 @@ end
 function mod:Pursued(args)
 	if bit.band(args.destFlags, 0x1) ~= 0 then -- Can't rely on GUID when we're in a vehicle. COMBATLOG_OBJECT_AFFILIATION_MINE = 0x1
 		local me = self:UnitName("player")
-		self:TargetMessage(args.spellId, me, "Personal", "Alarm")
+		self:TargetMessage(args.spellId, me, "blue", "Alarm")
 		self:Flash(args.spellId)
 		self:TargetBar(args.spellId, 30, me)
 	else
@@ -71,7 +71,7 @@ function mod:Pursued(args)
 			local guid = UnitGUID(unit.."pet")
 			if guid == args.destGUID then
 				local name = self:UnitName(unit)
-				self:TargetMessage(args.spellId, name, "Personal", "Alarm")
+				self:TargetMessage(args.spellId, name, "blue", "Alarm")
 				self:TargetBar(args.spellId, 30, name)
 				break
 			end

@@ -77,7 +77,7 @@ do
 		if not blazingTimers[blazingCount] then return end
 		mod:Bar("blazing", blazingTimers[blazingCount], L["blazing"], 69325)
 		mod:ScheduleTimer(blazingSpawn, blazingTimers[blazingCount])
-		mod:DelayedMessage("blazing", blazingTimers[blazingCount] - 5, "Positive", L["blazing_warning"])
+		mod:DelayedMessage("blazing", blazingTimers[blazingCount] - 5, "green", L["blazing_warning"])
 		blazingCount = blazingCount + 1
 		if not blazingRepeater and (UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) and bit.band(mod.db.profile.blazing, BigWigs.C.ICON) == BigWigs.C.ICON then
 			blazingRepeater = mod:ScheduleRepeatingTimer(scanTarget, 0.5)
@@ -97,7 +97,7 @@ do
 		end
 		self:ScheduleTimer(blazingSpawn, 50)
 		self:Bar("blazing", 50, L["blazing"], 69325)
-		self:DelayedMessage("blazing", 45, "Positive", L["blazing_warning"])
+		self:DelayedMessage("blazing", 45, "green", L["blazing_warning"])
 		blazingCount = 1
 	end
 end
@@ -107,7 +107,7 @@ end
 --
 
 function mod:LayWaste(args)
-	self:Message(69325, "Attention")
+	self:Message(69325, "yellow")
 	self:Bar(69325, 12)
 end
 
@@ -117,9 +117,9 @@ end
 
 function mod:Portal()
 	-- 46 sec cd until initial positioning, +14 sec until 'real' spawn.
-	self:Message("portal", "Important", nil, L["portalcd_message"]:format(portalCount), false)
+	self:Message("portal", "red", nil, L["portalcd_message"]:format(portalCount), false)
 	self:Bar("portal", 14, L["portal_bar"], 72482)
-	self:DelayedMessage("portal", 14, "Important", L["portal_message"])
+	self:DelayedMessage("portal", 14, "red", L["portal_message"])
 	portalCount = portalCount + 1
 	self:Bar("portal", 46, L["portalcd_bar"]:format(portalCount), 72482)
 end
@@ -130,7 +130,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) and UnitPowerType("player") == 0 then
 			prev = t
-			self:Message(71086, "Personal", "Alarm", CL["you"]:format(args.spellName))
+			self:Message(71086, "blue", "Alarm", CL["you"]:format(args.spellName))
 			self:Flash(71086)
 		end
 	end

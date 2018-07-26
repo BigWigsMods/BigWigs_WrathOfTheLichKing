@@ -1,118 +1,118 @@
 
 BigWigs:AddColors("Blood Prince Council", {
-	[70981] = "Positive",
-	[72037] = {"Personal","Urgent"},
-	[72039] = "Important",
-	[72040] = {"Personal","Urgent"},
-	[72052] = "Attention",
-	[72999] = "Personal",
+	[70981] = "green",
+	[72037] = {"blue","orange"},
+	[72039] = "red",
+	[72040] = {"blue","orange"},
+	[72052] = "yellow",
+	[72999] = "blue",
 })
 
 BigWigs:AddColors("Deathbound Ward", {
-	[71022] = "Personal",
+	[71022] = "blue",
 })
 
 BigWigs:AddColors("Deathspeaker High Priest", {
-	[69483] = "Personal",
+	[69483] = "blue",
 })
 
 BigWigs:AddColors("Lady Deathwhisper", {
-	[70842] = "Positive",
-	[71001] = "Personal",
-	[71204] = {"Personal","Urgent"},
-	[71289] = {"Important","Personal"},
-	[71426] = "Attention",
-	["adds"] = {"Attention","Urgent"},
+	[70842] = "green",
+	[71001] = "blue",
+	[71204] = {"blue","orange"},
+	[71289] = {"red","blue"},
+	[71426] = "yellow",
+	["adds"] = {"yellow","orange"},
 })
 
 BigWigs:AddColors("Putricide Dogs", {
-	[71127] = {"Important","Personal"},
+	[71127] = {"red","blue"},
 })
 
 BigWigs:AddColors("Festergut", {
-	[69165] = "Attention",
-	[69195] = "Attention",
-	[69240] = "Important",
-	[69279] = {"Personal","Urgent"},
-	[72219] = {"Personal","Positive"},
-	[72295] = "Important",
+	[69165] = "yellow",
+	[69195] = "yellow",
+	[69240] = "red",
+	[69279] = {"blue","orange"},
+	[72219] = {"blue","green"},
+	[72295] = "red",
 })
 
 BigWigs:AddColors("Icecrown Gunship Battle", {
-	["adds"] = "Attention",
-	["mage"] = "Positive",
+	["adds"] = "yellow",
+	["mage"] = "green",
 })
 
 BigWigs:AddColors("Blood-Queen Lana'thel", {
-	[70877] = "Urgent",
-	[71265] = {"Attention","Personal"},
-	[71340] = {"Important","Personal"},
-	[71623] = {"Attention","Personal"},
-	[71772] = "Important",
+	[70877] = "orange",
+	[71265] = {"yellow","blue"},
+	[71340] = {"red","blue"},
+	[71623] = {"yellow","blue"},
+	[71772] = "red",
 })
 
 BigWigs:AddColors("The Lich King", {
-	[68980] = {"Attention","Personal"},
-	[68981] = "Urgent",
-	[69037] = {"Attention","Personal","Urgent"},
-	[69200] = "Personal",
-	[69409] = "Personal",
-	[70337] = "Personal",
-	[70372] = {"Attention","Important"},
-	[70498] = "Urgent",
-	[70541] = "Urgent",
-	[72143] = "Attention",
-	[72262] = "Urgent",
-	[72762] = {"Important","Personal"},
-	[73529] = {"Attention","Personal"},
+	[68980] = {"yellow","blue"},
+	[68981] = "orange",
+	[69037] = {"yellow","blue","orange"},
+	[69200] = "blue",
+	[69409] = "blue",
+	[70337] = "blue",
+	[70372] = {"yellow","red"},
+	[70498] = "orange",
+	[70541] = "orange",
+	[72143] = "yellow",
+	[72262] = "orange",
+	[72762] = {"red","blue"},
+	[73529] = {"yellow","blue"},
 })
 
 BigWigs:AddColors("Lord Marrowgar", {
-	[69057] = {"Personal","Urgent"},
-	[69076] = "Attention",
-	[69138] = "Personal",
+	[69057] = {"blue","orange"},
+	[69076] = "yellow",
+	[69138] = "blue",
 })
 
 BigWigs:AddColors("Professor Putricide", {
-	[70351] = "Attention",
-	[70447] = "Personal",
-	[70672] = "Personal",
-	[70911] = "Personal",
-	[71255] = "Urgent",
-	[72295] = {"Attention","Personal"},
-	[72451] = {"Personal","Urgent"},
-	["phase"] = {"Important","Positive"},
+	[70351] = "yellow",
+	[70447] = "blue",
+	[70672] = "blue",
+	[70911] = "blue",
+	[71255] = "orange",
+	[72295] = {"yellow","blue"},
+	[72451] = {"blue","orange"},
+	["phase"] = {"red","green"},
 })
 
 BigWigs:AddColors("Rotface", {
-	[69508] = "Important",
-	[69674] = "Personal",
-	[69839] = "Urgent",
-	["ooze"] = "Attention",
+	[69508] = "red",
+	[69674] = "blue",
+	[69839] = "orange",
+	["ooze"] = "yellow",
 })
 
 BigWigs:AddColors("Deathbringer Saurfang", {
-	[72293] = {"Attention","Personal"},
-	[72385] = {"Personal","Urgent"},
-	[72410] = {"Attention","Personal"},
-	[72737] = "Important",
-	["adds"] = {"Positive","Urgent"},
+	[72293] = {"yellow","blue"},
+	[72385] = {"blue","orange"},
+	[72410] = {"yellow","blue"},
+	[72737] = "red",
+	["adds"] = {"green","orange"},
 })
 
 BigWigs:AddColors("Sindragosa", {
-	[69762] = "Personal",
-	[69766] = "Personal",
-	[70106] = "Personal",
-	[70123] = "Important",
-	[70126] = {"Personal","Urgent"},
-	[70127] = "Attention",
-	["airphase"] = "Positive",
-	["phase2"] = "Positive",
+	[69762] = "blue",
+	[69766] = "blue",
+	[70106] = "blue",
+	[70123] = "red",
+	[70126] = {"blue","orange"},
+	[70127] = "yellow",
+	["airphase"] = "green",
+	["phase2"] = "green",
 })
 
 BigWigs:AddColors("Valithria Dreamwalker", {
-	[69325] = "Attention",
-	[71086] = "Personal",
-	["blazing"] = "Positive",
-	["portal"] = "Important",
+	[69325] = "yellow",
+	[71086] = "blue",
+	["blazing"] = "green",
+	["portal"] = "red",
 })

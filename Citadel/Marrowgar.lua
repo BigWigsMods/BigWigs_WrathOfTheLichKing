@@ -37,7 +37,7 @@ end
 
 function mod:OnEngage()
 	self:CDBar(69076, 45)
-	self:DelayedMessage(69076, 40, "Attention", L["bonestorm_warning"])
+	self:DelayedMessage(69076, 40, "yellow", L["bonestorm_warning"])
 end
 
 --------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ end
 do
 	local impaleTargets, scheduled = mod:NewTargetList(), nil
 	local function impaleWarn(spellId)
-		mod:TargetMessage(69057, impaleTargets, "Urgent", "Alert", spellId)
+		mod:TargetMessage(69057, impaleTargets, "orange", "Alert", spellId)
 		scheduled = nil
 	end
 	function mod:Impale(args)
@@ -61,7 +61,7 @@ end
 
 function mod:Coldflame(args)
 	if self:Me(args.destName) then
-		self:Message(69138, "Personal", "Alarm", CL["under"]:format(args.spellName))
+		self:Message(69138, "blue", "Alarm", CL["under"]:format(args.spellName))
 		self:Flash(69138)
 	end
 end
@@ -70,10 +70,10 @@ do
 	local function afterTheStorm()
 		if mod:Heroic() then
 			mod:Bar(69076, 55)
-			mod:DelayedMessage(69076, 50, "Attention", L["bonestorm_warning"])
+			mod:DelayedMessage(69076, 50, "yellow", L["bonestorm_warning"])
 		else
 			mod:CDBar(69076, 40) -- Bonestorm
-			mod:DelayedMessage(69076, 65, "Attention", L["bonestorm_warning"])
+			mod:DelayedMessage(69076, 65, "yellow", L["bonestorm_warning"])
 			mod:CDBar(69057, 18, 69062) -- Impale
 		end
 	end
@@ -88,6 +88,6 @@ do
 end
 
 function mod:BonestormCast(args)
-	self:Message(args.spellId, "Attention")
+	self:Message(args.spellId, "yellow")
 end
 

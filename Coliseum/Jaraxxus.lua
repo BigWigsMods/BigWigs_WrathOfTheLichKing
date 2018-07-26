@@ -92,17 +92,17 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 end
 
 function mod:IncinerateFlesh(args)
-	self:TargetMessage(args.spellId, args.destName, "Urgent", "Info", L["incinerate_message"])
+	self:TargetMessage(args.spellId, args.destName, "orange", "Info", L["incinerate_message"])
 	self:Bar(args.spellId, 12, L["incinerate_other"]:format(args.destName))
 end
 
 function mod:IncinerateFleshRemoved(args)
-	self:Message(args.spellId, "Positive", nil, L["incinerate_safe"]:format(args.destName), 17) -- Power Word: Shield icon.
+	self:Message(args.spellId, "green", nil, L["incinerate_safe"]:format(args.destName), 17) -- Power Word: Shield icon.
 	self:StopBar(L["incinerate_other"]:format(args.destName))
 end
 
 function mod:LegionFlame(args)
-	self:TargetMessage(args.spellId, args.destName, "Personal", "Alert", L["legionflame_message"])
+	self:TargetMessage(args.spellId, args.destName, "blue", "Alert", L["legionflame_message"])
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
@@ -112,24 +112,24 @@ end
 
 function mod:NetherPower(args)
 	if self:MobId(args.destGUID) == 34780 then
-		self:Message(args.spellId, "Attention")
+		self:Message(args.spellId, "yellow")
 		self:CDBar(args.spellId, 44)
 	end
 end
 
 function mod:NetherPortal(args)
-	self:Message("adds", "Urgent", "Alarm", args.spellId)
+	self:Message("adds", "orange", "Alarm", args.spellId)
 	self:Bar("adds", 60, L["infernal_bar"], 66258)
 end
 
 function mod:InfernalEruption(args)
-	self:Message("adds", "Urgent", "Alarm", args.spellId)
+	self:Message("adds", "orange", "Alarm", args.spellId)
 	self:Bar("adds", 60, L["netherportal_bar"], 66269)
 end
 
 function mod:MistressKiss(args)
 	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "Personal", nil, L["kiss_message"])
+		self:Message(args.spellId, "blue", nil, L["kiss_message"])
 		self:Bar(args.spellId, 15, L["kiss_message"])
 		self:Flash(args.spellId)
 	end
@@ -143,7 +143,7 @@ end
 
 function mod:MistressKissInterrupted(args)
 	if self:Me(args.destGUID) then
-		self:Message(66334, "Personal", nil, L["kiss_interrupted"])
+		self:Message(66334, "blue", nil, L["kiss_interrupted"])
 	end
 end
 

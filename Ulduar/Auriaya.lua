@@ -50,7 +50,7 @@ function mod:OnEngage()
 	self:Bar("defender", 60, L["defender_message"]:format(9), 64455)
 	local fear = self:SpellName(5782) -- 5782 = "Fear"
 	self:Bar(64386, 32, fear)
-	self:DelayedMessage(64386, 32, "Attention", CL.soon:format(fear))
+	self:DelayedMessage(64386, 32, "yellow", CL.soon:format(fear))
 	self:Berserk(600)
 end
 
@@ -59,13 +59,13 @@ end
 --
 
 function mod:SonicScreech(args)
-	self:Message(args.spellId, "Attention", "Warning")
+	self:Message(args.spellId, "yellow", "Warning")
 	self:Bar(args.spellId, 28)
 end
 
 function mod:DefenderSpawn(args)
 	-- Spawns with 9 lives
-	self:Message("defender", "Attention", nil, L.defender_message:format(9), args.spellId)
+	self:Message("defender", "yellow", nil, L.defender_message:format(9), args.spellId)
 end
 
 function mod:DefenderKill(args)
@@ -75,18 +75,18 @@ function mod:DefenderKill(args)
 end
 
 function mod:GuardianSwarm(args)
-	self:TargetMessage(args.spellId, args.destName, "Attention", "Alert", L.swarm_message, nil, self:Healer())
+	self:TargetMessage(args.spellId, args.destName, "yellow", "Alert", L.swarm_message, nil, self:Healer())
 	self:CDBar(args.spellId, 37, L.swarm_message)
 end
 
 function mod:TerrifyingScreech(args)
 	local fear = self:SpellName(5782) -- 5782 = "Fear"
-	self:Message(args.spellId, "Urgent", "Info", fear)
+	self:Message(args.spellId, "orange", "Info", fear)
 	self:CDBar(args.spellId, 35, fear)
-	self:DelayedMessage(args.spellId, 32, "Urgent", CL.soon:format(fear))
+	self:DelayedMessage(args.spellId, 32, "orange", CL.soon:format(fear))
 end
 
 function mod:SentinelBlast(args)
-	self:Message(args.spellId, "Important", "Long")
+	self:Message(args.spellId, "red", "Long")
 end
 

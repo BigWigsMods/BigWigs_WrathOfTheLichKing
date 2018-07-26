@@ -73,7 +73,7 @@ end
 
 function mod:OnEngage()
 	self:Bar("tsunami", 30, L["tsunami_cooldown"], 57491)
-	self:DelayedMessage("tsunami", 25, "Attention", L["tsunami_warning"])
+	self:DelayedMessage("tsunami", 25, "yellow", L["tsunami_warning"])
 	self:Berserk(900)
 end
 
@@ -86,7 +86,7 @@ end
 function mod:DrakeCheckShadron(args)
 	if not shadronStarted then
 		self:CDBar("drakes", 80, L.shadron, 58105)
-		self:DelayedMessage("drakes", 75, "Attention", L["drakes_incomingsoon"]:format(L.shadron))
+		self:DelayedMessage("drakes", 75, "yellow", L["drakes_incomingsoon"]:format(L.shadron))
 		shadronStarted = true
 	end
 end
@@ -95,7 +95,7 @@ end
 function mod:DrakeCheckTenebron(args)
 	if not tenebronStarted then
 		self:CDBar("drakes", 30, L.tenebron, 61248)
-		self:DelayedMessage("drakes", 25, "Attention", L["drakes_incomingsoon"]:format(L.tenebron))
+		self:DelayedMessage("drakes", 25, "yellow", L["drakes_incomingsoon"]:format(L.tenebron))
 		tenebronStarted = true
 	end
 end
@@ -104,7 +104,7 @@ end
 function mod:DrakeCheckVesperon(args)
 	if not vesperonStarted then
 		self:CDBar("drakes", 120, L.vesperon, 61251)
-		self:DelayedMessage("drakes", 115, "Attention", L["drakes_incomingsoon"]:format(L.vesperon))
+		self:DelayedMessage("drakes", 115, "yellow", L["drakes_incomingsoon"]:format(L.vesperon))
 		vesperonStarted = true
 	end
 end
@@ -114,25 +114,25 @@ function mod:Breath(args)
 end
 
 function mod:Tsunami()
-	self:Message("tsunami", "Important", "Alert", L["tsunami_message"], 57491)
+	self:Message("tsunami", "red", "Alert", L["tsunami_message"], 57491)
 	self:Bar("tsunami", 30, L["tsunami_cooldown"], 57491)
-	self:DelayedMessage("tsunami", 25, "Attention", L["tsunami_warning"])
+	self:DelayedMessage("tsunami", 25, "yellow", L["tsunami_warning"])
 end
 
 function mod:Tenebron(msg, mob)
 	if mob ~= L.tenebron then return end
 	self:Bar("twilight", 20, L["twilight_message_tenebron"], 23851)
-	self:Message("twilight", "Attention", nil, L["twilight_message_tenebron"], 23851)
+	self:Message("twilight", "yellow", nil, L["twilight_message_tenebron"], 23851)
 end
 
 function mod:Shadron(msg, mob)
 	if mob ~= L.shadron then return end
-	self:Message("twilight", "Urgent", nil, L["twilight_message"]:format(mob), 59570)
+	self:Message("twilight", "orange", nil, L["twilight_message"]:format(mob), 59570)
 end
 
 function mod:Vesperon(msg, mob)
 	if mob ~= L.vesperon then return end
-	self:Message("twilight", "Personal", "Alarm", L["twilight_message"]:format(mob), 59569)
+	self:Message("twilight", "blue", "Alarm", L["twilight_message"]:format(mob), 59569)
 	self:Flash("twilight", 59569)
 end
 

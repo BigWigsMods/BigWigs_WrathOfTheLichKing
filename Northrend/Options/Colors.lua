@@ -1,54 +1,54 @@
 
 BigWigs:AddColors("Archavon the Stone Watcher", {
-	[58663] = {"Attention","Positive"},
-	[58965] = {"Important","Personal"},
-	["charge"] = {"Attention","Personal"},
+	[58663] = {"yellow","green"},
+	[58965] = {"red","blue"},
+	["charge"] = {"yellow","blue"},
 })
 
 BigWigs:AddColors("Malygos", {
-	[57429] = "Urgent",
-	["breath"] = {"Attention","Important"},
-	["phase"] = "Attention",
-	["sparkbuff"] = "Important",
-	["sparks"] = {"Attention","Important"},
-	["surge"] = "Personal",
-	["vortex"] = "Attention",
+	[57429] = "orange",
+	["breath"] = {"yellow","red"},
+	["phase"] = "yellow",
+	["sparkbuff"] = "red",
+	["sparks"] = {"yellow","red"},
+	["surge"] = "blue",
+	["vortex"] = "yellow",
 })
 
 BigWigs:AddColors("Sartharion", {
-	["drakes"] = "Attention",
-	["tsunami"] = {"Attention","Important"},
-	["twilight"] = {"Attention","Personal","Urgent"},
+	["drakes"] = "yellow",
+	["tsunami"] = {"yellow","red"},
+	["twilight"] = {"yellow","blue","orange"},
 })
 
 BigWigs:AddColors("Halion", {
-	[74562] = "Personal",
-	[74648] = {"Important","Personal","Urgent"},
-	[74769] = "Important",
-	[74792] = "Personal",
+	[74562] = "blue",
+	[74648] = {"red","blue","orange"},
+	[74769] = "red",
+	[74792] = "blue",
 })
 
 BigWigs:AddColors("Emalon the Storm Watcher", {
-	[64216] = "Attention",
-	[64218] = "Positive",
+	[64216] = "yellow",
+	[64218] = "green",
 })
 
 BigWigs:AddColors("Koralon the Flame Watcher", {
-	[66665] = {"Attention","Positive"},
-	[66684] = "Personal",
-	[66725] = "Attention",
+	[66665] = {"yellow","green"},
+	[66684] = "blue",
+	[66725] = "yellow",
 })
 
 BigWigs:AddColors("Toravon the Ice Watcher", {
-	[72004] = {"Personal","Urgent"},
-	[72034] = {"Attention","Positive"},
-	[72090] = "Personal",
-	[72091] = "Important",
+	[72004] = {"blue","orange"},
+	[72034] = {"yellow","green"},
+	[72090] = "blue",
+	[72091] = "red",
 })
 
 BigWigs:AddColors("Onyxia", {
-	[17086] = "Urgent",
-	[18431] = "Attention",
-	[18435] = "Important",
-	["phase"] = "Positive",
+	[17086] = "orange",
+	[18431] = "yellow",
+	[18435] = "red",
+	["phase"] = "green",
 })

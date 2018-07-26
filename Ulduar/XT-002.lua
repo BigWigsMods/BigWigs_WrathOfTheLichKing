@@ -67,16 +67,16 @@ end
 --
 
 function mod:ExposedHeart(args)
-	self:Message(args.spellId, "Attention", "Long")
+	self:Message(args.spellId, "yellow", "Long")
 	self:Bar(args.spellId, 30)
 end
 
 function mod:Heartbreak()
-	self:Message(64193, "Important", "Info")
+	self:Message(64193, "red", "Info")
 end
 
 function mod:TympanicTantrum(args)
-	self:Message(args.spellId, "Attention", "Warning")
+	self:Message(args.spellId, "yellow", "Warning")
 	self:CDBar(args.spellId, 62)
 end
 
@@ -87,7 +87,7 @@ function mod:GravityBomb(args)
 		self:Say(args.spellId)
 		self:SayCountdown(args.spellId, 9)
 	end
-	self:TargetMessage(args.spellId, args.destName, "Personal", "Alert")
+	self:TargetMessage(args.spellId, args.destName, "blue", "Alert")
 	self:TargetBar(args.spellId, 9, args.destName, L.gravitybomb_other)
 	self:SecondaryIcon(args.spellId, args.destName)
 end
@@ -107,7 +107,7 @@ function mod:SearingLight(args)
 		self:Flash(args.spellId)
 		self:Say(args.spellId)
 	end
-	self:TargetMessage(args.spellId, args.destName, "Personal", "Alert")
+	self:TargetMessage(args.spellId, args.destName, "blue", "Alert")
 	self:TargetBar(args.spellId, 9, args.destName, L.lightbomb_other)
 	self:PrimaryIcon(args.spellId, args.destName)
 end
@@ -124,13 +124,13 @@ function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if not exposed1 and hp > 86 and hp < 90 then
 		exposed1 = true
-		self:Message(63849, "Attention", nil, CL.soon:format(self:SpellName(63849))) -- Exposed Heart soon
+		self:Message(63849, "yellow", nil, CL.soon:format(self:SpellName(63849))) -- Exposed Heart soon
 	elseif not exposed2 and hp > 56 and hp < 58 then
 		exposed2 = true
-		self:Message(63849, "Attention", nil, CL.soon:format(self:SpellName(63849)))
+		self:Message(63849, "yellow", nil, CL.soon:format(self:SpellName(63849)))
 	elseif not exposed3 and hp > 26 and hp < 28 then
 		exposed3 = true
 		self:UnregisterUnitEvent(event, unit)
-		self:Message(63849, "Attention", nil, CL.soon:format(self:SpellName(63849)))
+		self:Message(63849, "yellow", nil, CL.soon:format(self:SpellName(63849)))
 	end
 end

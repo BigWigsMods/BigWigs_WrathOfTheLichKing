@@ -103,7 +103,7 @@ do
 	function mod:Root(args)
 		root[#root + 1] = args.destName
 		if #root == 1 then
-			self:ScheduleTimer("TargetMessage", 0.2, 62861, root, "Attention", "Info")
+			self:ScheduleTimer("TargetMessage", 0.2, 62861, root, "yellow", "Info")
 		end
 	end
 end
@@ -119,15 +119,15 @@ do
 
 	function mod:Tremor(args)
 		local caster = isCaster()
-		self:Message(62437, caster and "Personal" or "Attention", caster and "Long")
+		self:Message(62437, caster and "blue" or "yellow", caster and "Long")
 		if caster then self:Flash(62437) end
 		self:Bar(62437, 2)
 		if stage == 1 then
 			self:CDBar(62437, 30, L.tremor_bar)
-			self:DelayedMessage(62437, 26, "Attention", L.tremor_warning)
+			self:DelayedMessage(62437, 26, "yellow", L.tremor_warning)
 		elseif stage == 2 then
 			self:CDBar(62437, 23, L.tremor_bar)
-			self:DelayedMessage(62437, 20, "Attention", L.tremor_warning)
+			self:DelayedMessage(62437, 20, "yellow", L.tremor_warning)
 		end
 	end
 end
@@ -139,7 +139,7 @@ do
 		if not bossId then return end
 		local target = UnitName(bossId .. "target")
 		if target then
-			mod:TargetMessage(62623, target, "Attention")
+			mod:TargetMessage(62623, target, "yellow")
 			mod:SecondaryIcon(62623, target)
 		end
 		handle = nil
@@ -157,7 +157,7 @@ function mod:Fury(args)
 		self:OpenProximity("proximity", 10)
 		self:Flash(62589)
 	end
-	self:TargetMessage(62589, args.destName, "Personal", "Alert", L.fury_message)
+	self:TargetMessage(62589, args.destName, "blue", "Alert", L.fury_message)
 	self:TargetBar(62589, 10, args.destName, L.fury_message)
 	self:PrimaryIcon(62589, args.destName)
 end
@@ -172,7 +172,7 @@ end
 function mod:AttunedRemove()
 	stage = 2
 	self:StopBar(L.wave_bar)
-	self:Message("stages", "Important", nil, CL.stage:format(2), false)
+	self:Message("stages", "red", nil, CL.stage:format(2), false)
 end
 
 do
@@ -182,7 +182,7 @@ do
 			local t = GetTime()
 			if t-prev > 4 then
 				prev = t
-				self:Message(62865, "Personal", "Alarm", L.energy_message, 62451)
+				self:Message(62865, "blue", "Alarm", L.energy_message, 62451)
 				self:Flash(62865)
 			end
 		end
@@ -195,7 +195,7 @@ do
 		local t = GetTime()
 		if t-prev > 10 then
 			prev = t
-			self:Message(62865, "Important", nil, L.sunbeam_message)
+			self:Message(62865, "red", nil, L.sunbeam_message)
 		end
 	end
 	function mod:SunBeamDeath()
@@ -205,19 +205,19 @@ end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg == L.conservator_trigger then
-		self:Message("wave", "Positive", nil, L.conservator_message, 35594)
+		self:Message("wave", "green", nil, L.conservator_message, 35594)
 		self:Bar("wave", 60, L.wave_bar, 35594)
 	elseif msg == L.detonate_trigger then
-		self:Message("wave", "Positive", nil, L.detonate_message, 35594)
+		self:Message("wave", "green", nil, L.detonate_message, 35594)
 		self:Bar("wave", 60, L.wave_bar, 35594)
 	elseif msg == L.elementals_trigger then
-		self:Message("wave", "Positive", nil, L.elementals_message, 35594)
+		self:Message("wave", "green", nil, L.elementals_message, 35594)
 		self:Bar("wave", 60, L.wave_bar, 35594)
 	end
 end
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
 	if msg == L.tree_trigger then
-		self:Message("tree", "Urgent", "Alarm", L.tree_message, 5420) -- 5420 / Incarnation: Tree of Life / ability_druid_treeoflife / icon 132145
+		self:Message("tree", "orange", "Alarm", L.tree_message, 5420) -- 5420 / Incarnation: Tree of Life / ability_druid_treeoflife / icon 132145
 	end
 end
