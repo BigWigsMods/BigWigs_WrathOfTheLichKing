@@ -96,7 +96,7 @@ end
 local function waveWarn(message, color)
 	wave = wave + 1
 	if wave < 24 then
-		mod:Message("add", color, nil, L["wave"]:format(wave, message), false) -- SetOption:add:Attention,Urgent,Important::
+		mod:Message("add", color, nil, L["wave"]:format(wave, message), false) -- SetOption:add:yellow,orange,red::
 	end
 	if wave == 23 then
 		mod:StopBar(L["trabar"]:format(numTrainer - 1))
