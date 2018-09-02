@@ -1,5 +1,5 @@
 
-L = BigWigs:NewBossLocale("Halion", "esES")
+local L = BigWigs:NewBossLocale("Halion", "esES")
 if L then
 	L.engage_trigger = "Vuestro mundo está al borde de la aniquilación."
 
