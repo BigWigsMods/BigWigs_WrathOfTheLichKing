@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Archavon the Stone Watcher", 624, 1597)
 if not mod then return end
 mod:RegisterEnableMob(31125)
-mod.toggleOptions = {58663, "charge", {58678, "MESSAGE", "ICON"}, {58965, "FLASH"}, "berserk"}
+mod.toggleOptions = {58663, "charge", {58678, "MESSAGE", "ICON"}, {58965, "FLASH", "ICON"}, "berserk"}
 
 --------------------------------------------------------------------------------
 -- Localization

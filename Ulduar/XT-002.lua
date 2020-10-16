@@ -33,7 +33,7 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		{64234, "ICON", "FLASH", "SAY", "PROXIMITY"}, -- Gravity Bomb
+		{64234, "ICON", "FLASH", "SAY", "SAY_COUNTDOWN", "PROXIMITY"}, -- Gravity Bomb
 		{65121, "ICON", "FLASH", "SAY", "PROXIMITY"}, -- Searing Light
 		62776, -- Tympanic Tantrum
 		64193, -- Heartbreak
