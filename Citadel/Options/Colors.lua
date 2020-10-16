@@ -20,13 +20,13 @@ BigWigs:AddColors("Lady Deathwhisper", {
 	[70842] = "green",
 	[71001] = "blue",
 	[71204] = {"blue","orange"},
-	[71289] = {"red","blue"},
+	[71289] = {"blue","red"},
 	[71426] = "yellow",
-	["adds"] = {"yellow","orange"},
+	["adds"] = {"orange","yellow"},
 })
 
 BigWigs:AddColors("Putricide Dogs", {
-	[71127] = {"red","blue"},
+	[71127] = {"blue","red"},
 })
 
 BigWigs:AddColors("Festergut", {
@@ -45,26 +45,26 @@ BigWigs:AddColors("Icecrown Gunship Battle", {
 
 BigWigs:AddColors("Blood-Queen Lana'thel", {
 	[70877] = "orange",
-	[71265] = {"yellow","blue"},
-	[71340] = {"red","blue"},
-	[71623] = {"yellow","blue"},
+	[71265] = {"blue","yellow"},
+	[71340] = {"blue","red"},
+	[71623] = {"blue","yellow"},
 	[71772] = "red",
 })
 
 BigWigs:AddColors("The Lich King", {
-	[68980] = {"yellow","blue"},
+	[68980] = {"blue","yellow"},
 	[68981] = "orange",
-	[69037] = {"yellow","blue","orange"},
+	[69037] = {"blue","orange","yellow"},
 	[69200] = "blue",
 	[69409] = "blue",
 	[70337] = "blue",
-	[70372] = {"yellow","red"},
+	[70372] = {"red","yellow"},
 	[70498] = "orange",
 	[70541] = "orange",
 	[72143] = "yellow",
 	[72262] = "orange",
-	[72762] = {"red","blue"},
-	[73529] = {"yellow","blue"},
+	[72762] = {"blue","red"},
+	[73529] = {"blue","yellow"},
 })
 
 BigWigs:AddColors("Lord Marrowgar", {
@@ -79,9 +79,9 @@ BigWigs:AddColors("Professor Putricide", {
 	[70672] = "blue",
 	[70911] = "blue",
 	[71255] = "orange",
-	[72295] = {"yellow","blue"},
+	[72295] = {"blue","yellow"},
 	[72451] = {"blue","orange"},
-	["phase"] = {"red","green"},
+	["phase"] = {"green","red"},
 })
 
 BigWigs:AddColors("Rotface", {
@@ -92,9 +92,9 @@ BigWigs:AddColors("Rotface", {
 })
 
 BigWigs:AddColors("Deathbringer Saurfang", {
-	[72293] = {"yellow","blue"},
+	[72293] = {"blue","yellow"},
 	[72385] = {"blue","orange"},
-	[72410] = {"yellow","blue"},
+	[72410] = {"blue","yellow"},
 	[72737] = "red",
 	["adds"] = {"green","orange"},
 })

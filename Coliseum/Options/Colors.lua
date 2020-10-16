@@ -5,14 +5,14 @@ BigWigs:AddColors("The Beasts of Northrend", {
 	[66331] = {"blue","orange"},
 	[66758] = "green",
 	[66759] = "red",
-	[66770] = {"yellow","blue"},
+	[66770] = {"blue","yellow"},
 	[66823] = {"blue","orange"},
 	[66869] = {"blue","orange"},
-	[66883] = {"yellow","blue"},
+	[66883] = {"blue","yellow"},
 	[68335] = "red",
 	["bosses"] = "green",
 	["charge"] = "blue",
-	["snobold"] = {"yellow","blue"},
+	["snobold"] = {"blue","yellow"},
 	["spew"] = "yellow",
 	["sprays"] = "red",
 })
@@ -26,11 +26,11 @@ BigWigs:AddColors("Lord Jaraxxus", {
 })
 
 BigWigs:AddColors("Faction Champions", {
-	[65801] = {"yellow","blue"},
+	[65801] = {"blue","yellow"},
 	[65816] = {"blue","orange"},
-	[65877] = {"yellow","blue"},
+	[65877] = {"blue","yellow"},
 	[65947] = "red",
-	[65960] = {"yellow","blue"},
+	[65960] = {"blue","yellow"},
 	[65980] = "red",
 	[65983] = "red",
 	[66010] = "orange",
@@ -39,7 +39,7 @@ BigWigs:AddColors("Faction Champions", {
 })
 
 BigWigs:AddColors("The Twin Val'kyr", {
-	["shield"] = {"red","orange"},
+	["shield"] = {"orange","red"},
 	["touch"] = "blue",
 	["vortex"] = {"blue","green"},
 })
@@ -49,5 +49,5 @@ BigWigs:AddColors("Anub'arak", {
 	[66118] = "red",
 	[66134] = "yellow",
 	[67574] = "blue",
-	["burrow"] = {"yellow","orange"},
+	["burrow"] = {"orange","yellow"},
 })

@@ -1,23 +1,23 @@
 
 BigWigs:AddColors("Anub'Rekhan", {
-	[28785] = {"yellow","red"},
+	[28785] = {"red","yellow"},
 })
 
 BigWigs:AddColors("Grand Widow Faerlina", {
 	[28732] = {"green","orange"},
 	[28794] = "blue",
-	[28798] = {"yellow","red","green","orange"},
+	[28798] = {"green","orange","red","yellow"},
 })
 
 BigWigs:AddColors("Gluth", {
 	[28371] = "red",
-	[54426] = {"yellow","orange"},
+	[54426] = {"orange","yellow"},
 })
 
 BigWigs:AddColors("Gothik the Harvester", {
-	["add"] = {"yellow","red","orange"},
+	["add"] = {"orange","red","yellow"},
 	["adddeath"] = "red",
-	["room"] = {"yellow","red","orange"},
+	["room"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddColors("Grobbulus", {
@@ -27,43 +27,43 @@ BigWigs:AddColors("Grobbulus", {
 
 BigWigs:AddColors("Heigan the Unclean", {
 	["engage"] = "yellow",
-	["teleport"] = {"yellow","red","orange"},
+	["teleport"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddColors("The Four Horsemen", {
 	[28863] = "red",
 	[28883] = "red",
 	[28884] = "red",
-	["mark"] = {"yellow","red","orange"},
+	["mark"] = {"orange","red","yellow"},
 	["stages"] = "green",
 })
 
 BigWigs:AddColors("Kel'Thuzad", {
-	[27808] = {"yellow","red","blue"},
+	[27808] = {"blue","red","yellow"},
 	[27810] = "red",
-	[27819] = {"yellow","blue"},
-	[28410] = {"red","blue","orange"},
+	[27819] = {"blue","yellow"},
+	[28410] = {"blue","orange","red"},
 	["guardians"] = "red",
-	["phase"] = {"yellow","red"},
+	["phase"] = {"red","yellow"},
 })
 
 BigWigs:AddColors("Loatheb", {
-	[29204] = {"yellow","red","orange"},
+	[29204] = {"orange","red","yellow"},
 	[29234] = "red",
-	[29865] = {"yellow","red"},
-	[55593] = {"yellow","red"},
+	[29865] = {"red","yellow"},
+	[55593] = {"red","yellow"},
 })
 
 BigWigs:AddColors("Maexxna", {
-	[28622] = {"red","blue"},
-	[29484] = {"yellow","red"},
-	[54123] = {"yellow","red"},
+	[28622] = {"blue","red"},
+	[29484] = {"red","yellow"},
+	[54123] = {"red","yellow"},
 })
 
 BigWigs:AddColors("Noth the Plaguebringer", {
-	[29213] = {"red","orange"},
-	["blink"] = {"yellow","red"},
-	["teleport"] = {"yellow","red","orange"},
+	[29213] = {"orange","red"},
+	["blink"] = {"red","yellow"},
+	["teleport"] = {"orange","red","yellow"},
 	["wave"] = "orange",
 })
 
@@ -72,20 +72,20 @@ BigWigs:AddColors("Patchwerk", {
 })
 
 BigWigs:AddColors("Instructor Razuvious", {
-	[29060] = {"yellow","green"},
-	[29061] = {"yellow","green"},
-	[55543] = {"yellow","red"},
-	[55550] = {"red","blue"},
+	[29060] = {"green","yellow"},
+	[29061] = {"green","yellow"},
+	[55543] = {"red","yellow"},
+	[55550] = {"blue","red"},
 })
 
 BigWigs:AddColors("Sapphiron", {
-	[28522] = {"yellow","blue"},
-	[28524] = {"yellow","red"},
-	[28542] = {"red","orange"},
+	[28522] = {"blue","yellow"},
+	[28524] = {"red","yellow"},
+	[28542] = {"orange","red"},
 })
 
 BigWigs:AddColors("Thaddius", {
-	[28089] = {"red","blue","green"},
+	[28089] = {"blue","green","red"},
 	[28134] = "red",
 	["phase"] = "red",
 	["throw"] = "orange",

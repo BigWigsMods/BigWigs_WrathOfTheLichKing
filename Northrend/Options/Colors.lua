@@ -1,29 +1,29 @@
 
 BigWigs:AddColors("Archavon the Stone Watcher", {
-	[58663] = {"yellow","green"},
-	[58965] = {"red","blue"},
-	["charge"] = {"yellow","blue"},
+	[58663] = {"green","yellow"},
+	[58965] = {"blue","red"},
+	["charge"] = {"blue","yellow"},
 })
 
 BigWigs:AddColors("Malygos", {
 	[57429] = "orange",
-	["breath"] = {"yellow","red"},
+	["breath"] = {"red","yellow"},
 	["phase"] = "yellow",
 	["sparkbuff"] = "red",
-	["sparks"] = {"yellow","red"},
+	["sparks"] = {"red","yellow"},
 	["surge"] = "blue",
 	["vortex"] = "yellow",
 })
 
 BigWigs:AddColors("Sartharion", {
 	["drakes"] = "yellow",
-	["tsunami"] = {"yellow","red"},
-	["twilight"] = {"yellow","blue","orange"},
+	["tsunami"] = {"red","yellow"},
+	["twilight"] = {"blue","orange","yellow"},
 })
 
 BigWigs:AddColors("Halion", {
 	[74562] = "blue",
-	[74648] = {"red","blue","orange"},
+	[74648] = {"blue","orange","red"},
 	[74769] = "red",
 	[74792] = "blue",
 })
@@ -34,14 +34,14 @@ BigWigs:AddColors("Emalon the Storm Watcher", {
 })
 
 BigWigs:AddColors("Koralon the Flame Watcher", {
-	[66665] = {"yellow","green"},
+	[66665] = {"green","yellow"},
 	[66684] = "blue",
 	[66725] = "yellow",
 })
 
 BigWigs:AddColors("Toravon the Ice Watcher", {
 	[72004] = {"blue","orange"},
-	[72034] = {"yellow","green"},
+	[72034] = {"green","yellow"},
 	[72090] = "blue",
 	[72091] = "red",
 })
