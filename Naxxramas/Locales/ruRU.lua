@@ -229,7 +229,7 @@ if L then
 	L.starttrigger2 = "Кел'Тузад объявил Лоскутика воплощением войны!"
 end
 
-L = BigWigs:NewBossLocale("BigWigs_Bosses_Maexxna", "ruRU")
+L = BigWigs:NewBossLocale("Maexxna", "ruRU")
 if L then
 	L.webspraywarn30sec = "Паутина через 10 секунд"
 	L.webspraywarn20sec = "Паутина! 10 секунд до появления пауков!"
