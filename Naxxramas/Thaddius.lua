@@ -83,7 +83,7 @@ function mod:StalaggPower(args)
 	self:Bar(28134, 10)
 end
 
-function mod:UNIT_AURA(_, unit)
+function mod:UNIT_AURA(event, unit)
 	if not shiftTime or (GetTime() - shiftTime) < 3 then return end
 
 	local newCharge = 0
@@ -117,7 +117,7 @@ function mod:UNIT_AURA(_, unit)
 		end
 		lastCharge = newCharge
 		shiftTime = nil
-		self:UnregisterUnitEvent("UNIT_AURA")
+		self:UnregisterUnitEvent(event, unit)
 	end
 end
 
@@ -152,4 +152,3 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		self:Berserk(360, true)
 	end
 end
-
