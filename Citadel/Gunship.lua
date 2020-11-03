@@ -44,9 +44,9 @@ L = mod:GetLocale()
 --
 
 function mod:OnBossEnable()
-	self:Yell("Warmup", L["warmup_trigger_alliance"], L["warmup_trigger_horde"])
-	self:Yell("AddsPortal", L["adds_trigger_alliance"], L["adds_trigger_horde"]) --XXX unreliable, change to repeater
-	self:Yell("Defeated", L["disable_trigger_alliance"], L["disable_trigger_horde"])
+	self:BossYell("Warmup", L["warmup_trigger_alliance"], L["warmup_trigger_horde"])
+	self:BossYell("AddsPortal", L["adds_trigger_alliance"], L["adds_trigger_horde"]) --XXX unreliable, change to repeater
+	self:BossYell("Defeated", L["disable_trigger_alliance"], L["disable_trigger_horde"])
 	self:Log("SPELL_CAST_START", "Frozen", 69705)
 	self:Log("SPELL_AURA_REMOVED", "FrozenCD", 69705)
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT")

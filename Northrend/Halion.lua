@@ -53,9 +53,9 @@ function mod:OnBossEnable()
 	self:Death("Win", 39863, 40142)
 
 	self:Emote("TwilightCutter", L["twilight_cutter_trigger"])
-	self:Yell("Engage", L["engage_trigger"])
-	self:Yell("PhaseTwo", L["phase_two_trigger"])
-	self:Yell("MeteorInc", L["meteorstrike_yell"])
+	self:BossYell("Engage", L["engage_trigger"])
+	self:BossYell("PhaseTwo", L["phase_two_trigger"])
+	self:BossYell("MeteorInc", L["meteorstrike_yell"])
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 end

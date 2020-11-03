@@ -27,7 +27,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Frenzy", 28131)
 	self:Death("Win", 16028)
 
-	self:Yell("Engage", L["starttrigger1"], L["starttrigger2"])
+	self:BossYell("Engage", L["starttrigger1"], L["starttrigger2"])
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 end
 

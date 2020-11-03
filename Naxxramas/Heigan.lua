@@ -43,8 +43,8 @@ L = mod:GetLocale()
 --
 
 function mod:OnBossEnable()
-	self:Yell("Engage", L["starttrigger"], L["starttrigger2"], L["starttrigger3"])
-	self:Yell("Teleport", L["teleport_trigger"])
+	self:BossYell("Engage", L["starttrigger"], L["starttrigger2"], L["starttrigger3"])
+	self:BossYell("Teleport", L["teleport_trigger"])
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 15936)
 end

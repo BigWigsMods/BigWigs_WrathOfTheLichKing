@@ -59,7 +59,7 @@ function mod:OnBossEnable()
 	self:Death("Win", 36855)
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Yell("Engage", L["engage_trigger"])
+	self:BossYell("Engage", L["engage_trigger"])
 end
 
 local function adds(time)

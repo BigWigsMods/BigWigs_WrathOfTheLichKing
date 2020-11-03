@@ -65,7 +65,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "UnboundPlague", 70911)
 	self:Log("SPELL_CAST_START", "VolatileExperiment", 72840)
 
-	self:Yell("Engage", L["engage_trigger"])
+	self:BossYell("Engage", L["engage_trigger"])
 	self:Death("RedOozeDeath", 37562)
 	self:Death("Win", 36678)
 end

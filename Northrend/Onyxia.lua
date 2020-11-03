@@ -36,8 +36,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Fear", 18431)
 	self:Log("SPELL_CAST_START", "DeepBreath", 17086, 18351, 18564, 18576, 18584, 18596, 18609, 18617)
 	self:Log("SPELL_CAST_START", "FlameBreath", 18435)
-	self:Yell("Phase2", L["phase2_trigger"])
-	self:Yell("Phase3", L["phase3_trigger"])
+	self:BossYell("Phase2", L["phase2_trigger"])
+	self:BossYell("Phase3", L["phase3_trigger"])
 end
 
 --------------------------------------------------------------------------------

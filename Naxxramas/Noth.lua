@@ -65,7 +65,7 @@ L = mod:GetLocale()
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Curse", 29213, 54835)
 
-	self:Yell("Engage", L["starttrigger1"], L["starttrigger2"], L["starttrigger3"])
+	self:BossYell("Engage", L["starttrigger1"], L["starttrigger2"], L["starttrigger3"])
 	self:Emote("Blink", L["blinktrigger"])
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")

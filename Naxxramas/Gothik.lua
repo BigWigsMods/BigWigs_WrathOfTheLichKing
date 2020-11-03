@@ -76,8 +76,8 @@ function mod:OnBossEnable()
 	self:Death("DKDead", 16125)
 	self:Death("RiderDead", 16126)
 	self:Death("Win", 16060)
-	self:Yell("Engage", L["starttrigger1"], L["starttrigger2"])
-	self:Yell("InRoom", L["inroomtrigger"])
+	self:BossYell("Engage", L["starttrigger1"], L["starttrigger2"])
+	self:BossYell("InRoom", L["inroomtrigger"])
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 end
 

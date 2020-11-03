@@ -93,8 +93,8 @@ function mod:OnBossEnable()
 	self:Death("Win", 36597)
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Yell("Warmup", L["warmup_trigger"])
-	self:Yell("Engage", L["engage_trigger"])
+	self:BossYell("Warmup", L["warmup_trigger"])
+	self:BossYell("Engage", L["engage_trigger"])
 end
 
 function mod:Warmup()

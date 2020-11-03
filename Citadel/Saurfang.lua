@@ -48,9 +48,9 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Frenzy", 72737)
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Yell("Engage", L["engage_trigger"])
-	self:Yell("WarmupHorde", L["warmup_horde"])
-	self:Yell("WarmupAlliance", L["warmup_alliance"])
+	self:BossYell("Engage", L["engage_trigger"])
+	self:BossYell("WarmupHorde", L["warmup_horde"])
+	self:BossYell("WarmupAlliance", L["warmup_alliance"])
 
 	self:Death("Win", 37813)
 end

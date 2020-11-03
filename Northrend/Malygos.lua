@@ -66,9 +66,9 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Vortex", 56105)
 	self:Death("Win", 28859)
 
-	self:Yell("Phase2", L["phase2_trigger"])
-	self:Yell("P2End", L["phase2_end_trigger"])
-	self:Yell("Phase3", L["phase3_trigger"])
+	self:BossYell("Phase2", L["phase2_trigger"])
+	self:BossYell("P2End", L["phase2_end_trigger"])
+	self:BossYell("Phase3", L["phase3_trigger"])
 
 	self:RegisterEvent("RAID_BOSS_WHISPER")
 	self:RegisterEvent("RAID_BOSS_EMOTE")

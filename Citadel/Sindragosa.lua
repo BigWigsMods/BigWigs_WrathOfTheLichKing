@@ -65,9 +65,9 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Grip", 70117)
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Yell("Warmup", L["engage_trigger"])
-	self:Yell("AirPhase", L["airphase_trigger"])
-	self:Yell("Phase2", L["phase2_trigger"])
+	self:BossYell("Warmup", L["engage_trigger"])
+	self:BossYell("AirPhase", L["airphase_trigger"])
+	self:BossYell("Phase2", L["phase2_trigger"])
 	self:Death("Win", 36853)
 end
 

@@ -49,7 +49,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "LightShield", 65858)
 	self:Log("SPELL_AURA_APPLIED", "Touch", 66001, 65950) -- Dark/Light
 
-	self:Yell("Engage", L["engage_trigger1"])
+	self:BossYell("Engage", L["engage_trigger1"])
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 34496)
 

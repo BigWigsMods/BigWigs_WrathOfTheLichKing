@@ -56,9 +56,9 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "LayWasteRemoved", 69325)
 	self:Log("SPELL_CAST_START", "Win", 71189)
 
-	self:Yell("Portal", L["portal_trigger"])
+	self:BossYell("Portal", L["portal_trigger"])
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Yell("Engage", L["engage_trigger"])
+	self:BossYell("Engage", L["engage_trigger"])
 end
 
 do

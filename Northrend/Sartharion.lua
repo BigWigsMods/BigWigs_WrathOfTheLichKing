@@ -65,7 +65,7 @@ function mod:OnBossEnable()
 	self:Emote("Shadron", L["twilight_trigger_shadron"])
 	self:Emote("Vesperon", L["twilight_trigger_vesperon"])
 
-	self:Yell("Engage", L["engage_trigger"])
+	self:BossYell("Engage", L["engage_trigger"])
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 
 	shadronStarted, tenebronStarted, vesperonStarted = nil, nil, nil

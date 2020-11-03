@@ -30,7 +30,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Coldflame", 69146)
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Yell("Engage", L["engage_trigger"])
+	self:BossYell("Engage", L["engage_trigger"])
 
 	self:Death("Win", 36612)
 end

@@ -83,7 +83,7 @@ function mod:OnBossEnable()
 	self:Emote("Burrow", L["burrow_trigger"])
 	self:Emote("Surface", L["unburrow_trigger"])
 
-	self:Yell("Engage", L["engage_trigger"])
+	self:BossYell("Engage", L["engage_trigger"])
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 34564)
 end

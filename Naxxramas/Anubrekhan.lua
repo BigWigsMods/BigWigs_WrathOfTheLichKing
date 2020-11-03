@@ -40,7 +40,7 @@ function mod:OnBossEnable()
 	self:Death("Win", 15956)
 
 	started = nil
-	self:Yell("Engage", L["starttrigger1"], L["starttrigger2"], L["starttrigger3"])
+	self:BossYell("Engage", L["starttrigger1"], L["starttrigger2"], L["starttrigger3"])
 end
 
 function mod:OnEngage(diff)

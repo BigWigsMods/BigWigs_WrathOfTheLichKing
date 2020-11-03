@@ -55,7 +55,7 @@ function mod:OnBossEnable()
 	-- 71623. 72264 are 10 man (and so on)
 	self:Log("SPELL_AURA_APPLIED", "Slash", 71623, 72264)
 
-	self:Yell("Engage", L["engage_trigger"])
+	self:BossYell("Engage", L["engage_trigger"])
 	self:Emote("Shadows", L["shadow"])
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
