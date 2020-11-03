@@ -176,17 +176,14 @@ end
 -- Gormok the Impaler
 --
 
-do
-	local snobolled = GetSpellInfo(66406)
-	function mod:UNIT_AURA(_, unit)
-		local debuffed = self:UnitDebuff(unit, snobolled)
-		local player = self:UnitName(unit)
-		if snobolledWarned[player] and not debuffed then
-			snobolledWarned[player] = nil
-		elseif debuffed and not snobolledWarned[player] then
-			self:TargetMessage("snobold", player, "yellow", nil, L["snobold_message"], 66406)
-			snobolledWarned[player] = true
-		end
+function mod:UNIT_AURA(_, unit)
+	local debuffed = self:UnitDebuff(unit, self:SpellName(66406)) -- Snobolled!
+	local player = self:UnitName(unit)
+	if snobolledWarned[player] and not debuffed then
+		snobolledWarned[player] = nil
+	elseif debuffed and not snobolledWarned[player] then
+		self:TargetMessage("snobold", player, "yellow", nil, L["snobold_message"], 66406)
+		snobolledWarned[player] = true
 	end
 end
 
