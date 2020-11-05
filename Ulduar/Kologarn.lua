@@ -71,7 +71,7 @@ do
 		grip[#grip + 1] = args.destName
 		if #grip == 1 then
 			self:Bar(64290, 10)
-			self:ScheduleTimer("TargetMessage", 0.2, 64290, grip, "yellow", "Alert")
+			self:ScheduleTimer("TargetMessageOld", 0.2, 64290, grip, "yellow", "Alert")
 		end
 	end
 end

@@ -88,7 +88,7 @@ function mod:FlashFreeze(args)
 	if args.destGUID:find("Player", nil, true) then -- Applies to NPCs
 		flashFreezed[#flashFreezed + 1] = args.destName
 		if #flashFreezed == 1 then
-			self:ScheduleTimer("TargetMessage", 0.3, 61968, flashFreezed, "orange", "Alert")
+			self:ScheduleTimer("TargetMessageOld", 0.3, 61968, flashFreezed, "orange", "Alert")
 		end
 	end
 end
