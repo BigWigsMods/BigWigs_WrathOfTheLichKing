@@ -162,7 +162,7 @@ do
 		self:StopBar(L["blight_message"], oldBlightBar)
 		oldBlightBar = args.destName
 		self:TargetBar(70672, 20, oldBlightBar, L["blight_message"])
-		self:TargetMessage(70672, args.destName, "blue", nil, L["blight_message"], args.spellId)
+		self:TargetMessageOld(70672, args.destName, "blue", nil, L["blight_message"], args.spellId)
 	end
 	function mod:RedOozeDeath()
 		self:StopBar(L["blight_message"], oldBlightBar)
@@ -170,7 +170,7 @@ do
 end
 
 function mod:StunnedByGreenOoze(args)
-	self:TargetMessage(70447, args.destName, "blue", nil, L["violation_message"])
+	self:TargetMessageOld(70447, args.destName, "blue", nil, L["violation_message"])
 	self:PrimaryIcon(70447, args.destName)
 end
 
@@ -196,7 +196,7 @@ do
 				mod:Flash(72295)
 				mod:Say(72295, L["ball_say"], true)
 			end
-			mod:TargetMessage(72295, mod:UnitName(bossTarget), "yellow")
+			mod:TargetMessageOld(72295, mod:UnitName(bossTarget), "yellow")
 		end
 	end
 	function mod:BouncingGooBall(args)
@@ -216,7 +216,7 @@ do
 			oldPlagueBar = args.destName
 			self:TargetBar(70911, expirationTime - GetTime(), args.destName)
 		end
-		self:TargetMessage(70911, args.destName, "blue", "Alert")
+		self:TargetMessageOld(70911, args.destName, "blue", "Alert")
 		self:SecondaryIcon(70911, args.destName)
 		if self:Me(args.destGUID) then
 			self:Flash(70911)

@@ -97,7 +97,7 @@ end
 do
 	local beaconTargets, scheduled = mod:NewTargetList(), nil
 	local function baconWarn()
-		mod:TargetMessage(70126, beaconTargets, "orange")
+		mod:TargetMessageOld(70126, beaconTargets, "orange")
 		mod:Bar(70126, 7)
 		scheduled = nil
 	end

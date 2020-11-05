@@ -105,7 +105,7 @@ end
 
 function mod:BigWigs_BossComm(_, msg, _, sender)
 	if msg == "EyeBeamWarn" then
-		self:TargetMessage("eyebeam", sender, "green", "Info", eyeBeam, 63976)
+		self:TargetMessageOld("eyebeam", sender, "green", "Info", eyeBeam, 63976)
 		self:TargetBar("eyebeam", 11, sender, eyeBeam, 63976)
 		self:CDBar("eyebeam", 20, eyeBeam, 63976)
 		self:PrimaryIcon("eyebeam", sender)

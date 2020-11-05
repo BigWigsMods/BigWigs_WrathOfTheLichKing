@@ -101,12 +101,12 @@ function mod:LightningChargeApplied(args) -- Lightning Charge on Thorim
 end
 
 function mod:Stormhammer(args)
-	self:TargetMessage(args.spellId, args.destName, "orange")
+	self:TargetMessageOld(args.spellId, args.destName, "orange")
 	self:Bar(args.spellId, 16)
 end
 
 function mod:UnbalancingStrike(args)
-	self:TargetMessage(args.spellId, args.destName, "yellow")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow")
 	self:TargetBar(args.spellId, 15, args.destName)
 end
 
@@ -138,14 +138,14 @@ do
 end
 
 function mod:Impale(args)
-	self:TargetMessage(62331, args.destName, "red")
+	self:TargetMessageOld(62331, args.destName, "red")
 end
 
 function mod:RuneDetonation(args)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId, 40332) -- 40332 = "Bomb"
 	end
-	self:TargetMessage(args.spellId, args.destName, "red")
+	self:TargetMessageOld(args.spellId, args.destName, "red")
 	self:TargetBar(args.spellId, 4, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
 end

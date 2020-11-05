@@ -70,7 +70,7 @@ end
 do
 	local freezeTargets, scheduled = mod:NewTargetList(), nil
 	local function freezeWarn()
-		mod:TargetMessage(72090, freezeTargets, "blue", nil, L["freeze_message"])
+		mod:TargetMessageOld(72090, freezeTargets, "blue", nil, L["freeze_message"])
 		scheduled = nil
 	end
 	function mod:Freeze(args)

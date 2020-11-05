@@ -103,7 +103,7 @@ function mod:RegularShock()
 					self:Flash(72037)
 					self:Say(72037)
 				end
-				self:TargetMessage(72037, self:UnitName(bossTarget), "orange", nil, L["regular_shock_message"])
+				self:TargetMessageOld(72037, self:UnitName(bossTarget), "orange", nil, L["regular_shock_message"])
 				self:CDBar(72037, 16, L["shock_bar"])
 			end
 			break
@@ -115,7 +115,7 @@ function mod:EmpoweredFlame(msg, _, _, _, player)
 	if UnitIsUnit(player, "player") then
 		self:Flash(72040)
 	end
-	self:TargetMessage(72040, player, "orange", "Long", L["empowered_flames"])
+	self:TargetMessageOld(72040, player, "orange", "Long", L["empowered_flames"])
 	self:SecondaryIcon(72040, player)
 	self:CDBar(72040, 20, L["empowered_flames"])
 end

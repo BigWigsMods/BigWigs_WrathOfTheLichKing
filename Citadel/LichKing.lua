@@ -186,7 +186,7 @@ function mod:VileSpirits(args)
 end
 
 function mod:SoulReaper(args)
-	self:TargetMessage(69409, args.destName, "blue", "Alert")
+	self:TargetMessageOld(69409, args.destName, "blue", "Alert")
 	self:CDBar(69409, 30)
 end
 
@@ -194,7 +194,7 @@ function mod:NecroticPlague(args)
 	if self:Me(args.destGUID) then
 		self:Flash(70337)
 	end
-	self:TargetMessage(70337, args.destName, "blue", "Alert")
+	self:TargetMessageOld(70337, args.destName, "blue", "Alert")
 	self:Bar(70337, 30)
 	self:SecondaryIcon(70337, args.destName)
 end
@@ -208,7 +208,7 @@ do
 					mod:Flash(70337)
 				end
 				local player = mod:UnitName(unit)
-				mod:TargetMessage(70337, player, "blue", "Alert")
+				mod:TargetMessageOld(70337, player, "blue", "Alert")
 				mod:SecondaryIcon(70337, player)
 			end
 		end
@@ -228,7 +228,7 @@ function mod:Enrage(args)
 end
 
 function mod:RagingSpirit(args)
-	self:TargetMessage(69200, args.destName, "blue", "Alert")
+	self:TargetMessageOld(69200, args.destName, "blue", "Alert")
 	self:Bar(69200, 23) -- Raging Spirit
 end
 
@@ -270,7 +270,7 @@ do
 				hugged[#hugged + 1] = mod:UnitName(unit)
 			end
 		end
-		mod:TargetMessage(69037, hugged, "orange", nil, L["valkyrhug_message"], 71844)
+		mod:TargetMessageOld(69037, hugged, "orange", nil, L["valkyrhug_message"], 71844)
 	end
 
 	function mod:Valkyr(args)
@@ -302,7 +302,7 @@ function mod:HarvestSoul(args)
 		if self:Me(args.destGUID) then
 			self:Flash(68980)
 		end
-		self:TargetMessage(68980, args.destName, "yellow")
+		self:TargetMessageOld(68980, args.destName, "yellow")
 		self:Bar(68980, 75)
 		self:SecondaryIcon(68980, args.destName)
 	end
@@ -354,7 +354,7 @@ do
 				mod:Say(72762)
 			end
 			local target = mod:UnitName(bossTarget)
-			mod:TargetMessage(72762, target, "red", "Alert")
+			mod:TargetMessageOld(72762, target, "red", "Alert")
 			mod:PrimaryIcon(72762, target)
 		end
 		handle = nil
@@ -379,7 +379,7 @@ do
 				mod:Say(73529)
 			end
 			local target = mod:UnitName(bossTarget)
-			mod:TargetMessage(73529, target, "yellow")
+			mod:TargetMessageOld(73529, target, "yellow")
 			mod:PrimaryIcon(73529, target)
 		end
 	end

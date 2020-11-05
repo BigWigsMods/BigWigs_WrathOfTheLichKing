@@ -61,7 +61,7 @@ end
 --
 
 function mod:Infection(args)
-	self:TargetMessage(69674, args.destName, "blue", nil, L["infection_message"])
+	self:TargetMessageOld(69674, args.destName, "blue", nil, L["infection_message"])
 	self:TargetBar(69674, 12, args.destName, L["infection_message"])
 	self:PrimaryIcon(69674, args.destName, "icon")
 	if self:Me(args.destGUID) then

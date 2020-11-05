@@ -101,7 +101,7 @@ end
 do
 	local dmTargets, scheduled = mod:NewTargetList(), nil
 	local function dmWarn()
-		mod:TargetMessage(71289, dmTargets, "red", "Alert")
+		mod:TargetMessageOld(71289, dmTargets, "red", "Alert")
 		scheduled = nil
 	end
 	function mod:DominateMind(args)

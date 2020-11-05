@@ -87,7 +87,7 @@ function mod:GravityBomb(args)
 		self:Say(args.spellId)
 		self:SayCountdown(args.spellId, 9)
 	end
-	self:TargetMessage(args.spellId, args.destName, "blue", "Alert")
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "Alert")
 	self:TargetBar(args.spellId, 9, args.destName, L.gravitybomb_other)
 	self:SecondaryIcon(args.spellId, args.destName)
 end
@@ -107,7 +107,7 @@ function mod:SearingLight(args)
 		self:Flash(args.spellId)
 		self:Say(args.spellId)
 	end
-	self:TargetMessage(args.spellId, args.destName, "blue", "Alert")
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "Alert")
 	self:TargetBar(args.spellId, 9, args.destName, L.lightbomb_other)
 	self:PrimaryIcon(args.spellId, args.destName)
 end

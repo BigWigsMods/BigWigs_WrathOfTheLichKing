@@ -123,7 +123,7 @@ end
 do
 	local coldTargets, scheduled = mod:NewTargetList(), nil
 	local function coldWarn(spellId)
-		mod:TargetMessage(spellId, coldTargets, "orange")
+		mod:TargetMessageOld(spellId, coldTargets, "orange")
 		scheduled = nil
 	end
 	function mod:ColdDebuff(args)
@@ -163,7 +163,7 @@ function mod:Swarm(args)
 end
 
 function mod:Pursue(args)
-	self:TargetMessage(args.spellId, args.destName, "blue", "Alert", L["chase"])
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "Alert", L["chase"])
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end

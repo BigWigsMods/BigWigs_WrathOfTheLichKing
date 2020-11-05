@@ -47,7 +47,7 @@ end
 do
 	local impaleTargets, scheduled = mod:NewTargetList(), nil
 	local function impaleWarn(spellId)
-		mod:TargetMessage(69057, impaleTargets, "orange", "Alert", spellId)
+		mod:TargetMessageOld(69057, impaleTargets, "orange", "Alert", spellId)
 		scheduled = nil
 	end
 	function mod:Impale(args)

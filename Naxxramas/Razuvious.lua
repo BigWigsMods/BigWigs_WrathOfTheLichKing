@@ -63,6 +63,6 @@ function mod:Taunt(args)
 end
 
 function mod:Knife(args)
-	self:TargetMessage(args.spellId, args.destName, "red")
+	self:TargetMessageOld(args.spellId, args.destName, "red")
 end
 

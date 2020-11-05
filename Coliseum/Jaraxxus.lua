@@ -92,7 +92,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 end
 
 function mod:IncinerateFlesh(args)
-	self:TargetMessage(args.spellId, args.destName, "orange", "Info", L["incinerate_message"])
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "Info", L["incinerate_message"])
 	self:Bar(args.spellId, 12, L["incinerate_other"]:format(args.destName))
 end
 
@@ -102,7 +102,7 @@ function mod:IncinerateFleshRemoved(args)
 end
 
 function mod:LegionFlame(args)
-	self:TargetMessage(args.spellId, args.destName, "blue", "Alert", L["legionflame_message"])
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "Alert", L["legionflame_message"])
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end

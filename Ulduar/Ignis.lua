@@ -66,7 +66,7 @@ function mod:ScorchCast(args)
 end
 
 function mod:SlagPot(args)
-	self:TargetMessage(args.spellId, args.destName, "red", "Alert", nil, nil, self:Healer())
+	self:TargetMessageOld(args.spellId, args.destName, "red", "Alert", nil, nil, self:Healer())
 	self:TargetBar(args.spellId, 10, args.destName)
 end
 

@@ -53,7 +53,7 @@ end
 do
 	local cocoonTargets, scheduled = mod:NewTargetList(), nil
 	local function cocoonWarn()
-		mod:TargetMessage(28622, cocoonTargets, "red", "Alert", L["cocoonbar"], 745)
+		mod:TargetMessageOld(28622, cocoonTargets, "red", "Alert", L["cocoonbar"], 745)
 		scheduled = nil
 	end
 	function mod:Cocoon(args)

@@ -84,7 +84,7 @@ end
 do
 	local bbTargets, scheduled = mod:NewTargetList(), nil
 	local function boilingWarn()
-		mod:TargetMessage(72385, bbTargets, "orange")
+		mod:TargetMessageOld(72385, bbTargets, "orange")
 		scheduled = nil
 	end
 	function mod:BoilingBlood(args)
@@ -102,7 +102,7 @@ function mod:Adds(args)
 end
 
 function mod:RuneofBlood(args)
-	self:TargetMessage(72410, args.destName, "yellow")
+	self:TargetMessageOld(72410, args.destName, "yellow")
 	self:CDBar(72410, 20)
 end
 

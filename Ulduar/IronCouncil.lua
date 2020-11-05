@@ -92,7 +92,7 @@ function mod:OverwhelmingPower(args)
 		self:OpenProximity(64637, 15)
 		self:Flash(64637)
 	end
-	self:TargetMessage(64637, args.destName, "blue", "Alert")
+	self:TargetMessageOld(64637, args.destName, "blue", "Alert")
 	self:TargetBar(64637, 35, args.destName)
 	self:PrimaryIcon(64637, args.destName)
 end

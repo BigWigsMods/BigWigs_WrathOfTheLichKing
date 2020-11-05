@@ -93,7 +93,7 @@ function mod:Icebolt(args)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId, L["icebolt_say"], true)
 	else
-		self:TargetMessage(args.spellId, args.destName, "yellow")
+		self:TargetMessageOld(args.spellId, args.destName, "yellow")
 	end
 	self:PrimaryIcon(args.spellId, args.destName)
 end

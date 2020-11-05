@@ -139,7 +139,7 @@ do
 		if not bossId then return end
 		local target = UnitName(bossId .. "target")
 		if target then
-			mod:TargetMessage(62623, target, "yellow")
+			mod:TargetMessageOld(62623, target, "yellow")
 			mod:SecondaryIcon(62623, target)
 		end
 		handle = nil
@@ -157,7 +157,7 @@ function mod:Fury(args)
 		self:OpenProximity("proximity", 10)
 		self:Flash(62589)
 	end
-	self:TargetMessage(62589, args.destName, "blue", "Alert", L.fury_message)
+	self:TargetMessageOld(62589, args.destName, "blue", "Alert", L.fury_message)
 	self:TargetBar(62589, 10, args.destName, L.fury_message)
 	self:PrimaryIcon(62589, args.destName)
 end

@@ -67,7 +67,7 @@ end
 --
 
 function mod:StormCloud(args)
-	self:TargetMessage(args.spellId, args.destName, "green", "Info")
+	self:TargetMessageOld(args.spellId, args.destName, "green", "Info")
 	self:TargetBar(args.spellId, 30, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
 end

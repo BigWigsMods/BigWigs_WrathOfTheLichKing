@@ -22,7 +22,7 @@ end
 --
 
 function mod:Reckoning(args)
-	self:TargetMessage(69483, args.destName, "blue", "Alert")
+	self:TargetMessageOld(69483, args.destName, "blue", "Alert")
 	self:Bar(69483, 8)
 	if self:Me(args.destGUID) then
 		self:Flash(69483)

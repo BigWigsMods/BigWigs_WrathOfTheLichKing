@@ -82,7 +82,7 @@ function mod:Fire(args)
 		self:Say(74562, L["fire_message"])
 		self:Flash(74562)
 	end
-	self:TargetMessage(74562, args.destName, "blue", "Info", L["fire_message"])
+	self:TargetMessageOld(74562, args.destName, "blue", "Info", L["fire_message"])
 	self:PrimaryIcon(74562, args.destName)
 end
 
@@ -92,7 +92,7 @@ function mod:Shadow(args)
 		self:Say(74792, L["shadow_message"])
 		self:Flash(74792)
 	end
-	self:TargetMessage(74792, args.destName, "blue", "Info", L["shadow_message"])
+	self:TargetMessageOld(74792, args.destName, "blue", "Info", L["shadow_message"])
 	self:SecondaryIcon(74792, args.destName)
 end
 

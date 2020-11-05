@@ -112,7 +112,7 @@ end
 
 do
 	local function printTarget(self, name, guid)
-		self:TargetMessage(62660, name, "orange", "Alert")
+		self:TargetMessageOld(62660, name, "orange", "Alert")
 		self:SecondaryIcon(62660, name)
 		self:ScheduleTimer("SecondaryIcon", 3, 62660)
 		if self:Me(guid) then
@@ -126,7 +126,7 @@ do
 end
 
 function mod:MarkOfTheFaceless(args)
-	self:TargetMessage(args.spellId, args.destName, "orange", "Alert")
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alert")
 	if self:Me(args.destGUID) then
 		self:Say(63276, L.mark_message)
 		self:Flash(63276)

@@ -182,7 +182,7 @@ function mod:UNIT_AURA(_, unit)
 	if snobolledWarned[player] and not debuffed then
 		snobolledWarned[player] = nil
 	elseif debuffed and not snobolledWarned[player] then
-		self:TargetMessage("snobold", player, "yellow", nil, L["snobold_message"], 66406)
+		self:TargetMessageOld("snobold", player, "yellow", nil, L["snobold_message"], 66406)
 		snobolledWarned[player] = true
 	end
 end
@@ -261,7 +261,7 @@ end
 do
 	local toxinTargets, scheduled = mod:NewTargetList(), nil
 	local function toxinWarn(spellId)
-		mod:TargetMessage(spellId, toxinTargets, "orange", "Info", L["toxin_spell"])
+		mod:TargetMessageOld(spellId, toxinTargets, "orange", "Info", L["toxin_spell"])
 		scheduled = nil
 	end
 	function mod:Toxin(args)
@@ -278,7 +278,7 @@ end
 do
 	local burnTargets, scheduled = mod:NewTargetList()
 	local function burnWarn()
-		mod:TargetMessage(66869, burnTargets, "orange", "Info", L["burn_spell"])
+		mod:TargetMessageOld(66869, burnTargets, "orange", "Info", L["burn_spell"])
 		scheduled = nil
 	end
 	function mod:Burn(args)
@@ -336,14 +336,14 @@ function mod:Daze(args)
 end
 
 function mod:Butt(args)
-	self:TargetMessage(args.spellId, args.destName, "yellow")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow")
 	self:CDBar(args.spellId, 12)
 end
 
 function mod:Charge(_, msg, unit, _, _, player)
 	if unit == icehowl then
 		local furiousChargeId = 52311
-		self:TargetMessage("charge", player, "blue", "Alarm", furiousChargeId)
+		self:TargetMessageOld("charge", player, "blue", "Alarm", furiousChargeId)
 		if UnitIsUnit(player, "player") then
 			self:Flash("charge", furiousChargeId)
 			self:Say("charge", furiousChargeId)

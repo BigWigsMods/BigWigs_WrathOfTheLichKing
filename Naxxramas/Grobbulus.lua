@@ -40,7 +40,7 @@ end
 --
 
 function mod:Inject(args)
-	self:TargetMessage(args.spellId, args.destName, "blue", "Alert", L["bomb_message"])
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "Alert", L["bomb_message"])
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end

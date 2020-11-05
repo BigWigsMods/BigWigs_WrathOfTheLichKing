@@ -68,7 +68,7 @@ do
 		if not bossId then return end
 		local target = mod:UnitName(bossId .. "target")
 		if target then
-			mod:TargetMessage(58965, target, "red", nil, spellId)
+			mod:TargetMessageOld(58965, target, "red", nil, spellId)
 			mod:PrimaryIcon(58965, target)
 		end
 	end
@@ -81,7 +81,7 @@ end
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, _, unit, _, _, player)
 	if unit == self.displayName then
-		self:TargetMessage("charge", player, "yellow", nil, L["charge"], 11578)
+		self:TargetMessageOld("charge", player, "yellow", nil, L["charge"], 11578)
 	end
 end
 

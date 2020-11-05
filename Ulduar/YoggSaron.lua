@@ -143,7 +143,7 @@ end
 
 do
 	local function printTarget(self, name, guid)
-		self:TargetMessage(63138, name, "orange", "Alert")
+		self:TargetMessageOld(63138, name, "orange", "Alert")
 	end
 
 	function mod:SarasFervorCast(args)
@@ -178,7 +178,7 @@ function mod:SummonGuardian(args)
 end
 
 function mod:Insane(args)
-	self:TargetMessage(args.spellId, args.destName, "yellow")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow")
 end
 
 function mod:TentacleSpawn(args)
@@ -203,7 +203,7 @@ function mod:DeafeningRoar(args)
 end
 
 function mod:MaladyOfTheMind(args)
-	self:TargetMessage(args.spellId, args.destName, "yellow", "Alert", L.malady_message)
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Alert", L.malady_message)
 	self:PrimaryIcon(args.spellId, args.destName)
 end
 
@@ -212,7 +212,7 @@ function mod:MaladyOfTheMindRemoved(args)
 end
 
 function mod:Squeeze(args)
-	self:TargetMessage(args.spellId, args.destName, "green")
+	self:TargetMessageOld(args.spellId, args.destName, "green")
 end
 
 function mod:BrainLink(args)
@@ -311,7 +311,7 @@ do
 		local t = GetTime()
 		if t-prev > 5 then
 			prev = t
-			self:TargetMessage(args.spellId, args.destName, "red")
+			self:TargetMessageOld(args.spellId, args.destName, "red")
 		end
 
 		if self:GetOption(shadowBeaconMarker) then

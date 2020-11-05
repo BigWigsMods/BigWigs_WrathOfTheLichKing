@@ -68,7 +68,7 @@ end
 --
 
 function mod:Touch(args)
-	self:TargetMessage("touch", args.destName, "blue", "Info", args.spellId)
+	self:TargetMessageOld("touch", args.destName, "blue", "Info", args.spellId)
 	if self:Me(args.destGUID) then
 		self:Flash("touch", args.spellId)
 	end

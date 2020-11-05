@@ -75,7 +75,7 @@ function mod:DefenderKill(args)
 end
 
 function mod:GuardianSwarm(args)
-	self:TargetMessage(args.spellId, args.destName, "yellow", "Alert", L.swarm_message, nil, self:Healer())
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Alert", L.swarm_message, nil, self:Healer())
 	self:CDBar(args.spellId, 37, L.swarm_message)
 end
 

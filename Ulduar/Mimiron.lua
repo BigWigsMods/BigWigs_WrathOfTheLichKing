@@ -185,7 +185,7 @@ do
 	--CHAT_MSG_LOOT:Varian receives loot: |cffffffff|Hitem:46029::::::::110:253::::::|h[Magnetic Core]|h|r.::::Varian::0:0::0:247:nil:0:false:false:false:false:
 	function mod:CHAT_MSG_LOOT(event, msg, _, _, _, playerName)
 		if msg:find("Hitem:46029", nil, true) then
-			self:TargetMessage(64444, playerName, "green", "Info")
+			self:TargetMessageOld(64444, playerName, "green", "Info")
 		end
 	end
 end
