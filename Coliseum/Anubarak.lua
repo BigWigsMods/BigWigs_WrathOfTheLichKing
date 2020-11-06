@@ -90,14 +90,14 @@ end
 
 local function scheduleWave()
 	if isBurrowed then return end
-	mod:Message("burrow", "orange", nil, L["nerubian_message"], 66333)
+	mod:MessageOld("burrow", "orange", nil, L["nerubian_message"], 66333)
 	mod:Bar("burrow", 45, L["nerubian_burrower"], 66333)
 	handle_NextWave = mod:ScheduleTimer(scheduleWave, 45)
 end
 
 function mod:OnEngage()
 	isBurrowed = nil
-	self:Message("burrow", "yellow", nil, L["engage_message"], 65919)
+	self:MessageOld("burrow", "yellow", nil, L["engage_message"], 65919)
 	self:Bar("burrow", 80, L["burrow"], 65919)
 	self:DelayedMessage("burrow", 65, "yellow", L["burrow_soon"])
 
@@ -140,7 +140,7 @@ end
 
 function mod:ColdDebuff(args)
 	if self:Me(args.destGUID) and phase2 then
-		self:Message(args.spellId, "blue")
+		self:MessageOld(args.spellId, "blue")
 		self:Flash(args.spellId)
 	end
 end
@@ -152,7 +152,7 @@ function mod:ColdCooldown(args)
 end
 
 function mod:Swarm(args)
-	self:Message(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "Long")
 	phase2 = true
 	self:StopBar(L["burrow"])
 	self:CancelDelayedMessage(L["burrow_soon"])

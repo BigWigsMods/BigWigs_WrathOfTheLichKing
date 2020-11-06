@@ -78,7 +78,7 @@ function mod:StormCloudRemoved(args)
 end
 
 function mod:FlashFreezeCast(args)
-	self:Message(args.spellId, "yellow", "Long", CL.casting:format(args.spellName))
+	self:MessageOld(args.spellId, "yellow", "Long", CL.casting:format(args.spellName))
 	self:CastBar(args.spellId, 9)
 	self:Bar(args.spellId, 35)
 	self:DelayedMessage(args.spellId, 30, "yellow", CL.custom_sec:format(args.spellName, 5))
@@ -94,7 +94,7 @@ function mod:FlashFreeze(args)
 end
 
 function mod:FrozenBlows(args)
-	self:Message(args.spellId, "red")
+	self:MessageOld(args.spellId, "red")
 	self:Bar(args.spellId, 20)
 end
 
@@ -104,7 +104,7 @@ do
 		local _, stack = self:UnitDebuff(unit, 62039)
 		if stack and stack ~= lastCold then
 			if stack > 1 then
-				self:Message(62039, "blue", "Alert", CL.you:format(CL.count:format(cold, stack)))
+				self:MessageOld(62039, "blue", "Alert", CL.you:format(CL.count:format(cold, stack)))
 			end
 			lastCold = stack
 		end

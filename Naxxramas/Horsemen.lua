@@ -50,7 +50,7 @@ end
 function mod:OnEngage()
 	marks = 1
 	deaths = 0
-	self:Message("mark", "yellow", nil, L["startwarn"], false)
+	self:MessageOld("mark", "yellow", nil, L["startwarn"], false)
 	self:Bar("mark", 17, L["markbar"]:format(marks), 28835)
 	self:DelayedMessage("mark", 12, "orange", L["markwarn2"]:format(marks))
 end
@@ -62,24 +62,24 @@ end
 function mod:Deaths()
 	deaths = deaths + 1
 	if deaths < 4 then
-		self:Message("stages", "green", nil, CL.mob_killed:format(deaths, 4), false)
+		self:MessageOld("stages", "green", nil, CL.mob_killed:format(deaths, 4), false)
 	else
 		self:Win()
 	end
 end
 
 function mod:VoidZone(args)
-	self:Message(28863, "red")
+	self:MessageOld(28863, "red")
 	self:Bar(28863, 12)
 end
 
 function mod:Meteor(args)
-	self:Message(28884, "red")
+	self:MessageOld(28884, "red")
 	self:Bar(28884, 12)
 end
 
 function mod:Wrath(args)
-	self:Message(28883, "red")
+	self:MessageOld(28883, "red")
 	self:Bar(28883, 12)
 end
 
@@ -88,7 +88,7 @@ do
 	function mod:Mark(args)
 		local t = GetTime()
 		if t-5 > last then
-			self:Message("mark", "red", nil, L["markwarn1"]:format(marks), 28835)
+			self:MessageOld("mark", "red", nil, L["markwarn1"]:format(marks), 28835)
 			marks = marks + 1
 			self:Bar("mark", 12, L["markbar"]:format(marks), 28835)
 			self:DelayedMessage("mark", 7, "orange", L["markwarn2"]:format(marks))

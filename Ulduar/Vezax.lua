@@ -93,19 +93,19 @@ end
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
 	if msg == L.vapor_trigger then
-		self:Message("vapor", "green", nil, L.vapor_message:format(vaporCount), 63322)
+		self:MessageOld("vapor", "green", nil, L.vapor_message:format(vaporCount), 63322)
 		vaporCount = vaporCount + 1
 		if vaporCount < 7 then
 			self:Bar("vapor", 30, L.vapor_bar:format(vaporCount), 63322)
 		end
 	elseif msg == L.animus_trigger then
-		self:Message("animus", "red", nil, L.animus_message, 87179) -- 87179 / Summon Water Elemental / spell_frost_summonwaterelemental_2 / icon 135862
+		self:MessageOld("animus", "red", nil, L.animus_message, 87179) -- 87179 / Summon Water Elemental / spell_frost_summonwaterelemental_2 / icon 135862
 	end
 end
 
 function mod:SaroniteVaporsApplied(args)
 	if self:Me(args.destGUID) and args.amount > 5 then
-		self:Message("vaporstack", "blue", nil, L["vaporstack_message"]:format(args.amount), 63322)
+		self:MessageOld("vaporstack", "blue", nil, L["vaporstack_message"]:format(args.amount), 63322)
 		self:Flash("vaporstack", 63322)
 	end
 end
@@ -141,11 +141,11 @@ function mod:MarkOfTheFacelessRemoved(args)
 end
 
 function mod:SearingFlames(args)
-	self:Message(args.spellId, "yellow", self:Interrupter() and "Warning")
+	self:MessageOld(args.spellId, "yellow", self:Interrupter() and "Warning")
 end
 
 function mod:SurgeOfDarkness(args)
-	self:Message(args.spellId, "red", "Long", CL.count:format(args.spellName, surgeCount))
+	self:MessageOld(args.spellId, "red", "Long", CL.count:format(args.spellName, surgeCount))
 	self:CastBar(args.spellId, 3, L["surge_bar"]:format(surgeCount))
 	surgeCount = surgeCount + 1
 	self:Bar(args.spellId, 60, L["surge_bar"]:format(surgeCount))

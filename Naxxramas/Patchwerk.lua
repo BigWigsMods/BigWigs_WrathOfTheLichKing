@@ -40,6 +40,6 @@ end
 --
 
 function mod:Frenzy(args)
-	self:Message(args.spellId, "yellow", "Alarm", L["enragewarn"])
+	self:MessageOld(args.spellId, "yellow", "Alarm", L["enragewarn"])
 end
 

@@ -107,7 +107,7 @@ end
 --
 
 function mod:LayWaste(args)
-	self:Message(69325, "yellow")
+	self:MessageOld(69325, "yellow")
 	self:Bar(69325, 12)
 end
 
@@ -117,7 +117,7 @@ end
 
 function mod:Portal()
 	-- 46 sec cd until initial positioning, +14 sec until 'real' spawn.
-	self:Message("portal", "red", nil, L["portalcd_message"]:format(portalCount), false)
+	self:MessageOld("portal", "red", nil, L["portalcd_message"]:format(portalCount), false)
 	self:Bar("portal", 14, L["portal_bar"], 72482)
 	self:DelayedMessage("portal", 14, "red", L["portal_message"])
 	portalCount = portalCount + 1
@@ -130,7 +130,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) and UnitPowerType("player") == 0 then
 			prev = t
-			self:Message(71086, "blue", "Alarm", CL["you"]:format(args.spellName))
+			self:MessageOld(71086, "blue", "Alarm", CL["you"]:format(args.spellName))
 			self:Flash(71086)
 		end
 	end

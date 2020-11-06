@@ -45,24 +45,24 @@ end
 --
 
 function mod:Fear(args)
-	self:Message(args.spellId, "yellow", nil, L["fear_message"])
+	self:MessageOld(args.spellId, "yellow", nil, L["fear_message"])
 end
 
 function mod:DeepBreath()
-	self:Message(17086, "orange", "Alarm", L["deepbreath_message"])
+	self:MessageOld(17086, "orange", "Alarm", L["deepbreath_message"])
 	self:Bar(17086, 8)
 	self:Flash(17086)
 end
 
 function mod:FlameBreath(args)
-	self:Message(args.spellId, "red", "Alert")
+	self:MessageOld(args.spellId, "red", "Alert")
 end
 
 function mod:Phase2()
-	self:Message("phase", "green", nil, L["phase2_message"], false)
+	self:MessageOld("phase", "green", nil, L["phase2_message"], false)
 end
 
 function mod:Phase3()
-	self:Message("phase", "green", nil, L["phase3_message"], false)
+	self:MessageOld("phase", "green", nil, L["phase3_message"], false)
 end
 

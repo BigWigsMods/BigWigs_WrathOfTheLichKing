@@ -49,7 +49,7 @@ function mod:Inject(args)
 end
 
 function mod:Cloud(args)
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 	self:Bar(args.spellId, 15)
 end
 

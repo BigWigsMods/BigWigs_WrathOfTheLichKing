@@ -195,7 +195,7 @@ function mod:Impale(args)
 end
 
 function mod:StaggeringStomp(args)
-	self:Message(args.spellId, "red")
+	self:MessageOld(args.spellId, "red")
 	self:Bar(args.spellId, 21)
 end
 
@@ -205,7 +205,7 @@ do
 		if self:Me(args.destGUID) then
 			local t = GetTime()
 			if t-4 > last then
-				self:Message(args.spellId, "blue", "Alarm", CL["you"]:format(args.spellName))
+				self:MessageOld(args.spellId, "blue", "Alarm", CL["you"]:format(args.spellName))
 				self:Flash(args.spellId)
 				last = t
 			end
@@ -219,7 +219,7 @@ end
 
 function mod:Jormungars()
 	local m = L["boss_incoming"]:format(jormungars)
-	self:Message("bosses", "green", nil, m, "Ability_Hunter_Pet_Worm")
+	self:MessageOld("bosses", "green", nil, m, "Ability_Hunter_Pet_Worm")
 	self:Bar("bosses", 15, m, "INV_Misc_MonsterScales_18")
 	if self:Heroic() then
 		self:Bar("bosses", 200, L["boss_incoming"]:format(icehowl), "INV_Misc_MonsterHorn_07")
@@ -244,18 +244,18 @@ do
 	end
 
 	function mod:Spray(args)
-		self:Message("sprays", "red", nil, args.spellName, args.spellId)
+		self:MessageOld("sprays", "red", nil, args.spellName, args.spellId)
 		self:CDBar("sprays", 20, L["spray"], 5740)
 	end
 end
 
 
 function mod:SlimeCast(args)
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 end
 
 function mod:Spew(args)
-	self:Message("spew", "yellow", nil, args.spellName, args.spellId)
+	self:MessageOld("spew", "yellow", nil, args.spellName, args.spellId)
 end
 
 do
@@ -290,7 +290,7 @@ do
 end
 
 function mod:Enraged(args)
-	self:Message(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "Long")
 end
 
 do
@@ -299,7 +299,7 @@ do
 		if self:Me(args.destGUID) then
 			local t = GetTime()
 			if t-4 > last then
-				self:Message(args.spellId, "blue", "Alarm", L["slime_message"])
+				self:MessageOld(args.spellId, "blue", "Alarm", L["slime_message"])
 				self:Flash(args.spellId)
 				last = t
 			end
@@ -313,7 +313,7 @@ end
 
 function mod:Icehowl()
 	local m = L["boss_incoming"]:format(icehowl)
-	self:Message("bosses", "green", nil, m, "INV_Misc_Pet_Pandaren_Yeti")
+	self:MessageOld("bosses", "green", nil, m, "INV_Misc_Pet_Pandaren_Yeti")
 	self:Bar("bosses", 10, m, "INV_Misc_MonsterHorn_07")
 	self:CancelTimer(handle_Jormungars)
 	handle_Jormungars = nil
@@ -326,12 +326,12 @@ function mod:Icehowl()
 end
 
 function mod:Rage(args)
-	self:Message(args.spellId, "red")
+	self:MessageOld(args.spellId, "red")
 	self:Bar(args.spellId, 15)
 end
 
 function mod:Daze(args)
-	self:Message(args.spellId, "green")
+	self:MessageOld(args.spellId, "green")
 	self:Bar(args.spellId, 15)
 end
 

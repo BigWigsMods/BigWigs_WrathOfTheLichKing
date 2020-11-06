@@ -67,16 +67,16 @@ end
 --
 
 function mod:ExposedHeart(args)
-	self:Message(args.spellId, "yellow", "Long")
+	self:MessageOld(args.spellId, "yellow", "Long")
 	self:Bar(args.spellId, 30)
 end
 
 function mod:Heartbreak()
-	self:Message(64193, "red", "Info")
+	self:MessageOld(64193, "red", "Info")
 end
 
 function mod:TympanicTantrum(args)
-	self:Message(args.spellId, "yellow", "Warning")
+	self:MessageOld(args.spellId, "yellow", "Warning")
 	self:CDBar(args.spellId, 62)
 end
 
@@ -124,13 +124,13 @@ function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if not exposed1 and hp > 86 and hp < 90 then
 		exposed1 = true
-		self:Message(63849, "yellow", nil, CL.soon:format(self:SpellName(63849))) -- Exposed Heart soon
+		self:MessageOld(63849, "yellow", nil, CL.soon:format(self:SpellName(63849))) -- Exposed Heart soon
 	elseif not exposed2 and hp > 56 and hp < 58 then
 		exposed2 = true
-		self:Message(63849, "yellow", nil, CL.soon:format(self:SpellName(63849)))
+		self:MessageOld(63849, "yellow", nil, CL.soon:format(self:SpellName(63849)))
 	elseif not exposed3 and hp > 26 and hp < 28 then
 		exposed3 = true
 		self:UnregisterUnitEvent(event, unit)
-		self:Message(63849, "yellow", nil, CL.soon:format(self:SpellName(63849)))
+		self:MessageOld(63849, "yellow", nil, CL.soon:format(self:SpellName(63849)))
 	end
 end

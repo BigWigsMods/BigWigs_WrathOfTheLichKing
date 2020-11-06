@@ -91,12 +91,12 @@ do
 		mod:Bar(71255, 14, L["gasbomb_bar"])
 		mod:Bar(72295, 6, L["ball_bar"])
 		if not first then
-			mod:Message("phase", "green", nil, CL.phase:format(2), false)
+			mod:MessageOld("phase", "green", nil, CL.phase:format(2), false)
 			mod:Bar(70351, 25, L["experiment_bar"])
 			first = true
 			p2 = true
 		else
-			mod:Message("phase", "green", nil, CL.phase:format(3), false)
+			mod:MessageOld("phase", "green", nil, CL.phase:format(3), false)
 			first = nil
 			mod:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 		end
@@ -105,7 +105,7 @@ do
 	-- Heroic mode phase change
 	function mod:VolatileExperiment()
 		stopOldStuff()
-		self:Message("phase", "red", nil, L["experiment_heroic_message"], "achievement_boss_profputricide")
+		self:MessageOld("phase", "red", nil, L["experiment_heroic_message"], "achievement_boss_profputricide")
 		if not first then
 			self:Bar("phase", 45, L["phase_bar"], "achievement_boss_profputricide")
 			self:ScheduleTimer(newPhase, 45)
@@ -144,10 +144,10 @@ function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	if self:MobId(UnitGUID(unit)) == 36678 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 84 and not p2 then
-			self:Message("phase", "green", nil, L["phase_warning"]:format(2), false)
+			self:MessageOld("phase", "green", nil, L["phase_warning"]:format(2), false)
 			p2 = true
 		elseif hp < 38 then
-			self:Message("phase", "green", nil, L["phase_warning"]:format(3), false)
+			self:MessageOld("phase", "green", nil, L["phase_warning"]:format(3), false)
 			self:UnregisterUnitEvent(event, "target", "focus")
 		end
 	end
@@ -175,12 +175,12 @@ function mod:StunnedByGreenOoze(args)
 end
 
 function mod:Experiment(args)
-	self:Message(70351, "yellow", "Alert", L["experiment_message"])
+	self:MessageOld(70351, "yellow", "Alert", L["experiment_message"])
 	self:Bar(70351, 38, L["experiment_bar"])
 end
 
 function mod:GasBomb(args)
-	self:Message(71255, "orange", nil, L["gasbomb_message"])
+	self:MessageOld(71255, "orange", nil, L["gasbomb_message"])
 	self:Bar(71255, 35, L["gasbomb_bar"])
 end
 

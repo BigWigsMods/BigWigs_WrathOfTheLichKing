@@ -81,7 +81,7 @@ end
 --
 
 function mod:StalaggPower(args)
-	self:Message(28134, "red", nil, L["surge_message"])
+	self:MessageOld(28134, "red", nil, L["surge_message"])
 	self:Bar(28134, 10)
 end
 
@@ -109,28 +109,28 @@ function mod:UNIT_AURA(event, unit)
 				if name == negativeCharge then
 					if not lastCharge then
 						lastCharge = negativeCharge
-						self:Message(28089, "blue", "Alert", L["polarity_first_negative"], "spell_chargenegative")
+						self:MessageOld(28089, "blue", "Alert", L["polarity_first_negative"], "spell_chargenegative")
 						self:Flash(28089)
 					else
 						if lastCharge == negativeCharge then
-							self:Message(28089, "green", nil, L["polarity_nochange"], "spell_chargenegative")
+							self:MessageOld(28089, "green", nil, L["polarity_nochange"], "spell_chargenegative")
 						else
 							lastCharge = negativeCharge
-							self:Message(28089, "blue", "Alert", L["polarity_changed"], "spell_chargepositive")
+							self:MessageOld(28089, "blue", "Alert", L["polarity_changed"], "spell_chargepositive")
 							self:Flash(28089)
 						end
 					end
 				elseif name == positiveCharge then
 					if not lastCharge then
 						lastCharge = positiveCharge
-						self:Message(28089, "blue", "Alert", L["polarity_first_positive"], "spell_chargepositive")
+						self:MessageOld(28089, "blue", "Alert", L["polarity_first_positive"], "spell_chargepositive")
 						self:Flash(28089)
 					else
 						if lastCharge == positiveCharge then
-							self:Message(28089, "green", nil, L["polarity_nochange"], "spell_chargepositive")
+							self:MessageOld(28089, "green", nil, L["polarity_nochange"], "spell_chargepositive")
 						else
 							lastCharge = positiveCharge
-							self:Message(28089, "blue", "Alert", L["polarity_changed"], "spell_chargenegative")
+							self:MessageOld(28089, "blue", "Alert", L["polarity_changed"], "spell_chargenegative")
 							self:Flash(28089)
 						end
 					end
@@ -147,7 +147,7 @@ end
 function mod:Shift()
 	shiftTime = GetTime()
 	self:RegisterUnitEvent("UNIT_AURA", nil, "player")
-	self:Message(28089, "red", nil, L["polarity_message"])
+	self:MessageOld(28089, "red", nil, L["polarity_message"])
 end
 
 local function throw()
@@ -162,7 +162,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		self:Bar(28089, 28, L["polarity_bar"], "Spell_Nature_Lightning")
 	elseif msg == L["trigger_phase1_1"] or msg == L["trigger_phase1_2"] then
 		if not stage1warn then
-			self:Message("phase", "red", nil, L["phase1_message"], false)
+			self:MessageOld("phase", "red", nil, L["phase1_message"], false)
 		end
 		deaths = 0
 		stage1warn = true
@@ -171,7 +171,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	elseif msg:find(L["trigger_phase2_1"], nil, true) or msg:find(L["trigger_phase2_2"], nil, true) or msg:find(L["trigger_phase2_3"], nil, true) then
 		self:CancelTimer(throwHandle)
 		self:StopBar(L["throw_bar"])
-		self:Message("phase", "red", nil, L["phase2_message"], false)
+		self:MessageOld("phase", "red", nil, L["phase2_message"], false)
 		self:Berserk(360, true)
 	end
 end

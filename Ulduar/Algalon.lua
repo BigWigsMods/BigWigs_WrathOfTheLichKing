@@ -60,7 +60,7 @@ end
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if hp < 21 then
-		self:Message("stages", "green", nil, CL["soon"]:format(CL["phase"]:format(2)), false)
+		self:MessageOld("stages", "green", nil, CL["soon"]:format(CL["phase"]:format(2)), false)
 		self:UnregisterUnitEvent(event, unit)
 	end
 end
@@ -76,18 +76,18 @@ function mod:PhasePunchCount(args)
 end
 
 function mod:CosmicSmash(args)
-	self:Message(64597, "yellow", "Info", CL.casting:format(args.spellName))
+	self:MessageOld(64597, "yellow", "Info", CL.casting:format(args.spellName))
 	self:CastBar(64597, 5)
 	self:Bar(64597, 25)
 end
 
 function mod:BlackHoleExplosion()
 	blackholes = blackholes + 1
-	self:Message(64122, "green", nil, CL.count:format(self:SpellName(186546), blackholes)) -- 186546 = "Black Hole"
+	self:MessageOld(64122, "green", nil, CL.count:format(self:SpellName(186546), blackholes)) -- 186546 = "Black Hole"
 end
 
 function mod:BigBang(args)
-	self:Message(64443, "red", "Alarm")
+	self:MessageOld(64443, "red", "Alarm")
 	self:CastBar(64443, 8)
 	self:Bar(64443, 90)
 	self:DelayedMessage(64443, 85, "yellow", CL.soon:format(args.spellName))

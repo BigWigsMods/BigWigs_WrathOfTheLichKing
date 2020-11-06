@@ -87,18 +87,18 @@ end
 
 function mod:ArmsDie(args)
 	if args.mobId == 32933 then -- Left
-		self:Message("arm", "yellow", nil, L["left_dies"], L.arm_icon)
+		self:MessageOld("arm", "yellow", nil, L["left_dies"], L.arm_icon)
 		self:Bar("arm", 45, L["left_wipe_bar"], L.arm_icon)
 		self:StopBar(63983) -- Arm Sweep
 	elseif args.mobId == 32934 then -- Right
-		self:Message("arm", "yellow", nil, L["right_dies"], L.arm_icon)
+		self:MessageOld("arm", "yellow", nil, L["right_dies"], L.arm_icon)
 		self:Bar("arm", 45, L["right_wipe_bar"], L.arm_icon)
 	end
 end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 	if spellId == 63983 then -- Arm Sweep
-		self:Message(63983, "yellow")
+		self:MessageOld(63983, "yellow")
 		self:Bar(63983, 21)
 	end
 end

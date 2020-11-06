@@ -47,7 +47,7 @@ function mod:OnEngage(diff)
 	if started then return end
 	started = true
 	locustTime = diff == 3 and 102 or 90
-	self:Message(28785, "yellow", nil, L["engagewarn"]:format(locustTime), false)
+	self:MessageOld(28785, "yellow", nil, L["engagewarn"]:format(locustTime), false)
 	self:DelayedMessage(28785, locustTime - 10, "red", L["gainwarn10sec"])
 	self:CDBar(28785, locustTime) -- Locus Swarm
 end
@@ -66,7 +66,7 @@ function mod:GainSwarm(args)
 end
 
 function mod:Swarm(args)
-	self:Message(28785, "yellow", nil, CL["incoming"]:format(args.spellName))
+	self:MessageOld(28785, "yellow", nil, CL["incoming"]:format(args.spellName))
 	self:Bar(28785, 3, CL["incoming"]:format(args.spellName))
 end
 

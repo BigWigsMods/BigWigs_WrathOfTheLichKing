@@ -83,7 +83,7 @@ end
 
 function mod:DnD(args)
 	if self:Me(args.destGUID) then
-		self:Message(71001, "blue", "Alarm", L["dnd_message"], 71001)
+		self:MessageOld(71001, "blue", "Alarm", L["dnd_message"], 71001)
 		self:Flash(71001)
 	end
 end
@@ -94,7 +94,7 @@ function mod:Barrier(args)
 		self:StopBar(L["adds_bar"])
 		self:CancelDelayedMessage(L["adds_warning"])
 	end
-	self:Message(70842, "green", "Info", L["phase2_message"], args.spellId)
+	self:MessageOld(70842, "green", "Info", L["phase2_message"], args.spellId)
 	self:Bar(71426, 30, L["spirit_bar"])
 end
 
@@ -121,7 +121,7 @@ function mod:Touch(args)
 end
 
 function mod:Deformed()
-	self:Message("adds", "orange", nil, L["deformed_fanatic"], 70900)
+	self:MessageOld("adds", "orange", nil, L["deformed_fanatic"], 70900)
 end
 
 do
@@ -130,7 +130,7 @@ do
 		local time = GetTime()
 		if (time - t) > 5 then
 			t = time
-			self:Message(71426, "yellow", nil, L["spirit_message"])
+			self:MessageOld(71426, "yellow", nil, L["spirit_message"])
 			self:Bar(71426, 13, L["spirit_bar"])
 		end
 	end

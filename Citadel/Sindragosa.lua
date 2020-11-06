@@ -114,7 +114,7 @@ do
 end
 
 function mod:Grip()
-	self:Message(70123, "red", "Alarm", L["boom_message"])
+	self:MessageOld(70123, "red", "Alarm", L["boom_message"])
 	self:Bar(70123, 5, L["boom_bar"])
 	if phase == 2 then
 		self:Bar(70123, 67, 70117) -- Icy Grip
@@ -122,7 +122,7 @@ function mod:Grip()
 end
 
 function mod:AirPhase()
-	self:Message("airphase", "green", nil, L["airphase_message"], 23684)
+	self:MessageOld("airphase", "green", nil, L["airphase_message"], 23684)
 	self:Bar("airphase", 110, L["airphase_bar"], 23684)
 	self:Bar(70123, 80, 70117) -- Icy Grip
 	self:Bar(69762, 57) -- Unchained Magic
@@ -131,26 +131,26 @@ end
 function mod:Phase2()
 	phase = 2
 	self:StopBar(L["airphase_bar"])
-	self:Message("phase2", "green", "Long", L["phase2_message"], false)
+	self:MessageOld("phase2", "green", "Long", L["phase2_message"], false)
 	self:Bar(70123, 38, 70117) -- Icy Grip
 end
 
 function mod:Buffet(args)
 	self:Bar(70127, 6, L["buffet_cd"])
 	if (args.amount % 2 == 0) and self:Me(args.destGUID) then
-		self:Message(70127, "yellow", "Info", L["buffet_message"]:format(args.amount))
+		self:MessageOld(70127, "yellow", "Info", L["buffet_message"]:format(args.amount))
 	end
 end
 
 function mod:Instability(args)
 	if args.amount > 4 and self:Me(args.destGUID) then
-		self:Message(69766, "blue", nil, L["instability_message"]:format(args.amount))
+		self:MessageOld(69766, "blue", nil, L["instability_message"]:format(args.amount))
 	end
 end
 
 function mod:Chilled(args)
 	if args.amount > 4 and self:Me(args.destGUID) then
-		self:Message(70106, "blue", nil, L["chilled_message"]:format(args.amount))
+		self:MessageOld(70106, "blue", nil, L["chilled_message"]:format(args.amount))
 	end
 end
 
@@ -161,7 +161,7 @@ function mod:Unchained(args)
 		self:Bar(69762, 80)
 	end
 	if self:Me(args.destGUID) then
-		self:Message(69762, "blue", "Alert", CL["you"]:format(args.spellName))
+		self:MessageOld(69762, "blue", "Alert", CL["you"]:format(args.spellName))
 		self:Flash(69762)
 		if self:Heroic() then
 			self:OpenProximity("proximity", 20)

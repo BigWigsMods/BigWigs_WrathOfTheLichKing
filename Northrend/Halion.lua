@@ -72,7 +72,7 @@ end
 
 function mod:FireDamage(args)
 	if self:Me(args.destGUID) then
-		self:Message(74648, "blue", nil, L["fire_damage_message"])
+		self:MessageOld(74648, "blue", nil, L["fire_damage_message"])
 	end
 end
 
@@ -106,16 +106,16 @@ end
 
 function mod:TwilightCutter()
 	self:CDBar(74769, 33, L["twilight_cutter_bar"])
-	self:Message(74769, "red", "Alert", L["twilight_cutter_warning"])
+	self:MessageOld(74769, "red", "Alert", L["twilight_cutter_warning"])
 end
 
 function mod:MeteorInc(args)
-	self:Message(74648, "orange", "Long", L["meteor_warning_message"])
+	self:MessageOld(74648, "orange", "Long", L["meteor_warning_message"])
 end
 
 function mod:MeteorStrike(args)
 	self:Bar(74648, 40, L["meteorstrike_bar"])
-	self:Message(74648, "red")
+	self:MessageOld(74648, "red")
 end
 
 function mod:PhaseTwo(args)

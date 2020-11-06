@@ -48,14 +48,14 @@ end
 --
 
 function mod:Stomp(args)
-	self:Message(58663, "green", nil, L["stomp_message"])
+	self:MessageOld(58663, "green", nil, L["stomp_message"])
 	self:CDBar(58663, 47)
 	self:DelayedMessage(58663, 42, "yellow", L["stomp_warning"])
 end
 
 function mod:Cloud(args)
 	if self:Me(args.destGUID) then
-		self:Message(58965, "blue", "Alarm", CL["you"]:format(args.spellName))
+		self:MessageOld(58965, "blue", "Alarm", CL["you"]:format(args.spellName))
 		self:Flash(58965)
 	end
 end

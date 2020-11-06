@@ -61,7 +61,7 @@ end
 
 function mod:Coldflame(args)
 	if self:Me(args.destName) then
-		self:Message(69138, "blue", "Alarm", CL["under"]:format(args.spellName))
+		self:MessageOld(69138, "blue", "Alarm", CL["under"]:format(args.spellName))
 		self:Flash(69138)
 	end
 end
@@ -88,6 +88,6 @@ do
 end
 
 function mod:BonestormCast(args)
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 end
 

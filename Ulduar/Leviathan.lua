@@ -45,7 +45,7 @@ function mod:BluePyrite(args)
 end
 
 function mod:FlameVents(args)
-	self:Message(args.spellId, "orange")
+	self:MessageOld(args.spellId, "orange")
 	self:Bar(args.spellId, 10) -- Buff duration
 end
 
@@ -55,7 +55,7 @@ end
 
 function mod:SystemsShutdown(args)
 	if self:MobId(args.destGUID) == 33113 then -- Flame Leviathan
-		self:Message(args.spellId, "green", "Long")
+		self:MessageOld(args.spellId, "green", "Long")
 		self:Bar(args.spellId, 20)
 	end
 end

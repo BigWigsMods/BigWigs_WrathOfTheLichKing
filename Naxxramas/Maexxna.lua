@@ -64,7 +64,7 @@ do
 end
 
 function mod:Spray()
-	self:Message(29484, "red", nil, L["webspraywarn"], 54125)
+	self:MessageOld(29484, "red", nil, L["webspraywarn"], 54125)
 	self:DelayedMessage(29484, 10, "yellow", L["webspraywarn30sec"])
 	self:DelayedMessage(29484, 20, "yellow", L["webspraywarn20sec"])
 	self:DelayedMessage(29484, 30, "yellow", L["webspraywarn10sec"])
@@ -76,14 +76,14 @@ end
 
 function mod:Frenzy(args)
 	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
-	self:Message(54123, "yellow", "Alarm", L["enragewarn"], args.spellId)
+	self:MessageOld(54123, "yellow", "Alarm", L["enragewarn"], args.spellId)
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	if self:MobId(UnitGUID(unit)) == 15952 then
 		local health = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if health < 36 then
-			self:Message(54123, "red", nil, L["enragesoonwarn"], false)
+			self:MessageOld(54123, "red", nil, L["enragesoonwarn"], false)
 			self:UnregisterUnitEvent(event, "target", "focus")
 		end
 	end

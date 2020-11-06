@@ -140,7 +140,7 @@ function mod:PlagueTick(args)
 		local damageLeft = (3 - plagueTicks[args.destGUID]) * args.extraSpellId
 		local hp = UnitHealth(unitId)
 		if hp > damageLeft then
-			self:Message(70372, "yellow", nil, L["frenzy_survive_message"]:format(args.destName), 72143)
+			self:MessageOld(70372, "yellow", nil, L["frenzy_survive_message"]:format(args.destName), 72143)
 		end
 	else
 		local hp, max = UnitHealth(unitId), UnitHealthMax(unitId)
@@ -151,7 +151,7 @@ function mod:PlagueTick(args)
 		local percentHp = (nextTickHP / max) * 100
 		-- This sucker will frenzy in 5 seconds
 		if percentHp < 21 then
-			self:Message(70372, "red", "Info", L["frenzy_soon_message"], 72143)
+			self:MessageOld(70372, "red", "Info", L["frenzy_soon_message"], 72143)
 			self:Bar(70372, 5, L["frenzy_bar"]:format(args.destName), 72143)
 		end
 	end
@@ -159,11 +159,11 @@ end
 
 function mod:Frenzy(args)
 	frenzied[args.destGUID] = true
-	self:Message(70372, "red", "Long", L["frenzy_message"], 72143)
+	self:MessageOld(70372, "red", "Long", L["frenzy_message"], 72143)
 end
 
 function mod:Horror(args)
-	self:Message(70372, "yellow", nil, L["horror_message"])
+	self:MessageOld(70372, "yellow", nil, L["horror_message"])
 	self:CDBar(70372, 60, L["horror_bar"])
 end
 
@@ -176,12 +176,12 @@ function mod:FuryofFrostmourne()
 end
 
 function mod:Infest(args)
-	self:Message(70541, "orange")
+	self:MessageOld(70541, "orange")
 	self:CDBar(70541, 22)
 end
 
 function mod:VileSpirits(args)
-	self:Message(70498, "orange")
+	self:MessageOld(70498, "orange")
 	self:CDBar(70498, 30.5)
 end
 
@@ -220,10 +220,10 @@ end
 
 function mod:Enrage(args)
 	if self:Dispeller("enrage", true) then
-		self:Message(72143, "yellow", "Alert")
+		self:MessageOld(72143, "yellow", "Alert")
 		self:CDBar(72143, 21)
 	else
-		self:Message(72143, "yellow")
+		self:MessageOld(72143, "yellow")
 	end
 end
 
@@ -239,7 +239,7 @@ do
 		if t-prev > 2 then
 			prev = t
 			if self:Me(args.destGUID) then
-				self:Message(72762, "blue", "Info", CL["you"]:format(args.spellName))
+				self:MessageOld(72762, "blue", "Info", CL["you"]:format(args.spellName))
 				self:Flash(72762)
 			end
 		end
@@ -280,7 +280,7 @@ do
 		local t = GetTime()
 		if t-prev > 4 then
 			prev = t
-			self:Message(69037, "yellow", nil, L["valkyr_message"], 71844)
+			self:MessageOld(69037, "yellow", nil, L["valkyr_message"], 71844)
 			self:Bar(69037, 46, L["valkyr_bar"], 71844)
 			self:ScheduleTimer(ValkyrHugCheck, 6.1)
 			if self.db.profile.custom_on_valkyr_marker then
@@ -322,7 +322,7 @@ function mod:RemorselessWinter(args)
 	self:StopBar(69409) -- Soul Reaper
 	self:StopBar(73529) -- Shadow Trap
 
-	self:Message(68981, "orange", "Long", CL["cast"]:format(args.spellName))
+	self:MessageOld(68981, "orange", "Long", CL["cast"]:format(args.spellName))
 	self:Bar(72262, 62) -- Quake
 	self:Bar(69200, 15) -- Raging Spirit
 end
@@ -330,7 +330,7 @@ end
 function mod:Quake(args)
 	phase = phase + 1
 	self:StopBar(69200) -- Raging Spirit
-	self:Message(72262, "orange", "Long", CL["cast"]:format(args.spellName))
+	self:MessageOld(72262, "orange", "Long", CL["cast"]:format(args.spellName))
 	self:Bar(72762, 37) -- Defile
 	self:CDBar(70541, 13) -- Infest
 	self:CDBar(69409, 39) -- Soul Reaper

@@ -52,14 +52,14 @@ end
 --
 
 function mod:Whiteout(args)
-	self:Message(args.spellId, "green")
+	self:MessageOld(args.spellId, "green")
 	count = count + 1
 	self:Bar(args.spellId, 35, L["whiteout_bar"]:format(count))
 	self:DelayedMessage(args.spellId, 30, "yellow", L["whiteout_message"]:format(count))
 end
 
 function mod:Orbs(args)
-	self:Message(args.spellId, "red")
+	self:MessageOld(args.spellId, "red")
 	self:Bar(args.spellId, 30)
 end
 
