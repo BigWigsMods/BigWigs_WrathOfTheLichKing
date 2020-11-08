@@ -91,7 +91,7 @@ end
 do
 	local handle = nil
 	local function fbWarn(spellId)
-		mod:TargetMessageOld(spellId, fbTargets, "red", "Alert")
+		mod:TargetMessageOld(spellId, fbTargets, "red", "alert")
 		mod:DelayedMessage(spellId, 32, "yellow", L["frostblast_soon_message"])
 		mod:Bar(spellId, 37, L["frostblast_bar"])
 		handle = nil
@@ -105,7 +105,7 @@ do
 end
 
 function mod:Detonate(args)
-	self:TargetMessageOld(args.spellId, args.destName, "blue", "Alert")
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "alert")
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
@@ -119,7 +119,7 @@ do
 	local handle = nil
 	local function mcWarn(spellId)
 		local mindControl = mod:SpellName(605)
-		mod:TargetMessageOld(spellId, mcTargets, "red", "Alert", mindControl)
+		mod:TargetMessageOld(spellId, mcTargets, "red", "alert", mindControl)
 		mod:Bar(spellId, 20, mindControl)
 		mod:DelayedMessage(spellId, 68, "orange", CL["soon"]:format(mindControl))
 		mod:CDBar(spellId, 68, mindControl)

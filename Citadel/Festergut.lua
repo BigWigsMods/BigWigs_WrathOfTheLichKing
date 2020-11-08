@@ -65,7 +65,7 @@ end
 do
 	local sporeTargets, scheduled = mod:NewTargetList(), nil
 	local function sporeWarn()
-		mod:TargetMessageOld(69279, sporeTargets, "orange", "Alert")
+		mod:TargetMessageOld(69279, sporeTargets, "orange", "alert")
 		scheduled = nil
 	end
 	function mod:Spores(args)

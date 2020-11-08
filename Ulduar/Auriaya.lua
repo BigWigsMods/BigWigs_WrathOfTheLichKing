@@ -59,7 +59,7 @@ end
 --
 
 function mod:SonicScreech(args)
-	self:MessageOld(args.spellId, "yellow", "Warning")
+	self:MessageOld(args.spellId, "yellow", "warning")
 	self:Bar(args.spellId, 28)
 end
 
@@ -75,18 +75,18 @@ function mod:DefenderKill(args)
 end
 
 function mod:GuardianSwarm(args)
-	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Alert", L.swarm_message, nil, self:Healer())
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "alert", L.swarm_message, nil, self:Healer())
 	self:CDBar(args.spellId, 37, L.swarm_message)
 end
 
 function mod:TerrifyingScreech(args)
 	local fear = self:SpellName(5782) -- 5782 = "Fear"
-	self:MessageOld(args.spellId, "orange", "Info", fear)
+	self:MessageOld(args.spellId, "orange", "info", fear)
 	self:CDBar(args.spellId, 35, fear)
 	self:DelayedMessage(args.spellId, 32, "orange", CL.soon:format(fear))
 end
 
 function mod:SentinelBlast(args)
-	self:MessageOld(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "long")
 end
 

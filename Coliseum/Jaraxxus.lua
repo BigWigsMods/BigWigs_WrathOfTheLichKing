@@ -92,7 +92,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 end
 
 function mod:IncinerateFlesh(args)
-	self:TargetMessageOld(args.spellId, args.destName, "orange", "Info", L["incinerate_message"])
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "info", L["incinerate_message"])
 	self:Bar(args.spellId, 12, L["incinerate_other"]:format(args.destName))
 end
 
@@ -102,7 +102,7 @@ function mod:IncinerateFleshRemoved(args)
 end
 
 function mod:LegionFlame(args)
-	self:TargetMessageOld(args.spellId, args.destName, "blue", "Alert", L["legionflame_message"])
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "alert", L["legionflame_message"])
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
@@ -118,12 +118,12 @@ function mod:NetherPower(args)
 end
 
 function mod:NetherPortal(args)
-	self:MessageOld("adds", "orange", "Alarm", args.spellId)
+	self:MessageOld("adds", "orange", "alarm", args.spellId)
 	self:Bar("adds", 60, L["infernal_bar"], 66258)
 end
 
 function mod:InfernalEruption(args)
-	self:MessageOld("adds", "orange", "Alarm", args.spellId)
+	self:MessageOld("adds", "orange", "alarm", args.spellId)
 	self:Bar("adds", 60, L["netherportal_bar"], 66269)
 end
 

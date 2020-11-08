@@ -112,7 +112,7 @@ end
 
 do
 	local function printTarget(self, name, guid)
-		self:TargetMessageOld(62660, name, "orange", "Alert")
+		self:TargetMessageOld(62660, name, "orange", "alert")
 		self:SecondaryIcon(62660, name)
 		self:ScheduleTimer("SecondaryIcon", 3, 62660)
 		if self:Me(guid) then
@@ -126,7 +126,7 @@ do
 end
 
 function mod:MarkOfTheFaceless(args)
-	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alert")
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "alert")
 	if self:Me(args.destGUID) then
 		self:Say(63276, L.mark_message)
 		self:Flash(63276)
@@ -141,11 +141,11 @@ function mod:MarkOfTheFacelessRemoved(args)
 end
 
 function mod:SearingFlames(args)
-	self:MessageOld(args.spellId, "yellow", self:Interrupter() and "Warning")
+	self:MessageOld(args.spellId, "yellow", self:Interrupter() and "warning")
 end
 
 function mod:SurgeOfDarkness(args)
-	self:MessageOld(args.spellId, "red", "Long", CL.count:format(args.spellName, surgeCount))
+	self:MessageOld(args.spellId, "red", "long", CL.count:format(args.spellName, surgeCount))
 	self:CastBar(args.spellId, 3, L["surge_bar"]:format(surgeCount))
 	surgeCount = surgeCount + 1
 	self:Bar(args.spellId, 60, L["surge_bar"]:format(surgeCount))

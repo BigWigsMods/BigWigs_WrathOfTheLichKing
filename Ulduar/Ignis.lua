@@ -56,7 +56,7 @@ end
 --
 
 function mod:ActivateConstruct(args)
-	self:MessageOld(args.spellId, "red", self:Tank() and "Warning", CL.add_spawned, "INV_Misc_Statue_07")
+	self:MessageOld(args.spellId, "red", self:Tank() and "warning", CL.add_spawned, "INV_Misc_Statue_07")
 	self:CDBar(args.spellId, 30.3, CL.next_add, "INV_Misc_Statue_07") -- Usually 30.3, sometimes 35/37
 end
 
@@ -66,17 +66,17 @@ function mod:ScorchCast(args)
 end
 
 function mod:SlagPot(args)
-	self:TargetMessageOld(args.spellId, args.destName, "red", "Alert", nil, nil, self:Healer())
+	self:TargetMessageOld(args.spellId, args.destName, "red", "alert", nil, nil, self:Healer())
 	self:TargetBar(args.spellId, 10, args.destName)
 end
 
 function mod:FlameJets(args)
-	self:MessageOld(args.spellId, "yellow", "Long")
+	self:MessageOld(args.spellId, "yellow", "long")
 	self:CDBar(args.spellId, 24.3)
 end
 
 function mod:Brittle(args)
-	self:MessageOld(args.spellId, "green", "Info", L.brittle_message)
+	self:MessageOld(args.spellId, "green", "info", L.brittle_message)
 end
 
 do
@@ -86,7 +86,7 @@ do
 			local t = GetTime()
 			if t-prev > 2 then
 				prev = t
-				self:MessageOld(63474, "blue", "Alarm", CL.underyou:format(args.spellName))
+				self:MessageOld(63474, "blue", "alarm", CL.underyou:format(args.spellName))
 			end
 		end
 	end

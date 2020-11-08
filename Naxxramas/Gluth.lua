@@ -60,7 +60,7 @@ do
 	function mod:Decimate(args)
 		local t = GetTime()
 		if t-5 > last then
-			self:MessageOld(54426, "yellow", "Alert")
+			self:MessageOld(54426, "yellow", "alert")
 			self:CDBar(54426, 105, L["decimatebartext"])
 			self:DelayedMessage(54426, 100, "orange", L["decimatesoonwarn"])
 			last = t

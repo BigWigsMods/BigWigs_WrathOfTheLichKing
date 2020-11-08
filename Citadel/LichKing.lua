@@ -151,7 +151,7 @@ function mod:PlagueTick(args)
 		local percentHp = (nextTickHP / max) * 100
 		-- This sucker will frenzy in 5 seconds
 		if percentHp < 21 then
-			self:MessageOld(70372, "red", "Info", L["frenzy_soon_message"], 72143)
+			self:MessageOld(70372, "red", "info", L["frenzy_soon_message"], 72143)
 			self:Bar(70372, 5, L["frenzy_bar"]:format(args.destName), 72143)
 		end
 	end
@@ -159,7 +159,7 @@ end
 
 function mod:Frenzy(args)
 	frenzied[args.destGUID] = true
-	self:MessageOld(70372, "red", "Long", L["frenzy_message"], 72143)
+	self:MessageOld(70372, "red", "long", L["frenzy_message"], 72143)
 end
 
 function mod:Horror(args)
@@ -186,7 +186,7 @@ function mod:VileSpirits(args)
 end
 
 function mod:SoulReaper(args)
-	self:TargetMessageOld(69409, args.destName, "blue", "Alert")
+	self:TargetMessageOld(69409, args.destName, "blue", "alert")
 	self:CDBar(69409, 30)
 end
 
@@ -194,7 +194,7 @@ function mod:NecroticPlague(args)
 	if self:Me(args.destGUID) then
 		self:Flash(70337)
 	end
-	self:TargetMessageOld(70337, args.destName, "blue", "Alert")
+	self:TargetMessageOld(70337, args.destName, "blue", "alert")
 	self:Bar(70337, 30)
 	self:SecondaryIcon(70337, args.destName)
 end
@@ -208,7 +208,7 @@ do
 					mod:Flash(70337)
 				end
 				local player = mod:UnitName(unit)
-				mod:TargetMessageOld(70337, player, "blue", "Alert")
+				mod:TargetMessageOld(70337, player, "blue", "alert")
 				mod:SecondaryIcon(70337, player)
 			end
 		end
@@ -220,7 +220,7 @@ end
 
 function mod:Enrage(args)
 	if self:Dispeller("enrage", true) then
-		self:MessageOld(72143, "yellow", "Alert")
+		self:MessageOld(72143, "yellow", "alert")
 		self:CDBar(72143, 21)
 	else
 		self:MessageOld(72143, "yellow")
@@ -228,7 +228,7 @@ function mod:Enrage(args)
 end
 
 function mod:RagingSpirit(args)
-	self:TargetMessageOld(69200, args.destName, "blue", "Alert")
+	self:TargetMessageOld(69200, args.destName, "blue", "alert")
 	self:Bar(69200, 23) -- Raging Spirit
 end
 
@@ -239,7 +239,7 @@ do
 		if t-prev > 2 then
 			prev = t
 			if self:Me(args.destGUID) then
-				self:MessageOld(72762, "blue", "Info", CL["you"]:format(args.spellName))
+				self:MessageOld(72762, "blue", "info", CL["you"]:format(args.spellName))
 				self:Flash(72762)
 			end
 		end
@@ -322,7 +322,7 @@ function mod:RemorselessWinter(args)
 	self:StopBar(69409) -- Soul Reaper
 	self:StopBar(73529) -- Shadow Trap
 
-	self:MessageOld(68981, "orange", "Long", CL["cast"]:format(args.spellName))
+	self:MessageOld(68981, "orange", "long", CL["cast"]:format(args.spellName))
 	self:Bar(72262, 62) -- Quake
 	self:Bar(69200, 15) -- Raging Spirit
 end
@@ -330,7 +330,7 @@ end
 function mod:Quake(args)
 	phase = phase + 1
 	self:StopBar(69200) -- Raging Spirit
-	self:MessageOld(72262, "orange", "Long", CL["cast"]:format(args.spellName))
+	self:MessageOld(72262, "orange", "long", CL["cast"]:format(args.spellName))
 	self:Bar(72762, 37) -- Defile
 	self:CDBar(70541, 13) -- Infest
 	self:CDBar(69409, 39) -- Soul Reaper
@@ -354,7 +354,7 @@ do
 				mod:Say(72762)
 			end
 			local target = mod:UnitName(bossTarget)
-			mod:TargetMessageOld(72762, target, "red", "Alert")
+			mod:TargetMessageOld(72762, target, "red", "alert")
 			mod:PrimaryIcon(72762, target)
 		end
 		handle = nil

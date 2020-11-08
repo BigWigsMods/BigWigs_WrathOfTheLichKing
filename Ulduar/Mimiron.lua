@@ -110,7 +110,7 @@ end
 --
 
 function mod:BombBot(args)
-	self:MessageOld(args.spellId, "red", "Alert", L["bomb_message"])
+	self:MessageOld(args.spellId, "red", "alert", L["bomb_message"])
 end
 
 function mod:FlameSuppressant(args)
@@ -137,7 +137,7 @@ function mod:ShockBlast(args)
 end
 
 function mod:SpinningUp(args)
-	self:MessageOld(63274, "blue", "Long", L["laser_soon"], args.spellId)
+	self:MessageOld(63274, "blue", "long", L["laser_soon"], args.spellId)
 	self:Flash(63274)
 	self:ScheduleTimer("MessageOld", 4, 63274, "red", nil, L["laser_bar"])
 	self:ScheduleTimer("Bar", 4, 63274, 60, L["laser_bar"])
@@ -185,7 +185,7 @@ do
 	--CHAT_MSG_LOOT:Varian receives loot: |cffffffff|Hitem:46029::::::::110:253::::::|h[Magnetic Core]|h|r.::::Varian::0:0::0:247:nil:0:false:false:false:false:
 	function mod:CHAT_MSG_LOOT(event, msg, _, _, _, playerName)
 		if msg:find("Hitem:46029", nil, true) then
-			self:TargetMessageOld(64444, playerName, "green", "Info")
+			self:TargetMessageOld(64444, playerName, "green", "info")
 		end
 	end
 end

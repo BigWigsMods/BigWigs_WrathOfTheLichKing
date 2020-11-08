@@ -114,7 +114,7 @@ function mod:Breath(args)
 end
 
 function mod:Tsunami()
-	self:MessageOld("tsunami", "red", "Alert", L["tsunami_message"], 57491)
+	self:MessageOld("tsunami", "red", "alert", L["tsunami_message"], 57491)
 	self:Bar("tsunami", 30, L["tsunami_cooldown"], 57491)
 	self:DelayedMessage("tsunami", 25, "yellow", L["tsunami_warning"])
 end
@@ -132,7 +132,7 @@ end
 
 function mod:Vesperon(msg, mob)
 	if mob ~= L.vesperon then return end
-	self:MessageOld("twilight", "blue", "Alarm", L["twilight_message"]:format(mob), 59569)
+	self:MessageOld("twilight", "blue", "alarm", L["twilight_message"]:format(mob), 59569)
 	self:Flash("twilight", 59569)
 end
 

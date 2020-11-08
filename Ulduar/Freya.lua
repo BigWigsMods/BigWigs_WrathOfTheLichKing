@@ -103,7 +103,7 @@ do
 	function mod:Root(args)
 		root[#root + 1] = args.destName
 		if #root == 1 then
-			self:ScheduleTimer("TargetMessageOld", 0.2, 62861, root, "yellow", "Info")
+			self:ScheduleTimer("TargetMessageOld", 0.2, 62861, root, "yellow", "info")
 		end
 	end
 end
@@ -119,7 +119,7 @@ do
 
 	function mod:Tremor(args)
 		local caster = isCaster()
-		self:MessageOld(62437, caster and "blue" or "yellow", caster and "Long")
+		self:MessageOld(62437, caster and "blue" or "yellow", caster and "long")
 		if caster then self:Flash(62437) end
 		self:Bar(62437, 2)
 		if stage == 1 then
@@ -157,7 +157,7 @@ function mod:Fury(args)
 		self:OpenProximity("proximity", 10)
 		self:Flash(62589)
 	end
-	self:TargetMessageOld(62589, args.destName, "blue", "Alert", L.fury_message)
+	self:TargetMessageOld(62589, args.destName, "blue", "alert", L.fury_message)
 	self:TargetBar(62589, 10, args.destName, L.fury_message)
 	self:PrimaryIcon(62589, args.destName)
 end
@@ -182,7 +182,7 @@ do
 			local t = GetTime()
 			if t-prev > 4 then
 				prev = t
-				self:MessageOld(62865, "blue", "Alarm", L.energy_message, 62451)
+				self:MessageOld(62865, "blue", "alarm", L.energy_message, 62451)
 				self:Flash(62865)
 			end
 		end
@@ -218,6 +218,6 @@ end
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
 	if msg == L.tree_trigger then
-		self:MessageOld("tree", "orange", "Alarm", L.tree_message, 5420) -- 5420 / Incarnation: Tree of Life / ability_druid_treeoflife / icon 132145
+		self:MessageOld("tree", "orange", "alarm", L.tree_message, 5420) -- 5420 / Incarnation: Tree of Life / ability_druid_treeoflife / icon 132145
 	end
 end

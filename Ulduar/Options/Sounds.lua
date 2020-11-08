@@ -1,97 +1,97 @@
 
 BigWigs:AddSounds("Flame Leviathan", {
-	[62374] = "Alarm",
-	[62475] = "Long",
+	[62374] = "alarm",
+	[62475] = "long",
 })
 
 BigWigs:AddSounds("Ignis the Furnace Master", {
-	[62382] = "Info",
-	[62488] = "Warning",
-	[62717] = "Alert",
-	[63472] = "Long",
-	[63474] = "Alarm",
+	[62382] = "info",
+	[62488] = "warning",
+	[62717] = "alert",
+	[63472] = "long",
+	[63474] = "alarm",
 })
 
 BigWigs:AddSounds("Razorscale", {
-	[64021] = "Warning",
-	[64733] = "Alarm",
-	[64771] = "Info",
-	["harpoon"] = "Info",
-	["stages"] = "Long",
+	[64021] = "warning",
+	[64733] = "alarm",
+	[64771] = "info",
+	["harpoon"] = "info",
+	["stages"] = "long",
 })
 
 BigWigs:AddSounds("XT-002 Deconstructor", {
-	[62776] = "Warning",
-	[63849] = "Long",
-	[64193] = "Info",
-	[64234] = "Alert",
-	[65121] = "Alert",
+	[62776] = "warning",
+	[63849] = "long",
+	[64193] = "info",
+	[64234] = "alert",
+	[65121] = "alert",
 })
 
 BigWigs:AddSounds("The Iron Council", {
-	[61869] = "Long",
-	[61887] = "Alarm",
-	[62269] = "Alarm",
-	[64637] = "Alert",
+	[61869] = "long",
+	[61887] = "alarm",
+	[62269] = "alarm",
+	[64637] = "alert",
 })
 
 BigWigs:AddSounds("Kologarn", {
-	[63355] = "Info",
-	[64290] = "Alert",
-	["eyebeam"] = "Info",
+	[63355] = "info",
+	[64290] = "alert",
+	["eyebeam"] = "info",
 })
 
 BigWigs:AddSounds("Algalon the Observer", {
-	[64412] = "Alert",
-	[64443] = "Alarm",
-	[64597] = "Info",
+	[64412] = "alert",
+	[64443] = "alarm",
+	[64597] = "info",
 })
 
 BigWigs:AddSounds("Auriaya", {
-	[64386] = "Info",
-	[64396] = "Alert",
-	[64678] = "Long",
-	[64688] = "Warning",
+	[64386] = "info",
+	[64396] = "alert",
+	[64678] = "long",
+	[64688] = "warning",
 })
 
 BigWigs:AddSounds("Hodir", {
-	[61968] = {"Alert","Long"},
-	[62039] = "Alert",
-	[65133] = "Info",
+	[61968] = {"alert","long"},
+	[62039] = "alert",
+	[65133] = "info",
 })
 
 BigWigs:AddSounds("Thorim", {
-	[62017] = "Info",
-	[62338] = "Alarm",
+	[62017] = "info",
+	[62338] = "alarm",
 })
 
 BigWigs:AddSounds("Freya", {
-	[62437] = "Long",
-	[62589] = "Alert",
-	[62861] = "Info",
-	[62865] = "Alarm",
-	["tree"] = "Alarm",
+	[62437] = "long",
+	[62589] = "alert",
+	[62861] = "info",
+	[62865] = "alarm",
+	["tree"] = "alarm",
 })
 
 BigWigs:AddSounds("Mimiron", {
-	[63274] = "Long",
-	[63811] = "Alert",
-	[64444] = "Info",
+	[63274] = "long",
+	[63811] = "alert",
+	[64444] = "info",
 })
 
 BigWigs:AddSounds("General Vezax", {
-	[62660] = "Alert",
-	[62661] = "Warning",
-	[62662] = "Long",
-	[63276] = "Alert",
+	[62660] = "alert",
+	[62661] = "warning",
+	[62662] = "long",
+	[63276] = "alert",
 })
 
 BigWigs:AddSounds("Yogg-Saron", {
-	[63138] = "Alert",
-	[63802] = "Alarm",
-	[63830] = "Alert",
-	[64059] = "Warning",
-	[64163] = "Warning",
-	["stages"] = "Alarm",
-	["weakened"] = "Long",
+	[63138] = "alert",
+	[63802] = "alarm",
+	[63830] = "alert",
+	[64059] = "warning",
+	[64163] = "warning",
+	["stages"] = "alarm",
+	["weakened"] = "long",
 })

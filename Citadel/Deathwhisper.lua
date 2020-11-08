@@ -83,7 +83,7 @@ end
 
 function mod:DnD(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(71001, "blue", "Alarm", L["dnd_message"], 71001)
+		self:MessageOld(71001, "blue", "alarm", L["dnd_message"], 71001)
 		self:Flash(71001)
 	end
 end
@@ -94,14 +94,14 @@ function mod:Barrier(args)
 		self:StopBar(L["adds_bar"])
 		self:CancelDelayedMessage(L["adds_warning"])
 	end
-	self:MessageOld(70842, "green", "Info", L["phase2_message"], args.spellId)
+	self:MessageOld(70842, "green", "info", L["phase2_message"], args.spellId)
 	self:Bar(71426, 30, L["spirit_bar"])
 end
 
 do
 	local dmTargets, scheduled = mod:NewTargetList(), nil
 	local function dmWarn()
-		mod:TargetMessageOld(71289, dmTargets, "red", "Alert")
+		mod:TargetMessageOld(71289, dmTargets, "red", "alert")
 		scheduled = nil
 	end
 	function mod:DominateMind(args)

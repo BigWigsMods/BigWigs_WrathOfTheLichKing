@@ -143,7 +143,7 @@ end
 
 do
 	local function printTarget(self, name, guid)
-		self:TargetMessageOld(63138, name, "orange", "Alert")
+		self:TargetMessageOld(63138, name, "orange", "alert")
 	end
 
 	function mod:SarasFervorCast(args)
@@ -203,7 +203,7 @@ function mod:DeafeningRoar(args)
 end
 
 function mod:MaladyOfTheMind(args)
-	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Alert", L.malady_message)
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "alert", L.malady_message)
 	self:PrimaryIcon(args.spellId, args.destName)
 end
 
@@ -217,7 +217,7 @@ end
 
 function mod:BrainLink(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(args.spellId, "blue", "Alarm", L.link_warning)
+		self:MessageOld(args.spellId, "blue", "alarm", L.link_warning)
 		self:Flash(args.spellId)
 	end
 end
@@ -227,7 +227,7 @@ function mod:LunaticGazeOver(args)
 end
 
 function mod:LunaticGaze(args)
-	self:MessageOld(args.spellId, "red", "Warning")
+	self:MessageOld(args.spellId, "red", "warning")
 	self:CastBar(args.spellId, 4)
 end
 
@@ -243,7 +243,7 @@ do
 			local passed = GetTime() - madnessTime
 			local remaining = 55 - passed
 			self:Bar(64059, remaining)
-			self:DelayedMessage(64059, remaining - 10, "orange", L.madness_warning, false, "Warning")
+			self:DelayedMessage(64059, remaining - 10, "orange", L.madness_warning, false, "warning")
 		end
 	end
 
@@ -345,7 +345,7 @@ do
 end
 
 function mod:BrainStunned(args) -- Shattered Illusion
-	self:MessageOld("weakened", "green", "Long", L.weakened_message:format(self.displayName), 50661) -- 50661 / Weakened Resolve / spell_shadow_brainwash / icon 136125
+	self:MessageOld("weakened", "green", "long", L.weakened_message:format(self.displayName), 50661) -- 50661 / Weakened Resolve / spell_shadow_brainwash / icon 136125
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
@@ -360,7 +360,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		self:StopBar(L.tentacle_message:format(crusherCount))
 		self:StopBar(CL.count:format(L.portal_bar, portalCount))
 
-		self:MessageOld("stages", "red", "Alarm", CL.stage:format(3), false)
+		self:MessageOld("stages", "red", "alarm", CL.stage:format(3), false)
 		self:Bar(64465, 46)
 	elseif msg:find(L.engage_trigger) and not self.isEngaged then
 		self:Engage() -- Remove if Sara is added to boss frames on engage

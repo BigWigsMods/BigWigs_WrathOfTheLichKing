@@ -93,7 +93,7 @@ function mod:AddsPortal()
 end
 
 function mod:Frozen(args)
-	self:MessageOld("mage", "green", "Info", L["mage_message"], args.spellId)
+	self:MessageOld("mage", "green", "info", L["mage_message"], args.spellId)
 end
 
 function mod:FrozenCD(args)

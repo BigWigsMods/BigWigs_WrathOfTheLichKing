@@ -92,7 +92,7 @@ function mod:OverwhelmingPower(args)
 		self:OpenProximity(64637, 15)
 		self:Flash(64637)
 	end
-	self:TargetMessageOld(64637, args.destName, "blue", "Alert")
+	self:TargetMessageOld(64637, args.destName, "blue", "alert")
 	self:TargetBar(64637, 35, args.destName)
 	self:PrimaryIcon(64637, args.destName)
 end
@@ -122,7 +122,7 @@ end
 
 function mod:RuneOfDeath(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(62269, "blue", "Alarm", CL.you:format(self:SpellName(62269)))
+		self:MessageOld(62269, "blue", "alarm", CL.you:format(self:SpellName(62269)))
 		self:Flash(62269)
 	end
 end
@@ -132,7 +132,7 @@ function mod:RuneOfSummoning(args)
 end
 
 function mod:Overload(args)
-	self:MessageOld(61869, "yellow", "Long", CL.custom_sec:format(args.spellName, 6))
+	self:MessageOld(61869, "yellow", "long", CL.custom_sec:format(args.spellName, 6))
 	self:Bar(61869, 6)
 end
 
@@ -148,7 +148,7 @@ do
 		if target ~= previous then
 			if target then
 				if UnitIsUnit(target, "player") then
-					mod:MessageOld(61887, "blue", "Alarm", L.chased_you)
+					mod:MessageOld(61887, "blue", "alarm", L.chased_you)
 					mod:Flash(61887)
 				else
 					mod:MessageOld(61887, "yellow", nil, L.chased_other:format(target))

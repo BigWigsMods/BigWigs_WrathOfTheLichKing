@@ -49,13 +49,13 @@ function mod:Fear(args)
 end
 
 function mod:DeepBreath()
-	self:MessageOld(17086, "orange", "Alarm", L["deepbreath_message"])
+	self:MessageOld(17086, "orange", "alarm", L["deepbreath_message"])
 	self:Bar(17086, 8)
 	self:Flash(17086)
 end
 
 function mod:FlameBreath(args)
-	self:MessageOld(args.spellId, "red", "Alert")
+	self:MessageOld(args.spellId, "red", "alert")
 end
 
 function mod:Phase2()

@@ -1,31 +1,31 @@
 
 BigWigs:AddSounds("The Beasts of Northrend", {
-	[66317] = "Alarm",
-	[66331] = "Info",
-	[66823] = "Info",
-	[66869] = "Info",
-	[66883] = "Alarm",
-	[68335] = "Long",
-	["charge"] = "Alarm",
+	[66317] = "alarm",
+	[66331] = "info",
+	[66823] = "info",
+	[66869] = "info",
+	[66883] = "alarm",
+	[68335] = "long",
+	["charge"] = "alarm",
 })
 
 BigWigs:AddSounds("Lord Jaraxxus", {
-	[66197] = "Alert",
-	[66237] = "Info",
-	["adds"] = "Alarm",
+	[66197] = "alert",
+	[66237] = "info",
+	["adds"] = "alarm",
 })
 
 BigWigs:AddSounds("Faction Champions", {
-	[65816] = "Alarm",
+	[65816] = "alarm",
 })
 
 BigWigs:AddSounds("The Twin Val'kyr", {
-	["shield"] = "Alert",
-	["touch"] = "Info",
-	["vortex"] = "Alarm",
+	["shield"] = "alert",
+	["touch"] = "info",
+	["vortex"] = "alarm",
 })
 
 BigWigs:AddSounds("Anub'arak", {
-	[66118] = "Long",
-	[67574] = "Alert",
+	[66118] = "long",
+	[67574] = "alert",
 })

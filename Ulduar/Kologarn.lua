@@ -62,7 +62,7 @@ end
 --
 
 function mod:CrunchArmor(args)
-	self:StackMessage(63355, args.destName, args.amount, "orange", "Info")
+	self:StackMessage(63355, args.destName, args.amount, "orange", "info")
 end
 
 do
@@ -71,7 +71,7 @@ do
 		grip[#grip + 1] = args.destName
 		if #grip == 1 then
 			self:Bar(64290, 10)
-			self:ScheduleTimer("TargetMessageOld", 0.2, 64290, grip, "yellow", "Alert")
+			self:ScheduleTimer("TargetMessageOld", 0.2, 64290, grip, "yellow", "alert")
 		end
 	end
 end
@@ -105,7 +105,7 @@ end
 
 function mod:BigWigs_BossComm(_, msg, _, sender)
 	if msg == "EyeBeamWarn" then
-		self:TargetMessageOld("eyebeam", sender, "green", "Info", eyeBeam, 63976)
+		self:TargetMessageOld("eyebeam", sender, "green", "info", eyeBeam, 63976)
 		self:TargetBar("eyebeam", 11, sender, eyeBeam, 63976)
 		self:CDBar("eyebeam", 20, eyeBeam, 63976)
 		self:PrimaryIcon("eyebeam", sender)

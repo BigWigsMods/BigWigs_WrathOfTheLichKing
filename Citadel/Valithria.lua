@@ -130,7 +130,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) and UnitPowerType("player") == 0 then
 			prev = t
-			self:MessageOld(71086, "blue", "Alarm", CL["you"]:format(args.spellName))
+			self:MessageOld(71086, "blue", "alarm", CL["you"]:format(args.spellName))
 			self:Flash(71086)
 		end
 	end

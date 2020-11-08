@@ -96,7 +96,7 @@ do
 end
 
 function mod:Adds(args)
-	self:MessageOld("adds", "green", "Alarm", L["adds_message"], args.spellId)
+	self:MessageOld("adds", "green", "alarm", L["adds_message"], args.spellId)
 	self:DelayedMessage("adds", 35, "orange", L["adds_warning"])
 	self:Bar("adds", 40, L["adds"], args.spellId)
 end
@@ -107,7 +107,7 @@ function mod:RuneofBlood(args)
 end
 
 function mod:Mark(args)
-	self:StackMessage(72293, args.destName, count, "yellow", "Alert")
+	self:StackMessage(72293, args.destName, count, "yellow", "alert")
 	count = count + 1
 	self:PrimaryIcon(72293, args.destName)
 	if self:Me(args.destGUID) then
@@ -116,6 +116,6 @@ function mod:Mark(args)
 end
 
 function mod:Frenzy(args)
-	self:MessageOld(72737, "red", "Long")
+	self:MessageOld(72737, "red", "long")
 end
 

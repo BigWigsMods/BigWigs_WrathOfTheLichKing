@@ -114,7 +114,7 @@ do
 end
 
 function mod:Grip()
-	self:MessageOld(70123, "red", "Alarm", L["boom_message"])
+	self:MessageOld(70123, "red", "alarm", L["boom_message"])
 	self:Bar(70123, 5, L["boom_bar"])
 	if phase == 2 then
 		self:Bar(70123, 67, 70117) -- Icy Grip
@@ -131,14 +131,14 @@ end
 function mod:Phase2()
 	phase = 2
 	self:StopBar(L["airphase_bar"])
-	self:MessageOld("phase2", "green", "Long", L["phase2_message"], false)
+	self:MessageOld("phase2", "green", "long", L["phase2_message"], false)
 	self:Bar(70123, 38, 70117) -- Icy Grip
 end
 
 function mod:Buffet(args)
 	self:Bar(70127, 6, L["buffet_cd"])
 	if (args.amount % 2 == 0) and self:Me(args.destGUID) then
-		self:MessageOld(70127, "yellow", "Info", L["buffet_message"]:format(args.amount))
+		self:MessageOld(70127, "yellow", "info", L["buffet_message"]:format(args.amount))
 	end
 end
 
@@ -161,7 +161,7 @@ function mod:Unchained(args)
 		self:Bar(69762, 80)
 	end
 	if self:Me(args.destGUID) then
-		self:MessageOld(69762, "blue", "Alert", CL["you"]:format(args.spellName))
+		self:MessageOld(69762, "blue", "alert", CL["you"]:format(args.spellName))
 		self:Flash(69762)
 		if self:Heroic() then
 			self:OpenProximity("proximity", 20)

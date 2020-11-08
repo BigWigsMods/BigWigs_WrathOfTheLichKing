@@ -76,7 +76,7 @@ do
 		if self:Me(args.destGUID) then
 			local t = GetTime()
 			if t-4 > last then
-				self:MessageOld(65816, "blue", "Alarm", CL["you"]:format(self:SpellName(65816))) -- Hellfire
+				self:MessageOld(65816, "blue", "alarm", CL["you"]:format(self:SpellName(65816))) -- Hellfire
 				self:Flash(65816)
 				last = t
 			end

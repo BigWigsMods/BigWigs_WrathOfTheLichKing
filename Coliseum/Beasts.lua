@@ -189,7 +189,7 @@ end
 
 function mod:Impale(args)
 	if args.amount then
-		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "Info")
+		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "info")
 	end
 	self:Bar(args.spellId, 10)
 end
@@ -205,7 +205,7 @@ do
 		if self:Me(args.destGUID) then
 			local t = GetTime()
 			if t-4 > last then
-				self:MessageOld(args.spellId, "blue", "Alarm", CL["you"]:format(args.spellName))
+				self:MessageOld(args.spellId, "blue", "alarm", CL["you"]:format(args.spellName))
 				self:Flash(args.spellId)
 				last = t
 			end
@@ -261,7 +261,7 @@ end
 do
 	local toxinTargets, scheduled = mod:NewTargetList(), nil
 	local function toxinWarn(spellId)
-		mod:TargetMessageOld(spellId, toxinTargets, "orange", "Info", L["toxin_spell"])
+		mod:TargetMessageOld(spellId, toxinTargets, "orange", "info", L["toxin_spell"])
 		scheduled = nil
 	end
 	function mod:Toxin(args)
@@ -278,7 +278,7 @@ end
 do
 	local burnTargets, scheduled = mod:NewTargetList()
 	local function burnWarn()
-		mod:TargetMessageOld(66869, burnTargets, "orange", "Info", L["burn_spell"])
+		mod:TargetMessageOld(66869, burnTargets, "orange", "info", L["burn_spell"])
 		scheduled = nil
 	end
 	function mod:Burn(args)
@@ -290,7 +290,7 @@ do
 end
 
 function mod:Enraged(args)
-	self:MessageOld(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "long")
 end
 
 do
@@ -299,7 +299,7 @@ do
 		if self:Me(args.destGUID) then
 			local t = GetTime()
 			if t-4 > last then
-				self:MessageOld(args.spellId, "blue", "Alarm", L["slime_message"])
+				self:MessageOld(args.spellId, "blue", "alarm", L["slime_message"])
 				self:Flash(args.spellId)
 				last = t
 			end
@@ -343,7 +343,7 @@ end
 function mod:Charge(_, msg, unit, _, _, player)
 	if unit == icehowl then
 		local furiousChargeId = 52311
-		self:TargetMessageOld("charge", player, "blue", "Alarm", furiousChargeId)
+		self:TargetMessageOld("charge", player, "blue", "alarm", furiousChargeId)
 		if UnitIsUnit(player, "player") then
 			self:Flash("charge", furiousChargeId)
 			self:Say("charge", furiousChargeId)

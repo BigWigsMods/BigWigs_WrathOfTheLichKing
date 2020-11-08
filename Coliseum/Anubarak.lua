@@ -152,7 +152,7 @@ function mod:ColdCooldown(args)
 end
 
 function mod:Swarm(args)
-	self:MessageOld(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "long")
 	phase2 = true
 	self:StopBar(L["burrow"])
 	self:CancelDelayedMessage(L["burrow_soon"])
@@ -163,7 +163,7 @@ function mod:Swarm(args)
 end
 
 function mod:Pursue(args)
-	self:TargetMessageOld(args.spellId, args.destName, "blue", "Alert", L["chase"])
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "alert", L["chase"])
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end

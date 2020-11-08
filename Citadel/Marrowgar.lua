@@ -47,7 +47,7 @@ end
 do
 	local impaleTargets, scheduled = mod:NewTargetList(), nil
 	local function impaleWarn(spellId)
-		mod:TargetMessageOld(69057, impaleTargets, "orange", "Alert", spellId)
+		mod:TargetMessageOld(69057, impaleTargets, "orange", "alert", spellId)
 		scheduled = nil
 	end
 	function mod:Impale(args)
@@ -61,7 +61,7 @@ end
 
 function mod:Coldflame(args)
 	if self:Me(args.destName) then
-		self:MessageOld(69138, "blue", "Alarm", CL["under"]:format(args.spellName))
+		self:MessageOld(69138, "blue", "alarm", CL["under"]:format(args.spellName))
 		self:Flash(69138)
 	end
 end

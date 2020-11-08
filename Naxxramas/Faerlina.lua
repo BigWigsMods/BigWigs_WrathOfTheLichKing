@@ -93,7 +93,7 @@ end
 
 function mod:Rain(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(28794, "blue", "Alarm", L["rain_message"], 54099)
+		self:MessageOld(28794, "blue", "alarm", L["rain_message"], 54099)
 		self:Flash(28794)
 	end
 end

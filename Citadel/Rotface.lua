@@ -74,7 +74,7 @@ function mod:InfectionRemoved(args)
 end
 
 function mod:SlimeSpray(args)
-	self:MessageOld(69508, "red", "Alarm")
+	self:MessageOld(69508, "red", "alarm")
 	self:Bar(69508, 21, L["spray_bar"])
 end
 
@@ -84,7 +84,7 @@ do
 	local function explodeWarn()
 		handle = nil
 		mod:Flash(69839)
-		mod:MessageOld(69839, "orange", "Alert", 67729) -- Explode
+		mod:MessageOld(69839, "orange", "alert", 67729) -- Explode
 	end
 	function mod:Explode(args)
 		self:Bar(69839, 4, 67729) -- "Explode"

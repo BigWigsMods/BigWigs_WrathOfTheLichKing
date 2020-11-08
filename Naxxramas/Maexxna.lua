@@ -53,7 +53,7 @@ end
 do
 	local cocoonTargets, scheduled = mod:NewTargetList(), nil
 	local function cocoonWarn()
-		mod:TargetMessageOld(28622, cocoonTargets, "red", "Alert", L["cocoonbar"], 745)
+		mod:TargetMessageOld(28622, cocoonTargets, "red", "alert", L["cocoonbar"], 745)
 		scheduled = nil
 	end
 	function mod:Cocoon(args)
@@ -76,7 +76,7 @@ end
 
 function mod:Frenzy(args)
 	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
-	self:MessageOld(54123, "yellow", "Alarm", L["enragewarn"], args.spellId)
+	self:MessageOld(54123, "yellow", "alarm", L["enragewarn"], args.spellId)
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)

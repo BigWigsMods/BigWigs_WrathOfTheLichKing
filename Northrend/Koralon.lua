@@ -56,7 +56,7 @@ end
 
 function mod:Cinder(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(args.spellId, "blue", "Alarm", CL["you"]:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "alarm", CL["you"]:format(args.spellName))
 		self:Flash(args.spellId)
 	end
 end

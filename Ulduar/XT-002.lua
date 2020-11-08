@@ -67,16 +67,16 @@ end
 --
 
 function mod:ExposedHeart(args)
-	self:MessageOld(args.spellId, "yellow", "Long")
+	self:MessageOld(args.spellId, "yellow", "long")
 	self:Bar(args.spellId, 30)
 end
 
 function mod:Heartbreak()
-	self:MessageOld(64193, "red", "Info")
+	self:MessageOld(64193, "red", "info")
 end
 
 function mod:TympanicTantrum(args)
-	self:MessageOld(args.spellId, "yellow", "Warning")
+	self:MessageOld(args.spellId, "yellow", "warning")
 	self:CDBar(args.spellId, 62)
 end
 
@@ -87,7 +87,7 @@ function mod:GravityBomb(args)
 		self:Say(args.spellId)
 		self:SayCountdown(args.spellId, 9)
 	end
-	self:TargetMessageOld(args.spellId, args.destName, "blue", "Alert")
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "alert")
 	self:TargetBar(args.spellId, 9, args.destName, L.gravitybomb_other)
 	self:SecondaryIcon(args.spellId, args.destName)
 end
@@ -107,7 +107,7 @@ function mod:SearingLight(args)
 		self:Flash(args.spellId)
 		self:Say(args.spellId)
 	end
-	self:TargetMessageOld(args.spellId, args.destName, "blue", "Alert")
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "alert")
 	self:TargetBar(args.spellId, 9, args.destName, L.lightbomb_other)
 	self:PrimaryIcon(args.spellId, args.destName)
 end

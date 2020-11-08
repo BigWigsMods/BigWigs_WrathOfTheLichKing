@@ -64,7 +64,7 @@ end
 --
 
 function mod:Bomb(args)
-	self:MessageOld(72052, "yellow", "Alert")
+	self:MessageOld(72052, "yellow", "alert")
 end
 
 function mod:Prison(args)
@@ -74,7 +74,7 @@ function mod:Prison(args)
 end
 
 function mod:Switch(args)
-	self:MessageOld(70981, "green", "Info", L["switch_message"]:format(args.destName))
+	self:MessageOld(70981, "green", "info", L["switch_message"]:format(args.destName))
 	self:CDBar(70981, 45, L["switch_bar"])
 	self:StopBar(L["empowered_flames"])
 	for i = 1, 3 do
@@ -87,7 +87,7 @@ function mod:Switch(args)
 end
 
 function mod:EmpoweredShock(_, spellId)
-	self:MessageOld(72039, "red", "Long", L["empowered_shock_message"])
+	self:MessageOld(72039, "red", "long", L["empowered_shock_message"])
 	self:OpenProximity("proximity", 15)
 	self:ScheduleTimer("CloseProximity", 5)
 	self:CDBar(72039, 16, L["shock_bar"])
@@ -115,7 +115,7 @@ function mod:EmpoweredFlame(msg, _, _, _, player)
 	if UnitIsUnit(player, "player") then
 		self:Flash(72040)
 	end
-	self:TargetMessageOld(72040, player, "orange", "Long", L["empowered_flames"])
+	self:TargetMessageOld(72040, player, "orange", "long", L["empowered_flames"])
 	self:SecondaryIcon(72040, player)
 	self:CDBar(72040, 20, L["empowered_flames"])
 end

@@ -115,20 +115,20 @@ end
 
 function mod:RAID_BOSS_WHISPER(event, msg, mob)
 	if phase == 3 and msg == L["surge_trigger"] then
-		self:MessageOld("surge", "blue", "Alarm", L["surge_you"], 60936) -- 60936 for phase 3, not 56505
+		self:MessageOld("surge", "blue", "alarm", L["surge_you"], 60936) -- 60936 for phase 3, not 56505
 		self:Flash("surge", 60936)
 	end
 end
 
 function mod:RAID_BOSS_EMOTE(event, msg)
 	if phase == 1 then
-		self:MessageOld("sparks", "red", "Alert", L["sparks_message"], 56152)
+		self:MessageOld("sparks", "red", "alert", L["sparks_message"], 56152)
 		self:Bar("sparks", 30, L["sparks"], 56152)
 		self:DelayedMessage("sparks", 25, "yellow", L["sparks_warning"])
 	elseif phase == 2 then
 		-- 43810 Frost Wyrm, looks like a dragon breathing 'deep breath' :)
 		-- Correct spellId for 'breath" in phase 2 is 56505
-		self:MessageOld("breath", "red", "Alert", L["breath_message"], 43810)
+		self:MessageOld("breath", "red", "alert", L["breath_message"], 43810)
 		self:Bar("breath", 59, L["breath"], 43810)
 		self:DelayedMessage("breath", 54, "yellow", L["breath_warning"])
 	end

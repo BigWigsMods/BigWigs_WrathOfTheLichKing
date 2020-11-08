@@ -94,7 +94,7 @@ end
 --
 
 function mod:Curse(args)
-	self:MessageOld(29213, "red", "Alarm", L["cursewarn"])
+	self:MessageOld(29213, "red", "alarm", L["cursewarn"])
 	self:DelayedMessage(29213, cursetime - 10, "orange", L["curse10secwarn"])
 	self:Bar(29213, cursetime, L["cursebar"])
 	self:Bar(29213, 10, L["curseexplosion"])

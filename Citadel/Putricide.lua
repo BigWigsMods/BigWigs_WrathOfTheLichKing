@@ -136,7 +136,7 @@ do
 end
 
 function mod:Plague(args)
-	self:StackMessage(72451, args.destName, args.amount, "orange", "Info")
+	self:StackMessage(72451, args.destName, args.amount, "orange", "info")
 	self:Bar(72451, 10)
 end
 
@@ -175,7 +175,7 @@ function mod:StunnedByGreenOoze(args)
 end
 
 function mod:Experiment(args)
-	self:MessageOld(70351, "yellow", "Alert", L["experiment_message"])
+	self:MessageOld(70351, "yellow", "alert", L["experiment_message"])
 	self:Bar(70351, 38, L["experiment_bar"])
 end
 
@@ -216,7 +216,7 @@ do
 			oldPlagueBar = args.destName
 			self:TargetBar(70911, expirationTime - GetTime(), args.destName)
 		end
-		self:TargetMessageOld(70911, args.destName, "blue", "Alert")
+		self:TargetMessageOld(70911, args.destName, "blue", "alert")
 		self:SecondaryIcon(70911, args.destName)
 		if self:Me(args.destGUID) then
 			self:Flash(70911)

@@ -55,7 +55,7 @@ end
 
 function mod:Cloud(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(58965, "blue", "Alarm", CL["you"]:format(args.spellName))
+		self:MessageOld(58965, "blue", "alarm", CL["you"]:format(args.spellName))
 		self:Flash(58965)
 	end
 end

@@ -83,14 +83,14 @@ end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg == L.ground_trigger then -- Grounded stage begins
-		self:MessageOld("stages", "cyan", "Long", L.ground_message, false)
+		self:MessageOld("stages", "cyan", "long", L.ground_message, false)
 	end
 end
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
 	if msg == L.harpoon_trigger then -- Next harpoon ready
 		count = count + 1
-		self:MessageOld("harpoon", "yellow", "Info", L.harpoon_message:format(count), "INV_Spear_06")
+		self:MessageOld("harpoon", "yellow", "info", L.harpoon_message:format(count), "INV_Spear_06")
 		if count < 4 then
 			self:Bar("harpoon", 18, L.harpoon_nextbar:format(count+1), "INV_Spear_06")
 		end
@@ -104,7 +104,7 @@ do
 			local t = GetTime()
 			if t-prev > 2 then
 				prev = t
-				self:MessageOld(args.spellId, "blue", "Alarm", CL.underyou:format(args.spellName))
+				self:MessageOld(args.spellId, "blue", "alarm", CL.underyou:format(args.spellName))
 			end
 		end
 	end
@@ -122,7 +122,7 @@ function mod:WingBuffetCastEnd() -- Air stage begins again
 	count = 0
 	if stage == 1 then
 		self:Bar("harpoon", 55, L.harpoon_nextbar:format(1), "INV_Spear_06")
-		self:MessageOld("stages", "cyan", "Long", L.air_message, false)
+		self:MessageOld("stages", "cyan", "long", L.air_message, false)
 	end
 end
 
@@ -141,7 +141,7 @@ function mod:HarpoonedOver(args)
 end
 
 function mod:FlameBreath(args)
-	self:MessageOld(args.spellId, "yellow", "Warning")
+	self:MessageOld(args.spellId, "yellow", "warning")
 	if stage == 2 then
 		self:CDBar(args.spellId, 21)
 	end
@@ -150,6 +150,6 @@ end
 function mod:FuseArmor(args)
 	if self:Me(args.destGUID) or (self:Tank() and self:Tank(args.destName)) then
 		local amount = args.amount or 1
-		self:StackMessage(args.spellId, args.destName, amount, "orange", args.amount > 1 and "Info")
+		self:StackMessage(args.spellId, args.destName, amount, "orange", args.amount > 1 and "info")
 	end
 end

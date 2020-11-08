@@ -90,7 +90,7 @@ end
 --
 
 function mod:RunicBarrier(args)
-	self:MessageOld(args.spellId, "orange", "Alarm", L.barrier_message)
+	self:MessageOld(args.spellId, "orange", "alarm", L.barrier_message)
 	self:Bar(args.spellId, 20)
 end
 
@@ -130,7 +130,7 @@ do
 			local t = GetTime()
 			if t-prev > 5 then
 				prev = t
-				self:MessageOld(args.spellId, "blue", "Info", CL.you:format(args.spellName))
+				self:MessageOld(args.spellId, "blue", "info", CL.you:format(args.spellName))
 				self:Flash(args.spellId)
 			end
 		end

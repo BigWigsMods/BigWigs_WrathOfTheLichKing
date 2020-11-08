@@ -71,12 +71,12 @@ end
 
 function mod:PhasePunchCount(args)
 	if args.amount > 3 then
-		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "Alert")
+		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "alert")
 	end
 end
 
 function mod:CosmicSmash(args)
-	self:MessageOld(64597, "yellow", "Info", CL.casting:format(args.spellName))
+	self:MessageOld(64597, "yellow", "info", CL.casting:format(args.spellName))
 	self:CastBar(64597, 5)
 	self:Bar(64597, 25)
 end
@@ -87,7 +87,7 @@ function mod:BlackHoleExplosion()
 end
 
 function mod:BigBang(args)
-	self:MessageOld(64443, "red", "Alarm")
+	self:MessageOld(64443, "red", "alarm")
 	self:CastBar(64443, 8)
 	self:Bar(64443, 90)
 	self:DelayedMessage(64443, 85, "yellow", CL.soon:format(args.spellName))

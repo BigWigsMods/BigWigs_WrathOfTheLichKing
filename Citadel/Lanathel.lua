@@ -102,13 +102,13 @@ end
 
 function mod:Feed(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(70877, "orange", "Alert", L["feed_message"])
+		self:MessageOld(70877, "orange", "alert", L["feed_message"])
 		self:Bar(70877, 15, L["feed_message"])
 	end
 end
 
 function mod:AirPhase(args)
-	self:MessageOld(71772, "red", "Alarm", L["phase_message"])
+	self:MessageOld(71772, "red", "alarm", L["phase_message"])
 	self:Bar(71772, 12, L["phase1_bar"])
 	self:Bar(71772, airPhaseTimers[self:Difficulty()][2], L["phase2_bar"])
 end

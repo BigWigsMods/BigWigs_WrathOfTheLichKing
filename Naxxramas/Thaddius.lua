@@ -109,28 +109,28 @@ function mod:UNIT_AURA(event, unit)
 				if name == negativeCharge then
 					if not lastCharge then
 						lastCharge = negativeCharge
-						self:MessageOld(28089, "blue", "Alert", L["polarity_first_negative"], "spell_chargenegative")
+						self:MessageOld(28089, "blue", "alert", L["polarity_first_negative"], "spell_chargenegative")
 						self:Flash(28089)
 					else
 						if lastCharge == negativeCharge then
 							self:MessageOld(28089, "green", nil, L["polarity_nochange"], "spell_chargenegative")
 						else
 							lastCharge = negativeCharge
-							self:MessageOld(28089, "blue", "Alert", L["polarity_changed"], "spell_chargepositive")
+							self:MessageOld(28089, "blue", "alert", L["polarity_changed"], "spell_chargepositive")
 							self:Flash(28089)
 						end
 					end
 				elseif name == positiveCharge then
 					if not lastCharge then
 						lastCharge = positiveCharge
-						self:MessageOld(28089, "blue", "Alert", L["polarity_first_positive"], "spell_chargepositive")
+						self:MessageOld(28089, "blue", "alert", L["polarity_first_positive"], "spell_chargepositive")
 						self:Flash(28089)
 					else
 						if lastCharge == positiveCharge then
 							self:MessageOld(28089, "green", nil, L["polarity_nochange"], "spell_chargepositive")
 						else
 							lastCharge = positiveCharge
-							self:MessageOld(28089, "blue", "Alert", L["polarity_changed"], "spell_chargenegative")
+							self:MessageOld(28089, "blue", "alert", L["polarity_changed"], "spell_chargenegative")
 							self:Flash(28089)
 						end
 					end

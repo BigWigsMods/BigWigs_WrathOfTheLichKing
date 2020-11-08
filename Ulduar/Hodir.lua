@@ -67,7 +67,7 @@ end
 --
 
 function mod:StormCloud(args)
-	self:TargetMessageOld(args.spellId, args.destName, "green", "Info")
+	self:TargetMessageOld(args.spellId, args.destName, "green", "info")
 	self:TargetBar(args.spellId, 30, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
 end
@@ -78,7 +78,7 @@ function mod:StormCloudRemoved(args)
 end
 
 function mod:FlashFreezeCast(args)
-	self:MessageOld(args.spellId, "yellow", "Long", CL.casting:format(args.spellName))
+	self:MessageOld(args.spellId, "yellow", "long", CL.casting:format(args.spellName))
 	self:CastBar(args.spellId, 9)
 	self:Bar(args.spellId, 35)
 	self:DelayedMessage(args.spellId, 30, "yellow", CL.custom_sec:format(args.spellName, 5))
@@ -88,7 +88,7 @@ function mod:FlashFreeze(args)
 	if args.destGUID:find("Player", nil, true) then -- Applies to NPCs
 		flashFreezed[#flashFreezed + 1] = args.destName
 		if #flashFreezed == 1 then
-			self:ScheduleTimer("TargetMessageOld", 0.3, 61968, flashFreezed, "orange", "Alert")
+			self:ScheduleTimer("TargetMessageOld", 0.3, 61968, flashFreezed, "orange", "alert")
 		end
 	end
 end
@@ -104,7 +104,7 @@ do
 		local _, stack = self:UnitDebuff(unit, 62039)
 		if stack and stack ~= lastCold then
 			if stack > 1 then
-				self:MessageOld(62039, "blue", "Alert", CL.you:format(CL.count:format(cold, stack)))
+				self:MessageOld(62039, "blue", "alert", CL.you:format(CL.count:format(cold, stack)))
 			end
 			lastCold = stack
 		end
