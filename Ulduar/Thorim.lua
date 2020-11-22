@@ -170,9 +170,11 @@ end
 
 function mod:StageTwo()
 	-- Cancel scheduled berserk
-	for k,v in next, self.scheduledMessages do
-		self:CancelTimer(v)
-		self.scheduledMessages[k] = nil
+	if self.scheduledMessages then
+		for k,v in next, self.scheduledMessages do
+			self:CancelTimer(v)
+			self.scheduledMessages[k] = nil
+		end
 	end
 
 	self:StopBar(L["hardmode"])
