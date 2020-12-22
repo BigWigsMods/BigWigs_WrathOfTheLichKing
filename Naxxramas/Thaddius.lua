@@ -85,7 +85,7 @@ function mod:StalaggPower(args)
 	self:Bar(28134, 10)
 end
 
-local blacklist= {}
+local blacklist= {[28084] = true} -- Negative (issue #9)
 function mod:UNIT_AURA(event, unit)
 	if not shiftTime or (GetTime() - shiftTime) < 2.9 then return end
 
