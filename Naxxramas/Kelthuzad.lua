@@ -77,7 +77,7 @@ function mod:OnBossEnable()
 	self:Death("Win", 15990)
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "target", "focus")
 end
 
 --------------------------------------------------------------------------------
@@ -133,8 +133,8 @@ do
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unit)
-	if UnitName(unit) == mod.displayName then
+function mod:UNIT_HEALTH(event, unit)
+	if self:UnitName(unit) == mod.displayName then
 		local health = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if health < 46 then
 			self:MessageOld("phase", "yellow", nil, L["phase3_soon_warning"], false)

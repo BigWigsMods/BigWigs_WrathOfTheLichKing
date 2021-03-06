@@ -59,7 +59,7 @@ do
 		count = count + 1
 		if count == 2 then --2 bosses engaged
 			count = 0
-			local guid = UnitGUID("boss1")
+			local guid = self:UnitGUID("boss1")
 			if guid then
 				guid = self:MobId(guid)
 				if guid == 37540 or guid == 37215 then

@@ -49,7 +49,7 @@ end
 
 function mod:UNIT_TARGETABLE_CHANGED(_, unit)
 	if UnitCanAttack("player", unit) then -- Engage
-		self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, unit)
+		self:RegisterUnitEvent("UNIT_HEALTH", nil, unit)
 		self:Bar(64443, 98) -- Big Bang
 		self:DelayedMessage(64443, 93, "yellow", CL.soon:format(self:SpellName(64443)))
 		self:Bar(64597, 33) -- Cosmic Smash
@@ -57,7 +57,7 @@ function mod:UNIT_TARGETABLE_CHANGED(_, unit)
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unit)
+function mod:UNIT_HEALTH(event, unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if hp < 21 then
 		self:MessageOld("stages", "green", nil, CL["soon"]:format(CL["phase"]:format(2)), false)

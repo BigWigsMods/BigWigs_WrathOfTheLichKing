@@ -79,7 +79,7 @@ function mod:Switch(args)
 	self:StopBar(L["empowered_flames"])
 	for i = 1, 3 do
 		local bossId = ("boss%d"):format(i)
-		if UnitGUID(bossId) == args.destGUID then
+		if self:UnitGUID(bossId) == args.destGUID then
 			self:PrimaryIcon("iconprince", bossId)
 			break
 		end
@@ -96,7 +96,7 @@ end
 function mod:RegularShock()
 	for i = 1, 3 do
 		local boss = ("boss%d"):format(i)
-		if self:MobId(UnitGUID(boss)) == 37970 then
+		if self:MobId(self:UnitGUID(boss)) == 37970 then
 			local bossTarget = boss.."target"
 			if UnitExists(bossTarget) then
 				if UnitIsUnit("player", bossTarget) then

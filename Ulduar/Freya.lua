@@ -137,7 +137,7 @@ do
 	local function scanTarget()
 		local bossId = mod:GetUnitIdByGUID(32906)
 		if not bossId then return end
-		local target = UnitName(bossId .. "target")
+		local target = mod:UnitName(bossId .. "target")
 		if target then
 			mod:TargetMessageOld(62623, target, "yellow")
 			mod:SecondaryIcon(62623, target)

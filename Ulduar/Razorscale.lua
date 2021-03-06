@@ -59,7 +59,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_DAMAGE", "DevouringFlameDamage", 64733)
 	self:Log("SPELL_MISSED", "DevouringFlameDamage", 64733)
 
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
 	self:Log("SPELL_CAST_SUCCESS", "WingBuffetCastEnd", 62666)
 	self:Log("SPELL_AURA_APPLIED", "Harpooned", 62794)
 	self:Log("SPELL_AURA_REMOVED", "HarpoonedOver", 62794)
@@ -110,7 +110,7 @@ do
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unit)
+function mod:UNIT_HEALTH(event, unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if hp > 51 and hp < 56 then
 		self:MessageOld("stages", "green", nil, CL.soon:format(CL.stage:format(2)), false)

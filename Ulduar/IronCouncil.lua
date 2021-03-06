@@ -144,7 +144,7 @@ do
 	local function targetCheck()
 		local bossId = mod:GetUnitIdByGUID(32857)
 		if not bossId then return end
-		local target = UnitName(bossId .. "target")
+		local target = mod:UnitName(bossId .. "target")
 		if target ~= previous then
 			if target then
 				if UnitIsUnit(target, "player") then

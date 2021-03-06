@@ -51,7 +51,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "SearingLightRemoved", 65121)
 	self:Log("SPELL_CAST_START", "TympanicTantrum", 62776)
 
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
 end
 
 function mod:OnEngage()
@@ -120,7 +120,7 @@ function mod:SearingLightRemoved(args)
 	self:PrimaryIcon(args.spellId)
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unit)
+function mod:UNIT_HEALTH(event, unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if not exposed1 and hp > 86 and hp < 90 then
 		exposed1 = true

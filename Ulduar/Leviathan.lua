@@ -68,7 +68,7 @@ function mod:Pursued(args)
 		self:TargetBar(args.spellId, 30, me)
 	else
 		for unit in self:IterateGroup() do
-			local guid = UnitGUID(unit.."pet")
+			local guid = self:UnitGUID(unit.."pet")
 			if guid == args.destGUID then
 				local name = self:UnitName(unit)
 				self:TargetMessageOld(args.spellId, name, "blue", "alarm")

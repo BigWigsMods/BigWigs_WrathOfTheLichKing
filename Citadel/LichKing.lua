@@ -251,7 +251,7 @@ do
 	local count = 8
 	function mod:UNIT_TARGET(_, firedUnit)
 		local unit = firedUnit and firedUnit.."target" or "mouseover"
-		local guid = UnitGUID(unit)
+		local guid = self:UnitGUID(unit)
 		if valkyrs[guid] then
 			SetRaidTarget(unit, valkyrs[guid])
 			valkyrs[guid] = nil
