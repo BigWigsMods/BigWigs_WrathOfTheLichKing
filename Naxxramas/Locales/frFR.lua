@@ -1,16 +1,13 @@
 local L = BigWigs:NewBossLocale("Anub'Rekhan", "frFR")
+if not L then return end
 if L then
 	L.starttrigger1 = "Rien qu'une petite bouchée…"
 	L.starttrigger2 = "Oui, courez ! Faites circuler le sang !"
 	L.starttrigger3 = "Nulle part pour s'enfuir."
 	L.engagewarn = "Anub'Rekhan engagé ! Nuée de sauterelles dans ~%d sec. !"
 
-	L.gainendwarn = "Fin de la Nuée de sauterelles !"
 	L.gainnextwarn = "Prochaine Nuée de sauterelles dans ~85 sec."
 	L.gainwarn10sec = "~10 sec. avant la Nuée de sauterelles"
-	L.gainincbar = "~Prochaine Nuée"
-
-	L.castwarn = "Arrivée d'une Nuée de sauterelles !"
 end
 
 L = BigWigs:NewBossLocale("Grand Widow Faerlina", "frFR")
@@ -128,6 +125,8 @@ if L then
 	L.markbar = "Marque %d"
 	L.markwarn1 = "Marque %d !"
 	L.markwarn2 = "Marque %d dans 5 sec."
+
+	-- L.dies = "#%d Killed"
 
 	L.startwarn = "Les 4 cavaliers engagés ! Marque dans ~17 sec. !"
 end
@@ -263,7 +262,6 @@ end
 L = BigWigs:NewBossLocale("Instructor Razuvious", "frFR")
 if L then
 	L.shout_warning = "Cri perturbant dans 5 sec. !"
-	L.shout_next = "Recharge Cri"
 
 	L.taunt_warning = "Provocation prête dans 5 sec. !"
 	L.shieldwall_warning = "Barrière d'os terminée dans 5 sec. !"

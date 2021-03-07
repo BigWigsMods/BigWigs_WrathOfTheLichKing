@@ -1,17 +1,13 @@
-
 local L = BigWigs:NewBossLocale("Anub'Rekhan", "ruRU")
+if not L then return end
 if L then
 	L.starttrigger1 = "Посмотрим какие вы на вкус!"
 	L.starttrigger2 = "Бегите бегите! Я люблю горячую кровь!"
-	L.starttrigger3 = "Вам отсюда не выбраться." --check this
+	L.starttrigger3 = "Вам отсюда не выбраться." -- check this
 	L.engagewarn = "Ануб'Рекан вступает в бой! Первая волна жуков через ~%d секунд"
 
-	L.gainendwarn = "Жуки-трупоеды исчезают!"
 	L.gainnextwarn = "Следующая волна жуков-трупоедов через ~85 секунд"
 	L.gainwarn10sec = "~10 до жуков-трупоедов"
-	L.gainincbar = "Следующая волна жуков-трупоедов"
-
-	L.castwarn = "Появляются жуки-трупоеды!"
 end
 
 L = BigWigs:NewBossLocale("Grand Widow Faerlina", "ruRU")
@@ -129,6 +125,8 @@ if L then
 	L.markbar = "Знак %d"
 	L.markwarn1 = "Знак %d!"
 	L.markwarn2 = "Знак %d через 5 секунд"
+
+	-- L.dies = "#%d Killed"
 
 	L.startwarn = "Четверо всадников вступили в бой! Знак через ~17 секунд"
 end
@@ -264,7 +262,6 @@ end
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ruRU")
 if L then
 	L.shout_warning = "Разрушительный крик через 5сек!"
-	L.shout_next = "~перезарядка крика"
 
 	L.taunt_warning = "Провокация закончится через 5сек!"
 	L.shieldwall_warning = "Преграда из костей закончится через 5сек!"

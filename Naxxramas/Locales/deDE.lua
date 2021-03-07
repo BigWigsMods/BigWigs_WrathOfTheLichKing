@@ -1,17 +1,13 @@
-
 local L = BigWigs:NewBossLocale("Anub'Rekhan", "deDE")
+if not L then return end
 if L then
 	L.starttrigger1 = "Nur einmal kosten..."
 	L.starttrigger2 = "Rennt! Das bringt das Blut in Wallung!"
 	L.starttrigger3 = "Es gibt kein Entkommen."
 	L.engagewarn = "Anub'Rekhan angegriffen! Heuschreckenschwarm in ~%d sek!"
 
-	L.gainendwarn = "Heuschreckenschwarm vorbei!"
 	L.gainnextwarn = "Nächster Schwarm in ~85 sek"
 	L.gainwarn10sec = "Heuschreckenschwarm in ~10 sek!"
-	L.gainincbar = "~Nächster Schwarm"
-
-	L.castwarn = "Heuschreckenschwarm!"
 end
 
 L = BigWigs:NewBossLocale("Grand Widow Faerlina", "deDE")
@@ -129,6 +125,8 @@ if L then
 	L.markbar = "Mal (%d)"
 	L.markwarn1 = "Mal (%d)!"
 	L.markwarn2 = "Mal (%d) in 5 sek!"
+
+	-- L.dies = "#%d Killed"
 
 	L.startwarn = "Die Vier Reiter angegriffen! Male in ~17 sek."
 end
@@ -264,7 +262,6 @@ end
 L = BigWigs:NewBossLocale("Instructor Razuvious", "deDE")
 if L then
 	L.shout_warning = "Unterbrechender Schrei in 5 sek!"
-	L.shout_next = "~Unterbrechender Schrei"
 
 	L.taunt_warning = "Spott bereit in 5 sek!"
 	L.shieldwall_warning = "Knochenbarriere weg in 5 sek!"

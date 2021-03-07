@@ -1,13 +1,9 @@
 local L = BigWigs:NewBossLocale("Lord Marrowgar", "ruRU")
+if not L then return end
 if L then
-	L.impale_cd = "~Прокалывание"
-
-	L.bonestorm_cd = "~Вихрь костей"
-	L.bonestorm_warning = "Вихрь костей через 5 сек!"
-
-	L.coldflame_message = "На ВАС - Холодное пламя!"
-
 	L.engage_trigger = "Плеть накроет этот мир волной смерти и разрушения!"
+
+	L.bonestorm_warning = "Вихрь костей через 5 сек!"
 end
 
 L = BigWigs:NewBossLocale("Blood Prince Council", "ruRU")
@@ -61,17 +57,8 @@ L = BigWigs:NewBossLocale("Festergut", "ruRU")
 if L then
 	L.engage_trigger = "Повеселимся?"
 
-	L.inhale_message = "Вдыхание гнилостных испарений %d"
 	L.inhale_bar = "~Следующее вдыхание %d"
-
 	L.blight_warning = "Едкая гниль через ~5сек!"
-	L.blight_bar = "~Следущая Гниль"
-
-	L.bloat_message = "%2$dx Газовое вздутие on %1$s"
-	L.bloat_bar = "~Следущее Вздутие"
-
-	L.spore_bar = "~Следующие Газообразные споры"
-
 	L.ball_message = "Скоро комок гадости!"
 end
 
@@ -115,18 +102,16 @@ if L then
 
 	L.spirit_message = "Призыв духа!"
 	L.spirit_bar = "~Призыв духа"
-
-	L.dominate_bar = "~Господство над разумом"
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "ruRU")
 if L then
+	L.engage_trigger = "Отличные новости, народ!"
+
 	L.phase = "Фазы"
 	L.phase_desc = "Предупреждает о смене фаз."
 	L.phase_warning = "Скоро %d-я фаза!"
 	L.phase_bar = "Следующая фаза"
-
-	L.engage_trigger = "Отличные новости, народ!"
 
 	L.ball_bar = "Следующий бросок вязкой гадости"
 	L.ball_say = "Бросок вязкой гадости на МНЕ!"
@@ -137,25 +122,14 @@ if L then
 	L.blight_message = "Газовое облако"
 	L.violation_message = "Зеленый слизнюк"
 
-	L.plague_message = "%2$dx чума на %1$s"
-	L.plague_bar = "Следующая чума"
-
 	L.gasbomb_bar = "Следующие желтые газовые бомбы"
 	L.gasbomb_message = "Желтые бомбы!"
-
-	L.unbound_bar = "Безудержная чума: %s"
-end
-
-L = BigWigs:NewBossLocale("Putricide Dogs", "ruRU")
-if L then
-	L.wound_message = "%2$dx смертельных ран у: %1$s"
 end
 
 L = BigWigs:NewBossLocale("Rotface", "ruRU")
 if L then
 	L.engage_trigger = "УУИИИИИИ!"
 
-	L.infection_bar = "Инфекция на |3-5(%s)!"
 	L.infection_message = "Инфекция"
 
 	L.ooze = "Сливание слизнюков"
@@ -176,8 +150,6 @@ if L then
 	L.portalcd_message = "Портал %d, через 14 сек!"
 	L.portalcd_bar = "Следующий портал %d"
 	L.portal_trigger = "Я открыла портал в Изумрудный Сон. Там вы найдете спасение, герои..."
-
-	L.manavoid_message = "На ВАС - Магическая воронка!"
 
 	L.suppresser = "Появление Подавителей"
 	L.suppresser_desc = "Сообщать когда будут появляться Подавители."
@@ -206,10 +178,6 @@ if L then
 	L.boom_message = "Взрыв!"
 	L.boom_bar = "Взрыв"
 
-	L.grip_bar = "Морозная хватка"
-
-	L.unchained_message = "На ВАС - Освобожденная магия!"
-	L.unchained_bar = "Освобожденная магия"
 	L.instability_message = "Неустойчивость x%d!"
 	L.chilled_message = "Обжигающий холод x%d!"
 	L.buffet_message = "Таинственная энергия x%d!"
@@ -221,42 +189,22 @@ if L then
 	L.warmup_trigger = "Неужели прибыли наконец хваленые силы Света?"
 	L.engage_trigger = "Я оставлю тебя в живых, чтобы ты увидел финал."
 
-	L.horror_bar = "~Следующий Ужас"
 	L.horror_message = "Шаркающий ужас"
+	L.horror_bar = "~Следующий Ужас"
 
-	L.necroticplague_bar = "Мертвящая чума"
-
-	L.ragingspirit_bar = "Разъярённый дух"
-
-	L.valkyr_bar = "Следующая Валь'кира"
 	L.valkyr_message = "Валь'кира"
+	L.valkyr_bar = "Следующая Валь'кира"
+	L.valkyrhug_message = "Валь'кира схватила"
 
-	L.vilespirits_bar = "Зловещие духи"
-
-	L.harvestsoul_bar = "Жнец Душ"
-
-	L.remorselesswinter_message = "Беспощадность зимы!"
-	L.quake_message = "Встряска"
-	L.quake_bar = "Встряска!"
-
-	L.defile_message = "Осквернение на ТЕБЕ!"
-	L.defile_bar = "Следующее Осквернение"
-
-	L.infest_bar = "~Следующее Заражение"
-
-	L.reaper_bar = "~Следующий Жнец"
-
+	L.cave_phase = "Фаза пещеры"
 	L.last_phase_bar = "Последняя фаза"
 
-	L.trap_message = "Темная ловушка"
-	L.trap_bar = "~Следующая ловушка"
+	-- L.frenzy_bar = "%s frenzies!"
+	-- L.frenzy_survive_message = "%s will survive after plague"
+	-- L.frenzy_message = "Add frenzied!"
+	-- L.frenzy_soon_message = "5sec to frenzy!"
 
-	L.valkyrhug_message = "Валь'кира схватила"
-	L.cave_phase = "Фаза пещеры"
-
-	L.enrage_bar = "~Исступление"
-
-	--L.custom_on_valkyr_marker = "Val'kyr marker"
-	--L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
+	-- L.custom_on_valkyr_marker = "Val'kyr marker"
+	-- L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
 end
 

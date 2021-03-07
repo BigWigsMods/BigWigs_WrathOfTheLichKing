@@ -1,5 +1,5 @@
-
 local L = BigWigs:NewBossLocale("Onyxia", "koKR")
+if not L then return end
 if L then
 	L.phase = "단계"
 	L.phase_desc = "단계 변화를 알립니다."
@@ -18,9 +18,6 @@ L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "koKR")
 if L then
 	L.stomp_message = "발 구르기 - 곧 돌진!"
 	L.stomp_warning = "약 5초 후 발구르기 가능!"
-	L.stomp_bar = "~발 구르기 대기시간"
-
-	L.cloud_message = "당신은 숨막히는 구름!"
 
 	L.charge = "돌진"
 	L.charge_desc = "돌진의 대상인 플레이어를 알립니다."
@@ -28,11 +25,8 @@ end
 
 L = BigWigs:NewBossLocale("Emalon the Storm Watcher", "koKR")
 if L then
-	L.nova_next = "~번개 대기시간"
-
 	L.overcharge_message = "하수인 과충전!"
 	L.overcharge_bar = "폭발"
-	L.overcharge_next = "~과충전 대기시간"
 
 	L.custom_on_overcharge_mark = "Overcharge marker"
 	L.custom_on_overcharge_mark_desc = "Place the {rt8} marker on the overcharged minion, requires promoted or leader."
@@ -40,10 +34,6 @@ end
 
 L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "koKR")
 if L then
-	L.fists_bar = "다음 유성 주먹"
-
-	L.cinder_message = "당신은 잿더미!"
-
 	L.breath_bar = "숨결 %d"
 	L.breath_message = "곧 %d 숨결!"
 end
@@ -53,11 +43,7 @@ if L then
 	L.whiteout_bar = "시아상실 %d"
 	L.whiteout_message = "곧 시아상실 %d !"
 
-	L.frostbite_message = "동상 %2$dx : %1$s"
-
 	L.freeze_message = "땅얼리기"
-
-	L.orb_bar = "다음 구슬"
 end
 
 L = BigWigs:NewBossLocale("Malygos", "koKR")
@@ -140,14 +126,9 @@ if L then
 
 	L.fire_damage_message = "당신의 발이 불타오르는 중!"
 	L.fire_message = "맹렬한 발화"
-	L.fire_bar = "다음 맹렬한 발화"
 	L.shadow_message = "영혼 소진"
-	L.shadow_bar = "다음 영혼 소진"
 
 	L.meteorstrike_yell = "하늘이 타오른다!"
 	L.meteorstrike_bar = "유성 충돌"
 	L.meteor_warning_message = "곧 유성 충돌!"
-
-	L.sbreath_cooldown = "다음 어둠 숨결"
-	L.fbreath_cooldown = "다음 화염 숨결"
 end

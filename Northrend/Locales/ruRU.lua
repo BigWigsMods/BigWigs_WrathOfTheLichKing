@@ -1,9 +1,8 @@
-
 local L = BigWigs:NewBossLocale("Onyxia", "ruRU")
+if not L then return end
 if L then
 	L.phase = "Фазы"
 	L.phase_desc = "Сообщать о смене фаз."
-	L.phase1_message = "%s вступает в бой - фаза 1!"
 	L.phase2_message = "Фаза 2 - Ониксия взлетает!"
 	L.phase3_message = "Фаза 3 - Ониксия приземляется!"
 
@@ -12,7 +11,6 @@ if L then
 	L.phase3_trigger = "Похоже, вам требуется преподать еще один урок, смертные!"
 
 	L.deepbreath_message = "Огненное дыхание!"
-
 	L.fear_message = "Страх через 1.5 сек!"
 end
 
@@ -20,9 +18,6 @@ L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "ruRU")
 if L then
 	L.stomp_message = "Топот - близится Рывок!"
 	L.stomp_warning = "Топот через ~5сек!"
-	L.stomp_bar = "~Перезарядка топота"
-
-	L.cloud_message = "ВЫ в Удушающем облаке!"
 
 	L.charge = "Рывок"
 	L.charge_desc = "Предупреждать о Рывках."
@@ -30,11 +25,8 @@ end
 
 L = BigWigs:NewBossLocale("Emalon the Storm Watcher", "ruRU")
 if L then
-	L.nova_next = "~Перезарядка Вспышки молнии"
-
 	L.overcharge_message = "Служитель бури перегружен!"
 	L.overcharge_bar = "Взрыв Служителя бури"
-	L.overcharge_next = "~Следующая Перегрузка"
 
 	L.custom_on_overcharge_mark = "Overcharge marker"
 	L.custom_on_overcharge_mark_desc = "Place the {rt8} marker on the overcharged minion, requires promoted or leader."
@@ -42,8 +34,6 @@ end
 
 L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "ruRU")
 if L then
-	L.cinder_message = "ВЫ в ОГНЕ!"
-
 	L.breath_bar = "Дыхание %d"
 	L.breath_message = "Скоро дыхание %d!"
 end
@@ -52,8 +42,6 @@ L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "ruRU")
 if L then
 	L.whiteout_bar = "Пурга %d"
 	L.whiteout_message = "Скоро пурга %d!"
-
-	L.frostbite_message = "%2$dx Обморожение на %1$s"
 
 	L.freeze_message = "Заморозка"
 end
@@ -126,18 +114,6 @@ if L then
 	L.vesperon = "Весперон"
 end
 
-L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "ruRU")
-if L then
-	L.whiteout_bar = "Пурга %d"
-	L.whiteout_message = "Скоро Пурга %d!"
-
-	L.frostbite_message = "%2$dx Обморожение у %1$s"
-
-	L.freeze_message = "Мерзлый грунт"
-
-	L.orb_bar = "Следующий шар"
-end
-
 L = BigWigs:NewBossLocale("Halion", "ruRU")
 if L then
 	L.engage_trigger = "Этот мир вот-вот соскользнет в бездну. Вам выпала честь узреть начало эры РАЗРУШЕНИЯ!"
@@ -148,10 +124,11 @@ if L then
 	L.twilight_cutter_bar = "~Лезвие сумерок"
 	L.twilight_cutter_warning = "Скоро Лезвие сумерок"
 
+	-- L.fire_damage_message = "Your feet are burning!"
 	L.fire_message = "Огненная бомба"
 	L.shadow_message = "Пожирающая бомба"
 
+	-- L.meteorstrike_yell = "The heavens burn!"
 	L.meteorstrike_bar = "Падение метеора"
-
-	L.breath_cooldown = "Следующее дыхание"
+	-- L.meteor_warning_message = "Meteor incoming!"
 end

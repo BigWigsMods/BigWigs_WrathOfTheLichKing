@@ -1,4 +1,5 @@
 local L = BigWigs:NewBossLocale("Blood Prince Council", "zhCN")
+if not L then return end
 if L then
 	L.switch_message = "生命转换：>%s<！"
 	L.switch_bar = "<下一生命转换>"
@@ -123,10 +124,6 @@ if L then
 
 	L.gasbomb_bar = "<多个窒息毒气弹>"
 	L.gasbomb_message = "窒息毒气弹！"
-end
-
-L = BigWigs:NewBossLocale("Putricide Dogs", "zhCN")
-if L then
 end
 
 L = BigWigs:NewBossLocale("Rotface", "zhCN")

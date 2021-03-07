@@ -1,4 +1,3 @@
-
 local L = BigWigs:NewBossLocale("Auriaya", "esES") or BigWigs:NewBossLocale("Auriaya", "esMX")
 if not L then return end
 if L then

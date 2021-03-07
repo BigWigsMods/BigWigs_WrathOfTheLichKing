@@ -1,4 +1,5 @@
 local L = BigWigs:NewBossLocale("Blood Prince Council", "deDE")
+if not L then return end
 if L then
 	L.switch_message = "Ziel wechseln: %s"
 	L.switch_bar = "~Ziel wechseln"
@@ -49,17 +50,8 @@ L = BigWigs:NewBossLocale("Festergut", "deDE")
 if L then
 	L.engage_trigger = "Zeit für Spaß?"
 
-	L.inhale_message = "Einatmen %d"
 	L.inhale_bar = "Einatmen %d"
-
 	L.blight_warning = "Stechende Seuche in ~5 sek!"
-	L.blight_bar = "Nächste Seuche"
-
-	L.bloat_message = "%2$dx Magenblähung: %1$s"
-	L.bloat_bar = "~Magenblähung"
-
-	L.spore_bar = "~Gassporen"
-
 	L.ball_message = "Glibber!"
 end
 
@@ -103,30 +95,23 @@ if L then
 
 	L.spirit_message = "Geister!"
 	L.spirit_bar = "Nächsten Geister"
-
-	L.dominate_bar = "~Gedankenkontrolle"
 end
 
 L = BigWigs:NewBossLocale("Lord Marrowgar", "deDE")
 if L then
-	L.impale_cd = "~Aufspießen"
-
-	L.bonestorm_cd = "~Knochensturm"
-	L.bonestorm_warning = "Knochensturm in 5 sek!"
-
-	L.coldflame_message = "Eisflamme auf DIR!"
-
 	L.engage_trigger = "Die Geißel wird über diese Welt kommen wie ein Schwarm aus Tod und Zerstörung!"
+
+	L.bonestorm_warning = "Knochensturm in 5 sek!"
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "deDE")
 if L then
+	L.engage_trigger = "Ich habe eine Seuche perfektioniert"
+
 	L.phase = "Phasen"
 	L.phase_desc = "Warnt vor Phasenwechsel."
 	L.phase_warning = "Phase %d bald!"
 	L.phase_bar = "Nächste Phase"
-
-	L.engage_trigger = "Ich habe eine Seuche perfektioniert"
 
 	L.ball_bar = "Nächster Glibber"
 	L.ball_say = "Glibber auf MIR!"
@@ -137,25 +122,14 @@ if L then
 	L.blight_message = "Roter Schlamm"
 	L.violation_message = "Grüner Schlamm"
 
-	L.plague_message = "%2$dx Seuche: %1$s"
-	L.plague_bar = "Nächste Seuche"
-
 	L.gasbomb_bar = "Weitere Gasbomben"
 	L.gasbomb_message = "Gasbomben!"
-
-	L.unbound_bar = "Entfesselte Seuche: %s"
-end
-
-L = BigWigs:NewBossLocale("Putricide Dogs", "deDE")
-if L then
-	L.wound_message = "%2$dx Tödliche Wunde: %1$s"
 end
 
 L = BigWigs:NewBossLocale("Rotface", "deDE")
 if L then
 	L.engage_trigger = "WIIIIII!"
 
-	L.infection_bar = "Infektion: %s"
 	L.infection_message = "Infektion"
 
 	L.ooze = "Brühschlammer verschmelzen"
@@ -183,10 +157,6 @@ if L then
 	L.boom_message = "Explosion!"
 	L.boom_bar = "Explosion"
 
-	L.grip_bar = "Nächster Griff"
-
-	L.unchained_message = "Entfesselte Magie auf DIR!"
-	L.unchained_bar = "Entfesselte Magie"
 	L.instability_message = "%dx Instabilität!"
 	L.chilled_message = "%dx Durchgefroren!"
 	L.buffet_message = "%dx Puffer!"
@@ -198,47 +168,23 @@ if L then
 	L.warmup_trigger = "Der vielgerühmte Streiter des Lichts ist endlich hier?"
 	L.engage_trigger = "Ihr bleibt bis zum Ende am Leben, Fordring."
 
-	L.horror_bar = "~Torkelnder Schrecken"
 	L.horror_message = "Torkelnder Schrecken!"
+	L.horror_bar = "~Torkelnder Schrecken"
 
-	L.necroticplague_bar = "Nekrotische Seuche"
-
-	L.ragingspirit_bar = "Tobender Geist"
-
-	L.valkyr_bar = "Nächsten Val'kyr"
 	L.valkyr_message = "Val'kyr!"
-
-	L.vilespirits_bar = "~Widerwärtige Geister"
-
-	L.harvestsoul_bar = "Seele ernten"
-
-	L.remorselesswinter_message = "Unbarmherziger Winter kommt!"
-	L.quake_message = "Beben kommt!"
-	L.quake_bar = "Beben"
-
-	L.defile_message = "Entweihen auf DIR!"
-	L.defile_bar = "Nächstes Entweihen"
-
-	L.infest_bar = "~Befallen"
-
-	L.reaper_bar = "~Seelenernter"
-
-	L.last_phase_bar = "Letzte Phase"
-
-	L.trap_message = "Falle"
-	L.trap_bar = "Nächste Falle"
-
+	L.valkyr_bar = "Nächsten Val'kyr"
 	L.valkyrhug_message = "Val'kyren"
+
 	L.cave_phase = "Höhlenphase"
+	L.last_phase_bar = "Letzte Phase"
 
 	L.frenzy_bar = "%s in Raserei"
 	L.frenzy_survive_message = "%s wird Seuchentick überleben!"
-	L.enrage_bar = "~Wutanfall"
 	L.frenzy_message = "Add Raserei!"
 	L.frenzy_soon_message = "5 sek bis Raserei!"
 
-	--L.custom_on_valkyr_marker = "Val'kyr marker"
-	--L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
+	-- L.custom_on_valkyr_marker = "Val'kyr marker"
+	-- L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
 end
 
 L = BigWigs:NewBossLocale("Valithria Dreamwalker", "deDE")
@@ -252,8 +198,6 @@ if L then
 	L.portalcd_message = "Portale %d in 14 sek offen!"
 	L.portalcd_bar = "Portale %d"
 	L.portal_trigger = "Ich habe ein Portal in den Traum geöffnet. Darin liegt Eure Erlösung, Helden..."
-
-	L.manavoid_message = "Manaleere auf DIR!"
 
 	L.suppresser = "Unterdrücker erscheinen"
 	L.suppresser_desc = "Warnt, wenn eine Gruppe Unterdrücker erscheint."

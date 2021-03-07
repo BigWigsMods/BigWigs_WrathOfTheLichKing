@@ -1,4 +1,3 @@
-
 local L = BigWigs:NewBossLocale("Auriaya", "deDE")
 if not L then return end
 if L then
@@ -81,11 +80,7 @@ if L then
 	L.phase4_trigger = "Vorversuchsphase abgeschlossen. Jetzt kommt der eigentliche Test!"
 	L.phase_bar = "Phase %d"
 
-	L.hardmode = "Hard Mode"
-	L.hardmode_desc = "Timer für den Hard Mode."
 	L.hardmode_trigger = "^Warum habt Ihr das denn jetzt gemacht?"
-	L.hardmode_message = "Hard Mode aktiviert!"
-	L.hardmode_warning = "BOOM!"
 
 	L.plasma_warning = "Wirkt Plasmaeruption!"
 	L.plasma_soon = "Plasmaeruption bald!"

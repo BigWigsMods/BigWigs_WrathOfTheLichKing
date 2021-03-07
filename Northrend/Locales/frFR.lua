@@ -1,9 +1,8 @@
-
 local L = BigWigs:NewBossLocale("Onyxia", "frFR")
+if not L then return end
 if L then
 	L.phase = "Phases"
 	L.phase_desc = "Prévient quand la rencontre change de phase."
-	L.phase1_message = "Phase 1 !"
 	L.phase2_message = "65% - Arrivée de la phase 2 !"
 	L.phase3_message = "40% - Arrivée de la phase 3 !"
 
@@ -12,7 +11,6 @@ if L then
 	L.phase3_trigger = "Il semble que vous ayez besoin d'une autre leçon, mortels !"
 
 	L.deepbreath_message = "Arrivée d'une grande inspiration !"
-
 	L.fear_message = "Peur dans 1,5 sec. !"
 end
 
@@ -20,9 +18,6 @@ local L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "frFR")
 if L then
 	L.stomp_message = "Piétinement - Empaler imminent !"
 	L.stomp_warning = "Piétinement probable dans ~5 sec. !"
-	L.stomp_bar = "~Recharge Piétinement"
-
-	L.cloud_message = "Nuage asphyxiant sur VOUS !"
 
 	L.charge = "Empaler"
 	L.charge_desc = "Prévient quand un joueur subit les effets d'un Empaler."
@@ -30,11 +25,8 @@ end
 
 L = BigWigs:NewBossLocale("Emalon the Storm Watcher", "frFR")
 if L then
-	L.nova_next = "~Recharge Nova"
-
 	L.overcharge_message = "Un séide est surchargé !"
 	L.overcharge_bar = "Explosion"
-	L.overcharge_next = "~Prochaine Surcharge"
 
 	L.custom_on_overcharge_mark = "Overcharge marker"
 	L.custom_on_overcharge_mark_desc = "Place the {rt8} marker on the overcharged minion, requires promoted or leader."
@@ -52,23 +44,15 @@ if L then
 
 	L.fire_damage_message = "Vos pieds brûlent !"
 	L.fire_message = "Combustion ardente"
-	L.fire_bar = "Prochaine Combustion ardente"
 	L.shadow_message = "Consomption d'âmes"
-	L.shadow_bar = "Prochaine Consomption d'âmes"
 
 	L.meteorstrike_yell = "Les cieux s'embrasent !"
 	L.meteorstrike_bar = "Frappe météore"
-	L.meteorstrike_warning = "Arrivée d'une Frappe météore !"
-
-	L.breath_cooldown = "Prochain Souffle"
+	-- L.meteor_warning_message = "Meteor incoming!"
 end
 
 L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "frFR")
 if L then
-	L.fists_bar = "Prochains Poings"
-
-	L.cinder_message = "Braise enflammée sur VOUS !"
-
 	L.breath_bar = "Souffle %d"
 	L.breath_message = "Souffle %d imminent !"
 end
@@ -146,9 +130,5 @@ if L then
 	L.whiteout_bar = "Blanc aveuglant %d"
 	L.whiteout_message = "Blanc aveuglant %d imminent !"
 
-	L.frostbite_message = "%2$dx Morsure de givre sur %1$s"
-
 	L.freeze_message = "Sol givrant"
-
-	L.orb_bar = "Prochain Orbe"
 end

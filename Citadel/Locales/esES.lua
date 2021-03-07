@@ -1,4 +1,5 @@
-local L = BigWigs:NewBossLocale("Blood Prince Council", "esES")
+local L = BigWigs:NewBossLocale("Blood Prince Council", "esES") or BigWigs:NewBossLocale("Blood Prince Council", "esMX")
+if not L then return end
 if L then
 	L.switch_message = "Cambio de objetivo: %s"
 	L.switch_bar = "~Próximo cambio de objetivo"
@@ -15,7 +16,7 @@ if L then
 	L.prison_message = "¡Prisión de las Sombras x%d!"
 end
 
-L = BigWigs:NewBossLocale("Lady Deathwhisper", "esES")
+L = BigWigs:NewBossLocale("Lady Deathwhisper", "esES") or BigWigs:NewBossLocale("Lady Deathwhisper", "esMX")
 if L then
 	L.engage_trigger = "¿Qué es este alboroto? ¿Osáis entrar en suelo sagrado? ¡Este será vuestro lugar de reposo final!"
 	L.phase2_message = "¡Barrera BAJA - Fase 2!"
@@ -34,29 +35,18 @@ if L then
 
 	L.spirit_message = "¡Invocando Espíritu!"
 	L.spirit_bar = "Nuevos Espíritus"
-
-	L.dominate_bar = "~Siguiente Dominar mente"
 end
 
-L = BigWigs:NewBossLocale("Festergut", "esES")
+L = BigWigs:NewBossLocale("Festergut", "esES") or BigWigs:NewBossLocale("Festergut", "esMX")
 if L then
 	L.engage_trigger = "¿A divertirse?"
 
-	L.inhale_message = "Inhalar añublo %d"
 	L.inhale_bar = "Inhalar %d"
-
 	L.blight_warning = "¡Añublo acre en ~5sec!"
-	L.blight_bar = "Próximo Añublo acre"
-
-	L.bloat_message = "%2$dx Hinchazón gástrica en %1$s"
-	L.bloat_bar = "~Hinchazón gástrica"
-
-	L.spore_bar = "~Esporas de gas"
-
 	L.ball_message = "¡Lanzando Moco maleable!"
 end
 
-L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "esES")
+L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "esES") or BigWigs:NewBossLocale("Icecrown Gunship Battle", "esMX")
 if L then
 	L.adds = "Portal"
 	L.adds_desc = "Avisar Portal."
@@ -77,7 +67,7 @@ if L then
 	L.disable_trigger_horde = "Onward to the Lich King"
 end
 
-L = BigWigs:NewBossLocale("Blood-Queen Lana'thel", "esES")
+L = BigWigs:NewBossLocale("Blood-Queen Lana'thel", "esES") or BigWigs:NewBossLocale("Blood-Queen Lana'thel", "esMX")
 if L then
 	L.engage_trigger = "Habéis tomado una... decisión... incorrecta."
 
@@ -95,79 +85,45 @@ if L then
 	L.phase2_bar = "Fase aérea"
 end
 
-L = BigWigs:NewBossLocale("The Lich King", "esES")
+L = BigWigs:NewBossLocale("The Lich King", "esES") or BigWigs:NewBossLocale("The Lich King", "esMX")
 if L then
 	L.warmup_trigger = "¿Así que por fin ha llegado la elogiada justicia de la Luz?"
 	L.engage_trigger = "Te mantendré vivo para presenciar el final, Vadín"
 
-	L.horror_bar = "~Siguiente Horror"
 	L.horror_message = "Horror desgarbado"
+	L.horror_bar = "~Siguiente Horror"
 
-	L.necroticplague_bar = "Peste necrótica"
-
-	L.ragingspirit_bar = "Espíritu enfurecido"
-
-	L.valkyr_bar = "Siguiente Val'kyr"
 	L.valkyr_message = "Val'kyr"
-
-	L.vilespirits_bar = "~Espíritus malvados"
-
-	L.harvestsoul_bar = "Recolectar alma"
-
-	L.remorselesswinter_message = "Casteando Invierno sin remordimientos"
-	L.quake_message = "Casteando Temblor"
-	L.quake_bar = "Temblor"
-
-	L.defile_message = "¡Profanar en TÍ!"
-	L.defile_bar = "Siguiente Profanar"
-
-	L.infest_bar = "~Siguiente Infestar"
-
-	L.reaper_bar = "~Siguiente Segador de almas"
-
-	L.last_phase_bar = "Última fase"
-
-	L.trap_message = "Trampa de las Sombras"
-	L.trap_bar = "Siguiente Trampa"
-
+	L.valkyr_bar = "Siguiente Val'kyr"
 	L.valkyrhug_message = "Val'kyrs Hugged"
+
 	L.cave_phase = "Cave Phase"
+	L.last_phase_bar = "Última fase"
 
 	L.frenzy_bar = "¡%s Frenesí!"
 	L.frenzy_survive_message = "%s sobrevirán después de la peste"
-	L.enrage_bar = "~Enrage"
 	L.frenzy_message = "¡Add frenesí!"
 	L.frenzy_soon_message = "¡5sec para frenesí!"
 
-	--L.custom_on_valkyr_marker = "Val'kyr marker"
-	--L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
+	-- L.custom_on_valkyr_marker = "Val'kyr marker"
+	-- L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
 end
 
-L = BigWigs:NewBossLocale("Lord Marrowgar", "esES")
+L = BigWigs:NewBossLocale("Lord Marrowgar", "esES") or BigWigs:NewBossLocale("Lord Marrowgar", "esMX")
 if L then
-	L.impale_cd = "~Siguiente empalar"
-
-	L.bonestorm_cd = "~Siguiente Tormenta ósea"
-	L.bonestorm_warning = "¡Tormenta ósea en 5 sec!"
-
-	L.coldflame_message = "¡Llama fría en TÍ!"
-
 	L.engage_trigger = "¡La Plaga arrasará este mundo como un enjambre de muerte y destrucción!"
+
+	L.bonestorm_warning = "¡Tormenta ósea en 5 sec!"
 end
 
-L = BigWigs:NewBossLocale("Putricide Dogs", "esES")
+L = BigWigs:NewBossLocale("Professor Putricide", "esES") or BigWigs:NewBossLocale("Professor Putricide", "esMX")
 if L then
-	L.wound_message = "%2$dx Blessure mortelle sur %1$s"
-end
+	L.engage_trigger = "¡Buenas noticias, amigos!"
 
-L = BigWigs:NewBossLocale("Professor Putricide", "esES")
-if L then
 	L.phase = "Fases"
 	L.phase_desc = "Avisar cambios de fase."
 	L.phase_warning = "¡Fase %d pronto!"
 	L.phase_bar = "Siguiente Fase"
-
-	L.engage_trigger = "¡Buenas noticias, amigos!"
 
 	L.ball_bar = "Próximo Moco maleable"
 	L.ball_say = "¡Lanzando Moco maleable!"
@@ -178,20 +134,14 @@ if L then
 	L.blight_message = "Babosa Roja"
 	L.violation_message = "Babosa Verde"
 
-	L.plague_message = "%2$dx peste en %1$s"
-	L.plague_bar = "Siguiente Peste"
-
 	L.gasbomb_bar = "Más Bombas de gas asfixiante"
 	L.gasbomb_message = "¡Bomba de gas asfixiante!"
-
-	L.unbound_bar = "Peste desatada: %s"
 end
 
-L = BigWigs:NewBossLocale("Rotface", "esES")
+L = BigWigs:NewBossLocale("Rotface", "esES") or BigWigs:NewBossLocale("Rotface", "esMX")
 if L then
 	L.engage_trigger = "¡WEEEEEEE!"
 
-	L.infection_bar = "Infección en %s!"
 	L.infection_message = "Infección"
 
 	L.ooze = "Moco Fusionado"
@@ -201,7 +151,7 @@ if L then
 	L.spray_bar = "Siguiente Pulverizador"
 end
 
-L = BigWigs:NewBossLocale("Deathbringer Saurfang", "esES")
+L = BigWigs:NewBossLocale("Deathbringer Saurfang", "esES") or BigWigs:NewBossLocale("Deathbringer Saurfang", "esMX")
 if L then
 	L.adds = "Bestias de sangre"
 	L.adds_desc = "Shows a timer and messages for when Blood Beasts spawn."
@@ -213,7 +163,7 @@ if L then
 	L.warmup_horde = "Kor'kron, move out! Champions, watch your backs. The Scourge have been..."
 end
 
-L = BigWigs:NewBossLocale("Sindragosa", "esES")
+L = BigWigs:NewBossLocale("Sindragosa", "esES") or BigWigs:NewBossLocale("Sindragosa", "esMX")
 if L then
 	L.engage_trigger = "¡Estáis locos por haber venido aquí!"
 
@@ -231,17 +181,13 @@ if L then
 	L.boom_message = "¡Explosión!"
 	L.boom_bar = "Explosión"
 
-	L.grip_bar = "Próximo Agarre helado"
-
-	L.unchained_message = "¡Magia desencadenada en TÍ!"
-	L.unchained_bar = "Magia desencadenada"
 	L.instability_message = "Inestabilidad x%d!"
 	L.chilled_message = "¡Helado hasta los huesos x%d!"
 	L.buffet_message = "¡Sacudida mística x%d!"
 	L.buffet_cd = "Siguiente Sacudida mística"
 end
 
-L = BigWigs:NewBossLocale("Valithria Dreamwalker", "esES")
+L = BigWigs:NewBossLocale("Valithria Dreamwalker", "esES") or BigWigs:NewBossLocale("Valithria Dreamwalker", "esMX")
 if L then
 	L.engage_trigger = "Han entrado intrusos en el Sagrario Interior."
 
@@ -253,8 +199,6 @@ if L then
 	L.portalcd_bar = "Próximos portales %d"
 	L.portal_trigger = "He abierto un portal al Sueño."
 
-	L.manavoid_message = "¡Vacío de maná en TÍ!"
-
 	L.suppresser = "Supresores aparecen"
 	L.suppresser_desc = "Avisa cuando una oleada de supresores aparecen."
 	L.suppresser_message = "~Supresores"
@@ -262,10 +206,5 @@ if L then
 	L.blazing = "Esqueleto llameante"
 	L.blazing_desc = "Esqueleto llameante |cffff0000estimated|r tiempo de reaparición. Este contador puede que no sea preciso."
 	L.blazing_warning = "¡Esqueleto llameante pronto!"
-end
-
-L = BigWigs:NewBossLocale("Putricide Dogs", "esES")
-if L then
-	L.wound_message = "%2$dx Herida mortal en %1$s"
 end
 

@@ -1,5 +1,5 @@
-
 local L = BigWigs:NewBossLocale("Onyxia", "zhCN")
+if not L then return end
 if L then
 	L.phase = "阶段"
 	L.phase_desc = "当阶段转换时发出警报。"
@@ -18,9 +18,6 @@ local L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "zhCN")
 if L then
 	L.stomp_message = "践踏 - 即将 冲锋！"
 	L.stomp_warning = "约5秒后，可能践踏！"
-	L.stomp_bar = "<践踏 冷却>"
-
-	L.cloud_message = ">你< 窒息云雾！"
 
 	L.charge = "冲锋"
 	L.charge_desc = "当玩家中了冲锋时发出警报。"
@@ -28,11 +25,8 @@ end
 
 L = BigWigs:NewBossLocale("Emalon the Storm Watcher", "zhCN")
 if L then
-	L.nova_next = "<闪电新星 冷却>"
-
 	L.overcharge_message = "风暴爪牙 - 能量超载！"
 	L.overcharge_bar = "<爆炸>"
-	L.overcharge_next = "<下一能量超载>"
 
 	L.custom_on_overcharge_mark = "能量超载标记"
 	L.custom_on_overcharge_mark_desc = "使用 {rt8} 标记能量超载的风暴爪牙，需要权限。"
@@ -50,23 +44,15 @@ if L then
 
 	L.fire_damage_message = ">你< 炽焰燃烧！"
 	L.fire_message = "炽焰燃烧！"
-	L.fire_bar = "<下一炽焰燃烧>"
 	L.shadow_message = "灵魂吞噬！"
-	L.shadow_bar = "<下一灵魂吞噬>"
 
 	L.meteorstrike_yell = "天空在燃烧"
 	L.meteorstrike_bar = "<流星打击>"
 	L.meteor_warning_message = "即将 流星打击！"
-
-	L.sbreath_cooldown = "<下一黑暗吐息>"
-	L.fbreath_cooldown = "<下一火息术>"
 end
 
 L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "zhCN")
 if L then
-	L.fists_bar = "<下一流星拳>"
-	L.cinder_message = ">你< 余烬！"
-
 	L.breath_bar = "<灼热吐息：%d>"
 	L.breath_message = "即將 灼热吐息：>%d<！"
 end
@@ -144,9 +130,5 @@ if L then
 	L.whiteout_bar = "霜至：>%d<！"
 	L.whiteout_message = "即将 霜至：>%d<！"
 
-	L.frostbite_message = "冰霜撕咬%2$dx：>%1$s<！"
-
 	L.freeze_message = "大地冰封！"
-
-	L.orb_bar = "<下一冰冻之球>"
 end

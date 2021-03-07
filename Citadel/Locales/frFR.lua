@@ -1,4 +1,5 @@
 local L = BigWigs:NewBossLocale("Blood Prince Council", "frFR")
+if not L then return end
 if L then
 	L.switch_message = "Nouvelle cible : %s"
 	L.switch_bar = "~Prochain chgt de cible"
@@ -34,25 +35,14 @@ if L then
 
 	L.spirit_message = "Esprit vengeur invoqué !"
 	L.spirit_bar = "Prochain Esprit"
-
-	L.dominate_bar = "~Prochaine Emprise"
 end
 
 L = BigWigs:NewBossLocale("Festergut", "frFR")
 if L then
 	L.engage_trigger = "On joue ?"
 
-	L.inhale_message = "Inhalation de chancre %d"
 	L.inhale_bar = "Inhalation %d"
-
 	L.blight_warning = "Chancre âcre dans ~5 sec. !"
-	L.blight_bar = "Prochain Chancre"
-
-	L.bloat_message = "%2$dx Ballonnement gastrique sur %1$s"
-	L.bloat_bar = "~Ballonnement gastrique"
-
-	L.spore_bar = "~Spores gazeuses"
-
 	L.ball_message = "Arrivée d'une Gelée malléable !"
 end
 
@@ -100,74 +90,40 @@ if L then
 	L.warmup_trigger = "Voici donc qu’arrive la fameuse justice de la Lumière ?"
 	L.engage_trigger = "Je vais te laisser en vie, que tu sois témoin de la fin, Fordring."
 
-	L.horror_bar = "~Prochaine Horreur"
 	L.horror_message = "Horreur titubante"
+	L.horror_bar = "~Prochaine Horreur"
 
-	L.necroticplague_bar = "Peste nécrotique"
-
-	L.ragingspirit_bar = "Esprit déchaîné"
-
-	L.valkyr_bar = "Prochaine(s) val'kyr(s)"
 	L.valkyr_message = "Val'kyr(s)"
-
-	L.vilespirits_bar = "~Esprits vils"
-
-	L.harvestsoul_bar = "Moisson d'âmes"
-
-	L.remorselesswinter_message = "Hiver impitoyable en incantation"
-	L.quake_message = "Secousse en incantation"
-	L.quake_bar = "Secousse"
-
-	L.defile_message = "Profanation sur VOUS !"
-	L.defile_bar = "Prochaine Profanation"
-
-	L.infest_bar = "~Prochain Infester"
-
-	L.reaper_bar = "~Prochain Faucheur"
-
-	L.last_phase_bar = "Dernière phase"
-
-	L.trap_message = "Piège d'ombre"
-	L.trap_bar = "Prochain Piège"
-
+	L.valkyr_bar = "Prochaine(s) val'kyr(s)"
 	L.valkyrhug_message = "Étreinte val'kyrienne"
+
 	L.cave_phase = "Phase Deuillegivre"
+	L.last_phase_bar = "Dernière phase"
 
 	L.frenzy_bar = "%s s'enrage !"
 	L.frenzy_survive_message = "%s survivra après la Peste"
-	L.enrage_bar = "~Enrager"
 	L.frenzy_message = "Horreur enragée !"
 	L.frenzy_soon_message = "5 sec. avant Enrager !"
 
-	--L.custom_on_valkyr_marker = "Val'kyr marker"
-	--L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
+	-- L.custom_on_valkyr_marker = "Val'kyr marker"
+	-- L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
 end
 
 L = BigWigs:NewBossLocale("Lord Marrowgar", "frFR")
 if L then
-	L.impale_cd = "~Prochain Empaler"
-
-	L.bonestorm_cd = "~Prochaine Tempête d'os"
-	L.bonestorm_warning = "Tempête d'os dans 5 sec. !"
-
-	L.coldflame_message = "Flamme froide sur VOUS !"
-
 	L.engage_trigger = "Le Fléau va déferler sur ce monde dans un torrent de mort et de destruction !"
-end
 
-L = BigWigs:NewBossLocale("Putricide Dogs", "frFR")
-if L then
-	L.wound_message = "%2$dx Blessure mortelle sur %1$s"
+	L.bonestorm_warning = "Tempête d'os dans 5 sec. !"
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "frFR")
 if L then
+	L.engage_trigger = "Grande nouvelle, mes amis ! Je crois que j'ai mis au point une peste qui va détruire toute vie sur Azeroth !"
+
 	L.phase = "Phases"
 	L.phase_desc = "Prévient quand la rencontre change de phase."
 	L.phase_warning = "Phase %d imminente !"
 	L.phase_bar = "Prochaine phase"
-
-	L.engage_trigger = "Grande nouvelle, mes amis ! Je crois que j'ai mis au point une peste qui va détruire toute vie sur Azeroth !"
 
 	L.ball_bar = "Prochaine Gelée malléable"
 	L.ball_say = "Gelée malléable moi !"
@@ -178,20 +134,14 @@ if L then
 	L.blight_message = "Nuage de gaz"
 	L.violation_message = "Limon volatil"
 
-	L.plague_message = "%2$dx Peste mutée sur %1$s"
-	L.plague_bar = "Prochaine Peste"
-
 	L.gasbomb_bar = "D'autres Bombes de gaz !"
 	L.gasbomb_message = "Bombes de gaz !"
-
-	L.unbound_bar = "Peste déliée : %s"
 end
 
 L = BigWigs:NewBossLocale("Rotface", "frFR")
 if L then
 	L.engage_trigger = "Wiiiiiiiiiii !"
 
-	L.infection_bar = "Infection : %s"
 	L.infection_message = "Infection"
 
 	L.ooze = "Fusion de limons"
@@ -231,10 +181,6 @@ if L then
 	L.boom_message = "Explosion !"
 	L.boom_bar = "Explosion"
 
-	L.grip_bar = "Prochaine Poigne glaciale"
-
-	L.unchained_message = "Magie débridée sur VOUS !"
-	L.unchained_bar = "Magie débridée"
 	L.instability_message = "Magie débridée x%d !"
 	L.chilled_message = "Transi jusqu'aux os x%d !"
 	L.buffet_message = "Rafale mystique x%d !"
@@ -252,8 +198,6 @@ if L then
 	L.portalcd_message = "Portails %d ouverts dans 14 sec. !"
 	L.portalcd_bar = "Prochains portails %d"
 	L.portal_trigger = "J'ai ouvert un portail vers le Rêve. Vous y trouverez votre salut, héros…"
-
-	L.manavoid_message = "Vide de mana sur VOUS !"
 
 	L.suppresser = "Apparition de Suppresseurs"
 	L.suppresser_desc = "Prévient quand une meute de Suppresseurs apparaît."

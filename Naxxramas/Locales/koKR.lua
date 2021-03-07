@@ -1,17 +1,13 @@
-
 local L = BigWigs:NewBossLocale("Anub'Rekhan", "koKR")
+if not L then return end
 if L then
 	L.starttrigger1 = "어디 맛 좀 볼까..."
 	L.starttrigger2 = "그래, 도망쳐! 더 신선한 피가 솟구칠 테니!"
 	L.starttrigger3 = "나가는 길은 없다."
 	L.engagewarn = "아눕레칸 전투시작! 약 %d초 후 첫번째 메뚜기 떼!"
 
-	L.gainendwarn = "메뚜기 떼 종료!"
 	L.gainnextwarn = "약 85초 이내 다음 메뚜기 떼!"
 	L.gainwarn10sec = "10초 이내 메뚜기 떼"
-	L.gainincbar = "다음 메뚜기 떼"
-
-	L.castwarn = "메뚜기 떼 소환!"
 end
 
 L = BigWigs:NewBossLocale("Grand Widow Faerlina", "koKR")
@@ -129,6 +125,8 @@ if L then
 	L.markbar = "징표 (%d)"
 	L.markwarn1 = "징표(%d)!"
 	L.markwarn2 = "5초 후 징표(%d)"
+
+	-- L.dies = "#%d Killed"
 
 	L.startwarn = "4인의 기병대 전투 시작! 약 17초 이내 징표"
 end
@@ -264,7 +262,6 @@ end
 L = BigWigs:NewBossLocale("Instructor Razuvious", "koKR")
 if L then
 	L.shout_warning = "5초 후 분열의 외침!"
-	L.shout_next = "분열 대기시간"
 
 	L.taunt_warning = "5초 후 도발 종료!"
 	L.shieldwall_warning = "5초 후 방패의 벽 종료!"

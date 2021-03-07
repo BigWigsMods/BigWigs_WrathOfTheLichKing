@@ -1,4 +1,3 @@
-
 local L = BigWigs:NewBossLocale("Auriaya", "zhCN")
 if not L then return end
 if L then
@@ -81,11 +80,7 @@ if L then
 	L.phase4_trigger = "^初步测试阶段完成。"
 	L.phase_bar = "<阶段：%d>"
 
-	L.hardmode = "困难模式计时器"
-	L.hardmode_desc = "显示困难模式计时器。"
 	L.hardmode_trigger = "^嘿，你们为什么要这么做啊？"
-	L.hardmode_message = "已开启困难模式！"
-	L.hardmode_warning = "困难模式结束！"
 
 	L.plasma_warning = "正在施放 等离子冲击！"
 	L.plasma_soon = "即将 等离子冲击！"

@@ -1,4 +1,5 @@
 local L = BigWigs:NewBossLocale("Onyxia", "deDE")
+if not L then return end
 if L then
 	L.phase = "Phasen"
 	L.phase_desc = "Warnt, wenn ein Phasenwechsel bevorsteht."
@@ -17,9 +18,6 @@ local L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "deDE")
 if L then
 	L.stomp_message = "Stampfen - Ansturm bald!"
 	L.stomp_warning = "Mögliches Stampfen in ~5 sek!"
-	L.stomp_bar = "~Stampfen"
-
-	L.cloud_message = "Erstickende Wolke auf DIR!"
 
 	L.charge = "Ansturm"
 	L.charge_desc = "Warnt, wenn ein Spieler angestürmt wird."
@@ -27,11 +25,8 @@ end
 
 L = BigWigs:NewBossLocale("Emalon the Storm Watcher", "deDE")
 if L then
-	L.nova_next = "~Blitzschlagnova"
-
 	L.overcharge_message = "Sturmdiener überladen!"
 	L.overcharge_bar = "Explosion"
-	L.overcharge_next = "~Überladen"
 
 	L.custom_on_overcharge_mark = "Overcharge marker"
 	L.custom_on_overcharge_mark_desc = "Place the {rt8} marker on the overcharged minion, requires promoted or leader."
@@ -39,10 +34,6 @@ end
 
 L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "deDE")
 if L then
-	L.fists_bar = "~Meteorfäuste"
-
-	L.cinder_message = "Flamme auf DIR!"
-
 	L.breath_bar = "Atem %d"
 	L.breath_message = "Atem %d bald!"
 end
@@ -120,11 +111,7 @@ if L then
 	L.whiteout_bar = "Schneesturm %d"
 	L.whiteout_message = "Schneesturm %d bald!"
 
-	L.frostbite_message = "%2$dx Erfrierung: %1$s"
-
 	L.freeze_message = "Eingefroren"
-
-	L.orb_bar = "Nächste Kugel"
 end
 
 L = BigWigs:NewBossLocale("Halion", "deDE")
@@ -139,14 +126,9 @@ if L then
 
 	L.fire_damage_message = "Deine Füße brennen!"
 	L.fire_message = "Einäscherung"
-	L.fire_bar = "~Einäscherung"
 	L.shadow_message = "Seelenverzehrung"
-	L.shadow_bar = "~Seelenverzehrung"
 
 	L.meteorstrike_yell = "Die Himmel brennen!"
 	L.meteorstrike_bar = "Meteorschlag"
 	L.meteor_warning_message = "Meteor!"
-
-	L.sbreath_cooldown = "~Schattenatem"
-	L.fbreath_cooldown = "~Feueratem"
 end

@@ -1,4 +1,3 @@
-
 local L = BigWigs:NewBossLocale("Auriaya", "koKR")
 if not L then return end
 if L then
@@ -81,11 +80,7 @@ if L then
 	L.phase4_trigger = "^예비 시험은 이걸로 끝이다"
 	L.phase_bar = "%d 단계"
 
-	L.hardmode = "도전 모드 시간"
-	L.hardmode_desc = "도전 모드의 시간을 표시합니다."
 	L.hardmode_trigger = "^아니, 대체 왜 그런 짓을 한 게지?"
-	L.hardmode_message = "도전 모드 활성화!"
-	L.hardmode_warning = "폭발!"
 
 	L.plasma_warning = "플라스마 폭발 시전!"
 	L.plasma_soon = "곧 플라스마!"
@@ -183,14 +178,15 @@ if L then
 	L.weakened_message = "%s 기절!"
 
 	L.madness_warning = "10초 후 광기 유발!"
+
 	L.malady_message = "병든 정신" -- short for Malady of the Mind (63830)
 
 	L.tentacle = "촉수 소환"
 	L.tentacle_desc = "촉수 소환을 알립니다."
-	L.tentacle_message ="분쇄의 촉수(%d)"
+	-- L.tentacle_message = "Crusher %d!"
 
-	--L.small_tentacles = "Small Tentacles"
-	--L.small_tentacles_desc = "Warn for Corruptor Tentacle and Constrictor Tentacle spawns."
+	-- L.small_tentacles = "Small Tentacles"
+	-- L.small_tentacles_desc = "Warn for Corruptor Tentacle and Constrictor Tentacle spawns."
 
 	L.link_warning = "당신은 두뇌의 고리!"
 

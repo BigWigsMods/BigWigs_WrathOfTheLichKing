@@ -1,17 +1,13 @@
-
 local L = BigWigs:NewBossLocale("Anub'Rekhan", "zhCN")
+if not L then return end
 if L then
 	L.starttrigger1 = "一些小点心……"
 	L.starttrigger2 = "对，跑吧！那样伤口出血就更多了！"
 	L.starttrigger3 = "你们逃不掉的。"
 	L.engagewarn = "阿努布雷坎已激活 - 约%d秒后，虫群风暴！"
 
-	L.gainendwarn = "虫群风暴结束了！"
 	L.gainnextwarn = "约85秒后，下一波虫群风暴。"
 	L.gainwarn10sec = "约10秒后，下一波虫群风暴。"
-	L.gainincbar = "<下一虫群风暴>"
-
-	L.castwarn = "虫群风暴！"
 end
 
 L = BigWigs:NewBossLocale("Grand Widow Faerlina", "zhCN")
@@ -129,6 +125,8 @@ if L then
 	L.markbar = "<标记：%d>"
 	L.markwarn1 = "印记%d！"
 	L.markwarn2 = "5秒后，印记%d！"
+
+	-- L.dies = "#%d Killed"
 
 	L.startwarn = "四骑士已激活 - 约17秒后，印记！"
 end
@@ -264,7 +262,6 @@ end
 L = BigWigs:NewBossLocale("Instructor Razuvious", "zhCN")
 if L then
 	L.shout_warning = "5秒后，瓦解怒吼！"
-	L.shout_next = "瓦解怒吼冷却！"
 
 	L.taunt_warning = "5秒后，可以嘲讽！"
 	L.shieldwall_warning = "5秒后，可以白骨屏障！"

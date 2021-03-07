@@ -1,4 +1,5 @@
 local L = BigWigs:NewBossLocale("Anub'arak", "zhCN")
+if not L then return end
 if L then
 	L.engage_message = "阿努巴拉克已激活，80秒后，钻地！"
 	L.engage_trigger = "这里将是你的葬身之地！"

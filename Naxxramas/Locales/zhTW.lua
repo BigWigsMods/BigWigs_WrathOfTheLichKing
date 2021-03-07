@@ -1,17 +1,13 @@
-
 local L = BigWigs:NewBossLocale("Anub'Rekhan", "zhTW")
+if not L then return end
 if L then
 	L.starttrigger1 = "一些小點心……"
 	L.starttrigger2 = "對，跑吧!那樣傷口出血就更多了!"
 	L.starttrigger3 = "你們逃不掉的。"
 	L.engagewarn = "阿努比瑞克漢已進入戰鬥 - %d秒後，蝗蟲風暴！"
 
-	L.gainendwarn = "蝗蟲風暴結束了！"
 	L.gainnextwarn = "85秒後，下一波蝗蟲風暴！"
 	L.gainwarn10sec = "10秒後，下一波蝗蟲風暴！"
-	L.gainincbar = "<下一蝗蟲風暴>"
-
-	L.castwarn = "蝗蟲風暴！"
 end
 
 L = BigWigs:NewBossLocale("Grand Widow Faerlina", "zhTW")
@@ -129,6 +125,8 @@ if L then
 	L.markbar = "<印記：%d>"
 	L.markwarn1 = "印記%d！"
 	L.markwarn2 = "5秒後，印記%d！"
+
+	-- L.dies = "#%d Killed"
 
 	L.startwarn = "四騎士已進入戰鬥 - 約17秒後，印記！"
 end
@@ -264,7 +262,6 @@ end
 L = BigWigs:NewBossLocale("Instructor Razuvious", "zhTW")
 if L then
 	L.shout_warning = "5秒後，混亂怒吼！"
-	L.shout_next = "混亂怒吼冷卻！"
 
 	L.taunt_warning = "5秒後，可以嘲諷！"
 	L.shieldwall_warning = "5秒後，可以骸骨屏障！"

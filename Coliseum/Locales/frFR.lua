@@ -1,4 +1,5 @@
 local L = BigWigs:NewBossLocale("Anub'arak", "frFR")
+if not L then return end
 if L then
 	L.engage_message = "Anub'arak engagé, Fouir dans 80 sec. !"
 	L.engage_trigger = "Ce terreau sera votre tombeau !"
