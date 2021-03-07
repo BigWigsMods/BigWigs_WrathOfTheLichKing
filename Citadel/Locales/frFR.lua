@@ -4,7 +4,6 @@ if L then
 	L.switch_bar = "~Prochain chgt de cible"
 
 	L.empowered_flames = "L'Embrasement surpuissant"
-	L.empowered_bar = "~Prochain Embrasement"
 
 	L.empowered_shock_message = "Vortex de choc surpuissant en incantation !"
 	L.regular_shock_message = "Vortex de choc"
@@ -208,11 +207,6 @@ if L then
 	L.adds_desc = "Affiche un minuteur et des messages indiquant quand des Bêtes de sang apparaissent."
 	L.adds_warning = "Bêtes de sang dans 5 sec. !"
 	L.adds_message = "Bêtes de sang !"
-	L.adds_bar = "Prochaines Bêtes de sang"
-
-	L.rune_bar = "~Prochaine Rune"
-
-	L.mark = "Marque %d"
 
 	L.engage_trigger = "PAR LA PUISSANCE DU ROI-LICHE !"
 	L.warmup_alliance = "Bon allez, on se bouge ! En route -"

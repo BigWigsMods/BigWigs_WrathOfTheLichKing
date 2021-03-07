@@ -142,6 +142,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
+	snobolledWarned = {}
 	self:CloseProximity()
 	self:Bar("bosses", 20, L["boss_incoming"]:format(gormok), 66331)
 	if self:Heroic() then
@@ -149,7 +150,6 @@ function mod:OnEngage()
 	else
 		self:Berserk(900)
 	end
-	wipe(snobolledWarned)
 	self:RegisterEvent("UNIT_AURA")
 end
 

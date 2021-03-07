@@ -4,7 +4,6 @@ if L then
 	L.switch_bar = "~Ziel wechseln"
 
 	L.empowered_flames = "Machtvolle Flammen"
-	L.empowered_bar = "~Machtvolle Flammen"
 
 	L.empowered_shock_message = "Schockvortex kommt!"
 	L.regular_shock_message = "Schockzone"
@@ -40,11 +39,6 @@ if L then
 	L.adds_desc = "Zeigt Timer und Nachrichten für das Auftauchen der Blutbestien."
 	L.adds_warning = "Blutbestien in 5 sek!"
 	L.adds_message = "Blutbestien!"
-	L.adds_bar = "~Blutbestien"
-
-	L.rune_bar = "~Nächste Rune"
-
-	L.mark = "Mal %d"
 
 	L.engage_trigger = "BEI DER MACHT DES LICHKÖNIGS!"
 	L.warmup_alliance = "Dann beeilen wir uns! Brechen wir au..."

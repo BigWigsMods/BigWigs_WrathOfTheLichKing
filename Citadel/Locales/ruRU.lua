@@ -16,7 +16,6 @@ if L then
 	L.switch_bar = "~Следующая смена цели"
 
 	L.empowered_flames = "Жаркое пламя"
-	L.empowered_bar = "~Next Flames"
 
 	L.empowered_shock_message = "Могучий вихрь!"
 	L.regular_shock_message = "Вихрь"
@@ -52,11 +51,6 @@ if L then
 	L.adds_desc = "Сообщать о призыве кровавых чудовищ."
 	L.adds_warning = "Кровавые чудовища через 5 сек!"
 	L.adds_message = "Призваны кровавые чудовища"
-	L.adds_bar = "~Кровавые чудовища"
-
-	L.rune_bar = "~Следующая Руна"
-
-	L.mark = "Метка %d"
 
 	L.engage_trigger = "ВО ИМЯ КОРОЛЯ-ЛИЧА!"
 	L.warmup_alliance = "Тогда выдвигаемся! Быст..."

@@ -268,7 +268,7 @@ do
 
 	function mod:UnmarkShadowBeacon(event, unit, guid)
 		if guid == shadowBeacon1GUID or guid == shadowBeacon2GUID then
-			SetRaidTarget(unit, 0)
+			self:CustomIcon(false, unit, 0)
 		end
 	end
 
@@ -288,7 +288,7 @@ do
 			if destGUID == shadowBeacon1GUID or destGUID == shadowBeacon2GUID then
 				local unitId = mod:GetUnitIdByGUID(destGUID)
 				if unitId then
-					SetRaidTarget(unitId, 0)
+					self:CustomIcon(false, unitId, 0)
 				else
 					self:RegisterTargetEvents("UnmarkShadowBeacon")
 				end
@@ -300,9 +300,9 @@ end
 do
 	function mod:MarkShadowBeacon(event, unit, guid)
 		if guid == shadowBeacon1GUID then
-			SetRaidTarget(unit, 8)
+			self:CustomIcon(false, unit, 8)
 		elseif guid == shadowBeacon2GUID then
-			SetRaidTarget(unit, 7)
+			self:CustomIcon(false, unit, 7)
 		end
 	end
 
@@ -323,7 +323,7 @@ do
 
 			local unitId = mod:GetUnitIdByGUID(shadowBeacon2GUID or shadowBeacon1GUID)
 			if unitId then
-				SetRaidTarget(unitId, shadowBeacon2GUID and 7 or 8)
+				self:CustomIcon(false, unitId, shadowBeacon2GUID and 7 or 8)
 			else
 				self:RegisterTargetEvents("MarkShadowBeacon")
 			end

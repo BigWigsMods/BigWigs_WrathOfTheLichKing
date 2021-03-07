@@ -147,8 +147,8 @@ function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 	if msg == L["start_trigger"] then
 		self:MessageOld("phase", "yellow", nil, L["start_warning"], false)
 		self:Bar("phase", 215, L["start_bar"], "Spell_Fire_FelImmolation")
-		wipe(mcTargets)
-		wipe(fbTargets)
+		mcTargets = mod:NewTargetList()
+		fbTargets = mod:NewTargetList()
 		self:CloseProximity()
 		--self:Engage() -- No wipe check?
 	elseif msg == L["phase2_trigger1"] or msg == L["phase2_trigger2"] or msg == L["phase2_trigger3"] then

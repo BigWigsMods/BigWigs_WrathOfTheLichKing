@@ -4,7 +4,6 @@ if L then
 	L.switch_bar = "~다음 대상 변경"
 
 	L.empowered_flames = "강력한 불꽃"
-	L.empowered_bar = "~다음 불꽃"
 
 	L.empowered_shock_message = "충격의 소용돌이 시전!"
 	L.regular_shock_message = "충격 지역"
@@ -142,11 +141,6 @@ if L then
 	L.adds_desc = "피의 괴물 소환 메시지와 타이머를 표시합니다."
 	L.adds_warning = "5초 후 피의 괴물 소환!"
 	L.adds_message = "피의 괴물 소환!"
-	L.adds_bar = "다음 피의 괴물"
-
-	L.rune_bar = "다음 피의 룬"
-
-	L.mark = "징표 %d"
 
 	L.engage_trigger = "리치 왕의 힘으로!"
 	L.warmup_alliance = "그러면 이동하자! 이동..."

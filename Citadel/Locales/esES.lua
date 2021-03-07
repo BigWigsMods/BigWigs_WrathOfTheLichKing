@@ -4,7 +4,6 @@ if L then
 	L.switch_bar = "~Próximo cambio de objetivo"
 
 	L.empowered_flames = "Llama potenciada"
-	L.empowered_bar = "~Próxima Llama potenciada"
 
 	L.empowered_shock_message = "¡Casteando Choque!"
 	L.regular_shock_message = "Zona de Choque"
@@ -208,11 +207,6 @@ if L then
 	L.adds_desc = "Shows a timer and messages for when Blood Beasts spawn."
 	L.adds_warning = "¡Bestias de sangre en 5 sec!"
 	L.adds_message = "¡Bestias de sangre!"
-	L.adds_bar = "Siguientes Bestias de sangre"
-
-	L.rune_bar = "~Siguiente Runa"
-
-	L.mark = "Marca %d"
 
 	L.engage_trigger = "¡POR EL PODER DEL REY EXÁNIME!"
 	L.warmup_alliance = "¡Entonces movámonos! ¡Sali...!"

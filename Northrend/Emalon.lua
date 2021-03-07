@@ -63,7 +63,7 @@ do
 	local function scanTarget(self, destGUID)
 		local unitId = self:GetUnitIdByGUID(destGUID)
 		if not unitId then return end
-		SetRaidTarget(unitId, 8)
+		self:CustomIcon(false, unitId, 8)
 		self:CancelTimer(timer)
 		timer = nil
 	end
