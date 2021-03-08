@@ -126,7 +126,7 @@ if L then
 	L.markwarn1 = "Знак %d!"
 	L.markwarn2 = "Знак %d через 5 секунд"
 
-	-- L.dies = "#%d Killed"
+	--L.dies = "#%d Killed"
 
 	L.startwarn = "Четверо всадников вступили в бой! Знак через ~17 секунд"
 end

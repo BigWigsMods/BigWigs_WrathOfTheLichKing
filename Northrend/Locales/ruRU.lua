@@ -124,11 +124,11 @@ if L then
 	L.twilight_cutter_bar = "~Лезвие сумерок"
 	L.twilight_cutter_warning = "Скоро Лезвие сумерок"
 
-	-- L.fire_damage_message = "Your feet are burning!"
+	--L.fire_damage_message = "Your feet are burning!"
 	L.fire_message = "Огненная бомба"
 	L.shadow_message = "Пожирающая бомба"
 
-	-- L.meteorstrike_yell = "The heavens burn!"
+	--L.meteorstrike_yell = "The heavens burn!"
 	L.meteorstrike_bar = "Падение метеора"
-	-- L.meteor_warning_message = "Meteor incoming!"
+	--L.meteor_warning_message = "Meteor incoming!"
 end

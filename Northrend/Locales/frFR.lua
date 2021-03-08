@@ -48,7 +48,7 @@ if L then
 
 	L.meteorstrike_yell = "Les cieux s'embrasent !"
 	L.meteorstrike_bar = "Frappe météore"
-	-- L.meteor_warning_message = "Meteor incoming!"
+	--L.meteor_warning_message = "Meteor incoming!"
 end
 
 L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "frFR")

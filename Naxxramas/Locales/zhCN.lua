@@ -126,7 +126,7 @@ if L then
 	L.markwarn1 = "印记%d！"
 	L.markwarn2 = "5秒后，印记%d！"
 
-	-- L.dies = "#%d Killed"
+	--L.dies = "#%d Killed"
 
 	L.startwarn = "四骑士已激活 - 约17秒后，印记！"
 end

@@ -183,10 +183,10 @@ if L then
 
 	L.tentacle = "촉수 소환"
 	L.tentacle_desc = "촉수 소환을 알립니다."
-	-- L.tentacle_message = "Crusher %d!"
+	L.tentacle_message = "분쇄의 촉수(%d)"
 
-	-- L.small_tentacles = "Small Tentacles"
-	-- L.small_tentacles_desc = "Warn for Corruptor Tentacle and Constrictor Tentacle spawns."
+	--L.small_tentacles = "Small Tentacles"
+	--L.small_tentacles_desc = "Warn for Corruptor Tentacle and Constrictor Tentacle spawns."
 
 	L.link_warning = "당신은 두뇌의 고리!"
 

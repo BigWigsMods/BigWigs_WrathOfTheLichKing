@@ -199,12 +199,12 @@ if L then
 	L.cave_phase = "Фаза пещеры"
 	L.last_phase_bar = "Последняя фаза"
 
-	-- L.frenzy_bar = "%s frenzies!"
-	-- L.frenzy_survive_message = "%s will survive after plague"
-	-- L.frenzy_message = "Add frenzied!"
-	-- L.frenzy_soon_message = "5sec to frenzy!"
+	--L.frenzy_bar = "%s frenzies!"
+	--L.frenzy_survive_message = "%s will survive after plague"
+	--L.frenzy_message = "Add frenzied!"
+	--L.frenzy_soon_message = "5sec to frenzy!"
 
-	-- L.custom_on_valkyr_marker = "Val'kyr marker"
-	-- L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
+	--L.custom_on_valkyr_marker = "Val'kyr marker"
+	--L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
 end
 
