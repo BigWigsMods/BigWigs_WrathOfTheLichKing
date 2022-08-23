@@ -27,6 +27,10 @@ if L then
 	L.icehowl_trigger = "当下一名斗士出场时，空气都会为之冻结！它是冰吼，胜或是死，勇士们！"
 	L.boss_incoming = "即将%s！"
 
+	L.gormok = "穿刺者戈莫克"
+	L.jormungars = "酸喉和恐鳞"
+	L.icehowl = "冰吼"
+
 	-- Gormok
 	L.snobold = "狗头人奴隶"
 	L.snobold_desc = "当出现狗头人奴隶时发出警报。"

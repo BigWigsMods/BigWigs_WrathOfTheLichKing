@@ -8,6 +8,10 @@ if L then
 	--L.icehowl_trigger = "The air itself freezes with the introduction of our next combatant, Icehowl! Kill or be killed, champions!"
 	--L.boss_incoming = "%s incoming"
 
+	L.gormok = "Gormok l'Impalatore"
+	L.jormungars = "Acidalingua e Magmascaglia"
+	L.icehowl = "Urlogelido"
+
 	--L.snobold = "Snobold"
 	--L.snobold_desc = "Warn who gets a Snobold on their heads."
 	--L.snobold_message = "Add"

@@ -27,6 +27,10 @@ if L then
 	L.icehowl_trigger = "El propio aire se congela al presentar a nuestro siguiente combatiente: ¡Aullahielo! ¡Matad o morid, campeones!"
 	L.boss_incoming = "%s entrando"
 
+	L.gormok = "Gormok el Empalador"
+	L.jormungars = "Fauceácida y Aterraescama"
+	L.icehowl = "Aullahielo"
+
 	-- Gormok
 	L.snobold = "Snobold"
 	L.snobold_desc = "Avisa quien tiene un Snobold en su cabeza."

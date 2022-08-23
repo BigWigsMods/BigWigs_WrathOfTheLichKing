@@ -27,6 +27,10 @@ if L then
 	L.icehowl_trigger = "L'air se gèle à l'entrée de notre prochain combattant, Glace-hurlante ! Tuez ou soyez tués, champions !"
 	L.boss_incoming = "Arrivée de %s"
 
+	L.gormok = "Gormok l’Empaleur"
+	L.jormungars = "Gueule-d’acide et Ecaille-d’effroi"
+	L.icehowl = "Glace-Hurlante"
+
 	-- Gormok
 	L.snobold = "Frigbold"
 	L.snobold_desc = "Prévient quand un joueur a un frigbold sur sa tête."

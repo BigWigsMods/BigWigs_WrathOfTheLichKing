@@ -27,6 +27,10 @@ if L then
 	L.icehowl_trigger = "Mit der Ankündigung unseres nächsten Kämpfers gefriert die Luft selbst: Eisheuler! Tötet oder werdet getötet, Champions!"
 	L.boss_incoming = "%s kommt"
 
+	L.gormok = "Gormok der Pfähler"
+	L.jormungars = "Ätzschlund und Schreckensmaul"
+	L.icehowl = "Eisheuler"
+
 	-- Gormok
 	L.snobold = "Schneebold"
 	L.snobold_desc = "Warnt davor, wer einen Schneebold auf seinem Kopf hat."

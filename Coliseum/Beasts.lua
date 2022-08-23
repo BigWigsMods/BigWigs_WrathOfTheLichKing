@@ -19,13 +19,6 @@ mod:RegisterEnableMob(
 local snobolledWarned = {}
 local sprayTimer = nil
 local handle_Jormungars = nil
-local icehowl, jormungars, gormok
-do
-	local _
-	_, gormok = EJ_GetCreatureInfo(1, 1618) -- Gormok the Impaler
-	_, jormungars = EJ_GetCreatureInfo(2, 1618) -- Acidmaw and Dreadscale
-	_, icehowl = EJ_GetCreatureInfo(3, 1618) -- Icehowl
-end
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -39,6 +32,10 @@ if L then
 	L.jormungars_trigger = "Steel yourselves, heroes, for the twin terrors, Acidmaw and Dreadscale, enter the arena!"
 	L.icehowl_trigger = "The air itself freezes with the introduction of our next combatant, Icehowl! Kill or be killed, champions!"
 	L.boss_incoming = "%s incoming"
+
+	L.gormok = "Gormok the Impaler"
+	L.jormungars = "Acidmaw and Dreadscale"
+	L.icehowl = "Icehowl"
 
 	-- Gormok
 	L.snobold = "Snobold"
@@ -104,9 +101,9 @@ function mod:GetOptions()
 		"bosses",
 		"berserk",
 	}, {
-		snobold = gormok,
-		submerge = jormungars,
-		[66770] = icehowl,
+		snobold = L.gormok,
+		submerge = L.jormungars,
+		[66770] = L.icehowl,
 		bosses = "general",
 	}
 end
@@ -137,16 +134,16 @@ function mod:OnBossEnable()
 	-- Common
 	self:RegisterEvent("ZONE_CHANGED_NEW_AREA", "Reboot")
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
-	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE", "Charge")
+	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE")
 	self:Death("Win", 34797)
 end
 
 function mod:OnEngage()
 	snobolledWarned = {}
 	self:CloseProximity()
-	self:Bar("bosses", 20, L["boss_incoming"]:format(gormok), 66331)
+	self:Bar("bosses", 20, L["boss_incoming"]:format(L.gormok), 66331)
 	if self:Heroic() then
-		self:Bar("bosses", 180, L["boss_incoming"]:format(jormungars), "INV_Misc_MonsterScales_18")
+		self:Bar("bosses", 180, L["boss_incoming"]:format(L.jormungars), "INV_Misc_MonsterScales_18")
 	else
 		self:Berserk(900)
 	end
@@ -218,11 +215,11 @@ end
 --
 
 function mod:Jormungars()
-	local m = L["boss_incoming"]:format(jormungars)
+	local m = L["boss_incoming"]:format(L.jormungars)
 	self:MessageOld("bosses", "green", nil, m, "Ability_Hunter_Pet_Worm")
 	self:Bar("bosses", 15, m, "INV_Misc_MonsterScales_18")
 	if self:Heroic() then
-		self:Bar("bosses", 200, L["boss_incoming"]:format(icehowl), "INV_Misc_MonsterHorn_07")
+		self:Bar("bosses", 200, L["boss_incoming"]:format(L.icehowl), "INV_Misc_MonsterHorn_07")
 	end
 	self:OpenProximity("proximity", 10)
 	-- The first worm to spray is Acidmaw, he has a 10 second spray timer after emerge
@@ -269,7 +266,7 @@ do
 		if self:Me(args.destGUID) then
 			self:Flash(args.spellId)
 		end
-		if not scheduled then 
+		if not scheduled then
 			scheduled = self:ScheduleTimer(toxinWarn, 0.5, args.spellId)
 		end
 	end
@@ -283,7 +280,7 @@ do
 	end
 	function mod:Burn(args)
 		burnTargets[#burnTargets + 1] = args.destName
-		if not scheduled then 
+		if not scheduled then
 			scheduled = self:ScheduleTimer(burnWarn, 0.5)
 		end
 	end
@@ -312,15 +309,15 @@ end
 --
 
 function mod:Icehowl()
-	local m = L["boss_incoming"]:format(icehowl)
-	self:MessageOld("bosses", "green", nil, m, "INV_Misc_Pet_Pandaren_Yeti")
-	self:Bar("bosses", 10, m, "INV_Misc_MonsterHorn_07")
+	local text = L["boss_incoming"]:format(L.icehowl)
+	self:MessageOld("bosses", "green", nil, text, "INV_Misc_Pet_Pandaren_Yeti")
+	self:Bar("bosses", 10, text, "INV_Misc_MonsterHorn_07")
 	self:CancelTimer(handle_Jormungars)
 	handle_Jormungars = nil
 	self:StopBar(L["spray"])
 	self:StopBar(L["submerge"])
 	if self:Heroic() then
-		self:Berserk(220, true, icehowl)
+		self:Berserk(220, true, L.icehowl)
 	end
 	self:CloseProximity()
 end
@@ -340,15 +337,15 @@ function mod:Butt(args)
 	self:CDBar(args.spellId, 12)
 end
 
-function mod:Charge(_, msg, unit, _, _, player)
-	if unit == icehowl then
-		local furiousChargeId = 52311
-		self:TargetMessageOld("charge", player, "blue", "alarm", furiousChargeId)
+function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg, unit, _, _, player)
+	if unit == L.icehowl then
+		-- Furious Charge
+		self:TargetMessageOld("charge", player, "blue", "alarm", 52311)
 		if UnitIsUnit(player, "player") then
-			self:Flash("charge", furiousChargeId)
-			self:Say("charge", furiousChargeId)
+			self:Flash("charge", 52311)
+			self:Say("charge", 52311)
 		end
-		self:Bar("charge", 7.5, furiousChargeId)
+		self:Bar("charge", 7.5, 52311)
 		self:PrimaryIcon("charge", player)
 	end
 end

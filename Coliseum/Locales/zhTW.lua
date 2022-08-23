@@ -27,6 +27,10 @@ if L then
 	L.icehowl_trigger = "下一場參賽者的出場連空氣都會為之凝結:冰嚎!戰個你死我活吧，勇士們!"
 	L.boss_incoming = "即將%s！"
 
+	L.gormok = "『穿刺者』戈莫克"
+	L.jormungars = "酸喉與懼鱗"
+	L.icehowl = "冰嚎"
+
 	-- Gormok
 	L.snobold = "極地狗頭人奴僕"
 	L.snobold_desc = "當出現極地狗頭人奴僕時發出警報。"

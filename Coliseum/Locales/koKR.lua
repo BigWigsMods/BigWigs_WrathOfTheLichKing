@@ -27,6 +27,10 @@ if L then
 	L.icehowl_trigger = "다음은, 소개하는 순간 공기마저 얼어붙게 하는 얼음울음일세! 죽이지 않으면 죽을 걸세, 용사들이여!"
 	L.boss_incoming = "곧 %s 등장"
 
+	L.gormok = "꿰뚫는 자 고르목"
+	L.jormungars = "산성아귀와 공포비늘"
+	L.icehowl = "얼음울음"
+
 	-- Gormok
 	L.snobold = "스노볼트"
 	L.snobold_desc = "스노볼트가 누구의 머리위에 있는지를 알립니다."
