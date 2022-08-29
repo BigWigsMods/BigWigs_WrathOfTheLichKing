@@ -131,7 +131,7 @@ if L then
 	L.startwarn = "Die Vier Reiter angegriffen! Male in ~17 sek."
 end
 
-L = BigWigs:NewBossLocale("Kel'Thuzad", "deDE")
+L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "deDE")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Kel'Thuzads Gemach"
 

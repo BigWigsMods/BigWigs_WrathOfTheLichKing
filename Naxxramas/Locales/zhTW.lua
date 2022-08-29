@@ -131,7 +131,7 @@ if L then
 	L.startwarn = "四騎士已進入戰鬥 - 約17秒後，印記！"
 end
 
-L = BigWigs:NewBossLocale("Kel'Thuzad", "zhTW")
+L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "zhTW")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "科爾蘇加德之間"
 

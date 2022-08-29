@@ -131,7 +131,7 @@ if L then
 	L.startwarn = "Четверо всадников вступили в бой! Знак через ~17 секунд"
 end
 
-L = BigWigs:NewBossLocale("Kel'Thuzad", "ruRU")
+L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "ruRU")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Зал Кел'Тузада"
 

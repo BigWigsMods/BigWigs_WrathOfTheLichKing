@@ -131,7 +131,7 @@ if L then
 	L.startwarn = "4인의 기병대 전투 시작! 약 17초 이내 징표"
 end
 
-L = BigWigs:NewBossLocale("Kel'Thuzad", "koKR")
+L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "koKR")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "켈투자드의 방"
 

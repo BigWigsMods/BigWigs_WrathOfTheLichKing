@@ -131,7 +131,7 @@ if L then
 	--L.startwarn = "The Four Horsemen Engaged! Mark in ~17 sec"
 end
 
-L = BigWigs:NewBossLocale("Kel'Thuzad", "esES") or BigWigs:NewBossLocale("Kel'Thuzad", "esMX")
+L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "esES") or BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "esMX")
 if L then
 	--L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Kel'Thuzad's Chamber"
 

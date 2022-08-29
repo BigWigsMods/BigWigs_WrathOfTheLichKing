@@ -131,7 +131,7 @@ if L then
 	L.startwarn = "四骑士已激活 - 约17秒后，印记！"
 end
 
-L = BigWigs:NewBossLocale("Kel'Thuzad", "zhCN")
+L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "zhCN")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "克尔苏加德的大厅"
 

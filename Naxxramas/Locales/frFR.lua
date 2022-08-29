@@ -131,7 +131,7 @@ if L then
 	L.startwarn = "Les 4 cavaliers engagés ! Marque dans ~17 sec. !"
 end
 
-L = BigWigs:NewBossLocale("Kel'Thuzad", "frFR")
+L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "frFR")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Appartements de Kel'Thuzad"
 
