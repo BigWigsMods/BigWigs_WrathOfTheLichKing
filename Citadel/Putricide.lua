@@ -136,7 +136,7 @@ do
 end
 
 function mod:Plague(args)
-	self:StackMessage(72451, args.destName, args.amount, "orange", "info")
+	self:StackMessageOld(72451, args.destName, args.amount, "orange", "info")
 	self:Bar(72451, 10)
 end
 

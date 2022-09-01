@@ -100,7 +100,7 @@ end
 
 function mod:Bloat(args)
 	if args.amount > 5 then
-		self:StackMessage(72219, args.destName, args.amount, "green")
+		self:StackMessageOld(72219, args.destName, args.amount, "green")
 		self:CDBar(72219, 10)
 	end
 end

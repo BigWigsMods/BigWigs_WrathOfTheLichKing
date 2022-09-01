@@ -64,7 +64,7 @@ function mod:Orbs(args)
 end
 
 function mod:Frostbite(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "orange")
+	self:StackMessageOld(args.spellId, args.destName, args.amount, "orange")
 end
 
 do

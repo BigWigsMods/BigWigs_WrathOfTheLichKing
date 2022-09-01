@@ -107,7 +107,7 @@ function mod:RuneofBlood(args)
 end
 
 function mod:Mark(args)
-	self:StackMessage(72293, args.destName, count, "yellow", "alert")
+	self:StackMessageOld(72293, args.destName, count, "yellow", "alert")
 	count = count + 1
 	self:PrimaryIcon(72293, args.destName)
 	if self:Me(args.destGUID) then

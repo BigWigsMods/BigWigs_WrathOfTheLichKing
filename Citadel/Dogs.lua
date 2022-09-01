@@ -22,7 +22,7 @@ end
 
 function mod:Wound(args)
 	if args.amount > 5 then
-		self:StackMessage(71127, args.destName, args.amount, "red")
+		self:StackMessageOld(71127, args.destName, args.amount, "red")
 	end
 end
 

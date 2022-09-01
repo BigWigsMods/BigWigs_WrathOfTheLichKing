@@ -189,7 +189,7 @@ end
 
 function mod:Impale(args)
 	if args.amount then
-		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "info")
+		self:StackMessageOld(args.spellId, args.destName, args.amount, "orange", "info")
 	end
 	self:Bar(args.spellId, 10)
 end

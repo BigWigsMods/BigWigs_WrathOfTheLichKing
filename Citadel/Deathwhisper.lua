@@ -115,7 +115,7 @@ end
 
 function mod:Touch(args)
 	if (args.amount or 1) > 1 then
-		self:StackMessage(71204, args.destName, args.amount, "orange")
+		self:StackMessageOld(71204, args.destName, args.amount, "orange")
 	end
 	self:Bar(71204, 7, L["touch_bar"], 71204)
 end

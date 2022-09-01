@@ -71,7 +71,7 @@ end
 
 function mod:PhasePunchCount(args)
 	if args.amount > 3 then
-		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "alert")
+		self:StackMessageOld(args.spellId, args.destName, args.amount, "orange", "alert")
 	end
 end
 

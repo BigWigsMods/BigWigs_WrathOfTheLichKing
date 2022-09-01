@@ -62,7 +62,7 @@ end
 --
 
 function mod:CrunchArmor(args)
-	self:StackMessage(63355, args.destName, args.amount, "orange", "info")
+	self:StackMessageOld(63355, args.destName, args.amount, "orange", "info")
 end
 
 do
