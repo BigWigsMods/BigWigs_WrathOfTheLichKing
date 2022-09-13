@@ -5,8 +5,8 @@
 local mod, CL = BigWigs:NewBoss("Hodir", 603, 1644)
 if not mod then return end
 mod:RegisterEnableMob(32845)
-mod.engageId = 1135
-mod.respawnTime = 30
+mod:SetEncounterID(1135)
+mod:SetRespawnTime(30)
 
 --------------------------------------------------------------------------------
 -- Locals

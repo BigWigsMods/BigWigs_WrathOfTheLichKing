@@ -4,10 +4,14 @@
 
 local mod = BigWigs:NewBoss("Mimiron", 603, 1647)
 if not mod then return end
--- Leviathan Mk II(33432), VX-001(33651), Aerial Command Unit(33670),
-mod:RegisterEnableMob(33350, 33432, 33651, 33670)
-mod.engageId = 1138
-mod.respawnTime = 31
+mod:RegisterEnableMob(
+	33350, -- Mimiron
+	33432, -- Leviathan Mk II
+	33651, -- VX-001
+	33670  -- Aerial Command Unit
+)
+mod:SetEncounterID(1138)
+mod:SetRespawnTime(31)
 
 --------------------------------------------------------------------------------
 -- Locals

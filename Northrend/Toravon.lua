@@ -5,6 +5,8 @@
 local mod = BigWigs:NewBoss("Toravon the Ice Watcher", 624, 1600)
 if not mod then return end
 mod:RegisterEnableMob(38433)
+-- mod:SetEncounterID(1129)
+-- mod:SetRespawnTime(30)
 mod.toggleOptions = {72034, 72091, 72004, 72090}
 
 --------------------------------------------------------------------------------

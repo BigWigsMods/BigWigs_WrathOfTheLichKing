@@ -5,6 +5,8 @@
 local mod, CL = BigWigs:NewBoss("Festergut", 631, 1629)
 if not mod then return end
 mod:RegisterEnableMob(36626)
+-- mod:SetEncounterID(1097)
+-- mod:SetRespawnTime(30)
 mod.toggleOptions = {{69279, "FLASH"}, 69165, 69195, 72219, 69240, 72295, "proximity", "berserk"}
 mod.optionHeaders = {
 	[69279] = "normal",

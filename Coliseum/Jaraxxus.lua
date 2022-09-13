@@ -5,7 +5,8 @@
 local mod = BigWigs:NewBoss("Lord Jaraxxus", 649, 1619)
 if not mod then return end
 mod:RegisterEnableMob(34780)
---mod.engageId = 1087 -- Can fire repeatedly during a wipe
+-- mod:SetEncounterID(1087) -- Can fire repeatedly during a wipe
+-- mod:SetRespawnTime(30)
 mod.toggleOptions = {66237, {66197, "ICON", "FLASH"}, 66228, "adds", {66334, "FLASH"}, "berserk"}
 mod.optionHeaders = {
 	[66237] = "normal",

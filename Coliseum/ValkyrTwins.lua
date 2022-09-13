@@ -5,6 +5,8 @@
 local mod, CL = BigWigs:NewBoss("The Twin Val'kyr", 649, 1622)
 if not mod then return end
 mod:RegisterEnableMob(34496, 34497) -- Darkbane, Lightbane
+-- mod:SetEncounterID(1089)
+-- mod:SetRespawnTime(30)
 mod.toggleOptions = {{"vortex", "FLASH"}, "shield", "next", {"touch", "FLASH"}, "berserk"}
 
 --------------------------------------------------------------------------------
@@ -13,7 +15,6 @@ mod.toggleOptions = {{"vortex", "FLASH"}, "shield", "next", {"touch", "FLASH"}, 
 
 local essenceLight = GetSpellInfo(65686)
 local essenceDark = GetSpellInfo(65684)
-local started = nil
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -52,13 +53,9 @@ function mod:OnBossEnable()
 	self:BossYell("Engage", L["engage_trigger1"])
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 34496)
-
-	started = nil
 end
 
 function mod:OnEngage()
-	if started then return end
-	started = true
 	self:Bar("next", 45, L["vortex_or_shield_cd"], 39089)
 	self:Berserk(self:Heroic() and 360 or 480)
 end

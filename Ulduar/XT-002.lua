@@ -5,8 +5,8 @@
 local mod, CL = BigWigs:NewBoss("XT-002 Deconstructor", 603, 1640)
 if not mod then return end
 mod:RegisterEnableMob(33293)
-mod.engageId = 1142
---mod.respawnTime = resets, doesn't respawn
+mod:SetEncounterID(1142)
+-- mod:SetRespawnTime(0) -- resets, doesn't respawn
 
 --------------------------------------------------------------------------------
 -- Locals

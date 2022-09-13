@@ -5,6 +5,8 @@
 local mod, CL = BigWigs:NewBoss("Valithria Dreamwalker", 631, 1634)
 if not mod then return end
 mod:RegisterEnableMob(36789, 37868, 36791, 37934, 37886, 37950, 37985)
+-- mod:SetEncounterID(1098)
+-- mod:SetRespawnTime(30)
 mod.toggleOptions = {69325, {71086, "FLASH"}, "suppresser", {"blazing", "ICON"}, "portal", "berserk"}
 mod.optionHeaders = {
 	[69325] = "normal",

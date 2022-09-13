@@ -4,8 +4,10 @@
 
 local mod = BigWigs:NewBoss("Sartharion", 615, 1616)
 if not mod then return end
--- sartharion, tenebron, shadron, vesperon
+-- Sartharion, Tenebron, Shadron, Vesperon
 mod:RegisterEnableMob(28860, 30449, 30451, 30452)
+-- mod:SetEncounterID(1090)
+-- mod:SetRespawnTime(30)
 mod.toggleOptions = {"tsunami", 56908, "drakes", {"twilight", "FLASH"}, "berserk"}
 
 --------------------------------------------------------------------------------

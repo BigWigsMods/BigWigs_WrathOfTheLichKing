@@ -9,7 +9,8 @@ mod:RegisterEnableMob(
 	-- Horde NPCs
 	34441, 34444, 34445, 34447, 34448, 34449, 34450, 34451, 34453, 34454, 34455, 34456, 34458, 34459
 )
---mod.engageId = 1086 -- Fires too early
+-- mod:SetEncounterID(1086) -- Fires too early
+-- mod:SetRespawnTime(30)
 mod.toggleOptions = {65960, 65801, 65877, 66010, 65947, {65816, "FLASH"}, 67514, 67777, 65983, 65980}
 
 --------------------------------------------------------------------------------

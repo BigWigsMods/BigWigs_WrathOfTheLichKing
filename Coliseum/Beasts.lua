@@ -10,7 +10,8 @@ mod:RegisterEnableMob(
 	35144, -- Acidmaw
 	34797  -- Icehowl
 )
---mod.engageId = 0 -- Inconsistent between tries, ends between bosses
+-- mod:SetEncounterID(1088) -- Inconsistent between tries, ends between bosses
+-- mod:SetRespawnTime(30)
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -68,10 +69,11 @@ L = mod:GetLocale()
 -- Initialization
 --
 
-function mod:OnRegister()
+local function OnRegister(self)
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 end
-mod.OnBossDisable = mod.OnRegister
+mod.OnRegister = OnRegister
+mod.OnBossDisable = OnRegister
 
 function mod:GetOptions()
 	return {

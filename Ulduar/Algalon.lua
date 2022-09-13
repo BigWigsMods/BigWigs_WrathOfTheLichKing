@@ -5,7 +5,8 @@
 local mod, CL = BigWigs:NewBoss("Algalon the Observer", 603, 1650)
 if not mod then return end
 mod:RegisterEnableMob(32871)
-mod.engageId = 1130
+mod:SetEncounterID(1130)
+-- mod:SetRespawnTime(0) -- resets, doesn't respawn
 
 --------------------------------------------------------------------------------
 -- Locals

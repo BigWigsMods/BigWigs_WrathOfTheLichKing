@@ -5,6 +5,8 @@
 local mod, CL = BigWigs:NewBoss("Emalon the Storm Watcher", 624, 1598)
 if not mod then return end
 mod:RegisterEnableMob(33993)
+-- mod:SetEncounterID(1127)
+-- mod:SetRespawnTime(30)
 mod.toggleOptions = {64216, 64218, "custom_on_overcharge_mark", "proximity", "berserk"}
 
 --------------------------------------------------------------------------------

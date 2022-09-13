@@ -5,8 +5,8 @@
 local mod, CL = BigWigs:NewBoss("Auriaya", 603, 1643)
 if not mod then return end
 mod:RegisterEnableMob(33515)
-mod.engageId = 1131
-mod.respawnTime = 30
+mod:SetEncounterID(1131)
+mod:SetRespawnTime(30)
 
 --------------------------------------------------------------------------------
 -- Localization

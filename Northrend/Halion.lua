@@ -5,6 +5,8 @@
 local mod = BigWigs:NewBoss("Halion", 724, 1652)
 if not mod then return end
 mod:RegisterEnableMob(39863, 40142)
+-- mod:SetEncounterID(1150)
+-- mod:SetRespawnTime(30)
 mod.toggleOptions = {{74562, "SAY", "ICON", "FLASH"}, 74648, {74792, "SAY", "ICON", "FLASH"}, 74769, 74806, 74525, "berserk"}
 
 --------------------------------------------------------------------------------

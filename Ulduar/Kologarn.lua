@@ -5,8 +5,8 @@
 local mod, CL = BigWigs:NewBoss("Kologarn", 603, 1642)
 if not mod then return end
 mod:RegisterEnableMob(32930)
-mod.engageId = 1137
---mod.respawnTime = Respawn is based on running over the line at the room entrance
+mod:SetEncounterID(1137)
+-- mod:SetRespawnTime(0) -- Respawn is based on running over the line at the room entrance
 
 --------------------------------------------------------------------------------
 -- Locals

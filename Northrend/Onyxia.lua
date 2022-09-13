@@ -5,8 +5,9 @@
 local mod = BigWigs:NewBoss("Onyxia", 249, 1651)
 if not mod then return end
 mod:RegisterEnableMob(10184)
+-- mod:SetEncounterID(1084)
+-- mod:SetRespawnTime(30)
 mod.toggleOptions = {"phase", {17086, "FLASH"}, 18431, 18435}
-mod.engageId = 1084
 
 --------------------------------------------------------------------------------
 -- Localization

@@ -5,6 +5,8 @@
 local mod = BigWigs:NewBoss("Blood-Queen Lana'thel", 631, 1633)
 if not mod then return end
 mod:RegisterEnableMob(37955)
+-- mod:SetEncounterID(1103)
+-- mod:SetRespawnTime(30)
 mod.toggleOptions = {{71340, "FLASH"}, {71265, "FLASH"}, 70877, 71772, 71623, "proximity", "berserk"}
 
 --------------------------------------------------------------------------------

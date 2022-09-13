@@ -4,9 +4,15 @@
 
 local mod, CL = BigWigs:NewBoss("Razorscale", 603, 1639)
 if not mod then return end
-mod:RegisterEnableMob(33816, 33210, 33287, 33259, 33186) -- Expedition Defender, Expidition Commander, Expedition Engineer, Expedition Trapper, Razorscale
---mod.engageId = 1139 -- ENCOUNTER_END wasn't firing (for wipes)
---mod.respawnTime = 30
+mod:RegisterEnableMob(
+	33816, -- Expedition Defender
+	33210, -- Expedition Commander
+	33287, -- Expedition Engineer
+	33259, -- Expedition Trapper
+	33186  -- Razorscale
+)
+mod:SetEncounterID(1139)
+mod:SetRespawnTime(30)
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -50,6 +56,7 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
+	-- ENCOUNTER_END wasn't firing (for wipes)
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
 	self:Death("Win", 33186)
 

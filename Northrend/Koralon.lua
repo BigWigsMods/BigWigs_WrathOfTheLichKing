@@ -5,6 +5,8 @@
 local mod, CL = BigWigs:NewBoss("Koralon the Flame Watcher", 624, 1599)
 if not mod then return end
 mod:RegisterEnableMob(35013)
+-- mod:SetEncounterID(1128)
+-- mod:SetRespawnTime(30)
 mod.toggleOptions = {66725, {66684, "FLASH"}, 66665}
 
 --------------------------------------------------------------------------------

@@ -5,8 +5,8 @@
 local mod = BigWigs:NewBoss("Flame Leviathan", 603, 1637)
 if not mod then return end
 mod:RegisterEnableMob(33113)
-mod.engageId = 1132
---mod.respawnTime = resets, doesn't respawn
+mod:SetEncounterID(1132)
+-- mod:SetRespawnTime(0) -- resets, doesn't respawn
 
 --------------------------------------------------------------------------------
 -- Initialization

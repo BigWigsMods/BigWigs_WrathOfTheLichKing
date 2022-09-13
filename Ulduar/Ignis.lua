@@ -5,8 +5,8 @@
 local mod, CL = BigWigs:NewBoss("Ignis the Furnace Master", 603, 1638)
 if not mod then return end
 mod:RegisterEnableMob(33118)
-mod.engageId = 1136
-mod.respawnTime = 30
+mod:SetEncounterID(1136)
+mod:SetRespawnTime(30)
 
 --------------------------------------------------------------------------------
 -- Localization
