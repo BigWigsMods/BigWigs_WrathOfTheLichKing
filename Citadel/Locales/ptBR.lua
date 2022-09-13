@@ -207,3 +207,10 @@ if L then
 	--L.blazing_desc = "Blazing Skeleton |cffff0000estimated|r respawn timer. This timer may be inaccurate, use only as a rough guide."
 	--L.blazing_warning = "Blazing Skeleton soon!"
 end
+
+L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "ptBR")
+if L then
+	L.deathbound_ward = "Guardião Ata-morte"
+	--L.deathspeaker_adds = "Lady Deathwhisper Trash"
+	L.putricide_dogs = "Precioso & Inhaca"
+end

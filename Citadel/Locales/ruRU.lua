@@ -208,3 +208,9 @@ if L then
 	--L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
 end
 
+L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "ruRU")
+if L then
+	L.deathbound_ward = "Заклятый страж"
+	--L.deathspeaker_adds = "Lady Deathwhisper Trash"
+	L.putricide_dogs = "Прелесть & Вонючка"
+end

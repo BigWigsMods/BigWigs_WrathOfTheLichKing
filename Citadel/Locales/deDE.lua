@@ -208,3 +208,9 @@ if L then
 	L.blazing_warning = "Loderndes Skelett bald!"
 end
 
+L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "deDE")
+if L then
+	L.deathbound_ward = "Todesgeweihter Wächter"
+	--L.deathspeaker_adds = "Lady Deathwhisper Trash"
+	L.putricide_dogs = "Schatz & Stinki"
+end

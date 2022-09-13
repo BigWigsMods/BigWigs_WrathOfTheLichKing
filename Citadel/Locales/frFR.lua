@@ -208,3 +208,9 @@ if L then
 	L.blazing_warning = "Squelette flamboyant imminent !"
 end
 
+L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "frFR")
+if L then
+	L.deathbound_ward = "Gardien lié par la mort"
+	--L.deathspeaker_adds = "Lady Deathwhisper Trash"
+	L.putricide_dogs = "Bijou & Kifouette"
+end

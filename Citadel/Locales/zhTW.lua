@@ -208,3 +208,9 @@ if L then
 	L.blazing_warning = "即將 熾熱骷髏！"
 end
 
+L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "zhTW")
+if L then
+	L.deathbound_ward = "縛亡守衛"
+	--L.deathspeaker_adds = "Lady Deathwhisper Trash"
+	L.putricide_dogs = "小寶 & 大臭"
+end
