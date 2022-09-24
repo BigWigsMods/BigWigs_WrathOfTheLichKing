@@ -71,17 +71,10 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "zhCN")
 if L then
-	L.starttrigger = "你是我的了。"
-	L.starttrigger2 = "你……就是下一个。"
-	L.starttrigger3 = "我看到你了……"
-
-	L.engage = "激活"
-	L.engage_desc = "当激活时发出警报。"
-	L.engage_message = "希尔盖已激活 - 90秒后，传送！"
+	L.teleport_trigger = "你的生命正走向终结。"
 
 	L.teleport = "传送"
 	L.teleport_desc = "当传送时发出警报。"
-	L.teleport_trigger = "你的生命正走向终结。"
 	L.teleport_1min_message = "1分钟后传送"
 	L.teleport_30sec_message = "30秒后传送"
 	L.teleport_10sec_message = "10秒后传送！"
@@ -91,8 +84,8 @@ if L then
 	L.to_floor_10sec_message = "10秒后返回！"
 	L.on_floor_message = "返回！90秒后，传送！"
 
-	L.teleport_bar = "<传送>"
-	L.back_bar = "<出现>"
+	L.teleport_bar = "传送"
+	L.back_bar = "出现"
 end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "zhCN")
@@ -143,59 +136,30 @@ end
 
 L = BigWigs:NewBossLocale("Loatheb", "zhCN")
 if L then
-	L.startwarn = "洛欧塞布已激活 - 2分钟后，必然的厄运！"
+	L.doomtime_bar = "每隔15秒 必然的厄运"
+	L.doomtime_now = "必然的厄运现在每隔15秒发动一次！"
 
-	L.aura_message = "死灵光环 - 持续17秒！"
-	L.aura_warning = "3秒后，死灵光环消失！"
-
-	L.deathbloom_warning = "5秒后，死亡之花！"
-
-	L.doombar = "<必然的厄运：%d>"
-	L.doomwarn = "必然的厄运%d，%d秒后！"
-	L.doomwarn5sec = "5秒后，必然的厄运%d！"
-	L.doomtimerbar = "<每隔15秒 必然的厄运>"
-	L.doomtimerwarn = "%s秒后改变必然的厄运发动频率！"
-	L.doomtimerwarnnow = "必然的厄运现在每隔15秒发动一次！"
-
-	L.sporewarn = "孢子：>%d<！"
-	L.sporebar = "<孢子：%d>"
+	L.spore_warn = "孢子(%d)"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "zhCN")
 if L then
-	L.starttrigger1 = "死吧，入侵者！"
-	L.starttrigger2 = "荣耀归于我主！"
-	L.starttrigger3 = "我要没收你的生命！"
-	L.startwarn = "药剂师诺斯已激活 - 90秒后，传送！"
-
-	L.blink = "闪现术"
-	L.blink_desc = "当施放闪现术时发出警报。"
-	L.blinktrigger = "%s施放了瞬移！"
-	L.blinkwarn = "闪现术！停止攻击！"
-	L.blinkwarn2 = "约5秒后，闪现术！"
-	L.blinkbar = "<闪现术>"
+	L.add_trigger = "起来吧，我的战士们！起来，再为主人尽忠一次！"
 
 	L.teleport = "传送"
 	L.teleport_desc = "当施放传送时发出警报。"
-	L.teleportbar = "<传送>"
-	L.backbar = "<回到房间>"
-	L.teleportwarn = "传送！"
-	L.teleportwarn2 = "10秒后，传送！"
-	L.backwarn = "诺斯回到房间 - %d秒后，传送！"
-	L.backwarn2 = "10秒后诺斯回到房间！"
+	--L.teleport_balcony = "Teleport! He's on the balcony!"
+	--L.teleport_room = "Teleport! He's back in room!"
 
-	L.curseexplosion = "瘟疫使者的诅咒！"
-	L.cursewarn = "约55秒后，瘟疫使者的诅咒！"
-	L.curse10secwarn = "约10秒后，瘟疫使者的诅咒！"
-	L.cursebar = "<下一瘟疫使者的诅咒>"
+	L.curse_explosion = "诅咒爆炸！"
+	L.curse_warn = "诅咒！"
+	L.curse_10secwarn = "约10秒后，诅咒"
+	L.curse_bar = "下一诅咒"
 
-	L.wave = "骷髅"
+	L.wave = "召唤骷髅"
 	L.wave_desc = "当召唤骷髅时发出警报。"
-	L.addtrigger = "起来吧，我的战士们！起来，再为主人尽忠一次！"
-	L.wave1bar = "<第一波>"
-	L.wave2bar = "<第二波>"
-	L.wave2_message = "10秒后，第二波！"
-
+	L.wave1 = "第一波"
+	L.wave2 = "第二波"
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "zhCN")

@@ -71,17 +71,10 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "ptBR")
 if L then
-	--L.starttrigger = "You are mine now."
-	--L.starttrigger2 = "You... are next."
-	--L.starttrigger3 = "I see you..."
-
-	--L.engage = "Engage"
-	--L.engage_desc = "Warn when Heigan is engaged."
-	--L.engage_message = "Heigan the Unclean engaged! 90 sec to teleport!"
+	--L.teleport_trigger = "The end is upon you."
 
 	--L.teleport = "Teleport"
 	--L.teleport_desc = "Warn for Teleports."
-	--L.teleport_trigger = "The end is upon you."
 	--L.teleport_1min_message = "Teleport in 1 min"
 	--L.teleport_30sec_message = "Teleport in 30 sec"
 	--L.teleport_10sec_message = "Teleport in 10 sec!"
@@ -143,22 +136,10 @@ end
 
 L = BigWigs:NewBossLocale("Loatheb", "ptBR")
 if L then
-	--L.startwarn = "Loatheb engaged, 2 minutes to Inevitable Doom!"
+	--L.doomtime_bar = "Doom every 15 sec"
+	--L.doomtime_now = "Doom now happens every 15 sec!"
 
-	--L.aura_message = "Necrotic Aura - Duration 17 sec!"
-	--L.aura_warning = "Aura gone in 3 sec!"
-
-	--L.deathbloom_warning = "Bloom in 5 sec!"
-
-	--L.doombar = "Inevitable Doom %d"
-	--L.doomwarn = "Doom %d! %d sec to next!"
-	--L.doomwarn5sec = "Doom %d in 5 sec!"
-	--L.doomtimerbar = "Doom every 15sec"
-	--L.doomtimerwarn = "Doom timer changes in %s sec!"
-	--L.doomtimerwarnnow = "Doom now happens every 15 sec!"
-
-	--L.sporewarn = "Spore %d!"
-	--L.sporebar = "Summon Spore %d"
+	--L.spore_warn = "Spore (%d)"
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "ptBR")
@@ -177,38 +158,22 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "ptBR")
 if L then
-	--L.starttrigger1 = "Die, trespasser!"
-	--L.starttrigger2 = "Glory to the master!"
-	--L.starttrigger3 = "Your life is forfeit!"
-	--L.startwarn = "Noth the Plaguebringer engaged! 90 sec till teleport"
+	--L.add_trigger = "Rise, my soldiers! Rise and fight once more!"
 
-	--L.blink = "Blink"
-	--L.blink_desc = "Warnings when Noth blinks."
-	--L.blinktrigger = "%s blinks away!"
-	--L.blinkwarn = "Blink!"
-	--L.blinkwarn2 = "Blink in ~5 sec!"
-	--L.blinkbar = "Blink"
+	L.teleport = "Teleporte"
+	--L.teleport_desc = "Warnings for when Noth teleports."
+	--L.teleport_balcony = "Teleport! He's on the balcony!"
+	--L.teleport_room = "Teleport! He's back in room!"
 
-	--L.teleport = "Teleport"
-	--L.teleport_desc = "Warnings and bars for teleport."
-	--L.teleportbar = "Teleport!"
-	--L.backbar = "Back in room!"
-	--L.teleportwarn = "Teleport! He's on the balcony!"
-	--L.teleportwarn2 = "Teleport in 10 sec!"
-	--L.backwarn = "He's back in the room for %d sec!"
-	--L.backwarn2 = "10 sec until he's back in the room!"
+	--L.curse_explosion = "Curse explosion!"
+	--L.curse_warn = "Curse!"
+	--L.curse_10secwarn = "Curse in ~10 sec"
+	--L.curse_bar = "Next Curse"
 
-	--L.curseexplosion = "Curse explosion!"
-	--L.cursewarn = "Curse! next in ~55 sec"
-	--L.curse10secwarn = "Curse in ~10 sec"
-	--L.cursebar = "Next Curse"
-
-	--L.wave = "Waves"
-	--L.wave_desc = "Alerts for the different waves."
-	--L.addtrigger = "Rise, my soldiers! Rise and fight once more!"
-	--L.wave1bar = "Wave 1"
-	--L.wave2bar = "Wave 2"
-	--L.wave2_message = "Wave 2 in 10 sec"
+	L.wave = "Evocar Esqueletos"
+	--L.wave_desc = "Warnings for the skeleton add waves."
+	--L.wave1 = "Wave 1"
+	--L.wave2 = "Wave 2"
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ptBR")

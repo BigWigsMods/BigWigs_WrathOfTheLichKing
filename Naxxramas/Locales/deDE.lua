@@ -71,17 +71,10 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "deDE")
 if L then
-	L.starttrigger = "Ihr gehört mir..."
-	L.starttrigger2 = "Ihr seid.... als nächstes dran."
-	L.starttrigger3 = "Ihr entgeht mir nicht..."
-
-	L.engage = "Angriff"
-	L.engage_desc = "Warnt, wenn Heigan angegriffen wird."
-	L.engage_message = "Heigan der Unreine angegriffen! Teleport in 90 sek!"
+	L.teleport_trigger = "Euer Ende naht."
 
 	L.teleport = "Teleport"
 	L.teleport_desc = "Warnungen und Timer für Teleport."
-	L.teleport_trigger = "Euer Ende naht."
 	L.teleport_1min_message = "Teleport in 1 min"
 	L.teleport_30sec_message = "Teleport in 30 sek"
 	L.teleport_10sec_message = "Teleport in 10 sek!"
@@ -143,58 +136,30 @@ end
 
 L = BigWigs:NewBossLocale("Loatheb", "deDE")
 if L then
-	L.startwarn = "Loatheb angegriffen! 2 min bis Unausweichliches Schicksal!"
+	L.doomtime_bar = "Schicksal alle 15 sek"
+	L.doomtime_now = "Unausweichliches Schicksal nun alle 15 sek!"
 
-	L.aura_message = "Nekrotische Aura - Dauer 17 sek!"
-	L.aura_warning = "Nekrotische Aura schwindet in 3 sek!"
-
-	L.deathbloom_warning = "Todesblüte in 5 sek!"
-
-	L.doombar = "Unausweichliches Schicksal (%d)"
-	L.doomwarn = "Unausweichliches Schicksal (%d)! %d sek bis zum nächsten."
-	L.doomwarn5sec = "Unausweichliches Schicksal (%d) in 5 sek!"
-	L.doomtimerbar = "Schicksal alle 15 sek"
-	L.doomtimerwarn = "Schicksal: Timer Wechsel in %s sek!"
-	L.doomtimerwarnnow = "Unausweichliches Schicksal nun alle 15 sek!"
-
-	L.sporewarn = "Spore (%d)!"
-	L.sporebar = "Spore (%d)"
+	L.spore_warn = "Spore (%d)"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "deDE")
 if L then
-	L.starttrigger1 = "Sterbt, Eindringling!"
-	L.starttrigger2 = "Ehre unserem Meister!"
-	L.starttrigger3 = "Euer Leben ist verwirkt!"
-	L.startwarn = "Noth angegriffen! Teleport in 90 sek!"
-
-	L.blink = "Blinzeln"
-	L.blink_desc = "Warnungen und Timer für Blinzeln."
-	L.blinktrigger = "%s blinzelt sich davon!"
-	L.blinkwarn = "Blinzeln!"
-	L.blinkwarn2 = "Blinzeln in ~5 sek!"
-	L.blinkbar = "Blinzeln"
+	L.add_trigger = "Erhebt euch, Soldaten! Erhebt euch und kämpft erneut!"
 
 	L.teleport = "Teleport"
 	L.teleport_desc = "Warnungen und Timer für Teleport."
-	L.teleportbar = "Teleport"
-	L.backbar = "Rückteleport"
-	L.teleportwarn = "Teleport! Noth auf dem Balkon!"
-	L.teleportwarn2 = "Teleport in 10 sek!"
-	L.backwarn = "Noth zurück im Raum für %d sek!"
-	L.backwarn2 = "Rückteleport in 10 sek!"
+	L.teleport_balcony = "Teleport! Noth auf dem Balkon!"
+	L.teleport_room = "Teleport! Noth zurück im Raum!"
 
-	L.curseexplosion = "Fluch Explosion!"
-	L.cursewarn = "Fluch! Nächster in ~55 sek."
-	L.curse10secwarn = "Fluch in ~10 sek!"
-	L.cursebar = "Nächster Fluch"
+	L.curse_explosion = "Fluch Explosion!"
+	L.curse_warn = "Fluch!"
+	L.curse_10secwarn = "Fluch in ~10 sek!"
+	L.curse_bar = "Nächster Fluch"
 
-	L.wave = "Wellen"
-	L.wave_desc = "Warnungen und Timer für die Gegnerwellen."
-	L.addtrigger = "Erhebt euch, Soldaten! Erhebt euch und kämpft erneut!"
-	L.wave1bar = "Welle 1"
-	L.wave2bar = "Welle 2"
-	L.wave2_message = "Welle 2 in 10 sek!"
+	L.wave = "Skelette beschwören"
+	L.wave_desc = "Warnungen für die Gegnerwellen."
+	L.wave1 = "Welle 1"
+	L.wave2 = "Welle 2"
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "deDE")

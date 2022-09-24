@@ -71,17 +71,10 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "ruRU")
 if L then
-	L.starttrigger = "Теперь вы принадлежите мне!"
-	L.starttrigger2 = "Пришло ваше время..."
-	L.starttrigger3 = "Я вижу вас..."
-
-	L.engage = "Вступление в бой"
-	L.engage_desc = "Предупреждать когда Хейган вступает в бой."
-	L.engage_message = "Хейган вступает в бой! 90 секунд до телепорта!"
+	L.teleport_trigger = "Вам конец."
 
 	L.teleport = "Телепорт"
 	L.teleport_desc = "Предупреждать о телепорте."
-	L.teleport_trigger = "Вам конец."
 	L.teleport_1min_message = "Телепорт через 1 минуту"
 	L.teleport_30sec_message = "Телепорт через 30 секунд"
 	L.teleport_10sec_message = "Телепорт через 10 секунд!"
@@ -143,59 +136,30 @@ end
 
 L = BigWigs:NewBossLocale("Loatheb", "ruRU")
 if L then
-	L.startwarn = "Лотхиб вступает в бой, 2 минуты до неотвратимого рока!"
+	L.doomtime_bar = "Рок каждые 15 секунд"
+	L.doomtime_now = "Рок теперь накладывается каждые 15 секунд!"
 
-	L.aura_message = "Мертвенная аура - продолжительность 17 сек!"
-	L.aura_warning = "Мертвенная аура спадает через 3 сек!"
-
-	L.deathbloom_warning = "Бутон смерти через 5 сек!"
-
-	L.doombar = "Неотвратимый рок %d"
-	L.doomwarn = "Неотвратимый рок %d! %d секунд до следующего!"
-	L.doomwarn5sec = "Неотвратимый рок %d через 5 секунд!"
-	L.doomtimerbar = "Рок каждые 15 секунд"
-	L.doomtimerwarn = "Рок теперь каждые %s секунд!"
-	L.doomtimerwarnnow = "Рок теперь накладывается каждые 15 секунд!"
-
-	L.sporewarn = "Появляется %d спора"
-	L.sporebar = "Призвана спора %d"
+	L.spore_warn = "Спора (%d)"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "ruRU")
 if L then
-	L.starttrigger1 = "Смерть чужакам!"
-	L.starttrigger2 = "Слава господину!"
-	L.starttrigger3 = "Прощайся с жизнью!"
-	L.startwarn = "Нот Чумной вступает в бой! 90 секунд до телепорта"
-
-	L.blink = "Опасность скачка"
-	L.blink_desc = "Предупреждать когда Нот использует скачок"
-	L.blinktrigger = "%s перескакивает на другое место!"
-	L.blinkwarn = "Скачок!"
-	L.blinkwarn2 = "Скачок через 5 секунд!"
-	L.blinkbar = "Скачок"
+	L.add_trigger = "Встаньте мои воины! Встаньте и сражайтесь вновь!"
 
 	L.teleport = "Телепорт"
 	L.teleport_desc = "Предупреждать о телепорте."
-	L.teleportbar = "Телепорт!"
-	L.backbar = "Назад в Команту!"
-	L.teleportwarn = "Телепорт! Он на балконе!"
-	L.teleportwarn2 = "Телепорт через 10 секунд!"
-	L.backwarn = "Он вернулся в комнату на %d секунд!"
-	L.backwarn2 = "10 секунд до возвращения в комнату!"
+	L.teleport_balcony = "Телепорт! Он на балконе!"
+	L.teleport_room = "Телепорт! Он вернулся в комнат!"
 
-	L.curseexplosion = "Проклятый взрыв!"
-	L.cursewarn = "Проклятие через ~55 секунд"
-	L.curse10secwarn = "Проклятие через ~10 секунд"
-	L.cursebar = "Следующее проклятие"
+	L.curse_explosion = "Проклятый взрыв!"
+	L.curse_warn = "Проклятие!"
+	L.curse_10secwarn = "Проклятие через ~10 секунд"
+	L.curse_bar = "Следующее проклятие"
 
-	L.wave = "Волны"
+	L.wave = "Призыв скелетов"
 	L.wave_desc = "Сообщать о волнах"
-	L.addtrigger = "Встаньте мои воины! Встаньте и сражайтесь вновь!"
-	L.wave1bar = "1-я волна"
-	L.wave2bar = "2-я волна"
-	L.wave2_message = "2-я волна через 10 сек"
-
+	L.wave1 = "1-я волна"
+	L.wave2 = "2-я волна"
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "ruRU")

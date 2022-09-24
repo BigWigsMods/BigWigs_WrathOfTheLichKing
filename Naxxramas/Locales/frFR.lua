@@ -71,17 +71,10 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "frFR")
 if L then
-	L.starttrigger = "Vous êtes à moi, maintenant."
-	L.starttrigger2 = "Tu es… le suivant."
-	L.starttrigger3 = "Je vous vois…"
-
-	L.engage = "Engagement"
-	L.engage_desc = "Prévient quand Heigan est engagé."
-	L.engage_message = "Heigan l'Impur engagé ! 90 sec. avant téléportation !"
+	L.teleport_trigger = "Votre fin est venue."
 
 	L.teleport = "Téléportation"
 	L.teleport_desc = "Prévient quand Heigan se téléporte."
-	L.teleport_trigger = "Votre fin est venue."
 	L.teleport_1min_message = "Téléportation dans 1 min."
 	L.teleport_30sec_message = "Téléportation dans 30 sec."
 	L.teleport_10sec_message = "Téléportation dans 10 sec. !"
@@ -143,59 +136,30 @@ end
 
 L = BigWigs:NewBossLocale("Loatheb", "frFR")
 if L then
-	L.startwarn = "Horreb engagé ! 2 min. avant la 1ère Malédiction inévitable !"
+	L.doomtime_bar = "Malé. toutes les 15 sec."
+	L.doomtime_now = "La Malédiction inévitable arrive désormais toutes les 15 sec. !"
 
-	L.aura_message = "Aura nécrotique pendant 17 sec. !"
-	L.aura_warning = "Fin de l'Aura nécrotique dans 3 sec. !"
-
-	L.deathbloom_warning = "Mortelle floraison dans 5 sec. !"
-
-	L.doombar = "Malédiction inévitable %d"
-	L.doomwarn = "Malédiction inévitable %d ! Prochaine dans %d sec. !"
-	L.doomwarn5sec = "Malédiction inévitable %d dans 5 sec. !"
-	L.doomtimerbar = "Malé. toutes les 15 sec."
-	L.doomtimerwarn = "Changement du délai des malédictions dans %s sec. !"
-	L.doomtimerwarnnow = "La Malédiction inévitable arrive désormais toutes les 15 sec. !"
-
-	L.sporewarn = "Spore %d invoquée"
-	L.sporebar = "Invocation de spore %d"
+	L.spore_warn = "Spore (%d)"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "frFR")
 if L then
-	L.starttrigger1 = "Mourez, intrus !"
-	L.starttrigger2 = "Gloire au maître !"
-	L.starttrigger3 = "Vos vies ne valent plus rien !"
-	L.startwarn = "Noth le Porte-peste engagé ! 90 sec. avant téléportation !"
-
-	L.blink = "Transfert"
-	L.blink_desc = "Prévient quand Noth utilise son Transfert."
-	L.blinktrigger = "%s se transfère au loin !"
-	L.blinkwarn = "Transfert !"
-	L.blinkwarn2 = "Transfert dans ~5 sec. !"
-	L.blinkbar = "Transfert"
+	L.add_trigger = "Levez-vous, soldats ! Levez-vous et combattez une fois encore !"
 
 	L.teleport = "Téléportation"
 	L.teleport_desc = "Prévient quand Noth se téléporte."
-	L.teleportbar = "Téléportation"
-	L.backbar = "Retour dans la salle !"
-	L.teleportwarn = "Téléportation ! Il est sur le balcon !"
-	L.teleportwarn2 = "Téléportation dans 10 sec. !"
-	L.backwarn = "De retour dans la salle pendant %d sec. !"
-	L.backwarn2 = "10 sec. avant son retour dans la salle !"
+	L.teleport_balcony = "Téléportation ! Il est sur le balcon !"
+	L.teleport_room = "Téléportation ! De retour dans la salle !"
 
-	L.curseexplosion = "Explosion des malé. !"
-	L.cursewarn = "Malédictions ! Prochaines dans ~55 sec."
-	L.curse10secwarn = "Malédictions dans ~10 sec."
-	L.cursebar = "Prochaines malédictions"
+	L.curse_explosion = "Explosion des malé. !"
+	L.curse_warn = "Malédictions !"
+	L.curse_10secwarn = "Malédictions dans ~10 sec."
+	L.curse_bar = "Prochaines malédictions"
 
-	L.wave = "Vagues"
+	L.wave = "Invocation de squelettes"
 	L.wave_desc = "Prévient de l'arrivée des vagues."
-	L.addtrigger = "Levez-vous, soldats ! Levez-vous et combattez une fois encore !"
-	L.wave1bar = "1ère vague"
-	L.wave2bar = "2ème vague"
-	L.wave2_message = "2ème vague dans 10 sec."
-
+	L.wave1 = "1ère vague"
+	L.wave2 = "2ème vague"
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "frFR")
