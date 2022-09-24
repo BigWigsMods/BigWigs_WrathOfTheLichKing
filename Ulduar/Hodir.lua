@@ -48,7 +48,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "StormCloud", 65133)
 	self:Log("SPELL_AURA_REMOVED", "StormCloudRemoved", 65133)
 
-	self:RegisterUnitEvent("UNIT_AURA", "BitingCold", "player")
+	self:RegisterUnitEvent("UNIT_AURA", nil, "player")
 end
 
 function mod:OnEngage()
@@ -98,15 +98,13 @@ function mod:FrozenBlows(args)
 	self:Bar(args.spellId, 20)
 end
 
-do
-	local cold = mod:SpellName(62039)
-	function mod:BitingCold(_, unit)
-		local _, stack = self:UnitDebuff(unit, 62039)
-		if stack and stack ~= lastCold then
-			if stack > 1 then
-				self:MessageOld(62039, "blue", "alert", CL.you:format(CL.count:format(cold, stack)))
-			end
-			lastCold = stack
+function mod:UNIT_AURA(_, unit)
+	local name, stack = self:UnitDebuff(unit, 62039) -- Biting Cold
+	if stack and stack ~= lastCold then
+		if stack > 1 then
+			self:PersonalMessage(62039, nil, CL.count:format(name, stack))
+			self:PlaySound(62039, "alert")
 		end
+		lastCold = stack
 	end
 end
