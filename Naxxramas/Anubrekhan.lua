@@ -5,28 +5,19 @@
 local mod, CL = BigWigs:NewBoss("Anub'Rekhan", 533, 1601)
 if not mod then return end
 mod:RegisterEnableMob(15956)
-mod.toggleOptions = {28785}
-
---------------------------------------------------------------------------------
--- Locals
---
-
-local locustTime = 90
-local started = nil
+mod:SetEncounterID(1107)
+mod:SetRespawnTime(30)
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:NewLocale()
 if L then
-	L.starttrigger1 = "Just a little taste..."
-	L.starttrigger2 = "Yes, run! It makes the blood pump faster!"
-	L.starttrigger3 = "There is no way out."
-	L.engagewarn = "Anub'Rekhan engaged! Locust Swarm in ~%d sec"
+	L.add = "Crypt Guard"
+	L.add_icon = "inv_misc_ahnqirajtrinket_02"
 
-	L.gainnextwarn = "Next Locust Swarm in ~85 sec"
-	L.gainwarn10sec = "~10 sec until Locust Swarm"
+	L.locus = "Locus"
 end
 L = mod:GetLocale()
 
@@ -34,39 +25,75 @@ L = mod:GetLocale()
 -- Initialization
 --
 
-function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED", "GainSwarm", 28785, 54021)
-	self:Log("SPELL_CAST_START", "Swarm", 28785, 54021)
-	self:Death("Win", 15956)
+function mod:GetOptions()
+	return {
+		"add",
+		28783, -- Impale
+		28785, -- Locus Swarm
+		"berserk",
+	}, nil, {
+		["add"] = CL.big_add,
+	}
+end
 
-	started = nil
-	self:BossYell("Engage", L["starttrigger1"], L["starttrigger2"], L["starttrigger3"])
+function mod:OnBossEnable()
+	self:Log("SPELL_CAST_SUCCESS", "Impale", 28783, 56090)
+	self:Log("SPELL_CAST_START", "LocusSwarm", 28785, 54021)
+	self:Log("SPELL_AURA_APPLIED", "LocusSwarmApplied", 28785, 54021)
+	self:Log("SPELL_AURA_REMOVED", "LocusSwarmRemoved", 28785, 54021)
+
+	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE")
 end
 
 function mod:OnEngage(diff)
-	if started then return end
-	started = true
-	locustTime = diff == 3 and 102 or 90
-	self:MessageOld(28785, "yellow", nil, L["engagewarn"]:format(locustTime), false)
-	self:DelayedMessage(28785, locustTime - 10, "red", L["gainwarn10sec"])
+	self:Berserk(600, true)
+
+	local locustTime = diff == 3 and 102 or 92
+	self:Message(28785, "yellow", CL.custom_start_s:format(self.displayName, self:SpellName(28785), locustTime), false)
+	self:DelayedMessage(28785, locustTime - 10, "red", CL.soon:format(self:SpellName(28785)), nil, "alarm")
 	self:CDBar(28785, locustTime) -- Locus Swarm
+	if diff == 3 then
+		self:Bar("add", 16, CL.big_add, L.add_icon)
+	end
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:GainSwarm(args)
-	if self:MobId(args.destGUID) == 15956 then
-		self:DelayedMessage(28785, 20, "red", CL["over"]:format(args.spellName))
-		self:Bar(28785, 20, 131394) -- "Swarming Insects"
-		self:DelayedMessage(28785, 75, "red", L["gainwarn10sec"])
-		self:CDBar(28785, 85)
+function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg, sender)
+	if sender == L.add then
+		self:Message("add", "purple", CL.spawned:format(CL.big_add), L.add_icon)
+		if self:Tank() then
+			self:PlaySound("add", "warning")
+		end
 	end
 end
 
-function mod:Swarm(args)
-	self:MessageOld(28785, "yellow", nil, CL["incoming"]:format(args.spellName))
-	self:Bar(28785, 3, CL["incoming"]:format(args.spellName))
+function mod:Impale(args)
+	self:Message(28783, "orange")
+	self:PlaySound(28783, "alert")
+	-- self:CDBar(28783, 10) -- 10~35s z.z
 end
 
+function mod:LocusSwarm(args)
+	self:StopBar(28785)
+	self:Message(28785, "yellow")
+	self:PlaySound(28785, "long")
+	self:Bar(28785, 3, CL.incoming:format(L.locus), "spell_shadow_carrionswarm")
+end
+
+function mod:LocusSwarmApplied(args)
+	if self:MobId(args.destGUID) == 15956 then
+		self:Bar(28785, args.spellId == 28785 and 16 or 20, ("<%s>"):format(args.spellName), "spell_shadow_carrionswarm")
+		self:CDBar(28785, 92) -- 92~104s in 25n
+		self:DelayedMessage(28785, 82, "red", CL.soon:format(args.spellName), nil, "alarm")
+	end
+end
+
+function mod:LocusSwarmRemoved(args)
+	if self:MobId(args.destGUID) == 15956 then
+		self:Message(28785, "green", CL.over:format(args.spellName))
+		self:PlaySound(28785, "info")
+	end
+end

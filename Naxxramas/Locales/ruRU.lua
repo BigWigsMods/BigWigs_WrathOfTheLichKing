@@ -1,34 +1,15 @@
 local L = BigWigs:NewBossLocale("Anub'Rekhan", "ruRU")
 if not L then return end
 if L then
-	L.starttrigger1 = "Посмотрим какие вы на вкус!"
-	L.starttrigger2 = "Бегите бегите! Я люблю горячую кровь!"
-	L.starttrigger3 = "Вам отсюда не выбраться." -- check this
-	L.engagewarn = "Ануб'Рекан вступает в бой! Первая волна жуков через ~%d секунд"
-
-	L.gainnextwarn = "Следующая волна жуков-трупоедов через ~85 секунд"
-	L.gainwarn10sec = "~10 до жуков-трупоедов"
+	L.add = "Некрорахнид-стражник"
+	L.locus = "Саранча"
 end
 
 L = BigWigs:NewBossLocale("Grand Widow Faerlina", "ruRU")
 if L then
-	L.starttrigger1 = "Склонитесь передо мной черви!"
-	L.starttrigger2 = "Убейте их во имя господина!"
-	L.starttrigger3 = "Вам не скрыться от меня!"
-	L.starttrigger4 = "Бегите пока еще можете!"
-
-	L.startwarn = "Великая вдова Фарлина вступает в бой 60 секунд до бешенства!"
-
-	L.enragewarn15sec = "15 секунд до Бешенства!"
-	L.enragewarn = "Бешенство!"
-	L.enragewarn2 = "Скоро бешенство!"
-	L.enrageremovewarn = "Бешенство снято! ~60 секунд до следующего!"
-
 	L.silencewarn = "Безмолвие! Задержка ярости!"
 	L.silencewarn5sec = "Безмолвие закончится через 5 секунд"
-	L.silencebar = "Безмолвие"
-
-	L.rain_message = "Огненный ливень на ВАС!"
+	L.silence = "Безмолвие"
 end
 
 L = BigWigs:NewBossLocale("Gluth", "ruRU")
@@ -233,13 +214,12 @@ if L then
 	L.webspraywarn20sec = "Паутина! 10 секунд до появления пауков!"
 	L.webspraywarn10sec = "Пауки! 10 секунд до паутины!"
 	L.webspraywarn5sec = "Паутина через 5 секунд!"
-	L.webspraywarn = "Паутина! 40 секунд до следующей!"
+
 	L.enragewarn = "Бешенство - ХЛЮП ХЛЮП ХЛЮП!"
 	L.enragesoonwarn = "Скоро бешенство"
 
-	L.webspraybar = "Летящая паутина"
-	L.cocoonbar = "Коконы"
-	L.spiderbar = "Пауки"
+	L.cocoons = "Коконы"
+	L.spiders = "Пауки"
 end
 
 L = BigWigs:NewBossLocale("Sapphiron", "ruRU")
