@@ -7,12 +7,6 @@ if not mod then return end
 mod:RegisterEnableMob(34564, 34607, 34605)
 -- mod:SetEncounterID(1085)
 -- mod:SetRespawnTime(30)
-mod.toggleOptions = {66012, "burrow", {67574, "ICON", "FLASH"}, {66013, "FLASH"}, 66118, 66134, "berserk"}
-mod.optionHeaders = {
-	[66012] = "normal",
-	[66134] = "heroic",
-	berserk = "general",
-}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -28,7 +22,7 @@ local phase2 = nil
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:NewLocale()
 if L then
 	L.engage_message = "Anub'arak engaged, burrow in 80sec!"
 	L.engage_trigger = "This place will serve as your tomb!"
@@ -51,6 +45,24 @@ L = mod:GetLocale()
 --------------------------------------------------------------------------------
 -- Initialization
 --
+
+local coldMarker = mod:AddMarkerOption(false, "player", 1, 66013, 1, 2, 3, 4, 5) -- Penetrating Cold
+function mod:GetOptions()
+	return {
+		66012, -- Freezing Slash
+		"burrow",
+		{67574, "ICON", "FLASH"}, -- Pursued by Anub'arak
+		{66013, "FLASH"}, -- Penetrating Cold
+		coldMarker,
+		66118, -- Leeching Swarm
+		66134, -- Shadow Strike
+		"berserk",
+	}, {
+		[66012] = "normal",
+		[66134] = "heroic",
+		["berserk"] = "general",
+	}
+end
 
 -- Shadow Strike!
 -- 1. On engage, start a 30.5 second shadow strike timer if heroic.
@@ -75,7 +87,8 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Swarm", 66118)
 	self:Log("SPELL_CAST_SUCCESS", "ColdCooldown", 66013)
-	self:Log("SPELL_AURA_APPLIED", "ColdDebuff", 66013)
+	self:Log("SPELL_AURA_APPLIED", "ColdApplied", 66013)
+	-- self:Log("SPELL_AURA_REMOVED", "ColdRemoved", 66013)
 	self:Log("SPELL_AURA_APPLIED", "Pursue", 67574)
 
 	self:Log("SPELL_CAST_START", scheduleStrike, 66134)
@@ -125,27 +138,28 @@ end
 do
 	local coldTargets, scheduled = mod:NewTargetList(), nil
 	local function coldWarn(spellId)
-		mod:TargetMessageOld(spellId, coldTargets, "orange")
+		-- mod:TargetMessageOld(spellId, coldTargets, "orange")
+		table.wipe(coldTargets)
 		scheduled = nil
 	end
-	function mod:ColdDebuff(args)
+	function mod:ColdApplied(args)
 		if not phase2 then return end
 		coldTargets[#coldTargets + 1] = args.destName
 		if self:Me(args.destGUID) then
+			self:PersonalMessage(args.spellId)
 			self:Flash(args.spellId)
 		end
 		if not scheduled then
 			scheduled = self:ScheduleTimer(coldWarn, 0.2, args.spellId)
 		end
+		self:CustomIcon(coldMarker, args.destName, #coldTargets)
 	end
 end
 
-function mod:ColdDebuff(args)
-	if self:Me(args.destGUID) and phase2 then
-		self:MessageOld(args.spellId, "blue")
-		self:Flash(args.spellId)
-	end
-end
+-- function mod:ColdRemoved(args)
+-- 	-- rolling application, just let the next set move them?
+-- 	self:CustomIcon(coldMarker, args.destName)
+-- end
 
 function mod:ColdCooldown(args)
 	if phase2 then
