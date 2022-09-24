@@ -86,33 +86,25 @@ L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "esES") or BigWigs:NewBossLoca
 if L then
 	--L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Kel'Thuzad's Chamber"
 
-	--L.start_trigger = "Minions, servants, soldiers of the cold dark! Obey the call of Kel'Thuzad!"
-	--L.start_warning = "Kel'Thuzad encounter started! ~3min 30sec till he is active!"
-	--L.start_bar = "Phase 2"
-
-	--L.phase = "Phase"
-	--L.phase_desc = "Warn for phases."
+	--L.phase1_trigger = "Minions, servants, soldiers of the cold dark! Obey the call of Kel'Thuzad!"
 	--L.phase2_trigger1 = "Pray for mercy!"
 	--L.phase2_trigger2 = "Scream your dying breath!"
 	--L.phase2_trigger3 = "The end is upon you!"
-	--L.phase2_warning = "Phase 2, Kel'Thuzad incoming!"
-	--L.phase2_bar = "Kel'Thuzad Active!"
-	--L.phase3_soon_warning = "Phase 3 soon!"
 	--L.phase3_trigger = "Master, I require aid!"
-	--L.phase3_warning = "Phase 3, Guardians in ~15 sec!"
+	--L.guardians_trigger = "Very well. Warriors of the frozen wastes, rise up! I command you to fight, kill and die for your master! Let none survive!"
 
-	--L.frostblast_bar = "Possible Frost Blast"
-	--L.frostblast_soon_message = "Possible Frost Blast in ~5 sec!"
+	--L.phase2_warning = "Phase 2 - Kel'Thuzad Incoming!"
+	--L.phase2_bar = "Kel'Thuzad active"
 
-	--L.detonate_other = "Detonate - %s"
-	--L.detonate_possible_bar = "Possible Detonate"
-	--L.detonate_warning = "Next Detonate in 5 sec!"
+	--L.phase3_warning = "Stage 3 - Guardians in ~15 sec!"
 
 	--L.guardians = "Guardian Spawns"
 	--L.guardians_desc = "Warn for incoming Icecrown Guardians in phase 3."
-	--L.guardians_trigger = "Very well. Warriors of the frozen wastes, rise up! I command you to fight, kill and die for your master! Let none survive!"
+	--L.guardians_icon = "inv_trinket_naxxramas04"
 	--L.guardians_warning = "Guardians incoming in ~10sec!"
 	--L.guardians_bar = "Guardians incoming!"
+
+	--L.engage_message = "Kel'Thuzad encounter started!"
 end
 
 L = BigWigs:NewBossLocale("Loatheb", "esES") or BigWigs:NewBossLocale("Loatheb", "esMX")
@@ -169,16 +161,14 @@ end
 L = BigWigs:NewBossLocale("Sapphiron", "esES") or BigWigs:NewBossLocale("Sapphiron", "esMX")
 if L then
 	--L.airphase_trigger = "Sapphiron lifts off into the air!"
-	--L.deepbreath_incoming_message = "Ice Bomb casting in ~14sec!"
-	--L.deepbreath_incoming_soon_message = "Ice Bomb casting in ~5sec!"
-	--L.deepbreath_incoming_bar = "Ice Bomb Cast"
 	--L.deepbreath_trigger = "%s takes a deep breath."
-	--L.deepbreath_warning = "Ice Bomb Incoming!"
-	--L.deepbreath_bar = "Ice Bomb Lands!"
 
-	--L.lifedrain_message = "Life Drain! Next in ~24sec!"
-	--L.lifedrain_warn1 = "Life Drain in ~5sec!"
-	--L.lifedrain_bar = "Possible Life Drain"
+	--L.air_phase = "Air Phase"
+	--L.ground_phase = "Ground Phase"
+
+	--L.ice_bomb = "Ice Bomb"
+	--L.ice_bomb_warning = "Ice Bomb Incoming!"
+	--L.ice_bomb_bar = "Ice Bomb Lands!"
 
 	--L.icebolt_say = "I'm a Block!"
 end

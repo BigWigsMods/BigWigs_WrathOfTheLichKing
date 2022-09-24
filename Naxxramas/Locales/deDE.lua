@@ -86,33 +86,24 @@ L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "deDE")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Kel'Thuzads Gemach"
 
-	L.start_trigger = "Lakaien, Diener, Soldaten der eisigen Finsternis! Folgt dem Ruf von Kel'Thuzad!"
-	L.start_warning = "Kel'Thuzad gestartet! ~3:30 min, bis er aktiv wird!"
-	L.start_bar = "Phase 2"
-
-	L.phase = "Phasen"
-	L.phase_desc = "Warnt bei Phasenwechsel."
+	L.phase1_trigger = "Lakaien, Diener, Soldaten der eisigen Finsternis! Folgt dem Ruf von Kel'Thuzad!"
 	L.phase2_trigger1 = "Betet um Gnade!"
 	L.phase2_trigger2 = "Schreiend werdet ihr diese Welt verlassen!"
 	L.phase2_trigger3 = "Euer Ende ist gekommen!"
-	L.phase2_warning = "Phase 2, Kel'Thuzad kommt!"
-	L.phase2_bar = "Kel'Thuzad aktiv"
-	L.phase3_soon_warning = "Phase 3 bald!"
 	L.phase3_trigger = "Meister, ich benötige Beistand."
-	L.phase3_warning = "Phase 3, Wächter in ~15 sek!"
+	L.guardians_trigger = "Wohlan, Krieger der Eisigen Weiten, erhebt euch! Ich befehle euch für euren Meister zu kämpfen, zu töten und zu sterben! Keiner darf überleben!"
 
-	L.frostblast_bar = "~Frostschlag"
-	L.frostblast_soon_message = "Frostschlag in ~5 sek!"
+	L.phase2_warning = "Phase 2 - Kel'Thuzad kommt!"
+	L.phase2_bar = "Kel'Thuzad aktiv"
 
-	L.detonate_other = "Detonierendes Mana: %s"
-	L.detonate_possible_bar = "~Detonierendes Mana"
-	L.detonate_warning = "Detonierendes Mana in 5 sek!"
+	L.phase3_warning = "Phase 3 - Wächter in ~15 sek!"
 
 	L.guardians = "Wächter"
 	L.guardians_desc = "Warnt vor den Wächtern von Eiskrone in Phase 3."
-	L.guardians_trigger = "Wohlan, Krieger der Eisigen Weiten, erhebt euch! Ich befehle euch für euren Meister zu kämpfen, zu töten und zu sterben! Keiner darf überleben!"
 	L.guardians_warning = "Wächter in ~10 sek!"
 	L.guardians_bar = "Wächter kommen"
+
+	L.engage_message = "Kel'Thuzad gestartet!"
 end
 
 L = BigWigs:NewBossLocale("Loatheb", "deDE")
@@ -159,17 +150,12 @@ end
 
 L = BigWigs:NewBossLocale("Sapphiron", "deDE")
 if L then
-	L.airphase_trigger = "Saphiron erhebt sich in die Lüfte!" --No %s in deDE, we need the translated name!
-	L.deepbreath_incoming_message = "Frostatem in ~23 sek!"
-	L.deepbreath_incoming_soon_message = "Frostatem in ~5 sek!"
-	L.deepbreath_incoming_bar = "Wirkt Frostatem..."
+	L.airphase_trigger = "Saphiron erhebt sich in die Lüfte!"
 	L.deepbreath_trigger = "%s holt tief Luft."
-	L.deepbreath_warning = "Frostatem kommt!"
-	L.deepbreath_bar = "Frostatem landet!"
 
-	L.lifedrain_message = "Lebensentzug! Nächster in ~24 sek!"
-	L.lifedrain_warn1 = "Lebensentzug in ~5 sek!"
-	L.lifedrain_bar = "~Lebensentzug"
+	L.ice_bomb = "Frostatem"
+	L.ice_bomb_warning = "Frostatem kommt!"
+	L.ice_bomb_bar = "Frostatem landet!"
 
 	L.icebolt_say = "Ich bin ein Eisblock!"
 end

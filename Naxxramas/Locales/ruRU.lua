@@ -86,33 +86,24 @@ L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "ruRU")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Зал Кел'Тузада"
 
-	L.start_trigger = "Соратники слуги солдаты холодной тьмы! Повинуйтесь зову Кел'Тузада!"
-	L.start_warning = "Бой с Кел'Тузадом начинается! ~3 мин 30 сек до выхода босса!"
-	L.start_bar = "Фаза 2"
-
-	L.phase = "Фазы"
-	L.phase_desc = "Предупреждать когда босс входит в новую фазу."
+	L.phase1_trigger = "Соратники слуги солдаты холодной тьмы! Повинуйтесь зову Кел'Тузада!"
 	L.phase2_trigger1 = "Молите о пощаде!"
 	L.phase2_trigger2 = "Кричите! Кричите изо всех сил!"
 	L.phase2_trigger3 = "Вы уже мертвы!"
-	L.phase2_warning = "Фаза 2 Кел'Тузад просыпается!"
-	L.phase2_bar = "Кел'Тузад активен!"
-	L.phase3_soon_warning = "Скоро Фаза 3!"
 	L.phase3_trigger = "Господин мне нужна помощь!"
-	L.phase3_warning = "Фаза 3 защитники через ~15 секунд!"
+	L.guardians_trigger = "Хорошо. Воины ледяных пустошей восстаньте! Повелеваю вам сражаться убивать и умирать во имя своего повелителя! Не щадить никого!"
 
-	L.frostblast_bar = "Возможен ледяной взрыв"
-	L.frostblast_soon_message = "Возможный ледяной взрыв через 15 секунд!"
+	L.phase2_warning = "Фаза 2 - Кел'Тузад просыпается!"
+	L.phase2_bar = "Кел'Тузад активен!"
 
-	L.detonate_other = "Взрыв маны на 3-5(%s)"
-	L.detonate_possible_bar = "Возможен взрыв маны"
-	L.detonate_warning = "Следующий взрыв маны через 5 секунд!"
+	L.phase3_warning = "Фаза 3 - защитники через ~15 секунд!"
 
 	L.guardians = "Появление стражей"
 	L.guardians_desc = "Сообщать о появлении стражей ледяной короны в третьей фазе."
-	L.guardians_trigger = "Хорошо. Воины ледяных пустошей восстаньте! Повелеваю вам сражаться убивать и умирать во имя своего повелителя! Не щадить никого!"
 	L.guardians_warning = "Стражи появятся через 15 секунд!"
 	L.guardians_bar = "Появляются стражи!"
+
+	L.engage_message = "Бой с Кел'Тузадом начинается!"
 end
 
 L = BigWigs:NewBossLocale("Loatheb", "ruRU")
@@ -160,16 +151,14 @@ end
 L = BigWigs:NewBossLocale("Sapphiron", "ruRU")
 if L then
 	L.airphase_trigger = "%s взмывает в воздух!"
-	L.deepbreath_incoming_message = "Ледяная бомба через 23 секунды!"
-	L.deepbreath_incoming_soon_message = "Ледяная бомба через 5 секунд!"
-	L.deepbreath_incoming_bar = "Каст ледяной бомбы"
 	L.deepbreath_trigger = "%s глубоко вздыхает."
-	L.deepbreath_warning = "Появляется ледяная бомба!"
-	L.deepbreath_bar = "Приземляется ледяная бомба!"
 
-	L.lifedrain_message = "Похищение жизни! Следующее через 24 секунды!"
-	L.lifedrain_warn1 = "Похищение жизни через 5 секунд!"
-	L.lifedrain_bar = "~Возможное похищение жизни"
+	-- L.air_phase = "Air Phase"
+	-- L.ground_phase = "Ground Phase"
+
+	L.ice_bomb = "Ледяная бомба"
+	L.ice_bomb_warning = "Появляется ледяная бомба!"
+	L.ice_bomb_bar = "Приземляется ледяная бомба!"
 
 	L.icebolt_say = "Я в глыбе!"
 end

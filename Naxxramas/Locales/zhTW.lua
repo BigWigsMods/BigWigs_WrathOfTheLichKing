@@ -83,33 +83,24 @@ L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "zhTW")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "科爾蘇加德之間"
 
-	L.start_trigger = "僕從們，侍衛們，隸屬於黑暗與寒冷的戰士們!聽從科爾蘇加德的召喚!"
-	L.start_warning = "戰鬥開始，約3分30秒後，科爾蘇加德進入戰鬥！"
-	L.start_bar = "<第二階段>"
-
-	L.phase = "階段"
-	L.phase_desc = "當進入不同階段時發出警報。"
+	L.phase1_trigger = "僕從們，侍衛們，隸屬於黑暗與寒冷的戰士們!聽從科爾蘇加德的召喚!"
 	L.phase2_trigger1 = "祈禱我的慈悲吧!"
 	L.phase2_trigger2 = "呼出你的最後一口氣!"
 	L.phase2_trigger3 = "你的末日臨近了!"
-	L.phase2_warning = "第二階段 - 科爾蘇加德！"
-	L.phase2_bar = "<科爾蘇加德進入戰鬥>"
-	L.phase3_soon_warning = "即將 第三階段！"
 	L.phase3_trigger = "主人，我需要幫助!"
-	L.phase3_warning = "第三階段開始， 約15秒後，寒冰皇冠守衛者出現！"
+	L.guardians_trigger = "非常好，凍原的戰士們，起來吧!我命令你們作戰，為你們的主人殺戮或獻身吧!不要留下活口!"
 
-	L.frostblast_bar = "<可能 冰霜衝擊>"
-	L.frostblast_soon_message = "約5秒後，可能冰霜衝擊！"
+	L.phase2_warning = "第二階段 - 科爾蘇加德！"
+	L.phase2_bar = "科爾蘇加德進入戰鬥"
 
-	L.detonate_other = "爆裂法力：>%s<！"
-	L.detonate_possible_bar = "<可能 爆裂法力>"
-	L.detonate_warning = "約5秒後，爆裂法力！"
+	L.phase3_warning = "第三階段 - 約15秒後，寒冰皇冠守衛者出現！"
 
 	L.guardians = "寒冰皇冠守護者"
 	L.guardians_desc = "當第三階段召喚寒冰皇冠守護者時發出警報。"
-	L.guardians_trigger = "非常好，凍原的戰士們，起來吧!我命令你們作戰，為你們的主人殺戮或獻身吧!不要留下活口!"
 	L.guardians_warning = "約10秒後，寒冰皇冠守護者出現！"
-	L.guardians_bar = "<寒冰皇冠守護者出現>"
+	L.guardians_bar = "寒冰皇冠守護者出現"
+
+	--L.engage_message = "Kel'Thuzad encounter started!"
 end
 
 L = BigWigs:NewBossLocale("Loatheb", "zhTW")
@@ -157,16 +148,11 @@ end
 L = BigWigs:NewBossLocale("Sapphiron", "zhTW")
 if L then
 	L.airphase_trigger = "%s離地升空了!"
-	L.deepbreath_incoming_message = "約14秒後，冰息術！"
-	L.deepbreath_incoming_soon_message = "約5秒後，冰息術！"
-	L.deepbreath_incoming_bar = "<施放 冰息術>"
-	L.deepbreath_trigger = "%s深深地吸了一口氣……"
-	L.deepbreath_warning = "即將 冰息術！"
-	L.deepbreath_bar = "<冰息術 落地>"
+	L.deepbreath_trigger = "%s深深地吸了一口氣……" -- XXX Verify
 
-	L.lifedrain_message = "約24秒後，生命吸取！"
-	L.lifedrain_warn1 = "5秒後，生命吸取！"
-	L.lifedrain_bar = "<生命吸取>"
+	L.ice_bomb = "寒冰炸彈"
+	L.ice_bomb_warning = "即將 寒冰炸彈"
+	L.ice_bomb_bar = "寒冰炸彈 落地"
 
 	L.icebolt_say = "我是寒冰凍體！"
 end
