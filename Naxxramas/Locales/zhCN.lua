@@ -19,34 +19,18 @@ end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "zhCN")
 if L then
-	L.room = "进入房间"
-	L.room_desc = "当收割者戈提克进入房间时发出警报。"
+	L.phase1_trigger1 = "你们这些蠢货已经主动步入了陷阱。"
+	--L.phase1_trigger2 = "Teamanare shi rikk mannor rikk lok karkun" -- Curse of Tongues
+	L.phase2_trigger = "我已经等待很久了。现在你们将面对灵魂的收割者。"
 
 	L.add = "增援"
 	L.add_desc = "当增援时发出警报。"
 
-	L.adddeath = "增援死亡"
-	L.adddeath_desc = "当增援死亡时发出警报。"
-
-	L.starttrigger1 = "你们这些蠢货已经主动步入了陷阱。"
-	L.starttrigger2 = "Teamanare shi rikk mannor rikk lok karkun"
-	L.startwarn = "收割者戈提克已激活 - 4:30后，进入房间！"
-
-	L.rider = "冷酷的骑兵"
-	L.spectral_rider = "骑兵"
-	L.deathknight = "冷酷的死亡骑士"
-	L.spectral_deathknight = "死亡骑士"
-	L.trainee = "冷酷的学徒"
-	L.spectral_trainee = "学徒"
+	L.add_death = "增援死亡"
+	L.add_death_desc = "当增援死亡时发出警报。"
 
 	L.riderdiewarn = "骑兵已死亡！"
 	L.dkdiewarn = "死亡骑士已死亡！"
-
-	L.warn1 = "3分钟后进入房间"
-	L.warn2 = "90秒后进入房间"
-	L.warn3 = "60秒后进入房间"
-	L.warn4 = "30秒后进入房间"
-	L.warn5 = "收割者戈提克10秒后进入房间！"
 
 	L.wave = "%d/23：%s"
 
@@ -54,14 +38,16 @@ if L then
 	L.dkwarn = "3秒后死亡骑士出现"
 	L.riderwarn = "3秒后骑兵出现"
 
-	L.trabar = "学徒 - %d"
-	L.dkbar = "死亡骑士 - %d"
-	L.riderbar = "骑兵 - %d"
+	L.trabar = "学徒（%d）"
+	L.dkbar = "死亡骑士（%d）"
+	L.riderbar = "骑兵（%d）"
 
-	L.inroomtrigger = "我已经等待很久了。现在你们将面对灵魂的收割者。"
-	L.inroomwarn = "收割者戈提克进入了房间！"
+	--L.gate = "Gate Open!"
+	--L.gatebar = "Gate opens"
 
-	L.inroombartext = "<进入房间>"
+	L.phase_soon = "收割者戈提克10秒后进入房间！"
+
+	L.engage_message = "收割者戈提克已激活！"
 end
 
 L = BigWigs:NewBossLocale("Grobbulus", "zhCN")
@@ -92,13 +78,8 @@ L = BigWigs:NewBossLocale("The Four Horsemen", "zhCN")
 if L then
 	L.mark = "印记"
 	L.mark_desc = "当施放印记时发出警报。"
-	L.markbar = "<标记：%d>"
-	L.markwarn1 = "印记%d！"
-	L.markwarn2 = "5秒后，印记%d！"
 
-	--L.dies = "#%d Killed"
-
-	L.startwarn = "四骑士已激活 - 约17秒后，印记！"
+	L.engage_message = "四骑士已激活！"
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "zhCN")
@@ -195,8 +176,9 @@ end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "zhCN")
 if L then
-	L.shout_warning = "5秒后，瓦解怒吼！"
+	L.understudy = "见习死亡骑士"
 
+	L.shout_warning = "5秒后，瓦解怒吼！"
 	L.taunt_warning = "5秒后，可以嘲讽！"
 	L.shieldwall_warning = "5秒后，可以白骨屏障！"
 end

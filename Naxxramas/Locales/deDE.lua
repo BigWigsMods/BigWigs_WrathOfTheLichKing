@@ -19,34 +19,18 @@ end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "deDE")
 if L then
-	L.room = "Ankunft"
-	L.room_desc = "Warnungen und Timer für die Ankunft von Gothik im Raum."
+	L.phase1_trigger1 = "Ihr Narren habt euren eigenen Untergang heraufbeschworen."
+	L.phase1_trigger2 = "Maz Azgala veni kamil toralar Naztheros zennshinagas." -- Curse of Tongues
+	L.phase2_trigger = "Ich habe lange genug gewartet. Stellt euch dem Seelenjäger."
 
 	L.add = "Adds"
 	L.add_desc = "Warnungen und Timer für die Adds."
 
-	L.adddeath = "Tod eines Adds"
-	L.adddeath_desc = "Warnt, wenn ein Add stirbt."
-
-	L.starttrigger1 = "Ihr Narren habt euren eigenen Untergang heraufbeschworen."
-	L.starttrigger2 = "Maz Azgala veni kamil toralar Naztheros zennshinagas."
-	L.startwarn = "Gothik der Ernter angegriffen! Im Raum in 4:30 min!"
-
-	L.rider = "Unerbittlicher Reiter"
-	L.spectral_rider = "Spektraler Reiter"
-	L.deathknight = "Unerbittlicher Todesritter"
-	L.spectral_deathknight = "Spektraler Todesritter"
-	L.trainee = "Unerbittlicher Lehrling"
-	L.spectral_trainee = "Spektraler Lehrling"
+	L.add_death = "Tod eines Adds"
+	L.add_death_desc = "Warnt, wenn ein Add stirbt."
 
 	L.riderdiewarn = "Reiter tot!"
 	L.dkdiewarn = "Todesritter tot!"
-
-	L.warn1 = "Im Raum in 3 min"
-	L.warn2 = "Im Raum in 90 sek"
-	L.warn3 = "Im Raum in 60 sek"
-	L.warn4 = "Im Raum in 30 sek!"
-	L.warn5 = "Gothik im Raum in 10 sek!"
 
 	L.wave = "%d/23: %s"
 
@@ -58,10 +42,12 @@ if L then
 	L.dkbar = "Todesritter (%d)"
 	L.riderbar = "Reiter (%d)"
 
-	L.inroomtrigger = "Ich habe lange genug gewartet. Stellt euch dem Seelenjäger."
-	L.inroomwarn = "Gothik im Raum!"
+	--L.gate = "Gate Open!"
+	--L.gatebar = "Gate opens"
 
-	L.inroombartext = "Gothik im Raum"
+	L.phase_soon = "Gothik im Raum in 10 sek!"
+
+	L.engage_message = "Gothik der Ernter angegriffen!"
 end
 
 L = BigWigs:NewBossLocale("Grobbulus", "deDE")
@@ -92,13 +78,8 @@ L = BigWigs:NewBossLocale("The Four Horsemen", "deDE")
 if L then
 	L.mark = "Male"
 	L.mark_desc = "Warnungen und Timer für die Male."
-	L.markbar = "Mal (%d)"
-	L.markwarn1 = "Mal (%d)!"
-	L.markwarn2 = "Mal (%d) in 5 sek!"
 
-	--L.dies = "#%d Killed"
-
-	L.startwarn = "Die Vier Reiter angegriffen! Male in ~17 sek."
+	L.engage_message = "Die Vier Reiter angegriffen!"
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "deDE")
@@ -195,8 +176,9 @@ end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "deDE")
 if L then
-	L.shout_warning = "Unterbrechender Schrei in 5 sek!"
+	L.understudy = "Reservist der Todesritter"
 
+	L.shout_warning = "Unterbrechender Schrei in 5 sek!"
 	L.taunt_warning = "Spott bereit in 5 sek!"
 	L.shieldwall_warning = "Knochenbarriere weg in 5 sek!"
 end

@@ -19,34 +19,18 @@ end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "zhTW")
 if L then
-	L.room = "進入房間警報"
-	L.room_desc = "當『收割者』高希進入房間時發出警報。"
+	L.phase1_trigger1 = "你們這些蠢貨已經主動步入了陷阱。"
+	L.phase1_trigger2 = "Kazile Teamanare ZennshinagasRil" -- Curse of Tongues CHECK THIS
+	L.phase2_trigger = "我已經等待很久了。現在你們將面對靈魂的收割者。"
 
 	L.add = "增援警報"
 	L.add_desc = "當增援時發出警報。"
 
-	L.adddeath = "增援死亡"
-	L.adddeath_desc = "當增援死亡時發出警報。"
-
-	L.starttrigger1 = "你們這些蠢貨已經主動步入了陷阱。"
-	L.starttrigger2 = "Kazile Teamanare ZennshinagasRil" -- check
-	L.startwarn = "『收割者』高希已進入戰鬥 - 4:30後，進入房間！"
-
-	L.rider = "無情的騎兵"
-	L.spectral_rider = "鬼靈騎兵"
-	L.deathknight = "無情的死亡騎士"
-	L.spectral_deathknight = "鬼靈死亡騎士"
-	L.trainee = "無情的受訓員"
-	L.spectral_trainee = "鬼靈受訓員"
+	L.add_death = "增援死亡"
+	L.add_death_desc = "當增援死亡時發出警報。"
 
 	L.riderdiewarn = "騎兵已死亡！"
 	L.dkdiewarn = "死亡騎士已死亡！"
-
-	L.warn1 = "3分鐘後進入房間！"
-	L.warn2 = "90秒後進入房間！"
-	L.warn3 = "60秒後進入房間！"
-	L.warn4 = "30秒後進入房間！"
-	L.warn5 = "10秒後進入房間！"
 
 	L.wave = "%d/23：%s"
 
@@ -54,14 +38,13 @@ if L then
 	L.dkwarn = "3秒後死亡騎士出現"
 	L.riderwarn = "3秒後騎兵出現"
 
-	L.trabar = "受訓員 - %d"
-	L.dkbar = "死亡騎士 - %d"
-	L.riderbar = "騎兵 - %d"
+	L.trabar = "受訓員（%d）"
+	L.dkbar = "死亡騎士（%d）"
+	L.riderbar = "騎兵（%d）"
 
-	L.inroomtrigger = "我已經等待很久了。現在你們將面對靈魂的收割者。"
-	L.inroomwarn = "『收割者』高希進入了房間！"
+	L.phase_soon = "10秒後進入房間！"
 
-	L.inroombartext = "<進入房間>"
+	L.engage_message = "『收割者』高希已進入參戰！"
 end
 
 L = BigWigs:NewBossLocale("Grobbulus", "zhTW")
@@ -92,13 +75,8 @@ L = BigWigs:NewBossLocale("The Four Horsemen", "zhTW")
 if L then
 	L.mark = "印記"
 	L.mark_desc = "當施放印記時發出警報。"
-	L.markbar = "<印記：%d>"
-	L.markwarn1 = "印記%d！"
-	L.markwarn2 = "5秒後，印記%d！"
 
-	--L.dies = "#%d Killed"
-
-	L.startwarn = "四騎士已進入戰鬥 - 約17秒後，印記！"
+	L.engage_message = "四騎士已進入參戰！"
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "zhTW")
@@ -195,8 +173,9 @@ end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "zhTW")
 if L then
-	L.shout_warning = "5秒後，混亂怒吼！"
+	L.understudy = "見習死亡騎士"
 
+	L.shout_warning = "5秒後，混亂怒吼！"
 	L.taunt_warning = "5秒後，可以嘲諷！"
 	L.shieldwall_warning = "5秒後，可以骸骨屏障！"
 end

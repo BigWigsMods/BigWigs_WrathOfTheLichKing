@@ -19,49 +19,35 @@ end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "ptBR")
 if L then
-	--L.room = "Room Arrival Warnings"
-	--L.room_desc = "Warn for Gothik's arrival"
+	--L.phase1_trigger1 = "Foolishly you have sought your own demise."
+	--L.phase1_trigger2 = "Teamanare shi rikk mannor rikk lok karkun" -- Curse of Tongues
+	--L.phase2_trigger = "I have waited long enough. Now you face the harvester of souls."
 
 	--L.add = "Add Warnings"
-	--L.add_desc = "Warn for adds"
+	--L.add_desc = "Warnings for add waves."
 
-	--L.adddeath = "Add Death Alert"
-	--L.adddeath_desc = "Alerts when an add dies."
-
-	--L.starttrigger1 = "Foolishly you have sought your own demise."
-	--L.starttrigger2 = "Teamanare shi rikk mannor rikk lok karkun"
-	--L.startwarn = "Gothik the Harvester engaged! 4:30 till he's in the room."
-
-	--L.rider = "Unrelenting Rider"
-	--L.spectral_rider = "Spectral Rider"
-	--L.deathknight = "Unrelenting Deathknight"
-	--L.spectral_deathknight = "Spektral Deathknight"
-	--L.trainee = "Unrelenting Trainee"
-	--L.spectral_trainee = "Spectral Trainee"
+	--L.add_death = "Add Death Alert"
+	--L.add_death_desc = "Alerts when an add dies."
 
 	--L.riderdiewarn = "Rider dead!"
 	--L.dkdiewarn = "Death Knight dead!"
 
-	--L.warn1 = "In room in 3 min"
-	--L.warn2 = "In room in 90 sec"
-	--L.warn3 = "In room in 60 sec"
-	--L.warn4 = "In room in 30 sec"
-	--L.warn5 = "Gothik Incoming in 10 sec"
-
 	--L.wave = "%d/23: %s"
 
 	--L.trawarn = "Trainees in 3 sec"
-	--L.dkwarn = "Deathknights in 3 sec"
+	--L.dkwarn = "Death Knights in 3 sec"
 	--L.riderwarn = "Rider in 3 sec"
 
-	--L.trabar = "Trainee - %d"
-	--L.dkbar = "Deathknight - %d"
-	--L.riderbar = "Rider - %d"
+	--L.trabar = "Trainee (%d)"
+	--L.dkbar = "Death Knight (%d)"
+	--L.riderbar = "Rider (%d)"
 
-	--L.inroomtrigger = "I have waited long enough. Now you face the harvester of souls."
-	--L.inroomwarn = "He's in the room!"
+	--L.gate = "Gate Open!"
+	--L.gatebar = "Gate opens"
 
-	--L.inroombartext = "In Room"
+	--L.phase_soon = "Gothik Incoming in 10 sec"
+
+	--L.engage_message = "Gothik the Harvester engaged!"
 end
 
 L = BigWigs:NewBossLocale("Grobbulus", "ptBR")
@@ -92,13 +78,8 @@ L = BigWigs:NewBossLocale("The Four Horsemen", "ptBR")
 if L then
 	--L.mark = "Mark"
 	--L.mark_desc = "Warn for marks."
-	--L.markbar = "Mark %d"
-	--L.markwarn1 = "Mark %d!"
-	--L.markwarn2 = "Mark %d in 5 sec"
 
-	--L.dies = "#%d Killed"
-
-	--L.startwarn = "The Four Horsemen Engaged! Mark in ~17 sec"
+	--L.engage_message = "The Four Horsemen engaged!"
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "ptBR")
@@ -178,10 +159,11 @@ end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ptBR")
 if L then
-	--L.shout_warning = "Disrupting Shout in 5sec!"
+	L.understudy = "Cavaleiro da Morte Substituto"
 
-	--L.taunt_warning = "Taunt ready in 5sec!"
-	--L.shieldwall_warning = "Barrier gone in 5sec!"
+	--L.shout_warning = "Disrupting Shout in 5 sec!"
+	--L.taunt_warning = "Taunt ready in 5 sec!"
+	--L.shieldwall_warning = "Barrier gone in 5 sec!"
 end
 
 L = BigWigs:NewBossLocale("Sapphiron", "ptBR")

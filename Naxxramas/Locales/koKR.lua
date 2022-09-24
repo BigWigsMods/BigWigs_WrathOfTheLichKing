@@ -19,34 +19,18 @@ end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "koKR")
 if L then
-	L.room = "고딕 등장 알림"
-	L.room_desc = "고딕 등장을 알립니다."
+	L.phase1_trigger1 = "어리석은 것들, 스스로 죽음을 자초하다니!"
+	--L.phase1_trigger2 = "Teamanare shi rikk mannor rikk lok karkun" -- Curse of Tongues
+	L.phase2_trigger = "오랫동안 기다렸다. 이제 영혼 착취자를 만날 차례다."
 
 	L.add = "추가 몹 알림"
 	L.add_desc = "추가 몹을 알립니다."
 
-	L.adddeath = "추가 몹 죽음 알림"
-	L.adddeath_desc = "추가된 몹 죽음을 알립니다."
-
-	L.starttrigger1 = "어리석은 것들, 스스로 죽음을 자초하다니!"
-	L.starttrigger2 = "Teamanare shi rikk mannor rikk lok karkun" -- CHECK
-	L.startwarn = "영혼 착취자 고딕 전투 시작! 4:30 후 고딕 등장."
-
-	L.rider = "무자비한 죽음의 기병"
-	L.spectral_rider = "기병 망령"
-	L.deathknight = "무자비한 죽음의 기사"
-	L.spectral_deathknight = "죽음의 기사 망령"
-	L.trainee = "무자비한 수습생"
-	L.spectral_trainee = "수습생 유령"
+	L.add_death = "추가 몹 죽음 알림"
+	L.add_death_desc = "추가된 몹 죽음을 알립니다."
 
 	L.riderdiewarn = "기병 죽음!"
 	L.dkdiewarn = "죽음의 기사 죽음!"
-
-	L.warn1 = "고딕 등장 3분 전"
-	L.warn2 = "고딕 등장 90초 전"
-	L.warn3 = "고딕 등장 60초 전"
-	L.warn4 = "고딕 등장 30초 전"
-	L.warn5 = "고딕 등장 10초 전"
 
 	L.wave = "%d/23: %s"
 
@@ -54,14 +38,16 @@ if L then
 	L.dkwarn = "죽음의 기사 3초 후 등장"
 	L.riderwarn = "기병 3초 후 등장"
 
-	L.trabar = "수습생 - %d"
-	L.dkbar = "죽음의 기사 - %d"
-	L.riderbar = "기병 - %d"
+	L.trabar = "수습생 (%d)"
+	L.dkbar = "죽음의 기사 (%d)"
+	L.riderbar = "기병 (%d)"
 
-	L.inroomtrigger = "오랫동안 기다렸다. 이제 영혼 착취자를 만날 차례다."
-	L.inroomwarn = "고딕 등장!!"
+	--L.gate = "Gate Open!"
+	--L.gatebar = "Gate opens"
 
-	L.inroombartext = "고딕 등장"
+	L.phase_soon = "고딕 등장 10초 전"
+
+	L.engage_message = "영혼 착취자 고딕 전투 시작!"
 end
 
 L = BigWigs:NewBossLocale("Grobbulus", "koKR")
@@ -92,13 +78,8 @@ L = BigWigs:NewBossLocale("The Four Horsemen", "koKR")
 if L then
 	L.mark = "징표"
 	L.mark_desc = "징표를 알립니다."
-	L.markbar = "징표 (%d)"
-	L.markwarn1 = "징표(%d)!"
-	L.markwarn2 = "5초 후 징표(%d)"
 
-	--L.dies = "#%d Killed"
-
-	L.startwarn = "4인의 기병대 전투 시작! 약 17초 이내 징표"
+	L.engage_message = "4인의 기병대 전투 시작!"
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "koKR")
@@ -111,7 +92,7 @@ if L then
 
 	L.phase = "단계"
 	L.phase_desc = "단계 변경을 알립니다."
-	L.phase2_trigger1 = "자비를 구하라!" -- CHECK
+	L.phase2_trigger1 = "자비를 구하라!" --CHECK
 	L.phase2_trigger2 = "마지막 숨이나 쉬어라!"
 	L.phase2_trigger3 = "최후를 맞이하라!"
 	L.phase2_warning = "2 단계, 켈투자드!"
@@ -195,8 +176,9 @@ end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "koKR")
 if L then
-	L.shout_warning = "5초 후 분열의 외침!"
+	L.understudy = "죽음의 기사 수습생"
 
+	L.shout_warning = "5초 후 분열의 외침!"
 	L.taunt_warning = "5초 후 도발 종료!"
 	L.shieldwall_warning = "5초 후 방패의 벽 종료!"
 end

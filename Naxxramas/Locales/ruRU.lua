@@ -19,34 +19,18 @@ end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "ruRU")
 if L then
-	L.room = "Прибытие Готика"
-	L.room_desc = "Сообщать о прибытии Готика"
+	L.phase1_trigger1 = "Глупо было искать свою смерть."
+	L.phase1_trigger2 = "Я очень долго ждал. Положите свою душу в мой комбайн и будем вам дерево с золотыми монетами." -- Curse of Tongues CHECK THIS
+	L.phase2_trigger = "Я ждал слишком долго. Сейчас вы предстанете пред ликом Жнеца душ."
 
 	L.add = "Появление помощников"
 	L.add_desc = "Сообщать о появлении помощников"
 
-	L.adddeath = "Оповещать смерть помощников"
-	L.adddeath_desc = "Сообщать о смерти помощников."
-
-	L.starttrigger1 = "Глупо было искать свою смерть."
-	L.starttrigger2 = "Я очень долго ждал. Положите свою душу в мой комбайн и будем вам дерево с золотыми монетами." --check this
-	L.startwarn = "Готик вступает в бой! 4:30 до входа в комнату."
-
-	L.rider = "Неодолимый всадник"
-	L.spectral_rider = "Призрачный всадник"
-	L.deathknight = "Безжалостный Рыцарь Смерти"
-	L.spectral_deathknight = "Призрачный рыцарь Смерти"
-	L.trainee = "Жестокий новобранец"
-	L.spectral_trainee = "Призрачный ученик"
+	L.add_death = "Оповещать смерть помощников"
+	L.add_death_desc = "Сообщать о смерти помощников."
 
 	L.riderdiewarn = "Всадник мёртв!"
 	L.dkdiewarn = "Рыцарь смерти мёртв!"
-
-	L.warn1 = "В комнате через 3 минуты"
-	L.warn2 = "В комнате через 90 секунд"
-	L.warn3 = "В комнате через 60 секунд"
-	L.warn4 = "В комнате через 30 секунд"
-	L.warn5 = "Готик появится через 10 секунд"
 
 	L.wave = "%d/23: %s"
 
@@ -54,14 +38,16 @@ if L then
 	L.dkwarn = "Рыцарь Смерти через 3 секунды"
 	L.riderwarn = "Всадник через 3 секунды"
 
-	L.trabar = "Ученик - %d"
-	L.dkbar = "Рыцарь Смерти - %d"
-	L.riderbar = "Всадник - %d"
+	L.trabar = "Ученик (%d)"
+	L.dkbar = "Рыцарь Смерти (%d)"
+	L.riderbar = "Всадник (%d)"
 
-	L.inroomtrigger = "Я ждал слишком долго. Сейчас вы предстанете пред ликом Жнеца душ."
-	L.inroomwarn = "Он в комнате!!"
+	--L.gate = "Gate Open!"
+	--L.gatebar = "Gate opens"
 
-	L.inroombartext = "В комнате"
+	L.phase_soon = "Готик появится через 10 секунд"
+
+	L.engage_message = "Готик вступает в бой! 4:30 до входа в комнату."
 end
 
 L = BigWigs:NewBossLocale("Grobbulus", "ruRU")
@@ -92,13 +78,8 @@ L = BigWigs:NewBossLocale("The Four Horsemen", "ruRU")
 if L then
 	L.mark = "Знак"
 	L.mark_desc = "Предупреждать о знаках."
-	L.markbar = "Знак %d"
-	L.markwarn1 = "Знак %d!"
-	L.markwarn2 = "Знак %d через 5 секунд"
 
-	--L.dies = "#%d Killed"
-
-	L.startwarn = "Четверо всадников вступили в бой! Знак через ~17 секунд"
+	L.engage_message = "Четыре Всадника вступили в бой!"
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "ruRU")
@@ -195,10 +176,11 @@ end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ruRU")
 if L then
-	L.shout_warning = "Разрушительный крик через 5сек!"
+	L.understudy = "Ученик рыцаря смерти"
 
-	L.taunt_warning = "Провокация закончится через 5сек!"
-	L.shieldwall_warning = "Преграда из костей закончится через 5сек!"
+	L.shout_warning = "Разрушительный крик через 5 сек!"
+	L.taunt_warning = "Провокация закончится через 5 сек!"
+	L.shieldwall_warning = "Преграда из костей закончится через 5 сек!"
 end
 
 L = BigWigs:NewBossLocale("Thaddius", "ruRU")

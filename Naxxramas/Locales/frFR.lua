@@ -19,34 +19,18 @@ end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "frFR")
 if L then
-	L.room = "Arrivée dans la salle"
-	L.room_desc = "Prévient quand Gothik arrive dans la salle."
+	L.phase1_trigger1 = "Dans votre folie, vous avez provoqué votre propre mort."
+	L.phase1_trigger2 = "Teamanare shi rikk mannor rikk lok karkun" -- Curse of Tongues
+	L.phase2_trigger = "J'ai attendu assez longtemps. Maintenant, vous affrontez le moissonneur d'âmes."
 
 	L.add = "Arrivée des renforts"
 	L.add_desc = "Prévient quand des renforts se joignent au combat."
 
-	L.adddeath = "Mort des renforts"
-	L.adddeath_desc = "Prévient quand un des renforts meurt."
-
-	L.starttrigger1 = "Dans votre folie, vous avez provoqué votre propre mort."
-	L.starttrigger2 = "Teamanare shi rikk mannor rikk lok karkun"
-	L.startwarn = "Gothik le moissonneur engagé ! 4 min. 30 sec. avant son arrivée dans la salle !"
-
-	L.rider = "Cavalier tenace"
-	L.spectral_rider = "Cavalier spectral"
-	L.deathknight = "Chevalier de la mort tenace"
-	L.spectral_deathknight = "Chevalier de la mort spectral"
-	L.trainee = "Jeune recrue tenace"
-	L.spectral_trainee = "Jeune recrue spectral"
+	L.add_death = "Mort des renforts"
+	L.add_death_desc = "Prévient quand un des renforts meurt."
 
 	L.riderdiewarn = "Cavalier éliminé !"
 	L.dkdiewarn = "Chevalier éliminé !"
-
-	L.warn1 = "Dans la salle dans 3 min."
-	L.warn2 = "Dans la salle dans 90 sec."
-	L.warn3 = "Dans la salle dans 60 sec."
-	L.warn4 = "Dans la salle dans 30 sec."
-	L.warn5 = "Arrivée de Gothik dans 10 sec."
 
 	L.wave = "%d/23 : %s"
 
@@ -54,14 +38,16 @@ if L then
 	L.dkwarn = "Chevalier de la mort dans 3 sec."
 	L.riderwarn = "Cavalier dans 3 sec."
 
-	L.trabar = "Jeune recrue - %d"
-	L.dkbar = "Chevalier de la mort - %d"
-	L.riderbar = "Cavalier - %d"
+	L.trabar = "Jeune recrue (%d)"
+	L.dkbar = "Chevalier de la mort (%d)"
+	L.riderbar = "Cavalier (%d)"
 
-	L.inroomtrigger = "J'ai attendu assez longtemps. Maintenant, vous affrontez le moissonneur d'âmes."
-	L.inroomwarn = "Il est dans la salle !"
+	--L.gate = "Gate Open!"
+	--L.gatebar = "Gate opens"
 
-	L.inroombartext = "Dans la salle"
+	L.phase_soon = "Arrivée de Gothik dans 10 sec."
+
+	L.engage_message = "Gothik le moissonneur engagé !"
 end
 
 L = BigWigs:NewBossLocale("Grobbulus", "frFR")
@@ -92,13 +78,8 @@ L = BigWigs:NewBossLocale("The Four Horsemen", "frFR")
 if L then
 	L.mark = "Marque"
 	L.mark_desc = "Prévient de l'arrivée des marques."
-	L.markbar = "Marque %d"
-	L.markwarn1 = "Marque %d !"
-	L.markwarn2 = "Marque %d dans 5 sec."
 
-	--L.dies = "#%d Killed"
-
-	L.startwarn = "Les 4 cavaliers engagés ! Marque dans ~17 sec. !"
+	L.engage_message = "Les 4 cavaliers engagés !"
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "frFR")
@@ -195,8 +176,9 @@ end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "frFR")
 if L then
-	L.shout_warning = "Cri perturbant dans 5 sec. !"
+	L.understudy = "Doublure de chevalier de la mort"
 
+	L.shout_warning = "Cri perturbant dans 5 sec. !"
 	L.taunt_warning = "Provocation prête dans 5 sec. !"
 	L.shieldwall_warning = "Barrière d'os terminée dans 5 sec. !"
 end
