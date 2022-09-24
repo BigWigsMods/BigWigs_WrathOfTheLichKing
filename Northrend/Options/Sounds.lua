@@ -21,8 +21,14 @@ BigWigs:AddSounds("Halion", {
 	[74792] = "info",
 })
 
+BigWigs:AddSounds("Emalon the Storm Watcher", {
+})
+
 BigWigs:AddSounds("Koralon the Flame Watcher", {
 	[66684] = "alarm",
+})
+
+BigWigs:AddSounds("Toravon the Ice Watcher", {
 })
 
 BigWigs:AddSounds("Onyxia", {

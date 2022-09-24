@@ -45,7 +45,7 @@ BigWigs:AddColors("The Twin Val'kyr", {
 })
 
 BigWigs:AddColors("Anub'arak", {
-	[66013] = {"blue","orange"},
+	[66013] = "blue",
 	[66118] = "red",
 	[66134] = "yellow",
 	[67574] = "blue",
