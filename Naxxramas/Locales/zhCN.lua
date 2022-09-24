@@ -14,10 +14,7 @@ end
 
 L = BigWigs:NewBossLocale("Gluth", "zhCN")
 if L then
-	L.startwarn = "格拉斯已激活 - 约105秒后，残杀！"
-
-	L.decimatesoonwarn = "即将 吞噬！"
-	L.decimatebartext = "<残杀>"
+	L.decimate_bar = "残杀"
 end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "zhCN")
@@ -69,8 +66,7 @@ end
 
 L = BigWigs:NewBossLocale("Grobbulus", "zhCN")
 if L then
-	L.bomb_message = "变异注射"
-	L.bomb_message_other = "变异注射：>%s<！"
+	L.injection = "变异注射"
 end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "zhCN")
@@ -199,13 +195,7 @@ if L then
 	L.wave1bar = "<第一波>"
 	L.wave2bar = "<第二波>"
 	L.wave2_message = "10秒后，第二波！"
-end
 
-L = BigWigs:NewBossLocale("Patchwerk", "zhCN")
-if L then
-	L.enragewarn = "5% - 狂乱！"
-	L.starttrigger1 = "帕奇维克要跟你玩！"
-	L.starttrigger2 = "帕奇维克是克尔苏加德的战神！"
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "zhCN")
@@ -249,33 +239,48 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "zhCN")
 if L then
-	L.phase = "阶段"
-	L.phase_desc = "当进入不同阶段发出警报。"
+	L.phase1_trigger1 = "斯塔拉格要碾碎你！"
+	L.phase1_trigger2 = "主人要吃了你！"
+	L.phase2_trigger1 = "咬碎……你的……骨头……"
+	L.phase2_trigger2 = "打……烂……你！"
+	L.phase2_trigger3 = "杀……"
 
-	L.throw = "投掷"
-	L.throw_desc = "当 MT 被投掷到对面平台时发出警报。"
+	L.add_death_trigger = "%s死了。"
+	L.overload_trigger = "%s超载了！"
 
-	L.trigger_phase1_1 = "斯塔拉格要碾碎你！"
-	L.trigger_phase1_2 = "主人要吃了你！"
-	L.trigger_phase2_1 = "咬碎……你的……骨头……"
-	L.trigger_phase2_2 = "打……烂……你！"
-	L.trigger_phase2_3 = "杀……"
-
-	L.polarity_trigger = "你感受到痛苦的滋味了吧……"
-	L.polarity_message = "塔迪乌斯开始施放极性转化！"
-	L.polarity_warning = "3秒后，极性转化！"
-	L.polarity_bar = "<极性转化>"
 	L.polarity_changed = "极性转化改变！"
 	L.polarity_nochange = "相同极性转化！"
-
 	L.polarity_first_positive = "你是 >正极<！"
 	L.polarity_first_negative = "你是 >负极<！"
 
-	L.phase1_message = "第一阶段"
-	L.phase2_message = "第二阶段 - 6分钟后激怒！"
-
-	L.surge_message = "力量振荡！"
-
-	L.throw_bar = "<投掷>"
+	L.throw = "投掷"
+	L.throw_desc = "当 MT 被投掷到对面平台时发出警报。"
 	L.throw_warning = "约5秒后，投掷！"
+
+	L.polarity_extras = "有关极性转化后需要跑位的警报"
+
+	L.custom_off_select_charge_position = "起始位置"
+	L.custom_off_select_charge_position_desc = "第一次极性转化后的位置。"
+	L.custom_off_select_charge_position_value1 = "|cffff2020负极(-)|r 向左, |cff20ff20正极(+)|r 向右"
+	L.custom_off_select_charge_position_value2 = "|cff20ff20正极(+)|r 向左, |cffff2020负极(-)|r 向右"
+
+	L.custom_off_select_charge_movement = "移动战术"
+	L.custom_off_select_charge_movement_desc = "你团队使用的移动战术。"
+	L.custom_off_select_charge_movement_value1 = "使用战术： |cff20ff20穿过|r BOSS"
+	L.custom_off_select_charge_movement_value2 = "使用战术：在BOSS身边 |cff20ff20顺时针|r 移动"
+	L.custom_off_select_charge_movement_value3 = "使用战术：在BOSS身边 |cff20ff20逆时针|r 移动"
+	L.custom_off_select_charge_movement_value4 = "四点战术 1: 极性转化改变 |cff20ff20向右|r, 极性转化未改变 |cff20ff20向左|r"
+	L.custom_off_select_charge_movement_value5 = "四点战术 2: 极性转化改变 |cff20ff20向左|r, 极性转化未改变 |cff20ff20向右|r"
+
+	L.custom_off_charge_graphic = "图形箭头"
+	L.custom_off_charge_graphic_desc = "显示图形箭头。"
+	L.custom_off_charge_text = "文字箭头"
+	L.custom_off_charge_text_desc = "显示文字箭头。"
+	L.custom_off_charge_voice = "语音提示"
+	L.custom_off_charge_voice_desc = "播放语音提示。"
+
+	L.left = "<--- 向左 <--- 向左 <---"
+	L.right = "---> 向右 ---> 向右 --->"
+	L.swap = "^^^^ 交换 ^^^^ 迅速 ^^^^"
+	L.stay = "==== 不要动 ==== 不要动 ===="
 end

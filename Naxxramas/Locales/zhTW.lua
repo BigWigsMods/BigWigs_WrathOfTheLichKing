@@ -14,10 +14,7 @@ end
 
 L = BigWigs:NewBossLocale("Gluth", "zhTW")
 if L then
-	L.startwarn = "古魯斯已進入戰鬥 - 105秒後，殘殺！"
-
-	L.decimatesoonwarn = "即將 殘殺！"
-	L.decimatebartext = "<殘殺>"
+	L.decimate_bar = "殘殺"
 end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "zhTW")
@@ -69,8 +66,7 @@ end
 
 L = BigWigs:NewBossLocale("Grobbulus", "zhTW")
 if L then
-	L.bomb_message = "突變注射"
-	L.bomb_message_other = "突變注射：>%s<！"
+	L.injection = "突變注射"
 end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "zhTW")
@@ -199,13 +195,7 @@ if L then
 	L.wave1bar = "<第一波>"
 	L.wave2bar = "<第二波>"
 	L.wave2_message = "10秒後，第二波！"
-end
 
-L = BigWigs:NewBossLocale("Patchwerk", "zhTW")
-if L then
-	L.enragewarn = "5 % - 狂亂！"
-	L.starttrigger1 = "縫補者要跟你玩!"
-	L.starttrigger2 = "科爾蘇加德讓縫補者成為戰爭的化身!"
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "zhTW")
@@ -249,33 +239,48 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "zhTW")
 if L then
-	L.phase = "階段"
-	L.phase_desc = "當進入不同階段時發出警報。"
+	L.phase1_trigger1 = "斯塔拉格要碾碎你!"
+	L.phase1_trigger2 = "主人要吃了你!"
+	L.phase2_trigger1 = "咬碎……你的……骨頭……"
+	L.phase2_trigger2 = "打…碎…你……"
+	L.phase2_trigger3 = "殺……"
 
-	L.throw = "投擲"
-	L.throw_desc = "當主坦克被投擲到對面平台時發出警報。"
+	L.add_death_trigger = "%s死亡了。"
+	L.overload_trigger = "%s超負荷！"
 
-	L.trigger_phase1_1 = "斯塔拉格要碾碎你!"
-	L.trigger_phase1_2 = "主人要吃了你!"
-	L.trigger_phase2_1 = "咬碎……你的……骨頭……"
-	L.trigger_phase2_2 = "打…碎…你……"
-	L.trigger_phase2_3 = "殺……"
-
-	L.polarity_trigger = "你感受到痛苦的滋味了吧……"
-	L.polarity_message = "泰迪斯開始施放兩極移形！"
-	L.polarity_warning = "3秒後，兩極移形！"
-	L.polarity_bar = "<兩極移形>"
 	L.polarity_changed = "兩極移形改變！"
 	L.polarity_nochange = "相同兩極移形！"
-
 	L.polarity_first_positive = "你是 >正極<！"
 	L.polarity_first_negative = "你是 >負極<！"
 
-	L.phase1_message = "第一階段"
-	L.phase2_message = "第二階段 - 6分鍾後狂怒！"
-
-	L.surge_message = "力量澎湃！加大對坦克的治療！"
-
-	L.throw_bar = "<投擲>"
+	L.throw = "投擲"
+	L.throw_desc = "當主坦克被投擲到對面平台時發出警報。"
 	L.throw_warning = "約5秒後，投擲！"
+
+	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
+
+	--L.custom_off_select_charge_position = "First position"
+	--L.custom_off_select_charge_position_desc = "Where to move to after the first Polarity Shift."
+	--L.custom_off_select_charge_position_value1 = "|cffff2020Negative (-)|r are LEFT, |cff2020ffPositive (+)|r are RIGHT"
+	--L.custom_off_select_charge_position_value2 = "|cff2020ffPositive (+)|r are LEFT, |cffff2020Negative (-)|r are RIGHT"
+
+	--L.custom_off_select_charge_movement = "Movement"
+	--L.custom_off_select_charge_movement_desc = "The movement strategy your group uses."
+	--L.custom_off_select_charge_movement_value1 = "Run |cff20ff20THROUGH|r the boss"
+	--L.custom_off_select_charge_movement_value2 = "Run |cff20ff20CLOCKWISE|r around the boss"
+	--L.custom_off_select_charge_movement_value3 = "Run |cff20ff20COUNTER-CLOCKWISE|r around the boss"
+	--L.custom_off_select_charge_movement_value4 = "Four camps 1: Polarity changed moves |cff20ff20RIGHT|r, same polarity moves |cff20ff20LEFT|r"
+	--L.custom_off_select_charge_movement_value5 = "Four camps 2: Polarity changed moves |cff20ff20LEFT|r, same polarity moves |cff20ff20RIGHT|r"
+
+	--L.custom_off_charge_graphic = "Graphical arrow"
+	--L.custom_off_charge_graphic_desc = "Show an arrow graphic."
+	--L.custom_off_charge_text = "Text arrows"
+	--L.custom_off_charge_text_desc = "Show an additional message."
+	--L.custom_off_charge_voice = "Voice alert"
+	--L.custom_off_charge_voice_desc = "Play a voice alert."
+
+	L.left = "<--- 到左邊 <--- 到左邊 <---"
+	L.right = "---> 向右 ---> 向右 --->"
+	L.swap = "^^^^ 交換 ^^^^ 交換 ^^^^"
+	L.stay = "==== 不要動 ==== 不要動 ===="
 end

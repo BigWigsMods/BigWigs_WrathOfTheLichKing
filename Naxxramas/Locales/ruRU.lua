@@ -14,10 +14,7 @@ end
 
 L = BigWigs:NewBossLocale("Gluth", "ruRU")
 if L then
-	L.startwarn = "Глут вступает в бой! ~105 cекунд до появления зомби!"
-
-	L.decimatesoonwarn = "Скоро истребление!"
-	L.decimatebartext = "~Истребление зомби"
+	L.decimate_bar = "Истребление зомби"
 end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "ruRU")
@@ -69,8 +66,7 @@ end
 
 L = BigWigs:NewBossLocale("Grobbulus", "ruRU")
 if L then
-	L.bomb_message = "Укол"
-	L.bomb_message_other = "|3-2(%s) сделали укол!"
+	L.injection = "Укол"
 end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "ruRU")
@@ -199,13 +195,7 @@ if L then
 	L.wave1bar = "1-я волна"
 	L.wave2bar = "2-я волна"
 	L.wave2_message = "2-я волна через 10 сек"
-end
 
-L = BigWigs:NewBossLocale("Patchwerk", "ruRU")
-if L then
-	L.enragewarn = "5% - Бешенство!"
-	L.starttrigger1 = "Лоскутик хочет поиграть!"
-	L.starttrigger2 = "Кел'Тузад объявил Лоскутика воплощением войны!"
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "ruRU")
@@ -249,33 +239,49 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "ruRU")
 if L then
-	L.phase = "Фазы"
-	L.phase_desc = "Сообщать о фазах боя"
+	L.phase1_trigger1 = "Сталагг сокрушить вас!"
+	L.phase1_trigger2 = "Я скормлю вас господину!"
+	L.phase2_trigger1 = "Отведайте... своих... костей..." -- "Я сожру... ваши... кости..." -- XXX Check which is used
+	L.phase2_trigger2 = "Растерзаю!!!"
+	L.phase2_trigger3 = "Убей..." -- "Убью..." -- XXX Check which is used
 
-	L.throw = "Бросока"
-	L.throw_desc = "Предупреждать о смене танков на платформах."
+	L.add_death_trigger = "%s умирает."
+	L.overload_trigger = "%s перезагружается!"
 
-	L.trigger_phase1_1 = "Сталагг сокрушить вас!"
-	L.trigger_phase1_2 = "Я скормлю вас господину!"
-	L.trigger_phase2_1 = "Я сожру... ваши... кости..."
-	L.trigger_phase2_2 = "Растерзаю!!!"
-	L.trigger_phase2_3 = "Убью..."
-
-	L.polarity_trigger = "Познайте же боль..."
-	L.polarity_message = "Таддиус сдвигает полярность!"
-	L.polarity_warning = "3 секунды до сдвига полярности!"
-	L.polarity_bar = "Сдвиг полярности"
 	L.polarity_changed = "Полярность сменилась!"
 	L.polarity_nochange = "Полярность НЕ сменилась!"
-
 	L.polarity_first_positive = "Вы (+) ПОЛОЖИТЕЛЬНЫЙ!"
 	L.polarity_first_negative = "Вы (-) ОТРИЦАТЕЛЬНЫЙ!"
 
-	L.phase1_message = "Таддиус фаза 1"
-	L.phase2_message = "Таддиус фаза 2 Берсерк через 6 минут!"
-
-	L.surge_message = "Волна силы на Сталагге!"
-
-	L.throw_bar = "Бросок"
+	L.throw = "Бросока"
+	L.throw_desc = "Предупреждать о смене танков на платформах."
 	L.throw_warning = "Бросок через 5 секунд!"
+
+	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
+
+	--L.custom_off_select_charge_position = "First position"
+	--L.custom_off_select_charge_position_desc = "Where to move to after the first Polarity Shift."
+	--L.custom_off_select_charge_position_value1 = "|cffff2020Negative (-)|r are LEFT, |cff2020ffPositive (+)|r are RIGHT"
+	--L.custom_off_select_charge_position_value2 = "|cff2020ffPositive (+)|r are LEFT, |cffff2020Negative (-)|r are RIGHT"
+
+	--L.custom_off_select_charge_movement = "Movement"
+	--L.custom_off_select_charge_movement_desc = "The movement strategy your group uses."
+	--L.custom_off_select_charge_movement_value1 = "Run |cff20ff20THROUGH|r the boss"
+	--L.custom_off_select_charge_movement_value2 = "Run |cff20ff20CLOCKWISE|r around the boss"
+	--L.custom_off_select_charge_movement_value3 = "Run |cff20ff20COUNTER-CLOCKWISE|r around the boss"
+	--L.custom_off_select_charge_movement_value4 = "Four camps 1: Polarity changed moves |cff20ff20RIGHT|r, same polarity moves |cff20ff20LEFT|r"
+	--L.custom_off_select_charge_movement_value5 = "Four camps 2: Polarity changed moves |cff20ff20LEFT|r, same polarity moves |cff20ff20RIGHT|r"
+
+	--L.custom_off_charge_graphic = "Graphical arrow"
+	--L.custom_off_charge_graphic_desc = "Show an arrow graphic."
+	--L.custom_off_charge_text = "Text arrows"
+	--L.custom_off_charge_text_desc = "Show an additional message."
+	--L.custom_off_charge_voice = "Voice alert"
+	--L.custom_off_charge_voice_desc = "Play a voice alert."
+
+	--Translate these to get locale sound files!
+	--L.left = "<--- GO LEFT <--- GO LEFT <---"
+	--L.right = "---> GO RIGHT ---> GO RIGHT --->"
+	--L.swap = "^^^^ SWITCH SIDES ^^^^ SWITCH SIDES ^^^^"
+	--L.stay = "==== DON'T MOVE ==== DON'T MOVE ===="
 end

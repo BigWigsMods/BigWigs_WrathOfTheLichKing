@@ -14,10 +14,7 @@ end
 
 L = BigWigs:NewBossLocale("Gluth", "frFR")
 if L then
-	L.startwarn = "Gluth engagé ! ~105 sec. avant Décimer !"
-
-	L.decimatesoonwarn = "Décimer imminent !"
-	L.decimatebartext = "~Prochain Décimer"
+	L.decimate_bar = "Prochain Décimer"
 end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "frFR")
@@ -69,8 +66,7 @@ end
 
 L = BigWigs:NewBossLocale("Grobbulus", "frFR")
 if L then
-	L.bomb_message = "Injection"
-	L.bomb_message_other = "Injection mutante : %s"
+	L.injection = "Injection"
 end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "frFR")
@@ -199,13 +195,7 @@ if L then
 	L.wave1bar = "1ère vague"
 	L.wave2bar = "2ème vague"
 	L.wave2_message = "2ème vague dans 10 sec."
-end
 
-L = BigWigs:NewBossLocale("Patchwerk", "frFR")
-if L then
-	L.enragewarn = "5% - Frénésie !"
-	L.starttrigger1 = "R'cousu veut jouer !"
-	L.starttrigger2 = "R'cousu avatar de guerre pour Kel'Thuzad !"
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "frFR")
@@ -249,33 +239,49 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "frFR")
 if L then
-	L.phase = "Phases"
-	L.phase_desc = "Prévient quand la rencontre change de phase."
+	L.phase1_trigger1 = "Stalagg écraser toi !"
+	L.phase1_trigger2 = "À manger pour maître !"
+	L.phase2_trigger1 = "Manger… tes… os…"
+	L.phase2_trigger2 = "Casser... toi !"
+	L.phase2_trigger3 = "Tuer…"
+
+	L.add_death_trigger = "%s meurt."
+	L.overload_trigger = "%s entre en surcharge !"
+
+	L.polarity_changed = "La polarité a changé !"
+	L.polarity_nochange = "Même polarité !"
+	L.polarity_first_positive = "Vous êtes POSITIF !"
+	L.polarity_first_negative = "Vous êtes NÉGATIF !"
 
 	L.throw = "Lancer"
 	L.throw_desc = "Prévient quand les tanks sont lancés d'une plate-forme à l'autre."
+	L.throw_warning = "Lancer dans ~5 sec. !"
 
-	L.trigger_phase1_1 = "Stalagg écraser toi !"
-	L.trigger_phase1_2 = "À manger pour maître !"
-	L.trigger_phase2_1 = "Manger… tes… os…"
-	L.trigger_phase2_2 = "Casser... toi !"
-	L.trigger_phase2_3 = "Tuer…"
+	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
 
-	L.polarity_trigger = "Maintenant toi sentir douleur..."
-	L.polarity_message = "Thaddius commence à incanter un Changement de polarité !"
-	L.polarity_warning = "3 sec. avant Changement de polarité !"
-	L.polarity_bar = "Changement de polarité"
-	L.polarity_changed = "La polarité a changé !"
-	L.polarity_nochange = "Même polarité !"
+	--L.custom_off_select_charge_position = "First position"
+	--L.custom_off_select_charge_position_desc = "Where to move to after the first Polarity Shift."
+	--L.custom_off_select_charge_position_value1 = "|cffff2020Negative (-)|r are LEFT, |cff2020ffPositive (+)|r are RIGHT"
+	--L.custom_off_select_charge_position_value2 = "|cff2020ffPositive (+)|r are LEFT, |cffff2020Negative (-)|r are RIGHT"
 
-	L.polarity_first_positive = "Vous êtes POSITIF !"
-	L.polarity_first_negative = "Vous êtes NÉGATIF !"
+	--L.custom_off_select_charge_movement = "Movement"
+	--L.custom_off_select_charge_movement_desc = "The movement strategy your group uses."
+	--L.custom_off_select_charge_movement_value1 = "Run |cff20ff20THROUGH|r the boss"
+	--L.custom_off_select_charge_movement_value2 = "Run |cff20ff20CLOCKWISE|r around the boss"
+	--L.custom_off_select_charge_movement_value3 = "Run |cff20ff20COUNTER-CLOCKWISE|r around the boss"
+	--L.custom_off_select_charge_movement_value4 = "Four camps 1: Polarity changed moves |cff20ff20RIGHT|r, same polarity moves |cff20ff20LEFT|r"
+	--L.custom_off_select_charge_movement_value5 = "Four camps 2: Polarity changed moves |cff20ff20LEFT|r, same polarity moves |cff20ff20RIGHT|r"
 
-	L.phase1_message = "Phase 1"
-	L.phase2_message = "Phase 2, Berserk dans 6 min. !"
+	--L.custom_off_charge_graphic = "Graphical arrow"
+	--L.custom_off_charge_graphic_desc = "Show an arrow graphic."
+	--L.custom_off_charge_text = "Text arrows"
+	--L.custom_off_charge_text_desc = "Show an additional message."
+	--L.custom_off_charge_voice = "Voice alert"
+	--L.custom_off_charge_voice_desc = "Play a voice alert."
 
-	L.surge_message = "Vague de puissance sur Stalagg !"
-
-	L.throw_bar = "Lancer"
-	L.throw_warning = "Lancer dans ~5 sec. !"
+	--Translate these to get locale sound files!
+	--L.left = "<--- GO LEFT <--- GO LEFT <---"
+	--L.right = "---> GO RIGHT ---> GO RIGHT --->"
+	--L.swap = "^^^^ SWITCH SIDES ^^^^ SWITCH SIDES ^^^^"
+	--L.stay = "==== DON'T MOVE ==== DON'T MOVE ===="
 end

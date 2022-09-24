@@ -14,10 +14,7 @@ end
 
 L = BigWigs:NewBossLocale("Gluth", "esES") or BigWigs:NewBossLocale("Gluth", "esMX")
 if L then
-	--L.startwarn = "Gluth engaged, ~105 sec to decimate!"
-
-	--L.decimatesoonwarn = "Decimate Soon!"
-	--L.decimatebartext = "Decimate Zombies"
+	--L.decimate_bar = "Decimate Zombies"
 end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "esES") or BigWigs:NewBossLocale("Gothik the Harvester", "esMX")
@@ -69,8 +66,7 @@ end
 
 L = BigWigs:NewBossLocale("Grobbulus", "esES") or BigWigs:NewBossLocale("Grobbulus", "esMX")
 if L then
-	--L.bomb_message = "Injection"
-	--L.bomb_message_other = "%s is Injected!"
+	--L.injection = "Injection"
 end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "esES") or BigWigs:NewBossLocale("Heigan the Unclean", "esMX")
@@ -215,13 +211,6 @@ if L then
 	--L.wave2_message = "Wave 2 in 10 sec"
 end
 
-L = BigWigs:NewBossLocale("Patchwerk", "esES") or BigWigs:NewBossLocale("Patchwerk", "esMX")
-if L then
-	--L.enragewarn = "5% - Frenzied!"
-	--L.starttrigger1 = "Patchwerk want to play!"
-	--L.starttrigger2 = "Kel'thuzad make Patchwerk his avatar of war!"
-end
-
 L = BigWigs:NewBossLocale("Instructor Razuvious", "esES") or BigWigs:NewBossLocale("Instructor Razuvious", "esMX")
 if L then
 	--L.shout_warning = "Disrupting Shout in 5sec!"
@@ -249,33 +238,49 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "esES") or BigWigs:NewBossLocale("Thaddius", "esMX")
 if L then
-	--L.phase = "Phase"
-	--L.phase_desc = "Warn for Phase transitions"
+	--L.phase1_trigger1 = "Stalagg crush you!"
+	--L.phase1_trigger2 = "Feed you to master!"
+	--L.phase2_trigger1 = "Eat... your... bones..."
+	--L.phase2_trigger2 = "Break... you!!"
+	--L.phase2_trigger3 = "Kill..."
 
-	--L.throw = "Throw"
-	--L.throw_desc = "Warn about tank platform swaps."
+	--L.add_death_trigger = "%s dies."
+	--L.overload_trigger = "%s overloads!"
 
-	--L.trigger_phase1_1 = "Stalagg crush you!"
-	--L.trigger_phase1_2 = "Feed you to master!"
-	--L.trigger_phase2_1 = "Eat... your... bones..."
-	--L.trigger_phase2_2 = "Break... you!!"
-	--L.trigger_phase2_3 = "Kill..."
-
-	--L.polarity_trigger = "Now you feel pain..."
-	--L.polarity_message = "Polarity Shift incoming!"
-	--L.polarity_warning = "3 sec to Polarity Shift!"
-	--L.polarity_bar = "Polarity Shift"
 	--L.polarity_changed = "Polarity changed!"
 	--L.polarity_nochange = "Same polarity!"
-
 	--L.polarity_first_positive = "You're POSITIVE!"
 	--L.polarity_first_negative = "You're NEGATIVE!"
 
-	--L.phase1_message = "Phase 1"
-	--L.phase2_message = "Phase 2, Berserk in 6 minutes!"
-
-	--L.surge_message = "Power Surge on Stalagg!"
-
-	--L.throw_bar = "Throw"
+	--L.throw = "Throw"
+	--L.throw_desc = "Warn about tank platform swaps."
 	--L.throw_warning = "Throw in ~5 sec!"
+
+	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
+
+	--L.custom_off_select_charge_position = "First position"
+	--L.custom_off_select_charge_position_desc = "Where to move to after the first Polarity Shift."
+	--L.custom_off_select_charge_position_value1 = "|cffff2020Negative (-)|r are LEFT, |cff2020ffPositive (+)|r are RIGHT"
+	--L.custom_off_select_charge_position_value2 = "|cff2020ffPositive (+)|r are LEFT, |cffff2020Negative (-)|r are RIGHT"
+
+	--L.custom_off_select_charge_movement = "Movement"
+	--L.custom_off_select_charge_movement_desc = "The movement strategy your group uses."
+	--L.custom_off_select_charge_movement_value1 = "Run |cff20ff20THROUGH|r the boss"
+	--L.custom_off_select_charge_movement_value2 = "Run |cff20ff20CLOCKWISE|r around the boss"
+	--L.custom_off_select_charge_movement_value3 = "Run |cff20ff20COUNTER-CLOCKWISE|r around the boss"
+	--L.custom_off_select_charge_movement_value4 = "Four camps 1: Polarity changed moves |cff20ff20RIGHT|r, same polarity moves |cff20ff20LEFT|r"
+	--L.custom_off_select_charge_movement_value5 = "Four camps 2: Polarity changed moves |cff20ff20LEFT|r, same polarity moves |cff20ff20RIGHT|r"
+
+	--L.custom_off_charge_graphic = "Graphical arrow"
+	--L.custom_off_charge_graphic_desc = "Show an arrow graphic."
+	--L.custom_off_charge_text = "Text arrows"
+	--L.custom_off_charge_text_desc = "Show an additional message."
+	--L.custom_off_charge_voice = "Voice alert"
+	--L.custom_off_charge_voice_desc = "Play a voice alert."
+
+	--Translate these to get locale sound files!
+	--L.left = "<--- GO LEFT <--- GO LEFT <---"
+	--L.right = "---> GO RIGHT ---> GO RIGHT --->"
+	--L.swap = "^^^^ SWITCH SIDES ^^^^ SWITCH SIDES ^^^^"
+	--L.stay = "==== DON'T MOVE ==== DON'T MOVE ===="
 end

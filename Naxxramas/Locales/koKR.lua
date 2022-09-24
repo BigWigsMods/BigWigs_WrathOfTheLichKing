@@ -14,10 +14,7 @@ end
 
 L = BigWigs:NewBossLocale("Gluth", "koKR")
 if L then
-	L.startwarn = "글루스 전투 시작! 약 105초 후 좀비 척살!"
-
-	L.decimatesoonwarn = "잠시 후 척살!"
-	L.decimatebartext = "좀비 척살"
+	L.decimate_bar = "좀비 척살"
 end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "koKR")
@@ -69,8 +66,7 @@ end
 
 L = BigWigs:NewBossLocale("Grobbulus", "koKR")
 if L then
-	L.bomb_message = "돌연변이 유발"
-	L.bomb_message_other = "돌연변이 유발: %s!"
+	L.injection = "돌연변이 유발"
 end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "koKR")
@@ -181,6 +177,7 @@ if L then
 
 	L.teleport = "순간이동"
 	L.teleport_desc = "순간이동을 알립니다."
+	L.teleport_balcony = "발코니로 순간이동!"
 	L.teleportwarn = "발코니로 순간이동!"
 	L.teleportwarn2 = "10초 후 순간이동!"
 	L.teleportbar = "순간이동!"
@@ -199,13 +196,7 @@ if L then
 	L.wave1bar = "웨이브 1"
 	L.wave2bar = "웨이브 2"
 	L.wave2_message = "10초 이내 웨이브 2"
-end
 
-L = BigWigs:NewBossLocale("Patchwerk", "koKR")
-if L then
-	L.enragewarn = "5% - 광기!"
-	L.starttrigger1 = "패치워크랑 놀아줘!"
-	L.starttrigger2 = "켈투자드님이 패치워크 싸움꾼으로 만들었다."
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "koKR")
@@ -249,33 +240,48 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "koKR")
 if L then
-	L.phase = "단계 변경"
-	L.phase_desc = "단계 변경을 알립니다."
+	L.phase1_trigger1 = "스탈라그, 박살낸다!"
+	L.phase1_trigger2 = "너 주인님께 바칠꺼야!"
+	L.phase2_trigger1 = "잡아... 먹어주마..."
+	L.phase2_trigger2 = "박살을 내주겠다!"
+	L.phase2_trigger3 = "죽여주마..."
 
-	L.throw = "던지기"
-	L.throw_desc = "탱커 위치 교체를 알립니다."
+	L.add_death_trigger = "%s|1이;가; 죽습니다."
+	L.overload_trigger = "%s|1이;가; 과부하 상태가 됩니다."
 
-	L.trigger_phase1_1 = "스탈라그, 박살낸다!"
-	L.trigger_phase1_2 = "너 주인님께 바칠꺼야!"
-	L.trigger_phase2_1 = "잡아... 먹어주마..."
-	L.trigger_phase2_2 = "박살을 내주겠다!"
-	L.trigger_phase2_3 = "죽여주마..."
-
-	L.polarity_trigger = "자, 고통을 느껴봐라..."
-	L.polarity_message = "타디우스 극성 변환 시전!"
-	L.polarity_warning = "3초 이내 극성 변환!"
-	L.polarity_bar = "극성 변환"
 	L.polarity_changed = "극성 변경됨!"
 	L.polarity_nochange = "같은 극성!"
-
-	L.phase1_message = "타디우스 1 단계"
-	L.phase2_message = "타디우스 2 단계, 6분 후 격노!"
-
 	L.polarity_first_positive = "당신은 플러스!"
 	L.polarity_first_negative = "당신은 마이너스!"
 
-	L.surge_message = "스탈라그 마력의 쇄도!"
-
-	L.throw_bar = "던지기"
+	L.throw = "던지기"
+	L.throw_desc = "탱커 위치 교체를 알립니다."
 	L.throw_warning = "약 5초 후 던지기!"
+
+	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
+
+	--L.custom_off_select_charge_position = "First position"
+	--L.custom_off_select_charge_position_desc = "Where to move to after the first Polarity Shift."
+	--L.custom_off_select_charge_position_value1 = "|cffff2020Negative (-)|r are LEFT, |cff2020ffPositive (+)|r are RIGHT"
+	--L.custom_off_select_charge_position_value2 = "|cff2020ffPositive (+)|r are LEFT, |cffff2020Negative (-)|r are RIGHT"
+
+	--L.custom_off_select_charge_movement = "Movement"
+	--L.custom_off_select_charge_movement_desc = "The movement strategy your group uses."
+	--L.custom_off_select_charge_movement_value1 = "Run |cff20ff20THROUGH|r the boss"
+	--L.custom_off_select_charge_movement_value2 = "Run |cff20ff20CLOCKWISE|r around the boss"
+	--L.custom_off_select_charge_movement_value3 = "Run |cff20ff20COUNTER-CLOCKWISE|r around the boss"
+	--L.custom_off_select_charge_movement_value4 = "Four camps 1: Polarity changed moves |cff20ff20RIGHT|r, same polarity moves |cff20ff20LEFT|r"
+	--L.custom_off_select_charge_movement_value5 = "Four camps 2: Polarity changed moves |cff20ff20LEFT|r, same polarity moves |cff20ff20RIGHT|r"
+
+	--L.custom_off_charge_graphic = "Graphical arrow"
+	--L.custom_off_charge_graphic_desc = "Show an arrow graphic."
+	--L.custom_off_charge_text = "Text arrows"
+	--L.custom_off_charge_text_desc = "Show an additional message."
+	--L.custom_off_charge_voice = "Voice alert"
+	--L.custom_off_charge_voice_desc = "Play a voice alert."
+
+	L.left = "<--- 왼쪽으로 <--- 왼쪽으로 <---"
+	L.right = "---> 오른쪽으로 ---> 오른쪽으로 --->"
+	L.swap = "^^^^ 방향 전환 ^^^^ 방향 전환 ^^^^"
+	L.stay = "==== 움직 이지마 ==== 움직 이지마 ===="
 end

@@ -2,27 +2,19 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Gluth", 533, 1612)
+local mod, CL = BigWigs:NewBoss("Gluth", 533, 1612)
 if not mod then return end
 mod:RegisterEnableMob(15932)
-mod.toggleOptions = {28371, 54426, "berserk"}
-
---------------------------------------------------------------------------------
--- Locals
---
-
-local enrageTime = 420
+mod:SetEncounterID(1108)
+-- mod:SetRespawnTime(0) -- resets, doesn't respawn, doesn't fuck off
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:NewLocale()
 if L then
-	L.startwarn = "Gluth engaged, ~105 sec to decimate!"
-
-	L.decimatesoonwarn = "Decimate Soon!"
-	L.decimatebartext = "Decimate Zombies"
+	L.decimate_bar = "Decimate Zombies"
 end
 L = mod:GetLocale()
 
@@ -30,41 +22,72 @@ L = mod:GetLocale()
 -- Initialization
 --
 
+function mod:GetOptions()
+	return {
+		{25646, "TANK_HEALER"}, -- Mortal Wound
+		28371, -- Enrage
+		28374, -- Decimate
+		1604, -- Dazed
+		"berserk",
+	}
+end
+
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "Frenzy", 28371, 54427)
+	self:Log("SPELL_AURA_APPLIED", "MortalWound", 25646, 54378)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "MortalWound", 25646, 54378)
+	self:Log("SPELL_CAST_SUCCESS", "Enrage", 28371, 54427)
 	self:Log("SPELL_DAMAGE", "Decimate", 28375, 54426)
 	self:Log("SPELL_MISSED", "Decimate", 28375, 54426)
-	self:Death("Win", 15932)
-
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
+	self:Log("SPELL_AURA_APPLIED", "Dazed", 1604)
 end
 
 function mod:OnEngage(diff)
-	self:Berserk(diff == 3 and 480 or 420, true)
-	self:MessageOld(54426, "yellow", nil, L["startwarn"], false)
-	self:CDBar(54426, 105, L["decimatebartext"])
-	self:DelayedMessage(54426, 100, "orange", L["decimatesoonwarn"])
+	self:Berserk(diff == 3 and 480 or 420)
+	self:Bar(25646, 11.3) -- Mortal Wound
+	self:CDBar(28374, 90) -- Decimate
+	self:DelayedMessage(28374, 85, "orange", CL.soon:format(self:SpellName(28374)), 28374, "alarm")
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Frenzy(args)
-	self:MessageOld(28371, "red")
+function mod:MortalWound(args)
+	self:StackMessage(25646, "purple", args.destName, args.amount, 5)
+	if self:Tank() and (args.amount or 1) > 4 then
+		self:PlaySound(25646, "warning")
+	end
+	self:Bar(25646, 11.3)
+end
+
+function mod:Enrage(args)
+	self:Message(28371, "red")
+	if self:Dispeller("enrage", true) then
+		self:PlaySound(28371, "alert")
+	end
+	self:Bar(28371, 8)
 end
 
 do
-	local last = 0
+	local prev = 0
 	function mod:Decimate(args)
-		local t = GetTime()
-		if t-5 > last then
-			self:MessageOld(54426, "yellow", "alert")
-			self:CDBar(54426, 105, L["decimatebartext"])
-			self:DelayedMessage(54426, 100, "orange", L["decimatesoonwarn"])
-			last = t
+		local t = args.time
+		if t - prev > 5 then
+			prev = t
+			self:Message(28374, "yellow")
+			self:PlaySound(28374, "long")
+			self:CDBar(28374, 90)
+			self:DelayedMessage(28374, 85, "orange", CL.soon:format(args.spellName), 28374, "alarm")
 		end
 	end
 end
 
+do
+	local prev = {}
+	function mod:Dazed(args)
+		if args.time - (prev[args.destName] or 0) > 5 then
+			prev[args.destName] = args.time
+			self:TargetMessage(args.spellId, "orange", args.destName)
+		end
+	end
+end

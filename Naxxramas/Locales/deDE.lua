@@ -14,10 +14,7 @@ end
 
 L = BigWigs:NewBossLocale("Gluth", "deDE")
 if L then
-	L.startwarn = "Gluth angegriffen! ~105 sek bis Dezimieren!"
-
-	L.decimatesoonwarn = "Dezimieren bald!"
-	L.decimatebartext = "~Dezimieren"
+	L.decimate_bar = "Dezimieren"
 end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "deDE")
@@ -69,8 +66,7 @@ end
 
 L = BigWigs:NewBossLocale("Grobbulus", "deDE")
 if L then
-	L.bomb_message = "Injektion"
-	L.bomb_message_other = "%s ist verseucht!"
+	L.injection = "Injektion"
 end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "deDE")
@@ -201,13 +197,6 @@ if L then
 	L.wave2_message = "Welle 2 in 10 sek!"
 end
 
-L = BigWigs:NewBossLocale("Patchwerk", "deDE")
-if L then
-	L.enragewarn = "5% - Raserei!"
-	L.starttrigger1 = "Flickwerk spielen möchte!"
-	L.starttrigger2 = "Kel’Thuzad macht Flickwerk zu seinem Abgesandten von Krieg!" -- Yes, that's really a ´ instead of a '
-end
-
 L = BigWigs:NewBossLocale("Maexxna", "deDE")
 if L then
 	L.webspraywarn30sec = "Fangnetz in 10 sek!"
@@ -249,33 +238,48 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "deDE")
 if L then
-	L.phase = "Phasen"
-	L.phase_desc = "Warnt bei Phasenwechsel."
+	L.phase1_trigger1 = "Stalagg zerquetschen!"
+	L.phase1_trigger2 = "Verfüttere euch an Meister!"
+	L.phase2_trigger1 = "Eure... Knochen... zermalmen..."
+	L.phase2_trigger2 = "Euch... zerquetschen!"
+	L.phase2_trigger3 = "Töten..."
 
-	L.throw = "Magnetische Anziehung"
-	L.throw_desc = "Warnt, wenn die Tanks die Plattform wechseln."
+	L.add_death_trigger = "%s stirbt."
+	L.overload_trigger = "%s überlädt!"
 
-	L.trigger_phase1_1 = "Stalagg zerquetschen!"
-	L.trigger_phase1_2 = "Verfüttere euch an Meister!"
-	L.trigger_phase2_1 = "Eure... Knochen... zermalmen..."
-	L.trigger_phase2_2 = "Euch... zerquetschen!"
-	L.trigger_phase2_3 = "Töten..."
-
-	L.polarity_trigger = "Jetzt spürt ihr den Schmerz..."
-	L.polarity_message = "Thaddius beginnt Polaritätsveränderung zu wirken!"
-	L.polarity_warning = "Polaritätsveränderung in 3 sek!"
-	L.polarity_bar = "Polaritätsveränderung"
 	L.polarity_changed = "Polarität geändert!"
 	L.polarity_nochange = "Selbe Polarität!"
-
 	L.polarity_first_positive = "Du bist POSITIV!"
 	L.polarity_first_negative = "Du bist NEGATIV!"
 
-	L.phase1_message = "Phase 1"
-	L.phase2_message = "Thaddius Phase 2, Berserker in 6 min"
-
-	L.surge_message = "Kraftsog auf Stalagg!"
-
-	L.throw_bar = "Magnetische Anziehung"
+	L.throw = "Magnetische Anziehung"
+	L.throw_desc = "Warnt, wenn die Tanks die Plattform wechseln."
 	L.throw_warning = "Magnetische Anziehung in ~5 sek!"
+
+	L.polarity_extras = "Zusätzliche Warnungen für Polaritätsveränderung-Positionierung"
+
+	L.custom_off_select_charge_position = "Erste Position"
+	L.custom_off_select_charge_position_desc = "Einzunehmende Position nach erster Polaritätsveränderung."
+	L.custom_off_select_charge_position_value1 = "|cffff2020Negative (-)|r sind LINKS, |cff2020ffPositive (+)|r sind RECHTS"
+	L.custom_off_select_charge_position_value2 = "|cff2020ffPositive (+)|r sind LINKS, |cffff2020Negative (-)|r sind RECHTS"
+
+	L.custom_off_select_charge_movement = "Bewegung"
+	L.custom_off_select_charge_movement_desc = "Die Bewegungsstrategie, welche die Gruppe nutzt."
+	L.custom_off_select_charge_movement_value1 = "Laufe |cff20ff20DURCH|r den Boss"
+	L.custom_off_select_charge_movement_value2 = "Laufe |cff20ff20IM UHRZEIGERSINN|r um den Boss"
+	L.custom_off_select_charge_movement_value3 = "Laufe |cff20ff20GEGEN UHRZEIGERSINN|r um den Boss"
+	L.custom_off_select_charge_movement_value4 = "Vier Camps 1: Geänderte Polarität läuft |cff20ff20RECHTS|r, gleiche Polaritäte läuft |cff20ff20LINKS|r"
+	L.custom_off_select_charge_movement_value5 = "Vier Camps 2: Geänderte Polarität läuft |cff20ff20LINKS|r, gleiche Polaritäte läuft |cff20ff20RECHTS|r"
+
+	L.custom_off_charge_graphic = "Grafischer Pfeil"
+	L.custom_off_charge_graphic_desc = "Zeigt eine Pfeilgrafik an."
+	L.custom_off_charge_text = "Textpfeile"
+	L.custom_off_charge_text_desc = "Zeigt eine zusätzliche Nachricht."
+	L.custom_off_charge_voice = "Sprachwarnung"
+	L.custom_off_charge_voice_desc = "Spielt eine Sprachwarnung ab."
+
+	L.left = "<--- Nach Links <--- Nach Links <---"
+	L.right = "---> Nach Rechts ---> Nach Rechts --->"
+	L.swap = "^^^^ Seitenwechseln ^^^^ Seitenwechseln ^^^^"
+	L.stay = "==== Nicht Bewegen ==== Nicht Bewegen ===="
 end
