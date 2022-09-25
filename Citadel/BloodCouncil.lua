@@ -96,12 +96,13 @@ function mod:RegularShock()
 	local boss = self:GetUnitIdByGUID(37970)
 	if boss then
 		local bossTarget = boss.."target"
-		if UnitExists(bossTarget) then
+		local target = self:UnitName(bossTarget)
+		if target then
 			if self:Me(self:UnitGUID(bossTarget)) then
 				self:Flash(72037)
 				self:Say(72037)
 			end
-			self:TargetMessageOld(72037, self:UnitName(bossTarget), "orange", nil, L["regular_shock_message"])
+			self:TargetMessageOld(72037, target, "orange", nil, L["regular_shock_message"])
 			self:CDBar(72037, 16, L["shock_bar"])
 		end
 	end
