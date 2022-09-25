@@ -29,6 +29,8 @@
 
 ## X-Category: Raid
 ## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask us about anything else.
+## X-Curse-Project-ID: 50417
+## X-WoWI-ID: 22086
 ## X-BigWigs-LoadOn-InstanceId: 249, 533, 603, 615, 616, 624, 631, 649, 724
 
 modules.xml
