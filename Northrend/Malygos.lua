@@ -86,7 +86,7 @@ function mod:OnEngage()
 	self:Bar("sparks", 25, L["sparks"], 56152)
 	self:DelayedMessage("sparks", 20, "yellow", L["sparks_warning"])
 	self:Berserk(600)
-	self:RegisterUnitEvent("UNIT_HEALTH", nil, "target", "focus")
+	self:RegisterEvent("UNIT_HEALTH")
 end
 
 --------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ end
 
 function mod:Phase2()
 	phase = 2
-	self:UnregisterUnitEvent("UNIT_HEALTH", "target", "focus")
+	self:UnregisterEvent("UNIT_HEALTH")
 	self:CancelDelayedMessage(L["vortex_warning"])
 	self:CancelDelayedMessage(L["sparks_warning"])
 	self:StopBar(L["sparks"])
@@ -161,10 +161,10 @@ end
 
 function mod:UNIT_HEALTH(event, unit)
 	if phase == 1 and self:MobId(self:UnitGUID(unit)) == 28859 then
-		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+		local hp = self:GetHealtH(unit)
 		if hp < 54 then
 			self:MessageOld("phase", "yellow", nil, L["phase2_warning"], false)
-			self:UnregisterUnitEvent(event, "target", "focus")
+			self:UnregisterEvent(event)
 		end
 	end
 end

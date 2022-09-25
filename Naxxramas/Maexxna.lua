@@ -134,11 +134,11 @@ end
 function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 15952 then
 		local hp = self:GetHealth(unit)
-		if hp > 30 and hp < 35 then
-			self:Message(28747, "orange", L.enragesoonwarn)
-			self:PlaySound(28747, "alarm")
-			self:UnregisterEvent(event)
-		elseif hp < 30 then -- too fast!
+		if hp < 35 then
+			if hp > 30 then
+				self:Message(28747, "orange", L.enragesoonwarn)
+				self:PlaySound(28747, "alarm")
+			end
 			self:UnregisterEvent(event)
 		end
 	end

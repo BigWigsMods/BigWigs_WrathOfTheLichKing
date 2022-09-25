@@ -117,8 +117,7 @@ function mod:ENCOUNTER_START()
 
 	self:OpenProximity("proximity", 10)
 
-	self:RegisterUnitEvent("UNIT_HEALTH", nil, "target", "focus")
-	self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+	self:RegisterEvent("UNIT_HEALTH")
 end
 
 function mod:ShadowFissure(args)
@@ -179,7 +178,7 @@ function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 15990 then
 		local hp = self:GetHealth(unit)
 		if hp < 46 then
-			self:UnregisterUnitEvent(event, "target", "focus")
+			self:UnregisterEvent(event)
 			self:Message("stages", "cyan", CL.soon:format(CL.stage:format(3)), false)
 			self:PlaySound("stages", "info")
 		end

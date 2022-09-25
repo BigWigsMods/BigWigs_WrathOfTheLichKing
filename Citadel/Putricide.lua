@@ -77,7 +77,7 @@ function mod:OnEngage()
 	p2, first = nil, nil
 	self:Bar(70351, 25, L["experiment_bar"])
 
-	self:RegisterUnitEvent("UNIT_HEALTH", nil, "target", "focus")
+	self:RegisterEvent("UNIT_HEALTH")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 end
 
@@ -100,7 +100,7 @@ do
 		else
 			mod:MessageOld("phase", "green", nil, CL.phase:format(3), false)
 			first = nil
-			mod:UnregisterUnitEvent("UNIT_HEALTH", "target", "focus")
+			mod:UnregisterEvent("UNIT_HEALTH")
 		end
 	end
 
@@ -144,13 +144,13 @@ end
 
 function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 36678 then
-		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+		local hp = self:GetHealth(unit)
 		if hp < 84 and not p2 then
 			self:MessageOld("phase", "green", nil, L["phase_warning"]:format(2), false)
 			p2 = true
 		elseif hp < 38 then
 			self:MessageOld("phase", "green", nil, L["phase_warning"]:format(3), false)
-			self:UnregisterUnitEvent(event, "target", "focus")
+			self:UnregisterEvent(event)
 		end
 	end
 end
