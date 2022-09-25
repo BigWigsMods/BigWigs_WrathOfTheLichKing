@@ -79,12 +79,9 @@ function mod:Switch(args)
 	self:MessageOld(70981, "green", "info", L["switch_message"]:format(args.destName))
 	self:CDBar(70981, 45, L["switch_bar"])
 	self:StopBar(L["empowered_flames"])
-	for i = 1, 3 do
-		local bossId = ("boss%d"):format(i)
-		if self:UnitGUID(bossId) == args.destGUID then
-			self:PrimaryIcon("iconprince", bossId)
-			break
-		end
+	local boss = self:GetUnitIdByGUID(args.destGUID)
+	if boss then
+		self:PrimaryIcon("iconprince", boss)
 	end
 end
 
@@ -96,19 +93,16 @@ function mod:EmpoweredShock(_, spellId)
 end
 
 function mod:RegularShock()
-	for i = 1, 3 do
-		local boss = ("boss%d"):format(i)
-		if self:MobId(self:UnitGUID(boss)) == 37970 then
-			local bossTarget = boss.."target"
-			if UnitExists(bossTarget) then
-				if UnitIsUnit("player", bossTarget) then
-					self:Flash(72037)
-					self:Say(72037)
-				end
-				self:TargetMessageOld(72037, self:UnitName(bossTarget), "orange", nil, L["regular_shock_message"])
-				self:CDBar(72037, 16, L["shock_bar"])
+	local boss = self:GetUnitIdByGUID(37970)
+	if boss then
+		local bossTarget = boss.."target"
+		if UnitExists(bossTarget) then
+			if self:Me(self:UnitGUID(bossTarget)) then
+				self:Flash(72037)
+				self:Say(72037)
 			end
-			break
+			self:TargetMessageOld(72037, self:UnitName(bossTarget), "orange", nil, L["regular_shock_message"])
+			self:CDBar(72037, 16, L["shock_bar"])
 		end
 	end
 end

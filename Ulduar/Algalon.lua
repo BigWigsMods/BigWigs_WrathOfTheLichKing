@@ -40,7 +40,7 @@ end
 function mod:OnEngage()
 	blackholes = 0
 
-	self:RegisterUnitEvent("UNIT_TARGETABLE_CHANGED", nil, "boss1")
+	self:RegisterEvent("UNIT_TARGETABLE_CHANGED")
 	--self:Bar("stages", 8+offset, CL["phase"]:format(1), "INV_Gizmo_01") -- XXX FIXME
 end
 
@@ -49,8 +49,8 @@ end
 --
 
 function mod:UNIT_TARGETABLE_CHANGED(_, unit)
-	if UnitCanAttack("player", unit) then -- Engage
-		self:RegisterUnitEvent("UNIT_HEALTH", nil, unit)
+	if self:MobId(self:UnitGUID(unit)) == 32871 and UnitCanAttack("player", unit) then -- Engage
+		self:RegisterEvent("UNIT_HEALTH")
 		self:Bar(64443, 98) -- Big Bang
 		self:DelayedMessage(64443, 93, "yellow", CL.soon:format(self:SpellName(64443)))
 		self:Bar(64597, 33) -- Cosmic Smash
@@ -59,10 +59,11 @@ function mod:UNIT_TARGETABLE_CHANGED(_, unit)
 end
 
 function mod:UNIT_HEALTH(event, unit)
-	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+	if self:MobId(self:UnitGUID(unit)) ~= 32871 then return end
+	local hp = self:GetHealth(unit)
 	if hp < 21 then
 		self:MessageOld("stages", "green", nil, CL["soon"]:format(CL["phase"]:format(2)), false)
-		self:UnregisterUnitEvent(event, unit)
+		self:UnregisterEvent(event)
 	end
 end
 

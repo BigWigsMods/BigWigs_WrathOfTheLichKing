@@ -45,7 +45,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED_DOSE", "Bloat", 72219)
 	self:Death("Win", 36626)
 
-	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1")
+	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:BossYell("Engage", L["engage_trigger"])
 
@@ -118,8 +118,12 @@ do
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
-	if spellId == 72299 then
-		self:MessageOld(72295, "red", nil, L["ball_message"])
+do
+	local prev = 0
+	function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castId, spellId)
+		if spellId == 72299 and castId ~= prev then
+			prev = castId
+			self:MessageOld(72295, "red", nil, L["ball_message"])
+		end
 	end
 end

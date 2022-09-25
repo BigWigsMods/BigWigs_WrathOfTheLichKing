@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Icecrown Gunship Battle", 631, 1626)
 if not mod then return end
 mod:RegisterEnableMob(37184) -- Zafod Boombox
--- mod:SetEncounterID(1099)
+mod:SetEncounterID(1099) -- XXX untested
 -- mod:SetRespawnTime(30)
 mod.toggleOptions = {"adds", "mage"}
 
@@ -57,7 +57,8 @@ end
 do
 	local count = 0
 	function mod:INSTANCE_ENCOUNTER_ENGAGE_UNIT()
-		--Need some sensible event args please Blizz
+		-- Need some sensible event args please Blizz
+		-- XXX this probably needs a rework for Classic
 		count = count + 1
 		if count == 2 then --2 bosses engaged
 			count = 0

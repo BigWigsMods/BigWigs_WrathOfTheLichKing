@@ -66,7 +66,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_DAMAGE", "DevouringFlameDamage", 64733)
 	self:Log("SPELL_MISSED", "DevouringFlameDamage", 64733)
 
-	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
+	self:RegisterEvent("UNIT_HEALTH")
 	self:Log("SPELL_CAST_SUCCESS", "WingBuffetCastEnd", 62666)
 	self:Log("SPELL_AURA_APPLIED", "Harpooned", 62794)
 	self:Log("SPELL_AURA_REMOVED", "HarpoonedOver", 62794)
@@ -118,10 +118,11 @@ do
 end
 
 function mod:UNIT_HEALTH(event, unit)
-	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+	if self:MobId(self:UnitGUID(unit)) ~= 33186 then return end -- Razorscale
+	local hp = self:GetHealth(unit)
 	if hp > 51 and hp < 56 then
 		self:MessageOld("stages", "green", nil, CL.soon:format(CL.stage:format(2)), false)
-		self:UnregisterUnitEvent(event, unit)
+		self:UnregisterEvent(event)
 	end
 end
 
@@ -140,8 +141,8 @@ end
 
 function mod:HarpoonedOver(args)
 	self:StopBar(args.spellName)
-	local hp = UnitHealth("boss1") / UnitHealthMax("boss1") * 100
-	if hp < 50 then -- Stage 2 (Permanently grounded) begins
+	local boss = self:GetUnitIdByGUID(args.destGUID)
+	if boss and self:GetHealth(boss) < 50 then -- Stage 2 (Permanently grounded) begins
 		stage = 2
 		self:MessageOld("stages", "yellow", nil, CL.stage:format(2), false)
 	end
