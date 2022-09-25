@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Kel'Thuzad Naxxramas", 533, 1615)
 if not mod then return end
 mod:RegisterEnableMob(15990)
-mod:SetEncounterID(1114)
+-- mod:SetEncounterID(1114)
 mod:SetRespawnTime(30)
 
 --------------------------------------------------------------------------------

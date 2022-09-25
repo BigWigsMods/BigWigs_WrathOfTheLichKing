@@ -125,10 +125,10 @@ function mod:Icebolt(args)
 end
 
 function mod:IceBomb(args)
+	breathCount = breathCount + 1
 	self:Message(28524, "red", L.ice_bomb, L.ice_bomb_icon)
 	self:PlaySound(28524, "alarm")
-	self:PrimaryIcon(28522, nil)
-	breathCount = breathCount + 1
+	self:PrimaryIcon(28522)
 end
 
 do

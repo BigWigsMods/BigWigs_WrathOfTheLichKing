@@ -105,7 +105,7 @@ do
 	local inCocoon = mod:NewTargetList()
 	function mod:WebWrap(args)
 		inCocoon[#inCocoon + 1] = args.destName
-		self:TargetsMessage("web_wrap", "red", inCocoon, 0, L.cocoons, L.web_wrap_icon)
+		self:TargetsMessageOld("web_wrap", "red", inCocoon, 0, L.cocoons, L.web_wrap_icon)
 		-- "on me" is "Cocoons on YOU!" and I hate it.
 		if self:Me(args.destGUID) then
 			self:PlaySound("web_wrap", "alarm")
