@@ -75,7 +75,8 @@ function mod:OnBossEnable()
 	-- self:BossYell("Engage", L.phase1_trigger1, L.phase1_trigger2)
 	self:BossYell("Phase2", L.phase2_trigger)
 	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE") -- Unlocalized phase2 trigger
-	self:Death("Deaths", 16125, 16126) -- Death Knight, Rider
+	self:Death("DeathKnightDeath", 16125) -- Death Knight
+	self:Death("RiderDeath", 16126) -- Rider
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 end
@@ -103,14 +104,14 @@ end
 -- Event Handlers
 --
 
-function mod:Deaths(args)
-	if args.mobId == 16125 then
-		self:Message("add_death", "red", L.dkdiewarn, "ability_whirlwind")
-		self:PlaySound("add_death", "info")
-	elseif args.mobId == 16126 then
-		self:Message("add_death", "red", L.riderdiewarn, "ability_warstomp")
-		self:PlaySound("add_death", "alert")
-	end
+function mod:DeathKnightDeath(args)
+	self:Message("add_death", "red", L.dkdiewarn, "ability_whirlwind")
+	self:PlaySound("add_death", "info")
+end
+
+function mod:RiderDeath(args)
+	self:Message("add_death", "red", L.riderdiewarn, "ability_warstomp")
+	self:PlaySound("add_death", "alert")
 end
 
 function mod:Phase2()
