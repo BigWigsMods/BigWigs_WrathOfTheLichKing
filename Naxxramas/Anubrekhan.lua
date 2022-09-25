@@ -38,9 +38,9 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Impale", 28783, 56090)
-	self:Log("SPELL_CAST_START", "LocusSwarm", 28785, 54021)
-	self:Log("SPELL_AURA_APPLIED", "LocusSwarmApplied", 28785, 54021)
-	self:Log("SPELL_AURA_REMOVED", "LocusSwarmRemoved", 28785, 54021)
+	self:Log("SPELL_CAST_START", "LocustSwarm", 28785, 54021)
+	self:Log("SPELL_AURA_APPLIED", "LocustSwarmApplied", 28785, 54021)
+	self:Log("SPELL_AURA_REMOVED", "LocustSwarmRemoved", 28785, 54021)
 
 	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE")
 end
@@ -76,14 +76,14 @@ function mod:Impale(args)
 	-- self:CDBar(28783, 10) -- 10~35s z.z
 end
 
-function mod:LocusSwarm(args)
+function mod:LocustSwarm(args)
 	self:StopBar(28785)
 	self:Message(28785, "yellow")
 	self:PlaySound(28785, "long")
 	self:Bar(28785, 3, CL.incoming:format(L.locus), "spell_shadow_carrionswarm")
 end
 
-function mod:LocusSwarmApplied(args)
+function mod:LocustSwarmApplied(args)
 	if self:MobId(args.destGUID) == 15956 then
 		self:Bar(28785, args.spellId == 28785 and 16 or 20, ("<%s>"):format(args.spellName), "spell_shadow_carrionswarm")
 		self:CDBar(28785, 92) -- 92~104s in 25n
@@ -91,7 +91,7 @@ function mod:LocusSwarmApplied(args)
 	end
 end
 
-function mod:LocusSwarmRemoved(args)
+function mod:LocustSwarmRemoved(args)
 	if self:MobId(args.destGUID) == 15956 then
 		self:Message(28785, "green", CL.over:format(args.spellName))
 		self:PlaySound(28785, "info")
