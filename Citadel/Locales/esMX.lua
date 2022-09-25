@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("Blood Prince Council", "esES")
+local L = BigWigs:NewBossLocale("Blood Prince Council", "esMX")
 if not L then return end
 if L then
 	L.switch_message = "Cambio de objetivo: %s"
@@ -16,7 +16,7 @@ if L then
 	L.prison_message = "¡Prisión de las Sombras x%d!"
 end
 
-L = BigWigs:NewBossLocale("Lady Deathwhisper", "esES")
+L = BigWigs:NewBossLocale("Lady Deathwhisper", "esMX")
 if L then
 	L.engage_trigger = "¿Qué es este alboroto? ¿Osáis entrar en suelo sagrado? ¡Este será vuestro lugar de reposo final!"
 	L.phase2_message = "¡Barrera BAJA - Fase 2!"
@@ -37,7 +37,7 @@ if L then
 	L.spirit_bar = "Nuevos Espíritus"
 end
 
-L = BigWigs:NewBossLocale("Festergut", "esES")
+L = BigWigs:NewBossLocale("Festergut", "esMX")
 if L then
 	L.engage_trigger = "¿A divertirse?"
 
@@ -46,7 +46,7 @@ if L then
 	L.ball_message = "¡Lanzando Moco maleable!"
 end
 
-L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "esES")
+L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "esMX")
 if L then
 	L.adds = "Portal"
 	L.adds_desc = "Avisar Portal."
@@ -67,7 +67,7 @@ if L then
 	L.disable_trigger_horde = "Onward to the Lich King"
 end
 
-L = BigWigs:NewBossLocale("Blood-Queen Lana'thel", "esES")
+L = BigWigs:NewBossLocale("Blood-Queen Lana'thel", "esMX")
 if L then
 	L.engage_trigger = "Habéis tomado una... decisión... incorrecta."
 
@@ -85,7 +85,7 @@ if L then
 	L.phase2_bar = "Fase aérea"
 end
 
-L = BigWigs:NewBossLocale("The Lich King", "esES")
+L = BigWigs:NewBossLocale("The Lich King", "esMX")
 if L then
 	L.warmup_trigger = "¿Así que por fin ha llegado la elogiada justicia de la Luz?"
 	L.engage_trigger = "Te mantendré vivo para presenciar el final, Vadín"
@@ -109,14 +109,14 @@ if L then
 	--L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
 end
 
-L = BigWigs:NewBossLocale("Lord Marrowgar", "esES")
+L = BigWigs:NewBossLocale("Lord Marrowgar", "esMX")
 if L then
 	L.engage_trigger = "¡La Plaga arrasará este mundo como un enjambre de muerte y destrucción!"
 
 	L.bonestorm_warning = "¡Tormenta ósea en 5 sec!"
 end
 
-L = BigWigs:NewBossLocale("Professor Putricide", "esES")
+L = BigWigs:NewBossLocale("Professor Putricide", "esMX")
 if L then
 	L.engage_trigger = "¡Buenas noticias, amigos!"
 
@@ -138,7 +138,7 @@ if L then
 	L.gasbomb_message = "¡Bomba de gas asfixiante!"
 end
 
-L = BigWigs:NewBossLocale("Rotface", "esES")
+L = BigWigs:NewBossLocale("Rotface", "esMX")
 if L then
 	L.engage_trigger = "¡WEEEEEEE!"
 
@@ -151,7 +151,7 @@ if L then
 	L.spray_bar = "Siguiente Pulverizador"
 end
 
-L = BigWigs:NewBossLocale("Deathbringer Saurfang", "esES")
+L = BigWigs:NewBossLocale("Deathbringer Saurfang", "esMX")
 if L then
 	L.adds = "Bestias de sangre"
 	L.adds_desc = "Shows a timer and messages for when Blood Beasts spawn."
@@ -163,7 +163,7 @@ if L then
 	L.warmup_horde = "Kor'kron, move out! Champions, watch your backs. The Scourge have been..."
 end
 
-L = BigWigs:NewBossLocale("Sindragosa", "esES")
+L = BigWigs:NewBossLocale("Sindragosa", "esMX")
 if L then
 	L.engage_trigger = "¡Estáis locos por haber venido aquí!"
 
@@ -187,7 +187,7 @@ if L then
 	L.buffet_cd = "Siguiente Sacudida mística"
 end
 
-L = BigWigs:NewBossLocale("Valithria Dreamwalker", "esES")
+L = BigWigs:NewBossLocale("Valithria Dreamwalker", "esMX")
 if L then
 	L.engage_trigger = "Han entrado intrusos en el Sagrario Interior."
 
@@ -208,7 +208,7 @@ if L then
 	L.blazing_warning = "¡Esqueleto llameante pronto!"
 end
 
-L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "esES")
+L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "esMX")
 if L then
 	L.deathbound_ward = "Depositario vinculado a la muerte"
 	--L.deathspeaker_adds = "Lady Deathwhisper Trash"

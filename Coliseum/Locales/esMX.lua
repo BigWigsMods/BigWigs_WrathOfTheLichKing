@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("Anub'arak", "esES")
+local L = BigWigs:NewBossLocale("Anub'arak", "esMX")
 if not L then return end
 if L then
 	L.engage_message = "¡Anub'arak activo, se entierra en 80sec!"
@@ -18,7 +18,7 @@ if L then
 	L.chase = "Perseguido"
 end
 
-L = BigWigs:NewBossLocale("The Beasts of Northrend", "esES")
+L = BigWigs:NewBossLocale("The Beasts of Northrend", "esMX")
 if L then
 	L.wipe_trigger = "Trágico..."
 
@@ -57,7 +57,7 @@ if L then
 	L.bosses_desc = "Avisa cuando los Jefes esten entrando."
 end
 
-L = BigWigs:NewBossLocale("Faction Champions", "esES")
+L = BigWigs:NewBossLocale("Faction Champions", "esMX")
 if L then
 	L.defeat_trigger = "Una victoria trágica y fútil."
 
@@ -69,7 +69,7 @@ if L then
 	L["Bloodlust on champions!"] = "¡Ansia de sangre en campeones!"
 end
 
-L = BigWigs:NewBossLocale("Lord Jaraxxus", "esES")
+L = BigWigs:NewBossLocale("Lord Jaraxxus", "esMX")
 if L then
 	L.enable_trigger = "¡Un gnomo insignificante! ¡Tu arrogancia será tu perdición!"
 
@@ -96,7 +96,7 @@ if L then
 	L.kiss_interrupted = "¡Cortado!"
 end
 
-L = BigWigs:NewBossLocale("The Twin Val'kyr", "esES")
+L = BigWigs:NewBossLocale("The Twin Val'kyr", "esMX")
 if L then
 	L.engage_trigger1 = "En el nombre de nuestro oscuro maestro. Por el Rey Exánime. Morirás."
 

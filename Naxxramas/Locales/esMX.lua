@@ -1,23 +1,23 @@
-local L = BigWigs:NewBossLocale("Anub'Rekhan", "esES")
+local L = BigWigs:NewBossLocale("Anub'Rekhan", "esMX")
 if not L then return end
 if L then
 	L.add = "Guardia de la cripta"
 	L.locust = "Langosta"
 end
 
-L = BigWigs:NewBossLocale("Grand Widow Faerlina", "esES")
+L = BigWigs:NewBossLocale("Grand Widow Faerlina", "esMX")
 if L then
 	--L.silencewarn = "Silenced!"
 	--L.silencewarn5sec = "Silence ends in 5 sec"
 	L.silence = "Silencio"
 end
 
-L = BigWigs:NewBossLocale("Gluth", "esES")
+L = BigWigs:NewBossLocale("Gluth", "esMX")
 if L then
 	--L.decimate_bar = "Decimate Zombies"
 end
 
-L = BigWigs:NewBossLocale("Gothik the Harvester", "esES")
+L = BigWigs:NewBossLocale("Gothik the Harvester", "esMX")
 if L then
 	--L.phase1_trigger1 = "Foolishly you have sought your own demise."
 	--L.phase1_trigger2 = "Teamanare shi rikk mannor rikk lok karkun" -- Curse of Tongues
@@ -50,12 +50,12 @@ if L then
 	--L.engage_message = "Gothik the Harvester engaged!"
 end
 
-L = BigWigs:NewBossLocale("Grobbulus", "esES")
+L = BigWigs:NewBossLocale("Grobbulus", "esMX")
 if L then
 	--L.injection = "Injection"
 end
 
-L = BigWigs:NewBossLocale("Heigan the Unclean", "esES")
+L = BigWigs:NewBossLocale("Heigan the Unclean", "esMX")
 if L then
 	--L.teleport_trigger = "The end is upon you."
 
@@ -74,7 +74,7 @@ if L then
 	--L.back_bar = "Back on the floor!"
 end
 
-L = BigWigs:NewBossLocale("The Four Horsemen", "esES")
+L = BigWigs:NewBossLocale("The Four Horsemen", "esMX")
 if L then
 	--L.mark = "Mark"
 	--L.mark_desc = "Warn for marks."
@@ -82,7 +82,7 @@ if L then
 	--L.engage_message = "The Four Horsemen engaged!"
 end
 
-L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "esES")
+L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "esMX")
 if L then
 	--L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Kel'Thuzad's Chamber"
 
@@ -107,7 +107,7 @@ if L then
 	--L.engage_message = "Kel'Thuzad encounter started!"
 end
 
-L = BigWigs:NewBossLocale("Loatheb", "esES")
+L = BigWigs:NewBossLocale("Loatheb", "esMX")
 if L then
 	--L.doomtime_bar = "Doom every 15 sec"
 	--L.doomtime_now = "Doom now happens every 15 sec!"
@@ -115,7 +115,7 @@ if L then
 	--L.spore_warn = "Spore (%d)"
 end
 
-L = BigWigs:NewBossLocale("Maexxna", "esES")
+L = BigWigs:NewBossLocale("Maexxna", "esMX")
 if L then
 	--L.webspraywarn30sec = "Cocoons in 10 sec"
 	--L.webspraywarn20sec = "Cocoons! Spiders in 10 sec!"
@@ -129,7 +129,7 @@ if L then
 	--L.spiders = "Spiders"
 end
 
-L = BigWigs:NewBossLocale("Noth the Plaguebringer", "esES")
+L = BigWigs:NewBossLocale("Noth the Plaguebringer", "esMX")
 if L then
 	--L.add_trigger = "Rise, my soldiers! Rise and fight once more!"
 
@@ -149,7 +149,7 @@ if L then
 	--L.wave2 = "Wave 2"
 end
 
-L = BigWigs:NewBossLocale("Instructor Razuvious", "esES")
+L = BigWigs:NewBossLocale("Instructor Razuvious", "esMX")
 if L then
 	L.understudy = "Suplente Caballero de la Muerte"
 
@@ -158,7 +158,7 @@ if L then
 	--L.shieldwall_warning = "Barrier gone in 5 sec!"
 end
 
-L = BigWigs:NewBossLocale("Sapphiron", "esES")
+L = BigWigs:NewBossLocale("Sapphiron", "esMX")
 if L then
 	--L.airphase_trigger = "Sapphiron lifts off into the air!"
 	--L.deepbreath_trigger = "%s takes a deep breath."
@@ -173,7 +173,7 @@ if L then
 	--L.icebolt_say = "I'm a Block!"
 end
 
-L = BigWigs:NewBossLocale("Thaddius", "esES")
+L = BigWigs:NewBossLocale("Thaddius", "esMX")
 if L then
 	--L.phase1_trigger1 = "Stalagg crush you!"
 	--L.phase1_trigger2 = "Feed you to master!"

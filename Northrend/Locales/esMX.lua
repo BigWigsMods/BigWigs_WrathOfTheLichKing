@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("Halion", "esES")
+local L = BigWigs:NewBossLocale("Halion", "esMX")
 if not L then return end
 if L then
 	L.engage_trigger = "Vuestro mundo está al borde de la aniquilación."
@@ -18,7 +18,7 @@ if L then
 	L.meteor_warning_message = "¡Lanzando Golpe de meteorito!"
 end
 
-L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "esES")
+L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "esMX")
 if L then
 	L.whiteout_bar = "Tormenta de nieve %d"
 	L.whiteout_message = "¡Tormenta de nieve %d pronto!"
@@ -26,7 +26,7 @@ if L then
 	L.freeze_message = "Congelado"
 end
 
-L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "esES")
+L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "esMX")
 if L then
 	--L.stomp_message = "Stomp - Charge Inc!"
 	--L.stomp_warning = "Possible Stomp in ~5sec!"
@@ -35,7 +35,7 @@ if L then
 	--L.charge_desc = "Warn about Charge on players."
 end
 
-L = BigWigs:NewBossLocale("Malygos", "esES")
+L = BigWigs:NewBossLocale("Malygos", "esMX")
 if L then
 	--L.sparks = "Spark Spawns"
 	--L.sparks_desc = "Warns on Power Spark spawns."
@@ -73,7 +73,7 @@ if L then
 	--L.phase3_message = "Phase 3!"
 end
 
-L = BigWigs:NewBossLocale("Sartharion", "esES")
+L = BigWigs:NewBossLocale("Sartharion", "esMX")
 if L then
 	--L.engage_trigger = "It is my charge to watch over these eggs. I will see you burn before any harm comes to them!"
 
@@ -103,7 +103,7 @@ if L then
 	--L.vesperon = "Vesperon"
 end
 
-L = BigWigs:NewBossLocale("Emalon the Storm Watcher", "esES")
+L = BigWigs:NewBossLocale("Emalon the Storm Watcher", "esMX")
 if L then
 	--L.overcharge_message = "A minion is overcharged!"
 	--L.overcharge_bar = "Explosion"
@@ -112,13 +112,13 @@ if L then
 	--L.custom_on_overcharge_mark_desc = "Place the {rt8} marker on the overcharged minion, requires promoted or leader."
 end
 
-L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "esES")
+L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "esMX")
 if L then
 	--L.breath_bar = "Breath %d"
 	--L.breath_message = "Breath %d soon!"
 end
 
-L = BigWigs:NewBossLocale("Onyxia", "esES")
+L = BigWigs:NewBossLocale("Onyxia", "esMX")
 if L then
 	--L.phase = "Phases"
 	--L.phase_desc = "Warn for phase changes."

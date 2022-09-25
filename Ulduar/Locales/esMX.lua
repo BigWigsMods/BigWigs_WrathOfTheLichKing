@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("Auriaya", "esES")
+local L = BigWigs:NewBossLocale("Auriaya", "esMX")
 if not L then return end
 if L then
 	L.swarm_message = "Enjambre"
@@ -8,7 +8,7 @@ if L then
 	L.defender_message = "¡Defensor vivo %d/9!"
 end
 
-L = BigWigs:NewBossLocale("Freya", "esES")
+L = BigWigs:NewBossLocale("Freya", "esMX")
 if L then
 	L.wave = "Oleadas"
 	L.wave_desc = "Aviso para oleadas."
@@ -34,18 +34,18 @@ if L then
 	L.sunbeam_bar = "~Próximos Rayos de sol"
 end
 
-L = BigWigs:NewBossLocale("Hodir", "esES")
+L = BigWigs:NewBossLocale("Hodir", "esMX")
 if L then
 	L.hardmode = "Modo difícil"
 	L.hardmode_desc = "Mostrar contador para el modo difícil."
 end
 
-L = BigWigs:NewBossLocale("Ignis the Furnace Master", "esES")
+L = BigWigs:NewBossLocale("Ignis the Furnace Master", "esMX")
 if L then
 	L.brittle_message = "¡El ensamblaje es frágil!"
 end
 
-L = BigWigs:NewBossLocale("The Iron Council", "esES")
+L = BigWigs:NewBossLocale("The Iron Council", "esMX")
 if L then
 	L.stormcaller_brundir = "Clamatormentas Brundir"
 	L.steelbreaker = "Rompeacero"
@@ -57,7 +57,7 @@ if L then
 	L.chased_you = "¡TU estás siendo perseguido!"
 end
 
-L = BigWigs:NewBossLocale("Kologarn", "esES")
+L = BigWigs:NewBossLocale("Kologarn", "esMX")
 if L then
 	L.arm = "Muere el brazo"
 	L.arm_desc = "Aviso cuando muere el brazo izquierdo/derecho."
@@ -70,7 +70,7 @@ if L then
 	L.eyebeam_desc = "Avisa quien tiene el Haz ocular enfocado."
 end
 
-L = BigWigs:NewBossLocale("Mimiron", "esES")
+L = BigWigs:NewBossLocale("Mimiron", "esMX")
 if L then
 	L.phase = "Fases"
 	L.phase_desc = "Aviso para cambios de fases."
@@ -104,7 +104,7 @@ if L then
 	L.bomb_message = "¡Bombabot aparece!"
 end
 
-L = BigWigs:NewBossLocale("Razorscale", "esES")
+L = BigWigs:NewBossLocale("Razorscale", "esMX")
 if L then
 	L.ground_trigger = "¡Moveos! ¡No seguirá mucho más en el suelo!"
 	L.ground_message = "¡Tajoescama está encandenado!"
@@ -117,7 +117,7 @@ if L then
 	L.harpoon_nextbar = "Arpón %d"
 end
 
-L = BigWigs:NewBossLocale("Thorim", "esES")
+L = BigWigs:NewBossLocale("Thorim", "esMX")
 if L then
 	L.phase2_trigger = "¡Intrusos! Vosotros, mortales que osáis interferir en mi diversión, pagaréis… Un momento..."
 	L.phase3_trigger = "Gusanos impertinentes, ¿cómo osáis desafiarme en mi pedestal? ¡Os machacaré con mis propias manos!"
@@ -132,7 +132,7 @@ if L then
 	L.charge_bar = "Carga %d"
 end
 
-L = BigWigs:NewBossLocale("General Vezax", "esES")
+L = BigWigs:NewBossLocale("General Vezax", "esMX")
 if L then
 	L.surge_bar = "Oleada %d"
 
@@ -156,13 +156,13 @@ if L then
 	L.mark_message = "Marca"
 end
 
-L = BigWigs:NewBossLocale("XT-002 Deconstructor", "esES")
+L = BigWigs:NewBossLocale("XT-002 Deconstructor", "esMX")
 if L then
 	L.gravitybomb_other = "Gravedad"
 	L.lightbomb_other = "Luz"
 end
 
-L = BigWigs:NewBossLocale("Yogg-Saron", "esES")
+L = BigWigs:NewBossLocale("Yogg-Saron", "esMX")
 if L then
 	L.engage_trigger = "^¡Pronto llegará la hora de"
 	L.phase2_trigger = "^Soy un sueño lúcido."
