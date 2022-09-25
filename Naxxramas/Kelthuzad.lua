@@ -162,7 +162,7 @@ do
 		if args.time - prev > 3 then
 			prev = args.time
 			targets = {}
-			self:Bar(28410, 20, ("<%s>"):format(L.mind_control))
+			self:Bar(28410, 20, CL.over:format(L.mind_control))
 			self:CDBar(28410, 68, L.mind_control)
 			self:DelayedMessage(28410, 63, "orange", CL.soon:format(L.mind_control))
 		end

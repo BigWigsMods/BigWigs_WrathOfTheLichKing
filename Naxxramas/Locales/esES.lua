@@ -2,7 +2,7 @@ local L = BigWigs:NewBossLocale("Anub'Rekhan", "esES") or BigWigs:NewBossLocale(
 if not L then return end
 if L then
 	L.add = "Guardia de la cripta"
-	L.locus = "Langosta"
+	L.locust = "Langosta"
 end
 
 L = BigWigs:NewBossLocale("Grand Widow Faerlina", "esES") or BigWigs:NewBossLocale("Grand Widow Faerlina", "esMX")

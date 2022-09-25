@@ -17,7 +17,7 @@ if L then
 	L.add = "Crypt Guard"
 	L.add_icon = "inv_misc_ahnqirajtrinket_02"
 
-	L.locus = "Locus"
+	L.locust = "Locust"
 end
 L = mod:GetLocale()
 
@@ -80,12 +80,12 @@ function mod:LocustSwarm(args)
 	self:StopBar(28785)
 	self:Message(28785, "yellow")
 	self:PlaySound(28785, "long")
-	self:Bar(28785, 3, CL.incoming:format(L.locus), "spell_shadow_carrionswarm")
+	self:Bar(28785, 3, CL.incoming:format(L.locust))
 end
 
 function mod:LocustSwarmApplied(args)
 	if self:MobId(args.destGUID) == 15956 then
-		self:Bar(28785, args.spellId == 28785 and 16 or 20, ("<%s>"):format(args.spellName), "spell_shadow_carrionswarm")
+		self:Bar(28785, args.spellId == 28785 and 16 or 20, CL.over:format(L.locust))
 		self:CDBar(28785, 92) -- 92~104s in 25n
 		self:DelayedMessage(28785, 82, "red", CL.soon:format(args.spellName), nil, "alarm")
 	end

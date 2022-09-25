@@ -2,7 +2,7 @@ local L = BigWigs:NewBossLocale("Anub'Rekhan", "koKR")
 if not L then return end
 if L then
 	L.add = "지하마귀 수호병"
-	L.locus = "무리바퀴"
+	L.locust = "무리바퀴"
 end
 
 L = BigWigs:NewBossLocale("Grand Widow Faerlina", "koKR")

@@ -82,7 +82,7 @@ end
 function mod:NecroticAuraApplied(args)
 	if self:Me(args.destGUID) then
 		self:Message(55593, "red")
-		self:Bar(55593, 17, ("<%s>"):format(args.spellName))
+		self:TargetBar(55593, 17, args.spellName)
 	end
 end
 

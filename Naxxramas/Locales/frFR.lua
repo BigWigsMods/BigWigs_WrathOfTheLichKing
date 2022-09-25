@@ -2,7 +2,7 @@ local L = BigWigs:NewBossLocale("Anub'Rekhan", "frFR")
 if not L then return end
 if L then
 	L.add = "Gardien des cryptes"
-	L.locus = "Locuste"
+	L.locust = "Locuste"
 end
 
 L = BigWigs:NewBossLocale("Grand Widow Faerlina", "frFR")
