@@ -17,6 +17,7 @@ local handle_NextStrike = nil
 
 local isBurrowed = nil
 local phase2 = nil
+local coldTargets = {}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -88,7 +89,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Swarm", 66118)
 	self:Log("SPELL_CAST_SUCCESS", "ColdCooldown", 66013)
 	self:Log("SPELL_AURA_APPLIED", "ColdApplied", 66013)
-	-- self:Log("SPELL_AURA_REMOVED", "ColdRemoved", 66013)
 	self:Log("SPELL_AURA_APPLIED", "Pursue", 67574)
 
 	self:Log("SPELL_CAST_START", scheduleStrike, 66134)
@@ -127,6 +127,17 @@ function mod:OnEngage()
 	phase2 = nil
 end
 
+function mod:OnBossDisable()
+	if self:GetOption(coldMarker) then
+		-- rolling application, the next set moves them.
+		-- so clean up left over marks
+		for i = 1, #coldTargets do
+			self:CustomIcon(false, coldTargets[i])
+			coldTargets[i] = nil
+		end
+	end
+end
+
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
@@ -135,36 +146,21 @@ function mod:FreezeCooldown(args)
 	self:CDBar(args.spellId, 20)
 end
 
-do
-	local coldTargets, scheduled = mod:NewTargetList(), nil
-	local function coldWarn(spellId)
-		-- mod:TargetMessageOld(spellId, coldTargets, "orange")
-		table.wipe(coldTargets)
-		scheduled = nil
+function mod:ColdApplied(args)
+	if not phase2 then return end
+	local count = #coldTargets + 1
+	coldTargets[count] = args.destName
+	if self:Me(args.destGUID) then
+		self:PersonalMessage(args.spellId)
+		self:Flash(args.spellId)
 	end
-	function mod:ColdApplied(args)
-		if not phase2 then return end
-		coldTargets[#coldTargets + 1] = args.destName
-		if self:Me(args.destGUID) then
-			self:PersonalMessage(args.spellId)
-			self:Flash(args.spellId)
-		end
-		if not scheduled then
-			scheduled = self:ScheduleTimer(coldWarn, 0.2, args.spellId)
-		end
-		self:CustomIcon(coldMarker, args.destName, #coldTargets)
-	end
+	self:CustomIcon(coldMarker, args.destName, count)
 end
 
--- function mod:ColdRemoved(args)
--- 	-- rolling application, just let the next set move them?
--- 	self:CustomIcon(coldMarker, args.destName)
--- end
-
 function mod:ColdCooldown(args)
-	if phase2 then
-		self:CDBar(args.spellId, 15)
-	end
+	if not phase2 then return end
+	coldTargets = {}
+	self:CDBar(args.spellId, 15)
 end
 
 function mod:Swarm(args)
