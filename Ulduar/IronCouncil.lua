@@ -22,6 +22,10 @@ local tendrilscanner = nil
 
 local L = mod:NewLocale("enUS", true)
 if L then
+	L.stormcaller_brundir = "Stormcaller Brundir"
+	L.steelbreaker = "Steelbreaker"
+	L.runemaster_molgeim = "Runemaster Molgeim"
+
 	L.summoning_message = "Elementals Incoming!"
 
 	L.chased_other = "%s is being chased!"
@@ -47,9 +51,9 @@ function mod:GetOptions()
 		"berserk",
 		"stages",
 	}, {
-		[61869] = -17310, --Stormcaller Brundir
-		[61903] = -17321, --Steelbreaker
-		[62274] = -17315, --Runemaster Molgeim
+		[61869] = L.stormcaller_brundir,
+		[61903] = L.steelbreaker,
+		[62274] = L.runemaster_molgeim,
 		berserk = "general",
 	}
 end

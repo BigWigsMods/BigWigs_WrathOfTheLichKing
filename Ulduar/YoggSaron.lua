@@ -91,7 +91,7 @@ function mod:GetOptions()
 		[62979] = CL.stage:format(1),
 		tentacle = CL.stage:format(2),
 		[64465] = CL.stage:format(3),
-		[64189] = -17610, -- Hard Mode
+		[64189] = "hard",
 		stages = "general",
 	}
 end

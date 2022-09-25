@@ -17,7 +17,7 @@ if L then
 	L.phase2_trigger = "Interlopers! You mortals who dare to interfere with my sport will pay.... Wait--you..."
 	L.phase3_trigger = "Impertinent whelps, you dare challenge me atop my pedestal? I will crush you myself!"
 
-	L.hardmode = "Hard mode timer"
+	L.hardmode = "Hard mode"
 	L.hardmode_desc = "Show timer for when you have to reach Thorim in order to enter hard mode in phase 3."
 	L.hardmode_warning = "Hard mode expires"
 
@@ -164,7 +164,7 @@ function mod:HardModeTimerExpires()
 	if self:BarTimeLeft(L.hardmode) == 0 then
 		self:MessageOld("hardmode", "cyan", nil, L.hardmode_warning, false)
 	else
-		self:MessageOld("hardmode", "cyan", nil, -17610, false) -- -17610 = "Hard Mode"
+		self:MessageOld("hardmode", "cyan", nil, CL.hard, false)
 	end
 end
 

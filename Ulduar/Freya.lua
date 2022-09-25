@@ -63,7 +63,7 @@ function mod:GetOptions()
 		"berserk",
 	}, {
 		wave = "normal",
-		[62861] = -17610, -- Hard Mode
+		[62861] = "hard",
 		stages = "general",
 	}
 end

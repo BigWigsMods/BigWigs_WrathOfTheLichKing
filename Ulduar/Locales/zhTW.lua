@@ -47,6 +47,10 @@ end
 
 L = BigWigs:NewBossLocale("The Iron Council", "zhTW")
 if L then
+	L.stormcaller_brundir = "風暴召喚者布倫迪爾"
+	L.steelbreaker = "破鋼者"
+	L.runemaster_molgeim = "符文大師墨吉姆"
+
 	L.summoning_message = "閃電元素即將出現！"
 
 	L.chased_other = "閃電觸鬚：>%s<！"

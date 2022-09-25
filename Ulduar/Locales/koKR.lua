@@ -47,6 +47,10 @@ end
 
 L = BigWigs:NewBossLocale("The Iron Council", "koKR")
 if L then
+	L.stormcaller_brundir = "폭풍소환사 브룬디르"
+	L.steelbreaker = "강철파괴자"
+	L.runemaster_molgeim = "룬술사 몰가임"
+
 	L.summoning_message = "소환의 룬 - 곧 정령 등장!"
 
 	L.chased_other = "%s 추적 중!"

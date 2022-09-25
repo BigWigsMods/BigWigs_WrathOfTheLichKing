@@ -63,7 +63,7 @@ function mod:GetOptions()
 		[62660] = 62660,
 		[63276] = 63276,
 		[62661] = "normal",
-		animus = -17610, -- Hard Mode
+		animus = "hard",
 		berserk = "general",
 	}
 end

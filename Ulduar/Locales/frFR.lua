@@ -47,6 +47,10 @@ end
 
 L = BigWigs:NewBossLocale("The Iron Council", "frFR")
 if L then
+	L.stormcaller_brundir = "Mande-foudre Brundir"
+	L.steelbreaker = "Brise-acier"
+	L.runemaster_molgeim = "Maître des runes Molgeim"
+
 	L.summoning_message = "Arrivée des élémentaires !"
 
 	L.chased_other = "%s est poursuivi(e) !"

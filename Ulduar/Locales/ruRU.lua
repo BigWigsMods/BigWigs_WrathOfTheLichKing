@@ -47,6 +47,10 @@ end
 
 L = BigWigs:NewBossLocale("The Iron Council", "ruRU")
 if L then
+	L.stormcaller_brundir = "Буревестник Брундир"
+	L.steelbreaker = "Сталелом"
+	L.runemaster_molgeim = "Мастер рун Молгейм"
+
 	L.summoning_message = "Руна призыва - приход Элементалей!"
 
 	L.chased_other = "Преследует |3-3(%s)!"

@@ -77,7 +77,7 @@ function mod:GetOptions()
 		"berserk" ,
 	}, {
 		[64529] = "normal",
-		[64623] = -17610, -- Hard Mode
+		[64623] = "hard", -- Hard Mode
 		phase = "general",
 	}
 end
