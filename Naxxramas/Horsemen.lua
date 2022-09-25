@@ -84,22 +84,22 @@ end
 
 function mod:VoidZone(args)
 	self:Message(28863, "orange")
-	self:CDBar(28863, 14.6) -- 12~17
+	self:CDBar(28863, 12) -- 12~17
 end
 
 function mod:Meteor(args)
 	self:Message(28884, "red")
-	self:CDBar(28884, 15.8) -- 12~17
+	self:CDBar(28884, 12) -- 12~17
 end
 
 function mod:HolyWrath(args)
 	self:Message(28883, "yellow")
-	self:CDBar(28883, 14.6) -- 12~17
+	self:CDBar(28883, 12) -- 12~17
 end
 
 function mod:UnholyShadow(args)
 	self:TargetMessage(args.spellId, "purple", args.destName)
-	self:CDBar(args.spellId, 14.6) -- 12~17
+	self:CDBar(args.spellId, 12) -- 12~17
 end
 
 do
