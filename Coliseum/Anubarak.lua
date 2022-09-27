@@ -133,9 +133,9 @@ function mod:OnBossDisable()
 		-- so clean up left over marks
 		for i = 1, #coldTargets do
 			self:CustomIcon(false, coldTargets[i])
-			coldTargets[i] = nil
 		end
 	end
+	coldTargets = {}
 end
 
 --------------------------------------------------------------------------------

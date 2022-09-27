@@ -29,10 +29,11 @@ function mod:GetOptions()
 	return {
 		"add",
 		28783, -- Impale
-		28785, -- Locus Swarm
+		28785, -- Locust Swarm
 		"berserk",
 	}, nil, {
-		["add"] = CL.big_add,
+		["add"] = CL.big_add, -- Crypt Guard (Big Add)
+		[28785] = L.locust, -- Locust Swarm (Locust)
 	}
 end
 
@@ -51,7 +52,7 @@ function mod:OnEngage(diff)
 	local locustTime = diff == 3 and 102 or 92
 	self:Message(28785, "yellow", CL.custom_start_s:format(self.displayName, self:SpellName(28785), locustTime), false)
 	self:DelayedMessage(28785, locustTime - 10, "red", CL.soon:format(self:SpellName(28785)), nil, "alarm")
-	self:CDBar(28785, locustTime) -- Locus Swarm
+	self:CDBar(28785, locustTime) -- Locust Swarm
 	if diff == 3 then
 		self:Bar("add", 16, CL.big_add, L.add_icon)
 	end
