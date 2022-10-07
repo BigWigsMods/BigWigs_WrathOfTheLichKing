@@ -34,9 +34,10 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "MortalWound", 25646, 54378)
-	self:Log("SPELL_AURA_APPLIED_DOSE", "MortalWound", 25646, 54378)
-	self:Log("SPELL_CAST_SUCCESS", "Enrage", 28371, 54427)
-	self:Log("SPELL_DAMAGE", "Decimate", 28375, 54426)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "MortalWound", 25646, 54378) -- ?, 10/25
+	self:Log("SPELL_CAST_SUCCESS", "Enrage", 28371, 54427) -- 10, 25
+	self:Log("SPELL_DISPEL", "EnrageDispelled", "*")
+	self:Log("SPELL_DAMAGE", "Decimate", 28375, 54426) -- 10/25, ?
 	self:Log("SPELL_MISSED", "Decimate", 28375, 54426)
 	self:Log("SPELL_AURA_APPLIED", "Dazed", 1604)
 end
@@ -66,6 +67,13 @@ function mod:Enrage(args)
 		self:PlaySound(28371, "alert")
 	end
 	self:Bar(28371, 8)
+end
+
+function mod:EnrageDispelled(args)
+	if args.extraSpellId == 28371 or args.extraSpellId == 54427 then
+		self:Message(28371, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+		self:StopBar(28371) -- Enrage
+	end
 end
 
 do
