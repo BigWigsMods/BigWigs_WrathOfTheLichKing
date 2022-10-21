@@ -10,8 +10,11 @@ BigWigs:AddSounds("Malygos", {
 })
 
 BigWigs:AddSounds("Sartharion", {
-	["tsunami"] = "alert",
-	["twilight"] = "alarm",
+	[57491] = "warning",
+	[58793] = "info",
+	[58835] = "long",
+	[59127] = "alert",
+	["acolyte_shadron"] = "info",
 })
 
 BigWigs:AddSounds("Halion", {

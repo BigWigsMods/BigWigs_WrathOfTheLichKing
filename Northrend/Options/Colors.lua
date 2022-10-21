@@ -16,9 +16,14 @@ BigWigs:AddColors("Malygos", {
 })
 
 BigWigs:AddColors("Sartharion", {
+	[57491] = "red",
+	[58793] = "yellow",
+	[58835] = {"blue","green"},
+	[59127] = "yellow",
+	[60430] = {"blue","purple"},
+	["acolyte_shadron"] = "orange",
+	["acolyte_vesperon"] = "orange",
 	["drakes"] = "yellow",
-	["tsunami"] = {"red","yellow"},
-	["twilight"] = {"blue","orange","yellow"},
 })
 
 BigWigs:AddColors("Halion", {

@@ -12,9 +12,9 @@ BigWigs:AddSounds("Grand Widow Faerlina", {
 })
 
 BigWigs:AddSounds("Gluth", {
-	[25646] = "warning",
 	[28371] = "alert",
 	[28374] = {"alarm","long"},
+	[54378] = "warning",
 })
 
 BigWigs:AddSounds("Gothik the Harvester", {

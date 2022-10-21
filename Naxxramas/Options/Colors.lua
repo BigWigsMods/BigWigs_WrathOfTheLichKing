@@ -13,9 +13,9 @@ BigWigs:AddColors("Grand Widow Faerlina", {
 
 BigWigs:AddColors("Gluth", {
 	[1604] = {"blue","orange"},
-	[25646] = {"blue","purple"},
-	[28371] = "red",
+	[28371] = {"green","red"},
 	[28374] = {"orange","yellow"},
+	[54378] = {"blue","purple"},
 })
 
 BigWigs:AddColors("Gothik the Harvester", {
