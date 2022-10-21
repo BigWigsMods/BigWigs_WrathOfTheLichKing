@@ -86,32 +86,21 @@ end
 
 L = BigWigs:NewBossLocale("Sartharion", "ruRU")
 if L then
-	--L.engage_trigger = "It is my charge to watch over these eggs. I will see you burn before any harm comes to them!"
-
-	L.tsunami = "Огненное цунами"
-	L.tsunami_desc = "Предупреждать о взбалтывании лавы и отображать полосу."
-	L.tsunami_warning = "Огненное цунами через ~5сек!"
-	L.tsunami_message = "Огненное цунами!"
-	L.tsunami_cooldown = "Перезарядка цунами"
+	L.engage_trigger = "Моя обязанность – оберегать эти яйца, и вы сгорите, прежде чем хоть пальцем тронете их!"
 	L.tsunami_trigger = "Лава вокруг |3-1(%s) начинает бурлить!"
-
-	L.breath_cooldown = "Перезарядка дыхания"
+	L.twilight_trigger_vesperon = "В Сумраке появляется ученик Весперона!"
+	L.twilight_trigger_shadron = "Ученик Шадрона появляется в Зоне сумерек!"
 
 	L.drakes = "Драконы"
 	L.drakes_desc = "Предупреждать когда драконы вступят в бой."
-	L.drakes_incomingsoon = "%s прилетит через ~5сек!"
 
-	L.twilight = "События в Зоне сумерек"
-	L.twilight_desc = "Сообщать что происходит с Сумеречным порталом."
-	L.twilight_trigger_tenebron = "Тенеброн начинает высиживать кладку в Зоне сумерек!"
-	L.twilight_trigger_vesperon = "В Сумраке появляется ученик Весперона!"
-	L.twilight_trigger_shadron = "Ученик Шадрона появляется в Зоне сумерек!"
-	L.twilight_message_tenebron = "Вылупление яиц"
-	L.twilight_message = "Появился Ученик |3-1(%s)!"
-
+	-- Adds
 	L.shadron = "Шадрон"
 	L.tenebron = "Тенеброн"
 	L.vesperon = "Весперон"
+	L.lava_blaze = "Пламя лавы" -- NPC 30643
+	L.acolyte_shadron = "Служитель Шадрона" -- NPC 31218
+	L.acolyte_vesperon = "Служитель Весперона" -- NPC 31219
 end
 
 L = BigWigs:NewBossLocale("Halion", "ruRU")

@@ -97,32 +97,21 @@ end
 
 L = BigWigs:NewBossLocale("Sartharion", "frFR")
 if L then
-	L.engage_trigger = "Ces oeufs sont sous ma responsabilité. Je vous ferai brûler avant de vous laisser y toucher !"
-
-	L.tsunami = "Vague de flammes"
-	L.tsunami_desc = "Prévient quand la lave bouillonne et affiche une barre."
-	L.tsunami_warning = "Vague dans ~5 sec. !"
-	L.tsunami_message = "Vague de flammes !"
-	L.tsunami_cooldown = "Recharge Vague"
+	L.engage_trigger = "Ces œufs sont sous ma responsabilité. Je vous ferai brûler avant de vous laisser y toucher !"
 	L.tsunami_trigger = "La lave qui entoure %s bouillonne !"
-
-	L.breath_cooldown = "Recharge Souffle"
+	L.twilight_trigger_vesperon = "Un disciple de Vespéron apparaît dans le crépuscule !"
+	L.twilight_trigger_shadron = "Un disciple d’Obscuron apparaît dans le crépuscule !"
 
 	L.drakes = "Arrivée des drakes"
 	L.drakes_desc = "Prévient quand chaque drake se joint au combat."
-	L.drakes_incomingsoon = "%s atterrit dans ~5 sec. !"
 
-	L.twilight = "Évènements du crépuscule"
-	L.twilight_desc = "Prévient quand quelque chose se passe dans le crépuscule."
-	L.twilight_trigger_tenebron = "Ténébron se met à poser des œufs dans le crépuscule !"
-	L.twilight_trigger_vesperon = "Un disciple de Vespéron apparaît dans le crépuscule !"
-	L.twilight_trigger_shadron = "Un disciple d'Obscuron apparaît dans le crépuscule !"
-	L.twilight_message_tenebron = "Éclosion des œufs"
-	L.twilight_message = "Disciple |2 %s actif !"
-
+	-- Adds
 	L.shadron = "Obscuron"
 	L.tenebron = "Ténébron"
 	L.vesperon = "Vespéron"
+	L.lava_blaze = "Brasier de lave" -- NPC 30643
+	L.acolyte_shadron = "Acolyte d'Obscuron" -- NPC 31218
+	L.acolyte_vesperon = "Acolyte de Vespéron" -- NPC 31219
 end
 
 L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "frFR")

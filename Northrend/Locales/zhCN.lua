@@ -98,31 +98,20 @@ end
 L = BigWigs:NewBossLocale("Sartharion", "zhCN")
 if L then
 	L.engage_trigger = "我的职责是保护这些龙卵。在伤害到它们之前，你们就会被我的龙息烧成灰烬！"
-
-	L.tsunami = "烈焰之啸"
-	L.tsunami_desc = "当熔岩搅动时显示计时条。"
-	L.tsunami_warning = "约5秒，烈焰之啸！"
-	L.tsunami_message = "烈焰之啸！"
-	L.tsunami_cooldown = "烈焰之啸冷却！"
 	L.tsunami_trigger = "%s周围的岩浆沸腾了起来！"
-
-	L.breath_cooldown = "烈焰吐息冷却！"
+	L.twilight_trigger_vesperon = "一只维斯匹隆的信徒出现了！"
+	L.twilight_trigger_shadron = "一只沙德隆的信徒出现了！"
 
 	L.drakes = "幼龙增援"
 	L.drakes_desc = "当每只幼龙增援加入战斗时发出警报。"
-	L.drakes_incomingsoon = "约5秒后，%s即将到来！"
 
-	L.twilight = "暮光召唤"
-	L.twilight_desc = "当暮光召唤时发出警报。"
-	L.twilight_trigger_tenebron = "塔尼布隆开始孵蛋！"
-	L.twilight_trigger_vesperon = "一只维斯匹隆的信徒出现了！"
-	L.twilight_trigger_shadron = "一只沙德隆的信徒出现了！"
-	L.twilight_message_tenebron = "正在孵卵！"
-	L.twilight_message = "%s到来！"
-
+	-- Adds
 	L.shadron = "沙德隆"
 	L.tenebron = "塔尼布隆"
 	L.vesperon = "维斯匹隆"
+	L.lava_blaze = "熔岩烈焰" -- NPC 30643
+	L.acolyte_shadron = "沙德隆的追随者" -- NPC 31218
+	L.acolyte_vesperon = "维斯匹隆的追随者" -- NPC 31219
 end
 
 L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "zhCN")

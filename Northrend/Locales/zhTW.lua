@@ -97,32 +97,21 @@ end
 
 L = BigWigs:NewBossLocale("Sartharion", "zhTW")
 if L then
-	L.engage_trigger = "我的職責就是要看守這些龍蛋。在他們受到任何傷害之前，我將會看著你陷入火焰之中!"
-
-	L.tsunami = "炎嘯"
-	L.tsunami_desc = "當熔岩攪動時發出警報及顯示計時條。"
-	L.tsunami_warning = "約5秒，炎嘯！"
-	L.tsunami_message = "炎嘯！"
-	L.tsunami_cooldown = "炎嘯冷卻！"
+	L.engage_trigger = "我的職責是看守這些龍蛋。在你傷害這些蛋以前，我會先燒了你！"
 	L.tsunami_trigger = "圍繞著%s的熔岩開始劇烈地翻騰!"
-
-	L.breath_cooldown = "火息術冷卻！"
+	L.twilight_trigger_vesperon = "一個維斯佩朗信徒從暮光中出現!"
+	L.twilight_trigger_shadron = "一個夏德朗信徒從暮光中出現!"
 
 	L.drakes = "飛龍增援"
 	L.drakes_desc = "當每只飛龍增援加入戰鬥時發出警報。"
-	L.drakes_incomingsoon = "約5秒後。%s即將到來！"
 
-	L.twilight = "暮光召喚"
-	L.twilight_desc = "當暮光召喚時發出警報。"
-	L.twilight_trigger_tenebron = "坦納伯朗在暮光中孵化龍蛋!"
-	L.twilight_trigger_vesperon = "一個維斯佩朗信徒從暮光中出現!"
-	L.twilight_trigger_shadron = "一個夏德朗信徒從暮光中出現!"
-	L.twilight_message_tenebron = "正在孵卵！"
-	L.twilight_message = "%s到來！"
-
+	-- Adds
 	L.shadron = "夏德朗"
 	L.tenebron = "坦納伯朗"
 	L.vesperon = "維斯佩朗"
+	L.lava_blaze = "熔炎" -- NPC 30643
+	L.acolyte_shadron = "夏德朗侍僧" -- NPC 31218
+	L.acolyte_vesperon = "維斯佩朗侍僧" -- NPC 31219
 end
 
 L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "zhTW")

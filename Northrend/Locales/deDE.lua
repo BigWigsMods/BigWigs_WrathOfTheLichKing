@@ -79,31 +79,20 @@ end
 L = BigWigs:NewBossLocale("Sartharion", "deDE")
 if L then
 	L.engage_trigger = "Meine Aufgabe ist es, über diese Eier zu wachen. Kommt ihnen zu nahe und von euch bleibt nur ein Häuflein Asche."
-
-	L.tsunami = "Flammentsunami"
-	L.tsunami_desc = "Warnungen und Timer für Flammentsunami."
-	L.tsunami_warning = "Flammentsunami in ~5 sek!"
-	L.tsunami_message = "Flammentsunami!"
-	L.tsunami_cooldown = "~Flammentsunami"
 	L.tsunami_trigger = "Die Lava um %s brodelt!"
-
-	L.breath_cooldown = "~Flammenatem"
+	L.twilight_trigger_vesperon = "Ein Vesperonjünger erscheint im Zwielicht!"
+	L.twilight_trigger_shadron = "Ein Shadronjünger erscheint im Zwielicht!"
 
 	L.drakes = "Drachen"
 	L.drakes_desc = "Warnungen und Timer für den Kampfbeitritt der Drachen."
-	L.drakes_incomingsoon = "%s kommt in ~5 sek!"
 
-	L.twilight = "Zwielicht Ereignisse"
-	L.twilight_desc = "Warnungen und Timer für Ereignisse in der Zwielichtzone."
-	L.twilight_trigger_tenebron = "Tenebron beginnt im Zwielicht Eier auszubrüten!"
-	L.twilight_trigger_vesperon = "Ein Vesperonjünger erscheint im Zwielicht!"
-	L.twilight_trigger_shadron = "Ein Shadronjünger erscheint im Zwielicht!"
-	L.twilight_message_tenebron = "Eier schlüpfen"
-	L.twilight_message = "%s kommt dazu!"
-
+	-- Adds
 	L.shadron = "Shadron"
 	L.tenebron = "Tenebron"
 	L.vesperon = "Vesperon"
+	L.lava_blaze = "Lavaflamme" -- NPC 30643
+	L.acolyte_shadron = "Akolyth von Shadron" -- NPC 31218
+	L.acolyte_vesperon = "Akolyth von Vesperon" -- NPC 31219
 end
 
 L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "deDE")

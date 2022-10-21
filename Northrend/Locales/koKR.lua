@@ -87,31 +87,20 @@ end
 L = BigWigs:NewBossLocale("Sartharion", "koKR")
 if L then
 	L.engage_trigger = "내 임무는 알을 보호하는 것. 알에 손대지 못하게 모두 불태워 주마."
-
-	L.tsunami = "용암 파도"
-	L.tsunami_desc = "용암파도에 바와 알림입니다."
-	L.tsunami_warning = "약 5초 후 용암 파도!"
-	L.tsunami_message = "용암 파도!"
-	L.tsunami_cooldown = "용암 파도 대기시간"
 	L.tsunami_trigger = "%s|1을;를; 둘러싼 용암이 끓어오릅니다!"
-
-	L.breath_cooldown = "화염 숨결 대기시간"
+	L.twilight_trigger_vesperon = "베스페론의 신도가 황혼에서 나타납니다!"
+	L.twilight_trigger_shadron = "샤드론의 신도가 황혼에서 나타납니다!"
 
 	L.drakes = "비룡 추가"
 	L.drakes_desc = "각 비룡이 전투에 추가되는 것을 알립니다."
-	L.drakes_incomingsoon = "약 5초 후 %s 착지!"
 
-	L.twilight = "황혼 이벤트"
-	L.twilight_desc = "황혼의 안에서 무엇이 일어나는지 알립니다."
-	L.twilight_trigger_tenebron = "테네브론이 황혼에서 알을 부화하기 시작합니다!"
-	L.twilight_trigger_vesperon = "베스페론의 신도가 황혼에서 나타납니다!"
-	L.twilight_trigger_shadron = "샤드론의 신도가 황혼에서 나타납니다!"
-	L.twilight_message_tenebron = "알 부화중"
-	L.twilight_message = "%s 신도 추가!"
-
+	-- Adds
 	L.shadron = "샤드론"
 	L.tenebron = "테네브론"
 	L.vesperon = "베스페론"
+	L.lava_blaze = "타오르는 용암" -- NPC 30643
+	L.acolyte_shadron = "샤드론의 수행사제" -- NPC 31218
+	L.acolyte_vesperon = "베스페론의 수행사제" -- NPC 31219
 end
 
 L = BigWigs:NewBossLocale("Halion", "koKR")
