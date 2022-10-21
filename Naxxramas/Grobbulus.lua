@@ -24,7 +24,7 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		{28169, "ICON", "FLASH"}, -- Mutating Injection
+		{28169, "ICON", "FLASH", "ME_ONLY_EMPHASIZE"}, -- Mutating Injection
 		28240, -- Poison Cloud
 		28157, -- Slime Spray
 		28137, -- Slime Stream
@@ -43,7 +43,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Berserk(541)
+	self:Berserk(540)
 end
 
 --------------------------------------------------------------------------------
@@ -67,7 +67,6 @@ end
 
 function mod:PoisonCloud(args)
 	self:Message(args.spellId, "yellow")
-	-- self:PlaySound(args.spellId, "info")
 	self:CDBar(args.spellId, 15) -- 14.6~17.1
 end
 
