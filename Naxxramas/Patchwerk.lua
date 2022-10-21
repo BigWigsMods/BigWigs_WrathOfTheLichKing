@@ -26,7 +26,7 @@ end
 function mod:OnEngage()
 	self:Berserk(361)
 
-	self:RegisterEvent("UNIT_HEALTH")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
 end
 
 --------------------------------------------------------------------------------
@@ -39,14 +39,14 @@ function mod:Frenzy(args)
 end
 
 function mod:UNIT_HEALTH(event, unit)
-	if self:MobId(self:UnitGUID(unit)) == 16028 then
+	if self:MobId(self:UnitGUID(unit)) == 16028 then -- To be compatible with classic
 		local hp = self:GetHealth(unit)
 		if hp < 8 then
 			if hp > 5 then
 				self:Message(28131, "orange", CL.soon:format(self:SpellName(28131)))
 				self:PlaySound(28131, "alarm")
 			end
-			self:UnregisterEvent(event)
+			self:UnregisterUnitEvent(event, unit)
 		end
 	end
 end
