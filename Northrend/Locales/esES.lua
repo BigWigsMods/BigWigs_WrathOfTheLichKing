@@ -75,14 +75,14 @@ end
 
 L = BigWigs:NewBossLocale("Sartharion", "esES")
 if L then
-	--L.engage_trigger = "It is my charge to watch over these eggs. I will see you burn before any harm comes to them!"
+	L.engage_trigger = "Mi tarea es cuidar de estos huevos. ¡Arderéis antes de hacerles el más mínimo daño!"
 
 	--L.tsunami = "Flame Wave"
 	--L.tsunami_desc = "Warn for churning lava and show a bar."
 	--L.tsunami_warning = "Wave in ~5sec!"
 	--L.tsunami_message = "Flame Wave!"
 	--L.tsunami_cooldown = "Wave Cooldown"
-	--L.tsunami_trigger = "The lava surrounding %s churns!"
+	L.tsunami_trigger = "¡La lava se arremolina alrededor de %s!"
 
 	--L.breath_cooldown = "Breath Cooldown"
 
@@ -92,15 +92,15 @@ if L then
 
 	--L.twilight = "Twilight Events"
 	--L.twilight_desc = "Warn what happens in the Twilight."
-	--L.twilight_trigger_tenebron = "Tenebron begins to hatch eggs in the Twilight!"
-	--L.twilight_trigger_vesperon = "A Vesperon Disciple appears in the Twilight!"
-	--L.twilight_trigger_shadron = "A Shadron Acolyte appears in the Twilight!"
+	L.twilight_trigger_tenebron = "Tenebron comienza a romper huevos en el Crepúsculo."
+	L.twilight_trigger_vesperon = "¡Un discípulo de Vesperon aparece en el Crepúsculo!"
+	L.twilight_trigger_shadron = "¡Un discípulo de Shadron aparece en el Crepúsculo!"
 	--L.twilight_message_tenebron = "Eggs hatching"
 	--L.twilight_message = "%s add up!"
 
-	--L.shadron = "Shadron"
-	--L.tenebron = "Tenebron"
-	--L.vesperon = "Vesperon"
+	L.shadron = "Shadron"
+	L.tenebron = "Tenebron"
+	L.vesperon = "Vesperon"
 end
 
 L = BigWigs:NewBossLocale("Emalon the Storm Watcher", "esES")
