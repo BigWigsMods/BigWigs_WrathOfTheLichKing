@@ -7,6 +7,7 @@ if not mod then return end
 mod:RegisterEnableMob(15954)
 mod:SetEncounterID(1117)
 -- mod:SetRespawnTime(0) -- resets, doesn't respawn
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals

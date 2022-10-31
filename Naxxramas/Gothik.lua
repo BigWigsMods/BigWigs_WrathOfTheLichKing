@@ -6,6 +6,7 @@ local mod, CL = BigWigs:NewBoss("Gothik the Harvester", 533, 1608)
 if not mod then return end
 mod:RegisterEnableMob(16060)
 mod:SetEncounterID(1109)
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locales
