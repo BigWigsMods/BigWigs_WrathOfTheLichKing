@@ -219,5 +219,4 @@ if L then
 	--L.right = "---> GO RIGHT ---> GO RIGHT --->"
 	--L.swap = "^^^^ SWITCH SIDES ^^^^ SWITCH SIDES ^^^^"
 	--L.stay = "==== DON'T MOVE ==== DON'T MOVE ===="
-
 end
