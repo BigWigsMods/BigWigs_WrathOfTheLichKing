@@ -86,12 +86,12 @@ L = BigWigs:NewBossLocale("Kel'Thuzad Naxxramas", "ruRU")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Зал Кел'Тузада"
 
-	L.phase1_trigger = "Соратники слуги солдаты холодной тьмы! Повинуйтесь зову Кел'Тузада!"
+	L.phase1_trigger = "Соратники, слуги, солдаты холодной тьмы! Повинуйтесь зову Кел'Тузада!"
 	L.phase2_trigger1 = "Молите о пощаде!"
 	L.phase2_trigger2 = "Кричите! Кричите изо всех сил!"
 	L.phase2_trigger3 = "Вы уже мертвы!"
-	L.phase3_trigger = "Господин мне нужна помощь!"
-	L.guardians_trigger = "Хорошо. Воины ледяных пустошей восстаньте! Повелеваю вам сражаться убивать и умирать во имя своего повелителя! Не щадить никого!"
+	L.phase3_trigger = "Господин, мне нужна помощь!"
+	L.guardians_trigger = "Хорошо. Воины ледяных пустошей, восстаньте! Повелеваю вам сражаться, убивать и умирать во имя своего повелителя! Не щадить никого!"
 
 	L.phase2_warning = "Фаза 2 - Кел'Тузад просыпается!"
 	L.phase2_bar = "Кел'Тузад активен!"
@@ -151,7 +151,7 @@ end
 L = BigWigs:NewBossLocale("Sapphiron", "ruRU")
 if L then
 	L.airphase_trigger = "%s взмывает в воздух!"
-	L.deepbreath_trigger = "%s глубоко вздыхает."
+	L.deepbreath_trigger = "%s глубоко вдыхает."
 
 	-- L.air_phase = "Air Phase"
 	-- L.ground_phase = "Ground Phase"
