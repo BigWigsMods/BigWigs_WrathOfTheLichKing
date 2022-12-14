@@ -121,7 +121,7 @@ do
 	end
 
 	function mod:ShadowCrash(args)
-		self:GetBossTarget(printTarget, 0.5, args.sourceGUID)
+		self:GetUnitTarget(printTarget, 0.5, args.sourceGUID) -- Classic doesn't have boss frames for GetBossTarget
 	end
 end
 
