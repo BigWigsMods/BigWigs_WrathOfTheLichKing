@@ -19,7 +19,6 @@ end
 
 L = BigWigs:NewBossLocale("XT-002 Deconstructor", "itIT")
 if L then
-	--L.gravitybomb_other = "Gravity"
 	--L.lightbomb_other = "Light"
 end
 

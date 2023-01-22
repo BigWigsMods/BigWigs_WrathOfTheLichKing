@@ -22,7 +22,6 @@ local exposed3 = false
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.gravitybomb_other = "Gravity"
 	L.lightbomb_other = "Light"
 end
 L = mod:GetLocale()
@@ -33,8 +32,8 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		{64234, "ICON", "FLASH", "SAY", "SAY_COUNTDOWN", "PROXIMITY"}, -- Gravity Bomb
-		{65121, "ICON", "FLASH", "SAY", "PROXIMITY"}, -- Searing Light
+		{64234, "ICON", "SAY", "SAY_COUNTDOWN", "PROXIMITY", "ME_ONLY_EMPHASIZE"}, -- Gravity Bomb
+		{65121, "ICON", "SAY", "PROXIMITY", "ME_ONLY_EMPHASIZE"}, -- Searing Light
 		62776, -- Tympanic Tantrum
 		64193, -- Heartbreak
 		63849, -- Exposed Heart
@@ -44,11 +43,11 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "ExposedHeart", 63849)
-	self:Log("SPELL_AURA_APPLIED", "Heartbreak", 64193, 65737) -- XXX verify id
-	self:Log("SPELL_AURA_APPLIED", "GravityBomb", 64234)
-	self:Log("SPELL_AURA_APPLIED", "SearingLight", 65121)
-	self:Log("SPELL_AURA_REMOVED", "GravityBombRemoved", 64234)
-	self:Log("SPELL_AURA_REMOVED", "SearingLightRemoved", 65121)
+	self:Log("SPELL_AURA_APPLIED", "Heartbreak", 64193, 65737) -- ??, 10m
+	self:Log("SPELL_AURA_APPLIED", "GravityBomb", 64234, 63024) -- 25m, 10m
+	self:Log("SPELL_AURA_REMOVED", "GravityBombRemoved", 64234, 63024) -- 25m, 10m
+	self:Log("SPELL_AURA_APPLIED", "SearingLight", 65121, 63018) --25m, 10m
+	self:Log("SPELL_AURA_REMOVED", "SearingLightRemoved", 65121, 63018) --25m, 10m
 	self:Log("SPELL_CAST_START", "TympanicTantrum", 62776)
 
 	self:RegisterEvent("UNIT_HEALTH")
@@ -72,7 +71,7 @@ function mod:ExposedHeart(args)
 end
 
 function mod:Heartbreak()
-	self:MessageOld(64193, "red", "info")
+	self:MessageOld(64193, "orange", "info")
 end
 
 function mod:TympanicTantrum(args)
@@ -82,42 +81,40 @@ end
 
 function mod:GravityBomb(args)
 	if self:Me(args.destGUID) then
-		self:OpenProximity(args.spellId, 10)
-		self:Flash(args.spellId)
-		self:Say(args.spellId)
-		self:SayCountdown(args.spellId, 9)
+		self:OpenProximity(64234, 10)
+		self:Say(64234)
+		self:SayCountdown(64234, 9)
 	end
-	self:TargetMessageOld(args.spellId, args.destName, "blue", "alert")
-	self:TargetBar(args.spellId, 9, args.destName, L.gravitybomb_other)
-	self:SecondaryIcon(args.spellId, args.destName)
+	self:TargetMessageOld(64234, args.destName, "red", "alert")
+	self:TargetBar(64234, 9, args.destName, CL.bomb)
+	self:SecondaryIcon(64234, args.destName)
 end
 
 function mod:GravityBombRemoved(args)
 	if self:Me(args.destGUID) then
-		self:CloseProximity(args.spellId)
-		self:CancelSayCountdown(args.spellId)
+		self:CloseProximity(64234)
+		self:CancelSayCountdown(64234)
 	end
-	self:StopBar(L.gravitybomb_other, args.destName)
-	self:SecondaryIcon(args.spellId)
+	self:StopBar(CL.bomb, args.destName)
+	self:SecondaryIcon(64234)
 end
 
 function mod:SearingLight(args)
 	if self:Me(args.destGUID) then
-		self:OpenProximity(args.spellId, 10)
-		self:Flash(args.spellId)
-		self:Say(args.spellId)
+		self:OpenProximity(65121, 10)
+		self:Say(65121)
 	end
-	self:TargetMessageOld(args.spellId, args.destName, "blue", "alert")
-	self:TargetBar(args.spellId, 9, args.destName, L.lightbomb_other)
-	self:PrimaryIcon(args.spellId, args.destName)
+	self:TargetMessageOld(65121, args.destName, "red", "alert")
+	self:TargetBar(65121, 9, args.destName, L.lightbomb_other)
+	self:PrimaryIcon(65121, args.destName)
 end
 
 function mod:SearingLightRemoved(args)
 	if self:Me(args.destGUID) then
-		self:CloseProximity(args.spellId)
+		self:CloseProximity(65121)
 	end
 	self:StopBar(L.lightbomb_other, args.destName)
-	self:PrimaryIcon(args.spellId)
+	self:PrimaryIcon(65121)
 end
 
 function mod:UNIT_HEALTH(event, unit)

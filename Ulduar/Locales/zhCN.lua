@@ -158,7 +158,6 @@ end
 
 L = BigWigs:NewBossLocale("XT-002 Deconstructor", "zhCN")
 if L then
-	L.gravitybomb_other = "重力炸弹"
 	L.lightbomb_other = "灼热之光"
 end
 
