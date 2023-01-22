@@ -158,6 +158,6 @@ end
 function mod:FuseArmor(args)
 	if self:Me(args.destGUID) or (self:Tank() and self:Tank(args.destName)) then
 		local amount = args.amount or 1
-		self:StackMessageOld(args.spellId, args.destName, amount, "orange", args.amount > 1 and "info")
+		self:StackMessageOld(args.spellId, args.destName, amount, "orange", amount > 1 and "info")
 	end
 end
