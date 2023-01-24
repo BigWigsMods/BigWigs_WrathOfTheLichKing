@@ -73,6 +73,7 @@ function mod:OnBossEnable()
 
 	self:Log("SPELL_AURA_APPLIED", "HardModeTimerBegins", 62507) -- Touch of Dominion, Sif spawns and begins the cast
 	self:Log("SPELL_AURA_REMOVED", "HardModeTimerExpires", 62507) -- Touch of Dominion, Sif despawns
+	self:Log("SPELL_AURA_APPLIED", "NormalModeApplied", 62565) -- Touch of Dominion, Sif applies the debuff to Thorim, weakening him, enabling normal mode
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 end
 
@@ -157,14 +158,22 @@ end
 
 function mod:HardModeTimerBegins()
 	-- Restart the bar for accuracy
-	self:Bar("hardmode", 105, L.hardmode, 27578) -- ability_warrior_battleshout / Battle Shout / icon 132333
+	self:Bar("hardmode", self:Classic() and 150 or 105, L.hardmode, 27578) -- ability_warrior_battleshout / Battle Shout / icon 132333
 end
 
-function mod:HardModeTimerExpires()
-	if self:BarTimeLeft(L.hardmode) == 0 then
-		self:MessageOld("hardmode", "cyan", nil, L.hardmode_warning, false)
-	else
-		self:MessageOld("hardmode", "cyan", nil, CL.hard, false)
+do
+	local scheduled = nil
+
+	function mod:HardModeTimerExpires()
+		scheduled = self:ScheduleTimer("Message", 1, "hardmode", "cyan", CL.hard, false)
+	end
+
+	function mod:NormalModeApplied()
+		if scheduled then
+			self:CancelTimer(scheduled)
+			scheduled = nil
+		end
+		self:Message("hardmode", "cyan", L.hardmode_warning, false)
 	end
 end
 
