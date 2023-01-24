@@ -80,7 +80,7 @@ end
 function mod:OnEngage()
 	count = 0
 	stage = 1
-	self:Berserk(900)
+	self:Berserk(self:Classic() and 360 or 900)
 	self:Bar("harpoon", 50, L.harpoon_nextbar:format(1), "INV_Spear_06")
 end
 
