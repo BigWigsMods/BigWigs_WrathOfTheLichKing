@@ -74,7 +74,7 @@ function mod:GetOptions()
 		"tentacle",
 		"small_tentacles",
 		{63830, "ICON", "ME_ONLY"}, -- Malady of the Mind
-		{63802, "FLASH"}, -- Brain Link
+		{63802, "ME_ONLY_EMPHASIZE"}, -- Brain Link
 		64126, -- Squeeze
 		"portal",
 		"weakened",
@@ -87,12 +87,14 @@ function mod:GetOptions()
 		{63050, "FLASH"}, -- Sanity
 		63120, -- Insane
 		"berserk",
-	}, {
+	},{
 		[62979] = CL.stage:format(1),
 		tentacle = CL.stage:format(2),
 		[64465] = CL.stage:format(3),
 		[64189] = "hard",
 		stages = "general",
+	},{
+		[63802] = CL.link, -- Brain Link (Link)
 	}
 end
 
@@ -217,8 +219,8 @@ end
 
 function mod:BrainLink(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(args.spellId, "blue", "alarm", L.link_warning)
-		self:Flash(args.spellId)
+		self:PersonalMessage(args.spellId, false, L.link_warning)
+		self:PlaySound(args.spellId, "warning")
 	end
 end
 
