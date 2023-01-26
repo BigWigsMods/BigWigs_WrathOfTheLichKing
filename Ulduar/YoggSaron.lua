@@ -78,7 +78,7 @@ function mod:GetOptions()
 		64126, -- Squeeze
 		"portal",
 		"weakened",
-		{64059, "COUNTDOWN"}, -- Induce Madness
+		{64059, "COUNTDOWN", "EMPHASIZE"}, -- Induce Madness
 		64465, -- Shadow Beacon
 		shadowBeaconMarker,
 		64163, -- Lunatic Gaze
@@ -232,18 +232,18 @@ function mod:LunaticGaze(args)
 end
 
 do
-	local madnessTime = 0
-	function mod:InduceMadness()
-		madnessTime = GetTime()
+	local madnessCastStartTime = 0
+	function mod:InduceMadness(args)
+		madnessCastStartTime = args.time
 	end
 
 	function mod:IllusionRoom(args)
 		-- Induce Madness
 		if self:Me(args.destGUID) then
-			local passed = GetTime() - madnessTime
-			local remaining = 55 - passed
-			self:Bar(64059, remaining)
-			self:DelayedMessage(64059, remaining - 10, "orange", L.madness_warning, false, "warning")
+			local timeSinceCastStart = args.time - madnessCastStartTime
+			local remainingTime = (self:Classic() and 60 or 55) - timeSinceCastStart
+			self:Bar(64059, remainingTime)
+			self:DelayedMessage(64059, remainingTime - 10, "orange", L.madness_warning, false, "warning")
 		end
 	end
 
@@ -274,7 +274,7 @@ do
 
 	local prev = 0
 	function mod:ShadowBeaconRemoved(args)
-		local t = GetTime()
+		local t = args.time
 		if t-prev > 5 then
 			prev = t
 			self:MessageOld(args.spellId, "green", nil, CL.removed:format(args.spellName))
@@ -308,7 +308,7 @@ do
 
 	local prev = 0
 	function mod:ShadowBeaconApplied(args)
-		local t = GetTime()
+		local t = args.time
 		if t-prev > 5 then
 			prev = t
 			self:TargetMessageOld(args.spellId, args.destName, "red")
@@ -334,12 +334,12 @@ end
 do
 	local prev = 0
 	function mod:PortalsOpen(args) -- Laughing Skulls above portals all gain Lunatic Gaze
-		local t = GetTime()
+		local t = args.time
 		if t-prev > 10 then
 			prev = t
 			self:MessageOld("portal", "green", nil, CL.count:format(L.portal_message, portalCount), 35717)
 			portalCount = portalCount + 1
-			self:Bar("portal", 61, CL.count:format(L.portal_bar, portalCount), 35717)
+			self:Bar("portal", self:Classic() and 90 or 61, CL.count:format(L.portal_bar, portalCount), 35717)
 		end
 	end
 end
@@ -352,7 +352,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L.phase2_trigger) then
 		crusherCount = 1
 		self:MessageOld("stages", "yellow", nil, CL.stage:format(2), false)
-		self:Bar("portal", 25, CL.count:format(L.portal_bar, portalCount), 35717)
+		self:Bar("portal", self:Classic() and 75 or 25, CL.count:format(L.portal_bar, portalCount), 35717)
 	elseif msg:find(L.phase3_trigger) then
 		self:CancelDelayedMessage(L.madness_warning)
 
@@ -361,7 +361,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		self:StopBar(CL.count:format(L.portal_bar, portalCount))
 
 		self:MessageOld("stages", "red", "alarm", CL.stage:format(3), false)
-		self:Bar(64465, 46)
+		self:Bar(64465, 46) -- Shadow Beacon
 	elseif msg:find(L.engage_trigger) and not self.isEngaged then
 		self:Engage() -- Remove if Sara is added to boss frames on engage
 	end
