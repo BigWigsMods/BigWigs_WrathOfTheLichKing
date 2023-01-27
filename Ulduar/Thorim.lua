@@ -188,7 +188,7 @@ function mod:StageTwo()
 
 	self:StopBar(L["hardmode"])
 	self:MessageOld("stages", "yellow", nil, CL.stage:format(2), false)
-	self:OpenProximity("proximity", 5)
+	self:OpenProximity("proximity", self:Classic() and 10 or 5)
 	self:Berserk(312, true) -- Berserk again with new timer and no engage message
 end
 
