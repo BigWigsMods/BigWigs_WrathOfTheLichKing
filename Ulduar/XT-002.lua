@@ -57,7 +57,7 @@ function mod:OnEngage()
 	exposed1 = false
 	exposed2 = false
 	exposed3 = false
-	self:Berserk(600)
+	self:Berserk(self:Classic() and 360 or 600)
 	self:CDBar(62776, 32) -- Tympanic Tantrum
 end
 
