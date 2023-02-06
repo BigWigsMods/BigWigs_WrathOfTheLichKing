@@ -144,7 +144,7 @@ if L then
 	L.vapor = "薩倫煙霧"
 	L.vapor_desc = "當薩倫煙霧出現時發出警報。"
 	L.vapor_message = "薩倫煙霧：>%d<！"
-	L.vapor_bar = "<薩倫煙霧：%d/6>"
+	L.vapor_bar = "薩倫煙霧"
 	L.vapor_trigger = "一片薩倫煙霧在附近聚合!"
 
 	L.vaporstack = "薩倫煙霧堆疊"

@@ -144,7 +144,7 @@ if L then
 	L.vapor = "Vapores de saronita"
 	L.vapor_desc = "Avisa cuando avaprecen vapores de saronita."
 	L.vapor_message = "¡Vapor de saronita %d!"
-	L.vapor_bar = "Vapor %d/6"
+	L.vapor_bar = "Vapor"
 	L.vapor_trigger = "¡Cerca se forma una nube de vapores de saronita!" -- verificar
 
 	L.vaporstack = "Stacks de Vapores"

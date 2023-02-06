@@ -31,7 +31,7 @@ if L then
 	L.vapor = "Saronite Vapors"
 	L.vapor_desc = "Warn when Saronite Vapors spawn."
 	L.vapor_message = "Saronite Vapor %d!"
-	L.vapor_bar = "Vapor %d/6"
+	L.vapor_bar = "Vapor"
 	L.vapor_trigger = "A cloud of saronite vapors coalesces nearby!"
 
 	L.vaporstack = "Vapors Stack"
@@ -96,10 +96,10 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
 		self:MessageOld("vapor", "green", nil, L.vapor_message:format(vaporCount), 63322)
 		vaporCount = vaporCount + 1
 		if vaporCount < (self:Classic() and 9 or 7) then
-			self:Bar("vapor", 30, L.vapor_bar:format(vaporCount), 63322)
+			self:Bar("vapor", 30, CL.count_amount:format(L.vapor_bar, vaporCount, self:Classic() and 8 or 6), 63322)
 		end
 	elseif msg == L.animus_trigger then
-		self:MessageOld("animus", "red", nil, L.animus_message, 87179) -- 87179 / Summon Water Elemental / spell_frost_summonwaterelemental_2 / icon 135862
+		self:MessageOld("animus", "red", nil, L.animus_message, "spell_frost_summonwaterelemental_2") -- spell_frost_summonwaterelemental_2 / icon 135862
 	end
 end
 

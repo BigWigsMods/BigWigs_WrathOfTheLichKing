@@ -144,7 +144,7 @@ if L then
 	L.vapor = "사로나이트 증기"
 	L.vapor_desc = "사로나이트 증기 소환을 알립니다."
 	L.vapor_message = "사로나이트 증기 (%d)!"
-	L.vapor_bar = "다음 증기 %d/6"
+	L.vapor_bar = "다음 증기"
 	L.vapor_trigger = "가까운 사로나이트 증기 구름이 합쳐집니다!"
 
 	L.vaporstack = "증기 중첩"
