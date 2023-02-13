@@ -47,10 +47,10 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED", "StoneGrip", 64290, 64292)
-	self:Log("SPELL_AURA_APPLIED_DOSE", "CrunchArmor", 63355, 64002)
+	self:Log("SPELL_AURA_APPLIED", "StoneGrip", 64290, 64292) -- 10, 25
+	self:Log("SPELL_AURA_APPLIED_DOSE", "CrunchArmor", 63355, 64002) -- 10, 25
 
-	self:Death("ArmsDie", 32933, 32934)
+	self:Death("ArmsDie", 32933, 32934) -- Left, Right
 
 	self:RegisterEvent("CHAT_MSG_RAID_BOSS_WHISPER")
 	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
@@ -62,7 +62,7 @@ end
 --
 
 function mod:CrunchArmor(args)
-	self:StackMessageOld(63355, args.destName, args.amount, "orange", "info")
+	self:StackMessageOld(63355, args.destName, args.amount, "purple", "info")
 end
 
 do
@@ -101,7 +101,7 @@ do
 	function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castId, spellId)
 		if spellId == 63983 and castId ~= prev then -- Arm Sweep
 			prev = castId
-			self:MessageOld(63983, "yellow")
+			self:MessageOld(63983, "orange")
 			self:Bar(63983, 21)
 		end
 	end
@@ -109,7 +109,7 @@ end
 
 function mod:BigWigs_BossComm(_, msg, _, sender)
 	if msg == "EyeBeamWarn" then
-		self:TargetMessageOld("eyebeam", sender, "green", "info", eyeBeam, 63976)
+		self:TargetMessageOld("eyebeam", sender, "red", "info", eyeBeam, 63976)
 		self:TargetBar("eyebeam", 11, sender, eyeBeam, 63976)
 		self:CDBar("eyebeam", 20, eyeBeam, 63976)
 		self:PrimaryIcon("eyebeam", sender)
