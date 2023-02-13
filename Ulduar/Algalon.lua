@@ -85,7 +85,7 @@ end
 
 function mod:BlackHoleExplosion()
 	blackholes = blackholes + 1
-	self:MessageOld(64122, "green", nil, CL.count:format(self:SpellName(186546), blackholes)) -- 186546 = "Black Hole"
+	self:MessageOld(64122, "green", nil, CL.count:format(self:SpellName(62168), blackholes)) -- 62168 = "Black Hole"
 end
 
 function mod:BigBang(args)
