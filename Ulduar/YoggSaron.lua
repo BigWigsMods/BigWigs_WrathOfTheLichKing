@@ -17,7 +17,7 @@ local crusherCount = 1
 local smallTentacleCount = 1
 local portalCount = 1
 local warnedForSanity = false
-local shadowBeacon1GUID, shadowBeacon2GUID = nil, nil
+local shadowBeaconTbl = {}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -66,7 +66,7 @@ L = mod:GetLocale()
 -- Initialization
 --
 
-local shadowBeaconMarker = mod:AddMarkerOption(true, "npc", 8, 64465, 8, 7) -- Shadow Beacon
+local shadowBeaconMarker = mod:AddMarkerOption(true, "npc", 8, 64465, 8, 7, 6, 5, 4) -- Shadow Beacon
 function mod:GetOptions()
 	return {
 		62979, -- Summon Guardian
@@ -131,7 +131,7 @@ function mod:OnEngage()
 	smallTentacleCount = 1
 	portalCount = 1
 	warnedForSanity = false
-	shadowBeacon1GUID, shadowBeacon2GUID = nil, nil
+	shadowBeaconTbl = {}
 	self:Berserk(900)
 end
 
@@ -259,75 +259,50 @@ do
 end
 
 function mod:ShadowBeacon(args)
+	shadowBeaconTbl = {}
 	self:CDBar(args.spellId, 46)
+	self:Message(args.spellId, "red")
+end
+
+function mod:MarkShadowBeacon(event, unit, guid)
+	if shadowBeaconTbl[guid] then
+		self:CustomIcon(false, unit, shadowBeaconTbl[guid])
+	end
+end
+
+function mod:ShadowBeaconApplied(args)
+	if self:GetOption(shadowBeaconMarker) then
+		if not shadowBeaconTbl.count then
+			shadowBeaconTbl.count = 8
+		else
+			shadowBeaconTbl.count = shadowBeaconTbl.count - 1
+		end
+		shadowBeaconTbl[args.destGUID] = shadowBeaconTbl.count
+
+		local unitId = self:GetUnitIdByGUID(args.destGUID)
+		if unitId then
+			self:CustomIcon(false, unitId, shadowBeaconTbl.count)
+		end
+		self:RegisterTargetEvents("MarkShadowBeacon")
+	end
 end
 
 do
-	local function Cleanup(self)
-		shadowBeacon1GUID, shadowBeacon2GUID = nil, nil
-		self:UnregisterTargetEvents()
-	end
-
-	function mod:UnmarkShadowBeacon(event, unit, guid)
-		if guid == shadowBeacon1GUID or guid == shadowBeacon2GUID then
-			self:CustomIcon(false, unit, 0)
-		end
-	end
-
 	local prev = 0
 	function mod:ShadowBeaconRemoved(args)
 		local t = args.time
 		if t-prev > 5 then
 			prev = t
-			self:MessageOld(args.spellId, "green", nil, CL.removed:format(args.spellName))
-			if self:GetOption(shadowBeaconMarker) then
-				self:ScheduleTimer(Cleanup, 5, self)
-			end
+			self:Message(args.spellId, "green", CL.removed:format(args.spellName))
 		end
 
 		if self:GetOption(shadowBeaconMarker) then
-			local destGUID = args.destGUID
-			if destGUID == shadowBeacon1GUID or destGUID == shadowBeacon2GUID then
-				local unitId = mod:GetUnitIdByGUID(destGUID)
+			if shadowBeaconTbl[args.destGUID] then
+				shadowBeaconTbl[args.destGUID] = 0
+				local unitId = self:GetUnitIdByGUID(args.destGUID)
 				if unitId then
 					self:CustomIcon(false, unitId, 0)
-				else
-					self:RegisterTargetEvents("UnmarkShadowBeacon")
 				end
-			end
-		end
-	end
-end
-
-do
-	function mod:MarkShadowBeacon(event, unit, guid)
-		if guid == shadowBeacon1GUID then
-			self:CustomIcon(false, unit, 8)
-		elseif guid == shadowBeacon2GUID then
-			self:CustomIcon(false, unit, 7)
-		end
-	end
-
-	local prev = 0
-	function mod:ShadowBeaconApplied(args)
-		local t = args.time
-		if t-prev > 5 then
-			prev = t
-			self:TargetMessageOld(args.spellId, args.destName, "red")
-		end
-
-		if self:GetOption(shadowBeaconMarker) then
-			if not shadowBeacon1GUID then
-				shadowBeacon1GUID = args.destGUID
-			else
-				shadowBeacon2GUID = args.destGUID
-			end
-
-			local unitId = mod:GetUnitIdByGUID(shadowBeacon2GUID or shadowBeacon1GUID)
-			if unitId then
-				self:CustomIcon(false, unitId, shadowBeacon2GUID and 7 or 8)
-			else
-				self:RegisterTargetEvents("MarkShadowBeacon")
 			end
 		end
 	end
