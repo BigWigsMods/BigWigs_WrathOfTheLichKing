@@ -73,7 +73,7 @@ function mod:GetOptions()
 		{63138, "FLASH"}, -- Sara's Fervor
 		"tentacle",
 		"small_tentacles",
-		{63830, "ICON", "ME_ONLY"}, -- Malady of the Mind
+		{63830, "ICON", "ME_ONLY", "SAY"}, -- Malady of the Mind
 		{63802, "ME_ONLY_EMPHASIZE"}, -- Brain Link
 		64126, -- Squeeze
 		"portal",
@@ -206,6 +206,9 @@ end
 
 function mod:MaladyOfTheMind(args)
 	self:TargetMessageOld(args.spellId, args.destName, "yellow", "alert", L.malady_message)
+	if self:Me(args.destGUID) then
+		self:Say(args.spellId, L.malady_message)
+	end
 	self:PrimaryIcon(args.spellId, args.destName)
 end
 
