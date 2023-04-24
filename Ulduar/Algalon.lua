@@ -13,6 +13,7 @@ mod:SetEncounterID(mod:Classic() and 757 or 1130)
 --
 
 local blackholes = 0
+local isPhase2 = false
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -35,10 +36,12 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "CosmicSmash", 62301, 64598) -- Seems to be 62301 (which doens't have an icon)
 	self:Log("SPELL_CAST_SUCCESS", "BlackHoleExplosion", 64122, 65108) -- Seems to be 65108
 	self:Log("SPELL_CAST_START","BigBang", 64443, 64584)
+	self:BossYell("phase2", "Behold the tools of creation!")
 end
 
 function mod:OnEngage()
 	blackholes = 0
+	isPhase2 = false
 
 	self:RegisterEvent("UNIT_TARGETABLE_CHANGED")
 	--self:Bar("stages", 8+offset, CL["phase"]:format(1), "INV_Gizmo_01") -- XXX FIXME
@@ -58,17 +61,17 @@ function mod:UNIT_TARGETABLE_CHANGED(_, unit)
 	end
 end
 
-function mod:UNIT_HEALTH(event, unit)
-	if self:MobId(self:UnitGUID(unit)) ~= 32871 then return end
-	local hp = self:GetHealth(unit)
-	if hp < 21 then
-		self:MessageOld("stages", "green", nil, CL["soon"]:format(CL["phase"]:format(2)), false)
-		self:UnregisterEvent(event)
-	end
+function mod:phase2(args)
+	self:Bar(64412, 15)
+	isPhase2 = true
 end
 
 function mod:PhasePunch(args)
-	self:Bar(args.spellId, 15)
+	if isPhase2 then
+		self:Bar(args.spellId, 10)
+	else
+		self:Bar(args.spellId, 15)
+	end
 end
 
 function mod:PhasePunchCount(args)
