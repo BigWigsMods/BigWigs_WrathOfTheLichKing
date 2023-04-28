@@ -14,6 +14,7 @@ mod:SetEncounterID(mod:Classic() and 757 or 1130)
 
 local blackholes = 0
 local isPhase2 = false
+local difficulty = GetRaidDifficultyID()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -53,7 +54,6 @@ end
 
 function mod:UNIT_TARGETABLE_CHANGED(_, unit)
 	if self:MobId(self:UnitGUID(unit)) == 32871 and UnitCanAttack("player", unit) then -- Engage
-		self:RegisterEvent("UNIT_HEALTH")
 		self:Bar(64443, 98) -- Big Bang
 		self:DelayedMessage(64443, 93, "yellow", CL.soon:format(self:SpellName(64443)))
 		self:Bar(64597, 33) -- Cosmic Smash
@@ -62,12 +62,14 @@ function mod:UNIT_TARGETABLE_CHANGED(_, unit)
 end
 
 function mod:phase2(args)
-	self:Bar(64412, 15)
+	if difficulty == 4 then
+		self:Bar(64412, 15)
+	end
 	isPhase2 = true
 end
 
 function mod:PhasePunch(args)
-	if isPhase2 then
+	if isPhase2 and difficulty == 4 then
 		self:Bar(args.spellId, 10)
 	else
 		self:Bar(args.spellId, 15)
