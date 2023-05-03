@@ -24,9 +24,9 @@ BigWigs:AddColors("Razorscale", {
 BigWigs:AddColors("XT-002 Deconstructor", {
 	[62776] = "yellow",
 	[63849] = "yellow",
-	[64193] = "red",
-	[64234] = "blue",
-	[65121] = "blue",
+	[64193] = "orange",
+	[64234] = {"blue","red"},
+	[65121] = {"blue","red"},
 })
 
 BigWigs:AddColors("The Iron Council", {
@@ -43,11 +43,11 @@ BigWigs:AddColors("The Iron Council", {
 })
 
 BigWigs:AddColors("Kologarn", {
-	[63355] = {"blue","orange"},
-	[63983] = "yellow",
+	[63355] = {"blue","purple"},
+	[63983] = "orange",
 	[64290] = {"blue","yellow"},
 	["arm"] = "yellow",
-	["eyebeam"] = {"blue","green"},
+	["eyebeam"] = {"blue","red"},
 })
 
 BigWigs:AddColors("Algalon the Observer", {
@@ -130,7 +130,7 @@ BigWigs:AddColors("Yogg-Saron", {
 	[64126] = {"blue","green"},
 	[64163] = "red",
 	[64189] = "yellow",
-	[64465] = {"blue","green","red"},
+	[64465] = {"green","red"},
 	["portal"] = "green",
 	["small_tentacles"] = "red",
 	["stages"] = {"red","yellow"},

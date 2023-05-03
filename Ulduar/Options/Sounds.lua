@@ -88,7 +88,7 @@ BigWigs:AddSounds("General Vezax", {
 
 BigWigs:AddSounds("Yogg-Saron", {
 	[63138] = "alert",
-	[63802] = "alarm",
+	[63802] = "warning",
 	[63830] = "alert",
 	[64059] = "warning",
 	[64163] = "warning",
