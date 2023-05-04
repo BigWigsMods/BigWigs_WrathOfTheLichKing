@@ -54,6 +54,7 @@ end
 
 function mod:UNIT_TARGETABLE_CHANGED(_, unit)
 	if self:MobId(self:UnitGUID(unit)) == 32871 and UnitCanAttack("player", unit) then -- Engage
+		self:RegisterEvent("UNIT_HEALTH")
 		self:Bar(64443, 98) -- Big Bang
 		self:DelayedMessage(64443, 93, "yellow", CL.soon:format(self:SpellName(64443)))
 		self:Bar(64597, 33) -- Cosmic Smash
