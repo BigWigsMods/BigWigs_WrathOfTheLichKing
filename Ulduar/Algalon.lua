@@ -61,6 +61,15 @@ function mod:UNIT_TARGETABLE_CHANGED(_, unit)
 	end
 end
 
+function mod:UNIT_HEALTH(event, unit)
+	if self:MobId(self:UnitGUID(unit)) ~= 32871 then return end
+	local hp = self:GetHealth(unit)
+	if hp < 21 then
+		self:MessageOld("stages", "green", nil, CL["soon"]:format(CL["phase"]:format(2)), false)
+		self:UnregisterEvent(event)
+	end
+end
+
 function mod:phase2(args)
 	if difficulty == 4 then
 		self:Bar(64412, 15)
