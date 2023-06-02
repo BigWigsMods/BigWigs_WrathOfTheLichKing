@@ -71,7 +71,7 @@ function mod:MortalWoundApplied(args)
 		self:PlaySound(54378, "warning")
 	end
 	if args.spellId == 25646 then
-		BigWigs:Error("Mortal Wound found ID 25646 tell the BigWigs Devs! ".. self:Difficulty() .." ".. (self:Classic() and "classic" or "retail"))
+		self:Error("Mortal Wound found ID 25646 tell the devs! ".. self:Difficulty() .." ".. (self:Classic() and "classic" or "retail"))
 	end
 end
 
