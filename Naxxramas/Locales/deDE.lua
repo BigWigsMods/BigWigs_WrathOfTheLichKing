@@ -12,11 +12,6 @@ if L then
 	L.silence = "Stille"
 end
 
-L = BigWigs:NewBossLocale("Gluth", "deDE")
-if L then
-	L.decimate_bar = "Dezimieren"
-end
-
 L = BigWigs:NewBossLocale("Gothik the Harvester", "deDE")
 if L then
 	L.phase1_trigger1 = "Ihr Narren habt euren eigenen Untergang heraufbeschworen."

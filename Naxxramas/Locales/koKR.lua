@@ -12,11 +12,6 @@ if L then
 	L.silence = "침묵"
 end
 
-L = BigWigs:NewBossLocale("Gluth", "koKR")
-if L then
-	L.decimate_bar = "좀비 척살"
-end
-
 L = BigWigs:NewBossLocale("Gothik the Harvester", "koKR")
 if L then
 	L.phase1_trigger1 = "어리석은 것들, 스스로 죽음을 자초하다니!"

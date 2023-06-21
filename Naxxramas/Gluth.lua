@@ -15,16 +15,6 @@ mod:SetEncounterID(1108)
 local dazedThrottle = {}
 
 --------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale()
-if L then
-	L.decimate_bar = "Decimate Zombies"
-end
-L = mod:GetLocale()
-
---------------------------------------------------------------------------------
 -- Initialization
 --
 

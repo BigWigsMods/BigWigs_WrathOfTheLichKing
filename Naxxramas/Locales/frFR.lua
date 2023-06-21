@@ -12,11 +12,6 @@ if L then
 	L.silence = "Silence"
 end
 
-L = BigWigs:NewBossLocale("Gluth", "frFR")
-if L then
-	L.decimate_bar = "Prochain Décimer"
-end
-
 L = BigWigs:NewBossLocale("Gothik the Harvester", "frFR")
 if L then
 	L.phase1_trigger1 = "Dans votre folie, vous avez provoqué votre propre mort."

@@ -19,12 +19,11 @@ local lastCold = 0
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.hardmode = "Hard mode"
 	L.hardmode_desc = "Show timer for hard mode."
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization

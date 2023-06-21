@@ -12,11 +12,6 @@ if L then
 	L.silence = "Безмолвие"
 end
 
-L = BigWigs:NewBossLocale("Gluth", "ruRU")
-if L then
-	L.decimate_bar = "Истребление зомби"
-end
-
 L = BigWigs:NewBossLocale("Gothik the Harvester", "ruRU")
 if L then
 	L.phase1_trigger1 = "Глупо было искать свою смерть."

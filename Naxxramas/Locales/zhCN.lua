@@ -12,11 +12,6 @@ if L then
 	L.silence = "沉默"
 end
 
-L = BigWigs:NewBossLocale("Gluth", "zhCN")
-if L then
-	L.decimate_bar = "残杀"
-end
-
 L = BigWigs:NewBossLocale("Gothik the Harvester", "zhCN")
 if L then
 	L.phase1_trigger1 = "你们这些蠢货已经主动步入了陷阱。"

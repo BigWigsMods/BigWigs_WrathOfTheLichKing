@@ -185,7 +185,7 @@ function mod:TeleportToRoom()
 		self:DelayedMessage("teleport", timeroom - 10, "cyan", CL.soon:format(L.teleport))
 		self:ScheduleTimer("TeleportToBalcony", timeroom)
 		self:CDBar("wave", 15, CL.count:format(L.wave, waveCount), L.wave_icon)
-	else
+	--else
 		-- he breaks if you live this long? should be enrage, but instead you get no emote adds every ~35s,
 		-- will eventually blink + teleport, then emote back after like 3s but stays on the balcony
 	end
