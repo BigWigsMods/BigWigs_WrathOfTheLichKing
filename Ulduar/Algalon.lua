@@ -22,9 +22,9 @@ function mod:GetOptions()
 	return {
 		"stages",
 		64412, -- Phase Punch
-		64597, -- Cosmic Smash
+		{64597, "CASTBAR"}, -- Cosmic Smash
 		64122, -- Black Hole Explosion
-		64443, -- Big Bang
+		{64443, "CASTBAR"}, -- Big Bang
 		"berserk"
 	}
 end

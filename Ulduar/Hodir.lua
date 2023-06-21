@@ -34,7 +34,7 @@ function mod:GetOptions()
 	return {
 		62039, -- Biting Cold
 		{65133, "ICON"}, -- Storm Cloud
-		61968, -- Flash Freeze
+		{61968, "CASTBAR"}, -- Flash Freeze
 		63512, -- Frozen Blows
 		"hardmode",
 		"berserk",

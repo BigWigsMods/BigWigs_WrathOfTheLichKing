@@ -55,7 +55,7 @@ function mod:GetOptions()
 		{62660, "ICON", "SAY"}, -- Shadow Crash
 		{63276, "ICON", "SAY", "FLASH"}, -- Mark of the Faceless
 		62661, -- Searing Flames
-		62662, -- Surge of Darkness
+		{62662, "CASTBAR"}, -- Surge of Darkness
 		"animus",
 		"berserk",
 	}, {

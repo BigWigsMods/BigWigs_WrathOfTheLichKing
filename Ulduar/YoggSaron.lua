@@ -81,7 +81,7 @@ function mod:GetOptions()
 		{64059, "COUNTDOWN", "EMPHASIZE"}, -- Induce Madness
 		64465, -- Shadow Beacon
 		shadowBeaconMarker,
-		64163, -- Lunatic Gaze
+		{64163, "CASTBAR"}, -- Lunatic Gaze
 		64189, -- Deafening Roar
 		"stages",
 		{63050, "FLASH"}, -- Sanity
