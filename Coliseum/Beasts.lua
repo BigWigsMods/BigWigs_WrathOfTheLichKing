@@ -176,7 +176,7 @@ end
 --
 
 function mod:UNIT_AURA(_, unit)
-	local debuffed = self:UnitDebuff(unit, self:SpellName(66406)) -- Snobolled!
+	local debuffed = self:UnitDebuff(unit, self:SpellName(66406), 66406) -- Snobolled!
 	local player = self:UnitName(unit)
 	if snobolledWarned[player] and not debuffed then
 		snobolledWarned[player] = nil
