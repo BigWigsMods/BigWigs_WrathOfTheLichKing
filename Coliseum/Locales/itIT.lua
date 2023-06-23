@@ -14,7 +14,6 @@ if L then
 
 	--L.snobold = "Snobold"
 	--L.snobold_desc = "Warn who gets a Snobold on their heads."
-	--L.snobold_message = "Add"
 
 	--L.submerge = "Submerge"
 	--L.submerge_desc = "Show a timer bar for the next time the worms will submerge."

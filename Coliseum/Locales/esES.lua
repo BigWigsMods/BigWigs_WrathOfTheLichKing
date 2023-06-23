@@ -34,7 +34,6 @@ if L then
 	-- Gormok
 	L.snobold = "Snobold"
 	L.snobold_desc = "Avisa quien tiene un Snobold en su cabeza."
-	L.snobold_message = "Add"
 
 	-- Jormungars
 	L.submerge = "Sumerge"

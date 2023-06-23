@@ -34,7 +34,6 @@ if L then
 	-- Gormok
 	L.snobold = "스노볼트"
 	L.snobold_desc = "스노볼트가 누구의 머리위에 있는지를 알립니다."
-	L.snobold_message = "스노볼트 추가"
 
 	-- Jormungars
 	L.submerge = "잠수"

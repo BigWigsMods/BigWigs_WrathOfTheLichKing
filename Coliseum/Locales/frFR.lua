@@ -34,7 +34,6 @@ if L then
 	-- Gormok
 	L.snobold = "Frigbold"
 	L.snobold_desc = "Prévient quand un joueur a un frigbold sur sa tête."
-	L.snobold_message = "Frigbold"
 
 	-- Jormungars
 	L.submerge = "Dans le sol"

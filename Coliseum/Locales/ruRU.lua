@@ -34,7 +34,6 @@ if L then
 	-- Gormok
 	L.snobold = "Снобольд"
 	L.snobold_desc = "Сообщать о том, на кого прыгнул снобольд."
-	L.snobold_message = "Снобольд на:"
 
 	-- Jormungars
 	L.submerge = "Погружение"

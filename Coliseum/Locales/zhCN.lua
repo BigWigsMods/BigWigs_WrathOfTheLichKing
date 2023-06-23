@@ -34,7 +34,6 @@ if L then
 	-- Gormok
 	L.snobold = "狗头人奴隶"
 	L.snobold_desc = "当出现狗头人奴隶时发出警报。"
-	L.snobold_message = "狗头人奴隶！"
 
 	-- Jormungars
 	L.submerge = "潜地"

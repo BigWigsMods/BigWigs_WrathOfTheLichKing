@@ -41,7 +41,7 @@ if L then
 	-- Gormok
 	L.snobold = "Snobold"
 	L.snobold_desc = "Warn who gets a Snobold on their heads."
-	L.snobold_message = "Add"
+	L.snobold_icon = 66406
 
 	-- Jormungars
 	L.submerge = "Submerge"
@@ -102,11 +102,13 @@ function mod:GetOptions()
 		--[[ General ]]--
 		"bosses",
 		"berserk",
-	}, {
+	},{
 		snobold = L.gormok,
 		submerge = L.jormungars,
 		[66770] = L.icehowl,
 		bosses = "general",
+	},{
+		snobold = CL.add, -- Snobold (Add)
 	}
 end
 
@@ -117,6 +119,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Impale", 66331)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "Impale", 66331)
 	self:Log("SPELL_CAST_START", "StaggeringStomp", 66330)
+	self:Log("SPELL_AURA_APPLIED", "Snobolled", 66406)
 
 	-- Jormungars
 	self:Log("SPELL_CAST_SUCCESS", "SlimeCast", 66883)
@@ -175,13 +178,18 @@ end
 -- Gormok the Impaler
 --
 
+function mod:Snobolled(args) -- XXX Should be in patch 10.1.7, classic wrath pending
+	self:TargetMessageOld("snobold", args.destName, "yellow", nil, CL.add, args.spellId)
+	self:UnregisterEvent("UNIT_AURA")
+end
+
 function mod:UNIT_AURA(_, unit)
 	local debuffed = self:UnitDebuff(unit, self:SpellName(66406), 66406) -- Snobolled!
 	local player = self:UnitName(unit)
 	if snobolledWarned[player] and not debuffed then
 		snobolledWarned[player] = nil
 	elseif debuffed and not snobolledWarned[player] then
-		self:TargetMessageOld("snobold", player, "yellow", nil, L["snobold_message"], 66406)
+		self:TargetMessageOld("snobold", player, "yellow", nil, CL.add, 66406)
 		snobolledWarned[player] = true
 	end
 end
