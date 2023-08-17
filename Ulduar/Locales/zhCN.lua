@@ -183,12 +183,12 @@ if L then
 	L.madness_warning = "10秒后，疯狂诱导！"
 	L.malady_message = "心灵疾病" -- short for Malady of the Mind (63830)
 
-	L.tentacle = "粉碎触须"
-	L.tentacle_desc = "当粉碎触须出现时发出警报。"
-	L.tentacle_message = "粉碎触须：>%d<！"
+	L.tentacle = "重压触须"
+	L.tentacle_desc = "当重压触须出现时发出警报。"
+	L.tentacle_message = "重压触须：>%d<！"
 
-	--L.small_tentacles = "Small Tentacles"
-	--L.small_tentacles_desc = "Warn for Corruptor Tentacle and Constrictor Tentacle spawns."
+	L.small_tentacles = "小型触须"
+	L.small_tentacles_desc = "警告腐蚀触须和缠绕触须的刷新时间。"
 
 	L.link_warning = ">你< 心智链接！"
 
