@@ -15,7 +15,7 @@ end
 L = BigWigs:NewBossLocale("Gothik the Harvester", "zhCN")
 if L then
 	L.phase1_trigger1 = "你们这些蠢货已经主动步入了陷阱。"
-	--L.phase1_trigger2 = "Teamanare shi rikk mannor rikk lok karkun" -- Curse of Tongues
+	L.phase1_trigger2 = "你们正在挑战一个无比强大的存在" -- Curse of Tongues
 	L.phase2_trigger = "我已经等待很久了。现在你们将面对灵魂的收割者。"
 
 	L.add = "增援"
@@ -37,8 +37,8 @@ if L then
 	L.dkbar = "死亡骑士（%d）"
 	L.riderbar = "骑兵（%d）"
 
-	--L.gate = "Gate Open!"
-	--L.gatebar = "Gate opens"
+	L.gate = "门打开!"
+	L.gatebar = "门打开"
 
 	L.phase_soon = "收割者戈提克10秒后进入房间！"
 
@@ -98,7 +98,7 @@ if L then
 	L.guardians_warning = "约10秒后，寒冰皇冠卫士出现！"
 	L.guardians_bar = "寒冰皇冠卫士出现"
 
-	--L.engage_message = "Kel'Thuzad encounter started!"
+	L.engage_message = "克尔苏加德发动了攻击！"
 end
 
 L = BigWigs:NewBossLocale("Loatheb", "zhCN")
@@ -115,8 +115,8 @@ if L then
 
 	L.teleport = "传送"
 	L.teleport_desc = "当施放传送时发出警报。"
-	--L.teleport_balcony = "Teleport! He's on the balcony!"
-	--L.teleport_room = "Teleport! He's back in room!"
+	--L.teleport_balcony = "传送！他到了上层平台！"
+	--L.teleport_room = "传送！他回到了房间！"
 
 	L.curse_explosion = "诅咒爆炸！"
 	L.curse_warn = "诅咒！"
