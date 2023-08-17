@@ -15,7 +15,7 @@ end
 L = BigWigs:NewBossLocale("Gothik the Harvester", "zhCN")
 if L then
 	L.phase1_trigger1 = "你们这些蠢货已经主动步入了陷阱。"
-	L.phase1_trigger2 = "你们正在挑战一个无比强大的存在" -- Curse of Tongues
+	--L.phase1_trigger2 = "Teamanare shi rikk mannor rikk lok karkun" -- Curse of Tongues
 	L.phase2_trigger = "我已经等待很久了。现在你们将面对灵魂的收割者。"
 
 	L.add = "增援"
