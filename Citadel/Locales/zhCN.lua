@@ -211,6 +211,6 @@ end
 L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "zhCN")
 if L then
 	L.deathbound_ward = "缚亡守卫"
-	--L.deathspeaker_adds = "Lady Deathwhisper Trash"
+	L.deathspeaker_adds = "亡语部队（亡语者女士）"
 	L.putricide_dogs = "小宝 & 大臭"
 end
