@@ -87,8 +87,9 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Swarm", 66118)
-	self:Log("SPELL_CAST_SUCCESS", "ColdCooldown", 66013)
-	self:Log("SPELL_AURA_APPLIED", "ColdApplied", 66013)
+	self:Log("SPELL_CAST_SUCCESS", "PenetratingCold", 66013)
+	self:Log("SPELL_AURA_APPLIED", "PenetratingColdApplied", 66013)
+	self:Log("SPELL_AURA_REFRESH", "PenetratingColdApplied", 66013)
 	self:Log("SPELL_AURA_APPLIED", "Pursue", 67574)
 
 	self:Log("SPELL_CAST_START", scheduleStrike, 66134)
@@ -111,6 +112,7 @@ local function scheduleWave()
 end
 
 function mod:OnEngage()
+	coldTargets = {}
 	isBurrowed = nil
 	self:MessageOld("burrow", "yellow", nil, L["engage_message"], 65919)
 	self:Bar("burrow", 80, L["burrow"], 65919)
@@ -146,7 +148,13 @@ function mod:FreezeCooldown(args)
 	self:CDBar(args.spellId, 20)
 end
 
-function mod:ColdApplied(args)
+function mod:PenetratingCold(args)
+	if not phase2 then return end
+	coldTargets = {}
+	self:CDBar(args.spellId, 15)
+end
+
+function mod:PenetratingColdApplied(args)
 	if not phase2 then return end
 	local count = #coldTargets + 1
 	coldTargets[count] = args.destName
@@ -155,12 +163,6 @@ function mod:ColdApplied(args)
 		self:Flash(args.spellId)
 	end
 	self:CustomIcon(coldMarker, args.destName, count)
-end
-
-function mod:ColdCooldown(args)
-	if not phase2 then return end
-	coldTargets = {}
-	self:CDBar(args.spellId, 15)
 end
 
 function mod:Swarm(args)
