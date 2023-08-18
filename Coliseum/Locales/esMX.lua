@@ -14,8 +14,6 @@ if L then
 	L.nerubian_burrower = "Más adds"
 
 	L.shadow_soon = "¡Golpe de las Sombras en ~5sec!"
-
-	L.chase = "Perseguido"
 end
 
 L = BigWigs:NewBossLocale("The Beasts of Northrend", "esMX")

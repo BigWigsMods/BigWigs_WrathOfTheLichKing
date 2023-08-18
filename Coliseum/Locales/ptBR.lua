@@ -99,6 +99,4 @@ if L then
 	--L.nerubian_burrower = "More adds"
 
 	--L.shadow_soon = "Shadow Strike in ~5sec!"
-
-	--L.chase = "Pursue"
 end

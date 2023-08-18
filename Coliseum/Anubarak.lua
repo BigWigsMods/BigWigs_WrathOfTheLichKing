@@ -38,8 +38,6 @@ if L then
 	L.nerubian_burrower = "More adds"
 
 	L.shadow_soon = "Shadow Strike in ~5sec!"
-
-	L.chase = "Pursue"
 end
 L = mod:GetLocale()
 
@@ -62,6 +60,8 @@ function mod:GetOptions()
 		[66012] = "normal",
 		[66134] = "heroic",
 		["berserk"] = "general",
+	}, {
+		[67574] = CL.fixate, -- Pursued by Anub'arak (Fixate)
 	}
 end
 
@@ -89,8 +89,9 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Swarm", 66118)
 	self:Log("SPELL_CAST_SUCCESS", "PenetratingCold", 66013)
 	self:Log("SPELL_AURA_APPLIED", "PenetratingColdApplied", 66013)
-	self:Log("SPELL_AURA_REFRESH", "PenetratingColdApplied", 66013)
-	self:Log("SPELL_AURA_APPLIED", "Pursue", 67574)
+	self:Log("SPELL_AURA_REFRESH", "PenetratingColdApplied", 66013) -- Boss can apply new ones before old ones expire
+	self:Log("SPELL_AURA_APPLIED", "PursuedByAnubarak", 67574)
+	self:Log("SPELL_AURA_REFRESH", "PursuedByAnubarak", 67574)
 
 	self:Log("SPELL_CAST_START", scheduleStrike, 66134)
 	self:Log("SPELL_CAST_SUCCESS", "FreezeCooldown", 66012)
@@ -176,8 +177,8 @@ function mod:Swarm(args)
 	end
 end
 
-function mod:Pursue(args)
-	self:TargetMessageOld(args.spellId, args.destName, "blue", "alert", L["chase"])
+function mod:PursuedByAnubarak(args)
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "alert", CL.fixate)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end

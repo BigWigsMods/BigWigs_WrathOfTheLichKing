@@ -14,8 +14,6 @@ if L then
 	L.nerubian_burrower = "땅무지 추가"
 
 	L.shadow_soon = "약 5초 후 어둠의 일격!"
-
-	L.chase = "추격"
 end
 
 L = BigWigs:NewBossLocale("The Beasts of Northrend", "koKR")
