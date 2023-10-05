@@ -8,6 +8,7 @@ mod:RegisterEnableMob(37955)
 -- mod:SetEncounterID(1103)
 -- mod:SetRespawnTime(30)
 mod.toggleOptions = {{71340, "FLASH"}, {71265, "FLASH"}, 70877, 71772, 71623, "proximity", "berserk"}
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -65,6 +66,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage(diff)
+	self:SetStage(1)
 	self:Berserk(320, true)
 	self:OpenProximity("proximity", 6)
 	self:Bar(71772, airPhaseTimers[diff][1], L["phase2_bar"])
@@ -110,9 +112,15 @@ function mod:Feed(args)
 end
 
 function mod:AirPhase(args)
+	self:SetStage(1.5)
 	self:MessageOld(71772, "red", "alarm", L["phase_message"])
 	self:Bar(71772, 12, L["phase1_bar"])
 	self:Bar(71772, airPhaseTimers[self:Difficulty()][2], L["phase2_bar"])
+	self:ScheduleTimer("GroundPhase", airPhaseTimers[self:Difficulty()][2])
+end
+
+function mod:GroundPhase()
+	self:SetStage(1)
 end
 
 function mod:Slash(args)

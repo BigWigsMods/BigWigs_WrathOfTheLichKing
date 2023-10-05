@@ -16,6 +16,7 @@ mod.optionHeaders = {
 	[73529] = "heroic",
 	warmup = "general",
 }
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -104,6 +105,7 @@ function mod:Warmup()
 end
 
 function mod:OnEngage()
+	self:SetStage(1)
 	frenzied = {}
 	plagueTicks = {}
 	valkyrs = {}
@@ -316,6 +318,7 @@ end
 
 function mod:RemorselessWinter(args)
 	phase = phase + 1
+	self:SetStage(phase) -- Phase 2, and 4 is transition phases
 	self:StopBar(L["valkyr_bar"])
 	self:StopBar(L["horror_bar"])
 	self:StopBar(70337) -- Necrotic Plague
@@ -331,6 +334,7 @@ end
 
 function mod:Quake(args)
 	phase = phase + 1
+	self:SetStage(phase)
 	self:StopBar(69200) -- Raging Spirit
 	self:MessageOld(72262, "orange", "long", CL["cast"]:format(args.spellName))
 	self:Bar(72762, 37) -- Defile

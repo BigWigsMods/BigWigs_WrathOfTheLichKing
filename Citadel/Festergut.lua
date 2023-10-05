@@ -13,6 +13,7 @@ mod.optionHeaders = {
 	[72295] = "heroic",
 	proximity = "general",
 }
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -53,6 +54,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
+	self:SetStage(1)
 	count = 1
 	self:Berserk(300, true)
 	self:CDBar(69279, 20) -- Gas Spore
