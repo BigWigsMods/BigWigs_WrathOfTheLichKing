@@ -77,7 +77,6 @@ do
 end
 
 function mod:Warmup()
-	self:SetStage(1)
 	self:Bar("adds", 45, COMBAT, "achievement_dungeon_hordeairship")
 	--XXX Fix me, move to engage, need more logs for testing
 	self:Bar("adds", 60, L["adds_bar"], 53142)

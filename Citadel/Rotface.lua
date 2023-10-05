@@ -52,7 +52,6 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:SetStage(1)
 	self:Berserk(600, true)
 	self:Bar(69508, 19, L["spray_bar"])
 	if self:Heroic() then

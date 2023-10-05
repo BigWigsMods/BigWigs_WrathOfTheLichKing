@@ -59,7 +59,6 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:SetStage(1)
 	self:OpenProximity("proximity", 11)
 	self:Berserk(self:Heroic() and 360 or 480)
 	self:DelayedMessage("adds", 35, "orange", L["adds_warning"])
@@ -120,7 +119,6 @@ function mod:Mark(args)
 end
 
 function mod:Frenzy(args)
-	self:SetStage(2)
 	self:MessageOld(72737, "red", "long")
 end
 

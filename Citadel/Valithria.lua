@@ -87,7 +87,6 @@ do
 		end
 	end
 	function mod:OnEngage()
-		self:SetStage(1)
 		portalCount = 1
 		if self:Heroic() then
 			self:CDBar("suppresser", 14, L["suppresser_message"], 70588)
