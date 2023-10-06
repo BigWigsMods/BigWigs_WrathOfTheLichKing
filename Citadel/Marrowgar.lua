@@ -39,7 +39,6 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:SetStage(1)
 	self:CDBar(69076, 45)
 	self:DelayedMessage(69076, 40, "yellow", L["bonestorm_warning"])
 end
@@ -72,7 +71,6 @@ end
 
 do
 	local function afterTheStorm()
-		self:SetStage(1)
 		if mod:Heroic() then
 			mod:Bar(69076, 55)
 			mod:DelayedMessage(69076, 50, "yellow", L["bonestorm_warning"])
@@ -83,7 +81,6 @@ do
 		end
 	end
 	function mod:Bonestorm(args)
-		self:SetStage(2)
 		if not self:Heroic() then
 			self:StopBar(69062) -- Impale
 		end

@@ -86,7 +86,7 @@ function mod:Switch(args)
 		self:PrimaryIcon("iconprince", boss)
 		-- Set stage depending on active boss
 		local guid = self:MobId(args.destGUID)
-		if guid
+		if guid then
 			if guid == 37970 then -- Prince Valanar
 				self:SetStage(1)
 			elseif guid == 37972 then -- Prince Keleseth
