@@ -7,6 +7,7 @@ if not mod then return end
 mod:RegisterEnableMob(36853, 37533, 37534) -- Sindragosa, Rimefang, Spinestalker
 -- mod:SetEncounterID(1105)
 -- mod:SetRespawnTime(30)
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -99,6 +100,7 @@ function mod:Warmup()
 end
 
 function mod:OnEngage(diff)
+	self:SetStage(1)
 	phase = 1
 	beaconCount = 1
 	self:Berserk(600)
@@ -155,14 +157,23 @@ function mod:Grip()
 end
 
 function mod:AirPhase()
+	self:SetStage(1.5)
 	beaconCount = 1
 	self:MessageOld("airphase", "green", nil, L["airphase_message"], 23684)
 	self:Bar("airphase", 110, L["airphase_bar"], 23684)
 	self:Bar(70123, 80, 70117) -- Icy Grip
 	self:Bar(69762, 57) -- Unchained Magic
+	self:ScheduleTimer("GroundPhase", 20)
+end
+
+function mod:GroundPhase()
+	if self:GetStage() ~= 2 then
+		self:SetStage(1)
+	end
 end
 
 function mod:Phase2()
+	self:SetStage(2)
 	phase = 2
 	self:StopBar(L["airphase_bar"])
 	self:MessageOld("phase2", "green", "long", L["phase2_message"], false)

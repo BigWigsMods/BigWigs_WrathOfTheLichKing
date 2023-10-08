@@ -8,6 +8,7 @@ mod:RegisterEnableMob(37813, 37200, 37830, 37187, 37920) -- Deathbringer Saurfan
 -- mod:SetEncounterID(1096)
 -- mod:SetRespawnTime(30)
 mod.toggleOptions = {"warmup", "adds", 72410, 72385, {72293, "ICON", "FLASH"}, 72737, "proximity", "berserk"}
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals

@@ -13,6 +13,7 @@ mod.optionHeaders = {
 	[72272] = "heroic",
 	berserk = "general",
 }
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Localization

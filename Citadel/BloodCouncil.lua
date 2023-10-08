@@ -14,6 +14,7 @@ mod.optionHeaders = {
 	[72999] = "heroic",
 	[70981] = "general",
 }
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -56,6 +57,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
+	self:SetStage(1)
 	self:CDBar(70981, 45, L["switch_bar"])
 	self:CDBar(72037, 20, L["shock_bar"])
 	self:Berserk(600)
@@ -82,6 +84,17 @@ function mod:Switch(args)
 	local boss = self:GetUnitIdByGUID(args.destGUID)
 	if boss then
 		self:PrimaryIcon("iconprince", boss)
+		-- Set stage depending on active boss
+		local guid = self:MobId(args.destGUID)
+		if guid then
+			if guid == 37970 then -- Prince Valanar
+				self:SetStage(1)
+			elseif guid == 37972 then -- Prince Keleseth
+				self:SetStage(2)
+			elseif guid == 37973 then -- Prince Taldaram
+				self:SetStage(3)
+			end
+		end
 	end
 end
 
