@@ -99,10 +99,12 @@ do
 			mod:Bar(70351, 25, L["experiment_bar"])
 			first = true
 			p2 = true
+			self:SetStage(2)
 		else
 			mod:MessageOld("phase", "green", nil, CL.phase:format(3), false)
 			first = nil
 			mod:UnregisterEvent("UNIT_HEALTH")
+			self:SetStage(3)
 		end
 	end
 
@@ -129,12 +131,8 @@ do
 		stop = true
 		self:Bar("phase", 18, L["phase_bar"], "achievement_boss_profputricide")
 		self:ScheduleTimer(nextPhase, 3)
+		self:SetStage(self:GetStage()+0.5) -- Half stage during transition
 		stopOldStuff()
-		if not first then
-			self:SetStage(2)
-		else
-			self:SetStage(3)
-		end
 	end
 	function mod:TearGasOver()
 		if stop then return end
