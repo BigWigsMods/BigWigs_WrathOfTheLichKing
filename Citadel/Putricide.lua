@@ -99,12 +99,12 @@ do
 			mod:Bar(70351, 25, L["experiment_bar"])
 			first = true
 			p2 = true
-			self:SetStage(2)
+			mod:SetStage(2)
 		else
 			mod:MessageOld("phase", "green", nil, CL.phase:format(3), false)
 			first = nil
 			mod:UnregisterEvent("UNIT_HEALTH")
-			self:SetStage(3)
+			mod:SetStage(3)
 		end
 	end
 

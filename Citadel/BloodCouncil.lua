@@ -96,7 +96,6 @@ function mod:Switch(args)
 			end
 		end
 	end
-	
 end
 
 function mod:EmpoweredShock(_, spellId)
