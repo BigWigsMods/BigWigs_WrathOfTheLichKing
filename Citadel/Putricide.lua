@@ -131,7 +131,6 @@ do
 		stop = true
 		self:Bar("phase", 18, L["phase_bar"], "achievement_boss_profputricide")
 		self:ScheduleTimer(nextPhase, 3)
-		self:SetStage(self:GetStage()+0.5) -- Half stage during transition
 		stopOldStuff()
 	end
 	function mod:TearGasOver()
