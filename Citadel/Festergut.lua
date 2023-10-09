@@ -13,7 +13,6 @@ mod.optionHeaders = {
 	[72295] = "heroic",
 	proximity = "general",
 }
-mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals

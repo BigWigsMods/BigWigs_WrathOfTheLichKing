@@ -8,7 +8,6 @@ mod:RegisterEnableMob(36612)
 -- mod:SetEncounterID(1101)
 -- mod:SetRespawnTime(30)
 mod.toggleOptions = {69076, 69057, {69138, "FLASH"}}
-mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Localization

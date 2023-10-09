@@ -112,7 +112,7 @@ function mod:Feed(args)
 end
 
 function mod:AirPhase(args)
-	self:SetStage(1.5)
+	self:SetStage(2)
 	self:MessageOld(71772, "red", "alarm", L["phase_message"])
 	self:Bar(71772, 12, L["phase1_bar"])
 	self:Bar(71772, airPhaseTimers[self:Difficulty()][2], L["phase2_bar"])

@@ -8,7 +8,6 @@ mod:RegisterEnableMob(37184) -- Zafod Boombox
 -- mod:SetEncounterID(1099)
 -- mod:SetRespawnTime(30)
 mod.toggleOptions = {"adds", "mage"}
-mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals

@@ -12,7 +12,6 @@ mod.optionHeaders = {
 	[69325] = "normal",
 	berserk = "heroic",
 }
-mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals
