@@ -216,7 +216,7 @@ end
 do
 	local oldPlagueBar = ""
 	function mod:UnboundPlague(args)
-		local _, _, _, expirationTime = self:UnitDebuff(args.destName, args.spellName)
+		local _, _, _, expirationTime = self:UnitDebuff(args.destName, args.spellName, 70911)
 		if expirationTime then
 			self:StopBar(70911, oldPlagueBar)
 			oldPlagueBar = args.destName
