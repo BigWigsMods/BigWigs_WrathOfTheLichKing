@@ -43,7 +43,7 @@ L = mod:GetLocale()
 --
 
 function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED_DOSE", "Prison", 72999)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "ShadowPrison", 72999)
 	self:Log("SPELL_AURA_APPLIED", "Switch", 70981, 70982, 70952, 70983, 70934, 71582, 71596)
 	self:Log("SPELL_CAST_START", "EmpoweredShock", 72039)
 	self:Log("SPELL_SUMMON", "RegularShock", 72037)
@@ -68,12 +68,12 @@ end
 --
 
 function mod:Bomb(args)
-	self:MessageOld(72052, "yellow", "alert")
+	self:MessageOld(args.spellId, "yellow", "alert")
 end
 
-function mod:Prison(args)
+function mod:ShadowPrison(args)
 	if args.amount > 2 and self:Me(args.destGUID) then
-		self:MessageOld(72999, "blue", nil, L["prison_message"]:format(args.amount))
+		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 3)
 	end
 end
 
@@ -81,42 +81,40 @@ function mod:Switch(args)
 	self:MessageOld(70981, "green", "info", L["switch_message"]:format(args.destName))
 	self:CDBar(70981, 45, L["switch_bar"])
 	self:StopBar(L["empowered_flames"])
+	-- Set stage depending on active boss
+	local guid = self:MobId(args.destGUID)
+	if guid == 37970 then -- Prince Valanar
+		self:SetStage(1)
+	elseif guid == 37972 then -- Prince Keleseth
+		self:SetStage(2)
+	elseif guid == 37973 then -- Prince Taldaram
+		self:SetStage(3)
+	end
 	local boss = self:GetUnitIdByGUID(args.destGUID)
 	if boss then
 		self:PrimaryIcon("iconprince", boss)
-		-- Set stage depending on active boss
-		local guid = self:MobId(args.destGUID)
-		if guid then
-			if guid == 37970 then -- Prince Valanar
-				self:SetStage(1)
-			elseif guid == 37972 then -- Prince Keleseth
-				self:SetStage(2)
-			elseif guid == 37973 then -- Prince Taldaram
-				self:SetStage(3)
-			end
-		end
 	end
 end
 
-function mod:EmpoweredShock(_, spellId)
-	self:MessageOld(72039, "red", "long", L["empowered_shock_message"])
+function mod:EmpoweredShock(args)
+	self:MessageOld(args.spellId, "red", "long", L["empowered_shock_message"])
 	self:OpenProximity("proximity", 15)
 	self:ScheduleTimer("CloseProximity", 5)
-	self:CDBar(72039, 16, L["shock_bar"])
+	self:CDBar(args.spellId, 16, L["shock_bar"])
 end
 
-function mod:RegularShock()
+function mod:RegularShock(args)
 	local boss = self:GetUnitIdByGUID(37970)
 	if boss then
 		local bossTarget = boss.."target"
 		local target = self:UnitName(bossTarget)
 		if target then
 			if self:Me(self:UnitGUID(bossTarget)) then
-				self:Flash(72037)
-				self:Say(72037)
+				self:Flash(args.spellId)
+				self:Say(args.spellId)
 			end
-			self:TargetMessageOld(72037, target, "orange", nil, L["regular_shock_message"])
-			self:CDBar(72037, 16, L["shock_bar"])
+			self:TargetMessageOld(args.spellId, target, "orange", nil, L["regular_shock_message"])
+			self:CDBar(args.spellId, 16, L["shock_bar"])
 		end
 	end
 end
