@@ -50,7 +50,7 @@ if L then
 
 	L.engage_trigger = "ВО ИМЯ КОРОЛЯ-ЛИЧА!"
 	L.warmup_alliance = "Тогда выдвигаемся! Быст..."
-	L.warmup_horde = "Кор'крон, выдвигайтесь! Герои будьте начеку. Плеть только что..."
+	L.warmup_horde = "Кор'крон, выдвигайтесь! Герои, будьте начеку. Плеть только что..."
 end
 
 L = BigWigs:NewBossLocale("Festergut", "ruRU")
