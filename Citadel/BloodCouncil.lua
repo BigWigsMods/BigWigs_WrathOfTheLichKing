@@ -78,21 +78,23 @@ function mod:ShadowPrison(args)
 end
 
 function mod:Switch(args)
-	self:MessageOld(70981, "green", "info", L["switch_message"]:format(args.destName))
-	self:CDBar(70981, 45, L["switch_bar"])
-	self:StopBar(L["empowered_flames"])
-	-- Set stage depending on active boss
-	local guid = self:MobId(args.destGUID)
-	if guid == 37970 then -- Prince Valanar
-		self:SetStage(1)
-	elseif guid == 37972 then -- Prince Keleseth
-		self:SetStage(2)
-	elseif guid == 37973 then -- Prince Taldaram
-		self:SetStage(3)
-	end
-	local boss = self:GetUnitIdByGUID(args.destGUID)
-	if boss then
-		self:PrimaryIcon("iconprince", boss)
+	if self:IsEngaged() then -- Triggers on respawn
+		self:MessageOld(70981, "green", "info", L["switch_message"]:format(args.destName))
+		self:CDBar(70981, 45, L["switch_bar"])
+		self:StopBar(L["empowered_flames"])
+		-- Set stage depending on active boss
+		local guid = self:MobId(args.destGUID)
+		if guid == 37970 then -- Prince Valanar
+			self:SetStage(1)
+		elseif guid == 37972 then -- Prince Keleseth
+			self:SetStage(2)
+		elseif guid == 37973 then -- Prince Taldaram
+			self:SetStage(3)
+		end
+		local boss = self:GetUnitIdByGUID(args.destGUID)
+		if boss then
+			self:PrimaryIcon("iconprince", boss)
+		end
 	end
 end
 
