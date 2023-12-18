@@ -64,6 +64,13 @@ end
 L = BigWigs:NewBossLocale("Faction Champions", "ptBR")
 if L then
 	--L.defeat_trigger = "A shallow and tragic victory."
+
+	--L["Shield on %s!"] = "Shield on %s!"
+	--L["Bladestorming!"] = "Bladestorming!"
+	--L["Hunter pet up!"] = "Hunter pet up!"
+	--L["Felhunter up!"] = "Felhunter up!"
+	--L["Heroism on champions!"] = "Heroism on champions!"
+	--L["Bloodlust on champions!"] = "Bloodlust on champions!"
 end
 
 L = BigWigs:NewBossLocale("The Twin Val'kyr", "ptBR")

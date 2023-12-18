@@ -148,6 +148,9 @@ if L then
 	L.airphase_trigger = "Saphiron erhebt sich in die Lüfte!"
 	L.deepbreath_trigger = "%s holt tief Luft."
 
+	--L.air_phase = "Air Phase"
+	--L.ground_phase = "Ground Phase"
+
 	L.ice_bomb = "Frostatem"
 	L.ice_bomb_warning = "Frostatem kommt!"
 	L.ice_bomb_bar = "Frostatem landet!"

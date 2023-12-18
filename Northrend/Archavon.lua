@@ -70,8 +70,8 @@ do
 		if not bossId then return end
 		local target = mod:UnitName(bossId .. "target")
 		if target then
-			mod:TargetMessageOld(58965, target, "red", nil, spellId)
-			mod:PrimaryIcon(58965, target)
+			mod:TargetMessageOld(58678, target, "red", nil, spellId)
+			mod:PrimaryIcon(58678, target)
 		end
 	end
 	function mod:Shards(args)

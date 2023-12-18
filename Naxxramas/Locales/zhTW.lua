@@ -37,6 +37,9 @@ if L then
 	L.dkbar = "死亡騎士（%d）"
 	L.riderbar = "騎兵（%d）"
 
+	--L.gate = "Gate Open!"
+	--L.gatebar = "Gate opens"
+
 	L.phase_soon = "10秒後進入房間！"
 
 	L.engage_message = "『收割者』高希已進入參戰！"
@@ -144,6 +147,9 @@ L = BigWigs:NewBossLocale("Sapphiron", "zhTW")
 if L then
 	L.airphase_trigger = "%s離地升空了!"
 	L.deepbreath_trigger = "%s深深地吸了一口氣……" -- XXX Verify
+
+	--L.air_phase = "Air Phase"
+	--L.ground_phase = "Ground Phase"
 
 	L.ice_bomb = "寒冰炸彈"
 	L.ice_bomb_warning = "即將 寒冰炸彈"

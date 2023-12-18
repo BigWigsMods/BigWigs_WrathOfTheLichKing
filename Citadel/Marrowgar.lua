@@ -62,7 +62,7 @@ do
 end
 
 function mod:Coldflame(args)
-	if self:Me(args.destName) then
+	if self:Me(args.destGUID) then
 		self:MessageOld(69138, "blue", "alarm", CL["under"]:format(args.spellName))
 		self:Flash(69138)
 	end
