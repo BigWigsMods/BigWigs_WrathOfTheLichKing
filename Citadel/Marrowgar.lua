@@ -7,7 +7,7 @@ if not mod then return end
 mod:RegisterEnableMob(36612)
 -- mod:SetEncounterID(1101)
 -- mod:SetRespawnTime(30)
-mod.toggleOptions = {69076, 69057, {69138, "FLASH"}}
+mod.toggleOptions = {69076, 69057, 69138}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -27,9 +27,9 @@ L = mod:GetLocale()
 
 function mod:OnBossEnable()
 	self:Log("SPELL_SUMMON", "Impale", 69062, 72669, 72670) --25, ??, ??
-	self:Log("SPELL_CAST_START", "BonestormCast", 69076)
-	self:Log("SPELL_AURA_APPLIED", "Bonestorm", 69076)
-	self:Log("SPELL_AURA_APPLIED", "Coldflame", 69146)
+	self:Log("SPELL_CAST_START", "BoneStormCast", 69076)
+	self:Log("SPELL_AURA_APPLIED", "BoneStormApplied", 69076)
+	self:Log("SPELL_AURA_APPLIED", "ColdflameDamage", 69146)
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:BossYell("Engage", L["engage_trigger"])
@@ -38,8 +38,8 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:CDBar(69076, 45)
-	self:DelayedMessage(69076, 40, "yellow", L["bonestorm_warning"])
+	self:CDBar(69076, 45) -- Bone Storm
+	self:DelayedMessage(69076, 40, "yellow", L["bonestorm_warning"]) -- Bone Storm
 end
 
 --------------------------------------------------------------------------------
@@ -61,10 +61,14 @@ do
 	end
 end
 
-function mod:Coldflame(args)
-	if self:Me(args.destGUID) then
-		self:MessageOld(69138, "blue", "alarm", CL["under"]:format(args.spellName))
-		self:Flash(69138)
+do
+	local prev = 0
+	function mod:ColdflameDamage(args)
+		if self:Me(args.destGUID) and args.time - prev > 3 then
+			prev = args.time
+			self:PlaySound(69138, "underyou")
+			self:PersonalMessage(69138, "underyou")
+		end
 	end
 end
 
@@ -79,7 +83,7 @@ do
 			mod:CDBar(69057, 18, 69062) -- Impale
 		end
 	end
-	function mod:Bonestorm(args)
+	function mod:BoneStormApplied(args)
 		if not self:Heroic() then
 			self:StopBar(69062) -- Impale
 		end
@@ -89,7 +93,7 @@ do
 	end
 end
 
-function mod:BonestormCast(args)
-	self:MessageOld(args.spellId, "yellow")
+function mod:BoneStormCast(args)
+	self:Message(args.spellId, "yellow")
+	self:PlaySound(args.spellId, "long")
 end
-
