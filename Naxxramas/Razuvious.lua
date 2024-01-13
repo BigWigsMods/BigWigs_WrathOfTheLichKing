@@ -86,7 +86,7 @@ function mod:JaggedKnife(args)
 end
 
 function mod:MindControl(args)
-	local icon = CombatLog_String_GetIcon(args.destRaidFlags)
+	local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
 	if icon == "" then icon = nil end
 	understudyIcons[args.destGUID] = icon
 	activeUnderstudy = args.destGUID
