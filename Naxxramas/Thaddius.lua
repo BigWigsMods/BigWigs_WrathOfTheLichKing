@@ -307,7 +307,7 @@ function mod:NegativeCharge(args)
 			self:Message(28089, "red", L[direction], false)
 		end
 		if self:GetOption("custom_off_charge_voice") then
-			PlaySoundFile(DIRECTION_SOUND[direction], "Master")
+			self:PlaySoundFile(DIRECTION_SOUND[direction])
 		end
 	end
 end
@@ -337,7 +337,7 @@ function mod:NegativeChargeRefresh(args)
 			self:Message(28089, "yellow", L[direction], false)
 		end
 		if self:GetOption("custom_off_charge_voice") then
-			PlaySoundFile(DIRECTION_SOUND[direction], "Master")
+			self:PlaySoundFile(DIRECTION_SOUND[direction])
 		end
 	end
 end
@@ -379,7 +379,7 @@ function mod:PositiveCharge(args)
 			self:Message(28089, "blue", L[direction], false)
 		end
 		if self:GetOption("custom_off_charge_voice") then
-			PlaySoundFile(DIRECTION_SOUND[direction], "Master")
+			self:PlaySoundFile(DIRECTION_SOUND[direction])
 		end
 	end
 end
@@ -409,7 +409,7 @@ function mod:PositiveChargeRefresh(args)
 			self:Message(28089, "yellow", L[direction], false)
 		end
 		if self:GetOption("custom_off_charge_voice") then
-			PlaySoundFile(DIRECTION_SOUND[direction], "Master")
+			self:PlaySoundFile(DIRECTION_SOUND[direction])
 		end
 	end
 end
