@@ -1,7 +1,8 @@
 
 BigWigs:AddSounds("Lord Marrowgar", {
 	[69057] = "alert",
-	[69138] = "alarm",
+	[69076] = "long",
+	[69138] = "underyou",
 })
 
 BigWigs:AddSounds("Lady Deathwhisper", {

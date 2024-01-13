@@ -28,10 +28,14 @@ BigWigs:AddColors("Sartharion", {
 })
 
 BigWigs:AddColors("Halion", {
-	[74562] = "blue",
-	[74648] = {"blue","orange","red"},
+	[74525] = "orange",
+	[74562] = {"blue","yellow"},
+	[74648] = {"blue","red"},
 	[74769] = "red",
-	[74792] = "blue",
+	[74792] = {"blue","yellow"},
+	[74806] = "orange",
+	[74826] = "cyan",
+	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Emalon the Storm Watcher", {
