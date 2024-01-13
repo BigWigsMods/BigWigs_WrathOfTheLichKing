@@ -28,21 +28,7 @@ end
 
 L = BigWigs:NewBossLocale("Halion", "frFR")
 if L then
-	L.engage_trigger = "Votre monde vacille au bord de l'élimination. Vous serez tous témoins de l'avènement d'une nouvelle ère de DESTRUCTION !"
-
-	L.phase_two_trigger = "Vous ne trouverez que souffrance au royaume du crépuscule ! Entrez si vous l'osez !"
-
-	L.twilight_cutter_trigger = "Les sphères volantes rayonnent d'énergie noire !"
-	L.twilight_cutter_bar = "~Tranchant du crépuscule"
-	L.twilight_cutter_warning = "Arrivée d'un Tranchant du crépuscule !"
-
-	L.fire_damage_message = "Vos pieds brûlent !"
-	L.fire_message = "Combustion ardente"
-	L.shadow_message = "Consomption d'âmes"
-
-	L.meteorstrike_yell = "Les cieux s'embrasent !"
-	L.meteorstrike_bar = "Frappe météore"
-	--L.meteor_warning_message = "Meteor incoming!"
+	L.twilight_cutter_emote_trigger = "sphères" -- Les sphères volantes rayonnent d’énergie noire !
 end
 
 L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "frFR")

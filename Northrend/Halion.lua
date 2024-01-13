@@ -2,126 +2,322 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Halion", 724, 1652)
+local mod, CL = BigWigs:NewBoss("Halion", 724, 1652)
 if not mod then return end
 mod:RegisterEnableMob(39863, 40142)
--- mod:SetEncounterID(1150)
--- mod:SetRespawnTime(30)
-mod.toggleOptions = {{74562, "SAY", "ICON", "FLASH"}, 74648, {74792, "SAY", "ICON", "FLASH"}, 74769, 74806, 74525, "berserk"}
-
---------------------------------------------------------------------------------
--- Locals
---
-
-local phase = 1
+mod:SetEncounterID(mod:Classic() and 887 or 1150)
+mod:SetRespawnTime(31)
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
-	L.engage_trigger = "Your world teeters on the brink of annihilation. You will ALL bear witness to the coming of a new age of DESTRUCTION!"
-
-	L.phase_two_trigger = "You will find only suffering within the realm of twilight! Enter if you dare!"
-
-	L.twilight_cutter_trigger = "The orbiting spheres pulse with dark energy!"
-	L.twilight_cutter_bar = "Laser beams"
-	L.twilight_cutter_warning = "Laser beams incoming!"
-
-	L.fire_damage_message = "Your feet are burning!"
-	L.fire_message = "Fire bomb"
-	L.shadow_message = "Shadow bomb"
-
-	L.meteorstrike_yell = "The heavens burn!"
-	L.meteorstrike_bar = "Meteor Strike"
-	L.meteor_warning_message = "Meteor incoming!"
+	L.twilight_cutter_emote_trigger = "spheres" -- The orbiting spheres pulse with dark energy!
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
 --
 
+function mod:GetOptions()
+	return {
+		{74562, "SAY", "ICON", "ME_ONLY_EMPHASIZE"}, -- Fiery Combustion
+		74648, -- Meteor Strike
+		74525, -- Flame Breath
+		{74792, "SAY", "ICON", "ME_ONLY_EMPHASIZE"}, -- Soul Consumption
+		74769, -- Twilight Cutter
+		74806, -- Dark Breath
+		74826, -- Corporeality
+		"stages",
+		"berserk",
+	},{
+		[74792] = self:SpellName(74807), -- Twilight Realm
+		[74826] = CL.stage:format(3),
+		["stages"] = "general",
+	},{
+		[74562] = CL.bomb, -- Fiery Combustion (Bomb)
+		[74648] = CL.meteor, -- Meteor Strike (Meteor)
+		[74525] = CL.breath, -- Flame Breath (Breath)
+		[74792] = CL.bomb, -- Soul Consumption (Bomb)
+		[74769] = CL.beams, -- Twilight Cutter (Beams)
+		[74806] = CL.breath, -- Dark Breath (Breath)
+	}
+end
+
 function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED", "Fire", 74562)
-	self:Log("SPELL_AURA_APPLIED", "Shadow", 74792)
+	-- Normal Realm
+	self:Log("SPELL_CAST_SUCCESS", "FieryCombustion", 74562)
+	self:Log("SPELL_AURA_APPLIED", "FieryCombustionApplied", 74562)
+	self:Log("SPELL_AURA_REMOVED", "FieryCombustionRemoved", 74562)
+	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1", "boss2") -- Pre-Meteor
 	self:Log("SPELL_CAST_SUCCESS", "MeteorStrike", 74648)
-	--self:Log("SPELL_DAMAGE", "FireDamage", 75947, 75948, 75949, 75950, 75951, 75952) -- XXX These IDs no longer exist, we need to find the correct one(s).
-	--self:Log("SPELL_MISSED", "FireDamage", 75947, 75948, 75949, 75950, 75951, 75952)
-	-- Dark breath 25m, flame breath 25m, dark breath 10m, flame breath 10m
-	self:Log("SPELL_CAST_START", "ShadowBreath", 74806)
-	self:Log("SPELL_CAST_START", "FireBreath", 74525)
+	self:Log("SPELL_DAMAGE", "MeteorStrikeDamage", 74712, 74717) -- Center pool of fire, lines of fire stretching out
+	self:Log("SPELL_MISSED", "MeteorStrikeDamage", 74712, 74717)
+	self:Log("SPELL_CAST_START", "FlameBreath", 74525)
+
+	-- Twilight Realm
+	self:Log("SPELL_CAST_SUCCESS", "SoulConsumption", 74792)
+	self:Log("SPELL_AURA_APPLIED", "SoulConsumptionApplied", 74792)
+	self:Log("SPELL_AURA_REMOVED", "SoulConsumptionRemoved", 74792)
+	self:Log("SPELL_CAST_START", "DarkBreath", 74806)
+	self:RegisterMessage("BigWigs_BossComm")
+	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE") -- Twilight Cutter
+
+	-- Stages
+	self:Log("SPELL_CAST_SUCCESS", "DuskShroud", 75476)
+	self:Log("SPELL_CAST_START", "TwilightDivision", 75063)
+	self:Log("SPELL_AURA_APPLIED", "Corporeality50", 74826)
+	self:Log("SPELL_AURA_APPLIED", "Corporeality60", 74827)
+	self:Log("SPELL_AURA_APPLIED", "Corporeality70", 74828)
+	self:Log("SPELL_AURA_APPLIED", "Corporeality80", 74829)
+	self:Log("SPELL_AURA_APPLIED", "Corporeality90", 74830)
+	self:Log("SPELL_AURA_APPLIED", "Corporeality100", 74831)
+
 	self:Death("Win", 39863, 40142)
-
-	self:Emote("TwilightCutter", L["twilight_cutter_trigger"])
-	self:BossYell("Engage", L["engage_trigger"])
-	self:BossYell("PhaseTwo", L["phase_two_trigger"])
-	self:BossYell("MeteorInc", L["meteorstrike_yell"])
-
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 end
 
 function mod:OnEngage()
-	phase = 1
+	self:SetStage(1)
 	self:Berserk(480)
-	self:Bar(74648, 30, L["meteorstrike_bar"])
+	self:CDBar(74525, 8, CL.breath) -- Flame Breath
+	self:CDBar(74562, 16, CL.bomb) -- Fiery Combustion
+	self:CDBar(74648, 21, CL.meteor) -- Meteor Strike
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:FireDamage(args)
-	if self:Me(args.destGUID) then
-		self:MessageOld(74648, "blue", nil, L["fire_damage_message"])
+-- Normal Realm
+function mod:FieryCombustion(args)
+	self:StopBar(CL.bomb)
+	if not self:UnitBuff("player", 74807) then
+		self:CDBar(args.spellId, self:Heroic() and 21 or 25.5, CL.bomb)
 	end
 end
 
-function mod:Fire(args)
-	self:Bar(74562, self:Heroic() and 20 or 25, L["fire_message"])
-	if self:Me(args.destGUID) then
-		self:Say(74562, L["fire_message"])
-		self:Flash(74562)
+do
+	local bombTarget = nil
+	function mod:FieryCombustionApplied(args)
+		bombTarget = args.destGUID
+		self:PrimaryIcon(args.spellId, args.destName)
+		if not self:UnitBuff("player", 74807) then
+			self:TargetMessage(args.spellId, "yellow", args.destName, CL.bomb)
+		end
+		if self:Me(args.destGUID) then
+			self:Say(args.spellId, CL.bomb, nil, "Bomb")
+			self:PlaySound(args.spellId, "warning", nil, args.destName)
+		end
 	end
-	self:TargetMessageOld(74562, args.destName, "blue", "info", L["fire_message"])
-	self:PrimaryIcon(74562, args.destName)
-end
-
-function mod:Shadow(args)
-	self:Bar(74792, self:Heroic() and 20 or 25, L["shadow_message"])
-	if self:Me(args.destGUID) then
-		self:Say(74792, L["shadow_message"])
-		self:Flash(74792)
+	function mod:FieryCombustionRemoved(args)
+		if bombTarget == args.destGUID then
+			self:PrimaryIcon(args.spellId)
+		end
 	end
-	self:TargetMessageOld(74792, args.destName, "blue", "info", L["shadow_message"])
-	self:SecondaryIcon(74792, args.destName)
 end
 
-function mod:ShadowBreath(args)
-	self:Bar(74806, 12)
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId) -- Pre-Meteor
+	if spellId == 74637 then -- Meteor Strike (before it lands)
+		self:StopBar(CL.meteor)
+		if not self:UnitBuff("player", 74807) then
+			self:CDBar(74648, 40, CL.meteor)
+			self:Message(74648, "red", CL.incoming:format(CL.meteor))
+			self:PlaySound(74648, "long")
+		end
+	end
 end
 
-function mod:FireBreath(args)
-	self:Bar(74525, 12)
+function mod:MeteorStrike(args) -- When it lands
+	if not self:UnitBuff("player", 74807) then
+		self:Message(args.spellId, "red")
+	end
 end
 
-function mod:TwilightCutter()
-	self:CDBar(74769, 33, L["twilight_cutter_bar"])
-	self:MessageOld(74769, "red", "alert", L["twilight_cutter_warning"])
+do
+	local prev = 0
+	function mod:MeteorStrikeDamage(args)
+		if self:Me(args.destGUID) and args.time - prev > 3 then
+			prev = args.time
+			self:PersonalMessage(74648, "underyou")
+			self:PlaySound(74648, "underyou")
+		end
+	end
 end
 
-function mod:MeteorInc(args)
-	self:MessageOld(74648, "orange", "long", L["meteor_warning_message"])
+function mod:FlameBreath(args)
+	self:StopBar(CL.breath)
+	if not self:UnitBuff("player", 74807) then
+		self:Message(args.spellId, "orange", CL.breath)
+		self:CDBar(args.spellId, 14.5, CL.breath)
+	end
 end
 
-function mod:MeteorStrike(args)
-	self:Bar(74648, 40, L["meteorstrike_bar"])
-	self:MessageOld(74648, "red")
+-- Twilight Realm
+function mod:SoulConsumption(args)
+	self:StopBar(CL.bomb)
+	if self:UnitBuff("player", 74807) then
+		self:CDBar(args.spellId, self:Heroic() and 21 or 25.5, CL.bomb)
+	end
 end
 
-function mod:PhaseTwo(args)
-	phase = 2
-	self:CDBar(74769, 40, L["twilight_cutter_bar"])
+do
+	local bombTarget = nil
+	function mod:SoulConsumptionApplied(args)
+		bombTarget = args.destGUID
+		self:SecondaryIcon(args.spellId, args.destName)
+		if self:UnitBuff("player", 74807) then
+			self:TargetMessage(args.spellId, "yellow", args.destName, CL.bomb)
+		end
+		if self:Me(args.destGUID) then
+			self:Say(args.spellId, CL.bomb, nil, "Bomb")
+			self:PlaySound(args.spellId, "warning", nil, args.destName)
+		end
+	end
+	function mod:SoulConsumptionRemoved(args)
+		if bombTarget == args.destGUID then
+			self:SecondaryIcon(args.spellId)
+		end
+	end
 end
 
+function mod:DarkBreath(args)
+	self:StopBar(CL.breath)
+	if self:UnitBuff("player", 74807) then
+		self:Message(args.spellId, "orange", CL.breath)
+		self:CDBar(args.spellId, 14, CL.breath)
+	end
+end
+
+do
+	local prev = 0
+	function mod:BigWigs_BossComm(_, msg)
+		local t = GetTime()
+		if msg == "Beams" and t - prev > 12 then
+			prev = t
+			self:StopBar(CL.beams)
+			if self:UnitBuff("player", 74807) then
+				self:CDBar(74769, 30, CL.beams)
+				self:Message(74769, "red", CL.incoming:format(CL.beams))
+				self:PlaySound(74769, "alert")
+			end
+		end
+	end
+end
+
+function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg) -- Twilight Cutter
+	if msg:find(L.twilight_cutter_emote_trigger, nil, true) then
+		self:Sync("Beams") -- You can't see this in both realms, so sync
+	end
+end
+
+-- Stages
+function mod:DuskShroud() -- Stage 2
+	self:SetStage(2)
+	self:StopBar(CL.bomb) -- Fiery Combustion
+	self:StopBar(CL.breath) -- Flame Breath
+	self:StopBar(CL.meteor) -- Meteor Strike
+	self:Message("stages", "cyan", CL.percent:format(75, CL.stage:format(2)), false)
+	self:CDBar(74792, 16, CL.bomb) -- Soul Consumption
+	self:CDBar(74806, 18, CL.breath) -- Dark Breath
+	self:CDBar(74769, 30, CL.beams) -- Twilight Cutter
+	self:PlaySound("stages", "info")
+end
+
+function mod:TwilightDivision() -- Stage 3
+	self:SetStage(3)
+	self:Message("stages", "cyan", CL.percent:format(50, CL.stage:format(3)), false)
+	self:PlaySound("stages", "info")
+end
+
+function mod:Corporeality50(args)
+	if self:MobId(args.destGUID) == 40142 then -- Shadow
+		self:Message(args.spellId, "cyan", CL.percent:format(50, args.spellName))
+	end
+end
+
+function mod:Corporeality60(args)
+	if self:MobId(args.destGUID) == 40142  then
+		if self:UnitBuff("player", 74807) then
+			self:Message(74826, "cyan", CL.percent:format(60, args.spellName))
+		else
+			self:Message(74826, "cyan", CL.percent:format(40, args.spellName))
+		end
+	else
+		if self:UnitBuff("player", 74807) then
+			self:Message(74826, "cyan", CL.percent:format(40, args.spellName))
+		else
+			self:Message(74826, "cyan", CL.percent:format(60, args.spellName))
+		end
+	end
+end
+
+function mod:Corporeality70(args)
+	if self:MobId(args.destGUID) == 40142  then
+		if self:UnitBuff("player", 74807) then
+			self:Message(74826, "cyan", CL.percent:format(70, args.spellName))
+		else
+			self:Message(74826, "cyan", CL.percent:format(30, args.spellName))
+		end
+	else
+		if self:UnitBuff("player", 74807) then
+			self:Message(74826, "cyan", CL.percent:format(30, args.spellName))
+		else
+			self:Message(74826, "cyan", CL.percent:format(70, args.spellName))
+		end
+	end
+	self:PlaySound("stages", "info")
+end
+
+function mod:Corporeality80(args)
+	if self:MobId(args.destGUID) == 40142  then
+		if self:UnitBuff("player", 74807) then
+			self:Message(74826, "cyan", CL.percent:format(80, args.spellName))
+		else
+			self:Message(74826, "cyan", CL.percent:format(20, args.spellName))
+		end
+	else
+		if self:UnitBuff("player", 74807) then
+			self:Message(74826, "cyan", CL.percent:format(20, args.spellName))
+		else
+			self:Message(74826, "cyan", CL.percent:format(80, args.spellName))
+		end
+	end
+	self:PlaySound("stages", "warning")
+end
+
+function mod:Corporeality90(args)
+	if self:MobId(args.destGUID) == 40142  then
+		if self:UnitBuff("player", 74807) then
+			self:Message(74826, "cyan", CL.percent:format(90, args.spellName))
+		else
+			self:Message(74826, "cyan", CL.percent:format(10, args.spellName))
+		end
+	else
+		if self:UnitBuff("player", 74807) then
+			self:Message(74826, "cyan", CL.percent:format(10, args.spellName))
+		else
+			self:Message(74826, "cyan", CL.percent:format(90, args.spellName))
+		end
+	end
+	self:PlaySound("stages", "warning")
+end
+
+function mod:Corporeality100(args)
+	if self:MobId(args.destGUID) == 40142  then
+		if self:UnitBuff("player", 74807) then
+			self:Message(74826, "cyan", CL.percent:format(100, args.spellName))
+		else
+			self:Message(74826, "cyan", CL.percent:format(0, args.spellName))
+		end
+	else
+		if self:UnitBuff("player", 74807) then
+			self:Message(74826, "cyan", CL.percent:format(100, args.spellName))
+		else
+			self:Message(74826, "cyan", CL.percent:format(0, args.spellName))
+		end
+	end
+	self:PlaySound("stages", "warning")
+end

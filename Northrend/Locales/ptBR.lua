@@ -67,21 +67,7 @@ end
 
 L = BigWigs:NewBossLocale("Halion", "ptBR")
 if L then
-	--L.engage_trigger = "Your world teeters on the brink of annihilation. You will ALL bear witness to the coming of a new age of DESTRUCTION!"
-
-	--L.phase_two_trigger = "You will find only suffering within the realm of twilight! Enter if you dare!"
-
-	--L.twilight_cutter_trigger = "The orbiting spheres pulse with dark energy!"
-	--L.twilight_cutter_bar = "Laser beams"
-	--L.twilight_cutter_warning = "Laser beams incoming!"
-
-	--L.fire_damage_message = "Your feet are burning!"
-	--L.fire_message = "Fire bomb"
-	--L.shadow_message = "Shadow bomb"
-
-	--L.meteorstrike_yell = "The heavens burn!"
-	--L.meteorstrike_bar = "Meteor Strike"
-	--L.meteor_warning_message = "Meteor incoming!"
+	L.twilight_cutter_emote_trigger = "esferas" -- As esferas orbitantes pulsam com energia negra!
 end
 
 L = BigWigs:NewBossLocale("Emalon the Storm Watcher", "ptBR")

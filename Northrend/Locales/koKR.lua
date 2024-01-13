@@ -99,19 +99,5 @@ end
 
 L = BigWigs:NewBossLocale("Halion", "koKR")
 if L then
-	L.engage_trigger = "너희 세상에 파멸의 바람이 불어온다"
-
-	L.phase_two_trigger = "황혼 세계에서는 고통만이 있으리라"
-
-	L.twilight_cutter_trigger = "주위를 회전하는 구슬들이 고동치며 어둠의 기운을 내뿜습니다"
-	L.twilight_cutter_bar = "~황혼 절단기"
-	L.twilight_cutter_warning = "곧 황혼 절단기"
-
-	L.fire_damage_message = "당신의 발이 불타오르는 중!"
-	L.fire_message = "맹렬한 발화"
-	L.shadow_message = "영혼 소진"
-
-	L.meteorstrike_yell = "하늘이 타오른다!"
-	L.meteorstrike_bar = "유성 충돌"
-	L.meteor_warning_message = "곧 유성 충돌!"
+	L.twilight_cutter_emote_trigger = "주위를 회전하는 구슬들이" -- 주위를 회전하는 구슬들이 고동치며 어둠의 기운을 내뿜습니다!
 end

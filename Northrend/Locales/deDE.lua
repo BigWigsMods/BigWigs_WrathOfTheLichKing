@@ -99,19 +99,5 @@ end
 
 L = BigWigs:NewBossLocale("Halion", "deDE")
 if L then
-	L.engage_trigger = "Eure Welt steht auf Messers Schneide. Ihr ALLE werdet Zeuge des Anbeginns eines neuen Zeitalters der ZERSTÖRUNG!"
-
-	L.phase_two_trigger = "Ihr werdet im Reich des Zwielichts nur Leid finden! Tretet ein, wenn ihr es wagt!"
-
-	L.twilight_cutter_trigger = "Die kreisenden Sphären pulsieren vor dunkler Energie!"
-	L.twilight_cutter_bar = "~Zwielichtschnitter"
-	L.twilight_cutter_warning = "Zwielichtschnitter!"
-
-	L.fire_damage_message = "Deine Füße brennen!"
-	L.fire_message = "Einäscherung"
-	L.shadow_message = "Seelenverzehrung"
-
-	L.meteorstrike_yell = "Die Himmel brennen!"
-	L.meteorstrike_bar = "Meteorschlag"
-	L.meteor_warning_message = "Meteor!"
+	L.twilight_cutter_emote_trigger = "Sphären" -- Die kreisenden Sphären pulsieren vor dunkler Energie!
 end

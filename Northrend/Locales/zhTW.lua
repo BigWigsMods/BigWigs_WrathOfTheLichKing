@@ -28,21 +28,7 @@ end
 
 L = BigWigs:NewBossLocale("Halion", "zhTW")
 if L then
-	L.engage_trigger = "你們的世界在滅亡的邊緣搖搖欲墜。你們接下來全都會見證這個毀滅新紀元的來臨!"
-
-	L.phase_two_trigger = "在暮光的國度只有磨難在等著你!有膽量的話就進去吧!"
-
-	L.twilight_cutter_trigger = "暗影無所不在!"
-	L.twilight_cutter_bar = "<暮光切割>"
-	L.twilight_cutter_warning = "即將 暮光切割！"
-
-	L.fire_damage_message = ">你< 熾熱燃灼！"
-	L.fire_message = "熾熱燃灼！"
-	L.shadow_message = "靈魂耗損！"
-
-	L.meteorstrike_yell = "天堂也將燃燒!"
-	L.meteorstrike_bar = "<隕石轟擊>"
-	L.meteor_warning_message = "即將 隕石轟擊！"
+	L.twilight_cutter_emote_trigger = "這些環繞" -- 這些環繞的球體散發著黑暗能量!
 end
 
 L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "zhTW")

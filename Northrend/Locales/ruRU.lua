@@ -99,19 +99,5 @@ end
 
 L = BigWigs:NewBossLocale("Halion", "ruRU")
 if L then
-	L.engage_trigger = "Этот мир вот-вот соскользнет в бездну. Вам выпала честь узреть начало эры РАЗРУШЕНИЯ!"
-
-	L.phase_two_trigger = "В мире сумерек вы найдете лишь страдания! Входите, если посмеете!"
-
-	L.twilight_cutter_trigger = "Во вращающихся сферах пульсирует темная энергия!"
-	L.twilight_cutter_bar = "~Лезвие сумерок"
-	L.twilight_cutter_warning = "Скоро Лезвие сумерок"
-
-	--L.fire_damage_message = "Your feet are burning!"
-	L.fire_message = "Огненная бомба"
-	L.shadow_message = "Пожирающая бомба"
-
-	--L.meteorstrike_yell = "The heavens burn!"
-	L.meteorstrike_bar = "Падение метеора"
-	--L.meteor_warning_message = "Meteor incoming!"
+	L.twilight_cutter_emote_trigger = "сферах" -- Во вращающихся сферах пульсирует темная энергия!
 end
