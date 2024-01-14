@@ -26,11 +26,6 @@ if L then
 	L.custom_on_overcharge_mark_desc = "使用 {rt8} 标记能量超载的风暴爪牙，需要权限。"
 end
 
-L = BigWigs:NewBossLocale("Halion", "zhCN")
-if L then
-	L.twilight_cutter_emote_trigger = "黑暗能量" -- 黑暗能量正在这颗旋转的魔球中脉动！
-end
-
 L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "zhCN")
 if L then
 	L.breath_bar = "<灼热吐息：%d>"

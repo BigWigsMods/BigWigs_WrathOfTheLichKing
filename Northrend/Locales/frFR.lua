@@ -26,11 +26,6 @@ if L then
 	L.custom_on_overcharge_mark_desc = "Place the {rt8} marker on the overcharged minion, requires promoted or leader."
 end
 
-L = BigWigs:NewBossLocale("Halion", "frFR")
-if L then
-	L.twilight_cutter_emote_trigger = "sphères" -- Les sphères volantes rayonnent d’énergie noire !
-end
-
 L = BigWigs:NewBossLocale("Koralon the Flame Watcher", "frFR")
 if L then
 	L.breath_bar = "Souffle %d"

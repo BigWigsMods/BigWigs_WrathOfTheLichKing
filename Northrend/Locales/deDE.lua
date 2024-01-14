@@ -96,8 +96,3 @@ if L then
 
 	L.freeze_message = "Eingefroren"
 end
-
-L = BigWigs:NewBossLocale("Halion", "deDE")
-if L then
-	L.twilight_cutter_emote_trigger = "Sphären" -- Die kreisenden Sphären pulsieren vor dunkler Energie!
-end

@@ -65,11 +65,6 @@ if L then
 	L.acolyte_vesperon = "Acólito de Vesperon" -- NPC 31219
 end
 
-L = BigWigs:NewBossLocale("Halion", "ptBR")
-if L then
-	L.twilight_cutter_emote_trigger = "esferas" -- As esferas orbitantes pulsam com energia negra!
-end
-
 L = BigWigs:NewBossLocale("Emalon the Storm Watcher", "ptBR")
 if L then
 	--L.overcharge_message = "A minion is overcharged!"

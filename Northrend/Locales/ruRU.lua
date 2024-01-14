@@ -96,8 +96,3 @@ if L then
 	L.acolyte_shadron = "Служитель Шадрона" -- NPC 31218
 	L.acolyte_vesperon = "Служитель Весперона" -- NPC 31219
 end
-
-L = BigWigs:NewBossLocale("Halion", "ruRU")
-if L then
-	L.twilight_cutter_emote_trigger = "сферах" -- Во вращающихся сферах пульсирует темная энергия!
-end
