@@ -16,5 +16,7 @@
 <Include file="Northrend\modules.xml"/>
 <Include file="Northrend\locales.xml"/>
 
-</Ui>
+<Include file="RubySanctum\modules.xml"/>
+<Include file="RubySanctum\locales.xml"/>
 
+</Ui>
