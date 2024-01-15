@@ -2,6 +2,7 @@
 ..\FrameXML\UI.xsd">
 
 <Script file="Halion.lua"/>
+<Script file="Trash.lua"/>
 
 <Include file="Options\options.xml"/>
 
