@@ -70,11 +70,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "DuskShroud", 75476)
 	self:Log("SPELL_CAST_START", "TwilightDivision", 75063)
 	self:Log("SPELL_AURA_APPLIED", "Corporeality50", 74826)
-	self:Log("SPELL_AURA_APPLIED", "Corporeality60", 74827)
-	self:Log("SPELL_AURA_APPLIED", "Corporeality70", 74828)
-	self:Log("SPELL_AURA_APPLIED", "Corporeality80", 74829)
-	self:Log("SPELL_AURA_APPLIED", "Corporeality90", 74830)
-	self:Log("SPELL_AURA_APPLIED", "Corporeality100", 74831)
+	self:Log("SPELL_AURA_APPLIED", "CorporealityOther", 74827, 74828, 74829, 74830, 74831) -- 60, 70, 80, 90, 100
 
 	self:Death("Win", 39863, 40142)
 end
@@ -234,90 +230,36 @@ end
 
 function mod:Corporeality50(args)
 	if self:MobId(args.destGUID) == 40142 then -- Shadow
-		self:Message(args.spellId, "cyan", CL.percent:format(50, args.spellName))
+		self:Message(args.spellId, "cyan", CL.other:format(args.spellName, "50%"))
+		self:Bar(args.spellId, 15)
 	end
 end
 
-function mod:Corporeality60(args)
-	if self:MobId(args.destGUID) == 40142  then
-		if self:UnitBuff("player", 74807) then
-			self:Message(74826, "cyan", CL.percent:format(60, args.spellName))
+do
+	local percentLookup = {
+		[74827] = {"60%", "40%"},
+		[74828] = {"70%", "30%"},
+		[74829] = {"80%", "20%"},
+		[74830] = {"90%", "10%"},
+		[74831] = {"100%", "0%"},
+	}
+	function mod:CorporealityOther(args)
+		if self:MobId(args.destGUID) == 40142  then
+			if self:UnitBuff("player", 74807) then
+				self:Message(74826, "cyan", CL.other:format(args.spellName, percentLookup[args.spellId][1]))
+			else
+				self:Message(74826, "cyan", CL.other:format(args.spellName, percentLookup[args.spellId][2]))
+			end
 		else
-			self:Message(74826, "cyan", CL.percent:format(40, args.spellName))
+			if self:UnitBuff("player", 74807) then
+				self:Message(74826, "cyan", CL.other:format(args.spellName, percentLookup[args.spellId][2]))
+			else
+				self:Message(74826, "cyan", CL.other:format(args.spellName, percentLookup[args.spellId][1]))
+			end
 		end
-	else
-		if self:UnitBuff("player", 74807) then
-			self:Message(74826, "cyan", CL.percent:format(40, args.spellName))
-		else
-			self:Message(74826, "cyan", CL.percent:format(60, args.spellName))
-		end
-	end
-end
-
-function mod:Corporeality70(args)
-	if self:MobId(args.destGUID) == 40142  then
-		if self:UnitBuff("player", 74807) then
-			self:Message(74826, "cyan", CL.percent:format(70, args.spellName))
-		else
-			self:Message(74826, "cyan", CL.percent:format(30, args.spellName))
-		end
-	else
-		if self:UnitBuff("player", 74807) then
-			self:Message(74826, "cyan", CL.percent:format(30, args.spellName))
-		else
-			self:Message(74826, "cyan", CL.percent:format(70, args.spellName))
+		self:Bar(74826, 15)
+		if args.spellId ~= 74827 then -- 60%
+			self:PlaySound(74826, "warning")
 		end
 	end
-	self:PlaySound("stages", "info")
-end
-
-function mod:Corporeality80(args)
-	if self:MobId(args.destGUID) == 40142  then
-		if self:UnitBuff("player", 74807) then
-			self:Message(74826, "cyan", CL.percent:format(80, args.spellName))
-		else
-			self:Message(74826, "cyan", CL.percent:format(20, args.spellName))
-		end
-	else
-		if self:UnitBuff("player", 74807) then
-			self:Message(74826, "cyan", CL.percent:format(20, args.spellName))
-		else
-			self:Message(74826, "cyan", CL.percent:format(80, args.spellName))
-		end
-	end
-	self:PlaySound("stages", "warning")
-end
-
-function mod:Corporeality90(args)
-	if self:MobId(args.destGUID) == 40142  then
-		if self:UnitBuff("player", 74807) then
-			self:Message(74826, "cyan", CL.percent:format(90, args.spellName))
-		else
-			self:Message(74826, "cyan", CL.percent:format(10, args.spellName))
-		end
-	else
-		if self:UnitBuff("player", 74807) then
-			self:Message(74826, "cyan", CL.percent:format(10, args.spellName))
-		else
-			self:Message(74826, "cyan", CL.percent:format(90, args.spellName))
-		end
-	end
-	self:PlaySound("stages", "warning")
-end
-
-function mod:Corporeality100(args)
-	if self:MobId(args.destGUID) == 40142  then
-		if self:UnitBuff("player", 74807) then
-			self:Message(74826, "cyan", CL.percent:format(100, args.spellName))
-		else
-			self:Message(74826, "cyan", CL.percent:format(0, args.spellName))
-		end
-	else
-		if self:UnitBuff("player", 74807) then
-			self:Message(74826, "cyan", CL.percent:format(100, args.spellName))
-		else
-			self:Message(74826, "cyan", CL.percent:format(0, args.spellName))
-		end
-	end
-	self:PlaySound("stages", "warning")
 end
