@@ -9,3 +9,16 @@ BigWigs:AddColors("Halion", {
 	[74826] = "cyan",
 	["stages"] = "cyan",
 })
+
+BigWigs:AddColors("The Ruby Sanctum Trash", {
+	[40504] = "yellow",
+	[74367] = {"blue","purple"},
+	[74384] = "yellow",
+	[74403] = "red",
+	[74453] = {"blue","yellow"},
+	[74502] = {"blue","orange"},
+	[74509] = "orange",
+	[75125] = "red",
+	[78722] = {"green","orange"},
+	["adds"] = "cyan",
+})

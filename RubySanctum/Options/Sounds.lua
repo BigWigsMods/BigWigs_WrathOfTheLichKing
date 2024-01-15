@@ -4,5 +4,16 @@ BigWigs:AddSounds("Halion", {
 	[74648] = {"long","underyou"},
 	[74769] = "alert",
 	[74792] = "warning",
-	["stages"] = {"info","warning"},
+	[74826] = "warning",
+	["stages"] = "info",
+})
+
+BigWigs:AddSounds("The Ruby Sanctum Trash", {
+	[40504] = "alert",
+	[74403] = "info",
+	[74453] = "warning",
+	[74502] = "warning",
+	[74509] = "long",
+	[75125] = "info",
+	[78722] = "alarm",
 })
