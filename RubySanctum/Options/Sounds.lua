@@ -10,10 +10,13 @@ BigWigs:AddSounds("Halion", {
 
 BigWigs:AddSounds("The Ruby Sanctum Trash", {
 	[40504] = "alert",
+	[74367] = "alarm",
+	[74384] = "alert",
 	[74403] = "info",
 	[74453] = "warning",
 	[74502] = "warning",
 	[74509] = "long",
 	[75125] = "info",
 	[78722] = "alarm",
+	["adds"] = "long",
 })
