@@ -256,17 +256,22 @@ end
 
 function mod:CleaveArmorApplied(args)
 	self:StackMessage(args.spellId, "purple", args.destName, args.amount, 2)
+	if args.amount then
+		self:PlaySound(args.spellId, "alarm")
+	end
 end
 
 function mod:IntimidatingRoar(args)
 	self:Message(args.spellId, "yellow")
 	self:CDBar(args.spellId, 34)
+	self:PlaySound(args.spellId, "alert")
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L.adds_yell_trigger, nil, true) then
 		self:Message("adds", "cyan", CL.adds_spawned, L.adds_icon)
 		self:CDBar("adds", 45.5, CL.adds, L.adds_icon)
+		self:PlaySound("adds", "long")
 	end
 end
 
