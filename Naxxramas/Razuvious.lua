@@ -87,8 +87,9 @@ end
 
 function mod:MindControl(args)
 	local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
-	if icon == "" then icon = nil end
-	understudyIcons[args.destGUID] = icon
+	if icon then
+		understudyIcons[args.destGUID] = icon
+	end
 	activeUnderstudy = args.destGUID
 end
 
