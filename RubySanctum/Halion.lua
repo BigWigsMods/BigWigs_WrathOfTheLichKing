@@ -25,9 +25,11 @@ end
 function mod:GetOptions()
 	return {
 		{74562, "SAY", "ICON", "ME_ONLY_EMPHASIZE"}, -- Fiery Combustion
+		74630, -- Combustion
 		74648, -- Meteor Strike
 		74525, -- Flame Breath
 		{74792, "SAY", "ICON", "ME_ONLY_EMPHASIZE"}, -- Soul Consumption
+		74802, -- Consumption
 		74769, -- Twilight Cutter
 		74806, -- Dark Breath
 		74826, -- Corporeality
@@ -52,6 +54,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "FieryCombustion", 74562)
 	self:Log("SPELL_AURA_APPLIED", "FieryCombustionApplied", 74562)
 	self:Log("SPELL_AURA_REMOVED", "FieryCombustionRemoved", 74562)
+	self:Log("SPELL_DAMAGE", "CombustionDamage", 74630)
+	self:Log("SPELL_MISSED", "CombustionDamage", 74630)
 	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1", "boss2") -- Pre-Meteor
 	self:Log("SPELL_CAST_SUCCESS", "MeteorStrike", 74648)
 	self:Log("SPELL_DAMAGE", "MeteorStrikeDamage", 74712, 74717) -- Center pool of fire, lines of fire stretching out
@@ -62,6 +66,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "SoulConsumption", 74792)
 	self:Log("SPELL_AURA_APPLIED", "SoulConsumptionApplied", 74792)
 	self:Log("SPELL_AURA_REMOVED", "SoulConsumptionRemoved", 74792)
+	self:Log("SPELL_DAMAGE", "ConsumptionDamage", 74802)
+	self:Log("SPELL_MISSED", "ConsumptionDamage", 74802)
 	self:Log("SPELL_CAST_START", "DarkBreath", 74806)
 	self:RegisterMessage("BigWigs_BossComm")
 	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE") -- Twilight Cutter
@@ -89,7 +95,6 @@ end
 
 -- Normal Realm
 function mod:FieryCombustion(args)
-	self:StopBar(CL.bomb)
 	if not self:UnitBuff("player", 74807) then
 		self:CDBar(args.spellId, self:Heroic() and 21 or 25.5, CL.bomb)
 	end
@@ -115,6 +120,17 @@ do
 	end
 end
 
+do
+	local prev = 0
+	function mod:CombustionDamage(args)
+		if self:Me(args.destGUID) and args.time-prev > 3 then
+			prev = args.time
+			self:PersonalMessage(args.spellId, "underyou")
+			self:PlaySound(args.spellId, "underyou")
+		end
+	end
+end
+
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId) -- Pre-Meteor
 	if spellId == 74637 then -- Meteor Strike (before it lands)
 		self:StopBar(CL.meteor)
@@ -135,7 +151,7 @@ end
 do
 	local prev = 0
 	function mod:MeteorStrikeDamage(args)
-		if self:Me(args.destGUID) and args.time - prev > 3 then
+		if self:Me(args.destGUID) and args.time-prev > 3 then
 			prev = args.time
 			self:PersonalMessage(74648, "underyou")
 			self:PlaySound(74648, "underyou")
@@ -144,16 +160,14 @@ do
 end
 
 function mod:FlameBreath(args)
-	self:StopBar(CL.breath)
 	if not self:UnitBuff("player", 74807) then
 		self:Message(args.spellId, "orange", CL.breath)
-		self:CDBar(args.spellId, 14.5, CL.breath)
+		self:CDBar(args.spellId, self:Heroic() and 14 or 19, CL.breath)
 	end
 end
 
 -- Twilight Realm
 function mod:SoulConsumption(args)
-	self:StopBar(CL.bomb)
 	if self:UnitBuff("player", 74807) then
 		self:CDBar(args.spellId, self:Heroic() and 21 or 25.5, CL.bomb)
 	end
@@ -179,20 +193,29 @@ do
 	end
 end
 
+do
+	local prev = 0
+	function mod:ConsumptionDamage(args)
+		if self:Me(args.destGUID) and args.time-prev > 3 then
+			prev = args.time
+			self:PersonalMessage(args.spellId, "underyou")
+			self:PlaySound(args.spellId, "underyou")
+		end
+	end
+end
+
 function mod:DarkBreath(args)
-	self:StopBar(CL.breath)
 	if self:UnitBuff("player", 74807) then
 		self:Message(args.spellId, "orange", CL.breath)
-		self:CDBar(args.spellId, 14, CL.breath)
+		self:CDBar(args.spellId, self:Heroic() and 14 or 19, CL.breath)
 	end
 end
 
 do
 	local prev = 0
 	function mod:BigWigs_BossComm(_, msg)
-		local t = GetTime()
-		if msg == "Beams" and t - prev > 12 then
-			prev = t
+		if msg == "Beams" and GetTime()-prev > 12 then
+			prev = GetTime()
 			self:StopBar(CL.beams)
 			if self:UnitBuff("player", 74807) then
 				self:CDBar(74769, 30, CL.beams)
