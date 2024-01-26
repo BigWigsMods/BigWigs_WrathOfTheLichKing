@@ -6,6 +6,7 @@ local mod, CL = BigWigs:NewBoss("Onyxia", 249, 1651)
 if not mod then return end
 mod:RegisterEnableMob(10184)
 mod:SetEncounterID(1084)
+mod:SetRespawnTime(60)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------
@@ -19,6 +20,7 @@ if L then
 	L.phase3_trigger = "It seems you'll need another lesson"
 
 	L.deep_breath = "Deep Breath" -- Preserving the original way it was referred to during classic
+	L["18431_icon"] = "spell_shadow_psychicscream"
 end
 
 --------------------------------------------------------------------------------
@@ -69,12 +71,12 @@ end
 
 do
 	local function printTarget(self, player, guid)
+		self:PrimaryIcon(18392, player)
 		if self:Me(guid) then
 			self:Say(18392, nil, nil, "Fireball")
 			self:PersonalMessage(18392)
 			self:PlaySound(18392, "alarm")
 		end
-		self:PrimaryIcon(18392, player)
 	end
 	function mod:Fireball(args) -- Stage 2 Targetted Fireball threat wipe
 		self:GetUnitTarget(printTarget, 0.1, args.sourceGUID)
@@ -83,13 +85,13 @@ end
 
 function mod:Breath() -- Stage 2 "Deep Breath"
 	self:Message(17086, "red", L.deep_breath)
-	self:PlaySound(17086, "warning")
 	self:CastBar(17086, 8, L.deep_breath) -- 8s on Wrath, 5s on Classic Era
 	self:PrimaryIcon(18392) -- Clear Fireball raid icon
+	self:PlaySound(17086, "warning")
 end
 
 function mod:BellowingRoar(args) -- Stage 3 "Fear"
-	self:Message(args.spellId, "yellow", CL.incoming:format(CL.fear), "spell_shadow_psychicscream") -- Use custom icon instead of the same fire icon for 3 different abilities
+	self:Message(args.spellId, "yellow", CL.incoming:format(CL.fear), L["18431_icon"]) -- Use custom icon instead of the same fire icon for 3 different abilities
 	self:PlaySound(args.spellId, "info")
 end
 
@@ -103,7 +105,7 @@ function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 		self:PrimaryIcon(18392) -- Clear Fireball raid icon
 
 		self:SetStage(3)
-		self:Message("stages", "cyan", CL.percent:format(40, CL.stage:format(3)), false)
+		self:Message("stages", "cyan", CL.stage:format(3), false)
 		self:PlaySound("stages", "long")
 	end
 end
