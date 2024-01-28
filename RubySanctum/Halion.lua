@@ -133,11 +133,12 @@ end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId) -- Pre-Meteor
 	if spellId == 74637 then -- Meteor Strike (before it lands)
-		self:StopBar(CL.meteor)
 		if not self:UnitBuff("player", 74807) then
 			self:CDBar(74648, 40, CL.meteor)
 			self:Message(74648, "red", CL.incoming:format(CL.meteor))
 			self:PlaySound(74648, "long")
+		else
+			self:StopBar(CL.meteor)
 		end
 	end
 end
@@ -168,7 +169,7 @@ end
 
 -- Twilight Realm
 function mod:SoulConsumption(args)
-	if self:UnitBuff("player", 74807) then
+	if self:GetStage() < 3 or self:UnitBuff("player", 74807) then
 		self:CDBar(args.spellId, self:Heroic() and 21 or 25.5, CL.bomb)
 	end
 end
@@ -178,7 +179,7 @@ do
 	function mod:SoulConsumptionApplied(args)
 		bombTarget = args.destGUID
 		self:SecondaryIcon(args.spellId, args.destName)
-		if self:UnitBuff("player", 74807) then
+		if self:GetStage() < 3 or self:UnitBuff("player", 74807) then
 			self:TargetMessage(args.spellId, "yellow", args.destName, CL.bomb)
 		end
 		if self:Me(args.destGUID) then
@@ -205,7 +206,7 @@ do
 end
 
 function mod:DarkBreath(args)
-	if self:UnitBuff("player", 74807) then
+	if self:GetStage() < 3 or self:UnitBuff("player", 74807) then
 		self:Message(args.spellId, "orange", CL.breath)
 		self:CDBar(args.spellId, self:Heroic() and 14 or 19, CL.breath)
 	end
@@ -216,11 +217,12 @@ do
 	function mod:BigWigs_BossComm(_, msg)
 		if msg == "Beams" and GetTime()-prev > 12 then
 			prev = GetTime()
-			self:StopBar(CL.beams)
-			if self:UnitBuff("player", 74807) then
+			if self:GetStage() < 3 or self:UnitBuff("player", 74807) then
 				self:CDBar(74769, 30, CL.beams)
 				self:Message(74769, "red", CL.incoming:format(CL.beams))
 				self:PlaySound(74769, "alert")
+			else
+				self:StopBar(CL.beams)
 			end
 		end
 	end
