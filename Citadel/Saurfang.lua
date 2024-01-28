@@ -38,8 +38,12 @@ L = mod:GetLocale()
 -- Initialization
 --
 
-function mod:VerifyEnable()
-	return (GetTime() - prevWin) > 300 and BigWigsLoader.GetBestMapForUnit("player") == 188 -- Floor 3, Deathbringer's Rise
+function mod:VerifyEnable(_, mobId, mapArtID)
+	if mobId == 37813 then -- Deathbringer Saurfang
+		return true
+	else
+		return mapArtID == 188 and (GetTime() - prevWin) > 300 -- Floor 3, Deathbringer's Rise
+	end
 end
 
 function mod:OnBossEnable()
