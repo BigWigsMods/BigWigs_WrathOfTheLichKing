@@ -4,7 +4,7 @@
 
 local mod = BigWigs:NewBoss("Deathbringer Saurfang", 631, 1628)
 if not mod then return end
-mod:RegisterEnableMob(37813, 37200, 37830, 37187, 37920) -- Deathbringer Saurfang, Muradin, Marine, Overlord Saurfang, Kor'kron Reaver
+mod:RegisterEnableMob(37813, 37200, 37187) -- Deathbringer Saurfang, Muradin, High Overlord Saurfang
 -- mod:SetEncounterID(1096)
 -- mod:SetRespawnTime(30)
 mod.toggleOptions = {"warmup", "adds", 72410, 72385, {72293, "ICON", "FLASH"}, 72737, "proximity", "berserk"}
@@ -13,15 +13,13 @@ mod.toggleOptions = {"warmup", "adds", 72410, 72385, {72293, "ICON", "FLASH"}, 7
 -- Locals
 --
 
-local killed = nil
 local count = 1
-local prevWin = 0
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.adds = "Blood Beasts"
 	L.adds_desc = "Shows a timer and messages for when Blood Beasts spawn."
@@ -32,17 +30,16 @@ if L then
 	L.warmup_alliance = "Let's get a move on then! Move ou..."
 	L.warmup_horde = "Kor'kron, move out! Champions, watch your backs. The Scourge have been..."
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
 --
 
-function mod:VerifyEnable(_, mobId, mapArtID)
+function mod:VerifyEnable(unit, mobId)
 	if mobId == 37813 then -- Deathbringer Saurfang
 		return true
 	else
-		return mapArtID == 188 and (GetTime() - prevWin) > 300 -- Floor 3, Deathbringer's Rise
+		return self:UnitIsInteractable(unit) -- Muradin & High Overlord Saurfang
 	end
 end
 
@@ -77,10 +74,6 @@ end
 function mod:WarmupAlliance()
 	self:OpenProximity("proximity", 11)
 	self:Bar("warmup", 48, self.displayName, "achievement_boss_saurfang")
-end
-
-function mod:OnWin()
-	prevWin = GetTime()
 end
 
 --------------------------------------------------------------------------------
