@@ -1,9 +1,11 @@
 
 BigWigs:AddSounds("Halion", {
 	[74562] = "warning",
+	[74630] = "underyou",
 	[74648] = {"long","underyou"},
 	[74769] = "alert",
 	[74792] = "warning",
+	[74802] = "underyou",
 	[74826] = "warning",
 	["stages"] = "info",
 })
