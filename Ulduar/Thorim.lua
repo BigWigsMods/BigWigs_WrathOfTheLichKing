@@ -178,14 +178,7 @@ do
 end
 
 function mod:StageTwo()
-	-- Cancel scheduled berserk
-	if self.scheduledMessages then
-		for k,v in next, self.scheduledMessages do
-			self:CancelTimer(v)
-			self.scheduledMessages[k] = nil
-		end
-	end
-
+	self:StopBerserk(self:SpellName(26662)) -- Berserk
 	self:StopBar(L["hardmode"])
 	self:MessageOld("stages", "yellow", nil, CL.stage:format(2), false)
 	self:OpenProximity("proximity", self:Classic() and 10 or 5)
