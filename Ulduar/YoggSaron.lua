@@ -135,8 +135,8 @@ function mod:OnEngage()
 	self:Berserk(900)
 end
 
-function mod:VerifyEnable()
-	return BigWigsLoader.GetBestMapForUnit("player") == 150 -- Floor 4, The Prison of Yogg-Saron
+function mod:VerifyEnable(_, _, mapArtID)
+	return mapArtID == 150 -- Floor 4, The Prison of Yogg-Saron
 end
 
 --------------------------------------------------------------------------------
