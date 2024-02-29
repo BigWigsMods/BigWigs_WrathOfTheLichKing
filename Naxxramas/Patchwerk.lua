@@ -1,12 +1,11 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Patchwerk", 533, 1610)
 if not mod then return end
 mod:RegisterEnableMob(16028)
 mod:SetEncounterID(1118)
--- mod:SetRespawnTime(0) -- resets, doesn't respawn
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -16,6 +15,8 @@ function mod:GetOptions()
 	return {
 		28131, -- Frenzy
 		"berserk",
+	},nil,{
+		[28131] = CL.health_percent:format(5), -- Frenzy (5% Health)
 	}
 end
 
@@ -24,13 +25,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Berserk(361)
-
-	if self:Classic() then
-		self:RegisterEvent("UNIT_HEALTH")
-	else
-		self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
-	end
+	self:Berserk(360)
 end
 
 --------------------------------------------------------------------------------
@@ -38,19 +33,6 @@ end
 --
 
 function mod:Frenzy(args)
-	self:Message(28131, "red", CL.percent:format(5, args.spellName))
-	self:PlaySound(28131, "long")
-end
-
-function mod:UNIT_HEALTH(event, unit)
-	if self:MobId(self:UnitGUID(unit)) == 16028 then
-		local hp = self:GetHealth(unit)
-		if hp < 8 then
-			if hp > 5 then
-				self:Message(28131, "orange", CL.soon:format(self:SpellName(28131)))
-				self:PlaySound(28131, "alarm")
-			end
-			self:UnregisterUnitEvent(event, unit)
-		end
-	end
+	self:Message(args.spellId, "orange", CL.percent:format(5, args.spellName))
+	self:PlaySound(args.spellId, "long")
 end

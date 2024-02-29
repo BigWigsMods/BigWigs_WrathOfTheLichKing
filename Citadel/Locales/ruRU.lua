@@ -1,9 +1,7 @@
 local L = BigWigs:NewBossLocale("Lord Marrowgar", "ruRU")
 if not L then return end
 if L then
-	L.engage_trigger = "Плеть накроет этот мир волной смерти и разрушения!"
-
-	L.bonestorm_warning = "Вихрь костей через 5 сек!"
+	L.bone_spike = "Костяной шип" -- NPC ID 36619
 end
 
 L = BigWigs:NewBossLocale("Blood Prince Council", "ruRU")

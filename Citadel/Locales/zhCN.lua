@@ -99,9 +99,7 @@ end
 
 L = BigWigs:NewBossLocale("Lord Marrowgar", "zhCN")
 if L then
-	L.engage_trigger = "强大的天灾军团将让死亡和毁灭席卷整个世界！"
-
-	L.bonestorm_warning = "5秒后，白骨风暴！"
+	L.bone_spike = "骨针" -- NPC ID 36619
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "zhCN")

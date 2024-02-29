@@ -111,9 +111,7 @@ end
 
 L = BigWigs:NewBossLocale("Lord Marrowgar", "itIT")
 if L then
-	--L.engage_trigger = "The Scourge will wash over this world as a swarm of death and destruction!"
-
-	--L.bonestorm_warning = "Bone Storm in 5 sec!"
+	L.bone_spike = "Aculeo Osseo" -- NPC ID 36619
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "itIT")

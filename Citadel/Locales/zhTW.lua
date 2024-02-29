@@ -99,9 +99,7 @@ end
 
 L = BigWigs:NewBossLocale("Lord Marrowgar", "zhTW")
 if L then
-	L.engage_trigger = "天譴軍團會化身為死亡與毀滅，席捲整個世界。"
-
-	L.bonestorm_warning = "5秒後，骸骨風暴！"
+	--L.bone_spike = "Bone Spike" -- NPC ID 36619
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "zhTW")

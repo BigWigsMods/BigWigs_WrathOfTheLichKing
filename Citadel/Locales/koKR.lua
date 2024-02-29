@@ -69,9 +69,7 @@ end
 
 L = BigWigs:NewBossLocale("Lord Marrowgar", "koKR")
 if L then
-	L.engage_trigger = "스컬지가 죽음과 파괴의 무리가 되어 이 세상을 쓸어버리리라!"
-
-	L.bonestorm_warning = "5초 후 뼈 폭풍!"
+	L.bone_spike = "뼈 가시" -- NPC ID 36619
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "koKR")

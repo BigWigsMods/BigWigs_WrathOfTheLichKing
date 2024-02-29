@@ -111,9 +111,7 @@ end
 
 L = BigWigs:NewBossLocale("Lord Marrowgar", "esMX")
 if L then
-	L.engage_trigger = "¡La Plaga arrasará este mundo como un enjambre de muerte y destrucción!"
-
-	L.bonestorm_warning = "¡Tormenta ósea en 5 sec!"
+	--L.bone_spike = "Bone Spike" -- NPC ID 36619
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "esMX")

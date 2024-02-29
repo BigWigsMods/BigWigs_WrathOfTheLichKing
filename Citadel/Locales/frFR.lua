@@ -111,9 +111,7 @@ end
 
 L = BigWigs:NewBossLocale("Lord Marrowgar", "frFR")
 if L then
-	L.engage_trigger = "Le Fléau va déferler sur ce monde dans un torrent de mort et de destruction !"
-
-	L.bonestorm_warning = "Tempête d'os dans 5 sec. !"
+	L.bone_spike = "Pointe d'os" -- NPC ID 36619
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "frFR")

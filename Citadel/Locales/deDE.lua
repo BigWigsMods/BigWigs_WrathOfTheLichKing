@@ -99,9 +99,7 @@ end
 
 L = BigWigs:NewBossLocale("Lord Marrowgar", "deDE")
 if L then
-	L.engage_trigger = "Die Geißel wird über diese Welt kommen wie ein Schwarm aus Tod und Zerstörung!"
-
-	L.bonestorm_warning = "Knochensturm in 5 sek!"
+	L.bone_spike = "Knochenstachel" -- NPC ID 36619
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "deDE")
