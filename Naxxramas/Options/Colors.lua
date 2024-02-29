@@ -1,13 +1,12 @@
 
 BigWigs:AddColors("Patchwerk", {
-	[28131] = {"orange","red"},
+	[28131] = "orange",
 })
 
 BigWigs:AddColors("Grobbulus", {
-	[28137] = "orange",
-	[28157] = "purple",
 	[28169] = {"blue","red"},
 	[28240] = "yellow",
+	["adds"] = "orange",
 })
 
 BigWigs:AddColors("Gluth", {

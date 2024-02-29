@@ -1,7 +1,7 @@
 
 BigWigs:AddColors("Lord Marrowgar", {
-	[69057] = {"blue","orange"},
-	[69076] = "yellow",
+	[69057] = {"blue","yellow"},
+	[69076] = "red",
 	[69138] = "blue",
 })
 

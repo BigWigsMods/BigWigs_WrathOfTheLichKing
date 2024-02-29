@@ -1,11 +1,12 @@
 
 BigWigs:AddSounds("Patchwerk", {
-	[28131] = {"alarm","long"},
+	[28131] = "long",
 })
 
 BigWigs:AddSounds("Grobbulus", {
-	[28157] = "alert",
 	[28169] = "warning",
+	[28240] = "info",
+	["adds"] = "long",
 })
 
 BigWigs:AddSounds("Gluth", {
