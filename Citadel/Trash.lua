@@ -8,7 +8,7 @@ if not mod then return end
 mod.displayName = CL.trash
 mod:RegisterEnableMob(
 	37007, -- Deathbound Ward
-	36805, 36807, 36808, 36811, 36829, -- Deathspeaker Servant, Disciple, Zealot, Attendant, High Priest
+	36805, 36807, 36808, 36811, 36829, -- Deathspeaker Servant, Disciple, Zealot, Attendant, Deathspeaker High Priest
 	37217, 37025 -- Precious, Stinky
 )
 
@@ -19,7 +19,7 @@ mod:RegisterEnableMob(
 local L = mod:GetLocale()
 if L then
 	L.deathbound_ward = "Deathbound Ward"
-	L.deathspeaker_adds = "Lady Deathwhisper Trash"
+	L.deathspeaker_high_priest = "Deathspeaker High Priest" -- NPC ID 36829
 	L.putricide_dogs = "Precious & Stinky"
 end
 
@@ -32,12 +32,12 @@ function mod:GetOptions()
 		--[[ Deathbound Ward ]]--
 		71022, -- Disrupting Shout
 		--[[ Deathspeaker High Priest ]]--
-		{69483, "ICON", "PROXIMITY"}, -- Dark Reckoning
+		{69483, "ICON", "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Dark Reckoning
 		--[[ Putricide Dogs ]]--
 		{71127, "TANK"}, -- Mortal Wound
 	}, {
 		[71022] = L.deathbound_ward,
-		[69483] = L.deathspeaker_adds,
+		[69483] = L.deathspeaker_high_priest,
 		[71127] = L.putricide_dogs,
 	}
 end
@@ -61,32 +61,36 @@ end
 -- Event Handlers
 --
 
+--[[ Deathbound Ward ]]--
 function mod:DisruptingShout(args)
 	self:Message(71022, "red")
 	self:PlaySound(71022, "alarm")
 	self:Bar(71022, 3)
 end
 
+--[[ Deathspeaker High Priest ]]--
 function mod:DarkReckoningApplied(args)
-	self:TargetMessage(69483, "cyan", args.destName)
-	self:TargetBar(69483, 8, args.destName)
+	self:TargetMessage(args.spellId, "red", args.destName)
+	self:TargetBar(args.spellId, 8, args.destName)
+	self:PrimaryIcon(args.spellId, args.destName)
 	if self:Me(args.destGUID) then
-		self:PlaySound(69483, "warning")
-		self:OpenProximity(69483, 15)
+		self:Say(args.spellId, nil, nil, "Dark Reckoning")
+		self:SayCountdown(args.spellId, 8)
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	else
-		self:PlaySound(69483, "alert")
+		self:PlaySound(args.spellId, "alert")
 	end
-	self:PrimaryIcon(69483, args.destName)
 end
 
 function mod:DarkReckoningRemoved(args)
 	self:StopBar(args.spellName, args.destName)
-	self:PrimaryIcon(69483, nil)
+	self:PrimaryIcon(args.spellId)
 	if self:Me(args.destGUID) then
-		self:CloseProximity(69483)
+		self:CancelSayCountdown(args.spellId)
 	end
 end
 
+--[[ Putricide Dogs ]]--
 function mod:MortalWound(args)
 	if args.amount % 2 == 0 or args.amount > 5 then
 		self:StackMessage(71127, "purple", args.destName, args.amount, 6)

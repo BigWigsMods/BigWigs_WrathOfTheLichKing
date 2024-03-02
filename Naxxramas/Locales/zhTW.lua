@@ -169,23 +169,19 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "zhTW")
 if L then
-	L.phase1_trigger1 = "斯塔拉格要碾碎你!"
-	L.phase1_trigger2 = "主人要吃了你!"
-	L.phase2_trigger1 = "咬碎……你的……骨頭……"
-	L.phase2_trigger2 = "打…碎…你……"
-	L.phase2_trigger3 = "殺……"
+	--L[15929] = "Stalagg"
+	--L[15930] = "Feugen"
 
-	L.add_death_trigger = "%s死亡了。"
-	L.overload_trigger = "%s超負荷！"
+	L.stage1_yell_trigger1 = "斯塔拉格要碾碎你!"
+	L.stage1_yell_trigger2 = "主人要吃了你!"
 
-	L.polarity_changed = "兩極移形改變！"
-	L.polarity_nochange = "相同兩極移形！"
-	L.polarity_first_positive = "你是 >正極<！"
-	L.polarity_first_negative = "你是 >負極<！"
+	L.stage2_yell_trigger1 = "咬碎……你的……骨頭……"
+	L.stage2_yell_trigger2 = "打…碎…你……"
+	L.stage2_yell_trigger3 = "殺……"
 
-	L.throw = "投擲"
-	L.throw_desc = "當主坦克被投擲到對面平台時發出警報。"
-	L.throw_warning = "約5秒後，投擲！"
+	L.add_death_emote_trigger = "%s死亡了。"
+	L.overload_emote_trigger = "%s超負荷！"
+	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
 	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
 
@@ -213,4 +209,6 @@ if L then
 	L.right = "---> 向右 ---> 向右 --->"
 	L.swap = "^^^^ 交換 ^^^^ 交換 ^^^^"
 	L.stay = "==== 不要動 ==== 不要動 ===="
+
+	--L.chat_message = "The Thaddius mod supports showing you directional arrows and playing voices. Open the options to configure them."
 end

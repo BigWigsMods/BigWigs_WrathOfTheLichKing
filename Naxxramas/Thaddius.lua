@@ -1,20 +1,21 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Thaddius", 533, 1613)
 if not mod then return end
 mod:RegisterEnableMob(15928, 15929, 15930) -- Thaddius, Stalagg, Feugen
 mod:SetEncounterID(1120)
-mod:SetRespawnTime(32) -- p1 resets, p2 respawns
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals
 --
 
+local UpdateInfoBoxList
+local printed = false
 local deaths = 0
 local firstCharge = true
-local throwHandle = nil
 
 local EXTRAS_PATH = "Interface\\AddOns\\BigWigs_WrathOfTheLichKing\\Naxxramas\\Extras"
 
@@ -80,29 +81,21 @@ local INITIAL_DIRECTION = {
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
-	L.phase1_trigger1 = "Stalagg crush you!"
-	L.phase1_trigger2 = "Feed you to master!"
-	L.phase2_trigger1 = "Eat... your... bones..."
-	L.phase2_trigger2 = "Break... you!!"
-	L.phase2_trigger3 = "Kill..."
+	L[15929] = "Stalagg"
+	L[15930] = "Feugen"
 
-	L.add_death_trigger = "%s dies."
-	L.add_revive_trigger = "%s is jolted back to life!"
-	L.overload_trigger = "%s overloads!"
+	L.stage1_yell_trigger1 = "Stalagg crush you!"
+	L.stage1_yell_trigger2 = "Feed you to master!"
 
-	L.polarity_changed = "Polarity changed!"
-	L.polarity_nochange = "Same polarity!"
-	L.polarity_first_positive = "You are POSITIVE!"
-	L.polarity_first_negative = "You are NEGATIVE!"
+	L.stage2_yell_trigger1 = "Eat... your... bones..."
+	L.stage2_yell_trigger2 = "Break... you!!"
+	L.stage2_yell_trigger3 = "Kill..."
 
-	L.throw = "Throw"
-	L.throw_desc = "Warn about tank platform swaps."
-	L.throw_icon = "Ability_Druid_Maul"
-	L.throw_warning = "Throw in ~5 sec!"
-
-	L.engage_message = "Thaddius engaged! Phase 1"
+	L.add_death_emote_trigger = "%s dies."
+	L.overload_emote_trigger = "%s overloads!"
+	L.add_revive_emote_trigger = "%s is jolted back to life!"
 
 	-- BigWigs_ThaddiusArrows
 	L.polarity_extras = "Additional alerts for Polarity Shift positioning"
@@ -132,8 +125,9 @@ if L then
 	L.right = "---> GO RIGHT ---> GO RIGHT --->"
 	L.swap = "^^^^ SWITCH SIDES ^^^^ SWITCH SIDES ^^^^"
 	L.stay = "==== DON'T MOVE ==== DON'T MOVE ===="
+
+	L.chat_message = "The Thaddius mod supports showing you directional arrows and playing voices. Open the options to configure them."
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -143,19 +137,22 @@ function mod:GetOptions()
 	return {
 		"stages",
 		-- Stage 1
-		"throw",
+		28338, -- Magnetic Pull
 		28134, -- Power Surge
+		{"health", "INFOBOX"},
 		-- Stage 2
-		{28089, "FLASH"}, -- Polarity Shift
+		{28089, "COUNTDOWN"}, -- Polarity Shift
+		{28084, "EMPHASIZE"}, -- Negative Charge
+		{28059, "EMPHASIZE"}, -- Positive Charge
 		"berserk",
-		-- extras
+		-- Extras
 		"custom_off_select_charge_position",
 		"custom_off_select_charge_movement",
 		"custom_off_charge_graphic",
 		"custom_off_charge_text",
 		"custom_off_charge_voice",
-	}, {
-		["throw"] = CL.stage:format(1),
+	},{
+		[28338] = CL.stage:format(1),
 		[28089] = CL.stage:format(2),
 		["custom_off_select_charge_position"] = L.polarity_extras,
 	}
@@ -178,32 +175,52 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED", "StalaggPower", 28134, 54529)
-	self:Log("SPELL_CAST_START", "PolarityShiftCast", 28089)
+	self:Log("SPELL_CAST_SUCCESS", "MagneticPull", 28338, 28339, 54517) -- Stalagg, Feugen, Feugen (seems like only this ID is used on wrath)
+	self:Log("SPELL_AURA_APPLIED", "PowerSurge", 28134, 54529) -- 25, 10
+	self:Log("SPELL_CAST_START", "PolarityShiftStart", 28089)
 	self:Log("SPELL_CAST_SUCCESS", "PolarityShift", 28089)
 
-	self:BossYell("Engage", L.phase1_trigger1, L.phase1_trigger2)
 	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
-	self:Emote("PrePhase2", L.overload_trigger)
-	self:BossYell("Phase2", L.phase2_trigger1, L.phase2_trigger2, L.phase2_trigger3)
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE")
 
 	self:Log("SPELL_AURA_APPLIED", "NegativeCharge", 28084)
 	self:Log("SPELL_AURA_REFRESH", "NegativeChargeRefresh", 28084)
 	self:Log("SPELL_AURA_APPLIED", "PositiveCharge", 28059)
 	self:Log("SPELL_AURA_REFRESH", "PositiveChargeRefresh", 28059)
+
+	if not printed then
+		printed = true
+		BigWigs:Print(L.chat_message)
+	end
 end
 
 function mod:OnEngage()
 	deaths = 0
 	firstCharge = true
+	self:SetStage(1)
 
-	self:Message("stages", "yellow", CL.phase:format(1), false) -- L.engage_message
-	self:Throw()
-	-- self:Bar(28134, 11) -- Power Surge
+	self:OpenInfo("health", "BigWigs: ".. CL.health)
+	local npcId = 15928
+	for i = 1, 3, 2 do
+		npcId = npcId + 1
+		self:SetInfo("health", i, L[npcId])
+		self:SetInfoBar("health", i, 1)
+		self:SetInfo("health", i + 1, "100%")
+	end
+	self:SimpleTimer(UpdateInfoBoxList, 0.5)
+
+	self:Message("stages", "cyan", CL.stage:format(1), false) -- L.engage_message
+	self:Bar(28134, 11) -- Power Surge
+	self:Bar(28338, 20) -- Magnetic Pull
+
+	if self:Retail() then
+		self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
+	end
 end
 
 function mod:OnBossDisable()
+	self:SetRespawnTime(0)
 	self.arrow:Hide()
 end
 
@@ -211,63 +228,86 @@ end
 -- Event Handlers
 --
 
-function mod:Throw()
-	self:Bar("throw", 20, L.throw, L.throw_icon)
-	self:DelayedMessage("throw", 15, "orange", L.throw_warning, L.throw_icon)
-	throwHandle = self:ScheduleTimer("Throw", 21)
+do
+	local prev = 0
+	function mod:MagneticPull(args)
+		if args.time - prev > 5 then
+			prev = args.time
+			self:Bar(28338, 20)
+			self:Message(28338, "red")
+			self:PlaySound(28338, "alert")
+		end
+	end
 end
 
-function mod:StalaggPower(args)
+function mod:PowerSurge(args)
 	self:Message(28134, "red", CL.on:format(args.spellName, args.destName))
 	self:TargetBar(28134, 10, args.destName)
-	-- self:CDBar(28134, 25) -- 26~30
+	self:CDBar(28134, 26)
 end
 
 function mod:CHAT_MSG_MONSTER_EMOTE(_, msg, sender)
-	if msg == L.add_death_trigger then
+	if msg == L.add_death_emote_trigger then
 		deaths = math.min(2, deaths + 1) -- they can revive, just don't look too weird
 		self:Message("stages", "green", CL.mob_killed:format(sender, deaths, 2), false)
-		self:PlaySound("stages", "info")
 		if deaths == 2 then
-			self:CancelTimer(throwHandle)
-			self:StopBar(L.throw)
+			self:StopBar(28338) -- Magnetic Pull
+			self:StopBar(28134) -- Power Surge
+			if self:Retail() then
+				self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+			end
 		end
-	elseif msg == L.add_revive_trigger then
+		if sender == L[15929] then
+			self:SetInfoBar("health", 1, 0)
+			self:SetInfo("health", 2, CL.dead)
+		elseif sender == L[15930] then
+			self:SetInfoBar("health", 3, 0)
+			self:SetInfo("health", 4, CL.dead)
+		end
+		self:PlaySound("stages", "info")
+	elseif msg == L.add_revive_emote_trigger then
 		deaths = deaths - 1
-		-- self:Message("stages", "yellow", msg:format(sender))
 	end
 end
 
 do
 	local prev = 0
-	function mod:PrePhase2()
-		local t = GetTime()
-		if t-prev > 2 then
-			prev = t
-			self:Message("stages", "yellow", CL.incoming:format(self.displayName), false)
-			self:PlaySound("stages", "long")
-			self:Bar("stages", 3, CL.active, "spell_lightning_lightningbolt01")
+	function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg) -- Pre-Stage 2
+		if msg == L.overload_emote_trigger then
+			local t = GetTime()
+			if t-prev > 2 then
+				prev = t
+				self:CloseInfo("health")
+				self:Message("stages", "cyan", CL.incoming:format(self.displayName), false)
+				self:Bar("stages", 3, CL.stage:format(2), "spell_lightning_lightningbolt01")
+				self:PlaySound("stages", "long")
+			end
 		end
 	end
 end
 
-function mod:Phase2()
-	self:CancelTimer(throwHandle)
-	self:StopBar(L.throw)
+function mod:CHAT_MSG_MONSTER_YELL(_, msg) -- Stage 2
+	if msg:find(L.stage2_yell_trigger1, nil, true) or msg:find(L.stage2_yell_trigger2, nil, true) or msg:find(L.stage2_yell_trigger3, nil, true) then
+		self:StopBar(28338) -- Magnetic Pull
+		self:StopBar(28134) -- Power Surge
+		self:SetRespawnTime(32)
+		self:SetStage(2)
 
-	-- self:Message("stages", "yellow", CL.custom_start:format(self.displayName, self:SpellName(26662), 6))
-	self:Berserk(360)
-	self:PlaySound("stages", "alarm")
+		self:Message("stages", "cyan", CL.stage:format(2), false)
+		self:Berserk(300, true)
+		self:PlaySound("stages", "info")
+	elseif self:Retail() and (msg:find(L.stage1_yell_trigger1, nil, true) or msg:find(L.stage1_yell_trigger2, nil, true)) then
+		self:Engage()
+	end
 end
 
-function mod:PolarityShiftCast(args)
-	self:Message(28089, "orange", CL.casting:format(args.spellName))
-	self:PlaySound(28089, "long")
+function mod:PolarityShiftStart(args)
+	self:Message(args.spellId, "orange", CL.casting:format(args.spellName))
+	self:PlaySound(args.spellId, "long")
 end
 
 function mod:PolarityShift(args)
-	self:Bar(28089, 30)
-	self:DelayedMessage(28089, 25, "yellow", CL.soon:format(args.spellName), false, "info")
+	self:CDBar(args.spellId, 28)
 end
 
 function mod:NegativeCharge(args)
@@ -291,30 +331,27 @@ function mod:NegativeCharge(args)
 		if firstCharge then -- First charge
 			firstCharge = false
 			direction = strategy_first[ICON_NEGATIVE]
-			self:Message(28089, "red", L.polarity_first_negative, ICON_NEGATIVE)
 		else
 			direction = strategy_change
-			self:Message(28089, "red", L.polarity_changed, ICON_NEGATIVE)
 		end
-		if not self:GetOption("custom_off_charge_voice") then
-			self:PlaySound(28089, "warning")
-		end
-		self:Flash(28089, ICON_NEGATIVE)
+		self:Message(args.spellId, "blue", args.spellName, ICON_NEGATIVE)
 		if self:GetOption("custom_off_charge_graphic") then
 			DIRECTION_ARROW[direction]()
 		end
 		if self:GetOption("custom_off_charge_text") then
-			self:Message(28089, "red", L[direction], false)
+			self:Message(args.spellId, "blue", L[direction], ICON_NEGATIVE)
 		end
 		if self:GetOption("custom_off_charge_voice") then
 			self:PlaySoundFile(DIRECTION_SOUND[direction])
+		else
+			self:PlaySound(args.spellId, "warning")
 		end
 	end
 end
 
 function mod:NegativeChargeRefresh(args)
 	if self:Me(args.destGUID) then
-		local strategy_nochange, direction
+		local strategy_nochange
 		local opt = self:GetOption("custom_off_select_charge_movement")
 		if opt == 1 then -- through
 			strategy_nochange = "stay"
@@ -329,12 +366,12 @@ function mod:NegativeChargeRefresh(args)
 		end
 
 		local direction = strategy_nochange
-		self:Message(28089, "yellow", L.polarity_nochange, ICON_NEGATIVE)
+		self:Message(args.spellId, "blue", args.spellName, ICON_NEGATIVE, true) -- Disable emphasize
 		if self:GetOption("custom_off_charge_graphic") then
 			DIRECTION_ARROW[direction]()
 		end
 		if self:GetOption("custom_off_charge_text") then
-			self:Message(28089, "yellow", L[direction], false)
+			self:Message(args.spellId, "blue", L[direction], ICON_NEGATIVE, true) -- Disable emphasize
 		end
 		if self:GetOption("custom_off_charge_voice") then
 			self:PlaySoundFile(DIRECTION_SOUND[direction])
@@ -363,30 +400,27 @@ function mod:PositiveCharge(args)
 		if firstCharge then -- First charge
 			firstCharge = false
 			direction = strategy_first[ICON_POSITIVE]
-			self:Message(28089, "blue", L.polarity_first_positive, ICON_POSITIVE)
 		else
 			direction = strategy_change
-			self:Message(28089, "blue", L.polarity_changed, ICON_POSITIVE)
 		end
-		if not self:GetOption("custom_off_charge_voice") then
-			self:PlaySound(28089, "warning")
-		end
-		self:Flash(28089, ICON_POSITIVE)
+		self:Message(args.spellId, "blue", args.spellName, ICON_POSITIVE)
 		if self:GetOption("custom_off_charge_graphic") then
 			DIRECTION_ARROW[direction]()
 		end
 		if self:GetOption("custom_off_charge_text") then
-			self:Message(28089, "blue", L[direction], false)
+			self:Message(args.spellId, "blue", L[direction], ICON_POSITIVE)
 		end
 		if self:GetOption("custom_off_charge_voice") then
 			self:PlaySoundFile(DIRECTION_SOUND[direction])
+		else
+			self:PlaySound(args.spellId, "warning")
 		end
 	end
 end
 
 function mod:PositiveChargeRefresh(args)
 	if self:Me(args.destGUID) then
-		local strategy_nochange, direction
+		local strategy_nochange
 		local opt = self:GetOption("custom_off_select_charge_movement")
 		if opt == 1 then -- through
 			strategy_nochange = "stay"
@@ -401,15 +435,40 @@ function mod:PositiveChargeRefresh(args)
 		end
 
 		local direction = strategy_nochange
-		self:Message(28089, "yellow", L.polarity_nochange, ICON_POSITIVE)
+		self:Message(args.spellId, "blue", args.spellName, ICON_POSITIVE, true) -- Disable emphasize
 		if self:GetOption("custom_off_charge_graphic") then
 			DIRECTION_ARROW[direction]()
 		end
 		if self:GetOption("custom_off_charge_text") then
-			self:Message(28089, "yellow", L[direction], false)
+			self:Message(args.spellId, "blue", L[direction], ICON_POSITIVE, true) -- Disable emphasize
 		end
 		if self:GetOption("custom_off_charge_voice") then
 			self:PlaySoundFile(DIRECTION_SOUND[direction])
+		end
+	end
+end
+
+do
+	local bossList = {
+		[15929] = 1, -- Stalagg
+		[15930] = 3, -- Feugen
+	}
+	local unitTracker = {}
+	function UpdateInfoBoxList()
+		if not mod:IsEngaged() or deaths == 2 then return end
+		mod:SimpleTimer(UpdateInfoBoxList, 0.5)
+
+		for npcId in next, bossList do
+			if not unitTracker[npcId] or mod:MobId(mod:UnitGUID(unitTracker[npcId])) ~= npcId then
+				unitTracker[npcId] = mod:GetUnitIdByGUID(npcId)
+			end
+		end
+
+		for npcId, unitToken in next, unitTracker do
+			local line = bossList[npcId]
+			local currentHealthPercent = math.floor(mod:GetHealth(unitToken))
+			mod:SetInfoBar("health", line, currentHealthPercent/100)
+			mod:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
 		end
 	end
 end

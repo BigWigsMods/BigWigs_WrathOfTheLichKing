@@ -4,140 +4,233 @@
 
 local mod, CL = BigWigs:NewBoss("Lady Deathwhisper", 631, 1625)
 if not mod then return end
-mod:RegisterEnableMob(36855, 37949, 38010, 37890, 38009, 38135) --Deathwhisper, Cult Adherent, Reanimated Adherent, Cult Fanatic, Reanimated Fanatic, Deformed Fanatic
--- mod:SetEncounterID(1100)
--- mod:SetRespawnTime(30)
-mod.toggleOptions = {"adds", 70842, 71204, 71426, 71289, {71001, "FLASH"}, "berserk"}
-mod.optionHeaders = {
-	adds = CL.phase:format(1),
-	[71204] = CL.phase:format(2),
-	[71289] = "general",
-}
+mod:RegisterEnableMob(36855, 37949, 38010, 37890, 38009) -- Lady Deathwhisper, Cult Adherent, Reanimated Adherent, Cult Fanatic, Reanimated Fanatic
+mod:SetEncounterID(mod:Classic() and 846 or 1100)
+mod:SetRespawnTime(30)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals
 --
 
-local handle_Adds = nil
+local addsTimer = nil
+local addCollector = {}
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
-	L.engage_trigger = "What is this disturbance?"
-	L.phase2_message = "Barrier DOWN - Phase 2!"
-
-	L.dnd_message = "Death and Decay on YOU!"
-
-	L.adds = "Adds"
-	L.adds_desc = "Show timers for when the adds spawn."
-	L.adds_bar = "Next Adds"
-	L.adds_warning = "New adds in 5 sec!"
-
-	L.touch_message = "%2$dx Touch on %1$s"
-	L.touch_bar = "Next Touch"
-
-	L.deformed_fanatic = "Deformed Fanatic!"
-
-	L.spirit_message = "Summon Spirit!"
-	L.spirit_bar = "Next Spirit"
+	L.touch = "Touch"
+	L.deformed_fanatic = "Deformed Fanatic" -- NPC ID 38135
+	L.empowered_adherent = "Empowered Adherent" -- NPC ID 38136
+	L.adds_icon = "spell_shadow_twistedfaith"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
 --
 
+local deformedFanaticMarker = mod:AddMarkerOption(true, "npc", 8, "deformed_fanatic", 8) -- Deformed Fanatic
+local empoweredAdherentMarker = mod:AddMarkerOption(true, "npc", 7, "empowered_adherent", 7) -- Empowered Adherent
+local dominateMindMarker = mod:AddMarkerOption(false, "player", 1, 71289, 1, 2, 3) -- Dominate Mind
+function mod:GetOptions()
+	return {
+		-- Adds
+		"adds",
+		70900, -- Dark Transformation
+		deformedFanaticMarker,
+		70901, -- Dark Empowerment
+		empoweredAdherentMarker,
+		71237, -- Curse of Torpor
+		-- Stage 2
+		71204, -- Touch of Insignificance
+		71426, -- Summon Spirit
+		-- General
+		71289, -- Dominate Mind
+		dominateMindMarker,
+		71001, -- Death and Decay
+		"stages",
+		"berserk"
+	},{
+		["adds"] = CL.adds,
+		[71204] = CL.stage:format(2),
+		[71289] = "general",
+	},{
+		[70900] = L.deformed_fanatic, -- Dark Transformation (Deformed Fanatic)
+		[70901] = L.empowered_adherent, -- Dark Empowerment (Empowered Adherent)
+		[71237] = CL.curse, -- Curse of Torpor (Curse)
+		[71204] = L.touch, -- Touch of Insignificance (Touch)
+		[71426] = CL.spirits, -- Summon Spirit (Spirits)
+		[71289] = CL.mind_control, -- Dominate Mind (Mind Control)
+	}
+end
+
+function mod:OnRegister()
+	-- Delayed for custom locale
+	deformedFanaticMarker = mod:AddMarkerOption(true, "npc", 8, "deformed_fanatic", 8) -- Deformed Fanatic
+	empoweredAdherentMarker = mod:AddMarkerOption(true, "npc", 7, "empowered_adherent", 7) -- Empowered Adherent
+end
+
 function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED", "DnD", 71001)
-	self:Log("SPELL_AURA_REMOVED", "Barrier", 70842)
-	self:Log("SPELL_AURA_APPLIED", "DominateMind", 71289)
-	self:Log("SPELL_AURA_APPLIED", "Touch", 71204)
-	self:Log("SPELL_AURA_APPLIED_DOSE", "Touch", 71204)
-	self:Log("SPELL_CAST_START", "Deformed", 70900)
-	self:Log("SPELL_SUMMON", "Spirit", 71426)
-	self:Death("Win", 36855)
+	self:Log("SPELL_AURA_APPLIED", "CurseOfTorpor", 71237)
+	self:Log("SPELL_AURA_REMOVED", "ManaBarrierRemoved", 70842)
+	self:Log("SPELL_AURA_APPLIED", "DominateMindApplied", 71289)
+	self:Log("SPELL_AURA_REMOVED", "DominateMindRemoved", 71289)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "TouchOfInsignificanceApplied", 71204)
+	self:Log("SPELL_CAST_START", "DarkTransformation", 70900)
+	self:Log("SPELL_CAST_START", "DarkEmpowerment", 70901)
+	self:Log("SPELL_SUMMON", "SummonSpirit", 71426)
 
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:BossYell("Engage", L["engage_trigger"])
+	self:Log("SPELL_AURA_APPLIED", "DeathAndDecayDamage", 71001)
+	self:Log("SPELL_PERIODIC_DAMAGE", "DeathAndDecayDamage", 71001)
+	self:Log("SPELL_PERIODIC_MISSED", "DeathAndDecayDamage", 71001)
 end
 
-local function adds(time)
-	mod:DelayedMessage("adds", time-5, "yellow", L["adds_warning"])
-	mod:Bar("adds", time, L["adds_bar"], 70768)
-	handle_Adds = mod:ScheduleTimer(adds, time, time)
-end
-
-function mod:OnEngage(diff)
+function mod:OnEngage()
+	addCollector = {}
 	self:SetStage(1)
 	self:Berserk(600, true)
-	self:Bar("adds", 7, L["adds_bar"], 70768)
-	if diff > 3 then
-		self:CDBar(71289, 30) -- Dominate Mind
+	self:Bar("adds", 7, CL.adds, L.adds_icon)
+	if self:Difficulty() > 3 and not self:Solo() then -- Doesn't happen on 10 N or solo
+		self:CDBar(71289, 30, CL.mind_control) -- Dominate Mind
 	end
-	handle_Adds = self:ScheduleTimer(adds, 7, self:Heroic() and 45 or 60)
+	self:Message("stages", "cyan", CL.stage:format(1), false)
+	addsTimer = self:ScheduleTimer("SpawnAdds", 7, self:Heroic() and 45 or 60)
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:DnD(args)
-	if self:Me(args.destGUID) then
-		self:MessageOld(71001, "blue", "alarm", L["dnd_message"], 71001)
-		self:Flash(71001)
-	end
+function mod:SpawnAdds(duration)
+	self:Bar("adds", duration, CL.adds, L.adds_icon)
+	self:Message("adds", "cyan", CL.adds, L.adds_icon)
+	self:PlaySound("adds", "info")
+	addsTimer = self:ScheduleTimer("SpawnAdds", duration, duration)
 end
 
-function mod:Barrier(args)
+function mod:CurseOfTorpor(args)
+	self:TargetMessage(args.spellId, "red", args.destName, CL.curse)
+end
+
+function mod:ManaBarrierRemoved()
 	self:SetStage(2)
 	if not self:Heroic() then
-		self:CancelTimer(handle_Adds)
-		self:StopBar(L["adds_bar"])
-		self:CancelDelayedMessage(L["adds_warning"])
+		if addsTimer then
+			self:CancelTimer(addsTimer)
+		end
+		self:StopBar(CL.adds)
 	end
-	self:MessageOld(70842, "green", "info", L["phase2_message"], args.spellId)
-	self:Bar(71426, 30, L["spirit_bar"])
+	self:Message("stages", "cyan", CL.stage:format(2), false)
+	if not self:Solo() then
+		if self:Difficulty() == 4 or self:Difficulty() == 6 then -- 3 spirits on 25
+			self:CDBar(71426, 10, CL.spirits) -- Summon Spirit
+		else
+			self:CDBar(71426, 10, CL.spirit) -- Summon Spirit
+		end
+	end
+	self:PlaySound("stages", "long")
 end
 
 do
-	local dmTargets, scheduled = mod:NewTargetList(), nil
-	local function dmWarn()
-		mod:TargetMessageOld(71289, dmTargets, "red", "alert")
-		scheduled = nil
-	end
-	function mod:DominateMind(args)
-		dmTargets[#dmTargets + 1] = args.destName
-		if not scheduled then
-			self:CDBar(71289, 40) -- Dominate Mind
-			scheduled = self:ScheduleTimer(dmWarn, 0.3)
+	local playerList = {}
+	local prev = 0
+	function mod:DominateMindApplied(args)
+		if self:Difficulty() == 6 then -- Multiple players on 25 HC
+			if args.time - prev > 5 then
+				prev = args.time
+				playerList = {}
+			end
+			local count = #playerList+1
+			playerList[count] = args.destName
+			playerList[args.destName] = count -- Set raid marker
+			self:TargetsMessage(args.spellId, "orange", playerList, 3, CL.mind_control, nil, 1)
+			self:CustomIcon(dominateMindMarker, args.destName, count)
+			if #playerList == 1 then
+				self:CDBar(args.spellId, 40, CL.mind_control)
+				self:PlaySound(args.spellId, "alarm")
+			end
+		else -- 1 player on 25 N and 10 HC
+			self:TargetMessage(args.spellId, "orange", args.destName, CL.mind_control)
+			self:CDBar(args.spellId, 40, CL.mind_control)
+			self:CustomIcon(dominateMindMarker, args.destName, 1)
+			self:PlaySound(args.spellId, "alarm")
 		end
 	end
 end
 
-function mod:Touch(args)
-	if (args.amount or 1) > 1 then
-		self:StackMessageOld(71204, args.destName, args.amount, "orange")
-	end
-	self:Bar(71204, 7, L["touch_bar"], 71204)
+function mod:DominateMindRemoved(args)
+	self:CustomIcon(dominateMindMarker, args.destName)
 end
 
-function mod:Deformed()
-	self:MessageOld("adds", "orange", nil, L["deformed_fanatic"], 70900)
+function mod:TouchOfInsignificanceApplied(args)
+	self:StackMessage(args.spellId, "orange", args.destName, args.amount, 3, L.touch)
 end
 
-do
-	local t = 0
-	function mod:Spirit(args)
-		local time = GetTime()
-		if (time - t) > 5 then
-			t = time
-			self:MessageOld(71426, "yellow", nil, L["spirit_message"])
-			self:Bar(71426, 13, L["spirit_bar"])
+function mod:AddMarking(_, unit, guid)
+	if addCollector[guid] then
+		if addCollector[guid] == 8 then
+			self:CustomIcon(deformedFanaticMarker, unit, 8)
+		else
+			self:CustomIcon(empoweredAdherentMarker, unit, 7)
+		end
+		addCollector[guid] = nil
+		if not next(addCollector) then
+			self:UnregisterTargetEvents()
 		end
 	end
 end
 
+function mod:DarkTransformation(args)
+	self:Message(args.spellId, "cyan", L.deformed_fanatic)
+	local unit = self:GetUnitIdByGUID(args.sourceGUID)
+	if unit then
+		self:CustomIcon(deformedFanaticMarker, unit, 8)
+	else
+		addCollector[args.sourceGUID] = 8
+		self:RegisterTargetEvents("AddMarking")
+	end
+	self:PlaySound(args.spellId, "alert")
+end
+
+function mod:DarkEmpowerment(args)
+	self:Message(args.spellId, "cyan", L.empowered_adherent)
+	local unit = self:GetUnitIdByGUID(args.sourceGUID)
+	if unit then
+		self:CustomIcon(empoweredAdherentMarker, unit, 7)
+	else
+		addCollector[args.sourceGUID] = 7
+		self:RegisterTargetEvents("AddMarking")
+	end
+	self:PlaySound(args.spellId, "alert")
+end
+
+do
+	local prev = 0
+	function mod:SummonSpirit(args)
+		if args.time - prev > 5 then
+			prev = args.time
+			if self:Difficulty() == 4 or self:Difficulty() == 6 then -- 3 spirits on 25
+				self:Message(args.spellId, "yellow", CL.spirits)
+				self:CDBar(args.spellId, 10, CL.spirits)
+			else
+				self:Message(args.spellId, "yellow", CL.spirit)
+				self:CDBar(args.spellId, 10, CL.spirit)
+			end
+			self:PlaySound(args.spellId, "long")
+		end
+	end
+end
+
+do
+	local prev = 0
+	function mod:DeathAndDecayDamage(args)
+		if self:Me(args.destGUID) and args.time - prev > 4 then
+			prev = args.time
+			self:PersonalMessage(args.spellId, "underyou")
+			self:PlaySound(args.spellId, "underyou")
+		end
+	end
+end

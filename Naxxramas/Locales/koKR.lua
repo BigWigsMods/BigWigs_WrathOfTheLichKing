@@ -169,23 +169,19 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "koKR")
 if L then
-	L.phase1_trigger1 = "스탈라그, 박살낸다!"
-	L.phase1_trigger2 = "너 주인님께 바칠꺼야!"
-	L.phase2_trigger1 = "잡아... 먹어주마..."
-	L.phase2_trigger2 = "박살을 내주겠다!"
-	L.phase2_trigger3 = "죽여주마..."
+	L[15929] = "스탈라그"
+	L[15930] = "퓨진"
 
-	L.add_death_trigger = "%s|1이;가; 죽습니다."
-	L.overload_trigger = "%s|1이;가; 과부하 상태가 됩니다."
+	L.stage1_yell_trigger1 = "스탈라그, 박살낸다!"
+	L.stage1_yell_trigger2 = "너 주인님께 바칠꺼야!"
 
-	L.polarity_changed = "극성 변경됨!"
-	L.polarity_nochange = "같은 극성!"
-	L.polarity_first_positive = "당신은 플러스!"
-	L.polarity_first_negative = "당신은 마이너스!"
+	L.stage2_yell_trigger1 = "잡아... 먹어주마..."
+	L.stage2_yell_trigger2 = "박살을 내주겠다!"
+	L.stage2_yell_trigger3 = "죽여주마..."
 
-	L.throw = "던지기"
-	L.throw_desc = "탱커 위치 교체를 알립니다."
-	L.throw_warning = "약 5초 후 던지기!"
+	L.add_death_emote_trigger = "%s|1이;가; 죽습니다."
+	L.overload_emote_trigger = "%s|1이;가; 과부하 상태가 됩니다."
+	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
 	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
 
@@ -213,4 +209,6 @@ if L then
 	L.right = "---> 오른쪽으로 ---> 오른쪽으로 --->"
 	L.swap = "^^^^ 방향 전환 ^^^^ 방향 전환 ^^^^"
 	L.stay = "==== 움직 이지마 ==== 움직 이지마 ===="
+
+	--L.chat_message = "The Thaddius mod supports showing you directional arrows and playing voices. Open the options to configure them."
 end

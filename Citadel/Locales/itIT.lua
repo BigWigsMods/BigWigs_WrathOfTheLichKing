@@ -1,5 +1,17 @@
-local L = BigWigs:NewBossLocale("Blood Prince Council", "itIT")
+local L = BigWigs:NewBossLocale("Lord Marrowgar", "itIT")
 if not L then return end
+if L then
+	L.bone_spike = "Aculeo Osseo" -- NPC ID 36619
+end
+
+L = BigWigs:NewBossLocale("Lady Deathwhisper", "itIT")
+if L then
+	L.touch = "Tocco"
+	L.deformed_fanatic = "Fanatico Deformato" -- NPC ID 38135
+	L.empowered_adherent = "Proselito Potenziato" -- NPC ID 38136
+end
+
+L = BigWigs:NewBossLocale("Blood Prince Council", "itIT")
 if L then
 	--L.switch_message = "Health swap: %s"
 	--L.switch_bar = "Next health swap"
@@ -14,27 +26,6 @@ if L then
 	--L.iconprince_desc = "Place the primary raid icon on the active prince (requires promoted or leader)."
 
 	--L.prison_message = "Shadow Prison x%d!"
-end
-
-L = BigWigs:NewBossLocale("Lady Deathwhisper", "itIT")
-if L then
-	--L.engage_trigger = "What is this disturbance?"
-	--L.phase2_message = "Barrier DOWN - Phase 2!"
-
-	--L.dnd_message = "Death and Decay on YOU!"
-
-	--L.adds = "Adds"
-	--L.adds_desc = "Show timers for when the adds spawn."
-	--L.adds_bar = "Next Adds"
-	--L.adds_warning = "New adds in 5 sec!"
-
-	--L.touch_message = "%2$dx Touch on %1$s"
-	--L.touch_bar = "Next Touch"
-
-	--L.deformed_fanatic = "Deformed Fanatic!"
-
-	--L.spirit_message = "Summon Spirit!"
-	--L.spirit_bar = "Next Spirit"
 end
 
 L = BigWigs:NewBossLocale("Festergut", "itIT")
@@ -107,11 +98,6 @@ if L then
 
 	--L.custom_on_valkyr_marker = "Val'kyr marker"
 	--L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
-end
-
-L = BigWigs:NewBossLocale("Lord Marrowgar", "itIT")
-if L then
-	L.bone_spike = "Aculeo Osseo" -- NPC ID 36619
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "itIT")
@@ -209,6 +195,6 @@ end
 L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "itIT")
 if L then
 	L.deathbound_ward = "Guardia Predestinata"
-	--L.deathspeaker_adds = "Lady Deathwhisper Trash"
+	L.deathspeaker_high_priest = "Gran Sacerdote Necroratore" -- NPC ID 36829
 	L.putricide_dogs = "Tesoruccio & Puzzone"
 end

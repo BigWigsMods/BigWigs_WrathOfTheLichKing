@@ -1,18 +1,20 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Gluth", 533, 1612)
 if not mod then return end
 mod:RegisterEnableMob(15932)
 mod:SetEncounterID(1108)
--- mod:SetRespawnTime(0) -- resets, doesn't respawn, doesn't fuck off
 
 --------------------------------------------------------------------------------
--- Locals
+-- Localization
 --
 
-local dazedThrottle = {}
+local L = mod:GetLocale()
+if L then
+	L["28375_icon"] = "spell_nature_purge"
+end
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -20,83 +22,66 @@ local dazedThrottle = {}
 
 function mod:GetOptions()
 	return {
-		{54378, "TANK_HEALER"}, -- Mortal Wound
 		28371, -- Enrage
-		28374, -- Decimate
-		1604, -- Dazed
+		54378, -- Mortal Wound
+		29306, -- Infected Wound
+		{28375, "EMPHASIZE"}, -- Decimate
 		"berserk",
 	}
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "MortalWound", 54378)
-	self:Log("SPELL_AURA_APPLIED", "MortalWoundApplied", 25646, 54378)
-	self:Log("SPELL_AURA_APPLIED_DOSE", "MortalWoundApplied", 25646, 54378) -- ?, 10/25
 	self:Log("SPELL_CAST_SUCCESS", "Enrage", 28371, 54427) -- 10, 25
 	self:Log("SPELL_DISPEL", "EnrageDispelled", "*")
-	self:Log("SPELL_DAMAGE", "Decimate", 28375, 54426) -- 10/25, ?
-	self:Log("SPELL_MISSED", "Decimate", 28375, 54426)
-	self:Log("SPELL_AURA_APPLIED", "Dazed", 1604)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "MortalWoundApplied", 54378)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "InfectedWoundApplied", 29306)
+	self:Log("SPELL_DAMAGE", "Decimate", 28375)
+	self:Log("SPELL_MISSED", "Decimate", 28375)
 end
 
-function mod:OnEngage(diff)
-	dazedThrottle = {}
-	self:Berserk(diff == 3 and 480 or 420)
-	self:Bar(54378, 11.3) -- Mortal Wound
-	self:CDBar(28374, 90) -- Decimate
-	self:DelayedMessage(28374, 85, "orange", CL.soon:format(self:SpellName(28374)), 28374, "alarm")
+function mod:OnEngage()
+	self:Berserk(self:Difficulty() == 3 and 480 or 420, true) -- 8min on 10, 7min on 25
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:MortalWound(args)
-	self:Bar(args.spellId, 11.3)
-end
-
-function mod:MortalWoundApplied(args)
-	self:StackMessage(54378, "purple", args.destName, args.amount, 5)
-	if self:Tank() and (args.amount or 1) > 4 then
-		self:PlaySound(54378, "warning")
-	end
-	if args.spellId == 25646 then
-		self:Error("Mortal Wound found ID 25646 tell the devs! ".. self:Difficulty() .." ".. (self:Classic() and "classic" or "retail"))
-	end
-end
-
 function mod:Enrage(args)
-	self:Message(28371, "red")
+	self:Message(28371, "orange")
 	if self:Dispeller("enrage", true) then
 		self:PlaySound(28371, "alert")
 	end
-	self:Bar(28371, 8)
 end
 
 function mod:EnrageDispelled(args)
 	if args.extraSpellId == 28371 or args.extraSpellId == 54427 then
 		self:Message(28371, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
-		self:StopBar(28371) -- Enrage
+	end
+end
+
+function mod:MortalWoundApplied(args)
+	if args.amount >= 4 and args.amount % 2 == 0 then
+		self:StackMessage(args.spellId, "purple", args.destName, args.amount, 6)
+		if args.amount >= 6 then
+			self:PlaySound(args.spellId, "info")
+		end
+	end
+end
+
+function mod:InfectedWoundApplied(args)
+	if self:Me(args.destGUID) and args.amount % 3 == 0 then
+		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 9)
 	end
 end
 
 do
 	local prev = 0
 	function mod:Decimate(args)
-		local t = args.time
-		if t - prev > 5 then
-			prev = t
-			self:Message(28374, "yellow")
-			self:PlaySound(28374, "long")
-			self:CDBar(28374, 90)
-			self:DelayedMessage(28374, 85, "orange", CL.soon:format(args.spellName), 28374, "alarm")
+		if args.time - prev > 5 then
+			prev = args.time
+			self:Message(args.spellId, "red", args.spellName, L["28375_icon"])
+			self:PlaySound(args.spellId, "warning")
 		end
-	end
-end
-
-function mod:Dazed(args)
-	if args.time - (dazedThrottle[args.destName] or 0) > 5 then
-		dazedThrottle[args.destName] = args.time
-		self:TargetMessage(args.spellId, "orange", args.destName)
 	end
 end

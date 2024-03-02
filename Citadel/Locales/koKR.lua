@@ -1,5 +1,17 @@
-local L = BigWigs:NewBossLocale("Blood Prince Council", "koKR")
+local L = BigWigs:NewBossLocale("Lord Marrowgar", "koKR")
 if not L then return end
+if L then
+	L.bone_spike = "뼈 가시" -- NPC ID 36619
+end
+
+L = BigWigs:NewBossLocale("Lady Deathwhisper", "koKR")
+if L then
+	L.touch = "손길"
+	L.deformed_fanatic = "변형된 광신자" -- NPC ID 38135
+	L.empowered_adherent = "강화된 신봉자" -- NPC ID 38136
+end
+
+L = BigWigs:NewBossLocale("Blood Prince Council", "koKR")
 if L then
 	L.switch_message = "대상 변경: %s"
 	L.switch_bar = "~다음 대상 변경"
@@ -44,32 +56,6 @@ if L then
 
 	L.disable_trigger_alliance = "형제자매여, 전진"
 	L.disable_trigger_horde = "리치 왕을 향해 전진하라"
-end
-
-L = BigWigs:NewBossLocale("Lady Deathwhisper", "koKR")
-if L then
-	L.engage_trigger = "이게 무슨 소란이지?"
-	L.phase2_message = "마나 방벽 사라짐 - 2 단계"
-
-	L.dnd_message = "당신은 죽음과 부패!"
-
-	L.adds = "몹 추가"
-	L.adds_desc = "추가 소환 몹에 대한 타이머를 표시합니다."
-	L.adds_bar = "다음 추가"
-	L.adds_warning = "5초 후 몹 추가!"
-
-	L.touch_message = "손길 %2$dx : %1$s"
-	L.touch_bar = "다음 손길"
-
-	L.deformed_fanatic = "광신자 변형"
-
-	L.spirit_message = "영혼 소환!"
-	L.spirit_bar = "다음 새우"
-end
-
-L = BigWigs:NewBossLocale("Lord Marrowgar", "koKR")
-if L then
-	L.bone_spike = "뼈 가시" -- NPC ID 36619
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "koKR")
@@ -209,6 +195,6 @@ end
 L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "koKR")
 if L then
 	L.deathbound_ward = "죽음에 속박된 감시자"
-	--L.deathspeaker_adds = "Lady Deathwhisper Trash"
+	L.deathspeaker_high_priest = "죽음예언자 대사제" -- NPC ID 36829
 	L.putricide_dogs = "예삐 & 구리구리"
 end

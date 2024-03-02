@@ -1,5 +1,17 @@
-local L = BigWigs:NewBossLocale("Blood Prince Council", "esES")
+local L = BigWigs:NewBossLocale("Lord Marrowgar", "esES")
 if not L then return end
+if L then
+	L.bone_spike = "Púa ósea" -- NPC ID 36619
+end
+
+L = BigWigs:NewBossLocale("Lady Deathwhisper", "esES")
+if L then
+	L.touch = "Toque"
+	L.deformed_fanatic = "Fanático deformado" -- NPC ID 38135
+	L.empowered_adherent = "Partidario potenciado" -- NPC ID 38136
+end
+
+L = BigWigs:NewBossLocale("Blood Prince Council", "esES")
 if L then
 	L.switch_message = "Cambio de objetivo: %s"
 	L.switch_bar = "~Próximo cambio de objetivo"
@@ -14,27 +26,6 @@ if L then
 	L.iconprince_desc = "Coloca el primer icono de raid en el príncipe activo (requiere ayudante o líder)."
 
 	L.prison_message = "¡Prisión de las Sombras x%d!"
-end
-
-L = BigWigs:NewBossLocale("Lady Deathwhisper", "esES")
-if L then
-	L.engage_trigger = "¿Qué es este alboroto? ¿Osáis entrar en suelo sagrado? ¡Este será vuestro lugar de reposo final!"
-	L.phase2_message = "¡Barrera BAJA - Fase 2!"
-
-	L.dnd_message = "¡Muerte y Descomposición en TÍ!"
-
-	L.adds = "Adds"
-	L.adds_desc = "Contador para Nuevos Adds."
-	L.adds_bar = "Nuevos Adds"
-	L.adds_warning = "¡Nuevos adds en 5 sec!"
-
-	L.touch_message = "%2$dx Toque en %1$s"
-	L.touch_bar = "Siguiente Toque"
-
-	L.deformed_fanatic = "¡Fanático deformado!"
-
-	L.spirit_message = "¡Invocando Espíritu!"
-	L.spirit_bar = "Nuevos Espíritus"
 end
 
 L = BigWigs:NewBossLocale("Festergut", "esES")
@@ -107,11 +98,6 @@ if L then
 
 	--L.custom_on_valkyr_marker = "Val'kyr marker"
 	--L.custom_on_valkyr_marker_desc = "Mark the Val'kyr with {rt8}{rt7}{rt6}, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over the Val'kyr is the fastest way to mark them.|r"
-end
-
-L = BigWigs:NewBossLocale("Lord Marrowgar", "esES")
-if L then
-	L.bone_spike = "Púa ósea" -- NPC ID 36619
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "esES")
@@ -209,6 +195,6 @@ end
 L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "esES")
 if L then
 	L.deathbound_ward = "Depositario vinculado a la muerte"
-	--L.deathspeaker_adds = "Lady Deathwhisper Trash"
+	L.deathspeaker_high_priest = "Sumo sacerdote portavoz de la muerte" -- NPC ID 36829
 	L.putricide_dogs = "Precioso & Apestoso"
 end

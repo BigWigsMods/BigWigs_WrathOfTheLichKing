@@ -169,23 +169,19 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "deDE")
 if L then
-	L.phase1_trigger1 = "Stalagg zerquetschen!"
-	L.phase1_trigger2 = "Verfüttere euch an Meister!"
-	L.phase2_trigger1 = "Eure... Knochen... zermalmen..."
-	L.phase2_trigger2 = "Euch... zerquetschen!"
-	L.phase2_trigger3 = "Töten..."
+	L[15929] = "Stalagg"
+	L[15930] = "Feugen"
 
-	L.add_death_trigger = "%s stirbt."
-	L.overload_trigger = "%s überlädt!"
+	L.stage1_yell_trigger1 = "Stalagg zerquetschen!"
+	L.stage1_yell_trigger2 = "Verfüttere euch an Meister!"
 
-	L.polarity_changed = "Polarität geändert!"
-	L.polarity_nochange = "Selbe Polarität!"
-	L.polarity_first_positive = "Du bist POSITIV!"
-	L.polarity_first_negative = "Du bist NEGATIV!"
+	L.stage2_yell_trigger1 = "Eure... Knochen... zermalmen..."
+	L.stage2_yell_trigger2 = "Euch... zerquetschen!"
+	L.stage2_yell_trigger3 = "Töten..."
 
-	L.throw = "Magnetische Anziehung"
-	L.throw_desc = "Warnt, wenn die Tanks die Plattform wechseln."
-	L.throw_warning = "Magnetische Anziehung in ~5 sek!"
+	L.add_death_emote_trigger = "%s stirbt."
+	L.overload_emote_trigger = "%s überlädt!"
+	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
 	L.polarity_extras = "Zusätzliche Warnungen für Polaritätsveränderung-Positionierung"
 
@@ -213,4 +209,6 @@ if L then
 	L.right = "---> Nach Rechts ---> Nach Rechts --->"
 	L.swap = "^^^^ Seitenwechseln ^^^^ Seitenwechseln ^^^^"
 	L.stay = "==== Nicht Bewegen ==== Nicht Bewegen ===="
+
+	--L.chat_message = "The Thaddius mod supports showing you directional arrows and playing voices. Open the options to configure them."
 end

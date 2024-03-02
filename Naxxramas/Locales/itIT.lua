@@ -170,23 +170,19 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "itIT")
 if L then
-	--L.phase1_trigger1 = "Stalagg crush you!"
-	--L.phase1_trigger2 = "Feed you to master!"
-	--L.phase2_trigger1 = "Eat... your... bones..."
-	--L.phase2_trigger2 = "Break... you!!"
-	--L.phase2_trigger3 = "Kill..."
+	L[15929] = "Stalagg"
+	L[15930] = "Feugen"
 
-	--L.add_death_trigger = "%s dies."
-	--L.overload_trigger = "%s overloads!"
+	--L.stage1_yell_trigger1 = "Stalagg crush you!"
+	--L.stage1_yell_trigger2 = "Feed you to master!"
 
-	--L.polarity_changed = "Polarity changed!"
-	--L.polarity_nochange = "Same polarity!"
-	--L.polarity_first_positive = "You're POSITIVE!"
-	--L.polarity_first_negative = "You're NEGATIVE!"
+	--L.stage2_yell_trigger1 = "Eat... your... bones..."
+	--L.stage2_yell_trigger2 = "Break... you!!"
+	--L.stage2_yell_trigger3 = "Kill..."
 
-	--L.throw = "Throw"
-	--L.throw_desc = "Warn about tank platform swaps."
-	--L.throw_warning = "Throw in ~5 sec!"
+	--L.add_death_emote_trigger = "%s dies."
+	--L.overload_emote_trigger = "%s overloads!"
+	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
 	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
 
@@ -215,4 +211,6 @@ if L then
 	--L.right = "---> GO RIGHT ---> GO RIGHT --->"
 	--L.swap = "^^^^ SWITCH SIDES ^^^^ SWITCH SIDES ^^^^"
 	--L.stay = "==== DON'T MOVE ==== DON'T MOVE ===="
+
+	--L.chat_message = "The Thaddius mod supports showing you directional arrows and playing voices. Open the options to configure them."
 end

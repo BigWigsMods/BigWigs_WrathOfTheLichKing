@@ -1,5 +1,17 @@
-local L = BigWigs:NewBossLocale("Blood Prince Council", "zhCN")
+local L = BigWigs:NewBossLocale("Lord Marrowgar", "zhCN")
 if not L then return end
+if L then
+	L.bone_spike = "骨针" -- NPC ID 36619
+end
+
+L = BigWigs:NewBossLocale("Lady Deathwhisper", "zhCN")
+if L then
+	L.touch = "蔑视之触"
+	L.deformed_fanatic = "畸形的狂热者" -- NPC ID 38135
+	L.empowered_adherent = "亢奋的追随者" -- NPC ID 38136
+end
+
+L = BigWigs:NewBossLocale("Blood Prince Council", "zhCN")
 if L then
 	L.switch_message = "生命转换：>%s<！"
 	L.switch_bar = "<下一生命转换>"
@@ -74,32 +86,6 @@ if L then
 
 	L.disable_trigger_alliance = "我早就警告过你，恶棍"
 	L.disable_trigger_horde = "联盟不行了。向巫妖王进攻！"
-end
-
-L = BigWigs:NewBossLocale("Lady Deathwhisper", "zhCN")
-if L then
-	L.engage_trigger = "是谁在打扰我"
-	L.phase2_message = "第二阶段 - 法力壁垒消失！"
-
-	L.dnd_message = ">你< 死亡凋零！"
-
-	L.adds = "增援"
-	L.adds_desc = "当召唤增援时显示计时条。"
-	L.adds_bar = "<下一增援>"
-	L.adds_warning = "5秒后，新的增援！"
-
-	L.touch_message = "蔑视之触%2$dx：>%1$s<！"
-	L.touch_bar = "<下一蔑视之触>"
-
-	L.deformed_fanatic = "畸形的狂热者！"
-
-	L.spirit_message = "召唤灵魂！"
-	L.spirit_bar = "<下一召唤灵魂>"
-end
-
-L = BigWigs:NewBossLocale("Lord Marrowgar", "zhCN")
-if L then
-	L.bone_spike = "骨针" -- NPC ID 36619
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "zhCN")
@@ -209,6 +195,6 @@ end
 L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "zhCN")
 if L then
 	L.deathbound_ward = "缚亡守卫"
-	L.deathspeaker_adds = "亡语部队（亡语者女士）"
+	L.deathspeaker_high_priest = "亡语高阶祭司" -- NPC ID 36829
 	L.putricide_dogs = "小宝 & 大臭"
 end
