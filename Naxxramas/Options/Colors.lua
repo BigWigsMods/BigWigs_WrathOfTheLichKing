@@ -10,17 +10,19 @@ BigWigs:AddColors("Grobbulus", {
 })
 
 BigWigs:AddColors("Gluth", {
-	[1604] = {"blue","orange"},
-	[28371] = {"green","red"},
-	[28374] = {"orange","yellow"},
+	[28371] = {"green","orange"},
+	[28375] = "red",
+	[29306] = "blue",
 	[54378] = {"blue","purple"},
 })
 
 BigWigs:AddColors("Thaddius", {
-	[28089] = {"blue","orange","red","yellow"},
+	[28059] = "blue",
+	[28084] = "blue",
+	[28089] = "orange",
 	[28134] = "red",
-	["stages"] = {"green","yellow"},
-	["throw"] = "orange",
+	[28338] = "red",
+	["stages"] = {"cyan","green"},
 })
 
 BigWigs:AddColors("Noth the Plaguebringer", {

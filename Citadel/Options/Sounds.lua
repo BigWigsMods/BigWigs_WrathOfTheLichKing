@@ -6,9 +6,13 @@ BigWigs:AddSounds("Lord Marrowgar", {
 })
 
 BigWigs:AddSounds("Lady Deathwhisper", {
-	[70842] = "info",
-	[71001] = "alarm",
-	[71289] = "alert",
+	[70900] = "alert",
+	[70901] = "alert",
+	[71001] = "underyou",
+	[71289] = "alarm",
+	[71426] = "long",
+	["adds"] = "info",
+	["stages"] = "long",
 })
 
 BigWigs:AddSounds("Icecrown Gunship Battle", {

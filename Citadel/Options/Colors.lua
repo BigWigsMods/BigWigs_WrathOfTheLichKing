@@ -6,12 +6,15 @@ BigWigs:AddColors("Lord Marrowgar", {
 })
 
 BigWigs:AddColors("Lady Deathwhisper", {
-	[70842] = "green",
+	[70900] = "cyan",
+	[70901] = "cyan",
 	[71001] = "blue",
 	[71204] = {"blue","orange"},
-	[71289] = {"blue","red"},
+	[71237] = {"blue","red"},
+	[71289] = {"blue","orange"},
 	[71426] = "yellow",
-	["adds"] = {"orange","yellow"},
+	["adds"] = "cyan",
+	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Icecrown Gunship Battle", {
@@ -106,7 +109,7 @@ BigWigs:AddColors("The Lich King", {
 })
 
 BigWigs:AddColors("Icecrown Citadel Trash", {
-	[69483] = {"blue","cyan"},
+	[69483] = {"blue","red"},
 	[71022] = "red",
 	[71127] = {"blue","purple"},
 })

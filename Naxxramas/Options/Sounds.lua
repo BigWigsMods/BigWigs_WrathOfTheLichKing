@@ -11,13 +11,16 @@ BigWigs:AddSounds("Grobbulus", {
 
 BigWigs:AddSounds("Gluth", {
 	[28371] = "alert",
-	[28374] = {"alarm","long"},
-	[54378] = "warning",
+	[28375] = "warning",
+	[54378] = "info",
 })
 
 BigWigs:AddSounds("Thaddius", {
-	[28089] = {"info","long","warning"},
-	["stages"] = {"alarm","info","long"},
+	[28059] = "warning",
+	[28084] = "warning",
+	[28089] = "long",
+	[28338] = "alert",
+	["stages"] = {"info","long"},
 })
 
 BigWigs:AddSounds("Noth the Plaguebringer", {
