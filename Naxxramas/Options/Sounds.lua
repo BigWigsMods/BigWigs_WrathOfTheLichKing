@@ -24,16 +24,16 @@ BigWigs:AddSounds("Thaddius", {
 })
 
 BigWigs:AddSounds("Noth the Plaguebringer", {
-	[29210] = {"alarm","warning"},
-	[29212] = "alarm",
-	[29213] = "alert",
-	["teleport"] = {"alarm","long"},
-	["wave"] = "info",
+	[29208] = "alert",
+	[29213] = "warning",
+	[29214] = "alarm",
+	["adds"] = "info",
+	["stages"] = "long",
 })
 
 BigWigs:AddSounds("Heigan the Unclean", {
 	[29998] = "alert",
-	["teleport"] = {"info","long"},
+	["stages"] = {"info","long"},
 })
 
 BigWigs:AddSounds("Loatheb", {

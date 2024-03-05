@@ -18,16 +18,18 @@ BigWigs:AddColors("Lady Deathwhisper", {
 })
 
 BigWigs:AddColors("Icecrown Gunship Battle", {
-	["adds"] = "yellow",
-	["mage"] = "green",
+	[69638] = {"blue","orange"},
+	[69651] = {"blue","red"},
+	["adds"] = "cyan",
+	["mage"] = "yellow",
 })
 
 BigWigs:AddColors("Deathbringer Saurfang", {
 	[72293] = {"blue","yellow"},
 	[72385] = {"blue","orange"},
-	[72410] = {"blue","yellow"},
+	[72410] = {"blue","purple"},
 	[72737] = "red",
-	["adds"] = {"green","orange"},
+	["adds"] = "cyan",
 })
 
 BigWigs:AddColors("Festergut", {

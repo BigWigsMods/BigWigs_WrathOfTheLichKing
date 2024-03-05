@@ -16,13 +16,15 @@ BigWigs:AddSounds("Lady Deathwhisper", {
 })
 
 BigWigs:AddSounds("Icecrown Gunship Battle", {
-	["mage"] = "info",
+	["adds"] = "info",
+	["mage"] = "alarm",
 })
 
 BigWigs:AddSounds("Deathbringer Saurfang", {
 	[72293] = "alert",
+	[72410] = "warning",
 	[72737] = "long",
-	["adds"] = "alarm",
+	["adds"] = "info",
 })
 
 BigWigs:AddSounds("Festergut", {
@@ -75,7 +77,7 @@ BigWigs:AddSounds("The Lich King", {
 })
 
 BigWigs:AddSounds("Icecrown Citadel Trash", {
-	[69483] = {"alert","warning"},
+	[69483] = "warning",
 	[71022] = "alarm",
 	[71127] = "warning",
 })
