@@ -52,21 +52,7 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "deDE")
 if L then
-	L.teleport_trigger = "Euer Ende naht."
-
-	L.teleport = "Teleport"
-	L.teleport_desc = "Warnungen und Timer für Teleport."
-	L.teleport_1min_message = "Teleport in 1 min"
-	L.teleport_30sec_message = "Teleport in 30 sek"
-	L.teleport_10sec_message = "Teleport in 10 sek!"
-	L.on_platform_message = "Teleport! Auf Plattform für 45 sek!"
-
-	L.to_floor_30sec_message = "Zurück in 30 sek"
-	L.to_floor_10sec_message = "Zurück in 10 sek!"
-	L.on_floor_message = "Zurück im Raum! Nächster Teleport in 90 sek!"
-
-	L.teleport_bar = "Teleport"
-	L.back_bar = "Zurück im Raum"
+	L.teleport_yell_trigger = "Euer Ende naht."
 end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "deDE")
@@ -111,22 +97,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "deDE")
 if L then
-	L.add_trigger = "Erhebt euch, Soldaten! Erhebt euch und kämpft erneut!"
-
-	L.teleport = "Teleport"
-	L.teleport_desc = "Warnungen und Timer für Teleport."
-	L.teleport_balcony = "Teleport! Noth auf dem Balkon!"
-	L.teleport_room = "Teleport! Noth zurück im Raum!"
-
-	L.curse_explosion = "Fluch Explosion!"
-	L.curse_warn = "Fluch!"
-	L.curse_10secwarn = "Fluch in ~10 sek!"
-	L.curse_bar = "Nächster Fluch"
-
-	L.wave = "Skelette beschwören"
-	L.wave_desc = "Warnungen für die Gegnerwellen."
-	L.wave1 = "Welle 1"
-	L.wave2 = "Welle 2"
+	L.adds_yell_trigger = "Erhebt euch, Soldaten" -- Erhebt euch, Soldaten! Erhebt euch und kämpft erneut!
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "deDE")

@@ -11,6 +11,32 @@ if L then
 	L.empowered_adherent = "Machterfüllter Kultist" -- NPC ID 38136
 end
 
+L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "deDE")
+if L then
+	L.adds_trigger_alliance = "Häscher, Unteroffiziere, Angriff!"
+	L.adds_trigger_horde = "Soldaten! Zum Angriff!"
+
+	L.mage = "Magier"
+	L.mage_desc = "Warnt, wenn ein Magier erscheint, um die Kanonen einzufrieren."
+	-- Alliance: We're taking hull damage, get a battle-mage out here to shut down those cannons!
+	-- Horde: We're taking hull damage, get a sorcerer out here to shut down those cannons!
+	--L.mage_yell_trigger = "taking hull damage"
+
+	L.warmup_trigger_alliance = "Alle Maschinen auf Volldampf"
+	L.warmup_trigger_horde = "Erhebt Euch, Söhne und Töchter"
+
+	L.disable_trigger_alliance = "Vorwärts, Brüder und Schwestern"
+	L.disable_trigger_horde = "Vorwärts zum Lichkönig"
+end
+
+L = BigWigs:NewBossLocale("Deathbringer Saurfang", "deDE")
+if L then
+	L.blood_beast = "Blutbestie" --  NPC ID 38508
+
+	L.warmup_alliance = "Dann beeilen wir uns! Brechen wir au..."
+	L.warmup_horde = "Kor'kron, Aufbruch! Champions, gebt Acht. Die Geißel ist..."
+end
+
 L = BigWigs:NewBossLocale("Blood Prince Council", "deDE")
 if L then
 	L.switch_message = "Ziel wechseln: %s"
@@ -46,18 +72,6 @@ if L then
 	L.phase2_bar = "Flugphase"
 end
 
-L = BigWigs:NewBossLocale("Deathbringer Saurfang", "deDE")
-if L then
-	L.adds = "Blutbestien"
-	L.adds_desc = "Zeigt Timer und Nachrichten für das Auftauchen der Blutbestien."
-	L.adds_warning = "Blutbestien in 5 sek!"
-	L.adds_message = "Blutbestien!"
-
-	L.engage_trigger = "BEI DER MACHT DES LICHKÖNIGS!"
-	L.warmup_alliance = "Dann beeilen wir uns! Brechen wir au..."
-	L.warmup_horde = "Kor'kron, Aufbruch! Champions, gebt Acht. Die Geißel ist..."
-end
-
 L = BigWigs:NewBossLocale("Festergut", "deDE")
 if L then
 	L.engage_trigger = "Zeit für Spaß?"
@@ -65,27 +79,6 @@ if L then
 	L.inhale_bar = "Einatmen %d"
 	L.blight_warning = "Stechende Seuche in ~5 sek!"
 	L.ball_message = "Glibber!"
-end
-
-L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "deDE")
-if L then
-	L.adds = "Portal"
-	L.adds_desc = "Warnt vor den Portalen."
-	L.adds_trigger_alliance = "Häscher, Unteroffiziere, Angriff!"
-	L.adds_trigger_horde = "Soldaten! Zum Angriff!"
-	L.adds_message = "Portal!"
-	L.adds_bar = "Nächstes Portal"
-
-	L.mage = "Magier"
-	L.mage_desc = "Warnt, wenn ein Magier erscheint, um die Kanonen einzufrieren."
-	L.mage_message = "Magier gespawnt!"
-	L.mage_bar = "Nächster Magier"
-
-	L.warmup_trigger_alliance = "Alle Maschinen auf Volldampf"
-	L.warmup_trigger_horde = "Erhebt Euch, Söhne und Töchter"
-
-	L.disable_trigger_alliance = "Vorwärts, Brüder und Schwestern"
-	L.disable_trigger_horde = "Vorwärts zum Lichkönig"
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "deDE")

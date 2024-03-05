@@ -52,21 +52,7 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "ruRU")
 if L then
-	L.teleport_trigger = "Вам конец."
-
-	L.teleport = "Телепорт"
-	L.teleport_desc = "Предупреждать о телепорте."
-	L.teleport_1min_message = "Телепорт через 1 минуту"
-	L.teleport_30sec_message = "Телепорт через 30 секунд"
-	L.teleport_10sec_message = "Телепорт через 10 секунд!"
-	L.on_platform_message = "Телепорт! 45 секунд на платформе!"
-
-	L.to_floor_30sec_message = "Возвращение через 30 секунд"
-	L.to_floor_10sec_message = "Возвращение через 10 секунд!"
-	L.on_floor_message = "Возвращается! 90 секунд до следующего телепорта!"
-
-	L.teleport_bar = "Телепорт!"
-	L.back_bar = "Возвращение!"
+	L.teleport_yell_trigger = "Вам конец."
 end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "ruRU")
@@ -111,22 +97,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "ruRU")
 if L then
-	L.add_trigger = "Встаньте мои воины! Встаньте и сражайтесь вновь!"
-
-	L.teleport = "Телепорт"
-	L.teleport_desc = "Предупреждать о телепорте."
-	L.teleport_balcony = "Телепорт! Он на балконе!"
-	L.teleport_room = "Телепорт! Он вернулся в комнат!"
-
-	L.curse_explosion = "Проклятый взрыв!"
-	L.curse_warn = "Проклятие!"
-	L.curse_10secwarn = "Проклятие через ~10 секунд"
-	L.curse_bar = "Следующее проклятие"
-
-	L.wave = "Призыв скелетов"
-	L.wave_desc = "Сообщать о волнах"
-	L.wave1 = "1-я волна"
-	L.wave2 = "2-я волна"
+	L.adds_yell_trigger = "Встаньте мои воины" -- Встаньте мои воины! Встаньте и сражайтесь вновь!
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "ruRU")

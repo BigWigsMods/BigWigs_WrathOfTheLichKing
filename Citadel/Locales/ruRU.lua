@@ -11,6 +11,32 @@ if L then
 	L.empowered_adherent = "Могущественный последователь" -- NPC ID 38136
 end
 
+L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "ruRU")
+if L then
+	L.adds_trigger_alliance = "Разрушители, сержанты, в бой!"
+	L.adds_trigger_horde = "Пехота, сержанты, в бой!"
+
+	L.mage = "Маг"
+	L.mage_desc = "Предупредит когда появится маг и заморозит пушки."
+	-- Alliance: We're taking hull damage, get a battle-mage out here to shut down those cannons!
+	-- Horde: We're taking hull damage, get a sorcerer out here to shut down those cannons!
+	--L.mage_yell_trigger = "taking hull damage"
+
+	L.warmup_trigger_alliance = "Запускайте двигатели"
+	L.warmup_trigger_horde = "Воспряньте, сыны и дочери Орды"
+
+	L.disable_trigger_alliance = "братья и сестры"
+	L.disable_trigger_horde = "Вперед к Королю-Личу"
+end
+
+L = BigWigs:NewBossLocale("Deathbringer Saurfang", "ruRU")
+if L then
+	L.blood_beast = "Кровавое чудовище" --  NPC ID 38508
+
+	L.warmup_alliance = "Тогда выдвигаемся! Быст..."
+	L.warmup_horde = "Кор'крон, выдвигайтесь! Герои, будьте начеку. Плеть только что..."
+end
+
 L = BigWigs:NewBossLocale("Blood Prince Council", "ruRU")
 if L then
 	L.switch_message = "Смена цели: %s"
@@ -46,18 +72,6 @@ if L then
 	L.phase2_bar = "Воздушная фаза"
 end
 
-L = BigWigs:NewBossLocale("Deathbringer Saurfang", "ruRU")
-if L then
-	L.adds = "Кровавые чудовища"
-	L.adds_desc = "Сообщать о призыве кровавых чудовищ."
-	L.adds_warning = "Кровавые чудовища через 5 сек!"
-	L.adds_message = "Призваны кровавые чудовища"
-
-	L.engage_trigger = "ВО ИМЯ КОРОЛЯ-ЛИЧА!"
-	L.warmup_alliance = "Тогда выдвигаемся! Быст..."
-	L.warmup_horde = "Кор'крон, выдвигайтесь! Герои, будьте начеку. Плеть только что..."
-end
-
 L = BigWigs:NewBossLocale("Festergut", "ruRU")
 if L then
 	L.engage_trigger = "Повеселимся?"
@@ -65,27 +79,6 @@ if L then
 	L.inhale_bar = "~Следующее вдыхание %d"
 	L.blight_warning = "Едкая гниль через ~5сек!"
 	L.ball_message = "Скоро комок гадости!"
-end
-
-L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "ruRU")
-if L then
-	L.adds = "Порталы"
-	L.adds_desc = "Предупреждает о порталах."
-	L.adds_trigger_alliance = "Разрушители, сержанты, в бой!"
-	L.adds_trigger_horde = "Пехота, сержанты, в бой!"
-	L.adds_message = "Порталы!"
-	L.adds_bar = "Следующие Порталы"
-
-	L.mage = "Маг"
-	L.mage_desc = "Предупредит когда появится маг и заморозит пушки."
-	L.mage_message = "Маг появился!"
-	L.mage_bar = "~Следующий маг"
-
-	L.warmup_trigger_alliance = "Запускайте двигатели"
-	L.warmup_trigger_horde = "Воспряньте, сыны и дочери Орды"
-
-	L.disable_trigger_alliance = "братья и сестры"
-	L.disable_trigger_horde = "Вперед к Королю-Личу"
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "ruRU")

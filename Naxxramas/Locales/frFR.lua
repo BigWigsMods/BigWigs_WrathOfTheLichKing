@@ -52,21 +52,7 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "frFR")
 if L then
-	L.teleport_trigger = "Votre fin est venue."
-
-	L.teleport = "Téléportation"
-	L.teleport_desc = "Prévient quand Heigan se téléporte."
-	L.teleport_1min_message = "Téléportation dans 1 min."
-	L.teleport_30sec_message = "Téléportation dans 30 sec."
-	L.teleport_10sec_message = "Téléportation dans 10 sec. !"
-	L.on_platform_message = "Téléportation ! Sur la plate-forme pendant 45 sec. !"
-
-	L.to_floor_30sec_message = "De retour dans 30 sec."
-	L.to_floor_10sec_message = "De retour dans 10 sec. !"
-	L.on_floor_message = "De retour sur le sol ! 90 sec. avant la prochaine téléportation !"
-
-	L.teleport_bar = "Téléportation !"
-	L.back_bar = "Retour sur le sol !"
+	L.teleport_yell_trigger = "Votre fin est venue."
 end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "frFR")
@@ -111,22 +97,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "frFR")
 if L then
-	L.add_trigger = "Levez-vous, soldats ! Levez-vous et combattez une fois encore !"
-
-	L.teleport = "Téléportation"
-	L.teleport_desc = "Prévient quand Noth se téléporte."
-	L.teleport_balcony = "Téléportation ! Il est sur le balcon !"
-	L.teleport_room = "Téléportation ! De retour dans la salle !"
-
-	L.curse_explosion = "Explosion des malé. !"
-	L.curse_warn = "Malédictions !"
-	L.curse_10secwarn = "Malédictions dans ~10 sec."
-	L.curse_bar = "Prochaines malédictions"
-
-	L.wave = "Invocation de squelettes"
-	L.wave_desc = "Prévient de l'arrivée des vagues."
-	L.wave1 = "1ère vague"
-	L.wave2 = "2ème vague"
+	L.adds_yell_trigger = "Levez-vous, soldats" -- Levez-vous, soldats ! Levez-vous et combattez une fois encore !
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "frFR")

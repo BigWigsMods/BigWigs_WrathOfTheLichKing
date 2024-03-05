@@ -74,7 +74,7 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED", "CurseOfTorpor", 71237)
+	self:Log("SPELL_AURA_APPLIED", "CurseOfTorporApplied", 71237)
 	self:Log("SPELL_AURA_REMOVED", "ManaBarrierRemoved", 70842)
 	self:Log("SPELL_AURA_APPLIED", "DominateMindApplied", 71289)
 	self:Log("SPELL_AURA_REMOVED", "DominateMindRemoved", 71289)
@@ -111,8 +111,18 @@ function mod:SpawnAdds(duration)
 	addsTimer = self:ScheduleTimer("SpawnAdds", duration, duration)
 end
 
-function mod:CurseOfTorpor(args)
-	self:TargetMessage(args.spellId, "red", args.destName, CL.curse)
+do
+	local prev = 0
+	function mod:CurseOfTorporApplied(args)
+		if self:GetStage() == 1 then
+			if args.time - prev > 5 then
+				prev = args.time
+				self:Message(args.spellId, "red", CL.curses)
+			end
+		else
+			self:TargetMessage(args.spellId, "red", args.destName, CL.curse)
+		end
+	end
 end
 
 function mod:ManaBarrierRemoved()

@@ -77,8 +77,6 @@ function mod:DarkReckoningApplied(args)
 		self:Say(args.spellId, nil, nil, "Dark Reckoning")
 		self:SayCountdown(args.spellId, 8)
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
-	else
-		self:PlaySound(args.spellId, "alert")
 	end
 end
 

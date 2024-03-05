@@ -52,21 +52,7 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "koKR")
 if L then
-	L.teleport_trigger = "여기가 너희 무덤이 되리라."
-
-	L.teleport = "순간이동"
-	L.teleport_desc = "순간이동을 알립니다."
-	L.teleport_1min_message = "60초 후 순간이동!"
-	L.teleport_30sec_message = "30초 후 순간이동!"
-	L.teleport_10sec_message = "10초 후 순간이동!"
-	L.on_platform_message = "순간이동! 45초간 단상!"
-
-	L.to_floor_30sec_message = "30초 후 단상 내려옴!"
-	L.to_floor_10sec_message = "10초 후 단상 내려옴!"
-	L.on_floor_message = "헤이건 내려옴! 90초 후 순간이동!"
-
-	L.teleport_bar = "순간이동!"
-	L.back_bar = "단상으로 이동!"
+	L.teleport_yell_trigger = "여기가 너희 무덤이 되리라."
 end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "koKR")
@@ -111,22 +97,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "koKR")
 if L then
-	L.add_trigger = "일어나라,병사들이여! 다시 일어나 싸워라!"
-
-	L.teleport = "순간이동"
-	L.teleport_desc = "순간이동을 알립니다."
-	L.teleport_balcony = "발코니로 순간이동!"
-	L.teleport_room = "방으로 복귀 순간이동!"
-
-	L.curse_explosion = "역병술사의 저주!"
-	L.curse_warn = "저주!"
-	L.curse_10secwarn = "약 10초 이내 저주"
-	L.curse_bar = "다음 저주"
-
-	L.wave = "해골 소환"
-	L.wave_desc = "웨이브를 알립니다."
-	L.wave1 = "웨이브 1"
-	L.wave2 = "웨이브 2"
+	L.adds_yell_trigger = "일어나라,병사들이여" -- 일어나라,병사들이여! 다시 일어나 싸워라!
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "koKR")

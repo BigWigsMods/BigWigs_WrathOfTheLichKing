@@ -52,21 +52,7 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "ptBR")
 if L then
-	--L.teleport_trigger = "The end is upon you."
-
-	--L.teleport = "Teleport"
-	--L.teleport_desc = "Warn for Teleports."
-	--L.teleport_1min_message = "Teleport in 1 min"
-	--L.teleport_30sec_message = "Teleport in 30 sec"
-	--L.teleport_10sec_message = "Teleport in 10 sec!"
-	--L.on_platform_message = "Teleport! On platform for 45 sec!"
-
-	--L.to_floor_30sec_message = "Back in 30 sec"
-	--L.to_floor_10sec_message = "Back in 10 sec!"
-	--L.on_floor_message = "Back on the floor! 90 sec to next teleport!"
-
-	--L.teleport_bar = "Teleport!"
-	--L.back_bar = "Back on the floor!"
+	--L.teleport_yell_trigger = "The end is upon you."
 end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "ptBR")
@@ -126,22 +112,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "ptBR")
 if L then
-	--L.add_trigger = "Rise, my soldiers! Rise and fight once more!"
-
-	L.teleport = "Teleporte"
-	--L.teleport_desc = "Warnings for when Noth teleports."
-	--L.teleport_balcony = "Teleport! He's on the balcony!"
-	--L.teleport_room = "Teleport! He's back in room!"
-
-	--L.curse_explosion = "Curse explosion!"
-	--L.curse_warn = "Curse!"
-	--L.curse_10secwarn = "Curse in ~10 sec"
-	--L.curse_bar = "Next Curse"
-
-	L.wave = "Evocar Esqueletos"
-	--L.wave_desc = "Warnings for the skeleton add waves."
-	--L.wave1 = "Wave 1"
-	--L.wave2 = "Wave 2"
+	--L.adds_yell_trigger = "Rise, my soldiers" -- Rise, my soldiers! Rise and fight once more!
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ptBR")

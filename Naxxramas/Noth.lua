@@ -1,12 +1,11 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Noth the Plaguebringer", 533, 1604)
 if not mod then return end
 mod:RegisterEnableMob(15954)
 mod:SetEncounterID(1117)
--- mod:SetRespawnTime(0) -- resets, doesn't respawn
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------
@@ -15,36 +14,21 @@ mod:SetStage(1)
 
 local timeroom = 90
 local timebalcony = 70
+local wave1time = 10
 local wave2time = 41
-local phaseCount = 1
-local waveCount = 1
+local addsCount = 1
+local curseCount = 0
+local curseTime = 0
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
-	L.add_trigger = "Rise, my soldiers! Rise and fight once more!"
-
-	L.teleport = "Teleport"
-	L.teleport_desc = "Warnings for when Noth teleports."
-	L.teleport_icon = "Spell_Magic_LesserInvisibilty"
-	L.teleport_balcony = "Teleport! He's on the balcony!"
-	L.teleport_room = "Teleport! He's back in room!"
-
-	L.curse_explosion = "Curse explosion!"
-	L.curse_warn = "Curse!"
-	L.curse_10secwarn = "Curse in ~10 sec"
-	L.curse_bar = "Next Curse"
-
-	L.wave = "Summon Skeletons" -- 29237
-	L.wave_desc = "Warnings for the skeleton add waves."
-	L.wave_icon = "inv_misc_bone_dwarfskull_01"
-	L.wave1 = "Wave 1"
-	L.wave2 = "Wave 2"
+	L.adds_yell_trigger = "Rise, my soldiers" -- Rise, my soldiers! Rise and fight once more!
+	L.adds_icon = "inv_misc_bone_dwarfskull_01"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -52,38 +36,43 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		29210, -- Blink
+		"stages",
+		"adds",
 		29212, -- Cripple
 		29213, -- Curse of the Plaguebringer
-		"teleport",
-		"wave",
+		29214, -- Wrath of the Plaguebringer
+		29208, -- Blink
+	},nil,{
+		[29213] = CL.curse, -- Curse of the Plaguebringer (Curse)
+		[29214] = CL.explosion, -- Wrath of the Plaguebringer (Explosion)
 	}
 end
 
 function mod:OnBossEnable()
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+
+	self:Log("SPELL_AURA_APPLIED", "Cripple", 29212, 54814) -- 10, 25
+	self:Log("SPELL_CAST_SUCCESS", "CurseOfThePlaguebringer", 29213, 54835) -- 10, 25
+	self:Log("SPELL_AURA_APPLIED", "CurseOfThePlaguebringerApplied", 29213, 54835)
+	self:Log("SPELL_AURA_REMOVED", "CurseOfThePlaguebringerRemoved", 29213, 54835)
+	self:Log("SPELL_AURA_APPLIED", "WrathOfThePlaguebringerApplied", 29214, 54836) -- 10, 25
 	self:Log("SPELL_CAST_SUCCESS", "Blink", 29208, 29209, 29210, 29211)
-	self:Log("SPELL_AURA_APPLIED", "Cripple", 29212)
-	self:Log("SPELL_CAST_SUCCESS", "Curse", 29213, 54835)
-	self:BossYell("SkeletonWarriors", L.add_trigger)
 end
 
-function mod:OnEngage(diff)
-	self:SetStage(1)
+function mod:OnEngage()
 	timeroom = 90
 	timebalcony = 70
-	phaseCount = 1
-	waveCount = 1
+	addsCount = 1
+	curseCount = 0
+	curseTime = 0
+	self:SetStage(1)
 
-	self:Message("teleport", "yellow", CL.custom_start_s:format(self.displayName, L.teleport, 90), false)
+	self:CDBar(29213, 9, CL.curse) -- Curse of the Plaguebringer
+	self:CDBar("adds", 14, CL.count:format(CL.adds, addsCount), L.adds_icon) -- Adds
 
-	self:CDBar(29213, 11, L.curse_bar) -- Curse
-	self:CDBar("wave", 15, CL.count:format(L.wave, waveCount), L.wave_icon)
-	self:Bar("teleport", timeroom, L.teleport, L.teleport_icon)
-	self:DelayedMessage("teleport", timeroom - 10, "orange", CL.soon:format(L.teleport))
-	if diff == 4 then -- 25
-		self:CDBar(29210, 33) -- Blink
-		self:DelayedMessage(29210, 27, "orange", CL.soon:format(self:SpellName(29210)), 29210, "alarm")
-	end
+	self:Message("stages", "cyan", CL.stage:format(1), false)
+	self:DelayedMessage("stages", timeroom - 10, "cyan", CL.custom_sec:format(CL.stage:format(2), 10))
+	self:Bar("stages", timeroom, CL.stage:format(2), "Spell_Magic_LesserInvisibilty")
 	self:ScheduleTimer("TeleportToBalcony", timeroom)
 end
 
@@ -91,49 +80,66 @@ end
 -- Event Handlers
 --
 
-function mod:Curse(args)
-	self:Message(29213, "red", L.curse_warn)
-	self:PlaySound(29213, "alert")
-	self:Bar(29213, 10, L.curse_explosion, "spell_shadow_antishadow") -- Wrath of the Plaguebringer
-	if self:GetStage() == 1 then
-		self:CDBar(29213, 55, L.curse_bar)
-		self:DelayedMessage(29213, 45, "red", L.curse_10secwarn, 29213)
+do
+	local function NextAdds()
+		mod:Message("adds", "orange", CL.count:format(CL.adds, addsCount), L.adds_icon)
+		addsCount = addsCount + 1
+		if mod:GetStage() == 1 then
+			mod:CDBar("adds", 32, CL.count:format(CL.adds, addsCount), L.adds_icon) -- 30~42
+		end
+		mod:PlaySound("adds", "info")
+	end
+	function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+		if msg:find(L.adds_yell_trigger, nil, true) then
+			self:Bar("adds", {5, addsCount == 1 and 15 or 33}, CL.count:format(CL.adds, addsCount), L.adds_icon)
+			self:ScheduleTimer(NextAdds, 5)
+		end
 	end
 end
 
 function mod:Cripple(args)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId)
-		self:PlaySound(args.spellId, "alarm")
+		self:PersonalMessage(29212)
+	end
+end
+
+function mod:CurseOfThePlaguebringer(args)
+	curseCount = 0
+	curseTime = args.time
+	self:Message(29213, "red", CL.curse)
+	self:CDBar(29213, 51.7, CL.curse)
+	self:Bar(29214, 10, CL.explosion) -- Wrath of the Plaguebringer
+	self:PlaySound(29213, "warning")
+end
+
+function mod:CurseOfThePlaguebringerApplied()
+	curseCount = curseCount + 1
+end
+
+function mod:CurseOfThePlaguebringerRemoved(args)
+	curseCount = curseCount - 1
+	if curseCount == 0 then
+		self:StopBar(CL.explosion)
+		self:Message(29213, "green", CL.removed_after:format(CL.curse, args.time-curseTime))
+	end
+end
+
+do
+	local prev = 0
+	function mod:WrathOfThePlaguebringerApplied(args)
+		if args.time - prev > 10 then
+			prev = args.time
+			self:Message(29214, "red", CL.explosion)
+			self:PlaySound(29214, "alarm")
+		end
 	end
 end
 
 function mod:Blink(args)
-	if self:MobId(args.sourceGUID) ~= 15954 then return end
-
-	self:Message(29210, "purple")
-	self:PlaySound(29210, "warning")
-	local cd = phaseCount == 3 and 38 or 43
-	if self:GetStage() == 1 then
-		self:CDBar(29210, cd)
-		self:DelayedMessage(29210, cd - 5, "orange", CL.soon:format(self:SpellName(29210)), 29210, "alarm")
+	if self:MobId(args.sourceGUID) == 15954 then
+		self:Message(29208, "yellow")
+		self:PlaySound(29208, "alert")
 	end
-end
-
-function mod:SkeletonWarriors(_, msg)
-	local cd = 5
-	if self:BarTimeLeft(CL.count:format(L.wave, waveCount)) > 0 then
-		cd = {5, waveCount == 1 and 15 or 33} -- adjust the time if there is a bar up
-	end
-	self:Bar("wave", cd, CL.count:format(L.wave, waveCount), L.wave_icon)
-	self:ScheduleTimer(function()
-		self:Message("wave", "yellow", CL.count:format(L.wave, waveCount), L.wave_icon)
-		self:PlaySound("wave", "info")
-		waveCount = waveCount + 1
-		if self:GetStage() == 1 then
-			self:CDBar("wave", 33, CL.count:format(L.wave, waveCount), L.wave_icon) -- 30~42
-		end
-	end, 5)
 end
 
 function mod:TeleportToBalcony()
@@ -142,29 +148,23 @@ function mod:TeleportToBalcony()
 	elseif timeroom == 110 then
 		timeroom = 180
 	end
-
-	self:StopBar(L.curse_bar)
-	self:CancelDelayedMessage(L.curse_10secwarn)
-	self:StopBar(CL.count:format(L.wave, waveCount))
-	self:StopBar(29210) -- Blink
-	self:CancelDelayedMessage(CL.soon:format(self:SpellName(29210)))
-
+	self:StopBar(CL.count:format(CL.adds, addsCount)) -- Adds
+	addsCount = 1
 	self:SetStage(2)
-	waveCount = 1
 
-	self:Message("teleport", "cyan", L.teleport_balcony, false)
-	self:PlaySound("teleport", "long")
-	self:Bar("teleport", timebalcony, L.teleport, L.teleport_icon)
-	self:DelayedMessage("teleport", timebalcony - 10, "cyan", CL.soon:format(L.teleport), false, "alarm")
+	self:StopBar(29208) -- Blink
+	self:StopBar(CL.curse) -- Curse of the Plaguebringer
 
-	local wave_icon = "spell_shadow_raisedead"
-	self:Bar("wave", 10, L.wave1, wave_icon)
-	self:DelayedMessage("wave", 10, "yellow", L.wave1, wave_icon, "info")
-	self:Bar("wave", wave2time, L.wave2, wave_icon)
-	self:DelayedMessage("wave", wave2time, "yellow", L.wave2, wave_icon, "info")
-	wave2time = wave2time + 15
+	self:Message("stages", "cyan", CL.stage:format(2), false)
+	self:Bar("stages", timebalcony, CL.stage:format(1), "Spell_Magic_LesserInvisibilty")
+	self:DelayedMessage("stages", timebalcony - 10, "cyan", CL.custom_sec:format(CL.stage:format(1), 10))
+
+	self:Bar("adds", wave1time, CL.count:format(CL.adds, 1), L.adds_icon)
+	self:Bar("adds", wave2time, CL.count:format(CL.adds, 2), L.adds_icon)
 
 	self:ScheduleTimer("TeleportToRoom", timebalcony)
+	wave2time = wave2time + 15
+	self:PlaySound("stages", "long")
 end
 
 function mod:TeleportToRoom()
@@ -173,26 +173,14 @@ function mod:TeleportToRoom()
 	elseif timebalcony == 95 then
 		timebalcony = 120
 	end
-
+	addsCount = 1
 	self:SetStage(1)
-	phaseCount = phaseCount + 1
-	waveCount = 1
 
-	self:Message("teleport", "cyan", L.teleport_room, false)
-	self:PlaySound("teleport", "long")
-	if phaseCount < 4 then
-		self:Bar("teleport", timeroom, L.teleport, L.teleport_icon)
-		self:DelayedMessage("teleport", timeroom - 10, "cyan", CL.soon:format(L.teleport))
-		self:ScheduleTimer("TeleportToBalcony", timeroom)
-		self:CDBar("wave", 15, CL.count:format(L.wave, waveCount), L.wave_icon)
-	--else
-		-- he breaks if you live this long? should be enrage, but instead you get no emote adds every ~35s,
-		-- will eventually blink + teleport, then emote back after like 3s but stays on the balcony
-	end
-	self:CDBar(29213, 13, L.curse_bar) -- Curse
-
-	if self:Difficulty() == 4 then -- 25
-		self:CDBar(29210, 33) -- Blink
-		self:DelayedMessage(29210, 27, "orange", CL.soon:format(self:SpellName(29210)), 29210, "alarm")
-	end
+	self:CDBar(29213, 11, CL.curse) -- Curse of the Plaguebringer
+	self:CDBar("adds", 15, CL.count:format(CL.adds, 1), L.adds_icon)
+	self:Message("stages", "cyan", CL.stage:format(1), false)
+	self:Bar("stages", timeroom, CL.stage:format(2), "Spell_Magic_LesserInvisibilty")
+	self:DelayedMessage("stages", timeroom - 10, "cyan", CL.custom_sec:format(CL.stage:format(2), 10))
+	self:ScheduleTimer("TeleportToBalcony", timeroom)
+	self:PlaySound("stages", "long")
 end

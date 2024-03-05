@@ -11,6 +11,32 @@ if L then
 	L.empowered_adherent = "Adhérent investi" -- NPC ID 38136
 end
 
+L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "frFR")
+if L then
+	L.adds_trigger_alliance = "Saccageurs, sergents, à l'attaque !"
+	L.adds_trigger_horde = "Soldats, sergents, à l'attaque !"
+
+	L.mage = "Mage"
+	L.mage_desc = "Prévient quand un mage apparaît pour congeler vos canons."
+	-- Alliance: We're taking hull damage, get a battle-mage out here to shut down those cannons!
+	-- Horde: We're taking hull damage, get a sorcerer out here to shut down those cannons!
+	--L.mage_yell_trigger = "taking hull damage"
+
+	L.warmup_trigger_alliance = "Faites chauffer les moteurs"
+	L.warmup_trigger_horde = "Levez%-vous, fils et filles"
+
+	L.disable_trigger_alliance = "Mes frères et sœurs, en avant"
+	L.disable_trigger_horde = "Sus au roi%-liche"
+end
+
+L = BigWigs:NewBossLocale("Deathbringer Saurfang", "frFR")
+if L then
+	L.blood_beast = "Bête de sang" --  NPC ID 38508
+
+	L.warmup_alliance = "Bon allez, on se bouge ! En route -"
+	L.warmup_horde = "Kor'krons, en route ! Champions, surveillez bien vos arrières. Le Fléau a été -"
+end
+
 L = BigWigs:NewBossLocale("Blood Prince Council", "frFR")
 if L then
 	L.switch_message = "Nouvelle cible : %s"
@@ -35,27 +61,6 @@ if L then
 	L.inhale_bar = "Inhalation %d"
 	L.blight_warning = "Chancre âcre dans ~5 sec. !"
 	L.ball_message = "Arrivée d'une Gelée malléable !"
-end
-
-L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "frFR")
-if L then
-	L.adds = "Portails"
-	L.adds_desc = "Prévient de l'arrivée des ennemis sur votre propre bateau."
-	L.adds_trigger_alliance = "Saccageurs, sergents, à l'attaque !"
-	L.adds_trigger_horde = "Soldats, sergents, à l'attaque !"
-	L.adds_message = "Portails !"
-	L.adds_bar = "Prochains portails"
-
-	L.mage = "Mage"
-	L.mage_desc = "Prévient quand un mage apparaît pour congeler vos canons."
-	L.mage_message = "Mage apparu !"
-	L.mage_bar = "Prochain mage"
-
-	L.warmup_trigger_alliance = "Faites chauffer les moteurs"
-	L.warmup_trigger_horde = "Levez%-vous, fils et filles"
-
-	L.disable_trigger_alliance = "Mes frères et sœurs, en avant"
-	L.disable_trigger_horde = "Sus au roi%-liche"
 end
 
 L = BigWigs:NewBossLocale("Blood-Queen Lana'thel", "frFR")
@@ -133,18 +138,6 @@ if L then
 	L.ooze_message = "Limon %dx"
 
 	L.spray_bar = "Prochaine Projection"
-end
-
-L = BigWigs:NewBossLocale("Deathbringer Saurfang", "frFR")
-if L then
-	L.adds = "Bêtes de sang"
-	L.adds_desc = "Affiche un minuteur et des messages indiquant quand des Bêtes de sang apparaissent."
-	L.adds_warning = "Bêtes de sang dans 5 sec. !"
-	L.adds_message = "Bêtes de sang !"
-
-	L.engage_trigger = "PAR LA PUISSANCE DU ROI-LICHE !"
-	L.warmup_alliance = "Bon allez, on se bouge ! En route -"
-	L.warmup_horde = "Kor'krons, en route ! Champions, surveillez bien vos arrières. Le Fléau a été -"
 end
 
 L = BigWigs:NewBossLocale("Sindragosa", "frFR")

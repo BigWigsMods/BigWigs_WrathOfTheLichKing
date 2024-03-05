@@ -52,21 +52,7 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "zhCN")
 if L then
-	L.teleport_trigger = "你的生命正走向终结。"
-
-	L.teleport = "传送"
-	L.teleport_desc = "当传送时发出警报。"
-	L.teleport_1min_message = "1分钟后传送"
-	L.teleport_30sec_message = "30秒后传送"
-	L.teleport_10sec_message = "10秒后传送！"
-	L.on_platform_message = "传送！45秒后希尔盖出现！"
-
-	L.to_floor_30sec_message = "30秒后返回"
-	L.to_floor_10sec_message = "10秒后返回！"
-	L.on_floor_message = "返回！90秒后，传送！"
-
-	L.teleport_bar = "传送"
-	L.back_bar = "出现"
+	L.teleport_yell_trigger = "你的生命正走向终结。"
 end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "zhCN")
@@ -111,22 +97,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "zhCN")
 if L then
-	L.add_trigger = "起来吧，我的战士们！起来，再为主人尽忠一次！"
-
-	L.teleport = "传送"
-	L.teleport_desc = "当施放传送时发出警报。"
-	--L.teleport_balcony = "传送！他到了上层平台！"
-	--L.teleport_room = "传送！他回到了房间！"
-
-	L.curse_explosion = "诅咒爆炸！"
-	L.curse_warn = "诅咒！"
-	L.curse_10secwarn = "约10秒后，诅咒"
-	L.curse_bar = "下一诅咒"
-
-	L.wave = "召唤骷髅"
-	L.wave_desc = "当召唤骷髅时发出警报。"
-	L.wave1 = "第一波"
-	L.wave2 = "第二波"
+	L.adds_yell_trigger = "起来吧，我的战士们" -- 起来吧，我的战士们！起来，再为主人尽忠一次！
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "zhCN")

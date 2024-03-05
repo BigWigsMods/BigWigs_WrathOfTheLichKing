@@ -11,6 +11,32 @@ if L then
 	L.empowered_adherent = "Proselito Potenziato" -- NPC ID 38136
 end
 
+L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "itIT")
+if L then
+	--L.adds_trigger_alliance = "Reavers, Sergeants, attack!"
+	--L.adds_trigger_horde = "Marines, Sergeants, attack!"
+
+	--L.mage = "Mage"
+	--L.mage_desc = "Warn when a mage spawns to freeze the gunship cannons."
+	-- Alliance: We're taking hull damage, get a battle-mage out here to shut down those cannons!
+	-- Horde: We're taking hull damage, get a sorcerer out here to shut down those cannons!
+	--L.mage_yell_trigger = "taking hull damage"
+
+	--L.warmup_trigger_alliance = "Fire up the engines"
+	--L.warmup_trigger_horde = "Rise up, sons and daughters"
+
+	--L.disable_trigger_alliance = "Onward, brothers and sisters"
+	--L.disable_trigger_horde = "Onward to the Lich King"
+end
+
+L = BigWigs:NewBossLocale("Deathbringer Saurfang", "itIT")
+if L then
+	L.blood_beast = "Bestia di Sangue" --  NPC ID 38508
+
+	--L.warmup_alliance = "Let's get a move on then! Move ou..."
+	--L.warmup_horde = "Kor'kron, move out! Champions, watch your backs. The Scourge have been..."
+end
+
 L = BigWigs:NewBossLocale("Blood Prince Council", "itIT")
 if L then
 	--L.switch_message = "Health swap: %s"
@@ -35,27 +61,6 @@ if L then
 	--L.inhale_bar = "Inhale (%d)"
 	--L.blight_warning = "Pungent Blight in ~5sec!"
 	--L.ball_message = "Goo ball incoming!"
-end
-
-L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "itIT")
-if L then
-	--L.adds = "Portals"
-	--L.adds_desc = "Warn for Portals."
-	--L.adds_trigger_alliance = "Reavers, Sergeants, attack!"
-	--L.adds_trigger_horde = "Marines, Sergeants, attack!"
-	--L.adds_message = "Portals!"
-	--L.adds_bar = "Next Portals"
-
-	--L.mage = "Mage"
-	--L.mage_desc = "Warn when a mage spawns to freeze the gunship cannons."
-	--L.mage_message = "Mage Spawned!"
-	--L.mage_bar = "Next Mage"
-
-	--L.warmup_trigger_alliance = "Fire up the engines"
-	--L.warmup_trigger_horde = "Rise up, sons and daughters"
-
-	--L.disable_trigger_alliance = "Onward, brothers and sisters"
-	--L.disable_trigger_horde = "Onward to the Lich King"
 end
 
 L = BigWigs:NewBossLocale("Blood-Queen Lana'thel", "itIT")
@@ -133,18 +138,6 @@ if L then
 	--L.ooze_message = "Ooze %dx"
 
 	--L.spray_bar = "Next Spray"
-end
-
-L = BigWigs:NewBossLocale("Deathbringer Saurfang", "itIT")
-if L then
-	--L.adds = "Blood Beasts"
-	--L.adds_desc = "Shows a timer and messages for when Blood Beasts spawn."
-	--L.adds_warning = "Blood Beasts in 5 sec!"
-	--L.adds_message = "Blood Beasts!"
-
-	--L.engage_trigger = "BY THE MIGHT OF THE LICH KING!"
-	--L.warmup_alliance = "Let's get a move on then! Move ou..."
-	--L.warmup_horde = "Kor'kron, move out! Champions, watch your backs. The Scourge have been..."
 end
 
 L = BigWigs:NewBossLocale("Sindragosa", "itIT")

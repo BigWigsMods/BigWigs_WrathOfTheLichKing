@@ -11,6 +11,32 @@ if L then
 	L.empowered_adherent = "亢奋的追随者" -- NPC ID 38136
 end
 
+L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "zhCN")
+if L then
+	L.adds_trigger_alliance = "将士们，给我进攻"
+	L.adds_trigger_horde = "将士们，给我进攻"
+
+	L.mage = "法师"
+	L.mage_desc = "当法师出现冰冻炮舰火炮时发出警报。"
+	-- Alliance: We're taking hull damage, get a battle-mage out here to shut down those cannons!
+	-- Horde: We're taking hull damage, get a sorcerer out here to shut down those cannons!
+	--L.mage_yell_trigger = "taking hull damage"
+
+	L.warmup_trigger_alliance = "启动引擎！小伙子们"
+	L.warmup_trigger_horde = "来吧！部落忠诚勇敢的儿女们"
+
+	L.disable_trigger_alliance = "我早就警告过你，恶棍"
+	L.disable_trigger_horde = "联盟不行了。向巫妖王进攻！"
+end
+
+L = BigWigs:NewBossLocale("Deathbringer Saurfang", "zhCN")
+if L then
+	L.blood_beast = "血兽" --  NPC ID 38508
+
+	L.warmup_alliance = "那我们要行动了，我们要……"
+	L.warmup_horde = "库卡隆，行动！勇士们，提高警惕。天灾军团已经"
+end
+
 L = BigWigs:NewBossLocale("Blood Prince Council", "zhCN")
 if L then
 	L.switch_message = "生命转换：>%s<！"
@@ -46,18 +72,6 @@ if L then
 	L.phase2_bar = "<空中阶段>"
 end
 
-L = BigWigs:NewBossLocale("Deathbringer Saurfang", "zhCN")
-if L then
-	L.adds = "血兽"
-	L.adds_desc = "当召唤血兽时发出警报和显示计时条。"
-	L.adds_warning = "5秒后，血兽！"
-	L.adds_message = "血兽！"
-
-	L.engage_trigger = "以巫妖王的力量为名！"
-	L.warmup_alliance = "那我们要行动了，我们要……"
-	L.warmup_horde = "库卡隆，行动！勇士们，提高警惕。天灾军团已经"
-end
-
 L = BigWigs:NewBossLocale("Festergut", "zhCN")
 if L then
 	L.engage_trigger = "玩吗？玩吗？"
@@ -65,27 +79,6 @@ if L then
 	L.inhale_bar = "<下一凋零呼吸：%d>"
 	L.blight_warning = "约5秒后，刺鼻毒气！"
 	L.ball_message = "即将 绿色软泥黏液球！"
-end
-
-L = BigWigs:NewBossLocale("Icecrown Gunship Battle", "zhCN")
-if L then
-	L.adds = "传送门"
-	L.adds_desc = "传送门警报。"
-	L.adds_trigger_alliance = "将士们，给我进攻"
-	L.adds_trigger_horde = "将士们，给我进攻"
-	L.adds_message = "传送门！"
-	L.adds_bar = "<下一传送门>"
-
-	L.mage = "法师"
-	L.mage_desc = "当法师出现冰冻炮舰火炮时发出警报。"
-	L.mage_message = "法师 出现！"
-	L.mage_bar = "<下一法师>"
-
-	L.warmup_trigger_alliance = "启动引擎！小伙子们"
-	L.warmup_trigger_horde = "来吧！部落忠诚勇敢的儿女们"
-
-	L.disable_trigger_alliance = "我早就警告过你，恶棍"
-	L.disable_trigger_horde = "联盟不行了。向巫妖王进攻！"
 end
 
 L = BigWigs:NewBossLocale("Professor Putricide", "zhCN")

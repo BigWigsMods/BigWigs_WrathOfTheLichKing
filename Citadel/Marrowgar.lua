@@ -62,30 +62,38 @@ end
 --
 
 do
-	local playerList, spikeCollector = {}, {}
-	local spikeIcon = 8
-	function mod:BoneSpikeGraveyard(args)
-		playerList = {}
-		spikeCollector = {}
-		spikeIcon = 8
-		self:RegisterTargetEvents("BoneSpikeMarking")
-		self:CDBar(69057, args.spellId == 73142 and 15 or 18, self:SpellName(69062)) -- Bone Spike Graveyard (Impale)
-	end
-
+	local spikeCollector = {}
 	function mod:BoneSpikeMarking(_, unit, guid)
 		if spikeCollector[guid] then
 			self:CustomIcon(boneSpikeMarker, unit, spikeCollector[guid])
 			spikeCollector[guid] = nil
-			if not next(spikeCollector) and spikeIcon <= 5 then
+			if not next(spikeCollector) then
 				self:UnregisterTargetEvents()
 			end
 		end
 	end
 
+	local playerList = {}
+	local spikeIcon = 8
+	function mod:BoneSpikeGraveyard(args)
+		playerList = {}
+		spikeCollector = {}
+		spikeIcon = 8
+		self:CDBar(69057, args.spellId == 73142 and 15 or 18, self:SpellName(69062)) -- Bone Spike Graveyard (Impale)
+	end
+
 	function mod:ImpaleSummon(args)
 		playerList[#playerList + 1] = args.sourceName
-		spikeCollector[args.destGUID] = spikeIcon -- Mark the spike not the player
+
+		local unit = self:GetUnitIdByGUID(args.destGUID)
+		if unit then
+			self:CustomIcon(boneSpikeMarker, unit, spikeIcon)
+		else
+			spikeCollector[args.destGUID] = spikeIcon -- Mark the spike not the player
+			self:RegisterTargetEvents("BoneSpikeMarking")
+		end
 		spikeIcon = spikeIcon - 1
+
 		self:TargetsMessage(69057, "yellow", playerList, 3, args.spellName)
 		if spikeIcon == 7 then
 			self:PlaySound(69057, "alert")
