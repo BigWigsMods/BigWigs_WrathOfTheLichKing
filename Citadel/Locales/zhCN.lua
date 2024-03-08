@@ -39,19 +39,19 @@ end
 
 L = BigWigs:NewBossLocale("Blood Prince Council", "zhCN")
 if L then
-	L.switch_message = "生命转换：>%s<！"
-	L.switch_bar = "<下一生命转换>"
+	L.switch_message = "生命转换：%s！"
+	L.switch_bar = "下一生命转换"
 
 	L.empowered_flames = "塑造强能烈焰"
 
 	L.empowered_shock_message = "正在施放强能震荡涡流！"
 	L.regular_shock_message = "强能震荡涡流区域！"
-	L.shock_bar = "<下一强能震荡涡流>"
+	L.shock_bar = "下一强能震荡涡流"
 
 	L.iconprince = "标记强化的鲜血王子"
 	L.iconprince_desc = "为强化的鲜血王子打上团队标记。（需要权限）"
 
-	L.prison_message = "暗影牢笼：>x%d<！"
+	L.prison_message = "暗影牢笼：x%d！"
 end
 
 L = BigWigs:NewBossLocale("Blood-Queen Lana'thel", "zhCN")
@@ -60,23 +60,23 @@ if L then
 
 	L.shadow = "蜂拥之影"
 	L.shadow_message = "蜂拥之影！"
-	L.shadow_bar = "<下一蜂拥之影>"
+	L.shadow_bar = "下一蜂拥之影"
 
 	L.feed_message = "即将 疯狂嗜血！"
 
 	L.pact_message = "黑暗堕落者的契约"
-	L.pact_bar = "<下一黑暗堕落者的契约>"
+	L.pact_bar = "下一黑暗堕落者的契约"
 
 	L.phase_message = "即将 空中阶段！"
-	L.phase1_bar = "<地面阶段>"
-	L.phase2_bar = "<空中阶段>"
+	L.phase1_bar = "地面阶段"
+	L.phase2_bar = "空中阶段"
 end
 
 L = BigWigs:NewBossLocale("Festergut", "zhCN")
 if L then
 	L.engage_trigger = "玩吗？玩吗？"
 
-	L.inhale_bar = "<下一凋零呼吸：%d>"
+	L.inhale_bar = "下一凋零呼吸：%d"
 	L.blight_warning = "约5秒后，刺鼻毒气！"
 	L.ball_message = "即将 绿色软泥黏液球！"
 end
@@ -88,18 +88,18 @@ if L then
 	L.phase = "阶段"
 	L.phase_desc = "当进入不同阶段时发出警报。"
 	L.phase_warning = "即将 第%d阶段！"
-	L.phase_bar = "<下一阶段>"
+	L.phase_bar = "下一阶段"
 
-	L.ball_bar = "<下一可延展黏液>"
+	L.ball_bar = "下一可延展黏液"
 	L.ball_say = "即将 可延展黏液！"
 
 	L.experiment_message = "即将 软泥怪！"
 	L.experiment_heroic_message = "即将 软泥怪！"
-	L.experiment_bar = "<下一软泥怪>"
+	L.experiment_bar = "下一软泥怪"
 	L.blight_message = "毒肿！"
 	L.violation_message = "不稳定的软泥怪！"
 
-	L.gasbomb_bar = "<多个窒息毒气弹>"
+	L.gasbomb_bar = "多个窒息毒气弹"
 	L.gasbomb_message = "窒息毒气弹！"
 end
 
@@ -111,9 +111,9 @@ if L then
 
 	L.ooze = "软泥融合"
 	L.ooze_desc = "当软泥融合时发出警报。"
-	L.ooze_message = "不稳定的软泥：>%dx<！"
+	L.ooze_message = "不稳定的软泥：%dx！"
 
-	L.spray_bar = "<下一软泥喷射>"
+	L.spray_bar = "下一软泥喷射"
 end
 
 L = BigWigs:NewBossLocale("Sindragosa", "zhCN")
@@ -129,15 +129,15 @@ if L then
 	L.airphase_desc = "当辛达苟萨起飞时发出警报。"
 	L.airphase_trigger = "你们的入侵结束了"
 	L.airphase_message = "空中阶段！"
-	L.airphase_bar = "<下一空中阶段>"
+	L.airphase_bar = "下一空中阶段"
 
 	L.boom_message = "严寒！"
-	L.boom_bar = "<严寒>"
+	L.boom_bar = "严寒"
 
 	L.instability_message = "动荡 x%d！"
 	L.chilled_message = "寒霜刺骨 x%d！"
 	L.buffet_message = "秘法打击 x%d！"
-	L.buffet_cd = "<下一狂咒>"
+	L.buffet_cd = "下一狂咒"
 end
 
 L = BigWigs:NewBossLocale("The Lich King", "zhCN")
@@ -146,14 +146,14 @@ if L then
 	L.engage_trigger = "我会让你活着目睹这个末日，弗丁。"  -- 我会让你活着目睹这个末日，弗丁。这悲惨的世界将在我手中重铸，我不想让圣光最强大的勇士错过这一切。
 
 	L.horror_message = "蹒跚的血僵尸！"
-	L.horror_bar = "<下一血僵尸>"
+	L.horror_bar = "下一血僵尸"
 
 	L.valkyr_message = "瓦格里暗影戒卫者！"
-	L.valkyr_bar = "<下一瓦格里暗影戒卫者>"
+	L.valkyr_bar = "下一瓦格里暗影戒卫者"
 	L.valkyrhug_message = "瓦格里抓人！"
 
 	L.cave_phase = "剑内阶段！"
-	L.last_phase_bar = "<最终阶段>"
+	L.last_phase_bar = "最终阶段"
 
 	L.frenzy_bar = "%s狂乱！"
 	L.frenzy_survive_message = "%s将在瘟疫后存活！"
@@ -171,9 +171,9 @@ if L then
 	L.portal = "梦魇之门"
 	L.portal_desc = "当踏梦者瓦利瑟瑞娅打开梦魇之门时发出警报。"
 	L.portal_message = "打开梦魇之门！"
-	L.portal_bar = "<即将梦魇之门>"
-	L.portalcd_message = "14秒后，梦魇之门：>%d<！"
-	L.portalcd_bar = "<下一梦魇之门：%d>"
+	L.portal_bar = "即将梦魇之门"
+	L.portalcd_message = "14秒后，梦魇之门：%d！"
+	L.portalcd_bar = "下一梦魇之门：%d"
 	L.portal_trigger = "我打开了进入梦境的传送门。英雄们，救赎就在其中……"
 
 	L.suppresser = "抑制者出现"
@@ -189,5 +189,5 @@ L = BigWigs:NewBossLocale("Icecrown Citadel Trash", "zhCN")
 if L then
 	L.deathbound_ward = "缚亡守卫"
 	L.deathspeaker_high_priest = "亡语高阶祭司" -- NPC ID 36829
-	L.putricide_dogs = "小宝 & 大臭"
+	L.putricide_dogs = "小宝和大臭"
 end
