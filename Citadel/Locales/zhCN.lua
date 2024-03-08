@@ -18,9 +18,9 @@ if L then
 
 	L.mage = "法师"
 	L.mage_desc = "当法师出现冰冻炮舰火炮时发出警报。"
-	-- Alliance: We're taking hull damage, get a battle-mage out here to shut down those cannons!
-	-- Horde: We're taking hull damage, get a sorcerer out here to shut down those cannons!
-	--L.mage_yell_trigger = "taking hull damage"
+	-- 联盟: 我们的船体受损了，赶快叫个战斗法师来轰掉那些大炮！
+	-- 部落: 我们的船体受伤了，赶快叫个法师来干掉那些大炮！
+	L.mage_yell_trigger = "我们的船体"
 
 	L.warmup_trigger_alliance = "启动引擎！小伙子们"
 	L.warmup_trigger_horde = "来吧！部落忠诚勇敢的儿女们"
@@ -105,7 +105,7 @@ end
 
 L = BigWigs:NewBossLocale("Rotface", "zhCN")
 if L then
-	L.engage_trigger = "WEEEEEE"
+	L.engage_trigger = "WEEEEEE!"
 
 	L.infection_message = "畸变感染！"
 
@@ -118,7 +118,7 @@ end
 
 L = BigWigs:NewBossLocale("Sindragosa", "zhCN")
 if L then
-	L.engage_trigger = "你们这些蠢货胆敢闯入这里"
+	L.engage_trigger = "你们这些蠢货胆敢闯入这里"  -- 你们这些蠢货胆敢闯入这里。诺森德的冰风将卷走你们的灵魂！
 
 	L.phase2 = "第二阶段"
 	L.phase2_desc = "当辛达苟萨进入第二阶段发出警报。（35%）"
@@ -142,8 +142,8 @@ end
 
 L = BigWigs:NewBossLocale("The Lich King", "zhCN")
 if L then
-	L.warmup_trigger = "怎么，自诩正义的圣光终于来了"
-	L.engage_trigger = "我会让你活着目睹这个末日，弗丁。"
+	L.warmup_trigger = "怎么，自诩正义的圣光终于来了"  -- 怎么，自诩正义的圣光终于来了？我是不是该丢下霜之哀伤，恳求您的宽恕呢，弗丁？
+	L.engage_trigger = "我会让你活着目睹这个末日，弗丁。"  -- 我会让你活着目睹这个末日，弗丁。这悲惨的世界将在我手中重铸，我不想让圣光最强大的勇士错过这一切。
 
 	L.horror_message = "蹒跚的血僵尸！"
 	L.horror_bar = "<下一血僵尸>"
