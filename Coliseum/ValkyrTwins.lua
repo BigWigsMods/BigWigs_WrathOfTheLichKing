@@ -13,8 +13,8 @@ mod.toggleOptions = {{"vortex", "FLASH"}, "shield", "next", {"touch", "FLASH"}, 
 -- Locals
 --
 
-local essenceLight = GetSpellInfo(65686)
-local essenceDark = GetSpellInfo(65684)
+local essenceLight = mod:SpellName(65686)
+local essenceDark = mod:SpellName(65684)
 
 --------------------------------------------------------------------------------
 -- Localization
