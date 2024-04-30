@@ -15,6 +15,7 @@ mod:SetEncounterID(mod:Classic() and 847 or 1099)
 local killed = false
 local addsTimer = nil
 local firstMage = true
+local allowMageDeath = false
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -62,7 +63,7 @@ end
 
 function mod:OnBossEnable()
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
-	--self:Death("MageKilled", 37116, 37117) -- Skybreaker Sorcerer, Kor'kron Battle-Mage
+	self:Death("MageKilled", 37116, 37117) -- Skybreaker Sorcerer, Kor'kron Battle-Mage
 	self:Log("SPELL_AURA_REMOVED", "BelowZeroRemoved", 69705)
 	self:Log("SPELL_AURA_APPLIED", "WoundingStrikeApplied", 69651)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "BattleFuryApplied", 69638)
@@ -71,6 +72,7 @@ end
 function mod:OnEngage()
 	addsTimer = nil
 	firstMage = true
+	allowMageDeath = false
 end
 
 function mod:OnWin()
@@ -104,16 +106,21 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		else
 			self:Message("mage", "yellow", L.mage, L.mage_icon)
 		end
+		self:SimpleTimer(function() allowMageDeath = true end, 4) -- Attempt to filter other mage deaths
 		self:PlaySound("mage", "alarm")
 	end
 end
 
---function mod:MageKilled()
---	self:Bar("mage", 30, L.mage, L.mage_icon)
---end
+function mod:MageKilled()
+	if allowMageDeath then
+		allowMageDeath = false
+		self:Bar("mage", 30, L.mage, L.mage_icon) -- Might be the wrong mage death
+	end
+end
 
 function mod:BelowZeroRemoved()
-	self:Bar("mage", 30, L.mage, L.mage_icon)
+	allowMageDeath = false
+	self:Bar("mage", 30, L.mage, L.mage_icon) -- Definitely the right mage death
 end
 
 function mod:WoundingStrikeApplied(args)

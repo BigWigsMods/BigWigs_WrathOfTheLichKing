@@ -216,15 +216,15 @@ end
 do
 	local oldPlagueBar = ""
 	function mod:UnboundPlague(args)
-		local _, _, _, expirationTime = self:UnitDebuff(args.destName, args.spellName, 70911)
-		if expirationTime then
-			self:StopBar(70911, oldPlagueBar)
-			oldPlagueBar = args.destName
-			self:TargetBar(70911, expirationTime - GetTime(), args.destName)
-		end
-		self:TargetMessageOld(70911, args.destName, "blue", "alert")
-		self:SecondaryIcon(70911, args.destName)
+		--local _, _, _, expirationTime = self:UnitDebuff(args.destName, args.spellName, 70911)
+		--if expirationTime then
+		--	self:StopBar(70911, oldPlagueBar)
+		--	oldPlagueBar = args.destName
+		--	self:TargetBar(70911, expirationTime - GetTime(), args.destName)
+		--end
+		--self:SecondaryIcon(70911, args.destName)
 		if self:Me(args.destGUID) then
+			self:TargetMessageOld(70911, args.destName, "blue", "alert")
 			self:Flash(70911)
 		end
 	end

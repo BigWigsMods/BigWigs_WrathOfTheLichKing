@@ -10,6 +10,12 @@ mod:SetRespawnTime(31)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------
+-- Locals
+--
+
+local inTwilightRealm = false
+
+--------------------------------------------------------------------------------
 -- Localization
 --
 
@@ -50,6 +56,9 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
+	self:Log("SPELL_AURA_APPLIED", "TwilightRealmApplied", 74807)
+	self:Log("SPELL_AURA_REMOVED", "TwilightRealmRemoved", 74807)
+
 	-- Normal Realm
 	self:Log("SPELL_CAST_SUCCESS", "FieryCombustion", 74562)
 	self:Log("SPELL_AURA_APPLIED", "FieryCombustionApplied", 74562)
@@ -82,6 +91,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
+	inTwilightRealm = false
 	self:SetStage(1)
 	self:Berserk(480)
 	self:CDBar(74525, 8, CL.breath) -- Flame Breath
@@ -93,9 +103,21 @@ end
 -- Event Handlers
 --
 
+function mod:TwilightRealmApplied(args)
+	if self:Me(args.destGUID) then
+		inTwilightRealm = true
+	end
+end
+
+function mod:TwilightRealmRemoved(args)
+	if self:Me(args.destGUID) then
+		inTwilightRealm = false
+	end
+end
+
 -- Normal Realm
 function mod:FieryCombustion(args)
-	if not self:UnitBuff("player", 74807) then
+	if not inTwilightRealm then
 		self:CDBar(args.spellId, self:Heroic() and 21 or 25.5, CL.bomb)
 	end
 end
@@ -105,7 +127,7 @@ do
 	function mod:FieryCombustionApplied(args)
 		bombTarget = args.destGUID
 		self:PrimaryIcon(args.spellId, args.destName)
-		if not self:UnitBuff("player", 74807) then
+		if not inTwilightRealm then
 			self:TargetMessage(args.spellId, "yellow", args.destName, CL.bomb)
 		end
 		if self:Me(args.destGUID) then
@@ -133,7 +155,7 @@ end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId) -- Pre-Meteor
 	if spellId == 74637 then -- Meteor Strike (before it lands)
-		if not self:UnitBuff("player", 74807) then
+		if not inTwilightRealm then
 			self:CDBar(74648, 40, CL.meteor)
 			self:Message(74648, "red", CL.incoming:format(CL.meteor))
 			self:PlaySound(74648, "long")
@@ -144,7 +166,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId) -- Pre-Meteor
 end
 
 function mod:MeteorStrike(args) -- When it lands
-	if not self:UnitBuff("player", 74807) then
+	if not inTwilightRealm then
 		self:Message(args.spellId, "red")
 	end
 end
@@ -161,7 +183,7 @@ do
 end
 
 function mod:FlameBreath(args)
-	if not self:UnitBuff("player", 74807) then
+	if not inTwilightRealm then
 		self:Message(args.spellId, "orange", CL.breath)
 		self:CDBar(args.spellId, self:Heroic() and 14 or 19, CL.breath)
 	end
@@ -169,7 +191,7 @@ end
 
 -- Twilight Realm
 function mod:SoulConsumption(args)
-	if self:GetStage() < 3 or self:UnitBuff("player", 74807) then
+	if self:GetStage() < 3 or inTwilightRealm then
 		self:CDBar(args.spellId, self:Heroic() and 21 or 25.5, CL.bomb)
 	end
 end
@@ -179,7 +201,7 @@ do
 	function mod:SoulConsumptionApplied(args)
 		bombTarget = args.destGUID
 		self:SecondaryIcon(args.spellId, args.destName)
-		if self:GetStage() < 3 or self:UnitBuff("player", 74807) then
+		if self:GetStage() < 3 or inTwilightRealm then
 			self:TargetMessage(args.spellId, "yellow", args.destName, CL.bomb)
 		end
 		if self:Me(args.destGUID) then
@@ -206,7 +228,7 @@ do
 end
 
 function mod:DarkBreath(args)
-	if self:GetStage() < 3 or self:UnitBuff("player", 74807) then
+	if self:GetStage() < 3 or inTwilightRealm then
 		self:Message(args.spellId, "orange", CL.breath)
 		self:CDBar(args.spellId, self:Heroic() and 14 or 19, CL.breath)
 	end
@@ -217,7 +239,7 @@ do
 	function mod:BigWigs_BossComm(_, msg)
 		if msg == "Beams" and GetTime()-prev > 12 then
 			prev = GetTime()
-			if self:GetStage() < 3 or self:UnitBuff("player", 74807) then
+			if self:GetStage() < 3 or inTwilightRealm then
 				self:CDBar(74769, 30, CL.beams)
 				self:Message(74769, "red", CL.incoming:format(CL.beams))
 				self:PlaySound(74769, "alert")
@@ -270,13 +292,13 @@ do
 	}
 	function mod:CorporealityOther(args)
 		if self:MobId(args.destGUID) == 40142  then
-			if self:UnitBuff("player", 74807) then
+			if inTwilightRealm then
 				self:Message(74826, "cyan", CL.other:format(args.spellName, percentLookup[args.spellId][1]))
 			else
 				self:Message(74826, "cyan", CL.other:format(args.spellName, percentLookup[args.spellId][2]))
 			end
 		else
-			if self:UnitBuff("player", 74807) then
+			if inTwilightRealm then
 				self:Message(74826, "cyan", CL.other:format(args.spellName, percentLookup[args.spellId][2]))
 			else
 				self:Message(74826, "cyan", CL.other:format(args.spellName, percentLookup[args.spellId][1]))
