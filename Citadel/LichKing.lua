@@ -338,9 +338,9 @@ function mod:Quake(args)
 	self:StopBar(69200) -- Raging Spirit
 	self:MessageOld(72262, "orange", "long", CL["cast"]:format(args.spellName))
 	self:Bar(72762, 37) -- Defile
-	self:CDBar(70541, 13) -- Infest
 	self:CDBar(69409, 39) -- Soul Reaper
 	if phase == 3 then
+		self:CDBar(70541, 13) -- Infest
 		self:Bar(69037, 24, L["valkyr_bar"], 71844)
 	elseif phase == 5 then
 		self:CDBar(70498, 21) -- Vile Spirits
