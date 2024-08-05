@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Lord Marrowgar", 631, 1624)
 if not mod then return end
 mod:RegisterEnableMob(36612)
-mod:SetEncounterID(1101)
+mod:SetEncounterID(mod:Classic() and 845 or 1101)
 mod:SetRespawnTime(33)
 
 --------------------------------------------------------------------------------

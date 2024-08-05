@@ -101,15 +101,15 @@ end
 --
 
 function mod:ENCOUNTER_START(_, id)
-	if id == 1147 then -- Baltharus the Warborn
+	if id == 1147 or id == 890 then -- Baltharus the Warborn (Retail/Classic)
 		baltharusClones = {count = 1}
 		self:CDBar(40504, 14) -- Cleave
 		self:CDBar(75125, 15.5) -- Blade Tempest
-	elseif id == 1149 then -- Saviana Ragefire
+	elseif id == 1149 or id == 891 then -- Saviana Ragefire (Retail/Classic)
 		self:CDBar(74403, 11, CL.breath) -- Flame Breath
 		self:CDBar(78722, 15) -- Enrage
 		self:CDBar(74453, 33) -- Flame Beacon
-	elseif id == 1148 then -- General Zarithrian
+	elseif id == 1148 or id == 893 then -- General Zarithrian (Retail/Classic)
 		self:CDBar(74367, 8) -- Cleave Armor
 		self:CDBar(74384, 13) -- Intimidating Roar
 		self:CDBar("adds", 15.9, CL.adds, L.adds_icon)
