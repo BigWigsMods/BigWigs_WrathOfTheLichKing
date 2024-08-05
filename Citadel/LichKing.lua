@@ -357,7 +357,7 @@ do
 		if UnitExists(bossTarget) then
 			if UnitIsUnit(bossTarget, "player") then
 				mod:Flash(72762)
-				mod:Say(72762)
+				mod:Say(72762, nil, nil, "Defile")
 			end
 			local target = mod:UnitName(bossTarget)
 			mod:TargetMessageOld(72762, target, "red", "alert")
@@ -382,7 +382,7 @@ do
 		if UnitExists(bossTarget) then
 			if UnitIsUnit(bossTarget, "player") then
 				mod:Flash(73529)
-				mod:Say(73529)
+				mod:Say(73529, nil, nil, "Shadow Trap")
 			end
 			local target = mod:UnitName(bossTarget)
 			mod:TargetMessageOld(73529, target, "yellow")

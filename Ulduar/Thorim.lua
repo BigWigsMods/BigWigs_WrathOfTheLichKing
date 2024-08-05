@@ -144,7 +144,7 @@ end
 
 function mod:RuneDetonation(args)
 	if self:Me(args.destGUID) then
-		self:Say(args.spellId, 40332) -- 40332 = "Bomb"
+		self:Say(args.spellId, CL.bomb, nil, "Bomb")
 	end
 	self:TargetMessageOld(args.spellId, args.destName, "red")
 	self:TargetBar(args.spellId, 4, args.destName)

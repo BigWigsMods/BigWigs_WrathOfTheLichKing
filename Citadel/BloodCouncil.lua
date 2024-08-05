@@ -113,7 +113,7 @@ function mod:RegularShock(args)
 		if target then
 			if self:Me(self:UnitGUID(bossTarget)) then
 				self:Flash(args.spellId)
-				self:Say(args.spellId)
+				self:Say(args.spellId, nil, nil, "Shock Vortex")
 			end
 			self:TargetMessageOld(args.spellId, target, "orange", nil, L["regular_shock_message"])
 			self:CDBar(args.spellId, 16, L["shock_bar"])

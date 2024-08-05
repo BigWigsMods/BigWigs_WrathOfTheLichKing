@@ -80,7 +80,7 @@ function mod:CHAT_MSG_RAID_BOSS_WHISPER(event, msg, unitName)
 	-- Kologarn focuses his eyes on you!#Kologarn
 	if unitName == self.displayName then
 		self:Flash("eyebeam", 63976)
-		self:Say("eyebeam", eyeBeam)
+		self:Say("eyebeam", eyeBeam, nil, "Eyebeam")
 		self:Sync("EyeBeamWarn")
 	end
 end

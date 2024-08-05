@@ -82,7 +82,7 @@ end
 function mod:GravityBomb(args)
 	if self:Me(args.destGUID) then
 		self:OpenProximity(64234, 10)
-		self:Say(64234)
+		self:Say(64234, nil, nil, "Gravity Bomb")
 		self:SayCountdown(64234, 9)
 	end
 	self:TargetMessageOld(64234, args.destName, "red", "alert")
@@ -102,7 +102,7 @@ end
 function mod:SearingLight(args)
 	if self:Me(args.destGUID) then
 		self:OpenProximity(65121, 10)
-		self:Say(65121)
+		self:Say(65121, nil, nil, "Searing Light")
 	end
 	self:TargetMessageOld(65121, args.destName, "red", "alert")
 	self:TargetBar(65121, 9, args.destName, L.lightbomb_other)

@@ -353,7 +353,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg, unit, _, _, player)
 		self:TargetMessageOld("charge", player, "blue", "alarm", 52311)
 		if UnitIsUnit(player, "player") then
 			self:Flash("charge", 52311)
-			self:Say("charge", 52311)
+			self:Say("charge", 52311, nil, "Furious Charge")
 		end
 		self:Bar("charge", 7.5, 52311)
 		self:PrimaryIcon("charge", player)

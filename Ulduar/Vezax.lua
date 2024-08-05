@@ -116,7 +116,7 @@ do
 		self:SecondaryIcon(62660, name)
 		self:ScheduleTimer("SecondaryIcon", 3, 62660)
 		if self:Me(guid) then
-			self:Say(62660, L["crash_say"])
+			self:Say(62660, L["crash_say"], nil, "Crash")
 		end
 	end
 
@@ -128,7 +128,7 @@ end
 function mod:MarkOfTheFaceless(args)
 	self:TargetMessageOld(args.spellId, args.destName, "orange", "alert")
 	if self:Me(args.destGUID) then
-		self:Say(63276, L.mark_message)
+		self:Say(63276, L.mark_message, nil, "Mark")
 		self:Flash(63276)
 	end
 	self:TargetBar(args.spellId, 10, args.destName, L.mark_message)

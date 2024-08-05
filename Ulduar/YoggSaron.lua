@@ -207,7 +207,7 @@ end
 function mod:MaladyOfTheMind(args)
 	self:TargetMessageOld(args.spellId, args.destName, "yellow", "alert", L.malady_message)
 	if self:Me(args.destGUID) then
-		self:Say(args.spellId, L.malady_message)
+		self:Say(args.spellId, L.malady_message, nil, "Malady")
 	end
 	self:PrimaryIcon(args.spellId, args.destName)
 end
