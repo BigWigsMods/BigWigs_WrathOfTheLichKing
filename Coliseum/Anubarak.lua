@@ -93,7 +93,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "PursuedByAnubarak", 67574)
 	self:Log("SPELL_AURA_REFRESH", "PursuedByAnubarak", 67574)
 
-	self:Log("SPELL_CAST_START", scheduleStrike, 66134)
+	self:Log("SPELL_CAST_START", "ShadowStrike", 66134)
 	self:Log("SPELL_CAST_SUCCESS", "FreezeCooldown", 66012)
 	self:Log("SPELL_MISSED", "FreezeCooldown", 66012)
 
@@ -209,3 +209,6 @@ function mod:Surface()
 	end
 end
 
+function mod:ShadowStrike()
+	scheduleStrike()
+end
