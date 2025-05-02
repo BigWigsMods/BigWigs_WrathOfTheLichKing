@@ -12,7 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags') == true || (!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]'))
 
     steps:
       - name: Checkout addon
@@ -29,8 +28,8 @@ jobs:
       - name: Download common locale
         if: always()
         run: |
-          mkdir -p Core/Locales
-          curl -sS https://raw.githubusercontent.com/BigWigsMods/BigWigs/master/Core/Locales/common.enUS.lua > Core/Locales/common.enUS.lua
+          mkdir -p Locales
+          curl -sSf https://raw.githubusercontent.com/BigWigsMods/BigWigs/master/Locales/enUS_common.lua > Locales/enUS_common.lua
 
       - name: Update option files
         if: always()
