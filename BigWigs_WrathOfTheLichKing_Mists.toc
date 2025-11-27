@@ -1,4 +1,4 @@
-## Interface: 50500
+## Interface: 50502, 50503
 
 ## Title: BigWigs [|cffeda55fWrath of the Lich King|r]
 ## Title-deDE: BigWigs [|cffeda55fWrath of the Lich King|r]

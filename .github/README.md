@@ -12,5 +12,5 @@ A collection of BigWigs modules from the **Wrath of the Lich King** era, includi
 * The Ruby Sanctum
 
 ## Download
-<https://www.curseforge.com/wow/addons/bigwigs_wrathofthelichking>
-<https://addons.wago.io/addons/bigwigs-wrathofthelichking>
+* <https://www.curseforge.com/wow/addons/bigwigs_wrathofthelichking>
+* <https://addons.wago.io/addons/bigwigs-wrathofthelichking>
