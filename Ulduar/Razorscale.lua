@@ -89,12 +89,14 @@ end
 --
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if self:IsSecret(msg) then return end
 	if msg == L.ground_trigger then -- Grounded stage begins
 		self:MessageOld("stages", "cyan", "long", L.ground_message, false)
 	end
 end
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
+	if self:IsSecret(msg) then return end
 	if msg == L.harpoon_trigger then -- Next harpoon ready
 		count = count + 1
 		self:MessageOld("harpoon", "yellow", "info", L.harpoon_message:format(count), "INV_Spear_06")

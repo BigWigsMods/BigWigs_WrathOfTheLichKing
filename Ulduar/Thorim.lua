@@ -186,6 +186,7 @@ function mod:StageTwo()
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if self:IsSecret(msg) then return end
 	if msg == L.phase2_trigger then -- Stage 1
 		if not self.isEngaged then
 			self:Engage() -- Until boss frame shows for stage 1

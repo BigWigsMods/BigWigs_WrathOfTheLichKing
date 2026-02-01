@@ -152,6 +152,7 @@ function mod:MagneticCore(args)
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if self:IsSecret(msg) then return end
 	if msg:find(L["hardmode_trigger"]) then
 		ishardmode = true
 		self:Berserk(612, true)

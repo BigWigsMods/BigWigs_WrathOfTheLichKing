@@ -57,6 +57,7 @@ end
 --
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if self:IsSecret(msg) then return end
 	if msg == L.defeat_trigger or msg:find(L.defeat_trigger, nil, true) then
 		self:Win()
 	end

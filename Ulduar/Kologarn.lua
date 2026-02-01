@@ -77,6 +77,7 @@ do
 end
 
 function mod:CHAT_MSG_RAID_BOSS_WHISPER(event, msg, unitName)
+	if self:IsSecret(msg) then return end
 	-- Kologarn focuses his eyes on you!#Kologarn
 	if unitName == self.displayName then
 		self:Flash("eyebeam", 63976)
@@ -99,6 +100,7 @@ end
 do
 	local prev = 0
 	function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castId, spellId)
+		if self:IsSecret(spellId) then return end
 		if spellId == 63983 and castId ~= prev then -- Arm Sweep
 			prev = castId
 			self:MessageOld(63983, "orange")

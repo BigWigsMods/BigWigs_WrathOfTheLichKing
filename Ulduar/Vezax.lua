@@ -92,6 +92,7 @@ end
 --
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
+	if self:IsSecret(msg) then return end
 	if msg == L.vapor_trigger then
 		self:MessageOld("vapor", "green", nil, L.vapor_message:format(vaporCount), 63322)
 		vaporCount = vaporCount + 1

@@ -331,6 +331,7 @@ function mod:BrainStunned(args) -- Shattered Illusion
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if self:IsSecret(msg) then return end
 	if msg:find(L.phase2_trigger) then
 		crusherCount = 1
 		self:MessageOld("stages", "yellow", nil, CL.stage:format(2), false)

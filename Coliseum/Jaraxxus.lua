@@ -82,6 +82,7 @@ end
 --
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if self:IsSecret(msg) then return end
 	if msg == L.enable_trigger or msg:find(L.enable_trigger, nil, true) then
 		self:Enable()
 	elseif msg == L.engage_trigger1 or msg:find(L.engage_trigger1, nil, true) then

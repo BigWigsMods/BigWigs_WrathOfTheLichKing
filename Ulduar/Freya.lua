@@ -204,6 +204,7 @@ do
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if self:IsSecret(msg) then return end
 	if msg == L.conservator_trigger then
 		self:MessageOld("wave", "green", nil, L.conservator_message, 35594)
 		self:Bar("wave", 60, L.wave_bar, 35594)
@@ -217,6 +218,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 end
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
+	if self:IsSecret(msg) then return end
 	if msg == L.tree_trigger then
 		self:MessageOld("tree", "orange", "alarm", L.tree_message, 5420) -- 5420 / Incarnation: Tree of Life / ability_druid_treeoflife / icon 132145
 	end
