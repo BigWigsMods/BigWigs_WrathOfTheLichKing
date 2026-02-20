@@ -21,7 +21,7 @@
 ## Notes-ptBR: A collection of BigWigs modules from the Wrath of the Lich King era.
 ## Notes-ruRU: A collection of BigWigs modules from the Wrath of the Lich King era.
 ## Notes-zhCN: BigWigs 巫妖王之怒模块。
-## Notes-zhTW: A collection of BigWigs modules from the Wrath of the Lich King era.
+## Notes-zhTW: 巫妖王之怒模組。
 
 ## LoadOnDemand: 1
 ## Dependencies: BigWigs
