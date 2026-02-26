@@ -121,7 +121,7 @@ end
 do
 	local prev = 0
 	function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castId, spellId)
-		if spellId == 72299 and castId ~= prev then
+		if not self:IsSecret(spellId) and spellId == 72299 and castId ~= prev then
 			prev = castId
 			self:MessageOld(72295, "red", nil, L["ball_message"])
 		end
