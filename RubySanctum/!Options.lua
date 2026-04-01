@@ -10,6 +10,7 @@ BigWigs:AddColors("Halion", {
 	[74802] = "blue",
 	[74806] = "orange",
 	[74826] = "cyan",
+	["berserk"] = {"orange","red","yellow"},
 	["stages"] = "cyan",
 })
 
@@ -21,6 +22,7 @@ BigWigs:AddSounds("Halion", {
 	[74792] = "warning",
 	[74802] = "underyou",
 	[74826] = "warning",
+	["berserk"] = "alarm",
 	["stages"] = "info",
 })
 

@@ -4,15 +4,18 @@ BigWigs:AddColors("Archavon the Stone Watcher", {
 	[58663] = {"green","yellow"},
 	[58678] = {"blue","red"},
 	[58965] = "blue",
+	["berserk"] = {"orange","red","yellow"},
 	["charge"] = {"blue","yellow"},
 })
 
 BigWigs:AddSounds("Archavon the Stone Watcher", {
 	[58965] = "alarm",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Malygos", {
 	[57429] = "orange",
+	["berserk"] = {"orange","red","yellow"},
 	["breath"] = {"red","yellow"},
 	["phase"] = "yellow",
 	["sparkbuff"] = "red",
@@ -22,6 +25,7 @@ BigWigs:AddColors("Malygos", {
 })
 
 BigWigs:AddSounds("Malygos", {
+	["berserk"] = "alarm",
 	["breath"] = "alert",
 	["sparks"] = "alert",
 	["surge"] = "alarm",
@@ -35,6 +39,7 @@ BigWigs:AddColors("Sartharion", {
 	[60430] = {"blue","purple"},
 	["acolyte_shadron"] = "orange",
 	["acolyte_vesperon"] = "orange",
+	["berserk"] = {"orange","red","yellow"},
 	["drakes"] = "yellow",
 })
 
@@ -44,14 +49,17 @@ BigWigs:AddSounds("Sartharion", {
 	[58835] = "long",
 	[59127] = "alert",
 	["acolyte_shadron"] = "info",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Emalon the Storm Watcher", {
 	[64216] = "yellow",
 	[64218] = "green",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Emalon the Storm Watcher", {
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Koralon the Flame Watcher", {

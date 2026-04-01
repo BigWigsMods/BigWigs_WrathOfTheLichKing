@@ -2,22 +2,26 @@
 
 BigWigs:AddColors("Patchwerk", {
 	[28131] = "orange",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Patchwerk", {
 	[28131] = "long",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Grobbulus", {
 	[28169] = {"blue","red"},
 	[28240] = "yellow",
 	["adds"] = "orange",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Grobbulus", {
 	[28169] = "warning",
 	[28240] = "info",
 	["adds"] = "long",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Gluth", {
@@ -25,12 +29,14 @@ BigWigs:AddColors("Gluth", {
 	[28375] = "red",
 	[29306] = "blue",
 	[54378] = {"blue","purple"},
+	["berserk"] = {"orange","red"},
 })
 
 BigWigs:AddSounds("Gluth", {
 	[28371] = "alert",
 	[28375] = "warning",
 	[54378] = "info",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Thaddius", {
@@ -39,6 +45,7 @@ BigWigs:AddColors("Thaddius", {
 	[28089] = "orange",
 	[28134] = "red",
 	[28338] = "red",
+	["berserk"] = {"orange","red"},
 	["stages"] = {"cyan","green"},
 })
 
@@ -47,6 +54,7 @@ BigWigs:AddSounds("Thaddius", {
 	[28084] = "warning",
 	[28089] = "long",
 	[28338] = "alert",
+	["berserk"] = "alarm",
 	["stages"] = {"info","long"},
 })
 
@@ -82,24 +90,28 @@ BigWigs:AddColors("Loatheb", {
 	[29234] = "green",
 	[29865] = "yellow",
 	[55593] = {"green","red"},
+	["berserk"] = {"orange","red"},
 })
 
 BigWigs:AddSounds("Loatheb", {
 	[29204] = {"alarm","long"},
 	[29865] = "alert",
 	[55593] = "info",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Anub'Rekhan", {
 	[28783] = "orange",
 	[28785] = {"green","red","yellow"},
 	["add"] = "purple",
+	["berserk"] = {"orange","red"},
 })
 
 BigWigs:AddSounds("Anub'Rekhan", {
 	[28783] = "alert",
 	[28785] = {"alarm","info","long"},
 	["add"] = "warning",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Grand Widow Faerlina", {
@@ -159,11 +171,13 @@ BigWigs:AddColors("The Four Horsemen", {
 	[28883] = "yellow",
 	[28884] = "red",
 	[57369] = {"blue","purple"},
+	["berserk"] = {"orange","red","yellow"},
 	["mark"] = "cyan",
 	["stages"] = "green",
 })
 
 BigWigs:AddSounds("The Four Horsemen", {
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Sapphiron", {

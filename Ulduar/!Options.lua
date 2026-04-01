@@ -17,6 +17,7 @@ BigWigs:AddColors("Ignis the Furnace Master", {
 	[62717] = {"blue","red"},
 	[63472] = "yellow",
 	[63474] = {"blue","yellow"},
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Ignis the Furnace Master", {
@@ -25,12 +26,14 @@ BigWigs:AddSounds("Ignis the Furnace Master", {
 	[62717] = "alert",
 	[63472] = "long",
 	[63474] = "alarm",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Razorscale", {
 	[64021] = "yellow",
 	[64733] = "blue",
 	[64771] = {"blue","orange"},
+	["berserk"] = {"orange","red","yellow"},
 	["harpoon"] = "yellow",
 	["stages"] = {"cyan","green","yellow"},
 })
@@ -39,6 +42,7 @@ BigWigs:AddSounds("Razorscale", {
 	[64021] = "warning",
 	[64733] = "alarm",
 	[64771] = "info",
+	["berserk"] = "alarm",
 	["harpoon"] = "info",
 	["stages"] = "long",
 })
@@ -49,6 +53,7 @@ BigWigs:AddColors("XT-002 Deconstructor", {
 	[64193] = "orange",
 	[64234] = {"blue","red"},
 	[65121] = {"blue","red"},
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("XT-002 Deconstructor", {
@@ -57,6 +62,7 @@ BigWigs:AddSounds("XT-002 Deconstructor", {
 	[64193] = "info",
 	[64234] = "alert",
 	[65121] = "alert",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("The Iron Council", {
@@ -69,6 +75,7 @@ BigWigs:AddColors("The Iron Council", {
 	[62274] = "yellow",
 	[63483] = "yellow",
 	[64637] = "blue",
+	["berserk"] = {"orange","red","yellow"},
 	["stages"] = "green",
 })
 
@@ -77,6 +84,7 @@ BigWigs:AddSounds("The Iron Council", {
 	[61887] = "alarm",
 	[62269] = "alarm",
 	[64637] = "alert",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Kologarn", {
@@ -98,6 +106,7 @@ BigWigs:AddColors("Algalon the Observer", {
 	[64412] = {"blue","orange"},
 	[64443] = {"red","yellow"},
 	[64597] = "yellow",
+	["berserk"] = {"orange","red","yellow"},
 	["stages"] = "green",
 })
 
@@ -105,6 +114,7 @@ BigWigs:AddSounds("Algalon the Observer", {
 	[64412] = "alert",
 	[64443] = "alarm",
 	[64597] = "info",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Auriaya", {
@@ -112,6 +122,7 @@ BigWigs:AddColors("Auriaya", {
 	[64396] = {"blue","yellow"},
 	[64678] = "red",
 	[64688] = "yellow",
+	["berserk"] = {"orange","red","yellow"},
 	["defender"] = "yellow",
 })
 
@@ -120,6 +131,7 @@ BigWigs:AddSounds("Auriaya", {
 	[64396] = "alert",
 	[64678] = "long",
 	[64688] = "warning",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Hodir", {
@@ -127,12 +139,14 @@ BigWigs:AddColors("Hodir", {
 	[62039] = "blue",
 	[63512] = "red",
 	[65133] = {"blue","green"},
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Hodir", {
 	[61968] = {"alert","long"},
 	[62039] = "alert",
 	[65133] = "info",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Thorim", {
@@ -145,6 +159,7 @@ BigWigs:AddColors("Thorim", {
 	[62338] = "orange",
 	[62526] = {"blue","red"},
 	[62942] = "yellow",
+	["berserk"] = {"orange","red","yellow"},
 	["hardmode"] = "cyan",
 	["stages"] = "yellow",
 })
@@ -152,6 +167,7 @@ BigWigs:AddColors("Thorim", {
 BigWigs:AddSounds("Thorim", {
 	[62017] = "info",
 	[62338] = "alarm",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Freya", {
@@ -160,6 +176,7 @@ BigWigs:AddColors("Freya", {
 	[62623] = {"blue","yellow"},
 	[62861] = {"blue","yellow"},
 	[62865] = {"blue","red"},
+	["berserk"] = {"orange","red","yellow"},
 	["stages"] = "red",
 	["tree"] = "orange",
 	["wave"] = "green",
@@ -170,6 +187,7 @@ BigWigs:AddSounds("Freya", {
 	[62589] = "alert",
 	[62861] = "info",
 	[62865] = "alarm",
+	["berserk"] = "alarm",
 	["tree"] = "alarm",
 })
 
@@ -181,6 +199,7 @@ BigWigs:AddColors("Mimiron", {
 	[64529] = {"red","yellow"},
 	[64570] = "red",
 	[64623] = "red",
+	["berserk"] = {"orange","red"},
 	["phase"] = "yellow",
 })
 
@@ -188,6 +207,7 @@ BigWigs:AddSounds("Mimiron", {
 	[63274] = "long",
 	[63811] = "alert",
 	[64444] = "info",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("General Vezax", {
@@ -196,6 +216,7 @@ BigWigs:AddColors("General Vezax", {
 	[62662] = "red",
 	[63276] = {"blue","orange"},
 	["animus"] = "red",
+	["berserk"] = {"orange","red","yellow"},
 	["vapor"] = "green",
 	["vaporstack"] = "blue",
 })
@@ -205,6 +226,7 @@ BigWigs:AddSounds("General Vezax", {
 	[62661] = "warning",
 	[62662] = "long",
 	[63276] = "alert",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Yogg-Saron", {
@@ -219,6 +241,7 @@ BigWigs:AddColors("Yogg-Saron", {
 	[64163] = "red",
 	[64189] = "yellow",
 	[64465] = {"green","red"},
+	["berserk"] = {"orange","red","yellow"},
 	["portal"] = "green",
 	["small_tentacles"] = "red",
 	["stages"] = {"red","yellow"},
@@ -232,6 +255,7 @@ BigWigs:AddSounds("Yogg-Saron", {
 	[63830] = "alert",
 	[64059] = "warning",
 	[64163] = "warning",
+	["berserk"] = "alarm",
 	["stages"] = "alarm",
 	["weakened"] = "long",
 })

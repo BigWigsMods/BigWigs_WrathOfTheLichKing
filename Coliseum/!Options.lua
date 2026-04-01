@@ -11,6 +11,7 @@ BigWigs:AddColors("The Beasts of Northrend", {
 	[66869] = {"blue","orange"},
 	[66883] = {"blue","yellow"},
 	[68335] = "red",
+	["berserk"] = {"orange","red","yellow"},
 	["bosses"] = "green",
 	["charge"] = "blue",
 	["snobold"] = {"blue","yellow"},
@@ -25,6 +26,7 @@ BigWigs:AddSounds("The Beasts of Northrend", {
 	[66869] = "info",
 	[66883] = "alarm",
 	[68335] = "long",
+	["berserk"] = "alarm",
 	["charge"] = "alarm",
 })
 
@@ -34,12 +36,14 @@ BigWigs:AddColors("Lord Jaraxxus", {
 	[66237] = {"blue","green","orange"},
 	[66334] = "blue",
 	["adds"] = "orange",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Lord Jaraxxus", {
 	[66197] = "alert",
 	[66237] = "info",
 	["adds"] = "alarm",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Faction Champions", {
@@ -60,12 +64,14 @@ BigWigs:AddSounds("Faction Champions", {
 })
 
 BigWigs:AddColors("The Twin Val'kyr", {
+	["berserk"] = {"orange","red","yellow"},
 	["shield"] = {"orange","red"},
 	["touch"] = "blue",
 	["vortex"] = {"blue","green"},
 })
 
 BigWigs:AddSounds("The Twin Val'kyr", {
+	["berserk"] = "alarm",
 	["shield"] = "alert",
 	["touch"] = "info",
 	["vortex"] = "alarm",
@@ -76,10 +82,12 @@ BigWigs:AddColors("Anub'arak", {
 	[66118] = "red",
 	[66134] = "yellow",
 	[67574] = "blue",
+	["berserk"] = {"orange","red"},
 	["burrow"] = {"orange","yellow"},
 })
 
 BigWigs:AddSounds("Anub'arak", {
 	[66118] = "long",
 	[67574] = "alert",
+	["berserk"] = "alarm",
 })

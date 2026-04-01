@@ -4,12 +4,14 @@ BigWigs:AddColors("Lord Marrowgar", {
 	[69057] = {"blue","yellow"},
 	[69076] = "red",
 	[69138] = "blue",
+	["berserk"] = {"orange","red"},
 })
 
 BigWigs:AddSounds("Lord Marrowgar", {
 	[69057] = "alert",
 	[69076] = "long",
 	[69138] = "underyou",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Lady Deathwhisper", {
@@ -21,6 +23,7 @@ BigWigs:AddColors("Lady Deathwhisper", {
 	[71289] = {"blue","orange"},
 	[71426] = "yellow",
 	["adds"] = "cyan",
+	["berserk"] = {"orange","red"},
 	["stages"] = "cyan",
 })
 
@@ -31,6 +34,7 @@ BigWigs:AddSounds("Lady Deathwhisper", {
 	[71289] = "alarm",
 	[71426] = "long",
 	["adds"] = "info",
+	["berserk"] = "alarm",
 	["stages"] = "long",
 })
 
@@ -52,6 +56,7 @@ BigWigs:AddColors("Deathbringer Saurfang", {
 	[72410] = {"blue","purple"},
 	[72737] = "red",
 	["adds"] = "cyan",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Deathbringer Saurfang", {
@@ -59,6 +64,7 @@ BigWigs:AddSounds("Deathbringer Saurfang", {
 	[72410] = "warning",
 	[72737] = "long",
 	["adds"] = "info",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Festergut", {
@@ -68,22 +74,26 @@ BigWigs:AddColors("Festergut", {
 	[69279] = {"blue","orange"},
 	[72219] = {"blue","green"},
 	[72295] = "red",
+	["berserk"] = {"orange","red"},
 })
 
 BigWigs:AddSounds("Festergut", {
 	[69279] = "alert",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Rotface", {
 	[69508] = "red",
 	[69674] = "blue",
 	[69839] = "orange",
+	["berserk"] = {"orange","red"},
 	["ooze"] = "yellow",
 })
 
 BigWigs:AddSounds("Rotface", {
 	[69508] = "alarm",
 	[69839] = "alert",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Professor Putricide", {
@@ -94,6 +104,7 @@ BigWigs:AddColors("Professor Putricide", {
 	[71255] = "orange",
 	[72295] = {"blue","yellow"},
 	[72451] = {"blue","orange"},
+	["berserk"] = {"orange","red","yellow"},
 	["phase"] = {"green","red"},
 })
 
@@ -101,6 +112,7 @@ BigWigs:AddSounds("Professor Putricide", {
 	[70351] = "alert",
 	[70911] = "alert",
 	[72451] = "info",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Blood Prince Council", {
@@ -110,6 +122,7 @@ BigWigs:AddColors("Blood Prince Council", {
 	[72040] = {"blue","orange"},
 	[72052] = "yellow",
 	[72999] = "blue",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Blood Prince Council", {
@@ -117,6 +130,7 @@ BigWigs:AddSounds("Blood Prince Council", {
 	[72039] = "long",
 	[72040] = "long",
 	[72052] = "alert",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Blood-Queen Lana'thel", {
@@ -125,22 +139,26 @@ BigWigs:AddColors("Blood-Queen Lana'thel", {
 	[71340] = {"blue","red"},
 	[71623] = {"blue","yellow"},
 	[71772] = "red",
+	["berserk"] = {"orange","red"},
 })
 
 BigWigs:AddSounds("Blood-Queen Lana'thel", {
 	[70877] = "alert",
 	[71772] = "alarm",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Valithria Dreamwalker", {
 	[69325] = "yellow",
 	[71086] = "blue",
+	["berserk"] = {"orange","red","yellow"},
 	["blazing"] = "green",
 	["portal"] = "red",
 })
 
 BigWigs:AddSounds("Valithria Dreamwalker", {
 	[71086] = "alarm",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Sindragosa", {
@@ -151,6 +169,7 @@ BigWigs:AddColors("Sindragosa", {
 	[70126] = {"blue","orange"},
 	[70127] = "yellow",
 	["airphase"] = "green",
+	["berserk"] = {"orange","red","yellow"},
 	["phase2"] = "green",
 })
 
@@ -158,6 +177,7 @@ BigWigs:AddSounds("Sindragosa", {
 	[69762] = "alert",
 	[70123] = "alarm",
 	[70127] = "info",
+	["berserk"] = "alarm",
 	["phase2"] = "long",
 })
 
@@ -175,6 +195,7 @@ BigWigs:AddColors("The Lich King", {
 	[72262] = "orange",
 	[72762] = {"blue","red"},
 	[73529] = {"blue","yellow"},
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("The Lich King", {
@@ -186,6 +207,7 @@ BigWigs:AddSounds("The Lich King", {
 	[72143] = "alert",
 	[72262] = "long",
 	[72762] = {"alert","info"},
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Icecrown Citadel Trash", {
