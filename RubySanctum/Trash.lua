@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("The Ruby Sanctum Trash", 724)
 if not mod then return end
-mod.displayName = CL.trash
+mod:SetTrashModule(true)
 mod:RegisterEnableMob(
 	39751, -- Baltharus the Warborn
 	39747, -- Saviana Ragefire

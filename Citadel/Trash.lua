@@ -5,7 +5,7 @@
 
 local mod, CL = BigWigs:NewBoss("Icecrown Citadel Trash", 631)
 if not mod then return end
-mod.displayName = CL.trash
+mod:SetTrashModule(true)
 mod:RegisterEnableMob(
 	37007, -- Deathbound Ward
 	36805, 36807, 36808, 36811, 36829, -- Deathspeaker Servant, Disciple, Zealot, Attendant, Deathspeaker High Priest
