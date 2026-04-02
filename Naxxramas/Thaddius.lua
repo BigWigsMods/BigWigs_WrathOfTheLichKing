@@ -86,9 +86,6 @@ if L then
 	L[15929] = "Stalagg"
 	L[15930] = "Feugen"
 
-	L.stage1_yell_trigger1 = "Stalagg crush you!"
-	L.stage1_yell_trigger2 = "Feed you to master!"
-
 	L.stage2_yell_trigger1 = "Eat... your... bones..."
 	L.stage2_yell_trigger2 = "Break... you!!"
 	L.stage2_yell_trigger3 = "Kill..."
@@ -142,8 +139,8 @@ function mod:GetOptions()
 		{"health", "INFOBOX"},
 		-- Stage 2
 		{28089, "COUNTDOWN"}, -- Polarity Shift
-		{28084, "EMPHASIZE"}, -- Negative Charge
-		{28059, "EMPHASIZE"}, -- Positive Charge
+		{28084, "EMPHASIZE", "SAY"}, -- Negative Charge
+		{28059, "EMPHASIZE", "SAY"}, -- Positive Charge
 		"berserk",
 		-- Extras
 		"custom_off_select_charge_position",
@@ -182,7 +179,7 @@ function mod:OnBossEnable()
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
-	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE")
+	self:RegisterEvent("RAID_BOSS_EMOTE")
 
 	self:Log("SPELL_AURA_APPLIED", "NegativeCharge", 28084)
 	self:Log("SPELL_AURA_REFRESH", "NegativeChargeRefresh", 28084)
@@ -195,12 +192,12 @@ function mod:OnBossEnable()
 	end
 end
 
-function mod:OnEngage()
+function mod:OnEngage() -- Seems like on Retail the boss doesn't engage until stage 2
 	deaths = 0
 	firstCharge = true
 	self:SetStage(1)
 
-	self:OpenInfo("health", "BigWigs: ".. CL.health)
+	self:OpenInfo("health", CL.health)
 	local npcId = 15928
 	for i = 1, 3, 2 do
 		npcId = npcId + 1
@@ -210,13 +207,9 @@ function mod:OnEngage()
 	end
 	self:SimpleTimer(UpdateInfoBoxList, 0.5)
 
-	self:Message("stages", "cyan", CL.stage:format(1), false) -- L.engage_message
+	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:Bar(28134, 11) -- Power Surge
 	self:Bar(28338, 20) -- Magnetic Pull
-
-	if self:Retail() then
-		self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	end
 end
 
 function mod:OnBossDisable()
@@ -253,9 +246,6 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg, sender)
 		if deaths == 2 then
 			self:StopBar(28338) -- Magnetic Pull
 			self:StopBar(28134) -- Power Surge
-			if self:Retail() then
-				self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-			end
 		end
 		if sender == L[15929] then
 			self:SetInfoBar("health", 1, 0)
@@ -272,17 +262,21 @@ end
 
 do
 	local prev = 0
-	function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg) -- Pre-Stage 2
-		if msg == L.overload_emote_trigger then
-			local t = GetTime()
-			if t-prev > 2 then
-				prev = t
-				self:CloseInfo("health")
-				self:Message("stages", "cyan", CL.incoming:format(self.displayName), false)
-				self:Bar("stages", 3, CL.stage:format(2), "spell_lightning_lightningbolt01")
-				self:PlaySound("stages", "long")
-			end
+	function mod:PreStage2()
+		local t = GetTime()
+		if t-prev > 2 then
+			prev = t
+			self:CloseInfo("health")
+			self:Message("stages", "cyan", CL.incoming:format(self.displayName), false)
+			self:Bar("stages", 3, CL.stage:format(2), "spell_lightning_lightningbolt01")
+			self:PlaySound("stages", "long")
 		end
+	end
+end
+
+function mod:RAID_BOSS_EMOTE(_, msg) -- Pre-Stage 2
+	if msg == L.overload_emote_trigger then
+		self:PreStage2()
 	end
 end
 
@@ -296,8 +290,6 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg) -- Stage 2
 		self:Message("stages", "cyan", CL.stage:format(2), false)
 		self:Berserk(300, true)
 		self:PlaySound("stages", "info")
-	elseif self:Retail() and (msg:find(L.stage1_yell_trigger1, nil, true) or msg:find(L.stage1_yell_trigger2, nil, true)) then
-		self:Engage()
 	end
 end
 
@@ -312,6 +304,9 @@ end
 
 function mod:NegativeCharge(args)
 	if self:Me(args.destGUID) then
+		self:Say(args.spellId, "{rt7}--", true)
+		self:Message(args.spellId, "blue", args.spellName, ICON_NEGATIVE)
+
 		local opt = self:GetOption("custom_off_select_charge_position")
 		local strategy_first = INITIAL_DIRECTION[opt]
 		local strategy_change, direction
@@ -334,15 +329,18 @@ function mod:NegativeCharge(args)
 		else
 			direction = strategy_change
 		end
-		self:Message(args.spellId, "blue", args.spellName, ICON_NEGATIVE)
-		if self:GetOption("custom_off_charge_graphic") then
-			DIRECTION_ARROW[direction]()
-		end
-		if self:GetOption("custom_off_charge_text") then
-			self:Message(args.spellId, "blue", L[direction], ICON_NEGATIVE)
-		end
-		if self:GetOption("custom_off_charge_voice") then
-			self:PlaySoundFile(DIRECTION_SOUND[direction])
+		if direction then
+			if self:GetOption("custom_off_charge_graphic") then
+				DIRECTION_ARROW[direction]()
+			end
+			if self:GetOption("custom_off_charge_text") then
+				self:Message(args.spellId, "blue", L[direction], ICON_NEGATIVE)
+			end
+			if self:GetOption("custom_off_charge_voice") then
+				self:PlaySoundFile(DIRECTION_SOUND[direction])
+			else
+				self:PlaySound(args.spellId, "warning")
+			end
 		else
 			self:PlaySound(args.spellId, "warning")
 		end
@@ -351,6 +349,8 @@ end
 
 function mod:NegativeChargeRefresh(args)
 	if self:Me(args.destGUID) then
+		self:Message(args.spellId, "blue", args.spellName, ICON_NEGATIVE, true) -- Disable emphasize
+
 		local strategy_nochange
 		local opt = self:GetOption("custom_off_select_charge_movement")
 		if opt == 1 then -- through
@@ -366,21 +366,25 @@ function mod:NegativeChargeRefresh(args)
 		end
 
 		local direction = strategy_nochange
-		self:Message(args.spellId, "blue", args.spellName, ICON_NEGATIVE, true) -- Disable emphasize
-		if self:GetOption("custom_off_charge_graphic") then
-			DIRECTION_ARROW[direction]()
-		end
-		if self:GetOption("custom_off_charge_text") then
-			self:Message(args.spellId, "blue", L[direction], ICON_NEGATIVE, true) -- Disable emphasize
-		end
-		if self:GetOption("custom_off_charge_voice") then
-			self:PlaySoundFile(DIRECTION_SOUND[direction])
+		if direction then
+			if self:GetOption("custom_off_charge_graphic") then
+				DIRECTION_ARROW[direction]()
+			end
+			if self:GetOption("custom_off_charge_text") then
+				self:Message(args.spellId, "blue", L[direction], ICON_NEGATIVE, true) -- Disable emphasize
+			end
+			if self:GetOption("custom_off_charge_voice") then
+				self:PlaySoundFile(DIRECTION_SOUND[direction])
+			end
 		end
 	end
 end
 
 function mod:PositiveCharge(args)
 	if self:Me(args.destGUID) then
+		self:Say(args.spellId, "{rt6}++", true)
+		self:Message(args.spellId, "blue", args.spellName, ICON_POSITIVE)
+
 		local opt = self:GetOption("custom_off_select_charge_position")
 		local strategy_first = INITIAL_DIRECTION[opt]
 		local strategy_change, direction
@@ -403,15 +407,18 @@ function mod:PositiveCharge(args)
 		else
 			direction = strategy_change
 		end
-		self:Message(args.spellId, "blue", args.spellName, ICON_POSITIVE)
-		if self:GetOption("custom_off_charge_graphic") then
-			DIRECTION_ARROW[direction]()
-		end
-		if self:GetOption("custom_off_charge_text") then
-			self:Message(args.spellId, "blue", L[direction], ICON_POSITIVE)
-		end
-		if self:GetOption("custom_off_charge_voice") then
-			self:PlaySoundFile(DIRECTION_SOUND[direction])
+		if direction then
+			if self:GetOption("custom_off_charge_graphic") then
+				DIRECTION_ARROW[direction]()
+			end
+			if self:GetOption("custom_off_charge_text") then
+				self:Message(args.spellId, "blue", L[direction], ICON_POSITIVE)
+			end
+			if self:GetOption("custom_off_charge_voice") then
+				self:PlaySoundFile(DIRECTION_SOUND[direction])
+			else
+				self:PlaySound(args.spellId, "warning")
+			end
 		else
 			self:PlaySound(args.spellId, "warning")
 		end
@@ -420,6 +427,8 @@ end
 
 function mod:PositiveChargeRefresh(args)
 	if self:Me(args.destGUID) then
+		self:Message(args.spellId, "blue", args.spellName, ICON_POSITIVE, true) -- Disable emphasize
+
 		local strategy_nochange
 		local opt = self:GetOption("custom_off_select_charge_movement")
 		if opt == 1 then -- through
@@ -435,15 +444,16 @@ function mod:PositiveChargeRefresh(args)
 		end
 
 		local direction = strategy_nochange
-		self:Message(args.spellId, "blue", args.spellName, ICON_POSITIVE, true) -- Disable emphasize
-		if self:GetOption("custom_off_charge_graphic") then
-			DIRECTION_ARROW[direction]()
-		end
-		if self:GetOption("custom_off_charge_text") then
-			self:Message(args.spellId, "blue", L[direction], ICON_POSITIVE, true) -- Disable emphasize
-		end
-		if self:GetOption("custom_off_charge_voice") then
-			self:PlaySoundFile(DIRECTION_SOUND[direction])
+		if direction then
+			if self:GetOption("custom_off_charge_graphic") then
+				DIRECTION_ARROW[direction]()
+			end
+			if self:GetOption("custom_off_charge_text") then
+				self:Message(args.spellId, "blue", L[direction], ICON_POSITIVE, true) -- Disable emphasize
+			end
+			if self:GetOption("custom_off_charge_voice") then
+				self:PlaySoundFile(DIRECTION_SOUND[direction])
+			end
 		end
 	end
 end

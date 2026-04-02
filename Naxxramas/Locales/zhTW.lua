@@ -140,8 +140,8 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "zhTW")
 if L then
-	--L[15929] = "Stalagg"
-	--L[15930] = "Feugen"
+	L[15929] = "斯塔拉格"
+	L[15930] = "伏晨"
 
 	L.stage1_yell_trigger1 = "斯塔拉格要碾碎你!"
 	L.stage1_yell_trigger2 = "主人要吃了你!"
