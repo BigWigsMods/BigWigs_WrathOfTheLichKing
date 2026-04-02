@@ -143,9 +143,6 @@ if L then
 	L[15929] = "斯塔拉格"
 	L[15930] = "伏晨"
 
-	L.stage1_yell_trigger1 = "斯塔拉格要碾碎你!"
-	L.stage1_yell_trigger2 = "主人要吃了你!"
-
 	L.stage2_yell_trigger1 = "咬碎……你的……骨頭……"
 	L.stage2_yell_trigger2 = "打…碎…你……"
 	L.stage2_yell_trigger3 = "殺……"
