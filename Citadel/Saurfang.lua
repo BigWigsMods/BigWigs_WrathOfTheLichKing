@@ -22,7 +22,7 @@ local L = mod:GetLocale()
 if L then
 	L.warmup_icon = "achievement_boss_saurfang"
 	L.adds_icon = "spell_shadow_rune"
-	L.blood_beast = "Blood Beast" --  NPC ID 38508
+	L.blood_beast = "Blood Beast" -- NPC ID 38508
 
 	L.warmup_alliance = "Let's get a move on then! Move ou..."
 	L.warmup_horde = "Kor'kron, move out! Champions, watch your backs. The Scourge have been..."

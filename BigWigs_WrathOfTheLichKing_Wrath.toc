@@ -36,4 +36,10 @@
 ## X-BigWigs-LoadOn-InstanceId: 249, 533, 603, 615, 616, 624, 631, 649, 724
 ## X-BigWigs-Minimum: 412
 
-modules.xml
+Citadel\modules.xml
+Coliseum\modules.xml
+Naxxramas\modules.xml
+Ulduar\modules.xml
+Northrend\modules.xml
+RubySanctum\modules.xml
+!Locales\[TextLocale].lua [AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
