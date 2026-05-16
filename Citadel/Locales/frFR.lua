@@ -1,5 +1,4 @@
 local L = BigWigs:NewBossLocale("Lord Marrowgar", "frFR")
-if not L then return end
 if L then
 	L.bone_spike = "Pointe d'os" -- NPC ID 36619
 end

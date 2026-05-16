@@ -1,5 +1,4 @@
 local L = BigWigs:NewBossLocale("Anub'Rekhan", "deDE")
-if not L then return end
 if L then
 	L.add = "Gruftwache"
 	L.locust = "Heuschrecke"

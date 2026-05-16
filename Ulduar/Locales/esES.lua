@@ -1,5 +1,4 @@
 local L = BigWigs:NewBossLocale("Auriaya", "esES")
-if not L then return end
 if L then
 	L.swarm_message = "Enjambre"
 

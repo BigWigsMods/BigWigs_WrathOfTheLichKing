@@ -1,5 +1,4 @@
 local L = BigWigs:NewBossLocale("Auriaya", "koKR")
-if not L then return end
 if L then
 	L.swarm_message = "수호자의 무리"
 

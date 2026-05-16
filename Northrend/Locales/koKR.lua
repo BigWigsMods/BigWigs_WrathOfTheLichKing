@@ -1,5 +1,4 @@
 local L = BigWigs:NewBossLocale("Onyxia", "koKR")
-if not L then return end
 if L then
 	L.phase1_trigger = "오늘은 운이 아주 좋군."
 	L.phase2_trigger = "쓸데없이 힘을 쓰는 것도 지루하군. 네 녀석들 머리 위에서 모조리 불살라 주마!"

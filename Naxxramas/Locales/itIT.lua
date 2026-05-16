@@ -1,5 +1,4 @@
 local L = BigWigs:NewBossLocale("Anub'Rekhan", "itIT")
-if not L then return end
 if L then
 	--L.add = "Crypt Guard"
 	L.locust = "Locusta"

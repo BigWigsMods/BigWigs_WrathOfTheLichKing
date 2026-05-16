@@ -1,5 +1,4 @@
 local L = BigWigs:NewBossLocale("Archavon the Stone Watcher", "ptBR")
-if not L then return end
 if L then
 	--L.stomp_message = "Stomp - Charge Inc!"
 	--L.stomp_warning = "Possible Stomp in ~5sec!"

@@ -1,5 +1,4 @@
 local L = BigWigs:NewBossLocale("Onyxia", "ruRU")
-if not L then return end
 if L then
 	L.phase1_trigger = "Вот это сюрприз."
 	L.phase2_trigger = "Эта бессмысленная возня вгоняет меня в тоску. Я сожгу вас всех!"

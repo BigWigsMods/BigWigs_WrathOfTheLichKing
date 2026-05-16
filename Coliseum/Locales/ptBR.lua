@@ -1,5 +1,4 @@
 local L = BigWigs:NewBossLocale("The Beasts of Northrend", "ptBR")
-if not L then return end
 if L then
 	--L.wipe_trigger = "Tragic..."
 

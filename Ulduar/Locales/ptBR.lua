@@ -1,5 +1,4 @@
 local L = BigWigs:NewBossLocale("Ignis the Furnace Master", "ptBR")
-if not L then return end
 if L then
 	--L.brittle_message = "Construct is Brittle!"
 end

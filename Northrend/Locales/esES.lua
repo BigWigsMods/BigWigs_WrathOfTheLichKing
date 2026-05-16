@@ -1,5 +1,4 @@
 local L = BigWigs:NewBossLocale("Toravon the Ice Watcher", "esES")
-if not L then return end
 if L then
 	L.whiteout_bar = "Tormenta de nieve %d"
 	L.whiteout_message = "¡Tormenta de nieve %d pronto!"
