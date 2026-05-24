@@ -429,8 +429,8 @@ if L then
 	L.airphase_trigger = "사피론이 공중으로 떠오릅니다!"
 	L.deepbreath_trigger = "%s|1이;가; 숨을 깊게 들이마십니다."
 
-	-- L.air_phase = "Air Phase"
-	-- L.ground_phase = "Ground Phase"
+	--L.air_phase = "Air Phase"
+	--L.ground_phase = "Ground Phase"
 
 	L.ice_bomb = "얼음 폭탄"
 	L.ice_bomb_warning = "잠시 후 얼음 폭탄!"

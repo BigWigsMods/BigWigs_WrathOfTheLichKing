@@ -92,6 +92,6 @@ Northrend\Toravon.lua
 Northrend\Onyxia.lua
 RubySanctum\Halion.lua
 RubySanctum\Trash.lua
-!Locales\[TextLocale].lua [AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
 
+!Locales\[TextLocale].lua [AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
 !Options.lua

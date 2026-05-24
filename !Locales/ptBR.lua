@@ -388,7 +388,6 @@ if L then
 
 	--L.guardians = "Guardian Spawns"
 	--L.guardians_desc = "Warn for incoming Icecrown Guardians in phase 3."
-	--L.guardians_icon = "inv_trinket_naxxramas04"
 	--L.guardians_warning = "Guardians incoming in ~10sec!"
 	--L.guardians_bar = "Guardians incoming!"
 

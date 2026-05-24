@@ -429,8 +429,8 @@ if L then
 	L.airphase_trigger = "%s взмывает в воздух!"
 	L.deepbreath_trigger = "%s глубоко вдыхает."
 
-	-- L.air_phase = "Air Phase"
-	-- L.ground_phase = "Ground Phase"
+	--L.air_phase = "Air Phase"
+	--L.ground_phase = "Ground Phase"
 
 	L.ice_bomb = "Ледяная бомба"
 	L.ice_bomb_warning = "Появляется ледяная бомба!"
