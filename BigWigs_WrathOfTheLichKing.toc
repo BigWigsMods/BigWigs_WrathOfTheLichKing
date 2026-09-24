@@ -35,7 +35,7 @@
 ## X-WoWI-ID: 22086
 ## X-Wago-ID: 7nGvW2Nx
 ## X-BigWigs-LoadOn-InstanceId: 249, 533, 603, 615, 616, 624, 631, 649, 724
-## X-BigWigs-Minimum: 417
+## X-BigWigs-Minimum: 425
 
 Citadel\Marrowgar.lua
 Citadel\Deathwhisper.lua
