@@ -1,4 +1,5 @@
-## Interface: 120100, 120005, 120007
+## Interface: 30405, 38002, 40402, 50504, 50503, 120100, 120105, 120007
+## AllowLoadGameType: wrath, cata, mists, standard
 
 ## Title: BigWigs [|cffeda55fWrath of the Lich King|r]
 ## Title-deDE: BigWigs [|cffeda55fWrath of the Lich King|r]
